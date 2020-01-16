@@ -1,0 +1,9 @@
+[ProjectFiles]
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\Components\cs42l51;..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery
+[Others]
+Define=
+HALModule=
+[Groups]
+Doc=../readme.txt;
+Drivers/BSP/Components=../../../../../../Drivers/BSP/Components/cs42l51/cs42l51_reg.c;../../../../../../Drivers/BSP/Components/cs42l51/cs42l51.c;
+Drivers/BSP/STM32L562E-Discovery=../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_bus.c;../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c;

@@ -1,0 +1,99 @@
+/**
+  @page FLASH_DualBoot  FLASH Dual Boot example
+
+  @verbatim
+  ******************************************************************************
+  * @file    FLASH/FLASH_DualBoot/readme.txt
+  * @author  MCD Application Team
+  * @brief   Description of the FLASH Dual boot example.
+  ******************************************************************************
+  *
+  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                       opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  @endverbatim
+
+@par Example Description
+
+Guide through the configuration steps to program internal Flash memory bank 1 and bank 2,
+and to swap between both of them by mean of the FLASH HAL API.
+
+At the beginning of the main program the HAL_Init() function is called to reset
+all the peripherals, initialize the Flash interface and the systick.
+Then the SystemClock_Config() function is used to configure the system clock (SYSCLK)
+to run at 110 MHz.
+
+Below are the steps to run this example:
+1- Select bank2 configuration by commenting FLASH_BANK1 and uncommenting FLASH_BANK2 defines
+   in "main.h", and generate its binary (ie: FLASH_DualBoot.bin)
+
+2- Load this binary at the bank2 of the flash(at the address 0x08040000) using
+   STM32 CubeProgrammer (www.st.com) or any similar tool.
+@note:
+ - You can avoid step 1 by directly loading the binary file provided with the example
+ - You have to configure your preferred toolchain in order to generate the binary
+   file after compiling the project.
+ - You can use STM32 CubeProgrammer or any similar tool to initially reset the
+   BFB2 bit (disable the dual boot feature).
+
+3- Select bank1 configuration by uncommenting FLASH_BANK1 and commenting FLASH_BANK2 defines
+   in "main.h", and run it, this project will be loaded in the bank1 of the flash: at the
+   address 0x08000000
+
+4- Click the User push-button to swap between the two banks
+
+- If program in bank1 is selected, a message will be displayed on LCD glass
+  and LED10 will remain toggling while LED9 is turn on.
+
+- If program in bank2 is selected, a message will be displayed on LCD glass
+  and LED9 will remain toggling while LED10 is turn on.
+
+- If error occurs both LED10 and LED9 blink (period : 2s).
+
+@note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
+      based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
+      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
+      to have correct HAL operation.
+
+@par Keywords
+
+Memory, Flash, Dual-Boot, Dual-Bank, Execute, Binary, Option-Bytes
+
+@par Directory contents
+
+  - FLASH/FLASH_DualBoot/Inc/stm32l562e_discovery_conf.h     BSP configuration file
+  - FLASH/FLASH_DualBoot/Inc/stm32l5xx_hal_conf.h        HAL Configuration file
+  - FLASH/FLASH_DualBoot/Inc/stm32l5xx_it.h              Header for stm32l5xx_it.c
+  - FLASH/FLASH_DualBoot/Inc/main.h                      Header for main.c module
+  - FLASH/FLASH_DualBoot/Src/stm32l5xx_it.c              Interrupt handlers
+  - FLASH/FLASH_DualBoot/Src/main.c                      Main program
+  - FLASH/FLASH_DualBoot/Src/stm32l5xx_msp_hal.c         MSP initialization and de-initialization
+  - FLASH/FLASH_DualBoot/Src/system_stm32l5xx.c          STM32L5xx system clock configuration file
+  - FLASH/FLASH_DualBoot/Binary/FLASH_DualBoot.bin       Binary file to load at bank2
+
+@par Hardware and Software environment
+
+  - This example runs on STM32L562QEIxQ devices.
+
+  - This example has been tested with STM32L562E-DK board and can be
+    easily tailored to any other supported device and development board.
+
+@par How to use it ?
+
+In order to make the program work, you must do the following:
+ - Open your preferred toolchain
+ - Rebuild all files and load your image into target memory
+ - Run the example
+
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */

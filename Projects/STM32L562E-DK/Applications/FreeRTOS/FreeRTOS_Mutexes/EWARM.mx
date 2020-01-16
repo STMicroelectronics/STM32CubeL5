@@ -1,0 +1,7 @@
+config load "C:\mcd_git\l5_finalrelease\__INTERNAL__tools\pg\projectgenerator\Tools\..\Projects_tmp\..\..\..\..\Firmware\Projects\STM32L562E-DK\Applications\FreeRTOS\FreeRTOS_Mutexes\FreeRTOS_Mutexes.ioc"
+project name "FreeRTOS_Mutexes"
+project path "C:\mcd_git\l5_finalrelease\__INTERNAL__tools\pg\projectgenerator\Tools\..\Projects_tmp\..\..\..\..\Firmware\Projects\STM32L562E-DK\Applications\FreeRTOS"
+project setCustomFWPath "C:\mcd_git\l5_finalrelease\__INTERNAL__tools\pg\projectgenerator\Tools\..\Projects_tmp\..\..\..\..\Firmware"
+project toolchain "EWARM V8"
+project generate
+exit

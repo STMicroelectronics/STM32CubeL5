@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Release Notes for STM32L5xx HAL Drivers</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="_htmresc/mini-st.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<div class="col-sm-12 col-lg-4">
+<div class="card fluid">
+<div class="sectione dark">
+<center>
+<h1 id="release-notes-for-stm32l5xx-hal-drivers"><small>Release Notes for</small> <strong>STM32L5xx HAL Drivers</strong></h1>
+<p>Copyright © 2019 STMicroelectronics<br />
+</p>
+<a href="https://www.st.com" class="logo"><img src="./_htmresc/st_logo.png" alt="ST logo" /></a>
+</center>
+</div>
+</div>
+<h1 id="license">License</h1>
+<p>This software component is licensed by ST under BSD 3-Clause license, the "License"; You may not use this component except in compliance with the License. You may obtain a copy of the License at:</p>
+<p><a href="https://opensource.org/licenses/BSD-3-Clause">https://opensource.org/licenses/BSD-3-Clause</a></p>
+<h1 id="purpose">Purpose</h1>
+<p>The STM32Cube HAL and LL, an STM32 abstraction layer embedded software, ensure maximized portability across STM32 portfolio.</p>
+<p>The portable APIs layer provides a generic, multi instanced and simple set of APIs to interact with the upper layer (application, libraries and stacks). It is composed of native and extended APIs set. It is directly built around a generic architecture and allows the build-upon layers, like the middleware layer, to implement its functions without knowing in-depth the used STM32 device. This improves the library code reusability and guarantees an easy portability on other devices and STM32 families.</p>
+<p>The Low Layer (LL) drivers are part of the STM32Cube firmware HAL that provides a basic set of optimized and one shot services. The Low layer drivers, contrary to the HAL ones are not fully portable across the STM32 families; the availability of some functions depends on the physical availability of the relative features on the product. The Low Layer (LL) drivers are designed to offer the following features:</p>
+<ul>
+<li>New set of inline functions for direct and atomic register access</li>
+<li>One-shot operations that can be used by the HAL drivers or from application level</li>
+<li>Full independence from HAL and standalone usage (without HAL drivers)</li>
+<li>Full features coverage of all the supported peripherals</li>
+</ul>
+</div>
+<div class="col-sm-12 col-lg-8">
+<h1 id="update-history">Update History</h1>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" checked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
+<div>
+<h2 id="main-changes">Main Changes</h2>
+<p><strong>First release</strong></p>
+<h2 id="contents">Contents</h2>
+<p>First official release of <strong>HAL and Low Layer drivers</strong> for <strong>STM32L552xx/STM32L562xx</strong> devices</p>
+<p>Superset features device STM32L562xx API User Manual available (STM32L562xx_User_Manual.chm)</p>
+<h3 id="hal-drivers">HAL Drivers</h3>
+<ul>
+<li>ADC, COMP, CORTEX, CRC, CRYP, DAC, DFSDM, DMA, EXTI, FDCAN, FLASH, GPIO, GTZC, HASH, I2C, ICACHE, IRDA, IWDG, LPTIM, MMC, NAND, NOR, OPAMP, OSPI, OTFDEC, PCD, PKA, PWR, RCC, RNG, RTC, SAI, SD, SMARTCARD, SMBUS, SPI, SRAM, TIM, TSC, UART, USART, WWDG</li>
+<li>Alternate TIM and RTC timebase templates (to be copied in user application)</li>
+</ul>
+<h3 id="ll-drivers">LL Drivers</h3>
+<ul>
+<li>ADC, BUS, COMP, CORTEX, CRC, CRS, CRYP, DAC, DMA, DMAMUX, EXTI, GPIO, I2C, IWDG, LPTIM, LPUART, OPAMP, PKA, PWR, RCC, RNG, RTC, SDMMC, SPI, SYSTEM, TIM, UCPD, USART, UTILS, WWDG</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<p>For HAL drivers usage, stm32l5xx_hal_conf_template.h file must be copied in user application as stm32l5xx_hal_conf.h with optional configuration update.</p>
+<p>For LL drivers usage, stm32_assert_template.h file must be copied in user application as stm32_assert.h with optional assert configuration update.</p>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky">
+<p>For complete documentation on STM32L5xx, visit: [<a href="http://www.st.com/stm32l5">www.st.com/stm32l5</a>]</p>
+<em>This release note uses up to date web standards and, for this reason, should not be opened with Internet Explorer but preferably with popular browsers such as Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.</em>
+</footer>
+</body>
+</html>

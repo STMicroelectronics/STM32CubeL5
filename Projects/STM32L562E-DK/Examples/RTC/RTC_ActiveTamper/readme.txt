@@ -1,0 +1,81 @@
+/**
+  @page RTC_Standby RTC_ActiveTamper example
+
+  @verbatim
+  ******************************************************************************
+  * @file    RTC/RTC_ActiveTamper/readme.txt
+  * @author  MCD Application Team
+  * @brief   Description of the RTC ACTIVE TAMPER example.
+  ******************************************************************************
+  *
+  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                       opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  @endverbatim
+
+@par Example Description
+
+How to program the active tamper detection.
+
+In the associated software, the system clock is set to 110 MHz the SysTick is programmed to
+generate an interrupt each 1 ms.
+The LSE clock is used as RTC clock source by default.
+
+This example activates/deactivates active tamper pins and updates the Seed at run time.
+2 tampers Input share the same tamper Output.
+Tamper interrupts and erase of backup registers are checked.
+
+Please connect the following pins together :
+  - TAMP_IN5  (PA1  - CN19 A1)
+  - TAMP_OUT1 (PA0  - CN19 A0)
+  - (Optional) Oscilloscope probe to visualize the signal
+
+Execute the software, wait a little and disconnect a pin.
+One of the below scenario should occur :
+ - LED10 is ON : Tamper interrupt detected and backup registers erase verified.
+ - LED10 toggles for ever : an error occurs.
+
+@note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
+      based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
+      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+
+@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+      to have correct HAL operation.
+
+@par Directory contents
+
+  - RTC/RTC_ActiveTamper/Inc/main.h                   Header file for main.c
+  - RTC/RTC_ActiveTamper/Inc/stm32l5xx_hal_conf.h     HAL configuration file
+  - RTC/RTC_ActiveTamper/Inc/stm32l5xx_it.h           Header for stm32l5xx_it.c
+  - RTC/RTC_ActiveTamper/Inc/stm32l562e_discovery_conf.h     HAL configuration file
+  - RTC/RTC_ActiveTamper/Src/main.c                   Main program
+  - RTC/RTC_ActiveTamper/Src/stm32l5xx_hal_msp.c      HAL MSP module
+  - RTC/RTC_ActiveTamper/Src/stm32l5xx_it.c           Interrupt handlers
+  - RTC/RTC_ActiveTamper/Src/system_stm32l5xx.c       STM32L5xx system clock configuration file
+
+@par Hardware and Software environment
+
+  - This example runs on STM32L562QEIxQ devices without security enabled (TZEN=0).
+
+  - This example has been tested with STMicroelectronics STM32L562E-DK
+    evaluation board and can be easily tailored to any other supported device
+    and development board.
+
+ @par How to use it ?
+
+In order to make the program work, you must do the following :
+  - Open your preferred toolchain
+  - Rebuild all files and load your image into target memory
+  - Connect all pins as required
+  - Run the example
+  - Disconnect a pin
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */

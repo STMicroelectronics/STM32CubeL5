@@ -1,0 +1,8 @@
+[ProjectFiles]
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL;..\..\..\..\..\..\Drivers\BSP\Components\Common;
+[Others]
+Define=
+HALModule=
+[Groups]
+Doc=../readme.txt;
+Drivers/BSP/STM32L552E_EVAL=../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c;

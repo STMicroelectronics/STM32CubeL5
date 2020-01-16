@@ -1,0 +1,8 @@
+[ProjectFiles]
+HeaderPath=
+[Others]
+Define=
+HALModule=
+[Groups]
+Doc=../readme.txt;
+Application/User=../Src/SigGen.c;../Src/prime256v1.c;

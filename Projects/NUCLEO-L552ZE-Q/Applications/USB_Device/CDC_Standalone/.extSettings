@@ -1,0 +1,12 @@
+[ProjectFiles]
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L5xx_Nucleo
+[Others]
+Define=
+HALModule=TIM;UART;DMA;EXTI;ICACHE;UART
+[Groups]
+Application/User/Core=../Core/Src/main.c;../Core/Src/stm32l5xx_it.c;../Core/Src/stm32l5xx_hal_msp.c;../Core/Src/stm32l5xx_hal_msp.c;
+Application/User/USB_Device/App=../USB_Device/App/usbd_desc.c;../USB_Device/App/usbd_cdc_if.c;../USB_Device/App/usb_device.c;
+Application/User/USB_Device/Target=../USB_Device/Target/usbd_conf.c;
+Doc=../readme.txt;
+Drivers/BSP/STM32L5xx_Nucleo=../../../../../../Drivers/BSP/STM32L5xx_Nucleo/stm32l5xx_nucleo.c;
+Drivers/STM32L5xx_HAL_Driver=../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c;

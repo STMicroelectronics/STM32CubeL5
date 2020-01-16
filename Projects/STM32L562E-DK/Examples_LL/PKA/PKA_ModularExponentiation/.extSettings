@@ -1,0 +1,8 @@
+[ProjectFiles]
+HeaderPath=
+[Others]
+Define=
+HALModule=
+[Groups]
+Doc=../readme.txt;
+Application/User=../Src/ciphertext.c;../Src/plaintext.c;../Src/rsa_priv_2048.c;../Src/rsa_pub_2048.c;
