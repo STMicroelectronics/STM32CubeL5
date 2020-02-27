@@ -1,9 +1,10 @@
-  /**
+/* USER CODE BEGIN Header */
+/**
   ******************************************************************************
   * @file    PWR/PWR_RUN_SMPS/Src/main.c
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use SMPS PWR API to enter
-  *          SMPS in RUN mode.
+  * @brief   This sample code shows how to use STM32L5xx PWR HAL API to enter
+  *          SMPS modes in Run mode.
   ******************************************************************************
   * @attention
   *
@@ -17,34 +18,41 @@
   *
   ******************************************************************************
   */
+/* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/** @addtogroup STM32L5xx_HAL_Examples
-  * @{
-  */
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 
-/** @addtogroup PWR_RUN_SMPS
-  * @{
-  */
+/* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
-
+/* USER CODE BEGIN PTD */
 typedef struct
 {
 uint32_t power_mode_in_use;
 uint32_t hclkfreq_in_use;
 uint32_t vos_in_use;
 } config_in_useTypeDef;
+/* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
 // #define ADD_EXTRA_DELAY
 #define ADD_EXTRA_DELAY_MEASUREMENTS
 #define DELAY_FOR_POWER_MEASUREMENTS 20000 /* in ms */
+/* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
 /* Private variables ---------------------------------------------------------*/
+
+/* USER CODE BEGIN PV */
 /* List of power configuration as per test step */
 config_in_useTypeDef config_in_use_example [] =
 {
@@ -109,11 +117,22 @@ uint32_t power_mode_in_use;
 uint32_t hclkfreq_in_use;
 uint32_t vos_in_use;
 
+/* USER CODE END PV */
+
 /* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+/* USER CODE BEGIN PFP */
 void SystemClock_110MHz(void);
 void SystemClock_80MHz(void);
 void SystemClock_24MHz(void);
 
+uint32_t check_config_in_use_example(uint32_t config);
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
 /**
   * @brief This function provides minimum delay (in milliseconds) based
   *        on variable incremented.
@@ -149,29 +168,15 @@ void HAL_Delay(uint32_t Delay)
   {
   }
 }
-
-/* Private functions ---------------------------------------------------------*/
+/* USER CODE END 0 */
 
 /**
-  * @brief  Main program
-  * @param  None
-  * @retval None
+  * @brief  The application entry point.
+  * @retval int
   */
-   int main(void)
+int main(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct;
-
-  /* STM32L5xx HAL library initialization:
-       - Systick timer is configured by default as source of time base, but user
-             can eventually implement his proper time base source (a general purpose
-             timer for example or other time source), keeping in mind that Time base
-             duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
-             handled in milliseconds basis.
-       - Set NVIC Group Priority to 3
-       - Low Level Initialization
-     */
-  HAL_Init();
-
+  /* USER CODE BEGIN 1 */
   /* Enable Instruction cache in 1-way direct (default 2-ways set associative cache) */
   HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY);
 
@@ -180,43 +185,28 @@ void HAL_Delay(uint32_t Delay)
     /* Initialization Error */
     while(1);
   }
+  /* USER CODE END 1 */
+  
 
-  /* ------------------ GPIO ------------------ */
+  /* MCU Configuration--------------------------------------------------------*/
 
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOE_CLK_ENABLE();
-  __HAL_RCC_GPIOF_CLK_ENABLE();
-  __HAL_RCC_GPIOG_CLK_ENABLE();
-  __HAL_RCC_GPIOH_CLK_ENABLE();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Pin = GPIO_PIN_All;
+  /* USER CODE BEGIN Init */
 
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+  /* USER CODE END Init */
 
-  /* Upon standby or shutdown exit, the PULLUP is default setting */
-  /* Hence same applied here for coherence */
+  /* Configure the system clock */
+  SystemClock_Config();
 
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /* USER CODE BEGIN SysInit */
 
-  GPIO_InitStruct.Pin = GPIO_PIN_13;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  /* USER CODE END SysInit */
 
-  GPIO_InitStruct.Pin = GPIO_PIN_3;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  /* USER CODE BEGIN 2 */
 
   __HAL_RCC_GPIOA_CLK_DISABLE();
   __HAL_RCC_GPIOB_CLK_DISABLE();
@@ -226,11 +216,6 @@ void HAL_Delay(uint32_t Delay)
   __HAL_RCC_GPIOF_CLK_DISABLE();
   __HAL_RCC_GPIOG_CLK_DISABLE();
   __HAL_RCC_GPIOH_CLK_DISABLE();
-
-  __HAL_RCC_PWR_CLK_ENABLE();
-
-  /*  USB Power Delivery */
-  HAL_PWREx_DisableUCPDDeadBattery();
 
   /* -------------------------------------------- */
   /* Step_0                                       */
@@ -322,11 +307,14 @@ void HAL_Delay(uint32_t Delay)
   {
     while(1);
   }
+  /* USER CODE END 2 */
+ 
+ 
 
-  /* This part is looped  */
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
   while (1)
   {
-
   /* -------------------------------------------- */
   /* Step_4                                       */
   /* SMPS: Bypass/HighPower/LowPower : High power */
@@ -545,9 +533,179 @@ void HAL_Delay(uint32_t Delay)
     {
       while(1);
     }
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+}
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+  /** Configure the main internal regulator output voltage 
+  */
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Initializes the CPU, AHB and APB busses clocks 
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+  RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Initializes the CPU, AHB and APB busses clocks 
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    Error_Handler();
   }
 }
 
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  HAL_PWREx_EnableVddIO2();
+
+  /*Configure GPIO pins : PE2 PE3 PE4 PE5 
+                           PE6 PE7 PE8 PE9 
+                           PE10 PE11 PE12 PE13 
+                           PE14 PE15 PE0 PE1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5 
+                          |GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9 
+                          |GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13 
+                          |GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_0|GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PC13 PC14 PC15 PC0 
+                           PC1 PC2 PC3 PC6 
+                           PC7 PC8 PC9 PC10 
+                           PC11 PC12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_0 
+                          |GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_6 
+                          |GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10 
+                          |GPIO_PIN_11|GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PF0 PF1 PF2 PF3 
+                           PF4 PF5 PF6 PF7 
+                           PF8 PF9 PF10 PF11 
+                           PF12 PF13 PF14 PF15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 
+                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11 
+                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PH0 PH1 PH3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA0 PA1 PA2 PA3 
+                           PA4 PA5 PA6 PA7 
+                           PA8 PA9 PA10 PA11 
+                           PA12 PA14 PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 
+                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11 
+                          |GPIO_PIN_12|GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB0 PB1 PB2 PB10 
+                           PB11 PB13 PB14 PB15 
+                           PB4 PB5 PB6 PB7 
+                           PB8 PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10 
+                          |GPIO_PIN_11|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15 
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 
+                          |GPIO_PIN_8|GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PG0 PG1 PG2 PG3 
+                           PG4 PG5 PG6 PG7 
+                           PG8 PG9 PG10 PG12 
+                           PG13 PG14 PG15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 
+                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_12 
+                          |GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PD8 PD9 PD10 PD11 
+                           PD12 PD13 PD14 PD15 
+                           PD0 PD1 PD2 PD3 
+                           PD4 PD5 PD6 PD7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11 
+                          |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15 
+                          |GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
+                          |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+}
+
+/* USER CODE BEGIN 4 */
 /**
   * @brief  System Clock Configuration
   *         The system Clock is configured as follows :
@@ -758,10 +916,21 @@ uint32_t check_config_in_use_example(uint32_t config)
   }
  return result;
 }
+/* USER CODE END 4 */
 
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+
+  /* USER CODE END Error_Handler_Debug */
+}
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -770,23 +939,12 @@ uint32_t check_config_in_use_example(uint32_t config)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{
+{ 
+  /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-
-  /* Infinite loop */
-  while (1)
-  {
-  }
+     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
 }
-#endif
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
+#endif /* USE_FULL_ASSERT */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

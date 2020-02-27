@@ -47,14 +47,14 @@ extern "C" {
   */
 
 /* Usage of COM feature */
-#define USE_BSP_COM_FEATURE 1U
+#define USE_BSP_COM_FEATURE 0U
 #define USE_COM_LOG         0U
 
 /* Usage of POT feature */
-#define USE_BSP_POT_FEATURE 1U
+#define USE_BSP_POT_FEATURE 0U
 
 /* Usage of IO expander */
-#define USE_BSP_IO_CLASS 1U
+#define USE_BSP_IO_CLASS    0U
 
 /* USBPD BSP PWR TRACE define */
 #define USE_BSP_PWR_TRACE                 0U

@@ -1,9 +1,0 @@
-[ProjectFiles]
-HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery
-[Others]
-Define=
-HALModule=EXTI
-[Groups]
-Doc=../readme.txt;
-Drivers/BSP/STM32L562E-Discovery=../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c;
-Drivers/STM32L5xx_HAL_Driver=../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c;

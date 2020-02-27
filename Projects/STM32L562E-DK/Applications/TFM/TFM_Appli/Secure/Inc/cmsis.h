@@ -17,10 +17,8 @@
 #ifndef __CMSIS_H__
 #define __CMSIS_H__
 
-/* CMSIS wrapper for NUCLEO L552ZE_Q board */
+/* CMSIS wrapper for stm32l5xx  */
 
-#include "system_cmsdk_stm32l5xx.h"
-#include "platform_regs.h"              /* Platform registers */
-#include "platform_retarget.h"          /* Peripherals base addresses */
+#include "stm32l5xx.h"
 
-#endif /*__NUCLEO_L552ZE_Q_CMSIS_H__*/
+#endif /*__CMSIS_H__*/

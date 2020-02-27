@@ -61,7 +61,7 @@ _Min_Stack_Size = 0x1000 ;	/* required amount of stack */
 /* Memories definition */
 MEMORY
 {
-  RAM	(xrw)	: ORIGIN = 0x20000000,	LENGTH = 192K
+  RAM	(xrw)	: ORIGIN = 0x20020000,	LENGTH = 64K
   ROM	(rx)	: ORIGIN = 0x8000000,	LENGTH = 512K
 }
 

@@ -1,9 +1,9 @@
 [ProjectFiles]
-HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK
 [Others]
 Define=
 HALModule=
 [Groups]
 Doc=../readme.txt;
 Application/User=../Src/PKV.c;../Src/prime256v1.c;
-Drivers/BSP/STM32L562E-Discovery=../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c;
+Drivers/BSP/STM32L562E-DK=../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c;

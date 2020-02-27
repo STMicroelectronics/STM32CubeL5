@@ -48,7 +48,7 @@ RTC_HandleTypeDef hrtc;
 
 /* USER CODE BEGIN PV */
 /* Buffer used for displaying Time */
-uint8_t aShowTime[16] = "hh:ms:ss";
+uint8_t aShowTime[16]; /* hh:ms:ss */
 __IO uint32_t RTCStatus = 0;
 /* USER CODE END PV */
 
@@ -81,7 +81,6 @@ int main(void)
        - Low Level Initialization
      */
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -106,8 +105,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -141,6 +138,7 @@ void SystemClock_Config(void)
   /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.LSIDiv = RCC_LSI_DIV1;
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
@@ -170,6 +168,7 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
+
 /**
   * @brief RTC Initialization Function
   * @param None
@@ -198,7 +197,6 @@ static void MX_RTC_Init(void)
   hrtc.Init.SynchPrediv = RTC_SYNCH_PREDIV;
   hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
   hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
-  hrtc.Init.OutPutPullUp = RTC_OUTPUT_PULLUP_NONE;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
   {
     Error_Handler();
@@ -286,7 +284,7 @@ static void RTC_TimeShow(uint8_t *showtime)
   /* Get the RTC current Date */
   HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
   /* Display time Format : hh:mm:ss */
-  sprintf((char *)showtime, "%02d:%02d:%02d", stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
+  sprintf((char *)showtime, "%02u:%02u:%02u", (unsigned char)stimestructureget.Hours, (unsigned char)stimestructureget.Minutes, (unsigned char)stimestructureget.Seconds);
 }
 /* USER CODE END 4 */
 

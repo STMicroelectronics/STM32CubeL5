@@ -104,14 +104,26 @@ Power, PWR, Low Power, Interrupt, Wakeup, External reset
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
  - Rebuild all files
- - In using STM32CubeProgrammer tool, load your image into target memory SRAM1 area 
-   at start address 0x20000000. Make sure option bytes are correctly set. i.e.
-   select SRAM1 as boot area:
-   More precisely, with ST-Link STM32CubeProgrammer tool,, option bytes settings shall be as follows
+ - plug the USB_STlk
+ - with ST-Link STM32CubeProgrammer tool, Click on Connect
+ - Select SRAM1 as boot area:
+   ie. with ST-Link STM32CubeProgrammer tool, option bytes settings shall be as follows
    requires to 
    * uncheck nSWBOOT0 (Software BOOT0)
    * check   nBOOT0   (nBOOT0 option bit)
- - Run the example (push RESET button)
+   * in non secure Boot base address 0 : 0x20000000  
+   * press "Apply"
+   * The "Read" and verify Bytes are correctly programmed.
+ 
+ - In using STM32CubeProgrammer tool, load your image into target memory SRAM1 area. 
+   i.e. in download window
+   select target PWR_LPRUN_SRAM1.hex
+   start address shall be 0x20000000 
+ - With ST-Link STM32CubeProgrammer tool, Click on Disconnect
+ - Do not disconnect STLK USB cable.
+ - Press reset button to start the example. 
+   
+ - Run the example (press RESET button)
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

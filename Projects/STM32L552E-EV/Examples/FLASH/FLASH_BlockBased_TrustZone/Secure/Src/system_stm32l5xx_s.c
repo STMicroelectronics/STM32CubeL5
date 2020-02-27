@@ -4,13 +4,13 @@
   * @author  MCD Application Team
   * @brief   CMSIS Cortex-M33 Device Peripheral Access Layer System Source File
   *          to be used in secure application when the system implements
-  *          the security.
+  *          the TrustZone-M security.
   *
   *   This file provides two functions and one global variable to be called from
   *   user application:
-  *      - SystemInit(): This function is called at startup just after reset and
-  *                      before branch to main program. This call is made inside
-  *                      the "startup_stm32l5xx.s" file.
+  *      - SystemInit(): This function is called at secure startup just after reset
+  *                      and before branch to secure main program.
+  *                      This call is made inside the "startup_stm32l5xx.s" file.
   *
   *      - SystemCoreClock variable: Contains the core clock (HCLK), it can be used
   *                                  by the user application to setup the SysTick
@@ -31,7 +31,7 @@
   *   Then SystemInit() function is called, in "startup_stm32l5xx.s" file, to
   *   configure the system clock before to branch to main program.
   *
-  *   This file configures the system clock as follows:
+  *   This file insures the system clock as follows:
   *=============================================================================
   *-----------------------------------------------------------------------------
   *        System Clock source                    | MSI
@@ -145,12 +145,31 @@
   #define HSI_VALUE    16000000U /*!< Value of the Internal oscillator in Hz*/
 #endif /* HSI_VALUE */
 
-/************************* Miscellaneous Configuration ************************/
-/*!< Uncomment the following line if you need to relocate your vector Table in
-     Internal SRAM. */
+/* Note: Following vector table addresses must be defined in line with linker
+         configuration. */
+/*!< Uncomment the following line if you need to relocate the vector table
+     anywhere in Flash or Sram, else the vector table is kept at the automatic
+     remap of boot address selected */
+/* #define USER_VECT_TAB_ADDRESS */
+
+#if defined(USER_VECT_TAB_ADDRESS)
+/*!< Uncomment the following line if you need to relocate your vector Table
+     in Sram else user remap will be done in Flash. */
 /* #define VECT_TAB_SRAM */
-#define VECT_TAB_OFFSET  0x00 /*!< Vector Table base offset field.
-                                   This value must be a multiple of 0x200. */
+
+#if defined(VECT_TAB_SRAM)
+#define VECT_TAB_BASE_ADDRESS   SRAM1_BASE_S    /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#else
+#define VECT_TAB_BASE_ADDRESS   FLASH_BASE_S    /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#endif /* VECT_TAB_SRAM */
+#endif /* USER_VECT_TAB_ADDRESS */
+
 /******************************************************************************/
 /**
   * @}
@@ -208,17 +227,16 @@ void SystemInit(void)
   /* SAU/IDAU, FPU and Interrupts secure/non-secure allocation settings */
   TZ_SAU_Setup();
 
+  /* Configure the Vector Table location -------------------------------------*/
+#if defined(USER_VECT_TAB_ADDRESS)
+  SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET;
+#endif
+
   /* FPU settings ------------------------------------------------------------*/
 #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
   SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
 
   SCB_NS->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
-#endif
-
-  /* Configure the Vector Table location add offset address ------------------*/
-  /* Secure memory space */
-#ifdef VECT_TAB_SRAM
-  SCB->VTOR = SRAM_BASE_S | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
 #endif
 }
 

@@ -1,0 +1,18 @@
+#! armclang --target=arm-arm-none-eabi -march=armv8-m.main -E -xc
+#include "region_defs.h"
+
+LR_IROM1 NS_CODE_START  NS_CODE_SIZE  {    ; load region size_region
+  ER_IROM1 NS_CODE_START  NS_CODE_SIZE  {  ; load address = execution address
+   *.o (RESET, +First)
+   *(InRoot$$Sections)
+   .ANY (+RO)
+   .ANY (+XO)
+  }
+  ER_DATA_NO_INIT NS_DATA_START UNINIT NS_NO_INIT_DATA_SIZE {
+		*(.bss.NoInit)
+    }
+  ER_DATA (NS_DATA_START + NS_NO_INIT_DATA_SIZE) (NS_DATA_SIZE - NS_NO_INIT_DATA_SIZE) {
+        .ANY (+ZI +RW)
+    }
+}
+

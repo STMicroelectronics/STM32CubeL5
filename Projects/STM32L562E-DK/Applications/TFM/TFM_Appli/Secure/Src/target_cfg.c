@@ -17,10 +17,8 @@
 #include "cmsis.h"
 #include "target_cfg.h"
 #include "Driver_MPC.h"
-#include "platform_retarget_dev.h"
 #include "region_defs.h"
 #include "tfm_secure_api.h"
-#include "tfm_mbedcrypto_config.h"
 #include "tfm_plat_defs.h"
 /*  fix me to move to a CMSIS driver */
 #include "stm32l5xx_hal.h"

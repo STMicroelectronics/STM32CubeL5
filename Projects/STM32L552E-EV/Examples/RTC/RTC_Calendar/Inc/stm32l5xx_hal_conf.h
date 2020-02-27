@@ -78,7 +78,7 @@
 #define HAL_FLASH_MODULE_ENABLED
 #define HAL_PWR_MODULE_ENABLED
 #define HAL_CORTEX_MODULE_ENABLED
-#define HAL_GTZC_MODULE_ENABLED
+
 #define HAL_ICACHE_MODULE_ENABLED
 
 /* ########################## Oscillator Values adaptation ####################*/
@@ -238,7 +238,7 @@
 
 /* ################## SDMMC peripheral configuration ######################### */
 
-#define USE_SD_TRANSCEIVER            0U               /*!< use uSD Transceiver */
+#define USE_SD_TRANSCEIVER            0U
  
  
 /* Includes ------------------------------------------------------------------*/

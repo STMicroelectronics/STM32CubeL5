@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L552xx,USE_HAL_DRIVER,USE_STM32L552E_EVAL</Define>
+              <Define>STM32L552xx,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../NonSecure/FATFS/App;../NonSecure/FATFS/Target;../NonSecure/Core/Inc;../NonSecure/Core/Src;..;../Secure_nsclib;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src;../../../../../../Middlewares/Third_Party/FatFs/src/option;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Drivers/BSP/STM32L552E_EVAL;../../../../../../Drivers/BSP/Components/mfxstm32l152</IncludePath>
+              <IncludePath>../NonSecure/FATFS/App;../NonSecure/FATFS/Target;../NonSecure/Core/Inc;../NonSecure/Core/Src;..;../Secure_nsclib;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src;../../../../../../Middlewares/Third_Party/FatFs/src/option;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Drivers/BSP/STM32L552E-EV;../../../../../../Drivers/BSP/Components/mfxstm32l152</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -405,22 +405,22 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/BSP/STM32L552E_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32L552E-EV</GroupName>
           <Files>
             <File>
               <FileName>stm32l552e_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_bus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</FilePath>
             </File>
           </Files>
         </Group>

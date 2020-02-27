@@ -48,11 +48,7 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stm32l5xx_ll_tim.h"
-#include "stm32l5xx_ll_dac.h"
 
-#if defined(USE_FULL_ASSERT)
-#include "stm32_assert.h"
-#endif /* USE_FULL_ASSERT */
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

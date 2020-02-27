@@ -178,19 +178,19 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/Components/st7789h2/st7789h2_reg.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</name>
+			<name>Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_lcd.c</name>
+			<name>Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_lcd.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_lcd.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_lcd.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/Utilities/Basic_GUI/basic_gui.c</name>
+			<name>Drivers/Utilities/basic_gui/basic_gui.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Utilities/Basic_GUI/basic_gui.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Utilities/basic_gui/basic_gui.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

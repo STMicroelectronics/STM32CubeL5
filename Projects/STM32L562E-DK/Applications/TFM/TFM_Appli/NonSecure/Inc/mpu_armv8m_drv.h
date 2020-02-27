@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-#include "cmsis.h"
+#include "stm32l5xx.h"
 
 #define PRIVILEGED_DEFAULT_ENABLE 1
 #define HARDFAULT_NMI_ENABLE      1

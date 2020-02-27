@@ -11,7 +11,7 @@
       <name>General</name>
       <archiveVersion>3</archiveVersion>
       <data>
-        <version>29</version>
+        <version>31</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -32,11 +32,11 @@
         </option>
         <option>
           <name>Input description</name>
-          <state>No specifier n, no float nor long long, no scan set, no assignment suppressing, with multibyte support.</state>
+          <state>Full formatting, without multibyte support.</state>
         </option>
         <option>
           <name>Output description</name>
-          <state>No specifier a, A, no specifier n, no float nor long long, with multibyte support.</state>
+          <state>Full formatting, without multibyte support.</state>
         </option>
         <option>
           <name>GOutputBinary</name>
@@ -62,11 +62,11 @@
         </option>
         <option>
           <name>OGProductVersion</name>
-          <state>4.41A</state>
+          <state>5.10.0.159</state>
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>8.20.1.14181</state>
+          <state>8.32.3.20186</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -108,15 +108,15 @@
         <option>
           <name>GeneralMisraRules04</name>
           <version>0</version>
-          <state>011111111111111110111111111111011111111111111011110100111111111111111111111111111111111111111111101111111111111011111111111111111111111111111</state>
+          <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
         </option>
         <option>
           <name>RTConfigPath2</name>
-          <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
+          <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</state>
         </option>
         <option>
           <name>GBECoreSlave</name>
-          <version>26</version>
+          <version>27</version>
           <state></state>
         </option>
         <option>
@@ -133,12 +133,12 @@
         </option>
         <option>
           <name>CoreVariant</name>
-          <version>26</version>
-          <state>39</state>
+          <version>27</version>
+          <state>59</state>
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32L552ZE	ST STM32L552ZE</state>
+          <state></state>
         </option>
         <option>
           <name>FPU2</name>
@@ -156,8 +156,8 @@
         </option>
         <option>
           <name>GFPUCoreSlave2</name>
-          <version>26</version>
-          <state>39</state>
+          <version>27</version>
+          <state>59</state>
         </option>
         <option>
           <name>OGCMSISPackSelectDevice</name>
@@ -177,7 +177,7 @@
         </option>
         <option>
           <name>OGPrintfMultibyteSupport</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>OGScanfVariant</name>
@@ -186,7 +186,7 @@
         </option>
         <option>
           <name>OGScanfMultibyteSupport</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>GenLocaleTags</name>
@@ -198,6 +198,15 @@
         </option>
         <option>
           <name>DSPExtension</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>TrustZone</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>TrustZoneModes</name>
+          <version>0</version>
           <state>1</state>
         </option>
       </data>
@@ -206,7 +215,7 @@
       <name>ICCARM</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>34</version>
+        <version>35</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -217,8 +226,6 @@
           <name>CCDefines</name>
           <state>USE_HAL_DRIVER</state>
           <state>STM32L552xx</state>
-          <state></state>
-          <state></state>
           <state></state>
         </option>
         <option>
@@ -349,9 +356,7 @@
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E_EVAL</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/Common</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/mfxstm32l152</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E-EV</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -414,7 +419,7 @@
         </option>
         <option>
           <name>IccStaticDestr</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IccCppInlineSemantics</name>
@@ -464,6 +469,10 @@
         <option>
           <name>IccRTTI2</name>
           <state>0</state>
+        </option>
+        <option>
+          <name>OICompilerExtraOption</name>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -685,9 +694,13 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>20</version>
+        <version>22</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
+        <option>
+          <name>IlinkOutputFile</name>
+          <state>RTC_Calendar.out</state>
+        </option>
         <option>
           <name>IlinkLibIOConfig</name>
           <state>1</state>
@@ -699,10 +712,6 @@
         <option>
           <name>IlinkInputFileSlave</name>
           <state>0</state>
-        </option>
-        <option>
-          <name>IlinkOutputFile</name>
-          <state>RTC_Calendar.out</state>
         </option>
         <option>
           <name>IlinkDebugInfoEnable</name>
@@ -997,6 +1006,14 @@
           <name>IlinkLocaleSelect</name>
           <state>1</state>
         </option>
+        <option>
+          <name>IlinkTrustzoneImportLibraryOut</name>
+          <state></state>
+        </option>
+        <option>
+          <name>OILinkExtraOption</name>
+          <state>1</state>
+        </option>
       </data>
     </settings>
     <settings>
@@ -1025,6 +1042,11 @@
       <archiveVersion>0</archiveVersion>
       <data></data>
     </settings>
+    <settings>
+      <name>Coder</name>
+      <archiveVersion>0</archiveVersion>
+      <data></data>
+    </settings>
   </configuration>
   <group>
     <name>Application</name>
@@ -1048,77 +1070,41 @@
     </group>
   </group>
   <group>
+    <name>Doc</name>
+    <file>
+      <name>$PROJ_DIR$/../readme.txt</name>
+    </file>
+  </group>
+  <group>
     <name>Drivers</name>
     <group>
       <name>BSP</name>
       <group>
-        <name>Components</name>
+        <name>STM32L552E-EV</name>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152_reg.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</name>
-        </file>
-      </group>
-      <group>
-        <name>STM32L552E_EVAL</name>
-        <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</name>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</name>
         </file>
       </group>
     </group>
     <group>
       <name>STM32L5xx_HAL_Driver</name>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_spi_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_spi.c</name>
-      </file>
-      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c_ex.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_adc_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_adc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc.c</name>
@@ -1139,16 +1125,25 @@
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr_ex.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim.c</name>
@@ -1163,12 +1158,6 @@
         <name>$PROJ_DIR$/../Src/system_stm32l5xx.c</name>
       </file>
     </group>
-  </group>
-  <group>
-    <name>Doc</name>
-    <file>
-      <name>$PROJ_DIR$/../readme.txt</name>
-    </file>
   </group>
 </project>
 

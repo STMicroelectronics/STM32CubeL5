@@ -360,7 +360,7 @@
           <state>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-Discovery</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/mfxstm32l152</state>
         </option>
         <option>
@@ -1118,15 +1118,15 @@
         </file>
       </group>
       <group>
-        <name>STM32L562E-Discovery</name>
+        <name>STM32L562E-DK</name>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_sd.c</name>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_sd.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_bus.c</name>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_bus.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</name>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
         </file>
       </group>
     </group>

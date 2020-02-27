@@ -26,7 +26,7 @@ Secure and TFM_Appli Non Secure projects.
 The TFM_Appli Secure project is used to generate the TFM_Appli Secure binary
 file. The core function of this application relies on the trusted firmware (TFM)
 middleware and the mbed-crypto middleware.
-It has to be compiled after TFM_SBSFU project.
+It has to be compiled after TFM_SBSFU_Boot project.
 
 The TFM_Appli Non Secure project is used to generate the TFM_Appli Non Secure
 binary file. The core function of this application relies on the trusted
@@ -44,19 +44,14 @@ trusted by TFM firmware update process.
 
   - TFM_Appli/Secure/Inc/aes_alt.h               Header file for aes_alt.c
   - TFM_Appli/Secure/Inc/cmsis.h                 Header file for CMSIS
-  - TFM_Appli/Secure/Inc/cmsis_cpu.h             Header file for CMSIS CPU
   - TFM_Appli/Secure/Inc/ecp_alt.h               Header file for ecp_alt.c
   - TFM_Appli/Secure/Inc/gcm_alt.h               Header file for gcm_alt.c
   - TFM_Appli/Secure/Inc/md5_alt.h               Header file for md5_alt.c
   - TFM_Appli/Secure/Inc/mpu_armv8m_drv.h        Header file for mpu_armv8m_drv.c
   - TFM_Appli/Secure/Inc/platform_irq.h          Platform interrupt requests
-  - TFM_Appli/Secure/Inc/platform_regs.h         Platform registers
-  - TFM_Appli/Secure/Inc/platform_retarget.h     Platform registers base addresses
-  - TFM_Appli/Secure/Inc/platform_retarget_dev.h Platform registers base addresses
   - TFM_Appli/Secure/Inc/sha1_alt.h              Header file for sha1_alt.c
   - TFM_Appli/Secure/Inc/sha256_alt.h            Header file for sha256_alt.c
   - TFM_Appli/Secure/Inc/stm32l5xx_hal_conf.h    HAL configuration file
-  - TFM_Appli/Secure/Inc/system_cmsdk_stm32l5xx.h Device header file
   - TFM_Appli/Secure/Inc/target_cfg.h            Header file for target_cfg.c
   - TFM_Appli/Secure/Inc/tfm_mbedcrypto_config.h Mbedcrypto configuration file
   - TFM_Appli/Secure/Inc/tfm_peripherals_def.h   Peripheral definitions
@@ -87,23 +82,16 @@ trusted by TFM firmware update process.
 @par TFM_Appli/NonSecure Directory contents
 
   - TFM_Appli/NonSecure/Inc/cmsis.h              Header file for CMSIS
-  - TFM_Appli/NonSecure/Inc/cmsis_cpu.h          Header file for CMSIS CPU
   - TFM_Appli/NonSecure/Inc/com.h                Header file for com.c
   - TFM_Appli/NonSecure/Inc/common.h             Header file for common.c
   - TFM_Appli/NonSecure/Inc/flash_if.h           Header file for flash_if.c
   - TFM_Appli/NonSecure/Inc/fw_update_app.h      Header file for fw_update.c
   - TFM_Appli/NonSecure/Inc/main.h               Header file for main.c
   - TFM_Appli/NonSecure/Inc/mpu_armv8m_drv.h     Header file for mpu_armv8m_drv.c
-  - TFM_Appli/NonSecure/Inc/platform_regs.h      Platform registers
-  - TFM_Appli/NonSecure/Inc/platform_retarget.h  Platform peripheral base addresses
-  - TFM_Appli/NonSecure/Inc/platform_retarget_dev.h Platform peripheral base addresses
   - TFM_Appli/NonSecure/Inc/stm32l5xx_hal_conf.h HAL configuration file
   - TFM_Appli/NonSecure/Inc/stm32l5xx_it.h       Header file for stm32l5xx_it.c
-  - TFM_Appli/NonSecure/Inc/system_cmsdk_stm32l5xx.h Device header file
-  - TFM_Appli/NonSecure/Inc/target_cfg.h         Header file for target_cfg.c
   - TFM_Appli/NonSecure/Inc/test_protections.h   Header file for test_protections.c
   - TFM_Appli/NonSecure/Inc/tfm_app.h            Header file for tfm_app.c
-  - TFM_Appli/NonSecure/Inc/tfm_peripherals_def.h Peripheral definitions
   - TFM_Appli/NonSecure/Inc/ymodem.h             Header file for ymodem.c
 
   - TFM_Appli/NonSecure/Src/com.c                Uart low level interface

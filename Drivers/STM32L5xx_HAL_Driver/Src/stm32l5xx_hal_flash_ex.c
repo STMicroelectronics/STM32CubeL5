@@ -108,30 +108,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-#define FLASH_CR         FLASH->SECCR           /* Alias Secure Flash memory access */
-#define FLASH_SR         FLASH->SECSR           /* Alias Secure Flash memory access */
-
-#define FLASH_CR_MER1    FLASH_SECCR_SECMER1    /* Alias Secure Mass Erase Bank1 bit */
-#define FLASH_CR_MER2    FLASH_SECCR_SECMER2    /* Alias Secure Mass Erase Bank2 bit */
-#define FLASH_CR_STRT    FLASH_SECCR_SECSTRT    /* Alias Secure Start bit */
-#define FLASH_CR_BKER    FLASH_SECCR_SECBKER    /* Alias Secure Bank Erase Selection bit */
-#define FLASH_CR_PER     FLASH_SECCR_SECPER     /* Alias Secure Page Erase bit */
-#define FLASH_CR_PNB     FLASH_SECCR_SECPNB     /* Alias Secure Page Number bits */
-#define FLASH_CR_PNB_Pos FLASH_SECCR_SECPNB_Pos /* Alias Secure Page Number bits position */
-#else
-#define FLASH_CR         FLASH->NSCR            /* Alias Legacy/Non-Secure Flash memory access */
-#define FLASH_SR         FLASH->NSSR            /* Alias Legacy/Non-Secure Flash memory access */
-
-#define FLASH_CR_MER1    FLASH_NSCR_NSMER1      /* Alias Legacy/Non-Secure Mass Erase Bank1 bit */
-#define FLASH_CR_MER2    FLASH_NSCR_NSMER2      /* Alias Legacy/Non-Secure Mass Erase Bank2 bit */
-#define FLASH_CR_STRT    FLASH_NSCR_NSSTRT      /* Alias Legacy/Non-Secure Start bit */
-#define FLASH_CR_BKER    FLASH_NSCR_NSBKER      /* Alias Legacy/Non-Secure Bank Erase Selection bit */
-#define FLASH_CR_PER     FLASH_NSCR_NSPER       /* Alias Legacy/Non-Secure Page Erase bit */
-#define FLASH_CR_PNB     FLASH_NSCR_NSPNB       /* Alias Legacy/Non-Secure Page Number bits */
-#define FLASH_CR_PNB_Pos FLASH_NSCR_NSPNB_Pos   /* Alias Legacy/Non-Secure Page Number bits position */
-#endif
-
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -211,15 +187,9 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t
   {
     pFlash.ProcedureOnGoing = pEraseInit->TypeErase;
 
-#if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
     reg = IS_FLASH_SECURE_OPERATION() ? &(FLASH->SECCR) : &(FLASH_NS->NSCR);
 
     if ((pFlash.ProcedureOnGoing & ~(FLASH_NON_SECURE_MASK)) == FLASH_TYPEERASE_MASSERASE)
-#else
-    reg = &(FLASH->NSCR);
-
-    if (pFlash.ProcedureOnGoing == FLASH_TYPEERASE_MASSERASE)
-#endif
     {
       /* Mass erase to be done */
       FLASH_MassErase(pEraseInit->Banks);
@@ -249,13 +219,7 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t
     }
 
     /* If the erase operation is completed, disable the associated bits */
-#if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-    FLASH_ALLOW_ACCESS_NS_TO_SEC();
     CLEAR_BIT((*reg), (pFlash.ProcedureOnGoing & ~(FLASH_NON_SECURE_MASK)));
-    FLASH_DENY_ACCESS_NS_TO_SEC();
-#else
-    CLEAR_BIT((*reg), pFlash.ProcedureOnGoing);
-#endif
   }
 
   /* Process Unlocked */
@@ -274,6 +238,7 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t
 HAL_StatusTypeDef HAL_FLASHEx_Erase_IT(FLASH_EraseInitTypeDef *pEraseInit)
 {
   HAL_StatusTypeDef status;
+  __IO uint32_t *reg_cr;
 
   /* Check the parameters */
   assert_param(IS_FLASH_TYPEERASE(pEraseInit->TypeErase));
@@ -297,15 +262,14 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase_IT(FLASH_EraseInitTypeDef *pEraseInit)
     /* Set internal variables used by the IRQ handler */
     pFlash.ProcedureOnGoing = pEraseInit->TypeErase;
     pFlash.Bank = pEraseInit->Banks;
+    
+    /* Access to SECCR or NSCR depends on operation type */
+    reg_cr = IS_FLASH_SECURE_OPERATION() ? &(FLASH->SECCR) : &(FLASH->NSCR);
 
     /* Enable End of Operation and Error interrupts */
-    __HAL_FLASH_ENABLE_IT(FLASH_IT_EOP | FLASH_IT_OPERR);
+    (*reg_cr) |= (FLASH_IT_EOP | FLASH_IT_OPERR);
 
-#if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
     if ((pFlash.ProcedureOnGoing & ~(FLASH_NON_SECURE_MASK)) == FLASH_TYPEERASE_MASSERASE)
-#else
-    if (pFlash.ProcedureOnGoing == FLASH_TYPEERASE_MASSERASE)
-#endif
     {
       /* Mass erase to be done */
       FLASH_MassErase(pEraseInit->Banks);
@@ -766,13 +730,11 @@ static void FLASH_MassErase(uint32_t Banks)
   /* Disable interrupts to avoid any interruption */
   primask_bit = __get_PRIMASK();
   __disable_irq();
-
-  reg = IS_FLASH_SECURE_OPERATION() ? &(FLASH->SECCR) : &(FLASH_NS->NSCR);
-  FLASH_ALLOW_ACCESS_NS_TO_SEC();
-#else
-  reg = &(FLASH->NSCR);
 #endif
   
+  /* Access to SECCR or NSCR registers depends on operation type */
+  reg = IS_FLASH_SECURE_OPERATION() ? &(FLASH->SECCR) : &(FLASH_NS->NSCR);
+
   if (READ_BIT(FLASH->OPTR, FLASH_OPTR_DBANK) != 0U)
   {
     /* Check the parameters */
@@ -781,26 +743,24 @@ static void FLASH_MassErase(uint32_t Banks)
     /* Set the Mass Erase Bit for the bank 1 if requested */
     if((Banks & FLASH_BANK_1) != 0U)
     {
-      SET_BIT((*reg), FLASH_CR_MER1);
+      SET_BIT((*reg), FLASH_NSCR_NSMER1);
     }
 
     /* Set the Mass Erase Bit for the bank 2 if requested */
     if((Banks & FLASH_BANK_2) != 0U)
     {
-      SET_BIT((*reg), FLASH_CR_MER2);
+      SET_BIT((*reg), FLASH_NSCR_NSMER2);
     }
   }
   else
   {
-    SET_BIT((*reg), (FLASH_CR_MER1 | FLASH_CR_MER2));
+    SET_BIT((*reg), (FLASH_NSCR_NSMER1 | FLASH_NSCR_NSMER2));
   }
 
   /* Proceed to erase all sectors */
-  SET_BIT((*reg), FLASH_CR_STRT);
+  SET_BIT((*reg), FLASH_NSCR_NSSTRT);
 
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-  FLASH_DENY_ACCESS_NS_TO_SEC();
-
   /* Re-enable the interrupts */
   __set_PRIMASK(primask_bit);
 #endif
@@ -829,16 +789,14 @@ void FLASH_PageErase(uint32_t Page, uint32_t Banks)
   /* Disable interrupts to avoid any interruption */
   primask_bit = __get_PRIMASK();
   __disable_irq();
-
-  reg = IS_FLASH_SECURE_OPERATION() ? &(FLASH->SECCR) : &(FLASH_NS->NSCR);
-  FLASH_ALLOW_ACCESS_NS_TO_SEC();
-#else
-  reg = &(FLASH->NSCR);
 #endif
+
+  /* Access to SECCR or NSCR registers depends on operation type */
+  reg = IS_FLASH_SECURE_OPERATION() ? &(FLASH->SECCR) : &(FLASH_NS->NSCR);
 
   if(READ_BIT(FLASH->OPTR, FLASH_OPTR_DBANK) == 0U)
   {
-    CLEAR_BIT((*reg), FLASH_CR_BKER);
+    CLEAR_BIT((*reg), FLASH_NSCR_NSBKER);
   }
   else
   {
@@ -846,21 +804,19 @@ void FLASH_PageErase(uint32_t Page, uint32_t Banks)
 
     if((Banks & FLASH_BANK_1) != 0U)
     {
-      CLEAR_BIT((*reg), FLASH_CR_BKER);
+      CLEAR_BIT((*reg), FLASH_NSCR_NSBKER);
     }
     else
     {
-      SET_BIT((*reg), FLASH_CR_BKER);
+      SET_BIT((*reg), FLASH_NSCR_NSBKER);
     }
   }
 
   /* Proceed to erase the page */
-  MODIFY_REG((*reg), (FLASH_CR_PNB | FLASH_CR_PER), ((Page << FLASH_CR_PNB_Pos) | FLASH_CR_PER));
-  SET_BIT((*reg), FLASH_CR_STRT);
+  MODIFY_REG((*reg), (FLASH_NSCR_NSPNB | FLASH_NSCR_NSPER), ((Page << FLASH_NSCR_NSPNB_Pos) | FLASH_NSCR_NSPER));
+  SET_BIT((*reg), FLASH_NSCR_NSSTRT);
 
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-  FLASH_DENY_ACCESS_NS_TO_SEC();
-
   /* Re-enable the interrupts */
   __set_PRIMASK(primask_bit);
 #endif
@@ -1486,11 +1442,11 @@ static void FLASH_OB_GetBootAddr(uint32_t BootAddrConfig, uint32_t * BootAddr)
 {
   if (BootAddrConfig == OB_BOOTADDR_NS0)
   {
-    *BootAddr = FLASH->NSBOOTADD0R;
+    *BootAddr = (FLASH->NSBOOTADD0R & FLASH_NSBOOTADD0R_NSBOOTADD0);
   }
   else if (BootAddrConfig == OB_BOOTADDR_NS1)
   {
-    *BootAddr = FLASH->NSBOOTADD1R;
+    *BootAddr = (FLASH->NSBOOTADD1R & FLASH_NSBOOTADD1R_NSBOOTADD1);
   }
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
   else if (BootAddrConfig == OB_BOOTADDR_SEC0)

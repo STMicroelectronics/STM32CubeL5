@@ -638,7 +638,7 @@ typedef void (*pOSPI_CallbackTypeDef)(OSPI_HandleTypeDef *hospi);
   * @{
   */
 /** @brief Reset OSPI handle state.
-  * @param  __HANDLE__ OSPI handle.
+  * @param  __HANDLE__ specifies the OSPI Handle.
   * @retval None
   */
 #if defined (USE_HAL_OSPI_REGISTER_CALLBACKS) && (USE_HAL_OSPI_REGISTER_CALLBACKS == 1U)

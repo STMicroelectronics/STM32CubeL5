@@ -190,7 +190,6 @@ void SystemClock_Config(void)
 
   LL_Init1msTick(110000000);
 
-  LL_SYSTICK_SetClkSource(LL_SYSTICK_CLKSOURCE_HCLK);
   LL_SetSystemCoreClock(110000000);
 }
 

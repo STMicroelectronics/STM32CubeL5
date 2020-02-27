@@ -84,6 +84,7 @@ static void DAC_Config_LowPower(void)
   RCC_OscInitTypeDef RCC_OscInitStruct_LSI = {0};
   
   RCC_OscInitStruct_LSI.OscillatorType = RCC_OSCILLATORTYPE_LSI;
+  RCC_OscInitStruct_LSI.LSIDiv         = RCC_LSI_DIV1;
   RCC_OscInitStruct_LSI.LSIState       = RCC_LSI_ON;
   RCC_OscInitStruct_LSI.PLL.PLLState   = RCC_PLL_NONE;
   
@@ -139,7 +140,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
   uint32_t examplestate = 0; 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -263,8 +263,6 @@ int main(void)
     UserButtonStatus = 0; 
 
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */

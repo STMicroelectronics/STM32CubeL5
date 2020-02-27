@@ -11,10 +11,15 @@
 		<nature>com.st.stm32cube.ide.mcu.MCURootProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUCubeIdeServicesRevAProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUNonUnderRootProjectNature</nature>
-		<nature>com.st.stm32cube.ide.mcu.MCUCubeExampleProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUCubeProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUSingleCpuProjectNature</nature>
 	</natures>
 	<linkedResources>
+		<link>
+			<name>FreeRTOS_SecureIOToggle_TrustZone.ioc</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/FreeRTOS_SecureIOToggle_TrustZone.ioc</locationURI>
+		</link>
 		<link>
 			<name>Doc/readme.txt</name>
 			<type>1</type>
@@ -46,6 +51,21 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_flash.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_flash_ex.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_flash_ramfunc.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash_ramfunc.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_gpio.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</locationURI>
@@ -64,6 +84,11 @@
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_i2c_ex.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_icache.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_pwr.c</name>
@@ -86,6 +111,16 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc_ex.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_tim.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_tim_ex.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim_ex.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_uart.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c</locationURI>
@@ -96,14 +131,14 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</name>
+			<name>Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</locationURI>
 		</link>
 	</linkedResources>
 	<filteredResources>
 		<filter>
-			<id>1574623343347</id>
+			<id>1581066661506</id>
 			<name></name>
 			<type>22</type>
 			<matcher>

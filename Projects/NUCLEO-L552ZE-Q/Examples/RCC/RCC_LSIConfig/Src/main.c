@@ -72,7 +72,6 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -177,6 +176,7 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
+
 /* USER CODE BEGIN 4 */
 /**
   * @brief  EXTI line detection callbacks.
@@ -204,6 +204,7 @@ static void EnableLSI_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStructure;
 
   RCC_OscInitStructure.OscillatorType = RCC_OSCILLATORTYPE_LSI;
+  RCC_OscInitStructure.LSIDiv = RCC_LSI_DIV1;
   RCC_OscInitStructure.LSIState = RCC_LSI_ON;
   RCC_OscInitStructure.PLL.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStructure) !=  HAL_OK)

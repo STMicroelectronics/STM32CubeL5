@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L552xx,USE_HAL_DRIVER,USE_STM32L552E_EVAL</Define>
+              <Define>STM32L552xx,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Secure_nsclib;../Secure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/BSP/STM32L552E_EVAL;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/option;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</IncludePath>
+              <IncludePath>../Secure_nsclib;../Secure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/BSP/STM32L552E-EV;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/option;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -390,17 +390,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/BSP/STM32L552E_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32L552E-EV</GroupName>
           <Files>
             <File>
               <FileName>stm32l552e_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_sd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_sd.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sd.c</FilePath>
             </File>
           </Files>
         </Group>

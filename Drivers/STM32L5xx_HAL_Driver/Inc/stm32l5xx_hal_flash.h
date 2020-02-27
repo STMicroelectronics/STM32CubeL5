@@ -653,15 +653,20 @@ typedef struct
   * @retval none
   */
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
+/* Enable secure FLASH interrupts from the secure world */
 #define __HAL_FLASH_ENABLE_IT(__INTERRUPT__)    do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { SET_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
-                                                     if((((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) && IS_FLASH_SECURE_OPERATION()) { SET_BIT(FLASH->SECCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
-                                                     if((((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) && (!IS_FLASH_SECURE_OPERATION())) { SET_BIT(FLASH->NSCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
+                                                     if(((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) { SET_BIT(FLASH->SECCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
+                                                   } while(0)
+/* Enable non-secure FLASH interrupts from the secure world */
+#define __HAL_FLASH_ENABLE_IT_NS(__INTERRUPT__) do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { SET_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
+                                                     if(((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) { SET_BIT(FLASH->NSCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
                                                    } while(0)
 #else
+/* Enable non-secure FLASH interrupts from the non-secure world */
 #define __HAL_FLASH_ENABLE_IT(__INTERRUPT__)    do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { SET_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
                                                      if(((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) { SET_BIT(FLASH->NSCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
                                                    } while(0)
-#endif
+#endif /* __ARM_FEATURE_CMSE */
 
 /**
   * @brief  Disable the specified FLASH interrupt.
@@ -673,15 +678,20 @@ typedef struct
   * @retval none
   */
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-#define __HAL_FLASH_DISABLE_IT(__INTERRUPT__)   do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { CLEAR_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
-                                                     if((((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) && IS_FLASH_SECURE_OPERATION()) { CLEAR_BIT(FLASH->SECCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
-                                                     if((((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) && (!IS_FLASH_SECURE_OPERATION())) { CLEAR_BIT(FLASH->NSCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
-                                                   } while(0)
+/* Disable secure FLASH interrupts from the secure world */
+#define __HAL_FLASH_DISABLE_IT(__INTERRUPT__)    do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { CLEAR_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
+                                                      if(((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) { CLEAR_BIT(FLASH->SECCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
+                                                    } while(0)
+/* Disable non-secure FLASH interrupts from the secure world */
+#define __HAL_FLASH_DISABLE_IT_NS(__INTERRUPT__) do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { CLEAR_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
+                                                      if(((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) { CLEAR_BIT(FLASH->NSCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
+                                                    } while(0)
 #else
-#define __HAL_FLASH_DISABLE_IT(__INTERRUPT__)   do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { CLEAR_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
-                                                     if(((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) { CLEAR_BIT(FLASH->NSCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
-                                                   } while(0)
-#endif
+/* Disable non-secure FLASH interrupts from the non-secure world */
+#define __HAL_FLASH_DISABLE_IT(__INTERRUPT__)    do { if(((__INTERRUPT__) & FLASH_IT_ECCC) != 0U) { CLEAR_BIT(FLASH->ECCR, FLASH_ECCR_ECCIE); }\
+                                                      if(((__INTERRUPT__) & (~FLASH_IT_ECCC)) != 0U) { CLEAR_BIT(FLASH->NSCR, ((__INTERRUPT__) & (~FLASH_IT_ECCC))); }\
+                                                    } while(0)
+#endif /* __ARM_FEATURE_CMSE */
 
 /**
   * @brief  Check whether the specified FLASH flag is set or not.
@@ -701,16 +711,22 @@ typedef struct
   * @retval The new state of FLASH_FLAG (SET or RESET).
   */
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
+/* Get secure FLASH flags from the secure world */
 #define __HAL_FLASH_GET_FLAG(__FLAG__)          ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? \
                                                  (READ_BIT(FLASH->ECCR, (__FLAG__)) == (__FLAG__)) : \
-                                                 ((READ_BIT(FLASH->NSSR, (__FLAG__)) == (__FLAG__)) ? \
+                                                 ((((__FLAG__) & (FLASH_FLAG_OPTWERR)) != 0U) ? \
                                                   (READ_BIT(FLASH->NSSR, (__FLAG__)) == (__FLAG__)) : \
                                                   (READ_BIT(FLASH->SECSR, (__FLAG__)) == (__FLAG__))))
+/* Get non-secure FLASH flags from the secure world */
+#define __HAL_FLASH_GET_FLAG_NS(__FLAG__)       ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? \
+                                                 (READ_BIT(FLASH->ECCR, (__FLAG__)) == (__FLAG__)) : \
+                                                 (READ_BIT(FLASH->NSSR, (__FLAG__)) == (__FLAG__)))
 #else
+/* Get non-secure FLASH flags from the non-secure world */
 #define __HAL_FLASH_GET_FLAG(__FLAG__)          ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? \
                                                  (READ_BIT(FLASH->ECCR, (__FLAG__)) == (__FLAG__)) : \
                                                  (READ_BIT(FLASH->NSSR, (__FLAG__)) == (__FLAG__)))
-#endif
+#endif /* __ARM_FEATURE_CMSE */
 
 /**
   * @brief  Clear the FLASH's pending flags.
@@ -730,15 +746,21 @@ typedef struct
   * @retval None
   */
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
+/* Clear secure FLASH flags from the secure world */
 #define __HAL_FLASH_CLEAR_FLAG(__FLAG__)        do { if(((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) { SET_BIT(FLASH->ECCR, ((__FLAG__) & FLASH_FLAG_ECCR_ERRORS)); }\
-                                                     if(((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS)) != 0U) { WRITE_REG(FLASH->NSSR, ((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS))); \
-                                                                                                          WRITE_REG(FLASH->SECSR, ((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS))); } \
+                                                     if(((__FLAG__) & FLASH_FLAG_OPTWERR) != 0U) { SET_BIT(FLASH->NSSR, ((__FLAG__) & (FLASH_FLAG_OPTWERR))); }\
+                                                     if(((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS | FLASH_FLAG_OPTWERR)) != 0U) { WRITE_REG(FLASH->SECSR, ((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS | FLASH_FLAG_OPTWERR))); } \
+                                                   } while(0)
+/* Clear non-secure FLASH flags from the secure world */
+#define __HAL_FLASH_CLEAR_FLAG_NS(__FLAG__)     do { if(((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) { SET_BIT(FLASH->ECCR, ((__FLAG__) & FLASH_FLAG_ECCR_ERRORS)); }\
+                                                     if(((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS)) != 0U) { WRITE_REG(FLASH->NSSR, ((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS))); }\
                                                    } while(0)
 #else
+/* Clear non-secure FLASH flags from the non-secure world */
 #define __HAL_FLASH_CLEAR_FLAG(__FLAG__)        do { if(((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) { SET_BIT(FLASH->ECCR, ((__FLAG__) & FLASH_FLAG_ECCR_ERRORS)); }\
                                                      if(((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS)) != 0U) { WRITE_REG(FLASH->NSSR, ((__FLAG__) & ~(FLASH_FLAG_ECCR_ERRORS))); }\
                                                    } while(0)
-#endif
+#endif /* __ARM_FEATURE_CMSE */
 /**
   * @}
   */
@@ -823,9 +845,7 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout);
 
 #define FLASH_TIMEOUT_VALUE      1000u /* 1 s */
 
-#if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
 #define FLASH_NON_SECURE_MASK    0x80000000U
-#endif
 /**
   * @}
   */
@@ -953,12 +973,9 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout);
 
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
 #define IS_FLASH_SECURE_OPERATION()        ((pFlash.ProcedureOnGoing & FLASH_NON_SECURE_MASK) == 0U)
-
-#define FLASH_ALLOW_ACCESS_NS_TO_SEC()     do { if ((!IS_FLASH_SECURE_OPERATION())) { SAU->CTRL |= SAU_CTRL_ALLNS_Msk; SAU->CTRL &= ~(SAU_CTRL_ENABLE_Msk); __DSB(); } \
-                                              } while(0)
-#define FLASH_DENY_ACCESS_NS_TO_SEC()      do { if ((!IS_FLASH_SECURE_OPERATION())) { SAU->CTRL |= SAU_CTRL_ENABLE_Msk; SAU->CTRL &= ~(SAU_CTRL_ALLNS_Msk); __DSB(); } \
-                                              } while(0)
-#endif
+#else
+#define IS_FLASH_SECURE_OPERATION()        (0U)
+#endif /* __ARM_FEATURE_CMSE */
 /**
   * @}
   */

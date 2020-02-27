@@ -1421,6 +1421,29 @@ void HAL_PWREx_SMPS_DisableExternal(void)
 }
 
 /**
+  * @brief  Get Main Regulator status for use with external SMPS
+  * @retval Returned value can be one of the following values:
+  *         @arg @ref PWR_MAINREG_READY_FOR_EXTSMPS     Main regulator ready for use with external SMPS
+  *         @arg @ref PWR_MAINREG_NOT_READY_FOR_EXTSMPS Main regulator not ready for use with external SMPS
+  */
+uint32_t HAL_PWREx_SMPS_GetMainRegulatorExtSMPSReadyStatus(void)
+{
+  uint32_t main_regulator_status;
+  uint32_t pwr_sr1;
+
+  pwr_sr1 = READ_REG(PWR->SR1);
+  if (READ_BIT(pwr_sr1, PWR_SR1_EXTSMPSRDY) != 0U)
+  {
+    main_regulator_status = PWR_MAINREG_READY_FOR_EXTSMPS;
+  }
+  else
+  {
+    main_regulator_status = PWR_MAINREG_NOT_READY_FOR_EXTSMPS;
+  }
+  return main_regulator_status;
+}
+
+/**
   * @}
   */
 

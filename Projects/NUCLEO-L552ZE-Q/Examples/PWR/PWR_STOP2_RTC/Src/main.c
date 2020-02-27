@@ -4,7 +4,7 @@
   * @file    PWR/PWR_STOP2_RTC/Src/main.c
   * @author  MCD Application Team
   * @brief   This sample code shows how to use PWR HAL API to enter
-  *          and exit the STOP 1 mode using RTC.
+  *          and exit the STOP 2 mode using RTC.
   ******************************************************************************
   * @attention
   *
@@ -103,6 +103,8 @@ int main(void)
   /* Configure the system Power */
   SystemPower_Config();
   /* USER CODE END 2 */
+ 
+ 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -141,10 +143,10 @@ int main(void)
          Wakeup Time =  0,5 ms *  65,535 = 32,7675 s ~ 33 sec. */
     HAL_RTCEx_SetWakeUpTimer_IT(&RTCHandle, 0x0FFFF, RTC_WAKEUPCLOCK_RTCCLK_DIV16, 0U);
    
-    /* Enter STOP 1 mode */
+    /* Enter STOP 2 mode */
     HAL_PWREx_EnterSTOP2Mode(PWR_STOPENTRY_WFI);
     
-    /* ... STOP 1 mode ... */    
+    /* ... STOP 2 mode ... */    
 
     /* Re-configure the system clock to 110 MHz based on MSI, enable and
        select PLL as system clock source (PLL is disabled in STOP mode) */

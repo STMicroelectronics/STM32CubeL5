@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L552xx,USE_HAL_DRIVER,USE_STM32L552E_EVAL</Define>
+              <Define>STM32L552xx,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Secure_nsclib;../Secure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L552E_EVAL</IncludePath>
+              <IncludePath>../Secure_nsclib;../Secure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L552E-EV</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -395,7 +395,7 @@
             <File>
               <FileName>stm32l552e_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</FilePath>
             </File>
           </Files>
         </Group>

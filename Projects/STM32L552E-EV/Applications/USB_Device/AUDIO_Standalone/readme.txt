@@ -29,7 +29,7 @@ Following this specification, it is possible to manage only Full Speed USB mode 
 This class is natively supported by most Operating Systems: no need for specific driver setup.
 
 This is a typical application on how to use the stm32l5xx USB Device peripheral and SAI peripheral to
-stream audio data from USB Host to the audio codec implemented on the STM32L552E_EVAL board.
+stream audio data from USB Host to the audio codec implemented on the STM32L552E-EV board.
 
 The device supports the following audio features:
   - Pulse Coded Modulation (PCM) format
@@ -89,10 +89,10 @@ requirements, such as:
 
   - This application runs on STM32L5xx devices.
 
-  - This application has been tested with STMicroelectronics STM32L552E_EVAL board
+  - This application has been tested with STMicroelectronics STM32L552E-EV board
     and can be easily tailored to any other supported device and development board.
 
-  - STM32L552E_EVAL board Set-up
+  - STM32L552E-EV board Set-up
     -Connect the STM32L552E-EV board to the PC through "TYPE-C" to "Standard A" cable.
 
 

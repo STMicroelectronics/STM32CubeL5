@@ -355,7 +355,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                 </option>
                 <option>
@@ -1092,33 +1092,33 @@
                 </file>
             </group>
             <group>
-                <name>STM32L562E-Discovery</name>
+                <name>STM32L562E-DK</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_audio.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_audio.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_bus.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_bus.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_idd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_idd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_lcd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_motion_sensors.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_motion_sensors.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_ospi.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_ospi.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_sd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_sd.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_ts.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_ts.c</name>
                 </file>
             </group>
         </group>

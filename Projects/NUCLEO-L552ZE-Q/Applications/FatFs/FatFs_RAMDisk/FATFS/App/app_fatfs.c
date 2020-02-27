@@ -64,13 +64,13 @@ static int32_t FS_FileOperations(void);
 /**
   * @brief  FatFs initialization
   * @param  None
-  * @retval Initialization result 
+  * @retval Initialization result
   */
-int32_t MX_FATFS_Init(void) 
+int32_t MX_FATFS_Init(void)
 {
   /*## FatFS: Link the disk I/O driver(s)  ###########################*/
-   SRAMDISKFatFS.fs_type = FS_FAT16;   
-if (FATFS_LinkDriver(&SRAMDISK_Driver, SRAMDISKPath) != 0) 
+   SRAMDISKFatFS.fs_type = FS_FAT16;
+if (FATFS_LinkDriver(&SRAMDISK_Driver, SRAMDISKPath) != 0)
   /* USER CODE BEGIN FATFS_Init */
   {
     return APP_ERROR;
@@ -86,12 +86,12 @@ if (FATFS_LinkDriver(&SRAMDISK_Driver, SRAMDISKPath) != 0)
 /**
   * @brief  FatFs application main process
   * @param  None
-  * @retval Process result 
+  * @retval Process result
   */
 int32_t MX_FATFS_Process(void)
 {
   /* USER CODE BEGIN FATFS_Process */
-  int32_t process_res = APP_OK;  
+  int32_t process_res = APP_OK;
   /* Mass Storage Application State Machine */
   switch(Appli_state)
   {
@@ -101,9 +101,14 @@ int32_t MX_FATFS_Process(void)
       {
         process_res = APP_ERROR;
       }
+      else
+      {
+        process_res = APP_INIT;
+      }
+#else
+      process_res = APP_INIT;
 #endif
       Appli_state = APPLICATION_RUNNING;
-      process_res = APP_INIT;
     break;
   case APPLICATION_RUNNING:
       process_res = FS_FileOperations();
@@ -116,7 +121,7 @@ int32_t MX_FATFS_Process(void)
   }
   return process_res;
   /* USER CODE END FATFS_Process */
-}  
+}
 
 /**
   * @brief  Gets Time from RTC (generated when FS_NORTC==0; see ff.c)
@@ -127,14 +132,14 @@ DWORD get_fattime(void)
 {
   /* USER CODE BEGIN get_fattime */
   return 0;
-  /* USER CODE END get_fattime */  
+  /* USER CODE END get_fattime */
 }
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN Application */
 /**
   * @brief File system : file operation
-  * @retval File operation result 
+  * @retval File operation result
   */
 static int32_t FS_FileOperations(void)
 {

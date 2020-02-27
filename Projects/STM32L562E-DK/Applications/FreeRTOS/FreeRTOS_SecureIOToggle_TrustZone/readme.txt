@@ -72,7 +72,7 @@ This example configures the maximum system clock frequency at 110Mhz.
   - Secure/Inc/partition_stm32l562xx.h           STM32L5 Device System Configuration file
   - Secure/Inc/stm32l5xx_hal_conf.h              Secure HAL Configuration file
   - Secure/Inc/stm32l5xx_it.h                    Secure Interrupt handlers header file
-  - Secure/Inc/stm32l562e_discovery_conf.h       Secure NSP configuration header file
+  - Secure/Inc/stm32l562e_discovery_conf.h       Secure BSP configuration file
   - Secure_nsclib/secure_nsc.h                   Secure Non-Secure Callable (NSC) module header file
   - NonSecure/Src/main.c                         Non-secure Main program
   - NonSecure/Src/stm32l5xx_hal_msp.c            Non-secure HAL MSP module
@@ -82,7 +82,7 @@ This example configures the maximum system clock frequency at 110Mhz.
   - NonSecure/Inc/main.h                         Non-secure Main program header file
   - NonSecure/Inc/stm32l5xx_hal_conf.h           Non-secure HAL Configuration file
   - NonSecure/Inc/stm32l5xx_it.h                 Non-secure Interrupt handlers header file
-  - NonSecure/Inc/stm32l562e_discovery_conf.h    Non-secure BSP configuration header file
+  - NonSecure/Inc/stm32l562e_discovery_conf.h    Non-secure BSP configuration file
   - Common/FreeRTOSConfig.h                      FreeRTOS configuration file
 
 
@@ -122,6 +122,12 @@ IAR
 
 
 MDK-ARM
+
+ Requirements for Keil µVision version without ST-LINK debug support on Cortex-M33:
+ - Use ST-LINK FW v2J32 available on ST web site
+ - Use the ST-LINKIII-Keil_SWO.dll and STLinkUSBDriver.dll (ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip) and copy them at Keil\ARM\ST-LINK
+ - Change the TOOLS.INI under Keil install directory as described in the .doc file provided in the ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip package
+
  - Open your toolchain
  - Open Multi-projects workspace file Project.uvmpw
  - Select the xxxxx_S project as Active Project (Set as Active Project)
@@ -137,18 +143,15 @@ MDK-ARM
 
 
 STM32CubeIDE
- - Open your toolchain
- - Open Multi-projects workspace file .project
- - Select the xxxxx_S project and Build xxxxx_S project
- - Select the xxxxx_NS project and Build xxxxx_NS project
- - Select the xxxxx_NS project and select “Debug conguration”
+ - Open STM32CubeIDE
+ - File > Import. Point to the STM32CubeIDE folder of the example project. Click Finish.
+ - Select and build the xxxxx_NS project, this will automatically trigger build of xxxxx_S project
+ - Select the xxxxx_S project and select “Debug configuration”
    - Double click on “STM32 Cortex-M C/C++ Application”
    - Select  “Startup” >  “Add” > 
- - Select the xxxxx_S project 
+ - Select the xxxxx_NS project 
  - Build configuration : Select Release/Debug
-    - Select the xxxxx_NS project in “Load Image and Symbols” window  
-    -  Click “Move Up” then “Debug”
-    -  Run the example
+   - Click Debug to debug the example
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

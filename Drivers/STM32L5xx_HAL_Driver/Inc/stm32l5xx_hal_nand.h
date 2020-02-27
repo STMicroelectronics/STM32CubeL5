@@ -271,33 +271,33 @@ uint32_t              HAL_NAND_Read_Status(NAND_HandleTypeDef *hnand);
 /** @defgroup NAND_Private_Constants NAND Private Constants
   * @{
   */
-#define NAND_DEVICE                ((uint32_t)0x80000000U)
-#define NAND_WRITE_TIMEOUT         ((uint32_t)0x01000000U)
+#define NAND_DEVICE                ((uint32_t)0x80000000)
+#define NAND_WRITE_TIMEOUT         ((uint32_t)0x01000000)
 
 #define CMD_AREA                   ((uint32_t)(1UL<<16U))  /* A16 = CLE high */
 #define ADDR_AREA                  ((uint32_t)(1UL<<17U))  /* A17 = ALE high */
 
-#define NAND_CMD_AREA_A            ((uint8_t)0x00U)
-#define NAND_CMD_AREA_B            ((uint8_t)0x01U)
-#define NAND_CMD_AREA_C            ((uint8_t)0x50U)
-#define NAND_CMD_AREA_TRUE1        ((uint8_t)0x30U)
+#define NAND_CMD_AREA_A            ((uint8_t)0x00)
+#define NAND_CMD_AREA_B            ((uint8_t)0x01)
+#define NAND_CMD_AREA_C            ((uint8_t)0x50)
+#define NAND_CMD_AREA_TRUE1        ((uint8_t)0x30)
 
-#define NAND_CMD_WRITE0            ((uint8_t)0x80U)
-#define NAND_CMD_WRITE_TRUE1       ((uint8_t)0x10U)
-#define NAND_CMD_ERASE0            ((uint8_t)0x60U)
-#define NAND_CMD_ERASE1            ((uint8_t)0xD0U)
-#define NAND_CMD_READID            ((uint8_t)0x90U)
-#define NAND_CMD_STATUS            ((uint8_t)0x70U)
-#define NAND_CMD_LOCK_STATUS       ((uint8_t)0x7AU)
-#define NAND_CMD_RESET             ((uint8_t)0xFFU)
+#define NAND_CMD_WRITE0            ((uint8_t)0x80)
+#define NAND_CMD_WRITE_TRUE1       ((uint8_t)0x10)
+#define NAND_CMD_ERASE0            ((uint8_t)0x60)
+#define NAND_CMD_ERASE1            ((uint8_t)0xD0)
+#define NAND_CMD_READID            ((uint8_t)0x90)
+#define NAND_CMD_STATUS            ((uint8_t)0x70)
+#define NAND_CMD_LOCK_STATUS       ((uint8_t)0x7A)
+#define NAND_CMD_RESET             ((uint8_t)0xFF)
 
 /* NAND memory status */
-#define NAND_VALID_ADDRESS         ((uint32_t)0x00000100U)
-#define NAND_INVALID_ADDRESS       ((uint32_t)0x00000200U)
-#define NAND_TIMEOUT_ERROR         ((uint32_t)0x00000400U)
-#define NAND_BUSY                  ((uint32_t)0x00000000U)
-#define NAND_ERROR                 ((uint32_t)0x00000001U)
-#define NAND_READY                 ((uint32_t)0x00000040U)
+#define NAND_VALID_ADDRESS         ((uint32_t)0x00000100)
+#define NAND_INVALID_ADDRESS       ((uint32_t)0x00000200)
+#define NAND_TIMEOUT_ERROR         ((uint32_t)0x00000400)
+#define NAND_BUSY                  ((uint32_t)0x00000000)
+#define NAND_ERROR                 ((uint32_t)0x00000001)
+#define NAND_READY                 ((uint32_t)0x00000040)
 /**
   * @}
   */

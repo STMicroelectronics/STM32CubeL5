@@ -41,7 +41,7 @@
       <li>A Template project is provided to allow user to quickly build any firmware application on a given board.</li>
     </ul>
 
-    <p>The examples are located under STM32Cube_FW_STM32CubeL5_VX.Y.Z\Projects\</p>
+    <p>The examples are located under STM32Cube_FW_L5_VX.Y.Z\Projects\</p>
 
     <p>The examples in the default product configuration with the TrustZone disabled have the same structure:</p>
 
@@ -147,7 +147,7 @@ to build any firmware application.
         <td>1</td>
       </tr>
       <tr align=center>
-        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=144><p id="Examples">Examples</p></td>
+        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=147><p id="Examples">Examples</p></td>
         <td align=left rowspan=1><p id="-">-</p></td>
         <td align=left><p id="BSP">BSP</p></td>
         <td align=left>
@@ -564,7 +564,7 @@ How to configure and use GPIOs through the HAL API.
 How to use HAL GPIO to toggle secure and unsecure IOs when TrustZone security
 is activated (Option bit TZEN=1).
 </td>
-        <td>-</td>
+        <td><font size="5" color=green>CubeMx TrustZone</font></td>
         <td>-</td>
         <td><font size="5" color=green>CubeMx TrustZone</font></td>
       </tr>
@@ -584,7 +584,7 @@ How to use GTZC MPCWM-TZIC to build any example when TrustZone security is activ
 How to use HAL GTZC MPCBB to build any example with SecureFault detection when TrustZone
 security is activated (Option bit TZEN=1).
 </td>
-        <td>-</td>
+        <td><font size="5" color=green>CubeMx TrustZone</font></td>
         <td>-</td>
         <td><font size="5" color=green>CubeMx TrustZone</font></td>
       </tr>
@@ -933,7 +933,16 @@ How to use a OSPI HyperRAM memory in DMA mode.
         <td>-</td>
       </tr>
       <tr align=center>
-        <td align=left rowspan=1><p id="OPAMP">OPAMP</p></td>
+        <td align=left rowspan=2><p id="OPAMP">OPAMP</p></td>
+        <td align=left><p id="OPAMP_PGA">OPAMP_PGA</p></td>
+        <td align=left>
+How to configure the OPAMP peripheral in PGA mode (OPAMP programmable gain).
+</td>
+        <td>-</td>
+        <td>-</td>
+        <td><font size="5" color=green>CubeMx</font></td>
+      </tr>
+      <tr align=center>
         <td align=left><p id="OPAMP_STANDALONE">OPAMP_STANDALONE</p></td>
         <td align=left>
 How to configure the OPAMP peripheral in standalone mode. The gain 
@@ -1090,12 +1099,21 @@ allows validating an external public key.
         <td>-</td>
       </tr>
       <tr align=center>
-        <td align=left rowspan=10><p id="PWR">PWR</p></td>
+        <td align=left rowspan=11><p id="PWR">PWR</p></td>
         <td align=left><p id="PWR_LPRUN">PWR_LPRUN</p></td>
         <td align=left> 
 How to enter and exit the Low-power run mode.
 </td>
         <td><font size="5" color=green>CubeMx</font></td>
+        <td>-</td>
+        <td><font size="5" color=green>CubeMx</font></td>
+      </tr>
+      <tr align=center>
+        <td align=left><p id="PWR_LPRUN_SRAM1">PWR_LPRUN_SRAM1</p></td>
+        <td align=left>
+How to enter and exit the Low-power run mode.
+</td>
+        <td>-</td>
         <td>-</td>
         <td><font size="5" color=green>CubeMx</font></td>
       </tr>
@@ -1219,7 +1237,7 @@ Configuration of the system clock (SYSCLK) and modification of the clock setting
 Configuration of the system clock (SYSCLK) in Run mode from the secure application
 upon request from the non-secure application, using the RCC HAL API when TrustZone security is activated (Option bit TZEN=1).
 </td>
-        <td>-</td>
+        <td><font size="5" color=green>CubeMx TrustZone</font></td>
         <td>-</td>
         <td><font size="5" color=green>CubeMx TrustZone</font></td>
       </tr>
@@ -1266,7 +1284,7 @@ Configuration of the RNG using the HAL API. This example uses RNG interrupts to 
         <td align=left>
 How to program the active tamper detection.
 </td>
-        <td><font size="5" color=green>CubeMx</font></td>
+        <td><font size="5" color=green>X</font></td>
         <td><font size="5" color=green>X</font></td>
         <td>-</td>
       </tr>
@@ -1322,7 +1340,7 @@ of the RTC can be secure while the others are non-secure.
 </td>
         <td>-</td>
         <td>-</td>
-        <td><font size="5" color=green>CubeMx TrustZone</font></td>
+        <td><font size="5" color=green>X TrustZone</font></td>
       </tr>
       <tr align=center>
         <td align=left rowspan=1><p id="SAI">SAI</p></td>
@@ -1460,7 +1478,7 @@ mode.
         <td><font size="5" color=green>CubeMx</font></td>
       </tr>
       <tr align=center>
-        <td align=left rowspan=8><p id="UART">UART</p></td>
+        <td align=left rowspan=9><p id="UART">UART</p></td>
         <td align=left><p id="LPUART_WakeUpFromStop">LPUART_WakeUpFromStop</p></td>
         <td align=left>
 Configuration of an LPUART to wake up the MCU from Stop mode 
@@ -1497,6 +1515,15 @@ Re-routing of the C library printf function to the UART.
 </td>
         <td>-</td>
         <td><font size="5" color=green>CubeMx</font></td>
+        <td>-</td>
+      </tr>
+      <tr align=center>
+        <td align=left><p id="UART_Trace_TrustZone">UART_Trace_TrustZone</p></td>
+        <td align=left>
+How to use UART to define a secure trace communication path when TrustZone security is activated (Option bit TZEN=1).
+</td>
+        <td><font size="5" color=green>CubeMx TrustZone</font></td>
+        <td>-</td>
         <td>-</td>
       </tr>
       <tr align=center>
@@ -1562,10 +1589,10 @@ generates an MCU WWDG reset when a predefined time period has elapsed.
         <td><font size="5" color=green>CubeMx</font></td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-        <td colspan="3"><b>Total number of examples: 204</b></td>
-        <td>61</td>
+        <td colspan="3"><b>Total number of examples: 210</b></td>
+        <td>65</td>
         <td>50</td>
-        <td>93</td>
+        <td>95</td>
       </tr>
       <tr align=center>
         <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=70><p id="Examples_LL">Examples_LL</p></td>
@@ -1973,9 +2000,7 @@ uses LL unitary service functions for optimization purposes (performance and siz
       <tr align=center>
         <td align=left><p id="RTC_ExitStandbyWithWakeUpTimer_Init">RTC_ExitStandbyWithWakeUpTimer_Init</p></td>
         <td align=left>
-Configuration of the RTC to wake up from Standby mode 
-using the RTC Wakeup timer. The peripheral initialization uses LL unitary service 
-functions for optimization purposes (performance and size).
+How to periodically enter and wake up from STANDBY mode thanks to the RTC Wake-Up Timer (WUT).
 </td>
         <td>-</td>
         <td>-</td>
@@ -2507,8 +2532,20 @@ the STM32L5xx UART HAL and LL API, the LL API being used for performance improve
         <td>11</td>
       </tr>
       <tr align=center>
-        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=27><p id="Applications">Applications</p></td>
-        <td align=left rowspan=1><p id="-">-</p></td>
+        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=28><p id="Applications">Applications</p></td>
+        <td align=left rowspan=2><p id="-">-</p></td>
+        <td align=left><p id="SBSFU">SBSFU</p></td>
+        <td align=left>
+The SBSFU provides a Root of Trust solution including Secure Boot and Secure
+Firmware Update functionalities that is used before executing the application
+and provides an example of secure services that are isolated from the
+non-secure application but can be used by the non-secure application at run-time.
+</td>
+        <td>-</td>
+        <td>-</td>
+        <td><font size="5" color=green>X TrustZone</font></td>
+      </tr>
+      <tr align=center>
         <td align=left><p id="TFM">TFM</p></td>
         <td align=left>
 The TFM provides a Root of Trust solution including Secure Boot and Secure
@@ -2770,10 +2807,10 @@ This application shows how to use the USB device application based on the Mass S
         <td>-</td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-        <td colspan="3"><b>Total number of applications: 48</b></td>
+        <td colspan="3"><b>Total number of applications: 49</b></td>
         <td>13</td>
         <td>21</td>
-        <td>14</td>
+        <td>15</td>
       </tr>
       <tr align=center>
         <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=2><p id="Demonstrations">Demonstrations</p></td>
@@ -2799,10 +2836,10 @@ basic GUI interface. It is based on the STM32Cube HAL BSP and several middleware
         <td>0</td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-      	<td colspan="4"><b>Total number of projects: 342</b></td>
-      	<td>79</td>
+      	<td colspan="4"><b>Total number of projects: 349</b></td>
+      	<td>83</td>
       	<td>75</td>
-      	<td>188</td>
+      	<td>191</td>
       </tr>
     </table>
   </body>

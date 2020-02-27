@@ -349,7 +349,7 @@
                     <state>$PROJ_DIR$\..\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM33_NTZ\non_secure</state>
@@ -1094,13 +1094,13 @@
             <group>
                 <name>STM32L552E-EV</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL\stm32l552e_eval.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL\stm32l552e_eval_bus.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_bus.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL\stm32l552e_eval_io.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_io.c</name>
                 </file>
             </group>
         </group>

@@ -474,12 +474,15 @@ HAL_StatusTypeDef HAL_SD_InitCard(SD_HandleTypeDef *hsd)
   Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
   Init.ClockDiv            = SDMMC_INIT_CLK_DIV;
 
-#if (USE_SD_TRANSCEIVER != 0U) || defined (USE_SD_DIRPOL)
+#if (USE_SD_TRANSCEIVER != 0U)
   if (hsd->Init.TranceiverPresent == SDMMC_TRANSCEIVER_PRESENT)
   {
     /* Set Transceiver polarity */
     hsd->Instance->POWER |= SDMMC_POWER_DIRPOL;
   }
+#elif defined (USE_SD_DIRPOL)
+    /* Set Transceiver polarity */
+    hsd->Instance->POWER |= SDMMC_POWER_DIRPOL;
 #endif /* USE_SD_TRANSCEIVER  */
 
   /* Initialize SDMMC peripheral interface with default configuration */
@@ -1474,7 +1477,7 @@ HAL_StatusTypeDef HAL_SD_Erase(SD_HandleTypeDef *hsd, uint32_t BlockStartAdd, ui
     }
 
     /* Send CMD38 ERASE */
-    errorstate = SDMMC_CmdErase(hsd->Instance);
+    errorstate = SDMMC_CmdErase(hsd->Instance, 0UL);
     if(errorstate != HAL_SD_ERROR_NONE)
     {
       /* Clear all the static flags */

@@ -1,5 +1,5 @@
 [ProjectFiles]
-HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery;..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK;..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152
 [Others]
 Define=
 HALModule=ADC;DMA;I2C;ICACHE;EXTI;SPI;SRAM;UART;SD;MMC
@@ -9,5 +9,5 @@ Application/User/USB_Device/App=../USB_Device/App/usbd_desc.c;../USB_Device/App/
 Application/User/USB_Device/Target=../USB_Device/Target/usbd_conf.c;
 Doc=../readme.txt;
 Drivers/BSP/Components=../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152_reg.c;../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c;
-Drivers/BSP/STM32L562E-Discovery=../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_sd.c;../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_bus.c;../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c;
+Drivers/BSP/STM32L562E-DK=../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_sd.c;../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_bus.c;../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c;
 Drivers/STM32L5xx_HAL_Driver=../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_sdmmc.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_mmc_ex.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_mmc.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_sd_ex.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_sd.c;

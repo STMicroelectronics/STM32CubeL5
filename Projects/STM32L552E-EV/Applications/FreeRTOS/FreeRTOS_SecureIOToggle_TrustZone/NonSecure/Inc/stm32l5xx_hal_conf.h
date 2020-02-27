@@ -2,15 +2,19 @@
   ******************************************************************************
   * @file    stm32l5xx_hal_conf.h
   * @author  MCD Application Team
-  * @brief   HAL configuration file.
+  * @brief   HAL configuration template file.
+  *          This file should be copied to the application folder and renamed
+  *          to stm32l5xx_hal_conf.h.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -30,49 +34,52 @@
 /**
   * @brief This is the list of modules to be used in the HAL driver
   */
-#define HAL_MODULE_ENABLED
-/* #define HAL_ADC_MODULE_ENABLED */
-/* #define HAL_COMP_MODULE_ENABLED */
-#define HAL_CORTEX_MODULE_ENABLED
-/* #define HAL_CRC_MODULE_ENABLED */
-/* #define HAL_CRYP_MODULE_ENABLED */
-/* #define HAL_DAC_MODULE_ENABLED */
-/* #define HAL_DFSDM_MODULE_ENABLED */
-#define HAL_DMA_MODULE_ENABLED
-#define HAL_EXTI_MODULE_ENABLED
-/* #define HAL_FDCAN_MODULE_ENABLED */
-#define HAL_FLASH_MODULE_ENABLED
+#define HAL_MODULE_ENABLED  
+/*#define HAL_ADC_MODULE_ENABLED   */
+/*#define HAL_COMP_MODULE_ENABLED   */
+/*#define HAL_CRC_MODULE_ENABLED   */
+/*#define HAL_CRYP_MODULE_ENABLED   */
+/*#define HAL_DAC_MODULE_ENABLED   */
+/*#define HAL_DFSDM_MODULE_ENABLED   */
+/*#define HAL_FDCAN_MODULE_ENABLED   */
+/*#define HAL_GTZC_MODULE_ENABLED   */
+/*#define HAL_HASH_MODULE_ENABLED   */
+/*#define HAL_I2C_MODULE_ENABLED   */
+/*#define HAL_IRDA_MODULE_ENABLED   */
+/*#define HAL_IWDG_MODULE_ENABLED   */
+/*#define HAL_LPTIM_MODULE_ENABLED   */
+/*#define HAL_MMC_MODULE_ENABLED   */
+/*#define HAL_NAND_MODULE_ENABLED   */
+/*#define HAL_NOR_MODULE_ENABLED   */
+/*#define HAL_OPAMP_MODULE_ENABLED   */
+/*#define HAL_OSPI_MODULE_ENABLED   */
+/*#define HAL_OTFDEC_MODULE_ENABLED   */
+/*#define HAL_PCD_MODULE_ENABLED   */
+/*#define HAL_PKA_MODULE_ENABLED   */
+/*#define HAL_RCC_MODULE_ENABLED   */
+/*#define HAL_RNG_MODULE_ENABLED   */
+/*#define HAL_RTC_MODULE_ENABLED   */
+/*#define HAL_SAI_MODULE_ENABLED   */
+/*#define HAL_SD_MODULE_ENABLED   */
+/*#define HAL_SMARTCARD_MODULE_ENABLED   */
+/*#define HAL_SMBUS_MODULE_ENABLED   */
+/*#define HAL_SPI_MODULE_ENABLED   */
+/*#define HAL_SRAM_MODULE_ENABLED   */
+#define HAL_TIM_MODULE_ENABLED
+/*#define HAL_TSC_MODULE_ENABLED   */
+/*#define HAL_UART_MODULE_ENABLED   */
+/*#define HAL_USART_MODULE_ENABLED   */
+/*#define HAL_WWDG_MODULE_ENABLED   */
 #define HAL_GPIO_MODULE_ENABLED
-#define HAL_GTZC_MODULE_ENABLED
+#define HAL_EXTI_MODULE_ENABLED
 #define HAL_I2C_MODULE_ENABLED
-#define HAL_ICACHE_MODULE_ENABLED
-/* #define HAL_IRDA_MODULE_ENABLED */
-/* #define HAL_IWDG_MODULE_ENABLED */
-/* #define HAL_LPTIM_MODULE_ENABLED */
-/* #define HAL_MMC_MODULE_ENABLED */
-/* #define HAL_NAND_MODULE_ENABLED */
-/* #define HAL_NOR_MODULE_ENABLED */
-/* #define HAL_OPAMP_MODULE_ENABLED */
-/* #define HAL_OSPI_MODULE_ENABLED */
-/* #define HAL_OTFDEC_MODULE_ENABLED */
-/* #define HAL_PCD_MODULE_ENABLED */
-/* #define HAL_PKA_MODULE_ENABLED */
-#define HAL_PWR_MODULE_ENABLED
+#define HAL_DMA_MODULE_ENABLED
 #define HAL_RCC_MODULE_ENABLED
-/* #define HAL_RNG_MODULE_ENABLED */
-/* #define HAL_RTC_MODULE_ENABLED */
-/* #define HAL_SAI_MODULE_ENABLED */
-/* #define HAL_SD_MODULE_ENABLED */
-/* #define HAL_SMARTCARD_MODULE_ENABLED */
-/* #define HAL_SMBUS_MODULE_ENABLED */
-/* #define HAL_SPI_MODULE_ENABLED */
-/* #define HAL_SRAM_MODULE_ENABLED */
- #define HAL_TIM_MODULE_ENABLED 
-/* #define HAL_TSC_MODULE_ENABLED */
-#define HAL_UART_MODULE_ENABLED
-/* #define HAL_USART_MODULE_ENABLED */
-/* #define HAL_WWDG_MODULE_ENABLED */
+#define HAL_FLASH_MODULE_ENABLED
+#define HAL_PWR_MODULE_ENABLED
+#define HAL_CORTEX_MODULE_ENABLED
 
+#define HAL_ICACHE_MODULE_ENABLED
 
 /* ########################## Oscillator Values adaptation ####################*/
 /**
@@ -81,11 +88,11 @@
   *        (when HSE is used as system clock source, directly or through the PLL).
   */
 #if !defined  (HSE_VALUE)
-  #define HSE_VALUE              8000000U /*!< Value of the External oscillator in Hz */
+  #define HSE_VALUE    16000000UL /*!< Value of the External oscillator in Hz */
 #endif /* HSE_VALUE */
 
 #if !defined  (HSE_STARTUP_TIMEOUT)
-  #define HSE_STARTUP_TIMEOUT 100U   /*!< Time out for HSE start up, in ms */
+  #define HSE_STARTUP_TIMEOUT    100UL   /*!< Time out for HSE start up, in ms */
 #endif /* HSE_STARTUP_TIMEOUT */
 
 /**
@@ -93,7 +100,7 @@
   *        This value is the default MSI range value after Reset.
   */
 #if !defined  (MSI_VALUE)
-  #define MSI_VALUE           4000000U /*!< Value of the Internal oscillator in Hz*/
+  #define MSI_VALUE    4000000UL /*!< Value of the Internal oscillator in Hz*/
 #endif /* MSI_VALUE */
 
 /**
@@ -102,7 +109,7 @@
   *        (when HSI is used as system clock source, directly or through the PLL).
   */
 #if !defined  (HSI_VALUE)
-  #define HSI_VALUE           16000000U /*!< Value of the Internal oscillator in Hz*/
+  #define HSI_VALUE    16000000UL /*!< Value of the Internal oscillator in Hz*/
 #endif /* HSI_VALUE */
 
 /**
@@ -113,7 +120,7 @@
   *        which is subject to manufacturing process variations.
   */
 #if !defined  (HSI48_VALUE)
- #define HSI48_VALUE          48000000U /*!< Value of the Internal High Speed oscillator for USB FS/SDMMC/RNG in Hz.
+ #define HSI48_VALUE   48000000UL /*!< Value of the Internal High Speed oscillator for USB FS/SDMMC/RNG in Hz.
                                           The real value my vary depending on manufacturing process variations.*/
 #endif /* HSI48_VALUE */
 
@@ -121,8 +128,8 @@
   * @brief Internal Low Speed oscillator (LSI) value.
   */
 #if !defined  (LSI_VALUE)
- #define LSI_VALUE            32000U    /*!< LSI Typical Value in Hz*/
-#endif /* LSI_VALUE */                  /*!< Value of the Internal Low Speed oscillator in Hz
+ #define LSI_VALUE  32000UL       /*!< LSI Typical Value in Hz*/
+#endif /* LSI_VALUE */                      /*!< Value of the Internal Low Speed oscillator in Hz
                                           The real value may vary depending on the variations
                                           in voltage and temperature.*/
 /**
@@ -130,11 +137,11 @@
   *        This value is used by the UART, RTC HAL module to compute the system frequency
   */
 #if !defined  (LSE_VALUE)
-  #define LSE_VALUE           32768U    /*!< Value of the External oscillator in Hz*/
+  #define LSE_VALUE    32768UL /*!< Value of the External oscillator in Hz*/
 #endif /* LSE_VALUE */
 
 #if !defined  (LSE_STARTUP_TIMEOUT)
-  #define LSE_STARTUP_TIMEOUT 5000U     /*!< Time out for LSE start up, in ms */
+  #define LSE_STARTUP_TIMEOUT    5000UL   /*!< Time out for LSE start up, in ms */
 #endif /* HSE_STARTUP_TIMEOUT */
 
 /**
@@ -143,7 +150,7 @@
   *        frequency.
   */
 #if !defined  (EXTERNAL_SAI1_CLOCK_VALUE)
-  #define EXTERNAL_SAI1_CLOCK_VALUE  48000U /*!< Value of the SAI1 External clock source in Hz*/
+  #define EXTERNAL_SAI1_CLOCK_VALUE    48000UL /*!< Value of the SAI1 External clock source in Hz*/
 #endif /* EXTERNAL_SAI1_CLOCK_VALUE */
 
 /**
@@ -152,7 +159,7 @@
   *        frequency.
   */
 #if !defined  (EXTERNAL_SAI2_CLOCK_VALUE)
-  #define EXTERNAL_SAI2_CLOCK_VALUE   48000U /*!< Value of the SAI2 External clock source in Hz*/
+  #define EXTERNAL_SAI2_CLOCK_VALUE    48000UL /*!< Value of the SAI2 External clock source in Hz*/
 #endif /* EXTERNAL_SAI2_CLOCK_VALUE */
 
 /* Tip: To avoid modifying this file each time you need to use different HSE,
@@ -162,16 +169,17 @@
 /**
   * @brief This is the HAL system configuration section
   */
-#define VDD_VALUE          3300U /*!< Value of VDD in mv */
-#define TICK_INT_PRIORITY  ((1UL<<__NVIC_PRIO_BITS) - 1UL)  /*!< tick interrupt priority (lowest by default) */
-#define USE_RTOS           0U
+
+#define  VDD_VALUE					  3300UL /*!< Value of VDD in mv */           
+#define  TICK_INT_PRIORITY            0UL    /*!< tick interrupt priority */            
+#define  USE_RTOS                     0U
 
 /* ########################## Assert Selection ############################## */
 /**
   * @brief Uncomment the line below to expanse the "assert_param" macro in the
   *        HAL drivers code
   */
-/* #define USE_FULL_ASSERT               1U */
+/* #define USE_FULL_ASSERT    1U */
 
 /* ################## Register callback feature configuration ############### */
 /**
@@ -222,7 +230,7 @@
  * Deactivated: CRC code cleaned from driver
  */
 
-#define USE_SPI_CRC                   1U
+#define USE_SPI_CRC                   0U
 
 /* ################## CRYP peripheral configuration ########################## */
  

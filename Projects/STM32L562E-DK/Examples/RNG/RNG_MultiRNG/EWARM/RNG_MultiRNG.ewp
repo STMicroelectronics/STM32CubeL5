@@ -356,7 +356,7 @@
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-Discovery</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1080,9 +1080,9 @@
     <group>
       <name>BSP</name>
       <group>
-        <name>STM32L562E-Discovery</name>
+        <name>STM32L562E-DK</name>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</name>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
         </file>
       </group>
     </group>

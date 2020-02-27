@@ -249,11 +249,11 @@ extern "C" {
 /** @defgroup SYSTEM_LL_EC_APB2_GRP1_STOP DBGMCU APB2 GRP1 STOP
   * @{
   */
-#define LL_DBGMCU_APB2_GRP1_TIM1_STOP      DBGMCU_APB2FZ_DBG_TIM1_STOP     /*!< The counter clock of TIM1 is stopped when the core is halted*/
-#define LL_DBGMCU_APB2_GRP1_TIM8_STOP      DBGMCU_APB2FZ_DBG_TIM8_STOP     /*!< The counter clock of TIM8 is stopped when the core is halted*/
-#define LL_DBGMCU_APB2_GRP1_TIM15_STOP     DBGMCU_APB2FZ_DBG_TIM15_STOP    /*!< The counter clock of TIM15 is stopped when the core is halted*/
-#define LL_DBGMCU_APB2_GRP1_TIM16_STOP     DBGMCU_APB2FZ_DBG_TIM16_STOP    /*!< The counter clock of TIM16 is stopped when the core is halted*/
-#define LL_DBGMCU_APB2_GRP1_TIM17_STOP     DBGMCU_APB2FZ_DBG_TIM17_STOP    /*!< The counter clock of TIM17 is stopped when the core is halted*/
+#define LL_DBGMCU_APB2_GRP1_TIM1_STOP      DBGMCU_APB2FZR_DBG_TIM1_STOP     /*!< The counter clock of TIM1 is stopped when the core is halted*/
+#define LL_DBGMCU_APB2_GRP1_TIM8_STOP      DBGMCU_APB2FZR_DBG_TIM8_STOP     /*!< The counter clock of TIM8 is stopped when the core is halted*/
+#define LL_DBGMCU_APB2_GRP1_TIM15_STOP     DBGMCU_APB2FZR_DBG_TIM15_STOP    /*!< The counter clock of TIM15 is stopped when the core is halted*/
+#define LL_DBGMCU_APB2_GRP1_TIM16_STOP     DBGMCU_APB2FZR_DBG_TIM16_STOP    /*!< The counter clock of TIM16 is stopped when the core is halted*/
+#define LL_DBGMCU_APB2_GRP1_TIM17_STOP     DBGMCU_APB2FZR_DBG_TIM17_STOP    /*!< The counter clock of TIM17 is stopped when the core is halted*/
 /**
   * @}
   */
@@ -1033,7 +1033,7 @@ __STATIC_INLINE void LL_DBGMCU_APB1_GRP2_UnFreezePeriph(uint32_t Periphs)
 
 /**
   * @brief  Freeze APB2 peripherals
-  * @rmtoll DBGMCU_APB2FZ DBG_TIMx_STOP  LL_DBGMCU_APB2_GRP1_FreezePeriph
+  * @rmtoll DBGMCU_APB2FZR DBG_TIMx_STOP  LL_DBGMCU_APB2_GRP1_FreezePeriph
   * @param  Periphs This parameter can be a combination of the following values:
   *         @arg @ref LL_DBGMCU_APB2_GRP1_TIM1_STOP
   *         @arg @ref LL_DBGMCU_APB2_GRP1_TIM8_STOP
@@ -1044,12 +1044,12 @@ __STATIC_INLINE void LL_DBGMCU_APB1_GRP2_UnFreezePeriph(uint32_t Periphs)
   */
 __STATIC_INLINE void LL_DBGMCU_APB2_GRP1_FreezePeriph(uint32_t Periphs)
 {
-  SET_BIT(DBGMCU->APB2FZ, Periphs);
+  SET_BIT(DBGMCU->APB2FZR, Periphs);
 }
 
 /**
   * @brief  Unfreeze APB2 peripherals
-  * @rmtoll DBGMCU_APB2FZ DBG_TIMx_STOP  LL_DBGMCU_APB2_GRP1_UnFreezePeriph
+  * @rmtoll DBGMCU_APB2FZR DBG_TIMx_STOP  LL_DBGMCU_APB2_GRP1_UnFreezePeriph
   * @param  Periphs This parameter can be a combination of the following values:
   *         @arg @ref LL_DBGMCU_APB2_GRP1_TIM1_STOP
   *         @arg @ref LL_DBGMCU_APB2_GRP1_TIM8_STOP
@@ -1060,7 +1060,7 @@ __STATIC_INLINE void LL_DBGMCU_APB2_GRP1_FreezePeriph(uint32_t Periphs)
   */
 __STATIC_INLINE void LL_DBGMCU_APB2_GRP1_UnFreezePeriph(uint32_t Periphs)
 {
-  CLEAR_BIT(DBGMCU->APB2FZ, Periphs);
+  CLEAR_BIT(DBGMCU->APB2FZR, Periphs);
 }
 
 /**

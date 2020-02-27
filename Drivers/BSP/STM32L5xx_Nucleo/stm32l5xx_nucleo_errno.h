@@ -39,6 +39,10 @@ extern "C" {
 #define BSP_ERROR_MSP_FAILURE            -10
 #define BSP_ERROR_FEATURE_NOT_SUPPORTED  -11
 
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* STM32L5XX_NUCLEO_ERRNO_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

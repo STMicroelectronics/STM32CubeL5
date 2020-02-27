@@ -10,8 +10,8 @@ define symbol __ICFEDIT_region_RAM_start__   = 0x20000000;
 define symbol __ICFEDIT_region_RAM_end__     = 0x2002FFFF;
 
 /*-Sizes-*/
-define symbol __ICFEDIT_size_cstack__ = 0x800;
-define symbol __ICFEDIT_size_heap__   = 0x400;
+define symbol __ICFEDIT_size_cstack__ = 0x400;
+define symbol __ICFEDIT_size_heap__ = 0x200;
 /**** End of ICF editor section. ###ICF###*/
 
 define symbol __region_ROM_While1_start__  = 0x08070000;
@@ -22,7 +22,6 @@ define symbol __region_SRAM2_start__  = 0x20030000;
 define symbol __region_SRAM2_end__    = 0x2003FFFF;
 
 define memory mem with size = 4G;
-
 define region ROM_region      = mem:[from __ICFEDIT_region_ROM_start__   to __ICFEDIT_region_ROM_end__];
 define region ROM_While1_region  = mem:[from __region_ROM_While1_start__   to __region_ROM_While1_end__];
 define region RAM_region      = mem:[from __ICFEDIT_region_RAM_start__   to __ICFEDIT_region_RAM_end__];
@@ -43,3 +42,4 @@ place in RAM_region   { readwrite,
                         block CSTACK, block HEAP };
 place in SRAM1_region { };
 place in SRAM2_region { };
+                        

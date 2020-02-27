@@ -28,8 +28,8 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_crc.h"
+#include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_crs.h"
 #include "stm32l5xx_ll_rcc.h"
 #include "stm32l5xx_ll_bus.h"
@@ -48,9 +48,6 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#if defined(USE_FULL_ASSERT)
-#include "stm32_assert.h"
-#endif /* USE_FULL_ASSERT */
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

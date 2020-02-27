@@ -86,7 +86,6 @@ int main(void)
        - Low Level Initialization
      */
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -142,6 +141,7 @@ int main(void)
 
   RCC_OscInitStruct_LSI.OscillatorType = RCC_OSCILLATORTYPE_LSI;
   RCC_OscInitStruct_LSI.LSIState       = RCC_LSI_ON;
+  RCC_OscInitStruct_LSI.LSIDiv         = RCC_LSI_DIV1;
   RCC_OscInitStruct_LSI.PLL.PLLState   = RCC_PLL_NONE;
   HAL_RCC_OscConfig(&RCC_OscInitStruct_LSI);
   
@@ -305,6 +305,7 @@ static void MX_DAC1_Init(void)
   /* USER CODE END DAC1_Init 2 */
 
 }
+
 /**
   * @brief GPIO Initialization Function
   * @param None

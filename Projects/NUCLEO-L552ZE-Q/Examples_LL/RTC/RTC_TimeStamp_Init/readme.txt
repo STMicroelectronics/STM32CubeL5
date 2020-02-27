@@ -23,28 +23,18 @@
 Configuration of the Timestamp using the RTC LL API. The peripheral initialization 
 uses LL unitary service functions for optimization purposes (performance and size).
 
-In this example, after start-up, SYSCLK is configured to the max frequency using the PLL with
-HSI as clock source.
+In this example, after start-up, SYSCLK is configured to the max frequency using
+the PLL with MSI as clock source.
 
-The RTC peripheral configuration is ensured by the Configure_RTC() function 
-(configure of the needed RTC resources according to the used hardware CLOCK, 
-PWR, RTC clock source and BackUp). You may update this function to change RTC configuration.
-
-@note LSI oscillator clock is used as RTC clock source by default.
-      The user can use also LSE as RTC clock source. The user uncomment the adequate 
-      line on the main.c file.
-      @code
-        #define RTC_CLOCK_SOURCE_LSI  
-        /* #define RTC_CLOCK_SOURCE_LSE */
-      @endcode
-      LSI oscillator clock is delivered by a 32 kHz RC.
-      LSE (when available on board) is delivered by a 32.768 kHz crystal.
-
-Configure_RTC_TimeStamp() function is then called to initialize the time stamp feature 
-with interrupt mode. It configures the time stamp pin to be rising edge and enables
-the time stamp detection on time stamp pin.
-LL_RTC_DATE_Config()and LL_RTC_TIME_Config() functions are then called to initialize the 
-time and the date.
+LSE oscillator clock is used as RTC clock source.
+The user can use also LSI as RTC clock source by uncommenting the adequate 
+line on the main.c file.
+ @code
+   #define RTC_CLOCK_SOURCE_LSI  
+   /* #define RTC_CLOCK_SOURCE_LSE */
+ @endcode
+LSI oscillator clock is delivered by a 32 kHz RC.
+LSE is delivered by a 32.768 kHz crystal.
 
 The associated firmware performs the following:
 1. After start-up the program configure the RTC (Time date) and enable the feature 

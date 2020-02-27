@@ -1039,7 +1039,7 @@
     <settings>
       <name>BILINK</name>
       <archiveVersion>0</archiveVersion>
-      <data />
+      <data></data>
     </settings>
     <settings>
       <name>Coder</name>
@@ -1097,12 +1097,6 @@
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr_ex.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc_ex.c</name>
-      </file>
-      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</name>
       </file>
       <file>
@@ -1143,6 +1137,12 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim.c</name>

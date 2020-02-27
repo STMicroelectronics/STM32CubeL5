@@ -38,13 +38,9 @@ extern "C" {
 
 #include "usbpd_pwr_if.h"   
 
-#if defined(USE_STM32L552E_EVAL)
 #include "stm32l552e_eval.h"
 #include "stm32l552e_eval_lcd.h"
 #include "stm32l552e_eval_usbpd_pwr.h"
-#else
-#include "usbpd_bsp_pwr.h"
-#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/

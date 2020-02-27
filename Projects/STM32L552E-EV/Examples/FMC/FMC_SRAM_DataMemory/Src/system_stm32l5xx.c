@@ -91,7 +91,7 @@
   * @{
   */
 
-/** @addtogroup STM32L5xx_system
+/** @addtogroup STM32L5xx_System
   * @{
   */
 
@@ -100,18 +100,6 @@
   */
 
 #include "stm32l5xx.h"
-
-#if !defined  (HSE_VALUE)
-  #define HSE_VALUE    16000000U /*!< Value of the External oscillator in Hz */
-#endif /* HSE_VALUE */
-
-#if !defined  (MSI_VALUE)
-  #define MSI_VALUE    4000000U  /*!< Value of the Internal oscillator in Hz*/
-#endif /* MSI_VALUE */
-
-#if !defined  (HSI_VALUE)
-  #define HSI_VALUE    16000000U /*!< Value of the Internal oscillator in Hz*/
-#endif /* HSI_VALUE */
 
 /**
   * @}
@@ -129,15 +117,48 @@
   * @{
   */
 
+#if !defined  (HSE_VALUE)
+  #define HSE_VALUE    16000000U /*!< Value of the External oscillator in Hz */
+#endif /* HSE_VALUE */
+
+#if !defined  (MSI_VALUE)
+  #define MSI_VALUE    4000000U  /*!< Value of the Internal oscillator in Hz*/
+#endif /* MSI_VALUE */
+
+#if !defined  (HSI_VALUE)
+  #define HSI_VALUE    16000000U /*!< Value of the Internal oscillator in Hz*/
+#endif /* HSI_VALUE */
+
+
 /************************* Miscellaneous Configuration ************************/
 /*!< Uncomment the following line if you need to use external SRAM as data memory  */
 #define DATA_IN_ExtSRAM 
 
-/*!< Uncomment the following line if you need to relocate your vector Table in
-     Internal SRAM. */
+/* Note: Following vector table addresses must be defined in line with linker
+         configuration. */
+/*!< Uncomment the following line if you need to relocate the vector table
+     anywhere in Flash or Sram, else the vector table is kept at the automatic
+     remap of boot address selected */
+/* #define USER_VECT_TAB_ADDRESS */
+
+#if defined(USER_VECT_TAB_ADDRESS)
+/*!< Uncomment the following line if you need to relocate your vector Table
+     in Sram else user remap will be done in Flash. */
 /* #define VECT_TAB_SRAM */
-#define VECT_TAB_OFFSET  0x00 /*!< Vector Table base offset field.
-                                   This value must be a multiple of 0x200. */
+
+#if defined(VECT_TAB_SRAM)
+#define VECT_TAB_BASE_ADDRESS   SRAM1_BASE      /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#else
+#define VECT_TAB_BASE_ADDRESS   FLASH_BASE      /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#endif /* VECT_TAB_SRAM */
+#endif /* USER_VECT_TAB_ADDRESS */
+
 /******************************************************************************/
 /**
   * @}
@@ -196,6 +217,11 @@
 
 void SystemInit(void)
 {
+  /* Configure the Vector Table location -------------------------------------*/
+#if defined(USER_VECT_TAB_ADDRESS)
+  SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET;
+#endif
+
   /* FPU settings ------------------------------------------------------------*/
 #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
   SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
@@ -204,11 +230,6 @@ void SystemInit(void)
 #if defined (DATA_IN_ExtSRAM)
   SystemInit_ExtMemCtl(); 
 #endif /* DATA_IN_ExtSRAM */
-
-  /* Configure the Vector Table location add offset address ------------------*/
-#ifdef VECT_TAB_SRAM
-  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
-#endif
 }
 
 /**
@@ -333,8 +354,8 @@ void SystemInit_ExtMemCtl(void)
 {
   __IO uint32_t tmp = 0x00;
 
-/*-- GPIOs Configuration -----------------------------------------------------*/
-   /* Enable GPIOD, GPIOE, GPIOF and GPIOG interface clock */
+  /*-- GPIOs Configuration -----------------------------------------------------*/
+  /* Enable GPIOD, GPIOE, GPIOF and GPIOG interface clock */
   RCC->AHB2ENR       |= 0x00000078;
   /* Delay after an RCC peripheral clock enabling */
   tmp = READ_BIT(RCC->AHB2ENR, RCC_AHB2ENR_GPIODEN);
@@ -387,7 +408,7 @@ void SystemInit_ExtMemCtl(void)
   /* No pull-up, pull-down for PGx pins */ 
   GPIOG->PUPDR       = 0x00000000;
   
-   /* Enable PWR interface clock */
+  /* Enable PWR interface clock */
   RCC->APB1ENR1      |= 0x10000000;
   /* Delay after an RCC peripheral clock enabling */
   tmp = READ_BIT(RCC->APB1ENR1, RCC_APB1ENR1_PWREN);
@@ -395,7 +416,7 @@ void SystemInit_ExtMemCtl(void)
   /* IOSV bit MUST be set to access GPIO port G[2:15] */
   PWR->CR2           |= 0x00000200;
 
-/*-- FMC Configuration --------------------------------------------------*/
+  /*-- FMC Configuration --------------------------------------------------*/
   /* Enable the FMC interface clock */
   RCC->AHB3ENR       |= 0x00000001;
   /* Delay after an RCC peripheral clock enabling */
@@ -408,6 +429,7 @@ void SystemInit_ExtMemCtl(void)
   (void)(tmp); 
 }
 #endif /* DATA_IN_ExtSRAM */
+
 /**
   * @}
   */

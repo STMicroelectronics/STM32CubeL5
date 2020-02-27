@@ -29,6 +29,9 @@ extern ARM_DRIVER_USART TFM_DRIVER_STDIO;
 
 static void uart_putc(unsigned char c)
 {
+#ifdef NDEBUG
+    __attribute__((unused))
+#endif
     int32_t ret = ARM_DRIVER_OK;
 
     ret = TFM_DRIVER_STDIO.Send(&c, 1);
@@ -78,6 +81,9 @@ int putchar(int ch)
 
 void stdio_init(void)
 {
+#ifdef NDEBUG
+    __attribute__((unused))
+#endif
     int32_t ret = ARM_DRIVER_OK;
     ret = TFM_DRIVER_STDIO.Initialize(NULL);
     ASSERT_HIGH(ret);
@@ -88,6 +94,9 @@ void stdio_init(void)
 
 void stdio_uninit(void)
 {
+#ifdef NDEBUG
+    __attribute__((unused))
+#endif
     int32_t ret = ARM_DRIVER_OK;
     ret = TFM_DRIVER_STDIO.Uninitialize();
     ASSERT_HIGH(ret);

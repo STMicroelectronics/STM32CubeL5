@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L552xx,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32L552E_EVAL;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/basic_gui</IncludePath>
+              <IncludePath>../Inc;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32L552E-EV;../../../../../Drivers/BSP/Components/Common;../../../../../Utilities/basic_gui</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -450,47 +450,47 @@
             <File>
               <FileName>stm32l552e_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_audio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_audio.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_audio.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_bus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_lcd.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_lcd.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_ospi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_ospi.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_ospi.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_sd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_sd.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sd.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_sram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_sram.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sram.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_ts.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_ts.c</FilePath>
+              <FilePath>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_ts.c</FilePath>
             </File>
           </Files>
         </Group>

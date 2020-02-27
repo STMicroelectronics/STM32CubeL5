@@ -492,7 +492,11 @@ boot_status_source(void)
     const struct boot_status_table *table;
     struct boot_swap_state state_scratch;
     struct boot_swap_state state_primary_slot;
+#ifdef NDEBUG
+    __attribute__((unused))
+#endif
     int rc;
+
     size_t i;
     uint8_t source;
 

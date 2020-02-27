@@ -382,7 +382,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\attestation</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\arch\include</state>
@@ -1638,7 +1638,7 @@
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery</state>
+                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\spm</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\ipc</state>
@@ -2008,6 +2008,7 @@
                         <debug>1</debug>
                         <option>
                             <name>CCDefines</name>
+                            <state>NDEBUG</state>
                             <state>STM32L562xx</state>
                             <state>BL2</state>
                             <state>USE_HAL_DRIVER</state>
@@ -2169,7 +2170,7 @@
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery</state>
+                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\attestation</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
                             <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\arch\include</state>

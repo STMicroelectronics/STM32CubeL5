@@ -268,24 +268,24 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/Components/mfxstm32l152/mfxstm32l152_reg.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</name>
+			<name>Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</name>
+			<name>Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</name>
+			<name>Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_sd.c</name>
+			<name>Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sd.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_sd.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sd.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/USB_Device/App/usb_device.c</name>

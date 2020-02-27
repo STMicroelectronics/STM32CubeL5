@@ -4,13 +4,13 @@
   * @author  MCD Application Team
   * @brief   CMSIS Cortex-M33 Device Peripheral Access Layer System Source File
   *          to be used in non-secure application when the system implements
-  *          the security.
+  *          the TrustZone-M security.
   *
   *   This file provides two functions and one global variable to be called from
   *   user application:
-  *      - SystemInit(): This function is called at startup just after reset and
-  *                      before branch to main program. This call is made inside
-  *                      the "startup_stm32l5xx.s" file.
+  *      - SystemInit(): This function is called at non-secure startup before
+  *                      branch to non-secure main program.
+  *                      This call is made inside the "startup_stm32l5xx.s" file.
   *
   *      - SystemCoreClock variable: Contains the core clock (HCLK), it can be used
   *                                  by the user application to setup the SysTick
@@ -21,60 +21,12 @@
   *                                 during program execution.
   *
   *   After each device reset the MSI (4 MHz) is used as system clock source.
-  *   Then SystemInit() function is called, in "startup_stm32l5xx_s" file, to
-  *   configure the system clock before to branch to main program.
+  *   Then SystemInit() function is called, in "startup_stm32l5xx.s" file, to
+  *   configure the system clock before to branch to main secure program.
+  *   Later, when non-secure SystemInit() function is called, in "startup_stm32l5xx.s"
+  *   file, the system clock may have been updated from reset value by the main
+  *   secure program.
   *
-  *   This file configures the system clock as follows:
-  *=============================================================================
-  *-----------------------------------------------------------------------------
-  *        System Clock source                    | MSI
-  *-----------------------------------------------------------------------------
-  *        SYSCLK(Hz)                             | 4000000
-  *-----------------------------------------------------------------------------
-  *        HCLK(Hz)                               | 4000000
-  *-----------------------------------------------------------------------------
-  *        AHB Prescaler                          | 1
-  *-----------------------------------------------------------------------------
-  *        APB1 Prescaler                         | 1
-  *-----------------------------------------------------------------------------
-  *        APB2 Prescaler                         | 1
-  *-----------------------------------------------------------------------------
-  *        PLL_SRC                                | No clock
-  *-----------------------------------------------------------------------------
-  *        PLL_M                                  | 1
-  *-----------------------------------------------------------------------------
-  *        PLL_N                                  | 8
-  *-----------------------------------------------------------------------------
-  *        PLL_P                                  | 7
-  *-----------------------------------------------------------------------------
-  *        PLL_Q                                  | 2
-  *-----------------------------------------------------------------------------
-  *        PLL_R                                  | 2
-  *-----------------------------------------------------------------------------
-  *        PLLSAI1_SRC                            | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI1_M                              | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI1_N                              | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI1_P                              | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI1_Q                              | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI1_R                              | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI2_SRC                            | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI2_M                              | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI2_N                              | NA
-  *-----------------------------------------------------------------------------
-  *        PLLSAI2_P                              | NA
-  *-----------------------------------------------------------------------------
-  *        Require 48MHz for USB FS,              | Disabled
-  *        SDIO and RNG clock                     |
-  *-----------------------------------------------------------------------------
-  *=============================================================================
   ******************************************************************************
   * @attention
   *
@@ -131,6 +83,32 @@
   #define HSI_VALUE    16000000U /*!< Value of the Internal oscillator in Hz*/
 #endif /* HSI_VALUE */
 
+/* Note: Following vector table addresses must be defined in line with linker
+         configuration. */
+/*!< Uncomment the following line if you need to relocate the vector table
+     anywhere in Flash or Sram, else the vector table is kept at the automatic
+     remap of boot address selected */
+/* #define USER_VECT_TAB_ADDRESS */
+
+#if defined(USER_VECT_TAB_ADDRESS)
+/*!< Uncomment the following line if you need to relocate your vector Table
+     in Sram else user remap will be done in Flash. */
+/* #define VECT_TAB_SRAM */
+
+#if defined(VECT_TAB_SRAM)
+#define VECT_TAB_BASE_ADDRESS   SRAM1_BASE_NS   /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00018000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#else
+#define VECT_TAB_BASE_ADDRESS   FLASH_BASE_NS   /*!< Vector Table base address field.
+                                                     This value must be a multiple of 0x200. */
+#define VECT_TAB_OFFSET         0x00040000U     /*!< Vector Table base offset field.
+                                                     This value must be a multiple of 0x200. */
+#endif /* VECT_TAB_SRAM */
+#endif /* USER_VECT_TAB_ADDRESS */
+
+/******************************************************************************/
 /**
   * @}
   */
@@ -184,7 +162,12 @@
 
 void SystemInit(void)
 {
-  /* Nothing done in non-secure */
+  /* Vector table location and FPU setup done by secure application */
+
+  /* Configure the Vector Table location -------------------------------------*/
+#if defined(USER_VECT_TAB_ADDRESS)
+  SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET;
+#endif
 
   /* Non-secure main application shall call SystemCoreClockUpdate() to update */
   /* the SystemCoreClock variable to insure non-secure application relies on  */

@@ -330,6 +330,7 @@ typedef  void (*pSMBUS_AddrCallbackTypeDef)(SMBUS_HandleTypeDef *hsmbus, uint8_t
 #define  SMBUS_NEXT_FRAME                       ((uint32_t)(SMBUS_RELOAD_MODE | SMBUS_SOFTEND_MODE))
 #define  SMBUS_FIRST_AND_LAST_FRAME_NO_PEC      SMBUS_AUTOEND_MODE
 #define  SMBUS_LAST_FRAME_NO_PEC                SMBUS_AUTOEND_MODE
+#define  SMBUS_FIRST_FRAME_WITH_PEC             ((uint32_t)(SMBUS_SOFTEND_MODE | SMBUS_SENDPEC_MODE))
 #define  SMBUS_FIRST_AND_LAST_FRAME_WITH_PEC    ((uint32_t)(SMBUS_AUTOEND_MODE | SMBUS_SENDPEC_MODE))
 #define  SMBUS_LAST_FRAME_WITH_PEC              ((uint32_t)(SMBUS_AUTOEND_MODE | SMBUS_SENDPEC_MODE))
 
@@ -586,11 +587,12 @@ typedef  void (*pSMBUS_AddrCallbackTypeDef)(SMBUS_HandleTypeDef *hsmbus, uint8_t
                                                           ((REQUEST) == SMBUS_NO_STARTSTOP))
 
 
-#define IS_SMBUS_TRANSFER_OPTIONS_REQUEST(REQUEST)      (IS_SMBUS_TRANSFER_OTHER_OPTIONS_REQUEST(REQUEST)       || \
+#define IS_SMBUS_TRANSFER_OPTIONS_REQUEST(REQUEST)      (IS_SMBUS_TRANSFER_OTHER_OPTIONS_REQUEST(REQUEST)        || \
                                                           ((REQUEST) == SMBUS_FIRST_FRAME)                       || \
                                                           ((REQUEST) == SMBUS_NEXT_FRAME)                        || \
                                                           ((REQUEST) == SMBUS_FIRST_AND_LAST_FRAME_NO_PEC)       || \
                                                           ((REQUEST) == SMBUS_LAST_FRAME_NO_PEC)                 || \
+                                                          ((REQUEST) == SMBUS_FIRST_FRAME_WITH_PEC)              || \
                                                           ((REQUEST) == SMBUS_FIRST_AND_LAST_FRAME_WITH_PEC)     || \
                                                           ((REQUEST) == SMBUS_LAST_FRAME_WITH_PEC))
 

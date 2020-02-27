@@ -73,7 +73,7 @@
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
             <UserProg1Name></UserProg1Name>
-            <UserProg2Name>armclang  --target=arm-arm-none-eabi -march=armv8-m.main -E -P -xc -DBL2 -DMCUBOOT_IMAGE_NUMBER=2 -I..\..\Linker  ..\..\TFM_SBSFU\Src\image_macros_to_preprocess_s.c -o image_macros_preprocessed_s.c</UserProg2Name>
+            <UserProg2Name>armclang  --target=arm-arm-none-eabi -march=armv8-m.main -E -P -xc -DBL2 -DMCUBOOT_IMAGE_NUMBER=2 -I..\..\Linker  ..\..\TFM_SBSFU_Boot\Src\image_macros_to_preprocess_s.c -o image_macros_preprocessed_s.c</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopB1X>0</nStopB1X>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L562xx,MCUBOOT_IMAGE_NUMBER=2,USE_HAL_DRIVER,SST_ENCRYPTION,TFM_PSA_API,TFM_LVL=2,TFM_LEGACY_API</Define>
               <Undefine></Undefine>
-              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L562E-Discovery;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/spm;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/core;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/services;../../../../../../Middlewares/Third_Party/trustedfirmware/interface/include;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/include;../../../../../../Middlewares/Third_Party/trustedfirmware;../NonSecure/Inc;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/common;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/driver;../../../../../../Middlewares/Third_Party/trustedfirmware/bl2/include;../../../../../../Middlewares/Third_Party/trustedfirmware/test/suites/crypto;../../Linker;../../../../../../Middlewares/Third_Party/trustedfirmware/lib/ext/qcbor/inc;../../../../../../Middlewares/Third_Party/trustedfirmware//secure_fw/core/include</IncludePath>
+              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/spm;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/core;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/services;../../../../../../Middlewares/Third_Party/trustedfirmware/interface/include;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/include;../../../../../../Middlewares/Third_Party/trustedfirmware;../NonSecure/Inc;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/common;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/driver;../../../../../../Middlewares/Third_Party/trustedfirmware/bl2/include;../../../../../../Middlewares/Third_Party/trustedfirmware/test/suites/crypto;../../Linker;../../../../../../Middlewares/Third_Party/trustedfirmware/lib/ext/qcbor/inc;../../../../../../Middlewares/Third_Party/trustedfirmware//secure_fw/core/include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

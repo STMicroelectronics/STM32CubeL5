@@ -155,7 +155,7 @@ IAR
 
 MDK-ARM
 
- Requirements:
+ Requirements for Keil µVision version without ST-LINK debug support on Cortex-M33:
  - Use ST-LINK FW v2J32 available on ST web site
  - Use the ST-LINKIII-Keil_SWO.dll and STLinkUSBDriver.dll (ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip) and copy them at Keil\ARM\ST-LINK
  - Change the TOOLS.INI under Keil install directory as described in the .doc file provided in the ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip package
@@ -175,18 +175,19 @@ MDK-ARM
 
 
 STM32CubeIDE
- - Open your toolchain
- - Open Multi-projects workspace file .project
- - Select the xxxxx_S project and Build xxxxx_S project
- - Select the xxxxx_NS project and Build xxxxx_NS project
- - Select the xxxxx_NS project and select “Debug conguration”
+ - Open STM32CubeIDE
+ - File > Import. Point to the STM32CubeIDE folder of the example project. Click Finish.
+ - Select and build the xxxxx_NS project, this will automatically trigger build of xxxxx_S project
+ - Select the xxxxx_S project and select “Debug configuration”
    - Double click on “STM32 Cortex-M C/C++ Application”
    - Select  “Startup” >  “Add” > 
- - Select the xxxxx_S project 
+ - Select the xxxxx_NS project 
  - Build configuration : Select Release/Debug
-    - Select the xxxxx_NS project in “Load Image and Symbols” window  
-    -  Click “Move Up” then “Debug”
-    -  Run the example
+   - Click Debug to debug the example
+ NOTE:
+   - The default Debug configuration runtime option sets "Halt on exception" which 
+     makes the code execution halt on SecureFault_Handler() on voluntary security violation.
+     Press "Resume (F8)" to continue execution.
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

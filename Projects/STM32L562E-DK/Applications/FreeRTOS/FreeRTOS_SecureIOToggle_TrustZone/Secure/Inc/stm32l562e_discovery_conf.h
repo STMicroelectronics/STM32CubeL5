@@ -31,7 +31,7 @@ extern "C" {
 #include "stm32l5xx_hal.h"
 
 /* Usage of COM feature */
-#define USE_BSP_COM_FEATURE 1U
+#define USE_BSP_COM_FEATURE 0U
 #define USE_COM_LOG         0U
 
 /* Button interrupt priority */

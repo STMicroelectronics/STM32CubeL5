@@ -143,6 +143,6 @@ VP_WWDG_VS_WWDG.Signal=WWDG_VS_WWDG
 WWDG.Counter=126
 WWDG.EWIMode=WWDG_EWI_DISABLE
 WWDG.IPParameters=Prescaler,Window,Counter,EWIMode
-WWDG.Prescaler=LL_WWDG_PRESCALER_128
+WWDG.Prescaler=WWDG_PRESCALER_128
 WWDG.Window=126
 board=custom

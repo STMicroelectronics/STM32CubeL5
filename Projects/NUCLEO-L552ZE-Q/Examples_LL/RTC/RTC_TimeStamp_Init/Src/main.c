@@ -129,10 +129,6 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
-  */
-  LL_PWR_DisableUCPDDeadBattery();
-
   /* USER CODE BEGIN SysInit */
 
   /*## Enables the PWR Clock and Enables access to the backup domain #######*/
@@ -146,34 +142,10 @@ int main(void)
   LL_PWR_EnableBkUpAccess();
 
 
-  /*## Configure LSE/LSI as RTC clock source ###############################*/
 #ifdef RTC_CLOCK_SOURCE_LSE
-  /* Enable LSE only if disabled.*/
-  if (LL_RCC_LSE_IsReady() == 0)
-  {
-    LL_RCC_ForceBackupDomainReset();
-    LL_RCC_ReleaseBackupDomainReset();
-    LL_RCC_LSE_Enable();
-#if (USE_TIMEOUT == 1)
-    Timeout = LSE_TIMEOUT_VALUE;
-#endif /* USE_TIMEOUT */
-    while (LL_RCC_LSE_IsReady() != 1)
-    {
-#if (USE_TIMEOUT == 1)
-      if (LL_SYSTICK_IsActiveCounterFlag())
-      {
-        Timeout --;
-      }
-      if (Timeout == 0)
-      {
-        /* LSE activation error */
-        LED_Blinking(LED_BLINK_ERROR);
-      }
-#endif /* USE_TIMEOUT */
-    }
-    LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
-  }
+  /* LSE already configured in SystemClock_Config() */
 #elif defined(RTC_CLOCK_SOURCE_LSI)
+  /*## Configure LSI as RTC clock source ###############################*/
   /* Enable LSI */
   LL_RCC_LSI_Enable();
 #if (USE_TIMEOUT == 1)
@@ -189,7 +161,7 @@ int main(void)
     if (Timeout == 0)
     {
       /* LSI activation error */
-      LED_Blinking(LED_BLINK_ERROR);
+      Error_Handler();
     }
 #endif /* USE_TIMEOUT */
   }
@@ -251,6 +223,7 @@ void SystemClock_Config(void)
   LL_PWR_EnableBkUpAccess();
   LL_RCC_ForceBackupDomainReset();
   LL_RCC_ReleaseBackupDomainReset();
+  LL_RCC_LSE_SetDriveCapability(LL_RCC_LSEDRIVE_LOW);
   LL_RCC_LSE_Enable();
 
    /* Wait till LSE is ready */
@@ -291,7 +264,6 @@ void SystemClock_Config(void)
 
   LL_Init1msTick(110000000);
 
-  LL_SYSTICK_SetClkSource(LL_SYSTICK_CLKSOURCE_HCLK);
   LL_SetSystemCoreClock(110000000);
 }
 
@@ -497,9 +469,9 @@ void TimeStampEvent_Callback(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
   while(1) 
   {
+    LED_Blinking(LED_BLINK_ERROR);
   }
   /* USER CODE END Error_Handler_Debug */
 }

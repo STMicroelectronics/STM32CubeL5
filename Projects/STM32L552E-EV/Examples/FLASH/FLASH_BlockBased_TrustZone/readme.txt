@@ -158,7 +158,7 @@ IAR
 
 MDK-ARM
 
-Requirements:
+ Requirements for Keil µVision version without ST-LINK debug support on Cortex-M33:
  - Use ST-LINK FW v2J32 available on ST web site
  - Use the ST-LINKIII-Keil_SWO.dll and STLinkUSBDriver.dll (ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip) and copy them at Keil\ARM\ST-LINK
  - Change the TOOLS.INI under Keil install directory as described in the .doc file provided in the ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip package
@@ -178,18 +178,15 @@ Requirements:
 
 
 STM32CubeIDE
- - Open your toolchain
- - Open Multi-projects workspace file .project
- - Select the FLASH_BlockBased_TrustZone_S project and Build FLASH_BlockBased_TrustZone_S project
- - Select the FLASH_BlockBased_TrustZone_NS project and Build FLASH_BlockBased_TrustZone_S project
- - Select the FLASH_BlockBased_TrustZone_NS project and select “Debug conguration”
+ - Open STM32CubeIDE
+ - File > Import. Point to the STM32CubeIDE folder of the example project. Click Finish.
+ - Select and build the xxxxx_NS project, this will automatically trigger build of xxxxx_S project
+ - Select the xxxxx_S project and select “Debug configuration”
    - Double click on “STM32 Cortex-M C/C++ Application”
    - Select  “Startup” >  “Add” > 
- - Select the xxxxx_S project 
+ - Select the xxxxx_NS project 
  - Build configuration : Select Release/Debug
-    - Select the FLASH_BlockBased_TrustZone_NS project in “Load Image and Symbols” window  
-    -  Click “Move Up” then “Debug”
-    -  Run the example
+   - Click Debug to debug the example
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

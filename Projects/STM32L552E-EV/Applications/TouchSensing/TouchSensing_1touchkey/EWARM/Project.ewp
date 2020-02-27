@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>STM32L552E_EVAL</name>
+        <name>STM32L552E-EV</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -16,15 +16,15 @@
                 <debug>1</debug>
                 <option>
                     <name>ExePath</name>
-                    <state>STM32L552E_EVAL\Exe</state>
+                    <state>STM32L552E-EV\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>STM32L552E_EVAL\Obj</state>
+                    <state>STM32L552E-EV\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>STM32L552E_EVAL\List</state>
+                    <state>STM32L552E-EV\List</state>
                 </option>
                 <option>
                     <name>GEndianMode</name>
@@ -354,7 +354,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_TouchSensing_Library\inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\basic_gui</state>
@@ -657,7 +657,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>STM32L552E_EVAL.hex</state>
+                    <state>STM32L552E-EV.hex</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -1102,18 +1102,18 @@
                 </file>
             </group>
             <group>
-                <name>STM32L552E_EVAL</name>
+                <name>STM32L552E-EV</name>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL\stm32l552e_eval.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL\stm32l552e_eval_bus.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_bus.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL\stm32l552e_eval_io.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_io.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E_EVAL\stm32l552e_eval_lcd.c</name>
+                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_lcd.c</name>
                 </file>
             </group>
         </group>

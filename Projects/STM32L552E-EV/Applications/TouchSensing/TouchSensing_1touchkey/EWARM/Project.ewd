@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>STM32L552E_EVAL</name>
+        <name>STM32L552E-EV</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>

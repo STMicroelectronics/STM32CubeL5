@@ -7,11 +7,11 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics. 
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the 
+  * the "License"; You may not use this file except in compliance with the
   * License. You may obtain a copy of the License at:
   *                        opensource.org/licenses/BSD-3-Clause
   *
@@ -94,27 +94,6 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef* hrtc)
   {
   /* USER CODE BEGIN RTC_MspInit 0 */
 
-    RCC_OscInitTypeDef        RCC_OscInitStruct;
-    /* Enables the PWR Clock and Enables access to the backup domain */
-    /* To change the source clock of the RTC feature (LSE, LSI), You have to:
-       - Enable the power clock using __HAL_RCC_PWR_CLK_ENABLE()
-       - Enable write access using HAL_PWR_EnableBkUpAccess() function before to
-         configure the RTC clock source (to be done once after reset).
-       - Reset the Back up Domain using __HAL_RCC_BACKUPRESET_FORCE() and
-         __HAL_RCC_BACKUPRESET_RELEASE().
-       - Configure the needed RTc clock source */
-    __HAL_RCC_PWR_CLK_ENABLE();
-    HAL_PWR_EnableBkUpAccess();
-
-
-    /* Configure LSE as RTC clock */
-    RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI ;
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-    RCC_OscInitStruct.LSI State = RCC_LSI _ON;
-    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-    {
-      Error_Handler();
-    }
   /* USER CODE END RTC_MspInit 0 */
   /** Initializes the peripherals clock 
   */
@@ -153,9 +132,7 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef* hrtc)
     __HAL_RCC_RTC_DISABLE();
     __HAL_RCC_RTCAPB_CLK_DISABLE();
   /* USER CODE BEGIN RTC_MspDeInit 1 */
-    /* Disables the PWR Clock and Disables access to the backup domain */
-    HAL_PWR_DisableBkUpAccess();
-    __HAL_RCC_PWR_CLK_DISABLE();
+
   /* USER CODE END RTC_MspDeInit 1 */
   }
 
@@ -166,4 +143,3 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef* hrtc)
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

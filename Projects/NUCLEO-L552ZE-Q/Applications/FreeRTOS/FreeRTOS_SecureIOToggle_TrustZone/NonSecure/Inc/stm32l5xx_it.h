@@ -1,3 +1,4 @@
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_SecureIOToggle_TrustZone/NonSecure/Inc/stm32l5xx_it.h
@@ -10,41 +11,52 @@
   * This software component is licensed by ST under Ultimate Liberty license
   * SLA0044, the "License"; You may not use this file except in compliance with
   * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  *                             www.st.com/SLA0044
   *
-  ******************************************************************************
+ ******************************************************************************
   */
+/* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef STM32L5xx_IT_H
-#define STM32L5xx_IT_H
+#ifndef __STM32L5xx_IT_H
+#define __STM32L5xx_IT_H
 
 #ifdef __cplusplus
-extern "C" {
-#endif
+ extern "C" {
+#endif 
 
-/* Includes ------------------------------------------------------------------*/
-#include "stm32l5xx.h"
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+
+/* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
+/* USER CODE BEGIN ET */
 
-void NMI_Handler(void);
-void HardFault_Handler(void);
+/* USER CODE END ET */
+
+/* Exported constants --------------------------------------------------------*/
+/* USER CODE BEGIN EC */
+
+/* USER CODE END EC */
+
+/* Exported macro ------------------------------------------------------------*/
+/* USER CODE BEGIN EM */
+
+/* USER CODE END EM */
+
+/* Exported functions prototypes ---------------------------------------------*/
 void MemManage_Handler(void);
-void BusFault_Handler(void);
 void UsageFault_Handler(void);
-void SVC_Handler(void);
-void DebugMon_Handler(void);
-void PendSV_Handler(void);
-void SysTick_Handler(void);
+void TIM6_IRQHandler(void);
+/* USER CODE BEGIN EFP */
+
+/* USER CODE END EFP */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* STM32L5xx_IT_H */
+#endif /* __STM32L5xx_IT_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

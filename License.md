@@ -3,8 +3,8 @@
 | CMSIS                           | Apache License 2.0   | Copyright (c) 2009-2018 ARM Limited. All rights reserved. |
 | CMSIS Device                    | Apache License 2.0   | ARM Limited - STMicroelectronics |
 | STM32L5 HAL                     | BSD 3-Clause         | STMicroelectronics |
-| BSP STM32L552E_EVAL             | BSD 3-Clause         | STMicroelectronics |
-| BSP STM32L562E-Discovery        | BSD 3-Clause         | STMicroelectronics |
+| BSP STM32L552E-EV               | BSD 3-Clause         | STMicroelectronics |
+| BSP STM32L562E-DK               | BSD 3-Clause         | STMicroelectronics |
 | BSP STM32L5xx_Nucleo            | BSD 3-Clause         | STMicroelectronics |
 | BSP Components                  | BSD 3-Clause         | STMicroelectronics |
 | FreeRTOS kernel                 | MIT                  | Copyright (C) 2017 Amazon.com, Inc. or its affiliates |

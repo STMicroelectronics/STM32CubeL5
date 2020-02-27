@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>STM32L552E_EVAL</TargetName>
+      <TargetName>STM32L552E-EV</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>6120000::V6.12::.\ARMCLANG</pCCUsed>
@@ -48,7 +48,7 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM32L552E_EVAL\Exe\</OutputDirectory>
+          <OutputDirectory>STM32L552E-EV\Exe\</OutputDirectory>
           <OutputName>Project</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L552xx,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L552E_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/ST/STM32_TouchSensing_Library/inc;../../../../../../Utilities/basic_gui</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L552E-EV;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/ST/STM32_TouchSensing_Library/inc;../../../../../../Utilities/basic_gui</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -455,27 +455,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/BSP/STM32L552E_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32L552E-EV</GroupName>
           <Files>
             <File>
               <FileName>stm32l552e_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_bus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</FilePath>
             </File>
             <File>
               <FileName>stm32l552e_eval_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_lcd.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_lcd.c</FilePath>
             </File>
           </Files>
         </Group>

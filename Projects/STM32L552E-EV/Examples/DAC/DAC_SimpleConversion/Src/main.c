@@ -86,7 +86,6 @@ int main(void)
        - Low Level Initialization
      */
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -205,8 +204,6 @@ int main(void)
   /* Enter SLEEP Mode , wake up is done once Key push button is pressed */  
  HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */

@@ -53,7 +53,7 @@ Memory, OCTOSPI, NOR, Memory-mapped
   - OSPI/OSPI_NOR_MemoryMapped/Inc/main.h                 Main program header file  
   - OSPI/OSPI_NOR_MemoryMapped/Inc/stm32l5xx_hal_conf.h   HAL Configuration file
   - OSPI/OSPI_NOR_MemoryMapped/Inc/stm32l5xx_it.h         Interrupt handlers header file
-  - OSPI/OSPI_NOR_MemoryMapped/Inc/stm32l562e_discovery_conf.h      HAL configuration file  
+  - OSPI/OSPI_NOR_MemoryMapped/Inc/stm32l562e_discovery_conf.h      BSP configuration file  
 
         
 @par Hardware and Software environment  

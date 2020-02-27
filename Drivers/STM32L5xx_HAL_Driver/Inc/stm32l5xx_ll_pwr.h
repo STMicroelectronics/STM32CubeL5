@@ -1569,7 +1569,7 @@ __STATIC_INLINE uint32_t LL_PWR_IsActiveFlag_REGLPF(void)
   */
 __STATIC_INLINE uint32_t LL_PWR_IsActiveFlag_REGLPS(void)
 {
-  return ((READ_BIT(PWR->SR2, PWR_SR2_REGLPS) == (PWR_SR2_REGLPS)) ? 1UL : 0UL);;
+  return ((READ_BIT(PWR->SR2, PWR_SR2_REGLPS) == (PWR_SR2_REGLPS)) ? 1UL : 0UL);
 }
 
 /**

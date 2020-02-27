@@ -326,7 +326,7 @@
   </Group>
 
   <Group>
-    <GroupName>Drivers/BSP/STM32L562E-Discovery</GroupName>
+    <GroupName>Drivers/BSP/STM32L562E-DK</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -338,7 +338,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -350,7 +350,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_audio.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_audio.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_audio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -362,7 +362,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_bus.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_bus.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_bus.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -374,7 +374,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_idd.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_idd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_idd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -386,7 +386,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_lcd.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_lcd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_lcd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -398,7 +398,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_motion_sensors.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_motion_sensors.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_motion_sensors.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -410,7 +410,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_ospi.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_ospi.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_ospi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -422,7 +422,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_sd.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_sd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_sd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -434,7 +434,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-Discovery\stm32l562e_discovery_ts.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery_ts.c</PathWithFileName>
       <FilenameWithoutPath>stm32l562e_discovery_ts.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

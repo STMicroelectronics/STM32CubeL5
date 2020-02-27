@@ -33,7 +33,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define SECURE_IO_TOGGLE_DELAY           1000U   /* Toggle every second */
  
 /* USER CODE END PD */
 

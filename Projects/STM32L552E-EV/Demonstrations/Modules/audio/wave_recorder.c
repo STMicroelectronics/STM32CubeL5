@@ -323,7 +323,7 @@ static uint8_t CopyToSD(void)
   { /* Currently recording on 2nd half buffer, so copy 1st half to SD */
     pBuffer = (uint8_t*)Buffer;
   }
-  else if (DMA_AudioInComplete == COMPLETE)
+  else /* DMA_AudioInComplete == COMPLETE */
   { /* Currently recording on 1st half buffer, so copy 2nd half to SD */
     pBuffer = (uint8_t*)Buffer + BUFFER_HALF_SIZE_BYTE;
   }

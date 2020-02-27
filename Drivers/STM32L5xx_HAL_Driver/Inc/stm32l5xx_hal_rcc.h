@@ -536,8 +536,6 @@ typedef struct
 
 /* Flags in the CSR register */
 #define RCC_FLAG_LSIRDY                ((CSR_REG_INDEX << 5U) | RCC_CSR_LSIRDY_Pos)   /*!< LSI Ready flag */
-#define RCC_FLAG_RMVF                  ((CSR_REG_INDEX << 5U) | RCC_CSR_RMVF_Pos)     /*!< Remove reset flag */
-#define RCC_FLAG_FWRST                 ((CSR_REG_INDEX << 5U) | RCC_CSR_FWRSTF_Pos)   /*!< Firewall reset flag */
 #define RCC_FLAG_OBLRST                ((CSR_REG_INDEX << 5U) | RCC_CSR_OBLRSTF_Pos)  /*!< Option Byte Loader reset flag */
 #define RCC_FLAG_PINRST                ((CSR_REG_INDEX << 5U) | RCC_CSR_PINRSTF_Pos)  /*!< PIN reset flag */
 #define RCC_FLAG_BORRST                ((CSR_REG_INDEX << 5U) | RCC_CSR_BORRSTF_Pos)  /*!< BOR reset flag */
@@ -3266,7 +3264,7 @@ typedef struct
 #define __HAL_RCC_GET_IT(__INTERRUPT__)  ((RCC->CIFR & (__INTERRUPT__)) == (__INTERRUPT__))
 
 /** @brief Set RMVF bit to clear the reset flags.
-  *        The reset flags are: RCC_FLAG_FWRRST, RCC_FLAG_OBLRST, RCC_FLAG_PINRST, RCC_FLAG_BORRST,
+  *        The reset flags are: RCC_FLAG_OBLRST, RCC_FLAG_PINRST, RCC_FLAG_BORRST,
   *        RCC_FLAG_SFTRST, RCC_FLAG_IWDGRST, RCC_FLAG_WWDGRST and RCC_FLAG_LPWRRST.
   * @retval None
  */
@@ -3288,8 +3286,6 @@ typedef struct
   *            @arg @ref RCC_FLAG_BORRST  BOR reset
   *            @arg @ref RCC_FLAG_OBLRST  OBLRST reset
   *            @arg @ref RCC_FLAG_PINRST  Pin reset
-  *            @arg @ref RCC_FLAG_FWRST  FIREWALL reset
-  *            @arg @ref RCC_FLAG_RMVF  Remove reset Flag
   *            @arg @ref RCC_FLAG_SFTRST  Software reset
   *            @arg @ref RCC_FLAG_IWDGRST  Independent Watchdog reset
   *            @arg @ref RCC_FLAG_WWDGRST  Window Watchdog reset

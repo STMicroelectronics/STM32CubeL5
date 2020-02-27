@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L552xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L552E_EVAL</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L552E-EV</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -419,12 +419,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/BSP/STM32L552E_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32L552E-EV</GroupName>
           <Files>
             <File>
               <FileName>stm32l552e_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -17,7 +17,7 @@
   *
   ******************************************************************************
   */
-/* USER CODE END Header */ 
+/* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
 #include "ff_gen_drv.h"
@@ -36,9 +36,9 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 /* Block Size in Bytes */
-#define BLOCK_SIZE              512
-#define SRAM_DISK_BASE_ADDR 	SRAM1_BASE          
-#define SRAM_DISK_SIZE 		    96U * 1024U            
+#define BLOCK_SIZE            512
+#define SRAM_DISK_BASE_ADDR 	SRAM1_BASE   /* Start: 0x20000000 */
+#define SRAM_DISK_SIZE 		    96U * 1024U  /* End:   0x20017FFF */
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -123,7 +123,7 @@ DRESULT SRAMDISK_read(BYTE lun, BYTE * buff, DWORD sector, UINT count)
   uint32_t *pSrcBuffer = (uint32_t *)buff;
   uint32_t BufferSize = (BLOCK_SIZE * count) ;
   uint32_t *pSramAddress = (uint32_t *) (SRAM_DISK_BASE_ADDR + (sector * BLOCK_SIZE));
-  
+
   memcpy(pSrcBuffer, pSramAddress , BufferSize);
 
   return RES_OK;
@@ -144,7 +144,7 @@ DRESULT SRAMDISK_write(BYTE lun, const BYTE * buff, DWORD sector, UINT count)
   uint32_t BufferSize = (BLOCK_SIZE * count) ;
   uint32_t *pSramAddress = (uint32_t *) (SRAM_DISK_BASE_ADDR + (sector * BLOCK_SIZE));
 
-  memcpy(pSramAddress, pSrcBuffer, BufferSize); 
+  memcpy(pSramAddress, pSrcBuffer, BufferSize);
 
   return RES_OK;
 }

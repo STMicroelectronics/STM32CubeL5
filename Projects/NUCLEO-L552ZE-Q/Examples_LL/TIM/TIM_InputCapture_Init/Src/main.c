@@ -113,16 +113,16 @@ int main(void)
 
   /* System interrupt init*/
 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  */
+  LL_PWR_DisableUCPDDeadBattery();
+
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
-
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
-  */
-  LL_PWR_DisableUCPDDeadBattery();
 
   /* USER CODE BEGIN SysInit */
 
@@ -244,7 +244,6 @@ void SystemClock_Config(void)
 
   LL_Init1msTick(110000000);
 
-  LL_SYSTICK_SetClkSource(LL_SYSTICK_CLKSOURCE_HCLK);
   LL_SetSystemCoreClock(110000000);
 }
 

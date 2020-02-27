@@ -46,11 +46,137 @@
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" checked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
+<input type="checkbox" id="collapse-section3" checked aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.0.2 / 12-February-2020</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
-<p><strong>First release</strong></p>
+<p><strong>Third release</strong></p>
 <h2 id="contents">Contents</h2>
+<p>Third official release of <strong>HAL and Low Layer drivers</strong> for <strong>STM32L552xx/STM32L562xx</strong> devices</p>
+<p>Superset features device STM32L562xx API User Manual available (STM32L562xx_User_Manual.chm)</p>
+<h3 id="hal-drivers-updates"><strong>HAL Drivers</strong> updates</h3>
+<ul>
+<li><strong>HAL FLASH</strong> driver
+<ul>
+<li>Fix non-secure Flash access from secure Flash service to not update SAU status</li>
+<li>Fix HAL_FLASHEx_OBGetConfig() to return correct non-secure boot address 0 (OB_BOOTADDR_NS0) and non-secure boot address 1 (OB_BOOTADDR_NS1)</li>
+</ul></li>
+<li><strong>HAL MMC</strong> driver
+<ul>
+<li>Add support of sanitize and discard functions
+<ul>
+<li>new APIs HAL_MMC_Sanitize(), HAL_MMC_EraseSequence(), HAL_MMC_ConfigSecRemovalType() and HAL_MMC_GetSupportedSecRemovalType()</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL PWR</strong> driver
+<ul>
+<li>Add HAL_PWREx_SMPS_GetMainRegulatorExtSMPSReadyStatus() API</li>
+</ul></li>
+<li><strong>HAL SPI</strong> driver
+<ul>
+<li>Fix HAL_SPI_Receive_DMA() and HAL_SPI_TransmitReceive_DMA() to only disable TX DMA interrupt at end of DMA reception in Master RX 2 lines mode</li>
+</ul></li>
+</ul>
+<h3 id="ll-drivers-updates"><strong>LL Drivers</strong> updates</h3>
+<ul>
+<li><strong>LL UTILS</strong> driver
+<ul>
+<li>Fix AHB prescaler value when requesting System Clock over 80Mhz in
+<ul>
+<li>LL_PLL_ConfigSystemClock_MSI(), LL_PLL_ConfigSystemClock_HSI() and LL_PLL_ConfigSystemClock_HSE()</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="notes">Notes</h2>
+<p>For HAL drivers usage, stm32l5xx_hal_conf_template.h file must be copied in user application as stm32l5xx_hal_conf.h with optional configuration update.</p>
+<p>For LL drivers usage, stm32_assert_template.h file must be copied in user application as stm32_assert.h with optional assert configuration update.</p>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li><strong>HAL SMARTCARD</strong> driver
+<ul>
+<li>Issue with NACK management</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" unchecked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 22-January-2020</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<p><strong>Second release</strong></p>
+<h2 id="contents-1">Contents</h2>
+<p>Second official release of <strong>HAL and Low Layer drivers</strong> for <strong>STM32L552xx/STM32L562xx</strong> devices</p>
+<p>Superset features device STM32L562xx API User Manual available (STM32L562xx_User_Manual.chm)</p>
+<h3 id="hal-drivers-updates-1"><strong>HAL Drivers</strong> updates</h3>
+<ul>
+<li><strong>HAL FLASH</strong> driver
+<ul>
+<li>Enhance non-secure Flash access from secure Flash
+<ul>
+<li>Add new macros for controlling non-secure flash interrupts and flags from secure:
+<ul>
+<li>__HAL_FLASH_ENABLE_IT_NS(), __HAL_FLASH_DISABLE_IT_NS(), __HAL_FLASH_GET_FLAG_NS() and __HAL_FLASH_CLEAR_FLAG_NS()</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>HAL GPIO</strong> driver
+<ul>
+<li>Update initialization sequence in HAL_GPIO_Init() to avoid glitch</li>
+</ul></li>
+<li><strong>HAL I2C</strong> driver
+<ul>
+<li>Fix sequential transfer of MAX_NBYTE_SIZE in:
+<ul>
+<li>HAL_I2C_Master_Seq_Transmit_IT(), HAL_I2C_Master_Seq_Transmit_DMA(), HAL_I2C_Master_Seq_Receive_IT() and HAL_I2C_Master_Seq_Receive_DMA(),<br />
+</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL SMBUS</strong> driver
+<ul>
+<li>Add SMBUS_FIRST_FRAME_WITH_PEC define to transfer options</li>
+</ul></li>
+<li><strong>HAL TIM</strong> driver
+<ul>
+<li>Fix when using multiple DMA request to different channels of same timer
+<ul>
+<li>Add new APIs HAL_TIM_GetActiveChannel(), HAL_TIM_GetChannelState() and HAL_TIMEx_GetChannelNState()</li>
+</ul></li>
+<li>Fix assert instance check in:
+<ul>
+<li>HAL_TIM_Encoder_Init(), HAL_TIM_Encoder_Start(), HAL_TIM_Encoder_Stop(), HAL_TIM_Encoder_Start_IT(), HAL_TIM_Encoder_Stop_IT(), HAL_TIM_Encoder_Start_DMA() and HAL_TIM_Encoder_Stop_DMA()</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL USART</strong> driver
+<ul>
+<li>Fix SlaveMode field in USART handle after HAL_USARTEx_DisableSlaveMode() call</li>
+<li>Add receiver timeout interrupt management with new HAL_USART_ERROR_RTO error code in HAL_USART_IRQHandler()</li>
+</ul></li>
+</ul>
+<h3 id="ll-drivers-updates-1"><strong>LL Drivers</strong> updates</h3>
+<ul>
+<li><strong>LL GPIO</strong> driver
+<ul>
+<li>Update initialization sequence in LL_GPIO_Init() to avoid glitch</li>
+</ul></li>
+<li><strong>LL TIM</strong> driver
+<ul>
+<li>Add 32-bit Repetition Counter</li>
+</ul></li>
+<li><strong>LL UTILS</strong> driver
+<ul>
+<li>Add LL_SetFlashLatency() API</li>
+</ul></li>
+</ul>
+<h2 id="notes-1">Notes</h2>
+<p>For HAL drivers usage, stm32l5xx_hal_conf_template.h file must be copied in user application as stm32l5xx_hal_conf.h with optional configuration update.</p>
+<p>For LL drivers usage, stm32_assert_template.h file must be copied in user application as stm32_assert.h with optional assert configuration update.</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" unchecked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<p><strong>First release</strong></p>
+<h2 id="contents-2">Contents</h2>
 <p>First official release of <strong>HAL and Low Layer drivers</strong> for <strong>STM32L552xx/STM32L562xx</strong> devices</p>
 <p>Superset features device STM32L562xx API User Manual available (STM32L562xx_User_Manual.chm)</p>
 <h3 id="hal-drivers">HAL Drivers</h3>
@@ -62,7 +188,7 @@
 <ul>
 <li>ADC, BUS, COMP, CORTEX, CRC, CRS, CRYP, DAC, DMA, DMAMUX, EXTI, GPIO, I2C, IWDG, LPTIM, LPUART, OPAMP, PKA, PWR, RCC, RNG, RTC, SDMMC, SPI, SYSTEM, TIM, UCPD, USART, UTILS, WWDG</li>
 </ul>
-<h2 id="notes">Notes</h2>
+<h2 id="notes-2">Notes</h2>
 <p>For HAL drivers usage, stm32l5xx_hal_conf_template.h file must be copied in user application as stm32l5xx_hal_conf.h with optional configuration update.</p>
 <p>For LL drivers usage, stm32_assert_template.h file must be copied in user application as stm32_assert.h with optional assert configuration update.</p>
 </div>

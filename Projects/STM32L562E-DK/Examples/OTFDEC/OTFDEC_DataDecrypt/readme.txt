@@ -69,7 +69,7 @@ Security, OTFDEC, OCTOSPI, AES CTR, Memory-mapped, Deciphering
   - OTFDEC/OTFDEC_DataDecrypt/Inc/hal_octospi_utility.h  Octospi Utility header file
   - OTFDEC/OTFDEC_DataDecrypt/Inc/stm32l5xx_hal_conf.h   HAL Configuration file
   - OTFDEC/OTFDEC_DataDecrypt/Inc/stm32l5xx_it.h         Interrupt handlers header file
-  - OTFDEC/OTFDEC_DataDecrypt/Inc/stm32l562e_discovery_conf.h STM32L562E-DK board configuration file
+  - OTFDEC/OTFDEC_DataDecrypt/Inc/stm32l562e_discovery_conf.h BSP configuration file
   - OTFDEC/OTFDEC_DataDecrypt/Inc/hal_macronix.h         Macronix file
 
 

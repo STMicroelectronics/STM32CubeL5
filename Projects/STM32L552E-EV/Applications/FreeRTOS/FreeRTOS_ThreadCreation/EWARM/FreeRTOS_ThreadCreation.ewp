@@ -359,7 +359,7 @@
           <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33_NTZ/non_secure</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E_EVAL</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E-EV</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1089,9 +1089,9 @@
     <group>
       <name>BSP</name>
       <group>
-        <name>STM32L552E_EVAL</name>
+        <name>STM32L552E-EV</name>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</name>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</name>
         </file>
       </group>
     </group>

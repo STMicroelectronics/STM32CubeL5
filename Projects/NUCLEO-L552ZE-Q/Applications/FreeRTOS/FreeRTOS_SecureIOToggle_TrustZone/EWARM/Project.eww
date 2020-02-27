@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <workspace>
   <project>
-    <path>$WS_DIR$\Project_s.ewp</path>
+    <path>$WS_DIR$\FreeRTOS_SecureIOToggle_TrustZone_S.ewp</path>
+  </project><project>
+    <path>$WS_DIR$\FreeRTOS_SecureIOToggle_TrustZone_NS.ewp</path>
   </project>
-  <project>
-    <path>$WS_DIR$\Project_ns.ewp</path>
-  </project>
+  <batchBuild />
 </workspace>

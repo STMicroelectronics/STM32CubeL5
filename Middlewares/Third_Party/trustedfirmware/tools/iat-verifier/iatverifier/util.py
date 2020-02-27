@@ -107,8 +107,12 @@ def recursive_bytes_to_strings(d, in_place=False):
         result = [recursive_bytes_to_strings(r, in_place=True)
                   for r in result]
     elif isinstance(result, bytes):
-        result = str(result)[2:-1]
-
+        res=""
+        for x in result:
+            y = format(x,"02x")
+            res+=y
+        #result = str(result)[2:-1]
+        result=res
     return result
 
 

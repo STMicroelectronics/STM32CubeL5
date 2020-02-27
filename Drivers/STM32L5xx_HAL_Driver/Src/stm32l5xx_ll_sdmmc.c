@@ -728,16 +728,17 @@ uint32_t SDMMC_CmdEraseEndAdd(SDMMC_TypeDef *SDMMCx, uint32_t EndAdd)
 
 /**
   * @brief  Send the Erase command and check the response
-  * @param  SDMMCx: Pointer to SDMMC register base
+  * @param  SDMMCx Pointer to SDMMC register base
+  * @param  EraseType Type of erase to be performed
   * @retval HAL status
   */
-uint32_t SDMMC_CmdErase(SDMMC_TypeDef *SDMMCx)
+uint32_t SDMMC_CmdErase(SDMMC_TypeDef *SDMMCx, uint32_t EraseType)
 {
   SDMMC_CmdInitTypeDef  sdmmc_cmdinit;
   uint32_t errorstate;
 
   /* Set Block Size for Card */
-  sdmmc_cmdinit.Argument         = 0U;
+  sdmmc_cmdinit.Argument         = EraseType;
   sdmmc_cmdinit.CmdIndex         = SDMMC_CMD_ERASE;
   sdmmc_cmdinit.Response         = SDMMC_RESPONSE_SHORT;
   sdmmc_cmdinit.WaitForInterrupt = SDMMC_WAIT_NO;

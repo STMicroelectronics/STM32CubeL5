@@ -1197,6 +1197,9 @@
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_rcc.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_tim.c</name>
+      </file>
     </group>
     <group>
       <name>CMSIS</name>
@@ -1290,6 +1293,12 @@
     </file>
     <file>
       <name>$PROJ_DIR$/../../../../../../Utilities/TRACER_EMB/tracer_emb_hw.c</name>
+    </file>
+  </group>
+  <group>
+    <name>Doc</name>
+    <file>
+      <name>$PROJ_DIR$/../readme.txt</name>
     </file>
   </group>
 </project>

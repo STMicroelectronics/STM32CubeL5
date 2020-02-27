@@ -163,9 +163,9 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim_ex.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</name>
+			<name>Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

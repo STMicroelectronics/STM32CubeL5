@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L562xx,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Secure_nsclib;../Secure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/BSP/STM32L562E-Discovery;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/option;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</IncludePath>
+              <IncludePath>../Secure_nsclib;../Secure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/option;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -405,22 +405,22 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/BSP/STM32L562E-Discovery</GroupName>
+          <GroupName>Drivers/BSP/STM32L562E-DK</GroupName>
           <Files>
             <File>
               <FileName>stm32l562e_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</FilePath>
             </File>
             <File>
               <FileName>stm32l562e_discovery_bus.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_bus.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_bus.c</FilePath>
             </File>
             <File>
               <FileName>stm32l562e_discovery_sd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery_sd.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_sd.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -200,7 +200,7 @@ void WavePlayer_Demo(void)
         /* Update playing information */
         if (WaveFile.fptr < (WaveFileInfo.fsize - (2 * BUFFER_HALF_SIZE_BYTE)))
         {
-          if (DMA_AudioOutComplete != 0)
+          if (DMA_AudioOutComplete != STARTED)
           {
             WavePlayer_PlaybackPlay();
           }
@@ -477,7 +477,7 @@ static void WavePlayer_PlaybackPlay(void)
     /* Play buffer 1st half, prepare 2nd half */
     pBuffer = (uint8_t*)Buffer + BUFFER_HALF_SIZE_BYTE;
   }
-  else if (DMA_AudioOutComplete == HALF_COMPLETE)
+  else /* DMA_AudioOutComplete == HALF_COMPLETE */
   {
     pBuffer = (uint8_t*)Buffer;
   }

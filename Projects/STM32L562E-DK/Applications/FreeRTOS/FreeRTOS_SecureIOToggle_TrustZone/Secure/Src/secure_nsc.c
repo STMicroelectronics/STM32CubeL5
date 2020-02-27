@@ -1,20 +1,22 @@
 /**
   ******************************************************************************
-  * @file    FreeRTOS/FreeRTOS_SecureIOToggle_TrustZone/Secure/Src/secure_nsc.c
+  * @file    Secure/Src/secure_nsc.c
   * @author  MCD Application Team
   * @brief   This file contains the non-secure callable APIs (secure world)
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
-
+/* USER CODE BEGIN Non_Secure_CallLib */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "secure_nsc.h"
@@ -51,10 +53,10 @@ CMSE_NS_ENTRY void SECURE_RegisterCallback(SECURE_CallbackIDTypeDef CallbackId, 
   {
     switch(CallbackId)
     {
-      case SECURE_FAULT_CB_ID:           /* SecureFault IT */
+      case SECURE_FAULT_CB_ID:           /* SecureFault Interrupt occurred */
         pSecureFaultCallback = func;
         break;
-      case GTZC_ERROR_CB_ID:             /* GTZC IT */
+      case GTZC_ERROR_CB_ID:             /* GTZC Interrupt occurred */
         pSecureErrorCallback = func;
         break;
       default:
@@ -80,5 +82,5 @@ CMSE_NS_ENTRY void SECURE_RegisterCallback(SECURE_CallbackIDTypeDef CallbackId, 
 /**
   * @}
   */
-
+/* USER CODE END Non_Secure_CallLib */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

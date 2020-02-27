@@ -1641,11 +1641,9 @@ HAL_StatusTypeDef HAL_RTCEx_SetActiveTampers(RTC_HandleTypeDef *hrtc, RTC_Active
   /* Active Tampers must not be already enabled */
   if (READ_BIT(TAMP->ATOR, TAMP_ATOR_INITS) != 0U)
   {
-    /* Disable all actives tampers with HAL_RTCEx_DeactivateActiveTampers */
-    if (HAL_RTCEx_DeactivateActiveTampers(hrtc) != HAL_OK)
-    {
-      return HAL_ERROR;
-    }
+    /* Disable all actives tampers with HAL_RTCEx_DeactivateActiveTampers.
+       No need to check return value because it returns always HAL_OK */
+    (void) HAL_RTCEx_DeactivateActiveTampers(hrtc);
   }
 
   /* Set TimeStamp on tamper detection */

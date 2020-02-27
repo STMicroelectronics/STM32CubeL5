@@ -51,10 +51,10 @@ RTC_HandleTypeDef hrtc;
 
 
 /* Buffers used for displaying Time and Date */
-uint8_t aShowTime[] = "hh:ms:ss";
-uint8_t aShowTimeStamp[] = "hh:ms:ss";
-uint8_t aShowDate[] = "mm-dd-yyyy";
-uint8_t aShowDateStamp[] = "mm-dd-yyyy";
+uint8_t aShowTime[16];       /* hh:mm:ss */
+uint8_t aShowTimeStamp[16];  /* hh:mm:ss */
+uint8_t aShowDate[16];       /* mm-dd-yyyy */
+uint8_t aShowDateStamp[16];  /* mm-dd-yyyy */
 __IO uint8_t  RTCStatus = 0;
 /* USER CODE END PV */
 
@@ -88,7 +88,6 @@ int main(void)
        - Low Level Initialization
      */
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -147,6 +146,7 @@ void SystemClock_Config(void)
   /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.LSIDiv = RCC_LSI_DIV1;
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
@@ -234,7 +234,7 @@ static void MX_RTC_Init(void)
   }
   sDate.WeekDay = RTC_WEEKDAY_MONDAY;
   sDate.Month = RTC_MONTH_APRIL;
-  sDate.Date = 0x01;
+  sDate.Date = 0x1;
   sDate.Year = 0x20;
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
   {
@@ -283,9 +283,9 @@ void HAL_RTCEx_TimeStampEventCallback(RTC_HandleTypeDef *RTC_Handle)
   HAL_RTCEx_GetTimeStamp(&hrtc, &sTimeStampget, &sTimeStampDateget, RTC_FORMAT_BIN);
 
   /* Display time Format : hh:mm:ss */
-  sprintf((char *)aShowTimeStamp, "%02hhu:%02hhu:%02hhu", (unsigned char)sTimeStampget.Hours, (unsigned char)sTimeStampget.Minutes, (unsigned char)sTimeStampget.Seconds);
+  sprintf((char *)aShowTimeStamp, "%02u:%02u:%02u", (unsigned char)sTimeStampget.Hours, (unsigned char)sTimeStampget.Minutes, (unsigned char)sTimeStampget.Seconds);
   /* Display date Format : mm-dd-yyyy */
-  sprintf((char *)aShowDateStamp, "%02hhu-%02hhu-%04hu", (unsigned char)sTimeStampDateget.Month, (unsigned char)sTimeStampDateget.Date, (unsigned short)2020);
+  sprintf((char *)aShowDateStamp, "%02u-%02u-%04u", (unsigned char)sTimeStampDateget.Month, (unsigned char)sTimeStampDateget.Date, (unsigned short)2020);
 }
 
 /**
@@ -305,9 +305,9 @@ static void RTC_CalendarShow(void)
   HAL_RTC_GetDate(&hrtc, &sdatestructureget, RTC_FORMAT_BIN);
 
   /* Display time Format : hh:mm:ss */
-  sprintf((char *)aShowTime, "%02hhu:%02hhu:%02hhu", (unsigned char)stimestructureget.Hours, (unsigned char)stimestructureget.Minutes, (unsigned char)stimestructureget.Seconds);
+  sprintf((char *)aShowTime, "%02u:%02u:%02u", (unsigned char)stimestructureget.Hours, (unsigned char)stimestructureget.Minutes, (unsigned char)stimestructureget.Seconds);
   /* Display date Format : mm-dd-yyyy */
-  sprintf((char *)aShowDate, "%02hhu-%02hhu-%04hu", (unsigned char)sdatestructureget.Month, (unsigned char)sdatestructureget.Date, (unsigned short)(2000 + sdatestructureget.Year));
+  sprintf((char *)aShowDate, "%02u-%02u-%04u", (unsigned char)sdatestructureget.Month, (unsigned char)sdatestructureget.Date, (unsigned short)(2000 + sdatestructureget.Year));
 }
 
 /* USER CODE END 4 */

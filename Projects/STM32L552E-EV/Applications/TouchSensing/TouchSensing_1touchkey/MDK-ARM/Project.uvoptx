@@ -22,7 +22,7 @@
   </DaveTm>
 
   <Target>
-    <TargetName>STM32L552E_EVAL</TargetName>
+    <TargetName>STM32L552E-EV</TargetName>
     <ToolsetNumber>0x4</ToolsetNumber>
     <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>
@@ -354,7 +354,7 @@
   </Group>
 
   <Group>
-    <GroupName>Drivers/BSP/STM32L552E_EVAL</GroupName>
+    <GroupName>Drivers/BSP/STM32L552E-EV</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -366,7 +366,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -378,7 +378,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_bus.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -390,7 +390,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_io.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -402,7 +402,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_lcd.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_lcd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_lcd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

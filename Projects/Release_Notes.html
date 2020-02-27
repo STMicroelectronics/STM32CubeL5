@@ -54,25 +54,40 @@
 <p>Here is the list of references to user documents:</p>
 <ul>
 <li><a href="https://www.st.com/resource/en/user_manual/DM00668763.pdf">UM2656</a> : Getting started with STM32CubeL5 for STM32L5 Series</li>
+<li><a href="https://www.st.com/resource/en/user_manual/DM00669466.pdf">UM2659</a> : Description of STM32L5 HAL and Low Layer Drivers</li>
 </ul>
 </div>
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" checked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true">V1.1.0 / 06-January-2020</label>
+<input type="checkbox" id="collapse-section3" checked aria-hidden="true"> <label for="collapse-section3" aria-hidden="true">V1.2.0 / 12-February-2020</label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
-<p><strong>Second release</strong></p>
+<p><strong>Third release</strong></p>
 <ul>
-<li>TFM application (STM32L562E-DK)
+<li>NUCLEO-L552ZE-Q
 <ul>
-<li>fix Hide Protection (HDP) closure on STM32L5 devices with bootloader ID 0x90</li>
-<li>add MDK-ARM projects</li>
+<li>New SBSFU_Boot and SBSFU_Appli projects</li>
 </ul></li>
-<li>More MDK-ARM and STM32CubeIDE projects</li>
+<li>STM32L552E-EV
+<ul>
+<li>Mass update applied in projects to resort to new BSP driver path: Drivers/BSP/STM32L552E-EV</li>
+</ul></li>
+<li>STM32L562E-DK
+<ul>
+<li>Mass update applied in projects to resort to new BSP driver path: Drivers/BSP/STM32L562E-DK</li>
+<li>TFM application
+<ul>
+<li>TFM_SBSFU renamed to TFM_SBSFU_Boot</li>
+</ul></li>
+<li>New TrustZone projects
+<ul>
+<li>GPIO_ToggleIO_TrustZone, GTZC_TZSC_MPCBB_TrustZone, RCC_ClockConfig_TrustZone and UART_Trace_TrustZone projects</li>
+</ul></li>
+</ul></li>
 </ul>
 <h2 id="contents">Contents</h2>
-<p>Second release of STM32CubeL5 (STM32Cube for STM32L5 Series) Firmware projects supporting STM32L5xx devices</p>
+<p>Third release of STM32CubeL5 (STM32Cube for STM32L5 Series) Firmware projects supporting STM32L5xx devices</p>
 <table>
 <caption><strong>Projects</strong></caption>
 <thead>
@@ -186,7 +201,8 @@
 </p>
 <h2 id="known-limitations">Known Limitations</h2>
 <ul>
-<li>Projects available for IAR Embedded Workbench (EWARM), partially for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
+<li>Projects available for IAR Embedded Workbench (EWARM) and mostly for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
+<li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 but not preventing to run and debug.</li>
 <li>STM32L562E-DK demonstration firmware not available</li>
 </ul>
 <h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
@@ -207,7 +223,7 @@
 </ul></li>
 </ul></li>
 </ul></li>
-<li>STM32CubeIDE toolchain V1.2.0</li>
+<li>STM32CubeIDE toolchain V1.3.0</li>
 </ul>
 <h2 id="supported-devices-and-boards">Supported Devices and boards</h2>
 <ul>
@@ -217,16 +233,26 @@
 <li>STM32L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
 <h2 id="backward-compatibility">Backward Compatibility</h2>
-<p>Not applicable</p>
+<ul>
+<li>STM32CubeMX V5.6.0 required for 14 projects with LSI prescaler</li>
+</ul>
 </div>
 </div>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true">V1.0.0 / 13-December-2019</label>
+<input type="checkbox" id="collapse-section2" unchecked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true">V1.1.0 / 06-January-2020</label>
 <div>
 <h2 id="main-changes-1">Main Changes</h2>
-<p><strong>First release</strong></p>
+<p><strong>Second release</strong></p>
+<ul>
+<li>TFM application (STM32L562E-DK)
+<ul>
+<li>fix Hide Protection (HDP) closure on STM32L5 devices with bootloader ID 0x90</li>
+<li>add MDK-ARM projects</li>
+</ul></li>
+<li>More MDK-ARM and STM32CubeIDE projects</li>
+</ul>
 <h2 id="contents-1">Contents</h2>
-<p>First release of STM32CubeL5 (STM32Cube for STM32L5 Series) Firmware projects supporting STM32L5xx devices</p>
+<p>Second release of STM32CubeL5 (STM32Cube for STM32L5 Series) Firmware projects supporting STM32L5xx devices</p>
 <table>
 <caption><strong>Projects</strong></caption>
 <thead>
@@ -371,6 +397,160 @@
 <li>STM32L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
 <h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<p>Not applicable</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true">V1.0.0 / 13-December-2019</label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<p><strong>First release</strong></p>
+<h2 id="contents-2">Contents</h2>
+<p>First release of STM32CubeL5 (STM32Cube for STM32L5 Series) Firmware projects supporting STM32L5xx devices</p>
+<table>
+<caption><strong>Projects</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-L552ZE-Q</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects\NUCLEO-L552ZE-Q\Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-L552ZE-Q</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\NUCLEO-L552ZE-Q\Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-L552ZE-Q</td>
+<td style="text-align: left;">LL Examples</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\NUCLEO-L552ZE-Q\Examples_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-L552ZE-Q</td>
+<td style="text-align: left;">HAL/LL Examples</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\NUCLEO-L552ZE-Q\Examples_MIX</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NUCLEO-L552ZE-Q</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\NUCLEO-L552ZE-Q\Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NUCLEO-L552ZE-Q</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\NUCLEO-L552ZE-Q\Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L552E-EV</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects\STM32L552E-EV\Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L552E-EV</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects\STM32L552E-EV\Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L552E-EV</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\STM32L552E-EV\Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L552E-EV</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\STM32L552E-EV\Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L552E-EV</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\STM32L552E-EV\Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L562E-DK</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects\STM32L562E-DK\Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L562E-DK</td>
+<td style="text-align: left;">Examples</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\STM32L562E-DK\Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L562E-DK</td>
+<td style="text-align: left;">LL Examples</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\STM32L562E-DK\Examples_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L562E-DK</td>
+<td style="text-align: left;">Templates</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\STM32L562E-DK\Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L562E-DK</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects\STM32L562E-DK\Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="known-limitations-2">Known Limitations</h2>
+<ul>
+<li>Projects available for IAR Embedded Workbench (EWARM), partially for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
+<li>STM32L562E-DK demonstration firmware not available</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link
+<ul>
+<li>EWARM patch <strong>EWARMv8_STM32L5xx_Support_V11.2</strong> for STM32L5xx available from \Utilities\PC_Software</li>
+<li>Please note that administrator rights are required on Windows 10 at patch installation</li>
+</ul></li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27
+<ul>
+<li>Pack <strong>Keil.STM32L5xx_DFP.1.0.9.pack</strong> available from \Utilities\PC_Software
+<ul>
+<li>ST-Link usage requires
+<ul>
+<li>ST-Link Keil DLL updates (ST-LINKIII-Keil_SWO_v3_0_5_RC2.zip)</li>
+<li>Keil TOOLS.INI update as indicated in the ST-Link Keil DLL update zip package</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>STM32CubeIDE toolchain V1.2.0</li>
+</ul>
+<h2 id="supported-devices-and-boards-2">Supported Devices and boards</h2>
+<ul>
+<li>STM32L552xx/STM32L562xx devices</li>
+<li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
+<li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
+<li>STM32L552ZE-Q Nucleo kit (MB1361 C-02)</li>
+</ul>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
 <p>Not applicable</p>
 </div>
 </div>

@@ -183,9 +183,9 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</name>
+			<name>Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-Discovery/stm32l562e_discovery.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/FreeRTOS/CMSIS_RTOS/cmsis_os2.c</name>

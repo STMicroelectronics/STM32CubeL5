@@ -1,5 +1,5 @@
 [ProjectFiles]
-HeaderPath=../Secure/Inc
+HeaderPath=
 [Others]
 Define=
 HALModule=SRAM;GTZC

@@ -687,7 +687,7 @@
   </Group>
 
   <Group>
-    <GroupName>Drivers/BSP/STM32L552E_EVAL</GroupName>
+    <GroupName>Drivers/BSP/STM32L552E-EV</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -699,7 +699,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -711,7 +711,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_audio.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_audio.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_audio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -723,7 +723,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_bus.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_bus.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -735,7 +735,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_idd.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_idd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_idd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -747,7 +747,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_io.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_io.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -759,7 +759,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_lcd.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_lcd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_lcd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -771,7 +771,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_sd.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_sd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -783,7 +783,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E_EVAL/stm32l552e_eval_usbpd_pwr.c</PathWithFileName>
+      <PathWithFileName>../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_usbpd_pwr.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_usbpd_pwr.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1679,7 +1679,7 @@
   </Group>
 
   <Group>
-    <GroupName>Utilities/Basic_GUI</GroupName>
+    <GroupName>Utilities/basic_gui</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>

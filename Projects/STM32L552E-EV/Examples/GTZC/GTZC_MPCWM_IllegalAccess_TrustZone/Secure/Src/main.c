@@ -62,7 +62,6 @@ static void NonSecure_Init(void);
 void SystemClock_Config(void);
 static void MX_GTZC_Init(void);
 static void MX_GPIO_Init(void);
-static void MX_ICACHE_Init(void);
 static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -97,7 +96,6 @@ int main(void)
      */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -120,7 +118,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_ICACHE_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 
@@ -160,15 +157,12 @@ int main(void)
   }
 
   /* USER CODE END 2 */
- 
- 
 
   /*************** Setup and jump to non-secure *******************************/
 
   NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -271,10 +265,6 @@ static void MX_GTZC_Init(void)
   {
     Error_Handler();
   }
-  if (HAL_GTZC_TZSC_ConfigPeriphAttributes(GTZC_PERIPH_ICACHE_REG, GTZC_TZSC_PERIPH_SEC|GTZC_TZSC_PERIPH_NPRIV) != HAL_OK)
-  {
-    Error_Handler();
-  }
   MPCBB1_NonSecureArea_Desc.SecureRWIllegalMode = GTZC_MPCBB_SRWILADIS_ENABLE;
   MPCBB1_NonSecureArea_Desc.InvertSecureState = GTZC_MPCBB_INVSECSTATE_NOT_INVERTED;
   MPCBB1_NonSecureArea_Desc.AttributeConfig.MPCBB_SecConfig_array[0] =   0xFFFFFFFF;
@@ -332,33 +322,6 @@ static void MX_GTZC_Init(void)
   /* USER CODE BEGIN GTZC_Init 2 */
 
   /* USER CODE END GTZC_Init 2 */
-
-}
-
-/**
-  * @brief ICACHE Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ICACHE_Init(void)
-{
-
-  /* USER CODE BEGIN ICACHE_Init 0 */
-
-  /* USER CODE END ICACHE_Init 0 */
-
-  /* USER CODE BEGIN ICACHE_Init 1 */
-
-  /* USER CODE END ICACHE_Init 1 */
-  /** Enable instruction cache (default 2-ways set associative cache) 
-  */
-  if (HAL_ICACHE_Enable() != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ICACHE_Init 2 */
-
-  /* USER CODE END ICACHE_Init 2 */
 
 }
 

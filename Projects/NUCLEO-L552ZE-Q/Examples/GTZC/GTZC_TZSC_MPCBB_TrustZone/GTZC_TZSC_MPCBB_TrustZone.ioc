@@ -1,10 +1,9 @@
 #MicroXplorer Configuration settings - do not modify
-CortexM33NS.IPs=FREERTOS\:I,PWR,RCC,RTC,SYS\:I,TAMP,DMA\:I,NVIC2\:I,GPIO
+CortexM33NS.IPs=FREERTOS\:I,PWR,RCC,RTC,SYS\:I,TAMP,DMA\:I,NVIC2\:I,GPIO,ICACHE\:I
 CortexM33NS.Pins=PC13,PC7,PA9
-CortexM33S.IPs=GTZC\:I,PWR\:I,RCC\:I,RTC\:I,SYS_S\:I,TAMP\:I,DMA,NVIC1\:I,ICACHE\:I,GPIO
+CortexM33S.IPs=GTZC\:I,PWR\:I,RCC\:I,RTC\:I,SYS_S\:I,TAMP\:I,DMA,NVIC1\:I,GPIO
 File.Version=6
-GTZC.ICACHE_Secure=GTZC_TZSC_PERIPH_SEC
-GTZC.IPParameters=ICACHE_Secure,SRAM1_Illegal_Access_Interrupt
+GTZC.IPParameters=SRAM1_Illegal_Access_Interrupt
 GTZC.SRAM1_Illegal_Access_Interrupt=Enabled
 KeepUserPlacement=false
 Mcu.Context0=CortexM33S
@@ -106,7 +105,7 @@ ProjectManager.StackSize=0x400
 ProjectManager.TargetToolchain=EWARM V8.32
 ProjectManager.ToolChainLocation=
 ProjectManager.UnderRoot=false
-ProjectManager.functionlistsort=1-SystemClock_Config-RCC-false-HAL-false-CortexM33S,2-MX_GTZC_Init-GTZC-false-HAL-true-CortexM33S,3-MX_GPIO_Init-GPIO-false-HAL-true-CortexM33S,4-MX_ICACHE_Init-ICACHE-false-HAL-true-CortexM33S,5-MX_PWR_Init-PWR-false-HAL-true-CortexM33S,1-SystemClock_Config-RCC-false-HAL-false-CortexM33NS,2-MX_GPIO_Init-GPIO-false-HAL-true-CortexM33NS,3-MX_PWR_Init-PWR-false-HAL-true-CortexM33NS
+ProjectManager.functionlistsort=1-SystemClock_Config-RCC-false-HAL-false-CortexM33S,2-MX_GTZC_Init-GTZC-false-HAL-true-CortexM33S,3-MX_GPIO_Init-GPIO-false-HAL-true-CortexM33S,4-MX_PWR_Init-PWR-false-HAL-true-CortexM33S,1-SystemClock_Config-RCC-false-HAL-false-CortexM33NS,2-MX_GPIO_Init-GPIO-false-HAL-true-CortexM33NS,3-MX_ICACHE_Init-ICACHE-false-HAL-true-CortexM33NS,4-MX_PWR_Init-PWR-false-HAL-true-CortexM33NS
 RCC.AHBFreq_Value=110000000
 RCC.APB1Freq_Value=110000000
 RCC.APB1TimFreq_Value=110000000

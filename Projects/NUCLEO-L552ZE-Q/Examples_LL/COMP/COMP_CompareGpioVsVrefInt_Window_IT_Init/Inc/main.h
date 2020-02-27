@@ -28,9 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_comp.h"
 #include "stm32l5xx_ll_exti.h"
+#include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_crs.h"
 #include "stm32l5xx_ll_rcc.h"
 #include "stm32l5xx_ll_bus.h"

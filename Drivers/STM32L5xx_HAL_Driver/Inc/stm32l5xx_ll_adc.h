@@ -2589,9 +2589,12 @@ __STATIC_INLINE uint32_t LL_ADC_GetDataAlignment(ADC_TypeDef *ADCx)
   *           Moreover, this avoids risk of overrun for low frequency
   *           applications.
   *           How to use this low power mode:
-  *           - Do not use with interruption or DMA since these modes
-  *             have to clear immediately the EOC flag to free the
-  *             IRQ vector sequencer.
+  *           - It is not recommended to use with interruption or DMA
+  *             since these modes have to clear immediately the EOC flag
+  *             (by CPU to free the IRQ pending event or by DMA).
+  *             Auto wait will work but fort a very short time, discarding
+  *             its intended benefit (except specific case of high load of CPU
+  *             or DMA transfers which can justify usage of auto wait).
   *           - Do use with polling: 1. Start conversion,
   *             2. Later on, when conversion data is needed: poll for end of
   *             conversion  to ensure that conversion is completed and
@@ -2642,9 +2645,12 @@ __STATIC_INLINE void LL_ADC_SetLowPowerMode(ADC_TypeDef *ADCx, uint32_t LowPower
   *           Moreover, this avoids risk of overrun for low frequency
   *           applications.
   *           How to use this low power mode:
-  *           - Do not use with interruption or DMA since these modes
-  *             have to clear immediately the EOC flag to free the
-  *             IRQ vector sequencer.
+  *           - It is not recommended to use with interruption or DMA
+  *             since these modes have to clear immediately the EOC flag
+  *             (by CPU to free the IRQ pending event or by DMA).
+  *             Auto wait will work but fort a very short time, discarding
+  *             its intended benefit (except specific case of high load of CPU
+  *             or DMA transfers which can justify usage of auto wait).
   *           - Do use with polling: 1. Start conversion,
   *             2. Later on, when conversion data is needed: poll for end of
   *             conversion  to ensure that conversion is completed and
