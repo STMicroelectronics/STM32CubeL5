@@ -30,7 +30,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN Define */
- 
+
 /* USER CODE END Define */
 
 /* Private macro -------------------------------------------------------------*/
@@ -76,7 +76,7 @@ void HAL_MspInit(void)
   HAL_NVIC_SetPriority(GTZC_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(GTZC_IRQn);
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 

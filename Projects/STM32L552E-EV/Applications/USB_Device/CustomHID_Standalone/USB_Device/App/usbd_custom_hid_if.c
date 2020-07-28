@@ -35,7 +35,7 @@
 extern ADC_HandleTypeDef hadc2;
 uint32_t ADCConvertedValue = 0;
 uint32_t ADC_Prev_ConvertedValue = 0;
-extern USBD_HandleTypeDef USBD_Device;
+extern USBD_HandleTypeDef hUsbDeviceFS;
 extern TIM_HandleTypeDef htim1;
 /* USER CODE END PV */
 
@@ -96,117 +96,117 @@ extern TIM_HandleTypeDef htim1;
 __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
 {
   /* USER CODE BEGIN 0 */
-  0x06, 0xFF, 0x00,      /* USAGE_PAGE (Vendor Page: 0xFF00) */                       
-  0x09, 0x01,            /* USAGE (Demo Kit)               */    
-  0xa1, 0x01,            /* COLLECTION (Application)       */            
+  0x06, 0xFF, 0x00,      /* USAGE_PAGE (Vendor Page: 0xFF00) */
+  0x09, 0x01,            /* USAGE (Demo Kit)               */
+  0xa1, 0x01,            /* COLLECTION (Application)       */
   /* 6 */
-  
-  /* LED4 */        
-  0x85, LED4_REPORT_ID,  /*     REPORT_ID (1)		     */
-  0x09, 0x01,            /*     USAGE ( LED4)	             */
-  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
-  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
-  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
-  0x95, LED4_REPORT_COUNT, /*     REPORT_COUNT (1)           */       
-  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
-  
+
+  /* LED4 */
+  0x85, LED4_REPORT_ID,  /*     REPORT_ID (1)         */
+  0x09, 0x01,            /*     USAGE ( LED4)               */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */
+  0x95, LED4_REPORT_COUNT, /*     REPORT_COUNT (1)           */
+  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */
+
   0x85, LED4_REPORT_ID,  /*     REPORT_ID (1)              */
   0x09, 0x01,            /*     USAGE (LED4)              */
   0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
   /* 26 */
-  
+
   /* LED5 */
-  0x85, LED5_REPORT_ID,  /*     REPORT_ID 2		     */
-  0x09, 0x02,            /*     USAGE (LED5)	             */
-  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
-  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
-  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
-  0x95, LED5_REPORT_COUNT, /*     REPORT_COUNT (1)           */       
-  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
-  
+  0x85, LED5_REPORT_ID,  /*     REPORT_ID 2         */
+  0x09, 0x02,            /*     USAGE (LED5)               */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */
+  0x95, LED5_REPORT_COUNT, /*     REPORT_COUNT (1)           */
+  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */
+
   0x85, LED5_REPORT_ID,  /*     REPORT_ID (2)              */
   0x09, 0x02,            /*     USAGE (LED5)              */
   0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
   /* 46 */
-  
-  /* LED6 */        
-  0x85, LED6_REPORT_ID,  /*     REPORT_ID (3)		     */
-  0x09, 0x03,            /*     USAGE (LED6)	             */
-  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
-  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
-  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
-  0x95, LED6_REPORT_COUNT, /*     REPORT_COUNT (1)           */       
-  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
-  
+
+  /* LED6 */
+  0x85, LED6_REPORT_ID,  /*     REPORT_ID (3)         */
+  0x09, 0x03,            /*     USAGE (LED6)               */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */
+  0x95, LED6_REPORT_COUNT, /*     REPORT_COUNT (1)           */
+  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */
+
   0x85, LED6_REPORT_ID,  /*     REPORT_ID (3)              */
   0x09, 0x03,            /*     USAGE (LED6)              */
   0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
   /* 66 */
-  
+
   /* LED7 */
-  0x85, LED7_REPORT_ID,  /*     REPORT_ID 4)		     */
-  0x09, 0x04,            /*     USAGE (LED7)	             */
-  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
-  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
-  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
-  0x95, LED7_REPORT_COUNT, /*     REPORT_COUNT (1)           */       
-  0xB1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */     
-  
+  0x85, LED7_REPORT_ID,  /*     REPORT_ID 4)         */
+  0x09, 0x04,            /*     USAGE (LED7)               */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */
+  0x95, LED7_REPORT_COUNT, /*     REPORT_COUNT (1)           */
+  0xB1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */
+
   0x85, LED7_REPORT_ID,  /*     REPORT_ID (4)              */
   0x09, 0x04,            /*     USAGE (LED7)              */
   0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
   /* 86 */
-  
-  /* BUTTON_WAKEUP Button */  
+
+  /* BUTTON_WAKEUP Button */
   0x85, BUTTON_WAKEUP_REPORT_ID,   /*     REPORT_ID (5)              */
-  0x09, 0x05,            /*     USAGE (BUTTON_WAKEUP)        */      
-  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */      
-  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */      
-  0x75, 0x01,            /*     REPORT_SIZE (1)            */  
-  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */   
-  
-  0x09, 0x05,            /*     USAGE (Push Button)        */               
-  0x75, 0x01,            /*     REPORT_SIZE (1)            */           
-  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  
-  
-  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
-  0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */                    
-  0x85, BUTTON_WAKEUP_REPORT_ID,   /*     REPORT_ID (2)              */         
-  
-  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
-  0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */                      
+  0x09, 0x05,            /*     USAGE (BUTTON_WAKEUP)        */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */
+  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */
+
+  0x09, 0x05,            /*     USAGE (Push Button)        */
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */
+  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */
+
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */
+  0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */
+  0x85, BUTTON_WAKEUP_REPORT_ID,   /*     REPORT_ID (2)              */
+
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */
+  0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */
   /* 114 */
-  
-  /* BUTTON_TAMPER Button */  
+
+  /* BUTTON_TAMPER Button */
   0x85, BUTTON_TAMPER_REPORT_ID,/*     REPORT_ID (6)              */
-  0x09, 0x06,            /*     USAGE (BUTTON_TAMPER) */      
-  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */      
-  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */      
-  0x75, 0x01,            /*     REPORT_SIZE (1)            */  
-  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */   
-  
-  0x09, 0x06,            /*     USAGE (Tamper Push Button) */               
-  0x75, 0x01,            /*     REPORT_SIZE (1)            */           
-  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  
-  
-  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
-  0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */                    
-  0x85, BUTTON_TAMPER_REPORT_ID,/*     REPORT_ID (6)              */         
-  
-  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
-  0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */  
+  0x09, 0x06,            /*     USAGE (BUTTON_TAMPER) */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */
+  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */
+
+  0x09, 0x06,            /*     USAGE (Tamper Push Button) */
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */
+  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */
+
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */
+  0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */
+  0x85, BUTTON_TAMPER_REPORT_ID,/*     REPORT_ID (6)              */
+
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */
+  0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */
   /* 142 */
 
   /* ADC IN */
-  0x85, ADC_REPORT_ID,   /*     REPORT_ID                 */         
-  0x09, 0x07,            /*     USAGE (ADC IN)             */          
-  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */               
-  0x26, 0xff, 0x00,      /*     LOGICAL_MAXIMUM (255)      */                 
-  0x75, 0x08,            /*     REPORT_SIZE (8)            */           
-  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */                    
-  0x85, ADC_REPORT_ID,   /*     REPORT_ID (7)              */                 
-  0x09, 0x07,            /*     USAGE (ADC in)             */                     
-  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */                                 
+  0x85, ADC_REPORT_ID,   /*     REPORT_ID                 */
+  0x09, 0x07,            /*     USAGE (ADC IN)             */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */
+  0x26, 0xff, 0x00,      /*     LOGICAL_MAXIMUM (255)      */
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */
+  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */
+  0x85, ADC_REPORT_ID,   /*     REPORT_ID (7)              */
+  0x09, 0x07,            /*     USAGE (ADC in)             */
+  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */
   /* 161 */
   /* USER CODE END 0 */
   0xC0    /*     END_COLLECTION	             */
@@ -275,12 +275,13 @@ static int8_t CUSTOM_HID_Init_FS(void)
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
   BSP_LED_Init(LED7);
-  
+
   /* Enable GPIOC clock */
   __HAL_RCC_GPIOC_CLK_ENABLE();
-  
+
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
+  
   return (USBD_OK);
   /* USER CODE END 4 */
 }
@@ -293,8 +294,8 @@ static int8_t CUSTOM_HID_DeInit_FS(void)
 {
   /* USER CODE BEGIN 5 */
   /*
-  Add your de-initialization code here 
-  */  
+  Add your de-initialization code here
+  */
   return (USBD_OK);
   /* USER CODE END 5 */
 }
@@ -311,26 +312,30 @@ static int8_t CUSTOM_HID_OutEvent_FS(uint8_t event_idx, uint8_t state)
   switch(event_idx)
   {
   case 1: /* LED4 */
-    (state == 1) ? BSP_LED_On(LED4) : BSP_LED_Off(LED4); 
+    (state == 1) ? BSP_LED_On(LED4) : BSP_LED_Off(LED4);
     break;
-    
+
   case 2: /* LED5 */
-    (state == 1) ? BSP_LED_On(LED5) : BSP_LED_Off(LED5); 
+    (state == 1) ? BSP_LED_On(LED5) : BSP_LED_Off(LED5);
     break;
   case 3: /* LED6 */
-    (state == 1) ? BSP_LED_On(LED6) : BSP_LED_Off(LED6); 
+    (state == 1) ? BSP_LED_On(LED6) : BSP_LED_Off(LED6);
     break;
   case 4: /* LED7 */
-    (state == 1) ? BSP_LED_On(LED7) : BSP_LED_Off(LED7); 
+    (state == 1) ? BSP_LED_On(LED7) : BSP_LED_Off(LED7);
     break;
-    
+
   default:
     BSP_LED_Off(LED4);
     BSP_LED_Off(LED5);
     BSP_LED_Off(LED6);
-    BSP_LED_Off(LED7); 
+    BSP_LED_Off(LED7);
     break;
   }
+  
+  /* Start next USB packet transfer once data processing is completed */
+  USBD_CUSTOM_HID_ReceivePacket(&hUsbDeviceFS);
+  
   return (USBD_OK);
   /* USER CODE END 6 */
 }

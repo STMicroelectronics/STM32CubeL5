@@ -33,13 +33,11 @@ Below are the steps to run this example:
    in "main.h", and generate its binary (ie: FLASH_DualBoot.bin)
 
 2- Load this binary at the bank2 of the flash(at the address 0x08040000) using
-   STM32 CubeProgrammer (www.st.com) or any similar tool.
+   STM32CubeProgrammer (www.st.com) or any similar programming tool.
 @note:
  - You can avoid step 1 by directly loading the binary file provided with the example
  - You have to configure your preferred toolchain in order to generate the binary
    file after compiling the project.
- - You can use STM32 CubeProgrammer or any similar tool to initially reset the
-   BFB2 bit (disable the dual boot feature).
 
 3- Select bank1 configuration by uncommenting FLASH_BANK1 and commenting FLASH_BANK2 defines
    in "main.h", and run it, this project will be loaded in the bank1 of the flash: at the
@@ -47,10 +45,10 @@ Below are the steps to run this example:
 
 4- Click the User push-button to swap between the two banks
 
-- If program in bank1 is selected, a message will be displayed on LCD glass
+- If program in bank1 is selected, a message will be displayed on LCD
   and LED10 will remain toggling while LED9 is turn on.
 
-- If program in bank2 is selected, a message will be displayed on LCD glass
+- If program in bank2 is selected, a message will be displayed on LCD
   and LED9 will remain toggling while LED10 is turn on.
 
 - If error occurs both LED10 and LED9 blink (period : 2s).

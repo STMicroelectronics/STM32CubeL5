@@ -31,8 +31,11 @@ User can easily set its own PLL parameters in changing global variable used to s
 
 A LED1 toggle of 1sec provides this information that system is well configured to requested frequency.  
 
-Anyway, user can connect on oscilloscope to MCO pin (PA.08) to check requested frequency: 
- #error "GENERATOR_: define SYSCLK frequency txt for the family "
+Anyway, user can connect on oscilloscope to MCO pin (PA.08) to check requested frequency: 50MHz
+
+@par Keywords
+
+System, Utils, Clock, HSI, PLL, flash latency, SYSCLK, frequency, Oscilloscope
 
 @par Directory contents 
 

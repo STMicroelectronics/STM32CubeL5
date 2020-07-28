@@ -148,23 +148,23 @@ void AudioRecord_demo(void)
 static void AudioRecord_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Audio Demo description */
-  GUI_FillRect(0, 0, 240, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Audio Record", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Press User push-button", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"to stop record", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 240, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Audio Record", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Press User push-button", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"to stop record", CENTER_MODE);
   
-  GUI_DrawRect(10, 90, 220, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 218, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 220, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 218, 138, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
 }
 
 /**

@@ -50,15 +50,8 @@ static void RNG_Init(void)
     while (1);
   }
 
-  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
-
-  /*Select PLLQ output as RNG clock source */
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RNG;
-  PeriphClkInitStruct.RngClockSelection = RCC_RNGCLKSOURCE_MSI;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
-    while (1);
-  }
+  /* Select MSI as RNG clock source */
+  __HAL_RCC_RNG_CONFIG(RCC_RNGCLKSOURCE_MSI);
 
   /* RNG Peripheral clock enable */
   __HAL_RCC_RNG_CLK_ENABLE();

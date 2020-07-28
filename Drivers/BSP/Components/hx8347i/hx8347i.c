@@ -79,8 +79,8 @@ HX8347I_Drv_t HX8347I_Driver =
 /** @defgroup HX8347I_Private_FunctionPrototypes HX8347I Private Function Prototypes
   * @{
   */
-static int32_t HX8347I_ReadRegWrap(void *handle, uint16_t Reg, uint8_t* Data, uint16_t Length);
-static int32_t HX8347I_WriteRegWrap(void *handle, uint16_t Reg, uint8_t* Data, uint16_t Length);
+static int32_t HX8347I_ReadRegWrap(void *handle, uint16_t Reg, uint8_t* Data, uint32_t Length);
+static int32_t HX8347I_WriteRegWrap(void *handle, uint16_t Reg, uint8_t* Data, uint32_t Length);
 static void    HX8347I_Delay(HX8347I_Object_t *pObj, uint32_t Delay);
 /**
   * @}
@@ -605,7 +605,7 @@ int32_t HX8347I_DrawBitmap(HX8347I_Object_t *pObj, uint32_t Xpos, uint32_t Ypos,
   }
 
   /* Write GRAM */
-  ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, &pBmp[index], (uint16_t) size);
+  ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, &pBmp[index], size);
 
   /* Restore GRAM Area - Partial Display Control */
   pData[1] = 0x00U;
@@ -711,7 +711,7 @@ int32_t HX8347I_FillRGBRect(HX8347I_Object_t *pObj, uint32_t Xpos, uint32_t Ypos
       buffer[(2U*j)+1U] = *pTmp;
       pTmp++;
     }
-    ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, buffer, (uint16_t) Width);
+    ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, buffer, Width);
   }
 
   if(ret != HX8347I_OK)
@@ -748,7 +748,7 @@ int32_t HX8347I_DrawHLine(HX8347I_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, 
     pData[2U*i]      = (uint8_t) (Color & 0xFFU);
     pData[(2U*i)+1U] = (uint8_t) ((Color >> 8) & 0xFFU);
   }
-  ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, pData, (uint16_t) Length);
+  ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, pData, Length);
 
   if(ret != HX8347I_OK)
   {
@@ -820,7 +820,7 @@ int32_t HX8347I_DrawVLine(HX8347I_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, 
     pData[2U*i]      = (uint8_t) (Color & 0xFFU);
     pData[(2U*i)+1U] = (uint8_t) ((Color >> 8) & 0xFFU);
   }
-  ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, pData, (uint16_t) Length);
+  ret += hx8347i_write_reg(&pObj->Ctx, HX8347I_READ_DATA, pData, Length);
 
   /* Restore row and column end addresses */
   if ((pObj->Orientation == HX8347I_ORIENTATION_PORTRAIT) || (pObj->Orientation == HX8347I_ORIENTATION_PORTRAIT_ROT180))
@@ -1011,7 +1011,7 @@ int32_t HX8347I_GetYSize(HX8347I_Object_t *pObj, uint32_t *Ysize)
   * @param  Length  Buffer size to be red.
   * @retval error status.
   */
-static int32_t HX8347I_ReadRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint16_t Length)
+static int32_t HX8347I_ReadRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint32_t Length)
 {
   HX8347I_Object_t *pObj = (HX8347I_Object_t *)handle;
 
@@ -1026,7 +1026,7 @@ static int32_t HX8347I_ReadRegWrap(void *handle, uint16_t Reg, uint8_t* pData, u
   * @param  Length Buffer size to be written.
   * @retval error status.
   */
-static int32_t HX8347I_WriteRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint16_t Length)
+static int32_t HX8347I_WriteRegWrap(void *handle, uint16_t Reg, uint8_t* pData, uint32_t Length)
 {
   HX8347I_Object_t *pObj = (HX8347I_Object_t *)handle;
 

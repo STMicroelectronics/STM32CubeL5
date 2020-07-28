@@ -81,7 +81,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -125,15 +124,12 @@ int main(void)
   HAL_SuspendTick();
 
   /* USER CODE END 2 */
- 
- 
 
   /*************** Setup and jump to non-secure *******************************/
 
   NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -147,7 +143,7 @@ int main(void)
 
 /**
   * @brief  Non-secure call function
-  *         This function is responsible for Non-secure initialization and switch 
+  *         This function is responsible for Non-secure initialization and switch
   *         to non-secure state
   * @retval None
   */
@@ -176,17 +172,18 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Configure LSE Drive Capability 
+  /** Configure LSE Drive Capability
   */
   HAL_PWR_EnableBkUpAccess();
   __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
@@ -204,7 +201,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -314,7 +311,7 @@ static void MX_RTC_Init(void)
   /* USER CODE BEGIN RTC_Init 1 */
 
   /* USER CODE END RTC_Init 1 */
-  /** Initialize RTC Only 
+  /** Initialize RTC Only
   */
   hrtc.Instance = RTC;
   hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
@@ -322,6 +319,9 @@ static void MX_RTC_Init(void)
   hrtc.Init.SynchPrediv = 255;
   hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
   hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  hrtc.Init.OutPutPullUp = RTC_OUTPUT_PULLUP_NONE;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
   {
     Error_Handler();
@@ -336,8 +336,8 @@ static void MX_RTC_Init(void)
   }
   secureState.rtcSecureFull = RTC_SECURE_FULL_NO;
   secureState.rtcNonSecureFeatures = RTC_NONSECURE_FEATURE_NONE|RTC_NONSECURE_FEATURE_ALRB;
-  secureState.backupRegisterStartZone2 = RTC_BKP_DR10; /* Shared with Privilege */
-  secureState.backupRegisterStartZone3 = RTC_BKP_DR20; /* Shared with Privilege */
+  secureState.backupRegisterStartZone2 = RTC_BKP_DR10;
+  secureState.backupRegisterStartZone3 = RTC_BKP_DR20;
   if (HAL_RTCEx_SecureModeSet(&hrtc, &secureState) != HAL_OK)
   {
     Error_Handler();
@@ -347,7 +347,7 @@ static void MX_RTC_Init(void)
 
   /* USER CODE END Check_RTC_BKUP */
 
-  /** Initialize RTC and set the Time and Date 
+  /** Initialize RTC and set the Time and Date
   */
   sTime.Hours = 0x2;
   sTime.Minutes = 0x20;
@@ -366,7 +366,7 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-  /** Enable the Alarm A 
+  /** Enable the Alarm A
   */
   sAlarm.AlarmTime.Hours = 0x2;
   sAlarm.AlarmTime.Minutes = 0x20;
@@ -381,14 +381,12 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-
   /** Enable the WakeUp
   */
   if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 32768/2/5, RTC_WAKEUPCLOCK_RTCCLK_DIV2, 0) != HAL_OK)
   {
     Error_Handler();
   }
-
   /* USER CODE BEGIN RTC_Init 2 */
 
   /* USER CODE END RTC_Init 2 */
@@ -501,7 +499,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

@@ -40,6 +40,10 @@ the frequency of the changes on the external Input1 signal should never exceed t
 frequency of the internal clock provided to the LPTIM2 (LSI for the
 present example).
 
+@par Keywords
+
+Timers, LPTIM, Low power, Pulse Counter, Stop mode, Interrupt
+
 @par Directory contents 
 
   - LPTIM/LPTIM_PulseCounter_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

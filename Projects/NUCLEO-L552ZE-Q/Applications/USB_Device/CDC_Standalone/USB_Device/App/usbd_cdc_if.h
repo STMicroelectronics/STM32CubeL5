@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -38,17 +38,19 @@
   * @brief For Usb device.
   * @{
   */
-  
+
 /** @defgroup USBD_CDC_IF USBD_CDC_IF
   * @brief Usb VCP device module
   * @{
-  */ 
+  */
 
 /** @defgroup USBD_CDC_IF_Exported_Defines USBD_CDC_IF_Exported_Defines
   * @brief Defines.
   * @{
   */
 /* USER CODE BEGIN EXPORTED_DEFINES */
+#define APP_RX_DATA_SIZE  2048
+#define APP_TX_DATA_SIZE  2048
 
 /* USER CODE END EXPORTED_DEFINES */
 

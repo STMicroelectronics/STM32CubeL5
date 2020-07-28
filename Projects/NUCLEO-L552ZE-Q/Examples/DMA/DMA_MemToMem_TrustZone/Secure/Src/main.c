@@ -111,7 +111,6 @@ int main(void)
      */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -186,15 +185,12 @@ int main(void)
   HAL_SuspendTick();
 
   /* USER CODE END 2 */
- 
- 
 
   /*************** Setup and jump to non-secure *******************************/
 
   NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -208,7 +204,7 @@ int main(void)
 
 /**
   * @brief  Non-secure call function
-  *         This function is responsible for Non-secure initialization and switch 
+  *         This function is responsible for Non-secure initialization and switch
   *         to non-secure state
   * @retval None
   */
@@ -298,14 +294,14 @@ static void MX_GTZC_Init(void)
 
 }
 
-/** 
+/**
   * Enable DMA controller clock
   * Configure DMA for memory to memory transfers
   *   hdma_memtomem_dma1_channel1
   *   hdma_memtomem_dma1_channel2
   *   hdma_memtomem_dma1_channel3
   */
-static void MX_DMA_Init(void) 
+static void MX_DMA_Init(void)
 {
 
   /* DMA controller clock enable */
@@ -441,7 +437,6 @@ static void MX_DMA_Init(void)
   HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
 
 }
- 
 
 /* USER CODE BEGIN 4 */
 /**
@@ -496,7 +491,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

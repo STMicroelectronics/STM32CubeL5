@@ -40,7 +40,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "boot_hal_cfg.h"
 #include "string.h"
 #include "platform/include/tfm_plat_nv_counters.h"
 #ifdef TFM_DEV_MODE
@@ -51,7 +51,6 @@
 #include "bootutil/bootutil_log.h"
 #include "tfm_boot_status.h"
 #include "boot_record.h"
-#include "entropy_poll.h"
 #include <limits.h>
 #include "Driver_Flash.h"
 #include "flash_layout.h"

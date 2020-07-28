@@ -34,7 +34,6 @@ REGION_DECLARE(Load$$LR$$, LR_VENEER, $$Base);
 REGION_DECLARE(Load$$LR$$, LR_VENEER, $$Limit);
 REGION_DECLARE(Load$$LR$$, LR_SECONDARY_PARTITION, $$Base);
 
-
 const struct memory_region_limits memory_regions =
 {
   .non_secure_code_start =
@@ -48,7 +47,11 @@ const struct memory_region_limits memory_regions =
   (uint32_t) &REGION_NAME(Load$$LR$$, LR_NS_PARTITION, $$Base) +
   NS_PARTITION_SIZE - 1,
 #else /*  0 */
-  (uint32_t)(FLASH_BASE_NS + FLASH_AREA_3_OFFSET + FLASH_NS_PARTITION_SIZE - 1),
+#if defined(TFM_EXTERNAL_FLASH_ENABLE)
+  (uint32_t)(OSPI_FLASH_BASE_ADDRESS + FLASH_AREA_3_OFFSET + FLASH_AREA_3_SIZE - 1),
+#else
+  (uint32_t)(FLASH_BASE_NS + FLASH_AREA_3_OFFSET + FLASH_AREA_3_SIZE - 1),
+#endif /* TFM_EXTERNAL_FLASH_ENABLE */
 #endif /* 0 */
   .veneer_base =
   (uint32_t) &REGION_NAME(Load$$LR$$, LR_VENEER, $$Base),
@@ -309,7 +312,7 @@ void mpc_init_cfg(void)
   HAL_GTZC_TZSC_ConfigPeriphAttributes(GTZC_PERIPH_HASH, GTZC_TZSC_PERIPH_SEC | GTZC_TZSC_PERIPH_NPRIV);
 #endif
 #if (defined (MBEDTLS_ECP_C) && defined (MBEDTLS_ECP_ALT)) || \
-    (defined (MBEDTLS_ECDSA_C) && (defined (MBEDTLS_ECDSA_SIGN_ALT) || defined (MBEDTLS_ECDSA_SIGN_ALT)))
+    (defined (MBEDTLS_ECDSA_C) && (defined (MBEDTLS_ECDSA_SIGN_ALT) || defined (MBEDTLS_ECDSA_VERIFY_ALT)))
   HAL_GTZC_TZSC_ConfigPeriphAttributes(GTZC_PERIPH_PKA, GTZC_TZSC_PERIPH_SEC | GTZC_TZSC_PERIPH_NPRIV);
 #endif
 #if (defined (MBEDTLS_AES_C) && defined (MBEDTLS_AES_ALT)) || \

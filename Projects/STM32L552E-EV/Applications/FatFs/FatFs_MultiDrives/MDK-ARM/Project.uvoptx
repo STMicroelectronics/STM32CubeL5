@@ -347,7 +347,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../../Firmware/Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_bus.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -359,7 +359,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../../Firmware/Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sd.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_sd.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_sd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -371,7 +371,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../../Firmware/Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c</PathWithFileName>
       <FilenameWithoutPath>stm32l552e_eval_io.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -391,7 +391,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../../Firmware/Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c</PathWithFileName>
       <FilenameWithoutPath>mfxstm32l152.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -403,7 +403,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../../Firmware/Drivers/BSP/Components/mfxstm32l152/mfxstm32l152_reg.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152_reg.c</PathWithFileName>
       <FilenameWithoutPath>mfxstm32l152_reg.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

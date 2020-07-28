@@ -53,7 +53,7 @@ In case of any error, the LED10 (GREEN) is toggling slowly.
 
 @par Keywords
 
-PKA, PKA_PointCheck_IT, Security, NIST, CAVP, Point check
+Security, PKA, NIST, CAVP, Point check
 
 @par Directory contents 
   

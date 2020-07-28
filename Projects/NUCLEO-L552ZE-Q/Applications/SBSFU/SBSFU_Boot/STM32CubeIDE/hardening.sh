@@ -1,14 +1,32 @@
-#section to be updated according to flash_layout.h changes
-sec1_end=37
-wrp_end=23
-hdp_end=29
-#section end
+#!/bin/bash - 
+sec1_end=41
+sec2_start=127
+sec2_end=0
+wrp_start=2
+wrp_end=25
+hdp_end=24
+wrp_bank2_start=112
+wrp_bank2_end=127
 echo "hardening script started"
 PATH="/C/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/":$PATH
 stm32programmercli="STM32_Programmer_CLI"
+bank2_secure="-ob SECWM2_PSTRT="$sec2_start" SECWM2_PEND="$sec2_end
 connect="-c port=SWD mode=UR --hardRst"
 connect_no_reset="-c port=SWD mode=HotPlug"
-write_protect_secure="-ob WRP1A_PSTRT=0  WRP1A_PEND="$wrp_end" SECWM1_PSTRT=0 SECWM1_PEND="$sec1_end" HDP1_PEND="$hdp_end" HDP1EN=0x1"
-echo $write_protect_secure
+wrp_loader="WRP2A_PSTRT="$wrp_bank2_start" WRP2A_PEND="$wrp_bank2_end
+wrp_sbsfu="WRP1A_PSTRT="$wrp_start" WRP1A_PEND="$wrp_end
+write_protect_secure="-ob "$wrp_sbsfu" "$wrp_loader" SECWM1_PSTRT=0 SECWM1_PEND="$sec1_end" HDP1_PEND="$hdp_end" HDP1EN=1"
+$stm32programmercli $connect_no_reset $bank2_secure
+ret=$?
+if [ $ret != 0 ]; then
+  if [ "$1" != "AUTO" ]; then read -p "hardening script failed, press a key" -n1 -s; fi
+  exit 1
+fi
 $stm32programmercli $connect_no_reset $write_protect_secure
-read -p "hardening script Done, press a key" -n1 -s
+ret=$?
+if [ $ret != 0 ]; then
+  if [ "$1" != "AUTO" ]; then read -p "hardening script failed, press a key" -n1 -s; fi
+  exit 1
+fi
+if [ "$1" != "AUTO" ]; then read -p "hardening script Done, press a key" -n1 -s; fi
+exit 0

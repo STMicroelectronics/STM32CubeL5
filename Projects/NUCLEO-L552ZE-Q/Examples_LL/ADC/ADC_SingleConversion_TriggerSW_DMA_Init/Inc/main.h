@@ -38,7 +38,6 @@ extern "C" {
 #include "stm32l5xx_ll_exti.h"
 #include "stm32l5xx_ll_cortex.h"
 #include "stm32l5xx_ll_utils.h"
-#include "stm32l5xx.h"
 #include "stm32l5xx_ll_gpio.h"
 
 #if defined(USE_FULL_ASSERT)

@@ -59,6 +59,12 @@ int main(void)
   /* Configure the System clock to have a frequency of 110 MHz */
   SystemClock_Config();
 
+  /* Enable instruction cache (default 2-ways set associative cache) */
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    /* Initialization Error */
+    Error_Handler();
+  }
 
   /* Add your application code here
      */
@@ -95,9 +101,7 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
 
   /* Enable voltage range 0 for frequency above 80 Mhz */
-  __HAL_RCC_PWR_CLK_ENABLE();
   HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0);
-  __HAL_RCC_PWR_CLK_DISABLE();
 
   /* MSI Oscillator enabled at reset (4Mhz), activate PLL with MSI as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_NONE;
@@ -111,7 +115,7 @@ void SystemClock_Config(void)
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     /* Initialization Error */
-    while(1);
+    Error_Handler();
   }
 
   /* To avoid undershoot due to maximum frequency, select PLL as system clock source */
@@ -124,7 +128,7 @@ void SystemClock_Config(void)
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     /* Initialization Error */
-    while(1);
+    Error_Handler();
   }
 
   /* AHB prescaler divider at 1 as second step */
@@ -133,7 +137,19 @@ void SystemClock_Config(void)
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     /* Initialization Error */
-    while(1);
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* User can add his own implementation to report the HAL error return state */
+  while(1)
+  {
   }
 }
 

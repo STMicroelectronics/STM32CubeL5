@@ -357,8 +357,6 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L5xx_Nucleo</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\STM32L5xx_Nucleo</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\Common</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1221,9 +1219,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_icache.c</name>
-                <excluded>
-                    <configuration>NUCLEO-L552ZE-Q_Templates_TrustZone</configuration>
-                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_irda.c</name>

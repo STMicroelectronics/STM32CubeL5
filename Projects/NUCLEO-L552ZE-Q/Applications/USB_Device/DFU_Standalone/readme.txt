@@ -8,7 +8,7 @@
   * @brief   Description of the USB DFU application.
   ******************************************************************************
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
   *
   * This software component is licensed by ST under Ultimate Liberty license
   * SLA0044, the "License"; You may not use this file except in compliance with
@@ -93,7 +93,7 @@ Device's end address is the end address of the flash memory and it is dependent 
 
 @par Keywords
 
-Middleware, USB Device, DFU, Firmware upgrade
+Connectivity, USB_Device, USB, DFU, Firmware upgrade
 
 @par Directory contents
 
@@ -127,7 +127,7 @@ Middleware, USB Device, DFU, Firmware upgrade
       For Windows 8.1 and later : Update STM32 DFU device driver manually from Windows Device Manager.
       The install of required device driver is available under:
       "Program Files\STMicroelectronics\Software\DfuSe v3.0.5\Bin\Driver\Win8.1" directory.
-    - Connect the NUCLEO-L552ZE-Q board CN15 to the PC through "TYPE-C" to "Standard A" cable.
+    -Connect the NUCLEO-L552ZE-Q board CN15 to the PC through "TYPE-C" to "Standard A" cable.
 
 
 @par How to use it ?
@@ -140,8 +140,8 @@ In order to make the program work, you must do the following:
    - Install the DFU driver available in "DfuSe Demonstrator" installation directory
    - For Windows 8.1 and later : Update STM32 DFU device driver manually from Windows Device Manager.
      The install of required device driver is available under:
-     "Program Files\STMicroelectronics\Software\DfuSe v3.0.6\Bin\Driver\Win8.1" directory. 
-   - Open "DfuSe Demo", choose the "stm32l5xx_nucleo_LED_Toggle_@0x0800C000.dfu" provided in Binary
+     "Program Files\STMicroelectronics\Software\DfuSe v3.0.6\Bin\Driver\Win8.1" directory.
+   - Open "DfuSe Demo", choose the "stm32l5xx_nucleo_LED_Toggle_@0x0800C000.dfu" provided in Core\Binary
      directory, upgrade and verify to check that it is successfully downloaded.
    - This application allows also to upload a dfu file (either the provided DFU file or by creating a new dfu file).
      To check that the upload was successfully performed, choose the dfu uploaded file, upgrade and verify.

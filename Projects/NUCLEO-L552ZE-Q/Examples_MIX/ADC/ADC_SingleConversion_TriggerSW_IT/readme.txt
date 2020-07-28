@@ -70,7 +70,7 @@ for test (located in main.h):
 
 @par Keywords
 
-ADC,ADC channel,DAC channel, conversion, EOC, single channel, single conversion mode, interrupt,
+ADC, analog digital converter, conversion, voltage, channel, analog input, trigger
 
 @par Directory contents 
 

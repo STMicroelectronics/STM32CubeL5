@@ -46,6 +46,9 @@ Other peripheral used:
   1 GPIO for push button
   1 GPIO for DAC channel output PA.04 (Arduino connector CN7 pin 9, Morpho connector CN11 pin 32)
 
+@par Keywords
+
+Analog, DAC, Conversion, Voltage output, Oscilloscope, Signal, Software trigger.
 
 @par Directory contents 
 

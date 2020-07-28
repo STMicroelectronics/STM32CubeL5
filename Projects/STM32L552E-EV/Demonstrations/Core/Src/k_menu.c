@@ -162,12 +162,12 @@ void kMenu_HandleSelection(tMenu MainMenu, uint8_t *sel)
           }
 
           /* display the new header file */
-          GUI_SetTextColor(GUI_COLOR_ST_PINK);
-          GUI_SetBackColor(GUI_COLOR_ST_PINK);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_PINK);
+          UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_ST_PINK);
           BSP_LCD_GetXSize(0, &pXSize);
-          GUI_FillRect(0, 0, pXSize, Font24.Height, GUI_COLOR_ST_PINK);
-          GUI_SetTextColor(GUI_COLOR_WHITE);
-          GUI_DisplayStringAt(0, 0, (uint8_t *)psCurrentMenu.psItems[*sel].pszTitle, CENTER_MODE);
+          UTIL_LCD_FillRect(0, 0, pXSize, Font24.Height, UTIL_LCD_COLOR_ST_PINK);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+          UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)psCurrentMenu.psItems[*sel].pszTitle, CENTER_MODE);
 
           /* Prevent a single key press being interpreted as multi press */
           HAL_Delay(USER_EXPERIENCE_DELAY);
@@ -185,19 +185,19 @@ void kMenu_HandleSelection(tMenu MainMenu, uint8_t *sel)
           if (index == (*sel))
           {
             /* Set the Back Color */
-            GUI_SetBackColor(GUI_COLOR_ST_GREEN_LIGHT);
+            UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_ST_GREEN_LIGHT);
             /* Set the Text Color */
-            GUI_SetTextColor(GUI_COLOR_WHITE);
+            UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
           }
           else
           {
             /* Set the Back Color */
-            GUI_SetBackColor(GUI_COLOR_WHITE);
+            UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
             /* Set the Text Color */
-            GUI_SetTextColor(GUI_COLOR_ST_BLUE);
+            UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_BLUE);
           }
           /* Get the current menu */
-          GUI_DisplayStringAt(0, Font24.Height*(index+1), (uint8_t *)psCurrentMenu.psItems[index].pszTitle,LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(0, Font24.Height*(index+1), (uint8_t *)psCurrentMenu.psItems[index].pszTitle,LEFT_MODE);
           index++;
         }
 
@@ -253,26 +253,26 @@ void kMenu_Execute(tMenu psCurrentMenu)
       {
         /****************************** Display Header *************************/
         /* Clear the LCD Screen */
-        GUI_Clear(GUI_COLOR_WHITE);
+        UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
         if(psCurrentMenu.pszTitle != NULL)
         {
           /* Set the Back Color */
-          GUI_SetFont(&Font24);
-          GUI_SetBackColor(GUI_COLOR_ST_PINK);
-          GUI_SetTextColor(GUI_COLOR_ST_PINK);
+          UTIL_LCD_SetFont(&Font24);
+          UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_ST_PINK);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_PINK);
           BSP_LCD_GetXSize(0, &pXSize);
-          GUI_FillRect(0, 0, pXSize, Font24.Height, GUI_COLOR_ST_PINK);
+          UTIL_LCD_FillRect(0, 0, pXSize, Font24.Height, UTIL_LCD_COLOR_ST_PINK);
 
           /* Set the Text Color */
-          GUI_SetTextColor(GUI_COLOR_WHITE);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
         }
         switch(psCurrentMenu.nType)
         {
         case TYPE_ICON :
           if(psCurrentMenu.psItems[sel].pszTitle != NULL)
           {
-            GUI_DisplayStringAt(0, 0, (uint8_t *)psCurrentMenu.psItems[sel].pszTitle, CENTER_MODE);
+            UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)psCurrentMenu.psItems[sel].pszTitle, CENTER_MODE);
           }
           k_MenuState = KMENU_ICON;
           break;
@@ -280,7 +280,7 @@ void kMenu_Execute(tMenu psCurrentMenu)
         case TYPE_EXEC :
           if(psCurrentMenu.pszTitle != NULL)
           {
-            GUI_DisplayStringAt(0, 0, (uint8_t *)psCurrentMenu.pszTitle, CENTER_MODE);
+            UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)psCurrentMenu.pszTitle, CENTER_MODE);
           }
           k_MenuState = psCurrentMenu.nType;
           break;
@@ -309,9 +309,9 @@ void kMenu_Execute(tMenu psCurrentMenu)
     case KMENU_TEXT :
       {
         /* Set the Back Color */
-        GUI_SetBackColor(GUI_COLOR_WHITE);
+        UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
         /* Set the Text Color */
-        GUI_SetTextColor(GUI_COLOR_ST_BLUE);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_BLUE);
         k_MenuState = KMENU_WAITEVENT;
       }
       break;
@@ -413,11 +413,11 @@ void kMenu_Header(char *string)
 
   BSP_LCD_GetXSize(0, &pXSize);
   BSP_LCD_GetYSize(0, &pYSize);
-  GUI_SetTextColor(GUI_COLOR_ST_BLUE);
-  GUI_SetBackColor(GUI_COLOR_ST_BLUE);
-  GUI_FillRect(0, pYSize - Font24.Height, pXSize, Font24.Height, GUI_COLOR_ST_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_DisplayStringAt(0,  pYSize - Font24.Height, (uint8_t *)string , CENTER_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_ST_BLUE);
+  UTIL_LCD_FillRect(0, pYSize - Font24.Height, pXSize, Font24.Height, UTIL_LCD_COLOR_ST_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_DisplayStringAt(0,  pYSize - Font24.Height, (uint8_t *)string , CENTER_MODE);
 }
 
 

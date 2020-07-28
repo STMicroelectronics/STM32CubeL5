@@ -1,5 +1,5 @@
 /**
-  @page TouchSensing 1 touchkey sensor example
+  @page TouchSensing_1touchkey example
  
   @verbatim
   ******************************************************************************

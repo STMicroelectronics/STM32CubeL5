@@ -48,6 +48,12 @@ to run at 110 MHz.
     Once this operation is finished, double-word programming operation will be performed
     in the Flash memory. The written data is then read back and checked.
 
+Selections may be
+
+  - FLASH_PAGE_PROGRAM and WRITE_PROTECTION_ENABLE selected
+  - FLASH_PAGE_PROGRAM and WRITE_PROTECTION_DISABLE selected
+  - FLASH_PAGE_PROGRAM selected
+
 STM32L552E-EV board's LED can be used to monitor the transfer status:
  - LED4 is ON when there are no errors detected after programming
     => should be the case when WRITE_PROTECTION_DISABLE flag is enabled
@@ -71,7 +77,7 @@ Memory, FLASH, write protection, AREA, Sector, Mass Erase
 
 @par Directory contents
 
-  - FLASH/FLASH_WriteProtection/Inc/stm32l552e_eval_conf.h     BSP configuration file
+  - FLASH/FLASH_WriteProtection/Inc/stm32l552e_eval_conf.h      BSP configuration file
   - FLASH/FLASH_WriteProtection/Inc/stm32l5xx_hal_conf.h        HAL Configuration file
   - FLASH/FLASH_WriteProtection/Inc/stm32l5xx_it.h              Header for stm32l5xx_it.c
   - FLASH/FLASH_WriteProtection/Inc/main.h                      Header for main.c module

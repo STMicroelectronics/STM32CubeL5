@@ -1,9 +1,9 @@
 /**
   @page PWR_STOP1 PWR Example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_MIX/PWR/PWR_STOP1/readme.txt 
+  * @file    Examples_MIX/PWR/PWR_STOP1/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the PWR_STOP1 example.
   ******************************************************************************
@@ -18,24 +18,24 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
- 
-How to enter the STOP 1 mode and wake up from this mode by using external 
-reset or wakeup interrupt (all the RCC function calls use RCC LL API 
+@par Example Description
+
+How to enter the STOP 1 mode and wake up from this mode by using external
+reset or wakeup interrupt (all the RCC function calls use RCC LL API
 for minimizing footprint and maximizing performance).
 
 In the associated software, the system clock is set to 110 MHz, an EXTI line
-is connected to the user button through PC.13 and configured to generate an 
+is connected to the user button through PC.13 and configured to generate an
 interrupt on falling edge upon key press.
-The SysTick is programmed to generate an interrupt each 1 ms and in the SysTick 
-interrupt handler, LED1 is toggled in order to indicate whether the MCU is in STOP 1 mode 
+The SysTick is programmed to generate an interrupt each 1 ms and in the SysTick
+interrupt handler, LED1 is toggled in order to indicate whether the MCU is in STOP 1 mode
 or RUN mode.
 
-5 seconds after start-up, the system automatically enters STOP 1 mode and 
+5 seconds after start-up, the system automatically enters STOP 1 mode and
 LED1 stops toggling.
 
-The User push-button can be pressed at any time to wake-up the system. 
-The software then comes back in RUN mode for 5 sec. before automatically entering STOP 1 mode again. 
+The User push-button can be pressed at any time to wake-up the system.
+The software then comes back in RUN mode for 5 sec. before automatically entering STOP 1 mode again.
 
 Two leds LED1 and LED3 are used to monitor the system state as following:
  - LED1 toggling: system in RUN mode
@@ -46,8 +46,8 @@ These steps are repeated in an infinite loop.
 
 
 
-@note This example can not be used in DEBUG mode due to the fact 
-      that the Cortex-M33 core is no longer clocked during low power mode 
+@note This example can not be used in DEBUG mode due to the fact
+      that the Cortex-M33 core is no longer clocked during low power mode
       so debugging features are disabled.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -55,15 +55,15 @@ These steps are repeated in an infinite loop.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-      
+
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
-  
+
 @par Keywords
 
-Power, PWR, stop mode, wake-up, external reset, Interrupt, low power mode    
+Power, PWR, stop mode, wake-up, external reset, Interrupt, low power mode
 
-@par Directory contents 
+@par Directory contents
 
   - Examples_MIX/PWR/PWR_STOP1/Inc/stm32l5xx_conf.h         HAL Configuration file
   - Examples_MIX/PWR/PWR_STOP1/Inc/stm32l5xx_it.h           Header for stm32l5xx_it.c
@@ -76,21 +76,22 @@ Power, PWR, stop mode, wake-up, external reset, Interrupt, low power mode
 @par Hardware and Software environment
 
   - This example runs on STM32L5xx devices
-    
 
   - This example has been tested with STMicroelectronics NUCLEO-L552ZE-Q
-    board and can be easily tailored to any other supported device 
+    board and can be easily tailored to any other supported device
     and development board.
 
   - NUCLEO-L552ZE-Q set-up:
     - Use LED1 and LED3 connected respectively to PC.07 and PA.09 pins
     - User push-button connected to pin PC.13 (External line 13)
-    
-@par How to use it ? 
+
+@par How to use it ?
 
 In order to make the program work, you must do the following :
- - Open your preferred toolchain 
+ - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
+ - Once the image is loaded, power off the NUCLEO board by unplugging
+   the power cable then power on the board again 
  - Run the example
 
 

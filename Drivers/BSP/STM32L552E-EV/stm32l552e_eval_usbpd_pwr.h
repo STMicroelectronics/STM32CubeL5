@@ -5,7 +5,7 @@
   * @author  MCD Application Team
   * @brief   This file provides a set of firmware functions to manage
   *          USB-PD Power
-  *          available on STM32L552E-EVAL board(MB1352) from STMicroelectronics.
+  *          available on STM32L552E-EV board(MB1352) from STMicroelectronics.
   ******************************************************************************
   *
   * Copyright (c) 2019 STMicroelectronics. All rights reserved.

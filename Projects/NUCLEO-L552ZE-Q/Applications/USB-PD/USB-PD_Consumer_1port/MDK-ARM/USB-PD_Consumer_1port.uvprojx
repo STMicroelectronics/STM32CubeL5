@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_FULL_LL_DRIVER,USBPD_PORT_COUNT=1,USBPDCORE_LIB_PD3_FULL,_SNK,_TRACE,_GUI_INTERFACE,USE_HAL_DRIVER,STM32L552xx,_RTOS</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc; ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc; ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy; ../../../../../../Utilities/GUI_INTERFACE; ../../../../../../Utilities/TRACER_EMB; ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include; ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2; ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure; ../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc; ../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc; ../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include; ../../../../../../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc;   ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;   ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;   ../../../../../../Utilities/GUI_INTERFACE;   ../../../../../../Utilities/TRACER_EMB;   ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;   ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;   ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;   ../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;   ../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc;   ../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;   ../../../../../../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

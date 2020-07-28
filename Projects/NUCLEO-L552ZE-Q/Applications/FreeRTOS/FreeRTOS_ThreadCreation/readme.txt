@@ -53,14 +53,14 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-Middleware, RTOS, FreeRTOS, Thread
+RTOS, FreeRTOS, Thread
 
 @par Directory contents
     - FreeRTOS/FreeRTOS_ThreadCreation/Src/main.c                       Main program
-	- FreeRTOS/FreeRTOS_ThreadCreation/Src/app_FreeRTOS.c               Code for freertos applications
+    - FreeRTOS/FreeRTOS_ThreadCreation/Src/app_FreeRTOS.c               Code for freertos applications
     - FreeRTOS/FreeRTOS_ThreadCreation/Src/stm32l5xx_hal_timebase_tim.c HAL timebase file
     - FreeRTOS/FreeRTOS_ThreadCreation/Src/stm32l5xx_it.c               Interrupt handlers
-	- FreeRTOS/FreeRTOS_ThreadCreation/Src/stm32l5xx_hal_msp.c          MSP Initialization file
+    - FreeRTOS/FreeRTOS_ThreadCreation/Src/stm32l5xx_hal_msp.c          MSP Initialization file
     - FreeRTOS/FreeRTOS_ThreadCreation/Src/system_stm32l5xx.c           STM32L5xx system clock configuration file
     - FreeRTOS/FreeRTOS_ThreadCreation/Inc/main.h                       Main program header file
     - FreeRTOS/FreeRTOS_ThreadCreation/Inc/stm32l5xx_hal_conf.h         HAL Library Configuration file

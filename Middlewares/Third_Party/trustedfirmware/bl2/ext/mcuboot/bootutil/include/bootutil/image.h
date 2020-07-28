@@ -20,7 +20,7 @@
 /*
  * Original code taken from mcuboot project at:
  * https://github.com/JuulLabs-OSS/mcuboot
- * Git SHA of the original version: 3c469bc698a9767859ed73cd0201c44161204d5c
+ * Git SHA of the original version: ac55554059147fff718015be9f4bd3108123f50a
  * Modifications are Copyright (c) 2018-2019 Arm Limited.
  */
 
@@ -28,6 +28,7 @@
 #define H_IMAGE_
 
 #include <inttypes.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,6 +40,7 @@ struct flash_area;
 #define IMAGE_MAGIC_V1              0x96f3b83c
 #define IMAGE_MAGIC_NONE            0xffffffff
 #define IMAGE_TLV_INFO_MAGIC        0x6907
+#define IMAGE_TLV_PROT_INFO_MAGIC   0x6908
 
 #define IMAGE_HEADER_SIZE           32
 
@@ -71,6 +73,8 @@ struct flash_area;
 #define IMAGE_TLV_RSA3072_PSS       0x23   /* RSA3072 of hash output */
 #define IMAGE_TLV_DEPENDENCY        0x40   /* Image depends on other image */
 #define IMAGE_TLV_SEC_CNT           0x50   /* security counter */
+#define IMAGE_TLV_BOOT_RECORD       0x60   /* measured boot record */
+#define IMAGE_TLV_ANY               0xff   /* Used to iterate over all TLV */
 
 #define IMAGE_VER_MAJOR_LENGTH      8
 #define IMAGE_VER_MINOR_LENGTH      8
@@ -98,10 +102,10 @@ struct image_dependency {
 struct image_header {
     uint32_t ih_magic;
     uint32_t ih_load_addr;
-    uint16_t ih_hdr_size;            /* Size of image header (bytes). */
-    uint16_t ih_protect_tlv_size;    /* Size of protected TLV area (bytes). */
-    uint32_t ih_img_size;            /* Does not include header. */
-    uint32_t ih_flags;               /* IMAGE_F_[...]. */
+    uint16_t ih_hdr_size;           /* Size of image header (bytes). */
+    uint16_t ih_protect_tlv_size;   /* Size of protected TLV area (bytes). */
+    uint32_t ih_img_size;           /* Does not include header. */
+    uint32_t ih_flags;              /* IMAGE_F_[...]. */
     struct image_version ih_ver;
     uint32_t _pad1;
 };
@@ -122,15 +126,32 @@ struct image_tlv {
 _Static_assert(sizeof(struct image_header) == IMAGE_HEADER_SIZE,
                "struct image_header not required size");
 
-int bootutil_img_validate(struct image_header *hdr,
+int bootutil_img_validate(int image_index,
+                          struct image_header *hdr,
                           const struct flash_area *fap,
                           uint8_t *tmp_buf, uint32_t tmp_buf_sz,
                           uint8_t *seed, int seed_len, uint8_t *out_hash);
 
+struct image_tlv_iter {
+    const struct image_header *hdr;
+    const struct flash_area *fap;
+    uint8_t type;
+    bool prot;
+    uint32_t prot_end;
+    uint32_t tlv_off;
+    uint32_t tlv_end;
+};
+
+int bootutil_tlv_iter_begin(struct image_tlv_iter *it,
+                            const struct image_header *hdr,
+                            const struct flash_area *fap, uint8_t type,
+                            bool prot);
+int bootutil_tlv_iter_next(struct image_tlv_iter *it, uint32_t *off,
+                           uint16_t *len, uint8_t *type);
+
 int32_t bootutil_get_img_security_cnt(struct image_header *hdr,
                                       const struct flash_area *fap,
                                       uint32_t *security_cnt);
-
 
 #ifdef __cplusplus
 }

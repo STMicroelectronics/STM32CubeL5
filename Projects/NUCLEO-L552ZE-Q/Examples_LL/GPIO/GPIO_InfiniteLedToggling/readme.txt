@@ -30,6 +30,10 @@ On NUCLEO-L552ZE-Q C-02 board this IO is connected to LED1.
 
 In this example, HCLK is configured at 110 MHz.
 
+@par Keywords
+
+System, GPIO, Output, No pull, Speed, Push-pull, Toggle
+
 
 @par Directory contents
 

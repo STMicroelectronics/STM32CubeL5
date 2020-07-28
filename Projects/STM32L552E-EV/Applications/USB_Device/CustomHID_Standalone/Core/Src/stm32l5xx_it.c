@@ -36,7 +36,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
- 
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -70,7 +70,7 @@ extern uint8_t SendBuffer[2];
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex Processor Interruption and Exception Handlers          */ 
+/*           Cortex Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
@@ -232,7 +232,7 @@ void DMA1_Channel1_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
 
   SendBuffer[0] = ADC_REPORT_ID;
-  if(abs ((int32_t)((ADCConvertedValue >> 1) - (ADC_Prev_ConvertedValue >> 1))) > 4)
+  if(abs((int32_t)((ADCConvertedValue >> 1) - (ADC_Prev_ConvertedValue >> 1))) > 4)
   {
     ADC_Prev_ConvertedValue = ADCConvertedValue;
     SendBuffer[1] = ((int32_t)(ADCConvertedValue - 0x7C7) * 0xFF) / (0x800 - 0x7C7) ;

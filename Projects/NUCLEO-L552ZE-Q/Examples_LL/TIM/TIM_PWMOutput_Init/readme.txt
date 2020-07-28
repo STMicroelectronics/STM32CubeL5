@@ -1,9 +1,9 @@
 /**
   @page TIM_PWMOutput_Init TIM example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_LL/TIM/TIM_PWMOutput_Init/readme.txt 
+  * @file    Examples_LL/TIM/TIM_PWMOutput_Init/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the TIM_PWMOutput_Init example.
   ******************************************************************************
@@ -20,9 +20,9 @@
 
 @par Example Description
 
-Use of a timer peripheral to generate a 
-PWM output signal and update the PWM duty cycle. This example is based on the 
-STM32L5xx TIM LL API. The peripheral initialization uses 
+Use of a timer peripheral to generate a
+PWM output signal and update the PWM duty cycle. This example is based on the
+STM32L5xx TIM LL API. The peripheral initialization uses
 LL initialization function to demonstrate LL Init.
 
 In this example TIM2 input clock TIM2CLK is set to APB1 clock (PCLK1),
@@ -55,8 +55,11 @@ User push-button can be used to change the duty cycle from 0% up to 100% by
 steps of 10%. Duty cycle is periodically measured. It can be observed through
 the debugger by watching the variable uwMeasuredDutyCycle.
 
+@par Keywords
 
-@par Directory contents 
+Timers, TIM, Output, Signal, PWM, Frequency, Duty cycle, Waveform, Auto-reload.
+
+@par Directory contents
 
   - TIM/TIM_PWMOutput_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file
   - TIM/TIM_PWMOutput_Init/Inc/main.h                  Header for main.c module
@@ -69,13 +72,13 @@ the debugger by watching the variable uwMeasuredDutyCycle.
 @par Hardware and Software environment
 
   - This example runs on STM32L552ZETxQ devices.
-    
+
   - This example has been tested with NUCLEO-L552ZE-Q board and can be
     easily tailored to any other supported device and development board.
   - NUCLEO-L552ZE-Q Set-up:
-      - TIM2_CH1  PA5: connected to pin 10 of CN7 connector 
+      - TIM2_CH1  PA5: connected to pin 10 of CN7 connector
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

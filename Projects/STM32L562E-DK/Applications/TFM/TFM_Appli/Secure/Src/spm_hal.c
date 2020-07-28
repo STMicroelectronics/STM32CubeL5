@@ -62,6 +62,9 @@ void tfm_spm_hal_configure_default_isolation(
 #define MPU_REGION_NS_DATA           3
 #endif
 
+#define PARTITION_REGION_NV_DATA     6 /* PARTITION_REGION_PERIPH is not used */
+
+
 REGION_DECLARE(Image$$, TFM_UNPRIV_CODE, $$RO$$Base);
 REGION_DECLARE(Image$$, TFM_UNPRIV_CODE, $$RO$$Limit);
 REGION_DECLARE(Image$$, TFM_UNPRIV_DATA, $$RW$$Base);
@@ -190,6 +193,20 @@ static enum spm_err_t tfm_spm_mpu_init(void)
     return SPM_ERR_INVALID_CONFIG;
   }
 #endif
+
+  /* TFM Non volatile data region (NVCNT/SST/ITS) */
+  region_cfg.region_nr = PARTITION_REGION_NV_DATA;
+  region_cfg.region_base = TFM_NV_DATA_START;
+  region_cfg.region_limit = TFM_NV_DATA_LIMIT;
+  region_cfg.region_attridx = MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_IDX;
+  region_cfg.attr_access = MPU_ARMV8M_AP_RW_PRIV_UNPRIV;
+  region_cfg.attr_sh = MPU_ARMV8M_SH_NONE;
+  region_cfg.attr_exec = MPU_ARMV8M_XN_EXEC_NEVER;
+  if (mpu_armv8m_region_enable(&dev_mpu_s, &region_cfg) != MPU_ARMV8M_OK)
+  {
+    return SPM_ERR_INVALID_CONFIG;
+  }
+
   mpu_armv8m_enable(&dev_mpu_s, PRIVILEGED_DEFAULT_ENABLE,
                     HARDFAULT_NMI_ENABLE);
 

@@ -1,5 +1,5 @@
 /**
-  @page UART_Hyperterminal_IT UART Hyperterminal IT example
+  @page UART_HyperTerminal_IT UART Hyperterminal IT example
 
   @verbatim
   ******************************************************************************
@@ -97,8 +97,8 @@ position of the transmitted data.
 
 @par Keywords
 
-Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, full-duplex, HyperTerminal,
-Transmission, Reception, Asynchronous, interrupt
+Connectivity, UART/USART, baud rate, RS-232, HyperTerminal, full-duplex, Interrupt
+Transmitter, Receiver, Asynchronous
 
 @par Directory contents
 

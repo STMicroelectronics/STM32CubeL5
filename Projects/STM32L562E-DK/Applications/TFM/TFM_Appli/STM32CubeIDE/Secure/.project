@@ -501,9 +501,19 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Secure/Src/ecp_curves_alt.c</locationURI>
 		</link>
 		<link>
+			<name>Application/User/Src/rsa_alt.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Secure/Src/rsa_alt.c</locationURI>
+		</link>
+		<link>
 			<name>Application/User/Src/gcm_alt.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Secure/Src/gcm_alt.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Src/ccm_alt.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Secure/Src/ccm_alt.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/Src/low_level_com.c</name>

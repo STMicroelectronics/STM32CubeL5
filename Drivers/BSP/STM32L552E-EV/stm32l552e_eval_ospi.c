@@ -3,14 +3,14 @@
   * @file    stm32l552e_eval_ospi.c
   * @author  MCD Application Team
   * @brief   This file includes a standard driver for the OctoSPI
-  *          memories mounted on STM32L552E-EVAL board.
+  *          memories mounted on STM32L552E-EV board.
   @verbatim
   ==============================================================================
                      ##### How to use this driver #####
   ==============================================================================
   [..]
    (#) This driver is used to drive the MX25LM51245G Octal NOR and the ISS66WVH8M8 HyperRAM
-       external memories mounted on STM32L552E-EVAL evaluation board.
+       external memories mounted on STM32L552E-EV evaluation board.
 
    (#) This driver need specific component driver (MX25LM51245G and ISS66WVH8M8) to be included with.
 
@@ -220,7 +220,7 @@ int32_t BSP_OSPI_NOR_Init(uint32_t Instance, BSP_OSPI_NOR_Init_t *Init)
       }
 #endif /* USE_HAL_OSPI_REGISTER_CALLBACKS */
 
-      /* Get Flash informations of one memory */
+      /* Get Flash information of one memory */
       (void)MX25LM51245G_GetFlashInfo(&pInfo);
 
       /* Fill config structure */
@@ -1714,7 +1714,7 @@ void BSP_OSPI_RAM_IRQHandler(uint32_t Instance)
   * @}
   */
 
-/** @addtogroup STM32L4R9I_EVAL_OSPI_NOR_Private_Functions
+/** @addtogroup STM32L552E-EV_OSPI_NOR_Private_Functions
   * @{
   */
 

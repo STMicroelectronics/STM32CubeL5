@@ -33,7 +33,7 @@ extern DMA_HandleTypeDef hdma_adc1;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN Define */
- 
+
 /* USER CODE END Define */
 
 /* Private macro -------------------------------------------------------------*/
@@ -73,7 +73,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 
@@ -96,7 +96,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
   {
   /* USER CODE BEGIN ADC1_MspInit 0 */
   /* USER CODE END ADC1_MspInit 0 */
-  /** Initializes the peripherals clock 
+  /** Initializes the peripherals clock
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
     PeriphClkInit.AdcClockSelection = RCC_ADCCLKSOURCE_SYSCLK;
@@ -107,10 +107,10 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 
     /* Peripheral clock enable */
     __HAL_RCC_ADC_CLK_ENABLE();
-  
+
     __HAL_RCC_GPIOC_CLK_ENABLE();
-    /**ADC1 GPIO Configuration    
-    PC3     ------> ADC1_IN4 
+    /**ADC1 GPIO Configuration
+    PC3     ------> ADC1_IN4
     */
     GPIO_InitStruct.Pin = GPIO_PIN_3;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -165,9 +165,9 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
   /* USER CODE END ADC1_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_ADC_CLK_DISABLE();
-  
-    /**ADC1 GPIO Configuration    
-    PC3     ------> ADC1_IN4 
+
+    /**ADC1 GPIO Configuration
+    PC3     ------> ADC1_IN4
     */
     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_3);
 

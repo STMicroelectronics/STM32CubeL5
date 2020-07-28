@@ -227,14 +227,13 @@
 #define USE_SPI_CRC                   1U
 
 /* ################## CRYP peripheral configuration ########################## */
- 
+
 #define USE_HAL_CRYP_SUSPEND_RESUME   1U
 
 /* ################## SDMMC peripheral configuration ######################### */
 
 #define USE_SD_TRANSCEIVER            0U
- 
- 
+
 /* Includes ------------------------------------------------------------------*/
 /**
   * @brief Include module's header file

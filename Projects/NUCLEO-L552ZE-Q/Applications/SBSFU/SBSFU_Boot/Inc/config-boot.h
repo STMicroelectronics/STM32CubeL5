@@ -3,8 +3,6 @@
  *
  *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
  *  Copyright (C) 2016, Linaro Ltd
- *  Copyright (c) 2019, Arm Limited.
- *
  *  SPDX-License-Identifier: Apache-2.0
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -25,11 +23,16 @@
 /*
  * Minimal configuration for using TLS in the bootloader
  *
- * - RSA signature verification
+ * - RSA or ECDSA signature verification
  */
 
 #ifndef MBEDTLS_CONFIG_BOOT_H
 #define MBEDTLS_CONFIG_BOOT_H
+
+#ifdef CONFIG_MCUBOOT_SERIAL
+/* Mcuboot uses mbedts-base64 for serial protocol encoding. */
+#define MBEDTLS_BASE64_C
+#endif
 
 /* System support */
 #define MBEDTLS_PLATFORM_C
@@ -38,11 +41,29 @@
 #define MBEDTLS_NO_PLATFORM_ENTROPY
 #define MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
 
+/* STD functions */
+#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+
 #define MBEDTLS_PLATFORM_EXIT_ALT
 #define MBEDTLS_PLATFORM_PRINTF_ALT
+#define MBEDTLS_PLATFORM_SNPRINTF_ALT
+
+#if !defined(CONFIG_ARM)
+#define MBEDTLS_HAVE_ASM
+#endif
 
 #define MBEDTLS_RSA_C
-#define MBEDTLS_PKCS1_V15
+#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+#define MBEDTLS_ECP_NIST_OPTIM
+#define MBEDTLS_ECP_C
+#define MBEDTLS_ECDH_C
+#define MBEDTLS_ECDSA_C
+#define MBEDTLS_PKCS1_V21
+#define MBEDTLS_HKDF_C
+#define MBEDTLS_ENTROPY_HARDWARE_ALT
+
+/* HW accelerators */
+#define MBEDTLS_SHA256_ALT
 
 /* mbed TLS modules */
 #define MBEDTLS_ASN1_PARSE_C
@@ -51,20 +72,21 @@
 #define MBEDTLS_MD_C
 #define MBEDTLS_OID_C
 #define MBEDTLS_SHA256_C
-
+#define MBEDTLS_CIPHER_MODE_CTR
+#define MBEDTLS_AES_C
+#define MBEDTLS_CIPHER_C
 /* Save RAM by adjusting to our exact needs */
-#if MCUBOOT_SIGN_RSA_LEN == 3072
+#define MBEDTLS_ECP_MAX_BITS             2048
+
+
 #define MBEDTLS_MPI_MAX_SIZE              384
-#else /* RSA2048 */
-#define MBEDTLS_MPI_MAX_SIZE              256
-#endif
+
 
 #define MBEDTLS_SSL_MAX_CONTENT_LEN 1024
 
 /* Save ROM and a few bytes of RAM by specifying our own ciphersuite list */
 #define MBEDTLS_SSL_CIPHERSUITES MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8
 
-#define MBEDTLS_SHA256_ALT
 #include "mbedtls/check_config.h"
 
 #endif /* MBEDTLS_CONFIG_BOOT_H */

@@ -7,4 +7,4 @@ HALModule=EXTI
 Doc=../readme.txt;
 Drivers/BSP/STM32L5xx_Nucleo=../../../../../../Drivers/BSP/STM32L5xx_Nucleo/stm32l5xx_nucleo.c;
 Drivers/STM32L5xx_HAL_Driver=../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c;
-Example/User=../Src/main.c;../Src/stm32l5xx_it.c;
+Application/User=../Src/main.c;../Src/stm32l5xx_it.c;

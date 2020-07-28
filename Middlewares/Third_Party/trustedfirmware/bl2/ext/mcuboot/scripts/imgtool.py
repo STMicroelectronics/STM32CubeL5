@@ -103,6 +103,13 @@ def do_sign(args):
                                  + (version_num.minor << 16)
                                  + version_num.revision)
 
+    if "_s.c" in args.layout:
+        sw_type = "SPE"
+    elif "_ns.c" in args.layout:
+        sw_type = "NSPE"
+    else:
+        sw_type = "NSPE_SPE"
+
     pad_size = macro_parser.evaluate_macro(args.layout, sign_bin_size_re, 0, 1)
     img = image.Image.load(args.infile,
                            version=version_num,
@@ -112,7 +119,7 @@ def do_sign(args):
                            pad=pad_size)
     key = keys.load(args.key, args.public_key_format) if args.key else None
     ram_load_address = macro_parser.evaluate_macro(args.layout, image_load_address_re, 0, 1)
-    img.sign(key, ram_load_address, args.dependencies)
+    img.sign(sw_type, key, ram_load_address, args.dependencies)
 
     if pad_size:
         img.pad_to(pad_size, args.align)

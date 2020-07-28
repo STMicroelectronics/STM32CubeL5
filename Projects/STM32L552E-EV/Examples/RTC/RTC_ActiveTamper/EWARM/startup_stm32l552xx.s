@@ -13,7 +13,7 @@
 ;*                      priority is Privileged, and the Stack is set to Main.
 ;********************************************************************************
 ;*
-;* <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+;* <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
 ;* All rights reserved.</center></h2>
 ;*
 ;* This software component is licensed by ST under BSD 3-Clause license,
@@ -182,7 +182,7 @@ __vector_table
         DCD     DFSDM1_FLT3_IRQHandler            ; DFSDM1 Filter 3 global Interrupt
         DCD     UCPD1_IRQHandler                  ; UCPD1
         DCD     ICACHE_IRQHandler                 ; ICACHE
-        DCD     OTFDEC1_IRQHandler                ; OTFDEC1
+        DCD     0                                 ; Reserved
 __Vectors_End
 
 __Vectors       EQU   __vector_table
@@ -770,11 +770,6 @@ UCPD1_IRQHandler
         SECTION .text:CODE:NOROOT:REORDER(1)
 ICACHE_IRQHandler
         B ICACHE_IRQHandler
-
-        PUBWEAK OTFDEC1_IRQHandler
-        SECTION .text:CODE:NOROOT:REORDER(1)
-OTFDEC1_IRQHandler
-        B OTFDEC1_IRQHandler
 
         END
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

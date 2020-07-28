@@ -24,7 +24,7 @@
        o Call BSP_TS_EnableIT() (BSP_TS_DisableIT()) to enable (disable) touch
          screen interrupt. BSP_TS_Callback() is called when TS interrupt occurs.
        o Call BSP_TS_GetState() to get the current touch status (detection and
-         coordonates).
+         coordinates).
        o Call BSP_TS_Set_Orientation() to change the current orientation.
          Call BSP_TS_Get_Orientation() to get the current orientation.
        o Call BSP_TS_GetCapabilities() to get the FT6X06 capabilities.

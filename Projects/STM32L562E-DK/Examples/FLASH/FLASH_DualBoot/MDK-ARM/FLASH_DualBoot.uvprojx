@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L562xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/basic_gui</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/lcd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -560,12 +560,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/Utilities/basic_gui</GroupName>
+          <GroupName>Drivers/Utilities/lcd</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Utilities/basic_gui/basic_gui.c</FilePath>
+              <FilePath>../../../../../../Utilities/lcd/stm32_lcd.c</FilePath>
             </File>
           </Files>
         </Group>

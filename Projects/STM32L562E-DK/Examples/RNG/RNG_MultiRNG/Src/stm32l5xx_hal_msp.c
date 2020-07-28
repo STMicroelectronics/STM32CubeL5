@@ -72,7 +72,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 
@@ -102,7 +102,7 @@ void HAL_RNG_MspInit(RNG_HandleTypeDef* hrng)
     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 
   /* USER CODE END RNG_MspInit 0 */
-  /** Initializes the peripherals clock 
+  /** Initializes the peripherals clock
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RNG;
     PeriphClkInit.RngClockSelection = RCC_RNGCLKSOURCE_HSI48;

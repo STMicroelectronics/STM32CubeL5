@@ -98,7 +98,7 @@ NUCLEO-L552ZE-Q C-02's LEDs can be used to monitor the transfer status on the Sl
 
 @par Keywords
 
-Connectivity, I2C, Communication, Trasmission, Reception, SCL, SDA, Wake up, Interrupt
+Connectivity, I2C, Communication, Transmission, Reception, SCL, SDA, Wake up, Interrupt
 
 @par Directory contents 
 

@@ -36,10 +36,10 @@
  * These definitions should be adjusted for your particular hardware and
  * application requirements.
  *
- * THESE PARAMETERS ARE DESCRIBED WITHIN THE 'CONFIGURATION' SECTION OF THE
- * FreeRTOS API DOCUMENTATION AVAILABLE ON THE FreeRTOS.org WEB SITE.
+ * These parameters and more are described within the 'configuration' section of the
+ * FreeRTOS API documentation available on the FreeRTOS.org web site.
  *
- * See http://www.freertos.org/a00110.html.
+ * See http://www.freertos.org/a00110.html
  *----------------------------------------------------------*/
 
 /* Ensure stdint is only used by the compiler, and not the assembler. */
@@ -64,7 +64,7 @@
 #endif
 /* The lowest interrupt priority that can be used in a call to a "set priority"
 function. */
-#define configLIBRARY_LOWEST_INTERRUPT_PRIORITY     0x7
+#define configLIBRARY_LOWEST_INTERRUPT_PRIORITY 7
 
 /*-----------------------------------------------------------------*/
 

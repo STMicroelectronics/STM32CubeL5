@@ -22,16 +22,18 @@ enum mpu_armv8m_error_t mpu_armv8m_enable(struct mpu_armv8m_dev_t *dev,
   MPU_Type *mpu = (MPU_Type *)dev->base;
 
   /*
-   * FixMe: Set 3 pre-defined MAIR_ATTR for memory. The attributes come
+   * FixMe: Set 4 pre-defined MAIR_ATTR for memory. The attributes come
    * from default memory map, need to check if fine-tune is necessary.
    *
    * MAIR0_0: Peripheral, Device-nGnRE.
    * MAIR0_1: Code, WT RA. Same attr for Outer and Inner.
    * MAIR0_2: SRAM, WBWA RA. Same attr for Outer and Inner.
+   * MAIR0_3: Non cacheable RA. Same attr for Outer and Inner.
    */
   mpu->MAIR0 = (MPU_ARMV8M_MAIR_ATTR_DEVICE_VAL << MPU_MAIR0_Attr0_Pos) |
                (MPU_ARMV8M_MAIR_ATTR_CODE_VAL << MPU_MAIR0_Attr1_Pos) |
-               (MPU_ARMV8M_MAIR_ATTR_DATA_VAL << MPU_MAIR0_Attr2_Pos);
+               (MPU_ARMV8M_MAIR_ATTR_DATA_VAL << MPU_MAIR0_Attr2_Pos) |
+               (MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_VAL << MPU_MAIR0_Attr3_Pos);
 
   mpu->CTRL =
     (privdef_en ? MPU_CTRL_PRIVDEFENA_Msk : 0) |

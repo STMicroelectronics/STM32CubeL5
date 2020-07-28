@@ -49,12 +49,12 @@
         <option>
           <name>GRuntimeLibSelect</name>
           <version>0</version>
-          <state>1</state>
+          <state>2</state>
         </option>
         <option>
           <name>GRuntimeLibSelectSlave</name>
           <version>0</version>
-          <state>1</state>
+          <state>2</state>
         </option>
         <option>
           <name>RTDescription</name>
@@ -112,7 +112,7 @@
         </option>
         <option>
           <name>RTConfigPath2</name>
-          <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</state>
+          <state>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</state>
         </option>
         <option>
           <name>GBECoreSlave</name>
@@ -138,7 +138,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32L552ZE	ST STM32L552ZE</state>
+          <state></state>
         </option>
         <option>
           <name>FPU2</name>
@@ -319,7 +319,7 @@
         </option>
         <option>
           <name>CCRequirePrototypes</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>CCDiagWarnAreErr</name>
@@ -1089,22 +1089,13 @@
     <group>
       <name>STM32L5xx_HAL_Driver</name>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</name>
@@ -1134,6 +1125,12 @@
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr.c</name>
       </file>
       <file>
@@ -1144,6 +1141,15 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim_ex.c</name>
       </file>
     </group>
     <group>

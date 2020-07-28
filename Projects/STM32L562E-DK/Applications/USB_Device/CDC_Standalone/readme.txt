@@ -8,7 +8,7 @@
   * @brief   Description of the USB Device CDC application.
   ******************************************************************************
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
   *
   * This software component is licensed by ST under Ultimate Liberty license
   * SLA0044, the "License"; You may not use this file except in compliance with
@@ -28,7 +28,7 @@ This is a typical application on how to use the STM32L5xx USB Device peripheral 
 behaves as a USB-to-UART bridge following the Virtual COM Port (VCP) implementation.
  - On one side, the STM32 exchanges data with a PC host through USB interface in Device mode.
  - On the other side, the STM32 exchanges data with other devices (same host, other host,
-   other devices).
+   other devices...).
 
 At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick. The user is
@@ -98,6 +98,10 @@ To run this application, the user can use one of the following configuration:
 For more details about the STM32Cube USB Device library, please refer to UM1734
 "STM32Cube USB Device library".
 
+@par Keywords
+
+Connectivity, USB_Device, USB, CDC, Virtual COM Port
+
 @par Directory contents
 
   - USB_Device/CDC_Standalone/Core/Src/main.c                   Main program
@@ -124,12 +128,12 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
     board and can be easily tailored to any other supported device and development board.
 
   - STM32L562E-DK Set-up
-	- Connect the STM32L562E-DK board CN15 to the PC through "TYPE-C" to "Standard A" cable.
+  - Connect the STM32L562E-DK board CN16 to the PC through "TYPE-C" to "Standard A" cable.
     - For loopback mode test: connect directly USART1 TX and RX pins,
   The USART1  interface available on PA9 and PA10 of the microcontroller can be
   connected to ST-LINK MCU. The choice can be changed by setting the related jumpers.
   By default the USART1  communication between the target MCU and ST-LINK MCU is enabled.
-  
+
   - Hyperterminal configuration:
     - BaudRate = 115200 baud
     - Word Length = 8 Bits

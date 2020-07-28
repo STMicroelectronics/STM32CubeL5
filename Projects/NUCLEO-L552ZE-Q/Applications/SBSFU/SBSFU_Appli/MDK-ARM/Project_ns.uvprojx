@@ -10,14 +10,14 @@
       <TargetName>NUCLEO-L552ZE-Q_SBSFU_Appli_NonSecure</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6100001::V6.10.1::.\ARMCLANG</pCCUsed>
+      <pCCUsed>6130001::V6.13.1::.\ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32L552ZETx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32L5xx_DFP.1.0.9</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32L5xx_DFP.1.1.1</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IROM(0x08040000-0x807FFFF) IRAM(0x20018000-0x2002FFFF) CLOCK(8000000) FPU3(SFPU) CPUTYPE("Cortex-M33") ELITTLE TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -312,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>7</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L552xx,USE_HAL_DRIVER,USE_STM32L5XX_NUCLEO_144</Define>
+              <Define>STM32L552xx,USE_HAL_DRIVER,BL2</Define>
               <Undefine></Undefine>
-              <IncludePath>..;../Secure_nsclib;../NonSecure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../Linker</IncludePath>
+              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L5xx_Nucleo;../NonSecure/Inc;../Secure_nsclib;../../Linker</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -374,7 +374,6 @@
             <IncludeLibsPath></IncludeLibsPath>
             <Misc>--predefine=-I../../Linker
 --predefine=-DBL2
---predefine=-DMCUBOOT_IMAGE_NUMBER=2
 --predefine=-DTFM_PSA_API
 ../Secure_nsclib/secure_nsclib.o</Misc>
             <LinkerInputFile></LinkerInputFile>

@@ -45,8 +45,6 @@
 									<listOptionValue builtIn="false" value="LSE_STARTUP_TIMEOUT=5000"/>
 									<listOptionValue builtIn="false" value="DEBUG"/>
 									<listOptionValue builtIn="false" value="LSE_VALUE=32768"/>
-									<listOptionValue builtIn="false" value="VDD_VALUE=3300"/>
-									<listOptionValue builtIn="false" value="EXTERNALSAI2_CLOCK_VALUE=48000"/>
 									<listOptionValue builtIn="false" value="USE_FULL_LL_DRIVER"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths.1339383338" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths" valueType="includePath">

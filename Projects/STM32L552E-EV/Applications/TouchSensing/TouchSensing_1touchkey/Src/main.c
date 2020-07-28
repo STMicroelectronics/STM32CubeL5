@@ -21,7 +21,7 @@
 #include "main.h"
 #include "stm32l552e_eval.h"
 #include "stm32l552e_eval_lcd.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /** @addtogroup STM32L5xx_HAL_Examples
   * @{
@@ -67,7 +67,7 @@ int main(void)
 {
   tsl_user_status_t tsl_status;
 #if USE_LCD > 0
-  GUI_Drv_t pGuiDrv;
+  LCD_UTILS_Drv_t lcdDrv;
 #endif
 
   /* STM32L5xx HAL library initialization:
@@ -127,23 +127,23 @@ int main(void)
   }
 
 
-  pGuiDrv.DrawBitmap  = BSP_LCD_DrawBitmap;
-  pGuiDrv.FillRGBRect = BSP_LCD_FillRGBRect;
-  pGuiDrv.DrawHLine   = BSP_LCD_DrawHLine;
-  pGuiDrv.DrawVLine   = BSP_LCD_DrawVLine;
-  pGuiDrv.FillRect    = BSP_LCD_FillRect;
-  pGuiDrv.GetPixel    = BSP_LCD_ReadPixel;
-  pGuiDrv.SetPixel    = BSP_LCD_WritePixel;
-  pGuiDrv.GetXSize    = BSP_LCD_GetXSize;
-  pGuiDrv.GetYSize    = BSP_LCD_GetYSize;
-  pGuiDrv.SetLayer    = BSP_LCD_SetActiveLayer;
-  pGuiDrv.GetFormat   = BSP_LCD_GetFormat;
+  lcdDrv.DrawBitmap  = BSP_LCD_DrawBitmap;
+  lcdDrv.FillRGBRect = BSP_LCD_FillRGBRect;
+  lcdDrv.DrawHLine   = BSP_LCD_DrawHLine;
+  lcdDrv.DrawVLine   = BSP_LCD_DrawVLine;
+  lcdDrv.FillRect    = BSP_LCD_FillRect;
+  lcdDrv.GetPixel    = BSP_LCD_ReadPixel;
+  lcdDrv.SetPixel    = BSP_LCD_WritePixel;
+  lcdDrv.GetXSize    = BSP_LCD_GetXSize;
+  lcdDrv.GetYSize    = BSP_LCD_GetYSize;
+  lcdDrv.SetLayer    = BSP_LCD_SetActiveLayer;
+  lcdDrv.GetFormat   = BSP_LCD_GetFormat;
 
-  /* Set GUI functions */
-  GUI_SetFuncDriver(&pGuiDrv);
+  /* Set UTIL_LCD functions */
+  UTIL_LCD_SetFuncDriver(&lcdDrv);
 
   /* Clear screen */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set the display on */
   if (BSP_LCD_DisplayOn(0) != BSP_ERROR_NONE)
@@ -151,13 +151,13 @@ int main(void)
     Error_Handler();
   }
 
-  GUI_SetFont(&GUI_DEFAULT_FONT);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+  UTIL_LCD_SetFont(&UTIL_LCD_DEFAULT_FONT);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
 
-  GUI_DisplayStringAt(0, 130, (uint8_t *)"STM32L552xx", CENTER_MODE);
-  GUI_DisplayStringAt(0, 150, (uint8_t *)"TouchSensing", CENTER_MODE);
-  GUI_DisplayStringAt(0, 170, (uint8_t *)"Example", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 130, (uint8_t *)"STM32L552xx", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 150, (uint8_t *)"TouchSensing", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 170, (uint8_t *)"Example", CENTER_MODE);
 #endif
 
   BSP_LED_Off(LED4);
@@ -262,8 +262,8 @@ void Process_Sensors(tsl_user_status_t status)
   /* Display TS1 sensor information */
   LcdValue2String(str_value, MyTKeys[0].p_ChD->Delta);
   LcdMakeLine(TheLine, (uint8_t *)("TS1"), LcdState2String(MyTKeys[0].p_Data->StateId), str_value);
-  GUI_DisplayStringAt(0, 25, TheLine, CENTER_MODE);
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+  UTIL_LCD_DisplayStringAt(0, 25, TheLine, CENTER_MODE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
 #endif
 
   /* LED4 is ON when TS1 on board is touched */
@@ -282,15 +282,15 @@ void Process_Sensors(tsl_user_status_t status)
     case TSL_USER_STATUS_OK_ECS_OFF:
       BSP_LED_Off(LED6);
 #if USE_LCD > 0
-      GUI_DisplayStringAt(0, 5, (uint8_t *)("ECS OFF"), CENTER_MODE);
+      UTIL_LCD_DisplayStringAt(0, 5, (uint8_t *)("ECS OFF"), CENTER_MODE);
 #endif
       break;
     case TSL_USER_STATUS_OK_ECS_ON:
       BSP_LED_Toggle(LED6);
 #if USE_LCD > 0
-      GUI_SetTextColor(GUI_COLOR_GREEN);
-      GUI_DisplayStringAt(0, 5, (uint8_t *)("ECS ON "), CENTER_MODE);
-      GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
+      UTIL_LCD_DisplayStringAt(0, 5, (uint8_t *)("ECS ON "), CENTER_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
 #endif
       break;
     default:
@@ -381,7 +381,7 @@ void LcdValue2String(uint8_t *output, int16_t input)
   */
 uint8_t* LcdState2String(TSL_StateId_enum_T state)
 {
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
   switch (state)
   {
     case TSL_STATEID_DEB_CALIB:
@@ -395,34 +395,34 @@ uint8_t* LcdState2String(TSL_StateId_enum_T state)
     case TSL_STATEID_DEB_RELEASE_TOUCH:
         return (uint8_t*)("DB_REL  ");
     case TSL_STATEID_PROX:
-        GUI_SetTextColor(GUI_COLOR_MAGENTA);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_MAGENTA);
         return (uint8_t*)("PROX    ");
     case TSL_STATEID_DEB_PROX:
     case TSL_STATEID_DEB_PROX_DETECT:
     case TSL_STATEID_DEB_PROX_TOUCH:
         return (uint8_t*)("DB_PROX ");
     case TSL_STATEID_DETECT:
-        GUI_SetTextColor(GUI_COLOR_GREEN);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
         return (uint8_t*)("DETECT  ");
     case TSL_STATEID_DEB_DETECT:
         return (uint8_t*)("DB_DET  ");
     case TSL_STATEID_TOUCH:
-        GUI_SetTextColor(GUI_COLOR_GREEN);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_GREEN);
         return (uint8_t*)("TOUCH   ");
     case TSL_STATEID_ERROR:
-        GUI_SetTextColor(GUI_COLOR_RED);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
         return (uint8_t*)("ERROR   ");
     case TSL_STATEID_DEB_ERROR_CALIB:
     case TSL_STATEID_DEB_ERROR_RELEASE:
     case TSL_STATEID_DEB_ERROR_PROX:
     case TSL_STATEID_DEB_ERROR_DETECT:
     case TSL_STATEID_DEB_ERROR_TOUCH:
-        GUI_SetTextColor(GUI_COLOR_RED);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
         return (uint8_t*)("DB_ERR  ");
     case TSL_STATEID_OFF:
         return (uint8_t*)("OFF     ");
     default:
-        GUI_SetTextColor(GUI_COLOR_RED);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
         return (uint8_t*)("UNKNOWN ");
   }
 }

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32l552e_eval_bus.h
   * @author  MCD Application Team
-  * @brief   This file contains definitions for STM32L552E-EVAL bus.
+  * @brief   This file contains definitions for STM32L552E-EV bus.
   ******************************************************************************
   * @attention
   *

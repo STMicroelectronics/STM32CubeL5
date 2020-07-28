@@ -10,14 +10,14 @@
       <TargetName>STM32L562E-DK_TFM_NonSecure</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6100001::V6.10.1::.\ARMCLANG</pCCUsed>
+      <pCCUsed>6130001::V6.13.1::.\ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32L562QEIxQ</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32L5xx_DFP.1.0.9</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32L5xx_DFP.1.1.1</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x030000) IRAM2(0x30000000,0x030000) IROM(0x08000000,0x080000) IROM2(0x0C000000,0x080000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ESEL ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -73,7 +73,7 @@
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
             <UserProg1Name></UserProg1Name>
-            <UserProg2Name>armclang  --target=arm-arm-none-eabi -march=armv8-m.main -E -P -xc -DBL2 -DMCUBOOT_IMAGE_NUMBER=2 -I..\..\Linker  ..\..\TFM_SBSFU_Boot\Src\image_macros_to_preprocess_s.c -o image_macros_preprocessed_s.c</UserProg2Name>
+            <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopB1X>0</nStopB1X>
@@ -327,8 +327,8 @@
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
-            <v6LangP>1</v6LangP>
+            <v6Lang>5</v6Lang>
+            <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -336,7 +336,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L562xx,MCUBOOT_IMAGE_NUMBER=2,USE_HAL_DRIVER,SST_ENCRYPTION,TFM_PSA_API,TFM_LVL=2,TFM_LEGACY_API</Define>
+              <Define>STM32L562xx,USE_HAL_DRIVER,SST_ENCRYPTION,TFM_PSA_API,TFM_LVL=2,TFM_LEGACY_API,BL2</Define>
               <Undefine></Undefine>
               <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/spm;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/core;../../../../../../Middlewares/Third_Party/trustedfirmware/secure_fw/services;../../../../../../Middlewares/Third_Party/trustedfirmware/interface/include;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/include;../../../../../../Middlewares/Third_Party/trustedfirmware;../NonSecure/Inc;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/common;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/driver;../../../../../../Middlewares/Third_Party/trustedfirmware/bl2/include;../../../../../../Middlewares/Third_Party/trustedfirmware/test/suites/crypto;../../Linker;../../../../../../Middlewares/Third_Party/trustedfirmware/lib/ext/qcbor/inc;../../../../../../Middlewares/Third_Party/trustedfirmware//secure_fw/core/include</IncludePath>
             </VariousControls>
@@ -387,9 +387,9 @@
           <GroupName>Application/MDK-ARM</GroupName>
           <Files>
             <File>
-              <FileName>startup_stm32l5xx_ns.s</FileName>
+              <FileName>startup_stm32l562xx_ns.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\startup_stm32l5xx_ns.s</FilePath>
+              <FilePath>.\startup_stm32l562xx_ns.s</FilePath>
             </File>
           </Files>
         </Group>

@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -20,7 +20,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
- 
+
 #include "usb_device.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
@@ -62,7 +62,7 @@ void USBD_Clock_Restore(void)
 {
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-/** Initializes the peripherals clock 
+/** Initializes the peripherals clock
   */
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_HSI48;
@@ -88,7 +88,7 @@ void MX_USB_Device_Init(void)
 {
   /* USER CODE BEGIN USB_Device_Init_PreTreatment */
   /* USER CODE END USB_Device_Init_PreTreatment */
-  
+
   /* Init Device Library, add supported class and start the library. */
   if (USBD_Init(&hUsbDeviceFS, &CDC_Desc, DEVICE_FS) != USBD_OK) {
     Error_Handler();

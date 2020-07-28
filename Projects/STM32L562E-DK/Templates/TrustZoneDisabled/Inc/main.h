@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Templates/TrustZoneDisabled/Inc/main.h 
+  * @file    Templates/TrustZoneDisabled/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -16,7 +16,7 @@
   *
   ******************************************************************************
   */
-  
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef MAIN_H
 #define MAIN_H
@@ -29,6 +29,7 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
+extern void Error_Handler(void);
 
 #endif /* MAIN_H */
 

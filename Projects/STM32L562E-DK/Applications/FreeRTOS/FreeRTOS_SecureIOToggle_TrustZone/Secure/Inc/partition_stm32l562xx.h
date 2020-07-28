@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
- * @file     partition_stm32l562xx.h
+  * @file    partition_stm32l562xx.h
   * @author  MCD Application Team
-  * @brief   CMSIS STM32L552xx Device Initial Setup for Secure / Non-Secure Zones
+  * @brief   CMSIS STM32L562xx Device Initial Setup for Secure / Non-Secure Zones
   *          for ARMCM33 based on CMSIS CORE V5.3.1 partition_ARMCM33.h Template.
   *
   *          This file contains:

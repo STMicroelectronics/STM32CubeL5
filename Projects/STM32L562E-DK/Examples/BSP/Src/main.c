@@ -225,7 +225,7 @@ static void SystemHardwareInit(void)
   /* Initialize the LCD */
   if (LcdInitialized != SET)
   {
-    GUI_Drv_t GuiDrv;
+    LCD_UTILS_Drv_t lcdDrv;
     
     /* Initialize the LCD */
     if (BSP_LCD_Init(0, LCD_ORIENTATION_PORTRAIT) != BSP_ERROR_NONE)
@@ -233,22 +233,22 @@ static void SystemHardwareInit(void)
       Error_Handler();
     }
 
-    /* Set GUI functions */
-    GuiDrv.DrawBitmap  = BSP_LCD_DrawBitmap;
-    GuiDrv.FillRGBRect = BSP_LCD_FillRGBRect;
-    GuiDrv.DrawHLine   = BSP_LCD_DrawHLine;
-    GuiDrv.DrawVLine   = BSP_LCD_DrawVLine;
-    GuiDrv.FillRect    = BSP_LCD_FillRect;
-    GuiDrv.GetPixel    = BSP_LCD_ReadPixel;
-    GuiDrv.SetPixel    = BSP_LCD_WritePixel;
-    GuiDrv.GetXSize    = BSP_LCD_GetXSize;
-    GuiDrv.GetYSize    = BSP_LCD_GetYSize;
-    GuiDrv.SetLayer    = BSP_LCD_SetActiveLayer;
-    GuiDrv.GetFormat   = BSP_LCD_GetFormat;
-    GUI_SetFuncDriver(&GuiDrv);
+    /* Set UTIL_LCD functions */
+    lcdDrv.DrawBitmap  = BSP_LCD_DrawBitmap;
+    lcdDrv.FillRGBRect = BSP_LCD_FillRGBRect;
+    lcdDrv.DrawHLine   = BSP_LCD_DrawHLine;
+    lcdDrv.DrawVLine   = BSP_LCD_DrawVLine;
+    lcdDrv.FillRect    = BSP_LCD_FillRect;
+    lcdDrv.GetPixel    = BSP_LCD_ReadPixel;
+    lcdDrv.SetPixel    = BSP_LCD_WritePixel;
+    lcdDrv.GetXSize    = BSP_LCD_GetXSize;
+    lcdDrv.GetYSize    = BSP_LCD_GetYSize;
+    lcdDrv.SetLayer    = BSP_LCD_SetActiveLayer;
+    lcdDrv.GetFormat   = BSP_LCD_GetFormat;
+    UTIL_LCD_SetFuncDriver(&lcdDrv);
 
     /* Clear the LCD */
-    GUI_Clear(GUI_COLOR_WHITE);
+    UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
     /* Set the display on */
     if (BSP_LCD_DisplayOn(0) != BSP_ERROR_NONE)
@@ -294,33 +294,33 @@ static void Display_DemoDescription(void)
   char desc[60];
 
   /* Set font */
-  GUI_SetFont(&Font20);
+  UTIL_LCD_SetFont(&Font20);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set the LCD Text Color */
-  GUI_SetTextColor(GUI_COLOR_DARKBLUE);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
   
   /* Display LCD messages */
-  GUI_DisplayStringAt(0, 10, (uint8_t *)"STM32L562E-DK BSP", CENTER_MODE);
-  GUI_DisplayStringAt(0, 35, (uint8_t *)"drivers example", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32L562E-DK BSP", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 35, (uint8_t *)"drivers example", CENTER_MODE);
  
   /* Draw Bitmap */
-  GUI_DrawBitmap(80, 65, (uint8_t *)stlogo);
+  UTIL_LCD_DrawBitmap(80, 65, (uint8_t *)stlogo);
   
-  GUI_SetFont(&Font8);
-  GUI_DisplayStringAt(0, 220, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font8);
+  UTIL_LCD_DisplayStringAt(0, 220, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
   
-  GUI_SetFont(&Font12);
-  GUI_FillRect(0, 145, 240, 50, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_DisplayStringAt(0, 150, (uint8_t *)"Press User push-button", CENTER_MODE);
-  GUI_DisplayStringAt(0, 165, (uint8_t *)"to start :", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_FillRect(0, 145, 240, 50, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DisplayStringAt(0, 150, (uint8_t *)"Press User push-button", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 165, (uint8_t *)"to start :", CENTER_MODE);
   sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
-  GUI_DisplayStringAt(0, 180, (uint8_t *)desc, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 180, (uint8_t *)desc, CENTER_MODE);
 }
 
 /**

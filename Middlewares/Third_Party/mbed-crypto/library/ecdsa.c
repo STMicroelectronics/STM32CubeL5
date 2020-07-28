@@ -52,6 +52,10 @@
 
 #include "mbedtls/platform_util.h"
 
+#if defined(MCUBOOT_DOUBLE_SIGN_VERIF)
+#include "boot_hal_imagevalid.h"
+#endif /* MCUBOOT_DOUBLE_SIGN_VERIF */
+
 /* Parameter validation macros based on platform_util.h */
 #define ECDSA_VALIDATE_RET( cond )    \
     MBEDTLS_INTERNAL_VALIDATE_RET( cond, MBEDTLS_ERR_ECP_BAD_INPUT_DATA )
@@ -580,6 +584,28 @@ muladd:
         ret = MBEDTLS_ERR_ECP_VERIFY_FAILED;
         goto cleanup;
     }
+
+#if defined(MCUBOOT_DOUBLE_SIGN_VERIF)
+    /* Double the signature verification (using another way) to resist to basic HW attacks.
+     * The second verification is applicable to final signature check on primary slot images
+     * only (condition: ImageValidEnable).
+     * It is performed in 2 steps:
+     * 1- save signature status in global variable ImageValidStatus[]
+     *    Return value of comparison function is XORed with IMAGE_VALID to avoid
+     *    value 0 for success: IMAGE_VALID for success.
+     * 2- verify saved signature status later in boot process
+     */
+    if (ImageValidEnable == 1)
+    {
+        /* Check ImageValidIndex is in expected range MCUBOOT_IMAGE_NUMBER */
+        if (ImageValidIndex >= MCUBOOT_IMAGE_NUMBER)
+        {
+            ret = MBEDTLS_ERR_ECP_VERIFY_FAILED;
+            goto cleanup;
+        }
+        ImageValidStatus[ImageValidIndex++] = mbedtls_mpi_cmp_mpi( &R.X, r ) ^ IMAGE_VALID;
+    }
+#endif /* MCUBOOT_DOUBLE_SIGN_VERIF */
 
 cleanup:
     mbedtls_ecp_point_free( &R );

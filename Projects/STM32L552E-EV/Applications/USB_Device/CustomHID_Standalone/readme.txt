@@ -5,7 +5,7 @@
   ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/readme.txt
   * @author  MCD Application Team
-  * @brief   Description of the USB DFU application.
+  * @brief   Description of the USB CustomHID application.
   ******************************************************************************
   *
   * Copyright (c) 2019 STMicroelectronics. All rights reserved.
@@ -45,8 +45,9 @@ To test the application, user must proceed as follows:
 For more details about the STM32Cube USB Device library, please refer to UM1734
 "STM32Cube USB Device library".
 
+@par Keywords
 
-@par USB Library Configuration
+Connectivity, USB_Device, USB, CustomHID
 
 @par Directory contents
 
@@ -73,8 +74,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
     board and can be easily tailored to any other supported device
     and development board.
 
-  - STM32L552E-EV Set-up
-    - Connect the STM32L552E-EV board CN1 to the PC through "TYPE-C" to "Standard A" cable.
+    -Connect the STM32L552E-EV board CN1 to the PC through "TYPE-C" to "Standard A" cable.
 
 @note Make sure that :
   - jumper JP12 is on FS position (1-2)(POT)

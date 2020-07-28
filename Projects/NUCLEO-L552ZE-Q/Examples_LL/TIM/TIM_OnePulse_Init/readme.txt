@@ -1,9 +1,9 @@
 /**
   @page TIM_OnePulse_Init TIM example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_LL/TIM/TIM_OnePulse_Init/readme.txt 
+  * @file    Examples_LL/TIM/TIM_OnePulse_Init/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the TIM_OnePulse_Init example.
   ******************************************************************************
@@ -20,9 +20,9 @@
 
 @par Example Description
 
-Configuration of a timer to generate a positive pulse in 
-Output Compare mode with a length of tPULSE and after a delay of tDELAY. This example 
-is based on the STM32L5xx TIM LL API. The peripheral initialization uses 
+Configuration of a timer to generate a positive pulse in
+Output Compare mode with a length of tPULSE and after a delay of tDELAY. This example
+is based on the STM32L5xx TIM LL API. The peripheral initialization uses
 LL initialization function to demonstrate LL Init.
 
 The pulse is generated on OC1.
@@ -30,8 +30,8 @@ The pulse is generated on OC1.
 This example uses 2 timer instances:
 
   - TIM1 generates a positive pulse of 50 us after a delay of 50 us. User push-button
-    is used to start TIM1 counter. 
-                                              ___ 
+    is used to start TIM1 counter.
+                                              ___
                                              |   |
     User push-button ________________________|   |________________________________
                                                             ___________
@@ -41,7 +41,7 @@ This example uses 2 timer instances:
                                                 |            |_ uwMeasuredPulseLength
                                                 |_ uwMeasuredDelay
 
-  TIM1_CH1 delay and pulse length are measured every time a pulse is generated. 
+  TIM1_CH1 delay and pulse length are measured every time a pulse is generated.
   Both can be observed through the debugger by monitoring the variables uwMeasuredDelay and
   uwMeasuredPulseLength respectively.
 
@@ -57,16 +57,20 @@ This example uses 2 timer instances:
                                               |                           |
     OC1 ______________________________________|                           |____
     (TIM2_CH1)                   <-----2s-----><----------3 s------------->
-   
 
 
-Both TIM1 and TIM2 are configured to generate a single pulse (timer counter 
+
+Both TIM1 and TIM2 are configured to generate a single pulse (timer counter
 stops automatically at the next update event (UEV).
 
 Connecting TIM1 OC1 to TIM2 TI2 allows to trigger TIM2 counter by pressing
 the User push-button.
 
-@par Directory contents 
+@par Keywords
+
+Timers, TIM, Output, signals, One Pulse, PWM, Oscilloscope, External signal, Autoreload, Waveform.
+
+@par Directory contents
 
   - TIM/TIM_OnePulse_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file
   - TIM/TIM_OnePulse_Init/Inc/main.h                  Header for main.c module
@@ -79,16 +83,16 @@ the User push-button.
 @par Hardware and Software environment
 
   - This example runs on STM32L552ZETxQ devices.
-    
+
   - This example has been tested with NUCLEO-L552ZE-Q board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-L552ZE-Q Set-up:
-      - TIM1_CH1  PA.08: connected to pin 31 of CN10 connector  
-      - TIM2_CH1  PA.05: connected to pin 10 of CN7 connector 
-      - TIM2_CH2  PA.01: connected to pin 11 of CN10 connector 
+      - TIM1_CH1  PA.08: connected to pin 31 of CN10 connector
+      - TIM2_CH1  PA.05: connected to pin 10 of CN7 connector
+      - TIM2_CH2  PA.01: connected to pin 11 of CN10 connector
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

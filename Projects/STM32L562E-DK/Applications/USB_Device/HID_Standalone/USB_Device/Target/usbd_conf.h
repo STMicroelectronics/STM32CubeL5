@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -94,22 +94,20 @@
   */
 
 /* Memory management macros */
-
 /** Alias for memory allocation. */
-#define USBD_malloc         (uint32_t *)USBD_static_malloc
+#define USBD_malloc         (void *)USBD_static_malloc
 
 /** Alias for memory release. */
 #define USBD_free           USBD_static_free
 
 /** Alias for memory set. */
-#define USBD_memset         /* Not used */
+#define USBD_memset         memset
 
 /** Alias for memory copy. */
-#define USBD_memcpy         /* Not used */
+#define USBD_memcpy         memcpy
 
 /** Alias for delay. */
 #define USBD_Delay          HAL_Delay
-
 /* DEBUG macros */
 
 #if (USBD_DEBUG_LEVEL > 0)

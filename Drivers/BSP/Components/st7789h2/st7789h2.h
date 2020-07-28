@@ -49,9 +49,9 @@ typedef int32_t (*ST7789H2_Init_Func)(void);
 typedef int32_t (*ST7789H2_DeInit_Func)(void);
 typedef int32_t (*ST7789H2_GetTick_Func)(void);
 typedef int32_t (*ST7789H2_Delay_Func)(uint32_t);
-typedef int32_t (*ST7789H2_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
-typedef int32_t (*ST7789H2_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
-typedef int32_t (*ST7789H2_SendData_Func)(uint8_t *, uint16_t);
+typedef int32_t (*ST7789H2_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint32_t);
+typedef int32_t (*ST7789H2_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint32_t);
+typedef int32_t (*ST7789H2_SendData_Func)(uint8_t *, uint32_t);
 
 typedef struct
 {

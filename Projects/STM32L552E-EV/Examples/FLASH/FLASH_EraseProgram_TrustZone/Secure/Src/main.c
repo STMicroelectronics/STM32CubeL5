@@ -95,11 +95,11 @@ int main(void)
          purpose timer for example or other time source), keeping in mind that
          Time base duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined
          and handled in milliseconds basis.
+       - Set NVIC Group Priority to 3
        - Low Level Initialization
      */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -121,6 +121,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   /* Initialize LED4 */
   BSP_LED_Init(LED4);
+
+  /* Instruction cache is voluntary not enabled */
+  /* prior to internal cacheable memory update  */
 
   /* Unlock the Flash to enable the flash control register access *************/
   HAL_FLASH_Unlock();
@@ -191,6 +194,15 @@ int main(void)
      to protect the FLASH memory against possible unwanted operation) *********/
   HAL_FLASH_Lock();
 
+  /* Enable instruction cache with no security attribute at GTZC level  */
+  /* to let the instruction cache being updated by the non-secure       */
+  /* application to insure memory programming into cacheable memory     */
+  /* with cache disabled                                                */
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+
   /* Check if the programmed data is OK
       MemoryProgramStatus = 0: data programmed correctly
       MemoryProgramStatus != 0: number of words not programmed correctly ******/
@@ -238,15 +250,12 @@ int main(void)
 	/* Leave the GPIO clocks enabled to let non-secure having I/Os control */
 
   /* USER CODE END 2 */
- 
- 
 
   /*************** Setup and jump to non-secure *******************************/
 
   NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -260,7 +269,7 @@ int main(void)
 
 /**
   * @brief  Non-secure call function
-  *         This function is responsible for Non-secure initialization and switch 
+  *         This function is responsible for Non-secure initialization and switch
   *         to non-secure state
   * @retval None
   */
@@ -401,7 +410,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

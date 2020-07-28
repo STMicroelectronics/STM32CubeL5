@@ -35,7 +35,6 @@ extern "C" {
 #include "stm32l5xx_ll_gpio.h"
 #include "stm32l5xx_ll_rcc.h"
 #include "stm32l5xx_ll_usart.h"
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/

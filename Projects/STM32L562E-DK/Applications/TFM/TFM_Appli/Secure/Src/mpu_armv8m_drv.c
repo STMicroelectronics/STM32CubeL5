@@ -31,7 +31,8 @@ enum mpu_armv8m_error_t mpu_armv8m_enable(struct mpu_armv8m_dev_t *dev,
    */
   mpu->MAIR0 = (MPU_ARMV8M_MAIR_ATTR_DEVICE_VAL << MPU_MAIR0_Attr0_Pos) |
                (MPU_ARMV8M_MAIR_ATTR_CODE_VAL << MPU_MAIR0_Attr1_Pos) |
-               (MPU_ARMV8M_MAIR_ATTR_DATA_VAL << MPU_MAIR0_Attr2_Pos);
+               (MPU_ARMV8M_MAIR_ATTR_DATA_VAL << MPU_MAIR0_Attr2_Pos) |
+               (MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_VAL << MPU_MAIR0_Attr3_Pos);
 
   mpu->CTRL =
     (privdef_en ? MPU_CTRL_PRIVDEFENA_Msk : 0) |

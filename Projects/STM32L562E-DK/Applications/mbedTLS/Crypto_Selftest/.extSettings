@@ -1,0 +1,10 @@
+[ProjectFiles]
+HeaderPath=..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK;..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\Utilities\Fonts;..\..\..\..\..\..\Utilities\lcd
+[Others]
+HALModule=EXTI;SRAM
+[Groups]
+Doc=../readme.txt;
+Drivers/BSP/Components=../../../../../../Drivers/BSP/Components/st7789h2/st7789h2.c;../../../../../../Drivers/BSP/Components/st7789h2/st7789h2_reg.c;
+Drivers/BSP/STM32L562E-DK=../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c;../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery_lcd.c;
+Drivers/STM32L5xx_HAL_Driver=../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_sram.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_fmc.c;
+Utilities=../../../../../../Utilities/lcd/stm32_lcd.c;

@@ -51,7 +51,7 @@ In case of any error, the LED10 (GREEN) is toggling slowly.
 
 @par Keywords
 
-PKA, PKA_ModularExponentiationCRT_IT, Security, RSA, modular exponentiation, CRT ,decipher
+Security, PKA, RSA, modular exponentiation, CRT ,decipher
 
 @par Directory contents 
   

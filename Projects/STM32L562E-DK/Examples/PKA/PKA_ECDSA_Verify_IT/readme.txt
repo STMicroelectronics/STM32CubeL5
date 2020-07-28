@@ -54,7 +54,7 @@ In case of any error, the LED10 (LED_GREEN) is toggling slowly.
 
 @par Keywords
 
-PKA, PKA_ECDSA_Verify_IT, Security, NIST, CAVP, ECDSA verification
+Security, PKA, NIST, CAVP, ECDSA verification
 
 @par Directory contents 
   

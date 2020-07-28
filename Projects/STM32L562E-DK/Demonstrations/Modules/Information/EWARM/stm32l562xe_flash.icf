@@ -1,0 +1,79 @@
+/*###ICF### Section handled by ICF editor, don't touch! ****/
+/*-Editor annotation file-*/
+/* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\cortex_v1_0.xml" */
+/*-Specials-*/
+define symbol __ICFEDIT_intvec_start__ = __C_START_ADDR;
+/*-Memory Regions-*/
+define symbol __ICFEDIT_region_ROM_start__   = 0x08000000;
+define symbol __ICFEDIT_region_ROM_end__     = 0x0807FFFF;
+define symbol __ICFEDIT_region_RAM_start__   = 0x20000000;
+define symbol __ICFEDIT_region_RAM_end__     = 0x2003FFFF;
+
+/*-Sizes-*/
+define symbol __ICFEDIT_size_cstack__ = 0x800;
+define symbol __ICFEDIT_size_heap__   = 0x400;
+/**** End of ICF editor section. ###ICF###*/
+
+define symbol __ICFEDIT_region_ROM_ML_start__     = 0x08000000;
+define symbol __ICFEDIT_region_ROM_ML_end__       = 0x08017FFF; /*  96 Kbytes for the Menu Launcher */
+define symbol __ICFEDIT_region_ROM_PWR_start__    = 0x08018000;
+define symbol __ICFEDIT_region_ROM_PWR_end__      = 0x08027FFF; /*  64 Kbytes for Measurements Module */
+define symbol __ICFEDIT_region_ROM_AI_start__     = 0x08028000;
+define symbol __ICFEDIT_region_ROM_AI_end__       = 0x08037FFF; /*  64 Kbytes for AI Module */
+define symbol __ICFEDIT_region_ROM_BLE_start__    = 0x08038000;
+define symbol __ICFEDIT_region_ROM_BLE_end__      = 0x0804FFFF; /*  96 Kbytes for BLE Module */
+define symbol __ICFEDIT_region_ROM_AUD_start__    = 0x08050000;
+define symbol __ICFEDIT_region_ROM_AUD_end__      = 0x0806FFFF; /* 128 Kbytes for Audio Player Module */
+define symbol __ICFEDIT_region_ROM_INFO_start__   = 0x08070000;
+define symbol __ICFEDIT_region_ROM_INFO_end__     = 0x0807FFFF; /*  64 Kbytes for Information Module */
+
+define symbol __region_SRAM1_start__  = 0x20000000;
+define symbol __region_SRAM1_end__    = 0x2002FFFF;
+define symbol __region_SRAM2_start__  = 0x20030000;
+define symbol __region_SRAM2_end__    = 0x2003FFFF;
+
+/*-Octo-SPI Memory Regions-*/
+define symbol __ICFEDIT_region_OSPI_ML_start__    = 0x90000000;
+define symbol __ICFEDIT_region_OSPI_ML_end__      = 0x902FFFFF; /*  3 Mbytes for the MenuLauncher */
+define symbol __ICFEDIT_region_OSPI_PWR_start__   = 0x90300000;
+define symbol __ICFEDIT_region_OSPI_PWR_end__     = 0x903FFFFF; /*  1 Mbytes for Measurements Module */
+define symbol __ICFEDIT_region_OSPI_AI_start__    = 0x90400000;
+define symbol __ICFEDIT_region_OSPI_AI_end__      = 0x904FFFFF; /*  1 Mbytes for AI Module */
+define symbol __ICFEDIT_region_OSPI_BLE_start__   = 0x90500000;
+define symbol __ICFEDIT_region_OSPI_BLE_end__     = 0x905FFFFF; /*  1 Mbytes for BLE Module */
+define symbol __ICFEDIT_region_OSPI_AUD_start__   = 0x90600000;
+define symbol __ICFEDIT_region_OSPI_AUD_end__     = 0x90EFFFFF; /*  9 Mbytes for Audio Player Module */
+define symbol __ICFEDIT_region_OSPI_INFO_start__  = 0x90F00000;
+define symbol __ICFEDIT_region_OSPI_INFO_end__    = 0x90FFFFFF; /*  1 Mbytes for Information Module */
+
+define memory mem with size = 4G;
+define region ROM_region      = mem:[from __ICFEDIT_region_ROM_start__   to __ICFEDIT_region_ROM_end__];
+define region RAM_region      = mem:[from __ICFEDIT_region_RAM_start__   to __ICFEDIT_region_RAM_end__];
+define region SRAM1_region    = mem:[from __region_SRAM1_start__   to __region_SRAM1_end__];
+define region SRAM2_region    = mem:[from __region_SRAM2_start__   to __region_SRAM2_end__];
+
+define region ROM_ML_region     = mem:[from __ICFEDIT_region_ROM_ML_start__     to __ICFEDIT_region_ROM_ML_end__];
+define region ROM_PWR_region    = mem:[from __ICFEDIT_region_ROM_PWR_start__    to __ICFEDIT_region_ROM_PWR_end__];
+define region ROM_AI_region     = mem:[from __ICFEDIT_region_ROM_AI_start__     to __ICFEDIT_region_ROM_AI_end__];
+define region ROM_BLE_region    = mem:[from __ICFEDIT_region_ROM_BLE_start__    to __ICFEDIT_region_ROM_BLE_end__];
+define region ROM_AUD_region    = mem:[from __ICFEDIT_region_ROM_AUD_start__    to __ICFEDIT_region_ROM_AUD_end__];
+define region ROM_INFO_region   = mem:[from __ICFEDIT_region_ROM_INFO_start__   to __ICFEDIT_region_ROM_INFO_end__];
+
+define region OSPI_ML_region    = mem:[from __ICFEDIT_region_OSPI_ML_start__    to __ICFEDIT_region_OSPI_ML_end__];
+define region OSPI_PWR_region   = mem:[from __ICFEDIT_region_OSPI_PWR_start__   to __ICFEDIT_region_OSPI_PWR_end__];
+define region OSPI_AI_region    = mem:[from __ICFEDIT_region_OSPI_AI_start__    to __ICFEDIT_region_OSPI_AI_end__];
+define region OSPI_BLE_region   = mem:[from __ICFEDIT_region_OSPI_BLE_start__   to __ICFEDIT_region_OSPI_BLE_end__];
+define region OSPI_AUD_region   = mem:[from __ICFEDIT_region_OSPI_AUD_start__   to __ICFEDIT_region_OSPI_AUD_end__];
+define region OSPI_INFO_region  = mem:[from __ICFEDIT_region_OSPI_INFO_start__  to __ICFEDIT_region_OSPI_INFO_end__];
+
+define block CSTACK    with alignment = 8, size = __ICFEDIT_size_cstack__   { };
+define block HEAP      with alignment = 8, size = __ICFEDIT_size_heap__     { };
+
+initialize by copy { readwrite };
+do not initialize  { section .noinit };
+
+place at address mem:__ICFEDIT_intvec_start__ { readonly section .intvec };
+
+place in ROM_INFO_region  { readonly, last section IntFlashSection  };
+place in RAM_region       { readwrite, block CSTACK, block HEAP };
+place in OSPI_INFO_region { section ExtFlashSection, section FontFlashSection, section TextFlashSection };

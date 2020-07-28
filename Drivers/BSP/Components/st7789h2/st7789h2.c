@@ -64,9 +64,9 @@ ST7789H2_Drv_t   ST7789H2_Driver =
 /** @defgroup ST7789H2_Private_FunctionPrototypes ST7789H2 Private FunctionPrototypes
   * @{
   */
-static int32_t ST7789H2_ReadRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint16_t Length);
-static int32_t ST7789H2_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint16_t Length);
-static int32_t ST7789H2_SendDataWrap(void *handle, uint8_t *pData, uint16_t Length);
+static int32_t ST7789H2_ReadRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint32_t Length);
+static int32_t ST7789H2_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint32_t Length);
+static int32_t ST7789H2_SendDataWrap(void *handle, uint8_t *pData, uint32_t Length);
 static void    ST7789H2_Delay(ST7789H2_Object_t *pObj, uint32_t Delay);
 /**
   * @}
@@ -721,7 +721,7 @@ int32_t ST7789H2_DrawBitmap(ST7789H2_Object_t *pObj, uint32_t Xpos, uint32_t Ypo
   }
 
   /* Write GRAM */
-  ret += st7789h2_write_reg(&pObj->Ctx, ST7789H2_WRITE_RAM, &pBmp[index], (uint16_t) size);
+  ret += st7789h2_write_reg(&pObj->Ctx, ST7789H2_WRITE_RAM, &pBmp[index], size);
 
   /* Restore GRAM Area - Partial Display Control */
   if (pObj->Orientation == ST7789H2_ORIENTATION_LANDSCAPE)
@@ -825,7 +825,7 @@ int32_t ST7789H2_FillRGBRect(ST7789H2_Object_t *pObj, uint32_t Xpos, uint32_t Yp
       buffer[(2U*j)+1U] = *rect;
       rect++;
     }
-    ret += st7789h2_write_reg(&pObj->Ctx, ST7789H2_WRITE_RAM, buffer, (uint16_t) Width);
+    ret += st7789h2_write_reg(&pObj->Ctx, ST7789H2_WRITE_RAM, buffer, Width);
   }
 
   if(ret != ST7789H2_OK)
@@ -1036,7 +1036,7 @@ int32_t ST7789H2_GetYSize(ST7789H2_Object_t *pObj, uint32_t *YSize)
   * @param  Length  Buffer size to be red.
   * @retval error status.
   */
-static int32_t ST7789H2_ReadRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint16_t Length)
+static int32_t ST7789H2_ReadRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint32_t Length)
 {
   ST7789H2_Object_t *pObj = (ST7789H2_Object_t *)handle;
 
@@ -1051,7 +1051,7 @@ static int32_t ST7789H2_ReadRegWrap(void *handle, uint16_t Reg, uint8_t *pData, 
   * @param  Length Buffer size to be written.
   * @retval error status.
   */
-static int32_t ST7789H2_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint16_t Length)
+static int32_t ST7789H2_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *pData, uint32_t Length)
 {
   ST7789H2_Object_t *pObj = (ST7789H2_Object_t *)handle;
 
@@ -1065,7 +1065,7 @@ static int32_t ST7789H2_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *pData,
   * @param  Length Buffer size to be written.
   * @retval error status.
   */
-static int32_t ST7789H2_SendDataWrap(void *handle, uint8_t *pData, uint16_t Length)
+static int32_t ST7789H2_SendDataWrap(void *handle, uint8_t *pData, uint32_t Length)
 {
   ST7789H2_Object_t *pObj = (ST7789H2_Object_t *)handle;
 

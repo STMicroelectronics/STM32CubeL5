@@ -20,8 +20,8 @@
 /*
  * Original code taken from mcuboot project at:
  * https://github.com/JuulLabs-OSS/mcuboot
- * Git SHA of the original version: 3c469bc698a9767859ed73cd0201c44161204d5c
- * Modifications are Copyright (c) 2018-2019 Arm Limited.
+ * Git SHA of the original version: ac55554059147fff718015be9f4bd3108123f50a
+ * Modifications are Copyright (c) 2018-2020 Arm Limited.
  */
 
 #include <assert.h>
@@ -35,7 +35,7 @@
 #include "bootutil/sign_key.h"
 #include "security_cnt.h"
 
-#ifdef MCUBOOT_SIGN_RSA
+#if defined(MCUBOOT_SIGN_RSA)
 #include "mbedtls/rsa.h"
 #endif
 
@@ -51,16 +51,20 @@
  * Compute SHA256 over the image.
  */
 static int
-bootutil_img_hash(struct image_header *hdr, const struct flash_area *fap,
-                  uint8_t *tmp_buf, uint32_t tmp_buf_sz,
-                  uint8_t *hash_result, uint8_t *seed, int seed_len)
+bootutil_img_hash(int image_index,
+                  struct image_header *hdr, const struct flash_area *fap,
+                  uint8_t *tmp_buf, uint32_t tmp_buf_sz, uint8_t *hash_result,
+                  uint8_t *seed, int seed_len)
 {
     bootutil_sha256_context sha256_ctx;
     uint32_t size;
 #ifndef MCUBOOT_RAM_LOADING
     uint32_t blk_sz;
     uint32_t off;
+    int rc;
 #endif /* MCUBOOT_RAM_LOADING */
+
+    (void)image_index;
 
     bootutil_sha256_init(&sha256_ctx);
 
@@ -71,15 +75,10 @@ bootutil_img_hash(struct image_header *hdr, const struct flash_area *fap,
     }
 
     /* Hash is computed over image header and image itself. */
-    size = hdr->ih_img_size + hdr->ih_hdr_size;
+    size = BOOT_TLV_OFF(hdr);
 
-    /* If a security counter TLV and/or a dependency TLV(s) are present then the
-     * TLV info header, the security counter TLV and/or the dependency TLV(s)
-     * are also protected and must be included in the hash calculation.
-     */
-    if (hdr->ih_protect_tlv_size != 0) {
-        size += hdr->ih_protect_tlv_size;
-    }
+    /* If protected TLVs are present they are also hashed. */
+    size += hdr->ih_protect_tlv_size;
 
 #ifdef MCUBOOT_RAM_LOADING
     bootutil_sha256_update(&sha256_ctx,(void*)(hdr->ih_load_addr), size);
@@ -89,8 +88,9 @@ bootutil_img_hash(struct image_header *hdr, const struct flash_area *fap,
         if (blk_sz > tmp_buf_sz) {
             blk_sz = tmp_buf_sz;
         }
-        if(flash_area_read(fap, off, tmp_buf, blk_sz)) {
-            return -1;
+        rc = flash_area_read(fap, off, tmp_buf, blk_sz);
+        if (rc) {
+            return rc;
         }
         bootutil_sha256_update(&sha256_ctx, tmp_buf, blk_sz);
     }
@@ -124,9 +124,8 @@ bootutil_img_hash(struct image_header *hdr, const struct flash_area *fap,
 #ifdef EXPECTED_SIG_TLV
 #ifdef MCUBOOT_HW_KEY
 extern unsigned int pub_key_len;
-extern uint8_t current_image;
 static int
-bootutil_find_key(uint8_t *key, uint16_t key_len)
+bootutil_find_key(uint8_t image_id, uint8_t *key, uint16_t key_len)
 {
     bootutil_sha256_context sha256_ctx;
     uint8_t hash[32];
@@ -138,7 +137,7 @@ bootutil_find_key(uint8_t *key, uint16_t key_len)
     bootutil_sha256_update(&sha256_ctx, key, key_len);
     bootutil_sha256_finish(&sha256_ctx, hash);
 
-    plat_err = tfm_plat_get_rotpk_hash(current_image, key_hash, &key_hash_size);
+    plat_err = tfm_plat_get_rotpk_hash(image_id, key_hash, &key_hash_size);
     if (plat_err != TFM_PLAT_ERR_SUCCESS) {
         return -1;
     }
@@ -149,25 +148,28 @@ bootutil_find_key(uint8_t *key, uint16_t key_len)
     }
     return -1;
 }
-#else
-extern uint8_t current_image;
+#else /* !MCUBOOT_HW_KEY */
 static int
 bootutil_find_key(uint8_t *keyhash, uint8_t keyhash_len)
 {
     bootutil_sha256_context sha256_ctx;
+    int i;
     const struct bootutil_key *key;
     uint8_t hash[32];
-    uint32_t key_id = current_image > 2 ? current_image -2 : current_image;
-    assert(keyhash_len <= 32);
 
-    key = &bootutil_keys[key_id];
-    bootutil_sha256_init(&sha256_ctx);
-    bootutil_sha256_update(&sha256_ctx, key->key, *key->len);
-    bootutil_sha256_finish(&sha256_ctx, hash);
-    if (!boot_secure_memequal(hash, keyhash, keyhash_len)) {
-        return (int)key_id;
+    if (keyhash_len > 32) {
+        return -1;
     }
 
+    for (i = 0; i < bootutil_key_cnt; i++) {
+        key = &bootutil_keys[i];
+        bootutil_sha256_init(&sha256_ctx);
+        bootutil_sha256_update(&sha256_ctx, key->key, *key->len);
+        bootutil_sha256_finish(&sha256_ctx, hash);
+        if (!boot_secure_memequal(hash, keyhash, keyhash_len)) {
+            return i;
+        }
+    }
     return -1;
 }
 #endif
@@ -188,11 +190,9 @@ bootutil_get_img_security_cnt(struct image_header *hdr,
                               const struct flash_area *fap,
                               uint32_t *img_security_cnt)
 {
-    struct image_tlv_info info;
-    struct image_tlv tlv;
+    struct image_tlv_iter it;
     uint32_t off;
-    uint32_t end;
-    uint32_t found = 0;
+    uint16_t len;
     int32_t rc;
 
     if ((hdr == NULL) ||
@@ -202,67 +202,37 @@ bootutil_get_img_security_cnt(struct image_header *hdr,
         return BOOT_EBADARGS;
     }
 
-    /* The TLVs come after the image. */
-    off = hdr->ih_hdr_size + hdr->ih_img_size;
+    /* The security counter TLV is in the protected part of the TLV area. */
+    if (hdr->ih_protect_tlv_size == 0) {
+        return BOOT_EBADIMAGE;
+    }
 
-    /* The TLV area always starts with an image_tlv_info structure. */
-    rc = LOAD_IMAGE_DATA(fap, off, &info, sizeof(info));
+    rc = bootutil_tlv_iter_begin(&it, hdr, fap, IMAGE_TLV_SEC_CNT, true);
+    if (rc) {
+        return rc;
+    }
+
+    /* Traverse through the protected TLV area to find
+     * the security counter TLV.
+     */
+
+    rc = bootutil_tlv_iter_next(&it, &off, &len, NULL);
+    if (rc != 0) {
+        /* Security counter TLV has not been found. */
+        return -1;
+    }
+
+    if (len != sizeof(*img_security_cnt)) {
+        /* Security counter is not valid. */
+        return BOOT_EBADIMAGE;
+    }
+
+    rc = LOAD_IMAGE_DATA(hdr, fap, off, img_security_cnt, len);
     if (rc != 0) {
         return BOOT_EFLASH;
     }
 
-    if (info.it_magic != IMAGE_TLV_INFO_MAGIC) {
-        return BOOT_EBADMAGIC;
-    }
-
-    /* The security counter TLV is in the protected part of the TLV area. */
-    if (hdr->ih_protect_tlv_size != 0) {
-        end = off + (uint32_t)hdr->ih_protect_tlv_size;
-        off += sizeof(info);
-
-        /* Traverse through the protected TLV area to find the
-         * security counter TLV.
-         */
-        while (off < end) {
-            rc = LOAD_IMAGE_DATA(fap, off, &tlv, sizeof(tlv));
-            if (rc != 0) {
-                return BOOT_EFLASH;
-            }
-
-            if (tlv.it_type == IMAGE_TLV_SEC_CNT) {
-
-                if (tlv.it_len != sizeof(*img_security_cnt)) {
-                    /* Security counter is not valid. */
-                    break;
-                }
-
-                rc = LOAD_IMAGE_DATA(fap, off + sizeof(tlv),
-                                     img_security_cnt, tlv.it_len);
-                if (rc != 0) {
-                    return BOOT_EFLASH;
-                }
-
-                /* Security counter has been found. */
-                found = 1;
-                break;
-            }
-
-            /* Avoid integer overflow. */
-            if (boot_add_uint32_overflow_check(off, (sizeof(tlv) + tlv.it_len)))
-            {
-                /* Potential overflow. */
-                break;
-            } else {
-                off += sizeof(tlv) + tlv.it_len;
-            }
-        }
-    }
-
-    if (found) {
-        return 0;
-    }
-
-    return -1;
+    return 0;
 }
 
 /*
@@ -270,14 +240,15 @@ bootutil_get_img_security_cnt(struct image_header *hdr,
  * Return non-zero if image could not be validated/does not validate.
  */
 int
-bootutil_img_validate(struct image_header *hdr, const struct flash_area *fap,
-                      uint8_t *tmp_buf, uint32_t tmp_buf_sz,
-                      uint8_t *seed, int seed_len, uint8_t *out_hash)
+bootutil_img_validate(int image_index,
+                      struct image_header *hdr, const struct flash_area *fap,
+                      uint8_t *tmp_buf, uint32_t tmp_buf_sz, uint8_t *seed,
+                      int seed_len, uint8_t *out_hash)
 {
     uint32_t off;
-    uint32_t end;
+    uint16_t len;
+    uint8_t type;
     int sha256_valid = 0;
-    struct image_tlv_info info;
 #ifdef EXPECTED_SIG_TLV
     int valid_signature = 0;
     int key_id = -1;
@@ -286,7 +257,7 @@ bootutil_img_validate(struct image_header *hdr, const struct flash_area *fap,
     uint8_t key_buf[SIG_BUF_SIZE + 24];
 #endif
 #endif
-    struct image_tlv tlv;
+    struct image_tlv_iter it;
     uint8_t buf[SIG_BUF_SIZE];
     uint8_t hash[32] = {0};
     uint32_t security_cnt;
@@ -294,8 +265,8 @@ bootutil_img_validate(struct image_header *hdr, const struct flash_area *fap,
     int32_t security_counter_valid = 0;
     int rc;
 
-    rc = bootutil_img_hash(hdr, fap, tmp_buf, tmp_buf_sz, hash,
-                           seed, seed_len);
+    rc = bootutil_img_hash(image_index, hdr, fap, tmp_buf,
+            tmp_buf_sz, hash, seed, seed_len);
     if (rc) {
         return rc;
     }
@@ -304,41 +275,32 @@ bootutil_img_validate(struct image_header *hdr, const struct flash_area *fap,
         memcpy(out_hash, hash, 32);
     }
 
-    /* The TLVs come after the image. */
-    off = hdr->ih_img_size + hdr->ih_hdr_size;
-
-    rc = LOAD_IMAGE_DATA(fap, off, &info, sizeof(info));
+    rc = bootutil_tlv_iter_begin(&it, hdr, fap, IMAGE_TLV_ANY, false);
     if (rc) {
         return rc;
     }
-    if (info.it_magic != IMAGE_TLV_INFO_MAGIC) {
-        return BOOT_EBADMAGIC;
-    }
-    if (boot_add_uint32_overflow_check(off, (info.it_tlv_tot + sizeof(info)))) {
-        return -1;
-    }
-    end = off + info.it_tlv_tot;
-    off += sizeof(info);
 
     /*
      * Traverse through all of the TLVs, performing any checks we know
      * and are able to do.
      */
-    while (off < end) {
-        rc = LOAD_IMAGE_DATA(fap, off, &tlv, sizeof(tlv));
-        if (rc) {
-            return rc;
+    while (true) {
+        rc = bootutil_tlv_iter_next(&it, &off, &len, &type);
+        if (rc < 0) {
+            return -1;
+        } else if (rc > 0) {
+            break;
         }
 
-        if (tlv.it_type == IMAGE_TLV_SHA256) {
+        if (type == IMAGE_TLV_SHA256) {
             /*
              * Verify the SHA256 image hash.  This must always be
              * present.
              */
-            if (tlv.it_len != sizeof(hash)) {
+            if (len != sizeof(hash)) {
                 return -1;
             }
-            rc = LOAD_IMAGE_DATA(fap, off + sizeof(tlv), buf, sizeof(hash));
+            rc = LOAD_IMAGE_DATA(hdr, fap, off, buf, sizeof(hash));
             if (rc) {
                 return rc;
             }
@@ -349,75 +311,75 @@ bootutil_img_validate(struct image_header *hdr, const struct flash_area *fap,
             sha256_valid = 1;
 #ifdef EXPECTED_SIG_TLV
 #ifndef MCUBOOT_HW_KEY
-        } else if (tlv.it_type == IMAGE_TLV_KEYHASH) {
+        } else if (type == IMAGE_TLV_KEYHASH) {
             /*
              * Determine which key we should be checking.
              */
-            if (tlv.it_len > 32) {
+            if (len > 32) {
                 return -1;
             }
-            rc = LOAD_IMAGE_DATA(fap, off + sizeof(tlv), buf, tlv.it_len);
+            rc = LOAD_IMAGE_DATA(hdr, fap, off, buf, len);
             if (rc) {
                 return rc;
             }
-            key_id = bootutil_find_key(buf, tlv.it_len);
+            key_id = bootutil_find_key(buf, len);
             /*
              * The key may not be found, which is acceptable.  There
              * can be multiple signatures, each preceded by a key.
              */
-#else
-        } else if (tlv.it_type == IMAGE_TLV_KEY) {
+#else /* MCUBOOT_HW_KEY */
+        } else if (type == IMAGE_TLV_KEY) {
             /*
              * Determine which key we should be checking.
              */
-            if (tlv.it_len > sizeof(key_buf)) {
+            if (len > sizeof(key_buf)) {
                 return -1;
             }
-            rc = LOAD_IMAGE_DATA(fap, off + sizeof(tlv), key_buf, tlv.it_len);
+            rc = LOAD_IMAGE_DATA(hdr, fap, off, key_buf, len);
             if (rc) {
                 return rc;
             }
-            key_id = bootutil_find_key(key_buf, tlv.it_len);
+            key_id = bootutil_find_key(image_index, key_buf, len);
             /*
              * The key may not be found, which is acceptable.  There
              * can be multiple signatures, each preceded by a key.
              */
 #endif /* MCUBOOT_HW_KEY */
-        } else if (tlv.it_type == EXPECTED_SIG_TLV) {
+        } else if (type == EXPECTED_SIG_TLV) {
             /* Ignore this signature if it is out of bounds. */
-            if (key_id >= 0 && key_id < bootutil_key_cnt) {
-                if (!EXPECTED_SIG_LEN(tlv.it_len) || tlv.it_len > sizeof(buf)) {
-                    return -1;
-                }
-                rc = LOAD_IMAGE_DATA(fap, off + sizeof(tlv), buf, tlv.it_len);
-                if (rc) {
-                    return -1;
-                }
-                rc = bootutil_verify_sig(hash, sizeof(hash), buf, tlv.it_len,
-                                         key_id);
-                if (rc == 0) {
-                    valid_signature = 1;
-                }
+            if (key_id < 0 || key_id >= bootutil_key_cnt) {
+                key_id = -1;
+                continue;
+            }
+            if (!EXPECTED_SIG_LEN(len) || len > sizeof(buf)) {
+                return -1;
+            }
+            rc = LOAD_IMAGE_DATA(hdr, fap, off, buf, len);
+            if (rc) {
+                return -1;
+            }
+            rc = bootutil_verify_sig(hash, sizeof(hash), buf, len, key_id);
+            if (rc == 0) {
+                valid_signature = 1;
             }
             key_id = -1;
 #endif
-        } else if (tlv.it_type == IMAGE_TLV_SEC_CNT) {
+        } else if (type == IMAGE_TLV_SEC_CNT) {
             /*
              * Verify the image's security counter.
              * This must always be present.
              */
-            if (tlv.it_len != sizeof(img_security_cnt)) {
+            if (len != sizeof(img_security_cnt)) {
                 /* Security counter is not valid. */
                 return -1;
             }
 
-            rc = LOAD_IMAGE_DATA(fap, off + sizeof(tlv),
-                                 &img_security_cnt, tlv.it_len);
+            rc = LOAD_IMAGE_DATA(hdr, fap, off, &img_security_cnt, len);
             if (rc) {
                 return rc;
             }
 
-            rc = boot_nv_security_counter_get((current_image > 2 ? current_image -2 : current_image), &security_cnt);
+            rc = boot_nv_security_counter_get(0, &security_cnt);
             if (rc) {
                 return rc;
             }
@@ -432,14 +394,6 @@ bootutil_img_validate(struct image_header *hdr, const struct flash_area *fap,
 
             /* The image's security counter has been successfully verified. */
             security_counter_valid = 1;
-        }
-
-        /* Avoid integer overflow. */
-        if (boot_add_uint32_overflow_check(off, (sizeof(tlv) + tlv.it_len))) {
-            /* Potential overflow. */
-            break;
-        } else {
-            off += sizeof(tlv) + tlv.it_len;
         }
     }
 

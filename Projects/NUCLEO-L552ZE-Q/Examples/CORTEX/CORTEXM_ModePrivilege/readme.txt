@@ -1,5 +1,5 @@
-    /**
-  @page CortexM_Mode_Privilege Cortex-M33 Mode Privilege example
+/**
+  @page CORTEXM_ModePrivilege Cortex-M33 Mode Privilege example
 
   @verbatim
   ******************************************************************************

@@ -117,7 +117,7 @@
         <option>
           <name>GBECoreSlave</name>
           <version>27</version>
-          <state>59</state>
+          <state></state>
         </option>
         <option>
           <name>OGUseCmsis</name>
@@ -138,7 +138,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32L562QE	ST STM32L562QE</state>
+          <state></state>
         </option>
         <option>
           <name>FPU2</name>
@@ -226,6 +226,7 @@
           <name>CCDefines</name>
           <state>USE_HAL_DRIVER</state>
           <state>STM32L562xx</state>
+          <state></state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -286,7 +287,7 @@
         <option>
           <name>CCAllowList</name>
           <version>1</version>
-          <state>00000000</state>
+          <state>11111110</state>
         </option>
         <option>
           <name>CCDebugInfo</name>
@@ -318,7 +319,7 @@
         </option>
         <option>
           <name>CCRequirePrototypes</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>CCDiagWarnAreErr</name>
@@ -352,10 +353,10 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$/../Inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -371,7 +372,7 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>0</state>
+          <state>3</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
@@ -380,7 +381,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>0</state>
+          <state>3</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -1007,7 +1008,7 @@
         </option>
         <option>
           <name>IlinkTrustzoneImportLibraryOut</name>
-          <state>RTC_ActiveTamper_import_lib.o</state>
+          <state></state>
         </option>
         <option>
           <name>OILinkExtraOption</name>
@@ -1052,106 +1053,109 @@
     <group>
       <name>EWARM</name>
       <file>
-        <name>$PROJ_DIR$\startup_stm32l562xx.s</name>
+        <name>$PROJ_DIR$/startup_stm32l562xx.s</name>
       </file>
     </group>
     <group>
       <name>User</name>
       <file>
-        <name>$PROJ_DIR$\..\Src\main.c</name>
+        <name>$PROJ_DIR$/../Src/main.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\stm32l5xx_it.c</name>
+        <name>$PROJ_DIR$/../Src/stm32l5xx_it.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\stm32l5xx_hal_msp.c</name>
+        <name>$PROJ_DIR$/../Src/stm32l5xx_hal_msp.c</name>
       </file>
     </group>
   </group>
   <group>
     <name>Doc</name>
     <file>
-      <name>$PROJ_DIR$\..\readme.txt</name>
+      <name>$PROJ_DIR$/../readme.txt</name>
     </file>
   </group>
   <group>
     <name>Drivers</name>
     <group>
       <name>BSP</name>
+      <group>
+        <name>STM32L562E-DK</name>
+        <file>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
+        </file>
+      </group>
+    </group>
+    <group>
+      <name>STM32L5xx_HAL_Driver</name>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash_ramfunc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rtc_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim_ex.c</name>
       </file>
     </group>
     <group>
       <name>CMSIS</name>
       <file>
-        <name>$PROJ_DIR$\..\Src\system_stm32l5xx.c</name>
-      </file>
-    </group>
-    <group>
-      <name>STM32L5xx_HAL_Driver</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_pwr.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_pwr_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_rtc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_rtc_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_i2c.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_i2c_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_rcc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_rcc_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_flash.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_flash_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_flash_ramfunc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_gpio.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_dma.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_dma_ex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_exti.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_cortex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_gtzc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_icache.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_tim.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_tim_ex.c</name>
+        <name>$PROJ_DIR$/../Src/system_stm32l5xx.c</name>
       </file>
     </group>
   </group>

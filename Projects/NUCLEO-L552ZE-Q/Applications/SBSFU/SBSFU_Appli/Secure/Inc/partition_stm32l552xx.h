@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
- * @file     partition_stm32l552xx.h
+  * @file    partition_stm32l552xx.h
   * @author  MCD Application Team
   * @brief   CMSIS STM32L552xx Device Initial Setup for Secure / Non-Secure Zones
   *          for ARMCM33 based on CMSIS CORE V5.3.1 partition_ARMCM33.h Template.
@@ -363,7 +363,7 @@
 #define NVIC_INIT_ITNS0    1
 /*
 // Interrupts 0..31
-//   <o.0>  WWDG_IRQn           <0=> Secure state 
+//   <o.0>  WWDG_IRQn           <0=> Secure state
 //   <o.1>  PVD_PVM_IRQn        <0=> Secure state
 //   <o.2>  RTC_IRQn            <0=> Secure state
 //   <o.3>  RTC_S_IRQn          <0=> Secure state
@@ -456,11 +456,11 @@
 
 /*
 // Interrupts 64..95
-//   <o.0>  UART4_IRQn          <0=> Secure state  	
-//   <o.1>  UART5_IRQn          <0=> Secure state  	
-//   <o.2>  LPUART1_IRQn        <0=> Secure state		
-//   <o.3>  LPTIM1_IRQn         <0=> Secure state		
-//   <o.4>  LPTIM2_IRQn         <0=> Secure state			
+//   <o.0>  UART4_IRQn          <0=> Secure state
+//   <o.1>  UART5_IRQn          <0=> Secure state
+//   <o.2>  LPUART1_IRQn        <0=> Secure state
+//   <o.3>  LPTIM1_IRQn         <0=> Secure state
+//   <o.4>  LPTIM2_IRQn         <0=> Secure state
 //   <o.5>  TIM15_IRQn          <0=> Secure state
 //   <o.6>  TIM16_IRQn          <0=> Secure state
 //   <o.7>  TIM17_IRQn          <0=> Secure state
@@ -611,7 +611,7 @@ __STATIC_INLINE void TZ_SAU_Setup (void)
                    ((FPU_FPCCR_TS_VAL        << FPU_FPCCR_TS_Pos       ) & FPU_FPCCR_TS_Msk       ) |
                    ((FPU_FPCCR_CLRONRETS_VAL << FPU_FPCCR_CLRONRETS_Pos) & FPU_FPCCR_CLRONRETS_Msk) |
                    ((FPU_FPCCR_CLRONRET_VAL  << FPU_FPCCR_CLRONRET_Pos ) & FPU_FPCCR_CLRONRET_Msk );
-  #endif 
+  #endif
 
   #if defined (NVIC_INIT_ITNS0) && (NVIC_INIT_ITNS0 == 1U)
     NVIC->ITNS[0] = NVIC_INIT_ITNS0_VAL;

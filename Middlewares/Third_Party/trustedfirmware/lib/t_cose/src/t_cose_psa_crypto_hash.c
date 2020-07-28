@@ -11,7 +11,7 @@
  */
 
 #include "t_cose_crypto.h"
-#include "psa/crypto.h"
+#include "interface/include/psa/crypto.h"
 
 /**
  * \brief Convert COSE algorithm ID to a PSA algorithm ID

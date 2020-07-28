@@ -2,9 +2,9 @@
 <projectDescription>
 	<name>SBSFU_Appli_NonSecure</name>
 	<comment></comment>
-	<projects>
+ 	<projects>
 		<project>SBSFU_Appli_Secure</project>
-	</projects>
+ 	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>

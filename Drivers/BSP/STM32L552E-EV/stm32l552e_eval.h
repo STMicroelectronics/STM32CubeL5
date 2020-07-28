@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @brief   This file contains definitions for:
   *          - LEDs, push-buttons, potentiometer, joystick  and COM ports available
-  *            on STM32L552E-EVAL board (MB1372) from STMicroelectronics
+  *            on STM32L552E-EV board (MB1372) from STMicroelectronics
   ******************************************************************************
   * @attention
   *
@@ -186,7 +186,7 @@ typedef struct
   */
 #define STM32L552E_EVAL_BSP_VERSION_MAIN   (0x01U) /*!< [31:24] main version */
 #define STM32L552E_EVAL_BSP_VERSION_SUB1   (0x00U) /*!< [23:16] sub1 version */
-#define STM32L552E_EVAL_BSP_VERSION_SUB2   (0x01U) /*!< [15:8]  sub2 version */
+#define STM32L552E_EVAL_BSP_VERSION_SUB2   (0x02U) /*!< [15:8]  sub2 version */
 #define STM32L552E_EVAL_BSP_VERSION_RC     (0x00U) /*!< [7:0]  release candidate */
 #define STM32L552E_EVAL_BSP_VERSION       ((STM32L552E_EVAL_BSP_VERSION_MAIN << 24U)\
                                           |(STM32L552E_EVAL_BSP_VERSION_SUB1 << 16U)\

@@ -2,12 +2,12 @@
   ******************************************************************************
   * @file    stm32l552e_eval_audio.c
   * @author  MCD Application Team
-  * @brief   This file provides the Audio driver for the STM32L552E-EVAL
+  * @brief   This file provides the Audio driver for the STM32L552E-EV
   *          evaluation board.
   @verbatim
   How To use this driver:
   -----------------------
-   + This driver supports STM32L5xx devices on STM32L552E-EVAL (MB1372) Evaluation boards.
+   + This driver supports STM32L5xx devices on STM32L552E-EV (MB1372) Evaluation boards.
    + Call the function BSP_AUDIO_OUT_Init() for AUDIO OUT initialization: 
         Instance : Select the output instance. Can only be 0 (SAI).
         AudioInit: Audio Out structure to select the following parameters.
@@ -237,7 +237,7 @@ SAI_HandleTypeDef haudio_in_sai  = {0};
 DFSDM_Channel_HandleTypeDef haudio_in_dfsdm_channel[2] = {{0}, {0}};
 DFSDM_Filter_HandleTypeDef  haudio_in_dfsdm_filter[2] = {{0}, {0}};
 
-/* Audio in DFSDM internal buffers and global varibales */
+/* Audio in DFSDM internal buffers and global variables */
 int32_t  Audio_DigMic1RecBuff[BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE];
 int32_t  Audio_DigMic2RecBuff[BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE];
 uint32_t Audio_DmaDigMic1RecHalfBuffCplt;
@@ -544,7 +544,7 @@ int32_t BSP_AUDIO_OUT_Play(uint32_t Instance, uint8_t* pData, uint32_t NbrOfByte
   }
   else
   {
-    /* Compute number of DMA datas to tranfser according resolution */
+    /* Compute number of DMA data to transfer according resolution */
     if (Audio_Out_Ctx[Instance].BitsPerSample == AUDIO_RESOLUTION_16b)
     {
       NbrOfDmaDatas = (uint16_t) (NbrOfBytes / 2U);

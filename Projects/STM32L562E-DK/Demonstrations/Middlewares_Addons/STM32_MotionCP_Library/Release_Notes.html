@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="File-List" href="Library_files/filelist.xml">
+<link rel="Edit-Time-Data" href="Library_files/editdata.mso"><!--[if !mso]> <style> v\:* {behavior:url(#default#VML);} o\:* {behavior:url(#default#VML);} w\:* {behavior:url(#default#VML);} .shape {behavior:url(#default#VML);} </style> <![endif]--><title>Release Notes for the MotionCP Carry Position library</title><!--[if gte mso 9]><xml> <o:DocumentProperties> <o:Author>STMicroelectronics</o:Author> <o:LastAuthor>STMicroelectronics</o:LastAuthor> <o:Revision>37</o:Revision> <o:TotalTime>136</o:TotalTime> <o:Created>2009-02-27T19:26:00Z</o:Created> <o:LastSaved>2009-03-01T17:56:00Z</o:LastSaved> <o:Pages>1</o:Pages> <o:Words>522</o:Words> <o:Characters>2977</o:Characters> <o:Company>STMicroelectronics</o:Company> <o:Lines>24</o:Lines> <o:Paragraphs>6</o:Paragraphs> <o:CharactersWithSpaces>3493</o:CharactersWithSpaces> <o:Version>11.6568</o:Version> </o:DocumentProperties> </xml><![endif]--><!--[if gte mso 9]><xml> <w:WordDocument> <w:Zoom>110</w:Zoom> <w:ValidateAgainstSchemas/> <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid> <w:IgnoreMixedContent>false</w:IgnoreMixedContent> <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText> <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel> </w:WordDocument> </xml><![endif]--><!--[if gte mso 9]><xml> <w:LatentStyles DefLockedState="false" LatentStyleCount="156"> </w:LatentStyles> </xml><![endif]-->
+<style>
+<!--
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+{mso-style-parent:"";
+margin:0in;
+margin-bottom:.0001pt;
+mso-pagination:widow-orphan;
+font-size:12.0pt;
+font-family:"Times New Roman";
+mso-fareast-font-family:"Times New Roman";}
+h2
+{mso-style-next:Normal;
+margin-top:12.0pt;
+margin-right:0in;
+margin-bottom:3.0pt;
+margin-left:0in;
+mso-pagination:widow-orphan;
+page-break-after:avoid;
+mso-outline-level:2;
+font-size:14.0pt;
+font-family:Arial;
+font-weight:bold;
+font-style:italic;}
+a:link, span.MsoHyperlink
+{color:blue;
+text-decoration:underline;
+text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+{color:blue;
+text-decoration:underline;
+text-underline:single;}
+p
+{mso-margin-top-alt:auto;
+margin-right:0in;
+mso-margin-bottom-alt:auto;
+margin-left:0in;
+mso-pagination:widow-orphan;
+font-size:12.0pt;
+font-family:"Times New Roman";
+mso-fareast-font-family:"Times New Roman";}
+@page Section1
+{size:8.5in 11.0in;
+margin:1.0in 1.25in 1.0in 1.25in;
+mso-header-margin:.5in;
+mso-footer-margin:.5in;
+mso-paper-source:0;}
+div.Section1
+{page:Section1;}
+-->
+</style><!--[if gte mso 10]> <style> /* Style Definitions */ table.MsoNormalTable {mso-style-name:"Table Normal"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-parent:""; mso-padding-alt:0in 5.4pt 0in 5.4pt; mso-para-margin:0in; mso-para-margin-bottom:.0001pt; mso-pagination:widow-orphan; font-size:10.0pt; font-family:"Times New Roman"; mso-ansi-language:#0400; mso-fareast-language:#0400; mso-bidi-language:#0400;} </style> <![endif]--><!--[if gte mso 9]><xml> <o:shapedefaults v:ext="edit" spidmax="5122"/> </xml><![endif]--><!--[if gte mso 9]><xml> <o:shapelayout v:ext="edit"> <o:idmap v:ext="edit" data="1"/> </o:shapelayout></xml><![endif]-->
+<meta content="MCD Application Team" name="author"></head><body link="blue" vlink="blue">
+
+<div class="Section1">
+<p class="MsoNormal"><span style="font-family: Arial;"><o:p><br></o:p></span></p>
+<div align="center">
+<table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" cellspacing="0" width="900">
+  <tbody>
+    <tr>
+      <td style="padding: 0cm;" valign="top">
+      <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" cellspacing="0" width="900">
+        <tbody>
+          <tr style="">
+            <td style="padding: 1.5pt;">
+            <h1 style="margin-bottom: 18pt; text-align: center;" align="center"><span style="font-size: 20pt; font-family: Verdana; color: rgb(51, 102, 255);">Release Notes for MotionCP Carry Position Library</span><span style="font-size: 20pt; font-family: Verdana;"><o:p></o:p></span></h1>
+            <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;">Copyright 2017 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
+            <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;"><img alt="" id="_x0000_i1025" src="../../../_htmresc/st_logo.png" style="border: 0px solid ; width: 86px; height: 65px;"></span><span style="font-size: 10pt;"><o:p></o:p></span></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+      What is MotionCP?<br><o:p></o:p></span></u></b></p>
+      <ul style="margin-top: 0cm;" type="square">
+      <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+      The MotionCP provides real-time information about how the user is carrying a device, i.e. cell phone.<br></span></li>
+      <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+      The library acquires data from the accelerometer and provides information about how the user is carrying the device. It is able to distinguish following positions: on desk, in hand, near head, shirt pocket, trouser pocket, arm swing, jacket pocket.
+      </ul>
+
+      <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" width="900">
+        <tbody>
+          <tr>
+            <td style="padding: 0cm;" valign="top">
+            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">
+            Update History</span></h2>
+
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">
+            V2.0.2 / 15-February-2019</span></h3>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Main Changes<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              Unification of the libraries to single EABI library per Cortex core and wchar size</span><span style="font-size: 10pt; font-family: Verdana;"></span></li>
+            </ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 23px; width: 868px;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Development Toolchains and Compilers<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              System Workbench for STM32 V2.6.0.201809060829 + ST-LINK</span></li>
+            </ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Known limitations<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              The provided library supports only Cortex-M3 and Cortex-M4.<br></span></li>
+            </ul>
+
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">
+            V2.0.1 / 1-September-2017</span></h3>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Main Changes<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              Add library for EWARM 8 IDE. Due to the changes in EWARM 8 dedicated library for this environment must be used. The name of the library for EWARM 8 ends by _IAR8_ot.</span><span style="font-size: 10pt; font-family: Verdana;"></span></li>
+            </ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 23px; width: 868px;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Development Toolchains and Compilers<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</span></li>
+              <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              IAR Embedded Workbench for ARM (EWARM) toolchain V8.11.2 + ST-LINK</span></li>
+              <li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              uVision(MDK-ARM) toolchain 5.22 + ST-LINK</span></li>
+              <li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              System Workbench for STM32 V1.13.1.20170120 + ST-LINK</span></li>
+            </ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Known limitations<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              The provided library supports only Cortex-M3 and Cortex-M4.<br></span></li>
+            </ul>
+
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">
+            V2.0.0 / 1-May-2017</span></h3>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Main Changes<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              First version of the library published under the ODE initiative. Previously released as part of OSX framework.</span><span style="font-size: 10pt; font-family: Verdana;"></span></li>
+            </ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 23px; width: 868px;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Development Toolchains and Compilers<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</span></li>
+              <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              uVision(MDK-ARM) toolchain 5.22 + ST-LINK</span></li>
+              <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+              System Workbench for STM32 V1.13.1.20170120 + ST-LINK</span></li>
+            </ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Known limitations<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              The provided library supports only Cortex-M3 and Cortex-M4.<br></span></li>
+            </ul>
+
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">
+            V1.0.0 / 15-October-2015</span></h3>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Main Changes<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              First official release.</span><span style="font-size: 10pt; font-family: Verdana;"></span></li>
+            </ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 23px; width: 868px;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Development Toolchains and Compilers<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+            <li class="MsoNormal" style="margin-top: 4.5pt; margin-bottom: 4.5pt; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+            IAR Embedded Workbench for ARM (EWARM) toolchain V7.30 + ST-Link</span></li>
+            <li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+            uVision(MDK-ARM) toolchain 5.14 + ST-LINK + ST-LINK</span></li>
+            <li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">
+            System Workbench for STM32 V1.1.0.20150310 + ST-LINK</span><span style="font-size: 10pt; font-family: Verdana;"><span class="Apple-converted-space"> </span>+&nbsp;</span><span style="font-size: 10pt; font-family: Verdana;">ST-LINK</span></li></ul>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">
+            Known limitations<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+              <li class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">
+              The provided library supports Cortex-M3 and Cortex-M4 only.<br></span></li>
+            </ul>
+
+            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="font-size: 12pt; color: white;">
+            License<o:p></o:p></span></h2>
+
+            <p class="MsoNormal"><font size="-1"><span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;">
+            Licensed under Software License Agreement SLA0077, (the "License"). You may not use this package except in compliance with the License. You may obtain a copy of the License at:<br><br></span></font></p>
+
+            <div style="text-align: center;"><font size="-1">
+            <span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a target="_blank" href="http://www.st.com/content/st_com/en/search.html#q=SLA0077-t=keywords-page=1">SLA0077: SOFTWARE LICENSE AGREEMENT</a>
+            </span>
+            <br>
+            <br>
+            </font></div>
+
+            <div class="MsoNormal" style="text-align: center;" align="center"><span style="color: black;"><hr align="center" size="2" width="100%"></span></div>
+
+            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; text-align:center;">
+            <span style="font-size: 10pt; color: white;">
+            For complete documentation on STM32 ODE visit <a href="http://www.st.com/stm32ode" target="_blank"; style="font-size: 10pt; color: white;">www.st.com/stm32ode</a><o:p></o:p></span>
+            </h2>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+        <p class="MsoNormal"><span style="font-size: 10pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+
+</body></html>

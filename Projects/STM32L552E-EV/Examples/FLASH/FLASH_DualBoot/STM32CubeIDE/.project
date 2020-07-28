@@ -208,9 +208,9 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/BSP/STM32L552E-EV/stm32l552e_eval_lcd.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/Utilities/basic_gui/basic_gui.c</name>
+			<name>Drivers/Utilities/lcd/stm32_lcd.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Utilities/basic_gui/basic_gui.c</locationURI>
+			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Utilities/lcd/stm32_lcd.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

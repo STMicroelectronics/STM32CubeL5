@@ -14,6 +14,11 @@
 extern "C" {
 #endif
 
+struct arm_vector_table {
+	uint32_t msp;
+	uint32_t reset;
+};
+
 /*
  * \brief It clears that part of the RAM which was used by MCUBoot, expect the
  *        TFM_SHARED_DATA area, which is used to pass data to the TF-M runtime.
@@ -31,7 +36,10 @@ extern "C" {
  *        - Etc.
  */
 void boot_clear_bl2_ram_area(void);
-
+int32_t boot_platform_init(void);
+__attribute__((naked)) void boot_jump_to_next_image(uint32_t reset_handler_addr);
+void jumper(struct arm_vector_table *vt);
+void boot_platform_noimage(void);
 #ifdef __cplusplus
 }
 #endif

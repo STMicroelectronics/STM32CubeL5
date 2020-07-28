@@ -49,10 +49,10 @@ void Led_demo(void)
   Led_SetHint();
   
   /* Init and turn on LED 1 to 4  */
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
-  GUI_DisplayStringAt(0, 120, (uint8_t *)"Initialize then turn on", CENTER_MODE);
-  GUI_DisplayStringAt(0, 135, (uint8_t *)"each leds after 500 ms", CENTER_MODE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DisplayStringAt(0, 120, (uint8_t *)"Initialize then turn on", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 135, (uint8_t *)"each leds after 500 ms", CENTER_MODE);
 
   HAL_Delay(500);
   if (BSP_LED_On(LED4) != BSP_ERROR_NONE)
@@ -82,8 +82,8 @@ void Led_demo(void)
   HAL_Delay(2000);
   
   /* Turn off the LEDs */ 
-  GUI_DisplayStringAt(0, 120, (uint8_t *)"Turn off each leds after 500 ms", CENTER_MODE);
-  GUI_DisplayStringAt(0, 135, (uint8_t *)"                      ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 120, (uint8_t *)"Turn off each leds after 500 ms", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 135, (uint8_t *)"                      ", CENTER_MODE);
   HAL_Delay(500);
   if (BSP_LED_Off(LED4) != BSP_ERROR_NONE)
   {
@@ -108,28 +108,28 @@ void Led_demo(void)
   HAL_Delay(2000);
   
   /* After two seconds, turn on LED5, LED7, LED4 and LED7 */
-  GUI_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 5         ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 5         ", CENTER_MODE);
   if (BSP_LED_On(LED5) != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
   HAL_Delay(500);
   
-  GUI_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 7         ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 7         ", CENTER_MODE);
   if (BSP_LED_On(LED7) != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
   HAL_Delay(500);
   
-  GUI_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 4         ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 4         ", CENTER_MODE);
   if (BSP_LED_On(LED4) != BSP_ERROR_NONE)
   {
     Error_Handler();
   }
   HAL_Delay(500);
   
-  GUI_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 6         ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 120, (uint8_t *)"         Turn on led 6         ", CENTER_MODE);
   if (BSP_LED_On(LED6) != BSP_ERROR_NONE)
   {
     Error_Handler();
@@ -137,7 +137,7 @@ void Led_demo(void)
   HAL_Delay(500);
   
   /* For about five seconds, toggle all the LEDs */
-  GUI_DisplayStringAt(0, 120, (uint8_t *)"      Toggle all on leds       ", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 120, (uint8_t *)"      Toggle all on leds       ", CENTER_MODE);
   while (index < 25)
   {
     HAL_Delay(200);
@@ -169,21 +169,21 @@ void Led_demo(void)
 static void Led_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Led Demo description */
-  GUI_FillRect(0, 0, 320, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Led", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"initialize and turn on, turn off", CENTER_MODE);
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"and toggle the leds", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 320, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Led", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"initialize and turn on, turn off", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"and toggle the leds", CENTER_MODE);
   
-  GUI_DrawRect(10, 90, 300, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 298, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 300, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 298, 138, UTIL_LCD_COLOR_BLUE);
 }
 /**
   * @}

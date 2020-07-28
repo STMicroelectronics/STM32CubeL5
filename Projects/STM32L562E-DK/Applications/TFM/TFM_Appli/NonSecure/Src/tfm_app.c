@@ -72,6 +72,7 @@ static void tfm_sst_read_uid(struct test_result_t *ret);
 static void tfm_its_set_uid(struct test_result_t *ret);
 static void tfm_its_remove_uid(struct test_result_t *ret);
 static void tfm_its_read_uid(struct test_result_t *ret);
+void dump_eat_token(struct q_useful_buf_c *token);
 static void tfm_eat_test_circuit_sig(uint32_t encode_options, struct test_result_t *ret);
 static  enum psa_attest_err_t token_main_alt(uint32_t option_flags,
                                              struct q_useful_buf_c nonce,
@@ -125,6 +126,11 @@ void tfm_app_menu(void)
           ret.val = TEST_FAILED;
           psa_cipher_test(PSA_KEY_TYPE_AES, PSA_ALG_CBC_NO_PADDING, &ret);;
           printf("AES CBC test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          tests_executed++;
+          tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
+          ret.val = TEST_FAILED;
+          psa_aead_test(PSA_KEY_TYPE_AES, PSA_ALG_CCM, &ret);
+          printf("AES CCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           tfm_sst_set_uid(&ret);
@@ -185,55 +191,62 @@ void tfm_app_menu(void)
           printf("AES CBC test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
+         /* 3 = Tests AES-CCM Static key */
         case '3' :
+          ret.val = TEST_FAILED;
+          psa_aead_test(PSA_KEY_TYPE_AES, PSA_ALG_CCM, &ret);
+          printf("AES CCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          tfm_app_print_menu();
+          break;
+        case '4' :
           ret.val = TEST_FAILED;
           tfm_sst_set_uid(&ret);
           printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case '4' :
+        case '5' :
           ret.val = TEST_FAILED;
           tfm_sst_read_uid(&ret);
           printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case '5' :
+        case '6' :
           ret.val = TEST_FAILED;
           tfm_sst_remove_uid(&ret);
           printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case '6' :
+        case '7' :
           ret.val = TEST_FAILED;
           tfm_eat_test_circuit_sig(TOKEN_OPT_NORMAL_CIRCUIT_SIGN, &ret);
           printf("EAT normal circuit sig test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case '7' :
+        case '8' :
           ret.val = TEST_FAILED;
           tfm_its_set_uid(&ret);
           printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case '8' :
+        case '9' :
           ret.val = TEST_FAILED;
           tfm_its_read_uid(&ret);
           printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case '9' :
+        case 'a' :
           ret.val = TEST_FAILED;
           tfm_its_remove_uid(&ret);
           printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case 'a' :
+        case 'b' :
           ret.val = TEST_FAILED;
           psa_hash_test(PSA_ALG_SHA_224, &ret);
           printf("SHA224 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
           tfm_app_print_menu();
           break;
-        case 'b' :
+        case 'c' :
           ret.val = TEST_FAILED;
           psa_hash_test(PSA_ALG_SHA_256, &ret);
           printf("SHA256 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
@@ -271,15 +284,16 @@ static void tfm_app_print_menu(void)
   printf("  TFM - Test All                                   --------------------- 0\r\n\n");
   printf("  TFM - Test AES-GCM                               --------------------- 1\r\n\n");
   printf("  TFM - Test AES-CBC                               --------------------- 2\r\n\n");
-  printf("  TFM - Test SST set UID                           --------------------- 3\r\n\n");
-  printf("  TFM - Test SST read / check UID                  --------------------- 4\r\n\n");
-  printf("  TFM - Test SST remove UID                        --------------------- 5\r\n\n");
-  printf("  TFM - Test EAT                                   --------------------- 6\r\n\n");
-  printf("  TFM - Test ITS set UID                           --------------------- 7\r\n\n");
-  printf("  TFM - Test ITS read / check UID                  --------------------- 8\r\n\n");
-  printf("  TFM - Test ITS remove UID                        --------------------- 9\r\n\n");
-  printf("  TFM - Test SHA224                                --------------------- a\r\n\n");
-  printf("  TFM - Test SHA256                                --------------------- b\r\n\n");
+  printf("  TFM - Test AES-CCM                               --------------------- 3\r\n\n");
+  printf("  TFM - Test SST set UID                           --------------------- 4\r\n\n");
+  printf("  TFM - Test SST read / check UID                  --------------------- 5\r\n\n");
+  printf("  TFM - Test SST remove UID                        --------------------- 6\r\n\n");
+  printf("  TFM - Test EAT                                   --------------------- 7\r\n\n");
+  printf("  TFM - Test ITS set UID                           --------------------- 8\r\n\n");
+  printf("  TFM - Test ITS read / check UID                  --------------------- 9\r\n\n");
+  printf("  TFM - Test ITS remove UID                        --------------------- a\r\n\n");
+  printf("  TFM - Test SHA224                                --------------------- b\r\n\n");
+  printf("  TFM - Test SHA256                                --------------------- c\r\n\n");
   printf("  Exit TFM Examples Menu                           --------------------- x\r\n\n");
 }
 /**

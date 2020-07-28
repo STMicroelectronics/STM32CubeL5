@@ -30,7 +30,7 @@
 #include "stm32l562e_discovery_ospi.h"
 #include "stm32l562e_discovery_audio.h"
 #include "stm32l562e_discovery_motion_sensors.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

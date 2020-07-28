@@ -23,55 +23,24 @@
 extern "C" {
 #endif
 
-#include <stdio.h>
+#include <mcuboot_config/mcuboot_config.h>
+#include <mcuboot_config/mcuboot_logging.h>
 
-#define BOOT_LOG_LEVEL_OFF      0
-#define BOOT_LOG_LEVEL_ERROR    1
-#define BOOT_LOG_LEVEL_WARNING  2
-#define BOOT_LOG_LEVEL_INFO     3
-#define BOOT_LOG_LEVEL_DEBUG    4
+#ifdef MCUBOOT_HAVE_LOGGING
 
-/*
- * The compiled log level determines the maximum level that can be
- * printed. Messages at or below this level can be printed.
- */
-#ifndef BOOT_LOG_LEVEL
-#ifdef TFM_DEV_MODE
-#define BOOT_LOG_LEVEL BOOT_LOG_LEVEL_INFO
+#define BOOT_LOG_ERR(...) MCUBOOT_LOG_ERR(__VA_ARGS__)
+#define BOOT_LOG_WRN(...) MCUBOOT_LOG_WRN(__VA_ARGS__)
+#define BOOT_LOG_INF(...) MCUBOOT_LOG_INF(__VA_ARGS__)
+#define BOOT_LOG_DBG(...) MCUBOOT_LOG_DBG(__VA_ARGS__)
+
 #else
-#define BOOT_LOG_LEVEL BOOT_LOG_LEVEL_OFF
-#endif
-#endif
 
-int sim_log_enabled(int level);
-
-#if BOOT_LOG_LEVEL >= BOOT_LOG_LEVEL_ERROR
-#define BOOT_LOG_ERR(_fmt, ...)                  \
-    printf("[ERR] " _fmt "\r\n", ##__VA_ARGS__)
-#else
 #define BOOT_LOG_ERR(...) IGNORE(__VA_ARGS__)
-#endif
-
-#if BOOT_LOG_LEVEL >= BOOT_LOG_LEVEL_WARNING
-#define BOOT_LOG_WRN(_fmt, ...)                  \
-    printf("[WRN] " _fmt "\r\n", ##__VA_ARGS__)
-#else
 #define BOOT_LOG_WRN(...) IGNORE(__VA_ARGS__)
-#endif
-
-#if BOOT_LOG_LEVEL >= BOOT_LOG_LEVEL_INFO
-#define BOOT_LOG_INF(_fmt, ...)                  \
-    printf("[INF] " _fmt "\r\n", ##__VA_ARGS__)
-#else
 #define BOOT_LOG_INF(...) IGNORE(__VA_ARGS__)
-#endif
-
-#if BOOT_LOG_LEVEL >= BOOT_LOG_LEVEL_DEBUG
-#define BOOT_LOG_DBG(_fmt, ...)                  \
-    printf("[DBG] " _fmt "\r\n", ##__VA_ARGS__)
-#else
 #define BOOT_LOG_DBG(...) IGNORE(__VA_ARGS__)
-#endif
+
+#endif /* MCUBOOT_HAVE_LOGGING */
 
 #ifdef __cplusplus
 }

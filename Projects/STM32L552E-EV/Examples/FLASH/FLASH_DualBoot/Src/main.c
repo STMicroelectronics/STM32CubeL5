@@ -35,7 +35,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-const GUI_Drv_t LCD_Driver =
+const LCD_UTILS_Drv_t LCD_Driver =
 {
   BSP_LCD_DrawBitmap,
   BSP_LCD_FillRGBRect,
@@ -66,6 +66,7 @@ FLASH_OBProgramInitTypeDef    OBInit;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_ICACHE_Init(void);
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 static void Display_ExampleDescription(void);
@@ -94,7 +95,6 @@ int main(void)
        - Low Level Initialization
      */
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -113,6 +113,7 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_ICACHE_Init();
   /* USER CODE BEGIN 2 */
   /* Configure BUTTON_WAKEUP */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
@@ -128,7 +129,7 @@ int main(void)
   BSP_LED_On(LED4);
   BSP_LED_On(LED5);
 
-  /*--- If WKUP push-button is pushed, Set or reset BFB2 bit to enable or disable
+  /*--- If WKUP push-button is pushed, Set or reset SWAP_BANK option bit to enable or disable
   boot from Bank2 (active after next reset), w/ Boot pins set in Boot from Flash
   memory position ---*/
   /* USER CODE END 2 */
@@ -238,13 +239,14 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
@@ -261,7 +263,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -276,6 +278,33 @@ void SystemClock_Config(void)
   }
 }
 
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache (default 2-ways set associative cache)
+  */
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
+}
+
 /* USER CODE BEGIN 4 */
 /**
   * @brief  Display main example messages
@@ -288,45 +317,45 @@ static void Display_ExampleDescription(void)
 
   /* Initialize the LCD */
   BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE);
-  GUI_SetFuncDriver(&LCD_Driver); /* SetFunc before setting device */
-  GUI_SetDevice(0);               /* SetDevice after funcDriver is set */
+  UTIL_LCD_SetFuncDriver(&LCD_Driver);
+  UTIL_LCD_SetDevice(0);
 
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   BSP_LCD_DisplayOn(0);
   BSP_LCD_GetXSize(0, &x_size);
 #ifdef FLASH_BANK1
-  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_BLUE);
+  UTIL_LCD_FillRect(0, 0, x_size, 80, UTIL_LCD_COLOR_BLUE);
 #else
-  GUI_FillRect(0, 0, x_size, 80, GUI_COLOR_RED);
+  UTIL_LCD_FillRect(0, 0, x_size, 80, UTIL_LCD_COLOR_RED);
 #endif
 
   /* Display LCD messages */
 #ifdef FLASH_BANK1
-  GUI_SetBackColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
 #else
-  GUI_SetBackColor(GUI_COLOR_RED);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_RED);
 #endif
-  GUI_SetTextColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 10, (uint8_t *)MESSAGE1, CENTER_MODE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)MESSAGE1, CENTER_MODE);
 
-  GUI_SetFont(&Font16);
-  GUI_DisplayStringAt(0, 40, (uint8_t *)MESSAGE2, CENTER_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(0, 40, (uint8_t *)MESSAGE2, CENTER_MODE);
 
 #ifdef FLASH_BANK1
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
 #else
-  GUI_SetTextColor(GUI_COLOR_RED);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
 #endif
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
 
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 95,  (uint8_t *)MESSAGE3, CENTER_MODE);
-  GUI_DisplayStringAt(0, 110, (uint8_t *)MESSAGE4, CENTER_MODE);
-  GUI_DisplayStringAt(0, 140, (uint8_t *)MESSAGE5, CENTER_MODE);
-  GUI_DisplayStringAt(0, 155, (uint8_t *)MESSAGE6, CENTER_MODE);
+  UTIL_LCD_SetFont(&Font16);
+  UTIL_LCD_DisplayStringAt(0, 95,  (uint8_t *)MESSAGE3, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 110, (uint8_t *)MESSAGE4, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 140, (uint8_t *)MESSAGE5, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 155, (uint8_t *)MESSAGE6, CENTER_MODE);
 }
 
 /* USER CODE END 4 */
@@ -354,7 +383,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

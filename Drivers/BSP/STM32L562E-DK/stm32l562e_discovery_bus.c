@@ -37,6 +37,7 @@
 /** @defgroup STM32L562E-DK_BUS_Private_Defines STM32L562E-DK BUS Private Defines
   * @{
   */
+#if defined(HAL_I2C_MODULE_ENABLED)
 #define I2C_SPEED_FREQ_STANDARD         0U   /* 100 kHz */
 #define I2C_SPEED_FREQ_FAST             1U   /* 400 kHz */
 #define I2C_SPEED_FREQ_FAST_PLUS        2U   /* 1 MHz */
@@ -51,6 +52,7 @@
 #define I2C_SCLH_MAX                    256U
 #define I2C_SCLL_MAX                    256U
 #define SEC2NSEC                        1000000000UL
+#endif /* HAL_I2C_MODULE_ENABLED */
 /**
   * @}
   */
@@ -58,6 +60,7 @@
 /** @defgroup STM32L562E-DK_BUS_Private_Types STM32L562E-DK BUS Private Types
   * @{
   */
+#if defined(HAL_I2C_MODULE_ENABLED)
 typedef struct
 {
   uint32_t freq;       /* Frequency in Hz */
@@ -81,6 +84,7 @@ typedef struct
   uint32_t sclh;       /* SCL high period */
   uint32_t scll;       /* SCL low period */
 } I2C_Timings_t;
+#endif /* HAL_I2C_MODULE_ENABLED */
 /**
   * @}
   */
@@ -88,6 +92,7 @@ typedef struct
 /** @defgroup STM32L562E-DK_BUS_Private_Constants STM32L562E-DK BUS Private Constants
   * @{
   */
+#if defined(HAL_I2C_MODULE_ENABLED)
 static const I2C_Charac_t I2C_Charac[] =
 {
   [I2C_SPEED_FREQ_STANDARD] =
@@ -133,6 +138,7 @@ static const I2C_Charac_t I2C_Charac[] =
     .dnf = I2C_DIGITAL_FILTER_COEF,
   },
 };
+#endif /* HAL_I2C_MODULE_ENABLED */
 /**
   * @}
   */
@@ -140,12 +146,21 @@ static const I2C_Charac_t I2C_Charac[] =
 /** @defgroup STM32L562E-DK_BUS_Private_Variables STM32L562E-DK BUS Private Variables
   * @{
   */
+#if defined(HAL_I2C_MODULE_ENABLED)
 static uint32_t I2c1InitCounter = 0;
 #if (USE_HAL_I2C_REGISTER_CALLBACKS == 1)
 static uint32_t Bus_IsI2c1MspCbValid = 0;
 #endif
 static I2C_Timings_t I2c_valid_timing[I2C_VALID_TIMING_NBR];
 static uint32_t      I2c_valid_timing_nbr = 0;
+#endif /* HAL_I2C_MODULE_ENABLED */
+
+#if defined(HAL_SPI_MODULE_ENABLED)
+static uint32_t Spi1InitCounter = 0;
+#if (USE_HAL_SPI_REGISTER_CALLBACKS == 1)
+static uint32_t Bus_IsSpi1MspCbValid = 0;
+#endif
+#endif /* HAL_SPI_MODULE_ENABLED */
 /**
   * @}
   */
@@ -153,7 +168,13 @@ static uint32_t      I2c_valid_timing_nbr = 0;
 /** @defgroup STM32L562E-DK_BUS_Exported_Variables STM32L562E-DK BUS Exported Variables
   * @{
   */
+#if defined(HAL_I2C_MODULE_ENABLED)
 I2C_HandleTypeDef hbus_i2c1 = {0};
+#endif /* HAL_I2C_MODULE_ENABLED */
+
+#if defined(HAL_SPI_MODULE_ENABLED)
+SPI_HandleTypeDef hbus_spi1 = {0};
+#endif /* HAL_SPI_MODULE_ENABLED */
 /**
   * @}
   */
@@ -161,6 +182,7 @@ I2C_HandleTypeDef hbus_i2c1 = {0};
 /** @defgroup STM32L562E-DK_BUS_Private_FunctionPrototypes STM32L562E-DK BUS Private Function Prototypes
   * @{
   */
+#if defined(HAL_I2C_MODULE_ENABLED)
 static void     I2C1_MspInit(I2C_HandleTypeDef *hI2c);
 static void     I2C1_MspDeInit(I2C_HandleTypeDef *hI2c);
 static int32_t  I2C1_WriteReg(uint16_t DevAddr, uint16_t MemAddSize, uint16_t Reg, uint8_t *pData, uint16_t Length);
@@ -168,6 +190,13 @@ static int32_t  I2C1_ReadReg(uint16_t DevAddr, uint16_t MemAddSize, uint16_t Reg
 static uint32_t I2C_GetTiming(uint32_t clock_src_freq, uint32_t i2c_freq);
 static uint32_t I2C_Compute_SCLL_SCLH(uint32_t clock_src_freq, uint32_t I2C_speed);
 static void     I2C_Compute_PRESC_SCLDEL_SDADEL(uint32_t clock_src_freq, uint32_t I2C_speed);
+#endif /* HAL_I2C_MODULE_ENABLED */
+
+#if defined(HAL_SPI_MODULE_ENABLED)
+static void     SPI1_MspInit(SPI_HandleTypeDef *hSpi);
+static void     SPI1_MspDeInit(SPI_HandleTypeDef *hSpi);
+static uint32_t SPI_GetPrescaler(uint32_t clock_src_freq, uint32_t baudfreq_mbps);
+#endif /* HAL_SPI_MODULE_ENABLED */
 /**
   * @}
   */
@@ -176,6 +205,18 @@ static void     I2C_Compute_PRESC_SCLDEL_SDADEL(uint32_t clock_src_freq, uint32_
   * @{
   */
 
+/**
+  * @brief  Provide a tick value in millisecond.
+  * @retval Tick value.
+  */
+int32_t BSP_GetTick(void)
+{
+  uint32_t ret;
+  ret = HAL_GetTick();
+  return (int32_t)ret;
+}
+
+#if defined(HAL_I2C_MODULE_ENABLED)
 /**
   * @brief  Initialize BSP I2C1.
   * @retval BSP status.
@@ -278,7 +319,7 @@ __weak HAL_StatusTypeDef MX_I2C1_Init(I2C_HandleTypeDef *hI2c, uint32_t timing)
   else
   {
     uint32_t analog_filter;
-    
+
     analog_filter = (I2C_USE_ANALOG_FILTER == 1U) ? I2C_ANALOGFILTER_ENABLE : I2C_ANALOGFILTER_DISABLE;
     if (HAL_I2CEx_ConfigAnalogFilter(hI2c, analog_filter) != HAL_OK)
     {
@@ -367,17 +408,6 @@ int32_t BSP_I2C1_IsReady(uint16_t DevAddr, uint32_t Trials)
   return status;
 }
 
-/**
-  * @brief  Provide a tick value in millisecond.
-  * @retval Tick value.
-  */
-int32_t BSP_GetTick(void)
-{
-  uint32_t ret;
-  ret = HAL_GetTick();
-  return (int32_t)ret;
-}
-
 #if (USE_HAL_I2C_REGISTER_CALLBACKS == 1)
 /**
   * @brief  Register Default I2C1 Bus Msp Callbacks
@@ -436,6 +466,227 @@ int32_t BSP_I2C1_RegisterMspCallbacks(BSP_I2C_Cb_t *Callback)
   return ret;
 }
 #endif /* USE_HAL_I2C_REGISTER_CALLBACKS */
+#endif /* HAL_I2C_MODULE_ENABLED */
+
+#if defined(HAL_SPI_MODULE_ENABLED)
+/**
+  * @brief  Initialize BSP SPI1.
+  * @retval BSP status.
+  */
+int32_t BSP_SPI1_Init(void)
+{
+  int32_t status = BSP_ERROR_NONE;
+
+  hbus_spi1.Instance = BUS_SPI1;
+
+  if (Spi1InitCounter == 0U)
+  {
+    if (HAL_SPI_GetState(&hbus_spi1) == HAL_SPI_STATE_RESET)
+    {
+#if (USE_HAL_SPI_REGISTER_CALLBACKS == 0)
+      /* Init the SPI1 Msp */
+      SPI1_MspInit(&hbus_spi1);
+
+      if (MX_SPI1_Init(&hbus_spi1, SPI_GetPrescaler(HAL_RCC_GetPCLK2Freq(), BUS_SPI1_BAUDRATE)) != HAL_OK)
+      {
+        status = BSP_ERROR_BUS_FAILURE;
+      }
+#else
+      if (Bus_IsSpi1MspCbValid == 0U)
+      {
+        if (BSP_SPI1_RegisterDefaultMspCallbacks() != BSP_ERROR_NONE)
+        {
+          status = BSP_ERROR_MSP_FAILURE;
+        }
+      }
+
+      if (status == BSP_ERROR_NONE)
+      {
+        if (MX_SPI1_Init(&hbus_spi1, SPI_GetPrescaler(HAL_RCC_GetPCLK2Freq(), BUS_SPI1_BAUDRATE)) != HAL_OK)
+        {
+          status = BSP_ERROR_BUS_FAILURE;
+        }
+      }
+#endif
+    }
+  }
+  if (Spi1InitCounter < 0xFFFFFFFFU)
+  {
+    Spi1InitCounter++;
+  }
+  return status;
+}
+
+/**
+  * @brief  DeInitialize BSP SPI1.
+  * @retval BSP status.
+  */
+int32_t BSP_SPI1_DeInit(void)
+{
+  int32_t status = BSP_ERROR_NONE;
+
+  if (Spi1InitCounter > 0U)
+  {
+    Spi1InitCounter--;
+    if (Spi1InitCounter == 0U)
+    {
+#if (USE_HAL_SPI_REGISTER_CALLBACKS == 0)
+      SPI1_MspDeInit(&hbus_spi1);
+#endif
+
+      /* De-Init the SPI */
+      if (HAL_SPI_DeInit(&hbus_spi1) != HAL_OK)
+      {
+        status = BSP_ERROR_PERIPH_FAILURE;
+      }
+    }
+  }
+
+  return status;
+}
+
+/**
+  * @brief  MX SPI1 initialization.
+  * @param  hSpi SPI handle.
+  * @param  baudrate_presc SPI baud rate prescaler.
+  * @retval HAL status.
+  */
+__weak HAL_StatusTypeDef MX_SPI1_Init(SPI_HandleTypeDef *hSpi, uint32_t baudrate_presc)
+{
+  HAL_StatusTypeDef status = HAL_OK;
+
+  hSpi->Init.Mode = SPI_MODE_MASTER;
+  hSpi->Init.Direction = SPI_DIRECTION_2LINES;
+  hSpi->Init.DataSize = SPI_DATASIZE_8BIT;
+  hSpi->Init.CLKPolarity = SPI_POLARITY_LOW;
+  hSpi->Init.CLKPhase = SPI_PHASE_1EDGE;
+  hSpi->Init.NSS = SPI_NSS_SOFT;
+  hSpi->Init.BaudRatePrescaler = baudrate_presc;
+  hSpi->Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hSpi->Init.TIMode = SPI_TIMODE_DISABLE;
+  hSpi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hSpi->Init.CRCPolynomial = 7;
+  hSpi->Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+  hSpi->Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
+  if (HAL_SPI_Init(hSpi) != HAL_OK)
+  {
+    status = HAL_ERROR;
+  }
+
+  return status;
+}
+
+/**
+  * @brief  Send data through SPI BUS.
+  * @param  pData Pointer to data buffer to send.
+  * @param  Length Length of data in byte.
+  * @retval BSP status.
+  */
+int32_t BSP_SPI1_Send(uint8_t *pData, uint16_t Length)
+{
+  int32_t status = BSP_ERROR_NONE;
+
+  if (HAL_SPI_Transmit(&hbus_spi1, pData, Length, BUS_SPI1_TIMEOUT) != HAL_OK)
+  {
+    status = BSP_ERROR_BUS_FAILURE;
+  }
+  return status;
+}
+
+/**
+  * @brief  Receive data from SPI BUS.
+  * @param  pData Pointer to data buffer to receive.
+  * @param  Length Length of data in byte.
+  * @retval BSP status.
+  */
+int32_t BSP_SPI1_Recv(uint8_t *pData, uint16_t Length)
+{
+  int32_t status = BSP_ERROR_NONE;
+
+  if (HAL_SPI_Receive(&hbus_spi1, pData, Length, BUS_SPI1_TIMEOUT) != HAL_OK)
+  {
+    status = BSP_ERROR_BUS_FAILURE;
+  }
+  return status;
+}
+
+/**
+  * @brief  Send and receive data to/from SPI BUS (Full duplex).
+  * @param  pTxData  Pointer to data buffer to send.
+  * @param  pRxData  Pointer to data buffer to receive.
+  * @param  Length   Length of data in byte.
+  * @retval BSP status.
+  */
+int32_t BSP_SPI1_SendRecv(uint8_t *pTxData, uint8_t *pRxData, uint16_t Length)
+{
+  int32_t status = BSP_ERROR_NONE;
+
+  if(HAL_SPI_TransmitReceive(&hbus_spi1, pTxData, pRxData, Length, BUS_SPI1_TIMEOUT) != HAL_OK)
+  {
+    status = BSP_ERROR_BUS_FAILURE;
+  }
+  return status;
+}
+
+#if (USE_HAL_SPI_REGISTER_CALLBACKS == 1)
+/**
+  * @brief  Register Default SPI1 Bus Msp Callbacks
+  * @retval BSP status
+  */
+int32_t BSP_SPI1_RegisterDefaultMspCallbacks(void)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  __HAL_SPI_RESET_HANDLE_STATE(&hbus_spi1);
+
+  /* Register default MspInit/MspDeInit Callback */
+  if (HAL_SPI_RegisterCallback(&hbus_spi1, HAL_SPI_MSPINIT_CB_ID, SPI1_MspInit) != HAL_OK)
+  {
+    ret = BSP_ERROR_PERIPH_FAILURE;
+  }
+  else if (HAL_SPI_RegisterCallback(&hbus_spi1, HAL_SPI_MSPDEINIT_CB_ID, SPI1_MspDeInit) != HAL_OK)
+  {
+    ret = BSP_ERROR_PERIPH_FAILURE;
+  }
+  else
+  {
+    Bus_IsSpi1MspCbValid = 1U;
+  }
+
+  /* BSP status */
+  return ret;
+}
+
+/**
+  * @brief Register SPI1 Bus Msp Callbacks
+  * @param Callbacks pointer to SPI1 MspInit/MspDeInit callback functions
+  * @retval BSP status
+  */
+int32_t BSP_SPI1_RegisterMspCallbacks(BSP_SPI_Cb_t *Callback)
+{
+  int32_t ret = BSP_ERROR_NONE;
+
+  __HAL_SPI_RESET_HANDLE_STATE(&hbus_spi1);
+
+  /* Register MspInit/MspDeInit Callbacks */
+  if (HAL_SPI_RegisterCallback(&hbus_spi1, HAL_SPI_MSPINIT_CB_ID, Callback->pMspSpiInitCb) != HAL_OK)
+  {
+    ret = BSP_ERROR_PERIPH_FAILURE;
+  }
+  else if (HAL_SPI_RegisterCallback(&hbus_spi1, HAL_SPI_MSPDEINIT_CB_ID, Callback->pMspSpiDeInitCb) != HAL_OK)
+  {
+    ret = BSP_ERROR_PERIPH_FAILURE;
+  }
+  else
+  {
+    Bus_IsSpi1MspCbValid = 1U;
+  }
+
+  /* BSP status */
+  return ret;
+}
+#endif /* USE_HAL_SPI_REGISTER_CALLBACKS */
+#endif /* HAL_SPI_MODULE_ENABLED */
 /**
   * @}
   */
@@ -444,6 +695,7 @@ int32_t BSP_I2C1_RegisterMspCallbacks(BSP_I2C_Cb_t *Callback)
   * @{
   */
 
+#if defined(HAL_I2C_MODULE_ENABLED)
 /**
   * @brief  Initializes I2C1 MSP.
   * @param  hI2c I2C handle.
@@ -543,7 +795,7 @@ static int32_t I2C1_WriteReg(uint16_t DevAddr, uint16_t Reg, uint16_t MemAddSize
     else
     {
       status = BSP_ERROR_PERIPH_FAILURE;
-    }    
+    }
   }
 
   return status;
@@ -585,7 +837,8 @@ static int32_t I2C1_ReadReg(uint16_t DevAddr, uint16_t Reg, uint16_t MemAddSize,
     else
     {
       status = BSP_ERROR_PERIPH_FAILURE;
-    }    
+    }
+
   }
 
   return status;
@@ -788,6 +1041,121 @@ static uint32_t I2C_Compute_SCLL_SCLH (uint32_t clock_src_freq, uint32_t I2C_spe
 
   return ret;
 }
+#endif /* HAL_I2C_MODULE_ENABLED */
+
+#if defined(HAL_SPI_MODULE_ENABLED)
+/**
+  * @brief  Initializes SPI1 MSP.
+  * @param  hSpi SPI handle.
+  * @retval None
+  */
+static void  SPI1_MspInit(SPI_HandleTypeDef *hSpi)
+{
+  GPIO_InitTypeDef  gpio_init_structure;
+
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(hSpi);
+
+  /*** Configure the GPIOs ***/
+  /* Enable VddIO2 for GPIOG */
+  __HAL_RCC_PWR_CLK_ENABLE();
+  HAL_PWREx_EnableVddIO2();
+
+  /* Enable GPIO clock */
+  BUS_SPI1_SCK_GPIO_CLK_ENABLE();
+  BUS_SPI1_MISO_GPIO_CLK_ENABLE();
+  BUS_SPI1_MOSI_GPIO_CLK_ENABLE();
+
+  /* Configure SPI SCK as alternate function */
+  gpio_init_structure.Pin       = BUS_SPI1_SCK_GPIO_PIN;
+  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+  gpio_init_structure.Pull      = GPIO_PULLUP;
+  gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+  gpio_init_structure.Alternate = BUS_SPI1_SCK_GPIO_AF;
+  HAL_GPIO_Init(BUS_SPI1_SCK_GPIO_PORT, &gpio_init_structure);
+
+  /* Configure SPI MISO as alternate function */
+  gpio_init_structure.Pin       = BUS_SPI1_MISO_GPIO_PIN;
+  gpio_init_structure.Alternate = BUS_SPI1_MISO_GPIO_AF;
+  HAL_GPIO_Init(BUS_SPI1_MISO_GPIO_PORT, &gpio_init_structure);
+
+  /* Configure SPI MOSI as alternate function */
+  gpio_init_structure.Pin       = BUS_SPI1_MOSI_GPIO_PIN;
+  gpio_init_structure.Alternate = BUS_SPI1_MOSI_GPIO_AF;
+  HAL_GPIO_Init(BUS_SPI1_MOSI_GPIO_PORT, &gpio_init_structure);
+
+  /*** Configure the SPI peripheral ***/
+  /* Enable SPI clock */
+  BUS_SPI1_CLK_ENABLE();
+
+  /* Force the SPI peripheral clock reset */
+  BUS_SPI1_FORCE_RESET();
+
+  /* Release the SPI peripheral clock reset */
+  BUS_SPI1_RELEASE_RESET();
+}
+
+/**
+  * @brief  DeInitializes SPI MSP.
+  * @param  hSpi SPI handle.
+  * @retval None
+  */
+static void SPI1_MspDeInit(SPI_HandleTypeDef *hSpi)
+{
+  GPIO_InitTypeDef  gpio_init_structure;
+
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(hSpi);
+
+  /* De-initialiaze SPI SCK, MISO and MOSI */
+  gpio_init_structure.Pin = BUS_SPI1_SCK_GPIO_PIN;
+  HAL_GPIO_DeInit(BUS_SPI1_SCK_GPIO_PORT, gpio_init_structure.Pin);
+  gpio_init_structure.Pin = BUS_SPI1_MISO_GPIO_PIN;
+  HAL_GPIO_DeInit(BUS_SPI1_MISO_GPIO_PORT, gpio_init_structure.Pin);
+  gpio_init_structure.Pin = BUS_SPI1_MOSI_GPIO_PIN;
+  HAL_GPIO_DeInit(BUS_SPI1_MOSI_GPIO_PORT, gpio_init_structure.Pin);
+
+  /* Disable SPI clock */
+  BUS_SPI1_CLK_DISABLE();
+}
+
+/**
+  * @brief  Convert the SPI baud rate into SPI baud rate prescaler.
+  * @param  clock_src_freq SPI source clock in HZ.
+  * @param  baudfreq_mbps SPI baud rate.
+  * @retval SPI baud rate prescaler.
+  */
+static uint32_t SPI_GetPrescaler(uint32_t clock_src_freq, uint32_t baudfreq_mbps)
+{
+  uint32_t divisor = 0;
+  uint32_t spi_clk = clock_src_freq;
+  uint32_t presc = 0;
+
+  static const uint32_t baudfreq[]=
+  {
+    SPI_BAUDRATEPRESCALER_2,
+    SPI_BAUDRATEPRESCALER_4,
+    SPI_BAUDRATEPRESCALER_8,
+    SPI_BAUDRATEPRESCALER_16,
+    SPI_BAUDRATEPRESCALER_32,
+    SPI_BAUDRATEPRESCALER_64,
+    SPI_BAUDRATEPRESCALER_128,
+    SPI_BAUDRATEPRESCALER_256,
+  };
+
+  while (spi_clk > baudfreq_mbps)
+  {
+    presc = baudfreq[divisor];
+    divisor++;
+    if (divisor > 7U)
+      break;
+
+    spi_clk = (spi_clk >> 1);
+  }
+
+  return presc;
+}
+#endif /* HAL_SPI_MODULE_ENABLED */
 
 /**
   * @}

@@ -68,7 +68,7 @@ void OSPI_NOR_demo(void)
   
   led = LED_GREEN;
   OSPI_NOR_SetHint();
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Put JP7 in position OSPI_FLASH_NCS", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Put JP7 in position OSPI_FLASH_NCS", LEFT_MODE);
   while (1)
   {    
     if(WakeupButtonPressed == SET)
@@ -88,9 +88,9 @@ void OSPI_NOR_demo(void)
   led = LED_ORANGE;
   lcd_text_ypos = LCD_TEXT_YPOS_START;
   OSPI_NOR_SetHint();
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part I: Write & Read, Data Integrity,", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part I: Write & Read, Data Integrity,", LEFT_MODE);
   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"        Memory mapped", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"        Memory mapped", LEFT_MODE);
   lcd_text_ypos+=(LCD_TEXT_YPOS_INC * 2);
   
   /*##-1- Configure the OSPI NOR device ######################################*/
@@ -101,13 +101,13 @@ void OSPI_NOR_demo(void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
     /*##-2- Read & check the OSPI NOR info ###################################*/
@@ -139,25 +139,25 @@ void OSPI_NOR_demo(void)
        (sOSPI_NOR_Info.EraseSubSector1Number != (MX25LM51245G_FLASH_SIZE/MX25LM51245G_SUBSECTOR_4K)) ||
        (sOSPI_NOR_Info.ProgPagesNumber       != (MX25LM51245G_FLASH_SIZE/MX25LM51245G_PAGE_SIZE)))
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Get Info : Failed", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Get Info : Failed", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Get Info : OK", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Get Info : OK", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
       /*##-3- Erase OSPI NOR memory ##########################################*/ 
       if (BSP_OSPI_NOR_Erase_Block(0, OSPI_NOR_WRITE_READ_ADDR, MX25LM51245G_ERASE_64K) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : Failed", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : Failed", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
         /*##-4- OSPI NOR memory read/write access  ###########################*/   
@@ -167,49 +167,49 @@ void OSPI_NOR_demo(void)
         /* Write data to the OSPI NOR memory */
         if (BSP_OSPI_NOR_Write(0, ospi_nor_aTxBuffer, OSPI_NOR_WRITE_READ_ADDR, OSPI_NOR_BUFFER_SIZE) != BSP_ERROR_NONE)
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : Failed", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : Failed", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
         }
         else
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
           /* Read back data from the OSPI NOR memory */
           if (BSP_OSPI_NOR_Read(0, ospi_nor_aRxBuffer, OSPI_NOR_WRITE_READ_ADDR, OSPI_NOR_BUFFER_SIZE) != BSP_ERROR_NONE)
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : Failed", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : Failed", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
           }
           else
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : OK", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : OK", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
             /*##-5- Checking data integrity ##################################*/  
             if(Buffercmp(ospi_nor_aRxBuffer, ospi_nor_aTxBuffer, OSPI_NOR_BUFFER_SIZE) > 0)
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : Failed", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : Failed", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
             }
             else
             {    
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : OK", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : OK", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
               /*##-6- OSPI NOR memory in memory-mapped mode###################*/
               if (BSP_OSPI_NOR_EnableMemoryMappedMode(0) != BSP_ERROR_NONE)
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : Failed", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : Failed", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
               }
               else
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : OK", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : OK", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
                 for(index = 0, data_ptr = (__IO uint8_t *)(OSPI_NOR_BASE_ADDR + OSPI_NOR_WRITE_READ_ADDR); 
@@ -217,18 +217,18 @@ void OSPI_NOR_demo(void)
                 {
                   if(*data_ptr != ospi_nor_aTxBuffer[index])
                   {
-                    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : Failed", LEFT_MODE);
+                    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : Failed", LEFT_MODE);
                     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+                    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
                     break;
                   }
                 }
                 
                 if(index == OSPI_NOR_BUFFER_SIZE)
                 {
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : OK", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : OK", LEFT_MODE);
                   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
                   led = LED_GREEN;
                 }
               }
@@ -260,7 +260,7 @@ void OSPI_NOR_demo(void)
   lcd_text_ypos = LCD_TEXT_YPOS_START;
   OSPI_NOR_SetHint();
   
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part II : Erase Suspend & Resume", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part II : Erase Suspend & Resume", LEFT_MODE);
   lcd_text_ypos+=(LCD_TEXT_YPOS_INC * 2);
 
   /*##-1- Deconfigure the OSPI NOR device ####################################*/
@@ -268,13 +268,13 @@ void OSPI_NOR_demo(void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : Failed", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : Failed", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : OK", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : OK", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
     /*##-2- Reconfigure the OSPI NOR device ##################################*/
@@ -283,21 +283,21 @@ void OSPI_NOR_demo(void)
     
     if (status != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
       /*##-3- Erase OSPI NOR memory ##########################################*/ 
       if (BSP_OSPI_NOR_Erase_Block(0, 0, MX25LM51245G_ERASE_4K) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : Failed", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : Failed", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
       }
       else
       {
@@ -305,29 +305,29 @@ void OSPI_NOR_demo(void)
         /*##-4- Suspend erase OSPI NOR memory ################################*/
         if (BSP_OSPI_NOR_SuspendErase(0) != BSP_ERROR_NONE)
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Suspend : Failed", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Suspend : Failed", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
         }
         else
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Suspend : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Suspend : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
           
           /*##-6- Resume erase OSPI NOR memory ###############################*/ 
           if (BSP_OSPI_NOR_ResumeErase(0) != BSP_ERROR_NONE)
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Resume : Failed", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Resume : Failed", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
           }
           else
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Resume : OK", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase Resume : OK", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
             
             /*##-7- Check OSPI NOR memory status  ############################*/   
@@ -339,40 +339,40 @@ void OSPI_NOR_demo(void)
             
             if(status != BSP_ERROR_NONE)
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : Failed", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : Failed", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
             }
             else
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : OK", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : OK", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
               
               /*##-8- OSPI NOR memory read access  ###########################*/   
               /* Read back data from the OSPI NOR memory */
               if (BSP_OSPI_NOR_Read(0, ospi_nor_aRxBuffer, 0, MX25LM51245G_SUBSECTOR_4K) != BSP_ERROR_NONE)
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : Failed", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : Failed", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
               }
               else
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : OK", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : OK", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
                 
                 /*##-9- Checking data integrity ##############################*/  
                 if (DataCmp(ospi_nor_aRxBuffer, 0xFF, MX25LM51245G_SUBSECTOR_4K) > 0)
                 {
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : Failed", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : Failed", LEFT_MODE);
                   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
                 }
                 else
                 {    
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : OK", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : OK", LEFT_MODE);
                   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
                   led = LED_GREEN;
                 }
               }
@@ -403,9 +403,9 @@ void OSPI_NOR_demo(void)
   lcd_text_ypos = LCD_TEXT_YPOS_START;
   OSPI_NOR_SetHint();
   
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part III : Enter & Leave Flash Power", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part III : Enter & Leave Flash Power", LEFT_MODE);
   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"           Down mode", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"           Down mode", LEFT_MODE);
   lcd_text_ypos+=(LCD_TEXT_YPOS_INC * 2);
 
   /*##-1- Deconfigure the OSPI NOR device ####################################*/
@@ -413,13 +413,13 @@ void OSPI_NOR_demo(void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : Failed", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : Failed", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : OK", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : OK", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
     /*##-2- Reconfigure the OSPI NOR device ##################################*/
@@ -428,25 +428,25 @@ void OSPI_NOR_demo(void)
     
     if (status != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
       /*##-3- Erase OSPI NOR memory ##########################################*/ 
       if (BSP_OSPI_NOR_Erase_Block(0, OSPI_NOR_WRITE_READ_ADDR, MX25LM51245G_ERASE_4K) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : Failed", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : Failed", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Erase : OK", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
         /*##-4- OSPI NOR memory write access #################################*/
@@ -456,52 +456,52 @@ void OSPI_NOR_demo(void)
         /* Write data to the OSPI NOR memory */
         if (BSP_OSPI_NOR_Write(0, ospi_nor_aTxBuffer, OSPI_NOR_WRITE_READ_ADDR, OSPI_NOR_BUFFER_SIZE) != BSP_ERROR_NONE)
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : Failed", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : Failed", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
         }
         else
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Write : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
           /*##-5- Enter OSPI NOR memory in deep power down ###################*/ 
           if (BSP_OSPI_NOR_EnterDeepPowerDown(0) != BSP_ERROR_NONE)
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Enter Deep PwrDn : Failed", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Enter Deep PwrDn : Failed", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
           }
           else
           {
             /* !!! Warning : This is only a test of the API. To check if the memory is really in deep power down, 
                    need to use Idd to check the consumption !!! */
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Enter Deep PwrDn : OK", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Enter Deep PwrDn : OK", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
             
             /*##-6- Leave OSPI NOR memory from deep power down ###############*/ 
             HAL_Delay(100);
             if (BSP_OSPI_NOR_LeaveDeepPowerDown(0) != BSP_ERROR_NONE)
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Leave Deep PwrDn : Failed", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Leave Deep PwrDn : Failed", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
             }
             else
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Leave Deep PwrDn : OK", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Leave Deep PwrDn : OK", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
               
               /*##-7- OSPI NOR memory in memory-mapped mode#######################*/
               if (BSP_OSPI_NOR_EnableMemoryMappedMode(0) != BSP_ERROR_NONE)
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : Failed", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : Failed", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
               }
               else
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : OK", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Cfg : OK", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
                 for(index = 0, data_ptr = (__IO uint8_t *)(OSPI_NOR_BASE_ADDR + OSPI_NOR_WRITE_READ_ADDR); 
@@ -509,18 +509,18 @@ void OSPI_NOR_demo(void)
                 {
                   if(*data_ptr != ospi_nor_aTxBuffer[index])
                   {
-                    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : Failed", LEFT_MODE);
+                    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : Failed", LEFT_MODE);
                     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+                    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
                     break;
                   }
                 }
                 
                 if(index == OSPI_NOR_BUFFER_SIZE)
                 {
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : OK", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Mem-Mapped Access : OK", LEFT_MODE);
                   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
                   led = LED_GREEN;
                 }
               }
@@ -552,7 +552,7 @@ void OSPI_NOR_demo(void)
   lcd_text_ypos = LCD_TEXT_YPOS_START;
   OSPI_NOR_SetHint();
   
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part IV : Erase ... wait up to 300s", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part IV : Erase ... wait up to 300s", LEFT_MODE);
   lcd_text_ypos+=(LCD_TEXT_YPOS_INC * 2);
 
   /*##-1- Deconfigure the OSPI NOR device ####################################*/
@@ -560,13 +560,13 @@ void OSPI_NOR_demo(void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : Failed", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : Failed", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : OK", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR De-Initialization : OK", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
     /*##-2- Reconfigure the OSPI NOR device ##################################*/
@@ -575,27 +575,27 @@ void OSPI_NOR_demo(void)
     
     if (status != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : Failed", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Initialization : OK", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
       /*##-3- Erase OSPI NOR memory ##########################################*/ 
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Chip Erasing...", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Chip Erasing...", LEFT_MODE);
 
       if (BSP_OSPI_NOR_Erase_Chip(0) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Chip Erase : Failed", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Chip Erase : Failed", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Chip Erase : OK", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Chip Erase : OK", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
         /* Wait the end of the current operation on memory side */
@@ -606,13 +606,13 @@ void OSPI_NOR_demo(void)
             
         if(status != BSP_ERROR_NONE)
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : Failed", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : Failed", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
         }
         else
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Memory Status : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
           for (index = 0; index < (MX25LM51245G_FLASH_SIZE / MX25LM51245G_SUBSECTOR_4K); index++)
@@ -621,9 +621,9 @@ void OSPI_NOR_demo(void)
             /* Read back data from the OSPI NOR memory */
             if (BSP_OSPI_NOR_Read(0, ospi_nor_aRxBuffer, (index * MX25LM51245G_SUBSECTOR_4K), MX25LM51245G_SUBSECTOR_4K) != BSP_ERROR_NONE)
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : Failed", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Read : Failed", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
               break;
             }
             else
@@ -631,9 +631,9 @@ void OSPI_NOR_demo(void)
               /*##-5- Checking data integrity ################################*/  
               if(DataCmp(ospi_nor_aRxBuffer, 0xFF, MX25LM51245G_SUBSECTOR_4K) > 0)
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : Failed", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Compare : Failed", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test Aborted", LEFT_MODE);
                 break;
               }
             }
@@ -641,7 +641,7 @@ void OSPI_NOR_demo(void)
 
           if (index == (MX25LM51245G_FLASH_SIZE / MX25LM51245G_SUBSECTOR_4K))
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Test : OK", LEFT_MODE);
             led = LED_GREEN;
           }
         }
@@ -676,23 +676,23 @@ void OSPI_NOR_demo(void)
 static void OSPI_NOR_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set LCD Demo description */
-  GUI_FillRect(0, 0, 320, 60, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t*)"OSPI NOR", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t*)"Press Wakeup push-button", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t*)"to switch to next menu", CENTER_MODE); 
+  UTIL_LCD_FillRect(0, 0, 320, 60, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t*)"OSPI NOR", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t*)"Press Wakeup push-button", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t*)"to switch to next menu", CENTER_MODE); 
   
-  GUI_DrawRect(10, 70, 300, 160, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 71, 298, 158, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 70, 300, 160, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 71, 298, 158, UTIL_LCD_COLOR_BLUE);
   
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
 }
 
 /**

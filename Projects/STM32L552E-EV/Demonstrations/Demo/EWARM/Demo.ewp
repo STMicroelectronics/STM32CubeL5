@@ -389,7 +389,7 @@
                     <state>$PROJ_DIR$\..\..\Modules\imagebrowser</state>
                     <state>$PROJ_DIR$\..\..\Modules\main_app</state>
                     <state>$PROJ_DIR$\..\..\Modules\ucpd</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\Utilities\Basic_GUI</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\Utilities\lcd</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\TRACER_EMB</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Utilities\GUI_INTERFACE</state>
                 </option>
@@ -1516,9 +1516,9 @@
     <group>
         <name>Utilities</name>
         <group>
-            <name>Basic_GUI</name>
+            <name>lcd</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\Utilities\basic_gui\basic_gui.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</name>
             </file>
         </group>
         <group>

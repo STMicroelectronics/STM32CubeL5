@@ -1,5 +1,5 @@
 [ProjectFiles]
-HeaderPath=..\..\..\..\..\..\Utilities\basic_gui;..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV
+HeaderPath=..\..\..\..\..\..\Utilities\lcd;..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV
 [Others]
 Define=
 HALModule=SRAM;
@@ -8,4 +8,4 @@ Doc=../readme.txt;
 Drivers/BSP/Components=../../../../../../Drivers/BSP/Components/hx8347i/hx8347i_reg.c;../../../../../../Drivers/BSP/Components/hx8347i/hx8347i.c;../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152_reg.c;../../../../../../Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.c;
 Drivers/BSP/STM32L552E-EV=../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_lcd.c;../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_io.c;../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval_bus.c;../../../../../../Drivers/BSP/STM32L552E-EV/stm32l552e_eval.c;
 Drivers/STM32L5xx_HAL_Driver=../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_fmc.c;../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_sram.c;
-Utilities=../../../../../../Utilities/basic_gui/basic_gui.c;
+Utilities=../../../../../../Utilities/lcd/stm32_lcd.c;

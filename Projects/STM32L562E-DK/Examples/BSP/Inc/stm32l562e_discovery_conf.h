@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32l562e_discovery_conf.h
   * @author  MCD Application Team
-  * @brief   STM32L562E discovery board configuration file.
+  * @brief   STM32L562E-DK discovery board configuration file.
   *          This file should be copied to the application folder and renamed
   *          to stm32l562e_discovery_conf.h .
   ******************************************************************************
@@ -51,7 +51,8 @@ extern "C" {
 #define BSP_SD_IT_PRIORITY          0x07UL  /* Default is lowest priority level */
 
 /* Bus frequencies */
-#define BUS_I2C1_FREQUENCY          100000UL /* Frequency of I2C1 = 100 KHz */
+#define BUS_I2C1_FREQUENCY          100000UL  /* Frequency of I2C1 = 100 KHz */
+#define BUS_SPI1_BAUDRATE           5000000UL /* Baud rate of SPI1 = 5 Mbps */
 
 /* Default AUDIO IN internal buffer size in 32-bit words per micro */
 #define BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE 4096UL /* 4096*4 = 16Kbytes */

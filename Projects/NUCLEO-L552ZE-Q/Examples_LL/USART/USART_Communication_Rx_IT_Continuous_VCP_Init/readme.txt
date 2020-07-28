@@ -42,6 +42,11 @@ In case of errors, LED1 is blinking.
 
 Virtual Com port feature of STLINK could be used for UART communication between board and PC.
 
+@par Keywords
+
+Connectivity, UART/USART, Asynchronous, RS-232, baud rate, Interrupt, HyperTerminal, Continuous Reception, VCP,
+Receiver
+
 @par Directory contents 
 
   - USART/USART_Communication_Rx_IT_Continuous_VCP_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

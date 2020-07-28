@@ -69,7 +69,6 @@ int main(void)
   /**
    * Keep debugger enabled while in any low power mode
    */
-  HAL_DBGMCU_EnableDBGSleepMode();
   HAL_DBGMCU_EnableDBGStopMode();
   HAL_DBGMCU_EnableDBGStandbyMode();
 

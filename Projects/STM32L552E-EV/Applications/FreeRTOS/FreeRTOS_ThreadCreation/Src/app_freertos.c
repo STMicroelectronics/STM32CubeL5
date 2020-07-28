@@ -25,7 +25,7 @@
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
@@ -53,6 +53,14 @@
 /* USER CODE BEGIN FunctionPrototypes */
 
 /* USER CODE END FunctionPrototypes */
+
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
+
+/* USER CODE BEGIN PREPOSTSLEEP */
+
+/* USER CODE END PREPOSTSLEEP */
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */

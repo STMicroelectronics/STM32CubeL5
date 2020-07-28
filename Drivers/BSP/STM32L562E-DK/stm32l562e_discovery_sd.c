@@ -100,7 +100,7 @@ static void SD_RxCpltCallback(SD_HandleTypeDef *hsd);
   * @{
   */
 #if (USE_HAL_SD_REGISTER_CALLBACKS == 1)
-/* Is Msp Callbacks registred */
+/* Is Msp Callbacks registered */
 static uint32_t Sd_IsMspCallbacksValid[SD_INSTANCES_NBR] = {0};
 #endif
 /**

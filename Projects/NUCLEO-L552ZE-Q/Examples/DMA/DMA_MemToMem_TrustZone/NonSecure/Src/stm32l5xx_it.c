@@ -63,7 +63,7 @@ extern DMA_HandleTypeDef hdma_memtomem_dma1_channel4;
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex Processor Interruption and Exception Handlers          */ 
+/*           Cortex Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Memory management fault.

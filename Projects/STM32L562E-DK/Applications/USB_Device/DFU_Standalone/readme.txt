@@ -8,7 +8,7 @@
   * @brief   Description of the USB DFU application.
   ******************************************************************************
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
   *
   * This software component is licensed by ST under Ultimate Liberty license
   * SLA0044, the "License"; You may not use this file except in compliance with
@@ -66,7 +66,7 @@ To download a *.dfu image, use "DfuSe Demo" available within "DFUse Demonstratio
 Please refer to UM0412, DFuSe USB device firmware upgrade STMicroelectronics extension for more details
 on the driver installation and PC host user interface.
 
-@note A binary which toggles LED10 on the STM32L562E-DK board is provided in Binary directory.
+@note A binary which toggles LED1 on the STM32L562E-DK board is provided in Binary directory.
 
 @note The application needs to ensure that the SysTick time base is set to 1 millisecond
       to have correct HAL configuration.
@@ -93,7 +93,7 @@ Device's end address is the end address of the flash memory and it is dependent 
 
 @par Keywords
 
-Middleware, USB Device, DFU, Firmware upgrade
+Connectivity, USB_Device, USB, DFU, Firmware upgrade
 
 @par Directory contents
 
@@ -127,7 +127,7 @@ Middleware, USB Device, DFU, Firmware upgrade
       For Windows 8.1 and later : Update STM32 DFU device driver manually from Windows Device Manager.
       The install of required device driver is available under:
       "Program Files\STMicroelectronics\Software\DfuSe v3.0.5\Bin\Driver\Win8.1" directory.
-    - Connect the STM32L562E-DK board CN15 to the PC through "TYPE-C" to "Standard A" cable.
+    -Connect the STM32L562E-DK board CN16 to the PC through "TYPE-C" to "Standard A" cable.
 
 
 @par How to use it ?
@@ -140,8 +140,8 @@ In order to make the program work, you must do the following:
    - Install the DFU driver available in "DfuSe Demonstrator" installation directory
    - For Windows 8.1 and later : Update STM32 DFU device driver manually from Windows Device Manager.
      The install of required device driver is available under:
-     "Program Files\STMicroelectronics\Software\DfuSe v3.0.6\Bin\Driver\Win8.1" directory. 
-   - Open "DfuSe Demo", choose the "stm32l562e_discovery_LED_Toggle_@0x0800C000.dfu" provided in Binary
+     "Program Files\STMicroelectronics\Software\DfuSe v3.0.6\Bin\Driver\Win8.1" directory.
+   - Open "DfuSe Demo", choose the "stm32l562e_discovery_LED_Toggle_@0x0800C000.dfu" provided in Core\Binary
      directory, upgrade and verify to check that it is successfully downloaded.
    - This application allows also to upload a dfu file (either the provided DFU file or by creating a new dfu file).
      To check that the upload was successfully performed, choose the dfu uploaded file, upgrade and verify.

@@ -52,10 +52,10 @@ void Joystick_demo(void)
   Joystick_SetHint();
   
   /* Initial cursor display */
-  GUI_SetBackColor(GUI_COLOR_WHITE);
-  GUI_SetTextColor(GUI_COLOR_BLUE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
     
-  GUI_DisplayChar(xPtr, yPtr, 'X');   
+  UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');   
   
   while (1)
   {
@@ -97,15 +97,15 @@ void Joystick_demo(void)
     
       if(JoyPinPressed == JOY_SEL)
       {
-        GUI_SetTextColor(GUI_COLOR_RED);
-        GUI_DisplayChar(xPtr, yPtr, 'X');
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+        UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');
       }
       else
       {
-        GUI_SetTextColor(GUI_COLOR_WHITE);
-        GUI_DisplayChar(old_xPtr, old_yPtr, 'X');
-        GUI_SetTextColor(GUI_COLOR_BLUE);
-        GUI_DisplayChar(xPtr, yPtr, 'X');
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+        UTIL_LCD_DisplayChar(old_xPtr, old_yPtr, 'X');
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLUE);
+        UTIL_LCD_DisplayChar(xPtr, yPtr, 'X');
 
         old_xPtr = xPtr;
         old_yPtr = yPtr;
@@ -134,21 +134,21 @@ void Joystick_demo(void)
 static void Joystick_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Joystick Demo description */
-  GUI_FillRect(0, 0, 320, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Joystick", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Please use the joystick to move", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"the pointer inside the rectangle", CENTER_MODE);
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"Press Wakeup button to switch to next menu", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 320, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Joystick", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Please use the joystick to move", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"the pointer inside the rectangle", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"Press Wakeup button to switch to next menu", CENTER_MODE);
   
-  GUI_DrawRect(10, 90, 300, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 298, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 300, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 298, 138, UTIL_LCD_COLOR_BLUE);
 }
 /**
   * @}

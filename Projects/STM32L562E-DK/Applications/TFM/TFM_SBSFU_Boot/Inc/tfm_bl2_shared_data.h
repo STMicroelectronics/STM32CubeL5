@@ -34,6 +34,9 @@ extern "C" {
 /** @defgroup TFM_BL2_SHARED_DATA define
   * @{
   */
+/* size of element stored in RTC for exchange with TFM */
+#define BL2_RTC_SHARED_DATA_SIZE 		32
+#define BL2_RTC_CLEANUP_VALUE			0xDADABEEF
 /**
   * @}
   */

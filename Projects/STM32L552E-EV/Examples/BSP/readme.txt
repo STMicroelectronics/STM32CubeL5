@@ -93,6 +93,10 @@ available on the board.
 This example shows how to write and read data available on the Octal HyperRAM memory
 available on the board.
 
+@par Keywords
+
+BSP, Board Support Package, Audio Play, Audio Record, Button, Display, LCD, Headphone, Microphone, 
+Joystick, LED, OctoSPI NOR Flash, OctoSPI HyperRAM, SD Card, SRAM, Touchscreen
 
 @par Directory contents 
 

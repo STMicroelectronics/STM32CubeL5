@@ -1,7 +1,15 @@
 -1-Python Installation : (use python 3)
 in directory ./tools/iat_verifier 
 python setup.py install
--2- check initial attestation token
+
+-2-Select sbsfu binary path in checkiat.sh,
+according to IDE.
+
+-3-Check Perso area offset in build.py,
+and update it if not correct.
+        big_binary=big_binary[0x900:]
+
+-4-Check initial attestation token
 
 The script checkiat.sh is used to check initialattestion response
 according to IDE selected for test uncomment the line in ./checkiat.sh to sbsfu binary

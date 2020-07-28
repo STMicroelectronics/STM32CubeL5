@@ -106,7 +106,7 @@ or buffers compared error. (communication is stopped if any, using infinite loop
 
 @par Keywords
 
-Connectivity, I2C, Communication, Trasmission, Reception, SCL, SDA, Interrupt
+Connectivity, I2C, Communication, Transmission, Reception, SCL, SDA, Interrupt
 
 @par Directory contents 
 

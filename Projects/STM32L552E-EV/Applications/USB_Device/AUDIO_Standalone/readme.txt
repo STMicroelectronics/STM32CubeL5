@@ -1,11 +1,11 @@
 ﻿/**
-  @page USB AUDIO_Standalone application
+  @page AUDIO_Standalone USB AUDIO application
 
   @verbatim
   ******************************************************************************
   * @file    USB_Device/AUDIO_Standalone/readme.txt
   * @author  MCD Application Team
-  * @brief   Description of the USB AUDIO_Standalone.
+  * @brief   Description of the USB AUDIO Standalone.
   ******************************************************************************
   *
   * Copyright (c) 2019 STMicroelectronics. All rights reserved.
@@ -24,7 +24,7 @@ This application shows how to use the implementation of the audio streaming (Out
 capability on the STM32L5xx devices.
 
 It follows the "Universal Serial Bus Device Class Definition for Audio Devices Release 1.0 March 18,
-1998" defined by the USB Implementers Forum for reprogramming an application through USB-FS-Device. 
+1998" defined by the USB Implementers Forum for reprogramming an application through USB-FS-Device.
 Following this specification, it is possible to manage only Full Speed USB mode (High Speed is not supported).
 This class is natively supported by most Operating Systems: no need for specific driver setup.
 
@@ -65,6 +65,9 @@ requirements, such as:
  - USBD_AUDIO_FREQ, specifying the sampling rate conversion from original audio file sampling rate to the
    sampling rate supported by the device.
 
+@par Keywords
+
+Connectivity, USB_Device, USB, AUDIO, Audio Playback
 
 @par Directory contents
 
@@ -93,7 +96,7 @@ requirements, such as:
     and can be easily tailored to any other supported device and development board.
 
   - STM32L552E-EV board Set-up
-    -Connect the STM32L552E-EV board to the PC through "TYPE-C" to "Standard A" cable.
+    -Connect the STM32L552E-EV board CN1 to the PC through "TYPE-C" to "Standard A" cable.
 
 
 @par How to use it ?

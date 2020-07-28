@@ -2,18 +2,18 @@
   ******************************************************************************
   * @file    tfm_low_level_security.h
   * @author  MCD Application Team
-  * @brief   This file contains definitions for Secure Firmware Update security
-  *          low level interface.
+  * @brief   Header for tfm_low_level_security.c module
+  *
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "boot_hal_cfg.h"
 #include "bootutil/bootutil_log.h"
 
 /** @addtogroup TFM Secure Secure Boot / Firmware Update
@@ -90,7 +90,12 @@ typedef enum
   * @{
   */
 void    TFM_LL_SECU_ApplyRunTimeProtections(void);
+void    TFM_LL_SECU_UpdateRunTimeProtections(void);
 void    TFM_LL_SECU_CheckStaticProtections(void);
+void    TFM_LL_SECU_UpdateLoaderRunTimeProtections(void);
+void    TFM_LL_SECU_SetLoaderCodeSecure(void);
+
+
 /**
   * @}
   */

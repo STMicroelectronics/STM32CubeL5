@@ -10,7 +10,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -50,7 +50,7 @@
 UART_HandleTypeDef hlpuart1;
 
 /* USER CODE BEGIN PV */
-uint8_t HeaderTxBuffer[] = "\r\nUART WakeUp from stop mode using FIFO\r\n";
+uint8_t HeaderTxBuffer[] = "\r\nLPUART1 WakeUp from stop mode using FIFO\r\n";
 uint8_t Part1TxBuffer[] = "\r\n\t Part 1: RXFIFO threshold interrupt\r\n   Waiting for characters reception until RX FIFO threshold is reached\r\n   Please send 2 bytes\r\n";
 uint8_t WakeupRXFTBuffer[] = "\r\n   Proper wakeup based on RXFIFO threshold interrupt detection.\r\n";
 uint8_t Part2TxBuffer[] = "\r\n\t Part 2: RXFIFO full interrupt\r\n   Waiting for characters reception until RX FIFO is Full \r\n   Please send 8 bytes\r\n";
@@ -66,6 +66,7 @@ static void MX_GPIO_Init(void);
 static void MX_LPUART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
+void SystemClock_Config_fromSTOP(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -82,7 +83,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -97,9 +97,8 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  /* Initialize BSP LEDs */
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
+  /* Initialize BSP LED */
+  BSP_LED_Init(LED1);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -107,8 +106,11 @@ int main(void)
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  /* Turn LED2 on */
-  BSP_LED_On(LED2);
+  /* Turn LED1 on */
+  BSP_LED_On(LED1);
+
+  /* Specify HSI as the clock source used after wake up from stop mode */
+  __HAL_RCC_WAKEUPSTOP_CLK_CONFIG(RCC_STOP_WAKEUPCLOCK_HSI);
 
   /*##########################################################################*/
   /*##-1- Wakeup first step RXFT #############################################*/
@@ -117,43 +119,47 @@ int main(void)
   /* Output message on hyperterminal */
   HAL_UART_Transmit(&hlpuart1, (uint8_t*)&HeaderTxBuffer, countof(HeaderTxBuffer)-1, HAL_TIMEOUT_VALUE);
 
-  /* Enable MCU wakeup by UART */
+  /* Enable MCU wakeup by LPUART1 */
   HAL_UARTEx_EnableStopMode(&hlpuart1);
 
-  /* Enable the UART RX FIFO threshold interrupt */
+  /* Enable the LPUART1 RX FIFO threshold interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_RXFT);
 
-  /* Enable the UART wakeup from stop mode interrupt */
+  /* Enable the LPUART1 wakeup from stop mode interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_WUF);
 
   /* Output message on hyperterminal */
   HAL_UART_Transmit(&hlpuart1, (uint8_t*)&Part1TxBuffer, countof(Part1TxBuffer)-1, HAL_TIMEOUT_VALUE);
 
-  /* Put UART peripheral in reception process */
+  /* Put LPUART1 peripheral in reception process */
   HAL_UART_Receive_IT(&hlpuart1, (uint8_t*)&RxBuffer, 2);
 
-  /* Turn LED2 off */
-  BSP_LED_Off(LED2);
+  /* Turn LED1 off */
+  BSP_LED_Off(LED1);
 
   /* Enter STOP mode */
   HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON,PWR_STOPENTRY_WFI);
 
   /* ... STOP Mode ... */
 
-  /* Turn LED2 on */
-  BSP_LED_On(LED2);
+  /* Call SystemClock_Config for the wake up from stop clock */
+  SystemClock_Config_fromSTOP();
+
+  /* Turn LED1 on */
+  BSP_LED_On(LED1);
+
 
   while(HAL_UART_GetState(&hlpuart1) != HAL_UART_STATE_READY)
   {
   }
 
-  /* Disable the UART wakeup from stop mode interrupt */
+  /* Disable the LPUART1 wakeup from stop mode interrupt */
   __HAL_UART_DISABLE_IT(&hlpuart1, UART_IT_WUF);
 
-  /* Disable the UART RX FIFO threshold interrupt */
+  /* Disable the LPUART1 RX FIFO threshold interrupt */
   __HAL_UART_DISABLE_IT(&hlpuart1, UART_IT_RXFT);
 
-  /* Disable UART Stop Mode */
+  /* Disable LPUART1 Stop Mode */
   HAL_UARTEx_DisableStopMode(&hlpuart1);
 
   /* Output message on hyperterminal */
@@ -169,43 +175,46 @@ int main(void)
     Error_Handler();
   }
 
-  /* Enable MCU wakeup by UART */
+  /* Enable MCU wakeup by LPUART1 */
   HAL_UARTEx_EnableStopMode(&hlpuart1);
 
-  /* Enable the UART RX FIFO full interrupt */
+  /* Enable the LPUART1 RX FIFO full interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_RXFF);
 
-  /* Enable the UART wakeup from stop mode interrupt */
+  /* Enable the LPUART1 wakeup from stop mode interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_WUF);
 
   /* Output message on hyperterminal */
   HAL_UART_Transmit(&hlpuart1, (uint8_t*)&Part2TxBuffer, countof(Part2TxBuffer)-1, HAL_TIMEOUT_VALUE);
 
-  /* Put UART peripheral in reception process */
+  /* Put LPUART1 peripheral in reception process */
   HAL_UART_Receive_IT(&hlpuart1, (uint8_t*)&RxBuffer, 8);
 
-  /* Turn LED2 off */
-  BSP_LED_Off(LED2);
+  /* Turn LED1 off */
+  BSP_LED_Off(LED1);
 
   /* Enter STOP mode */
   HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON,PWR_STOPENTRY_WFI);
 
   /* ... STOP Mode ... */
 
-  /* Turn LED2 on */
-  BSP_LED_On(LED2);
+  /* Turn LED1 on */
+  BSP_LED_On(LED1);
+  
+  /* Call SystemClock_Config for the wake up from stop clock */
+  SystemClock_Config_fromSTOP();
 
   while(HAL_UART_GetState(&hlpuart1) != HAL_UART_STATE_READY)
   {
   }
 
-  /* Disable the UART wakeup from stop mode interrupt */
+  /* Disable the LPUART1 wakeup from stop mode interrupt */
   __HAL_UART_DISABLE_IT(&hlpuart1, UART_IT_WUF);
 
-  /* Disable the UART RX FIFO full interrupt */
+  /* Disable the LPUART1 RX FIFO full interrupt */
   __HAL_UART_DISABLE_IT(&hlpuart1, UART_IT_RXFF);
 
-  /* Disable UART Stop Mode */
+  /* Disable LPUART1 Stop Mode */
   HAL_UARTEx_DisableStopMode(&hlpuart1);
 
   /* Output message on hyperterminal */
@@ -218,8 +227,6 @@ int main(void)
   /* Output message on hyperterminal */
   HAL_UART_Transmit(&hlpuart1, (uint8_t*)&FooterTxBuffer, countof(FooterTxBuffer)-1, HAL_TIMEOUT_VALUE);
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -241,13 +248,14 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -263,7 +271,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -277,6 +285,7 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
+
 /**
   * @brief LPUART1 Initialization Function
   * @param None
@@ -293,7 +302,7 @@ static void MX_LPUART1_UART_Init(void)
 
   /* USER CODE END LPUART1_Init 1 */
   hlpuart1.Instance = LPUART1;
-  hlpuart1.Init.BaudRate = 9600;
+  hlpuart1.Init.BaudRate = 115200;
   hlpuart1.Init.WordLength = UART_WORDLENGTH_8B;
   hlpuart1.Init.StopBits = UART_STOPBITS_1;
   hlpuart1.Init.Parity = UART_PARITY_ODD;
@@ -340,6 +349,32 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void SystemClock_Config_fromSTOP(void)
+{
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  uint32_t pFLatency = 0;
+  /* Get the Oscillators configuration from the internal RCC registers */
+  HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
+  /* Wake up on HSI, re-enable PLL with HSI as source */
+  /* Oscillator configuration unchanged */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* Get the clock prescalers configuration from the internal RCC registers */
+  HAL_RCC_GetClockConfig(&RCC_ClkInitStruct, &pFLatency);
+  /* Select PLL as system clock source */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, pFLatency) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
 
 /* USER CODE END 4 */
 
@@ -351,11 +386,45 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  while(1)
+  while (1)
   {
-    /* LED3 is blinking */
-    BSP_LED_Toggle(LED3);
-    HAL_Delay(500);
+    /* In case of error, LED1 transmits a sequence of three dots, three dashes, three dots */
+    BSP_LED_On(LED1);
+    HAL_Delay(300);
+    BSP_LED_Off(LED1);
+    HAL_Delay(300);
+    BSP_LED_On(LED1);
+    HAL_Delay(300);
+    BSP_LED_Off(LED1);
+    HAL_Delay(300);
+    BSP_LED_On(LED1);
+    HAL_Delay(300);
+    BSP_LED_Off(LED1);
+    HAL_Delay(300);
+    BSP_LED_On(LED1);
+    HAL_Delay(700);
+    BSP_LED_Off(LED1);
+    HAL_Delay(700);
+    BSP_LED_On(LED1);
+    HAL_Delay(700);
+    BSP_LED_Off(LED1);
+    HAL_Delay(700);
+    BSP_LED_On(LED1);
+    HAL_Delay(700);
+    BSP_LED_Off(LED1);
+    HAL_Delay(700);
+    BSP_LED_On(LED1);
+    HAL_Delay(300);
+    BSP_LED_Off(LED1);
+    HAL_Delay(300);
+    BSP_LED_On(LED1);
+    HAL_Delay(300);
+    BSP_LED_Off(LED1);
+    HAL_Delay(300);
+    BSP_LED_On(LED1);
+    HAL_Delay(300);
+    BSP_LED_Off(LED1);
+    HAL_Delay(800);
   }
   /* USER CODE END Error_Handler_Debug */
 }
@@ -369,7 +438,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

@@ -62,10 +62,10 @@ Other peripherals used:
   1 GPIO for analog input: PC.03 (Arduino connector CN9 pin A2, Morpho connector CN11 pin 37)
   DMA
   Timer
+
 @par Keywords
 
-ADC, ADC channel, DMA transfers conversion, DMA half transfer, DMA transfer complete, conversion, single channel, single conversion mode, interrupt,
-
+ADC, analog digital converter, conversion, voltage, channel, analog input, DMA transfer, trigger
 
 @par Directory contents 
 

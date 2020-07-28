@@ -75,19 +75,19 @@ void SD_demo(void)
   {
     if (SD_state == BSP_ERROR_UNKNOWN_COMPONENT)
     {
-      GUI_DisplayStringAt(20, 100, (uint8_t *)"SD shall be inserted before running test", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"SD shall be inserted before running test", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(20, 100, (uint8_t *)"SD Initialization : FAIL.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"SD Initialization : FAIL.", LEFT_MODE);
     }
-    GUI_DisplayStringAt(20, 115, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(20, 100, (uint8_t *)"SD Initialization : OK.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 100, (uint8_t *)"SD Initialization : OK.", LEFT_MODE);
 
-    GUI_DisplayStringAt(20, 210, (uint8_t *)"SD Connected    ", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 210, (uint8_t *)"SD Connected    ", LEFT_MODE);
     prev_status = SD_PRESENT;
 
     SD_state = BSP_SD_Erase(0, BLOCK_START_ADDR, (BLOCKSIZE * NUM_OF_BLOCKS));
@@ -99,12 +99,12 @@ void SD_demo(void)
 
     if (SD_state != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(20, 115, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
-      GUI_DisplayStringAt(20, 130, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"SD ERASE : FAILED.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(20, 115, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(20, 115, (uint8_t *)"SD ERASE : OK.", LEFT_MODE);
 
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
@@ -123,12 +123,12 @@ void SD_demo(void)
 
       if (SD_state != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(20, 130, (uint8_t *)"SD WRITE : FAILED.", LEFT_MODE);
-        GUI_DisplayStringAt(20, 145, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"SD WRITE : FAILED.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(20, 130, (uint8_t *)"SD WRITE : OK.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 130, (uint8_t *)"SD WRITE : OK.", LEFT_MODE);
         SD_state = BSP_SD_ReadBlocks_DMA(0, aRxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS);
 
         /* Wait for the read process is completed */
@@ -144,21 +144,21 @@ void SD_demo(void)
 
         if (SD_state != BSP_ERROR_NONE)
         {
-          GUI_DisplayStringAt(20, 145, (uint8_t *)"SD READ : FAILED.", LEFT_MODE);
-          GUI_DisplayStringAt(20, 160, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"SD READ : FAILED.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
         }
         else
         {
-          GUI_DisplayStringAt(20, 145, (uint8_t *)"SD READ : OK.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 145, (uint8_t *)"SD READ : OK.", LEFT_MODE);
           if (Buffercmp(aTxBuffer, aRxBuffer, BUFFER_WORDS_SIZE) > 0)
           {
-            GUI_DisplayStringAt(20, 160, (uint8_t *)"SD COMPARE : FAILED.", LEFT_MODE);
-            GUI_DisplayStringAt(20, 175, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"SD COMPARE : FAILED.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 175, (uint8_t *)"SD Test Aborted.", LEFT_MODE);
           }
           else
           {
-            GUI_DisplayStringAt(20, 160, (uint8_t *)"SD Test : OK.", LEFT_MODE);
-            GUI_DisplayStringAt(20, 175, (uint8_t *)"SD can be removed.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 160, (uint8_t *)"SD Test : OK.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(20, 175, (uint8_t *)"SD can be removed.", LEFT_MODE);
           }
         }
       }
@@ -177,13 +177,13 @@ void SD_demo(void)
         if (prev_status != SD_NOT_PRESENT)
         {
           prev_status = SD_NOT_PRESENT;
-          GUI_SetTextColor(GUI_COLOR_RED);
-          GUI_DisplayStringAt(20, 210, (uint8_t *)"SD Not Connected", LEFT_MODE);
+          UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);
+          UTIL_LCD_DisplayStringAt(20, 210, (uint8_t *)"SD Not Connected", LEFT_MODE);
         }
       }
       else if (prev_status != SD_PRESENT)
       {
-        GUI_DisplayStringAt(20, 210,   (uint8_t *)"SD Connected    ", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 210,   (uint8_t *)"SD Connected    ", LEFT_MODE);
         prev_status = SD_PRESENT;
       }
 #if (SD_CARD_PRESENCE_VALIDATION_MODE == SD_CARD_PRESENCE_INTERRUPT_MODE)
@@ -210,23 +210,23 @@ void SD_demo(void)
 static void SD_SetHint(void)
 {
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set LCD Demo description */
-  GUI_FillRect(0, 0, 320, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"SD", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Press Wakeup push-button to exit", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 320, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"SD", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Press Wakeup push-button to exit", CENTER_MODE);
 
   /* Set the LCD Text Color */
-  GUI_DrawRect(10, 90, 300, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 298, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 300, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 298, 138, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
 }
 
 /**

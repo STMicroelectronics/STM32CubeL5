@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include "com.h"
 #include "common.h"
+#include "flash_layout.h"
 /* Avoids the semihosting issue */
 #if defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
 __asm("  .global __ARM_use_no_argv\n");
@@ -162,9 +163,11 @@ int main(int argc, char **argv)
 void FW_APP_PrintMainMenu(void)
 {
   printf("\r\n=================== Main Menu ============================\r\n\n");
-  printf("  Download a new Fw Image ------------------------------- 1\r\n\n");
-  printf("  Test Protections -------------------------------------- 2\r\n\n");
-  printf("  Test TFM ---------------------------------------------- 3\r\n\n");
+  printf("  Test Protections -------------------------------------- 1\r\n\n");
+  printf("  Test TFM ---------------------------------------------- 2\r\n\n");
+#if !defined(TFM_EXTERNAL_FLASH_ENABLE)
+  printf("  Download a new Fw Image ------------------------------- 3\r\n\n");
+#endif /* !TFM_EXTERNAL_FLASH_ENABLE */
   printf("  Selection :\r\n\n");
 }
 
@@ -182,49 +185,46 @@ void FW_APP_Run(void)
 
   while (1U)
   {
-  /* Clean the input path */
-  COM_Flush();
+    /* Clean the input path */
+    COM_Flush();
 
-  /* Receive key */
-  if (COM_Receive(&key, 1U, RX_TIMEOUT) == HAL_OK)
-  {
-    switch (key)
+    /* Receive key */
+    if (COM_Receive(&key, 1U, RX_TIMEOUT) == HAL_OK)
     {
-      case '1' :
-        FW_UPDATE_Run();
-        break;
-      case '2' :
-        TEST_PROTECTIONS_Run();
-        break;
-      case '3' :
-        tfm_app_menu();
-        break;
-      default:
-        printf("Invalid Number !\r");
-        break;
+      switch (key)
+      {
+        case '1' :
+          TEST_PROTECTIONS_Run();
+          break;
+        case '2' :
+          tfm_app_menu();
+          break;
+#if !defined(TFM_EXTERNAL_FLASH_ENABLE)
+        case '3' :
+          FW_UPDATE_Run();
+          break;
+#endif /* !TFM_EXTERNAL_FLASH_ENABLE */
+        default:
+          printf("Invalid Number !\r");
+          break;
+      }
+
+      /*Print Main Menu message*/
+      FW_APP_PrintMainMenu();
     }
-
-    /*Print Main Menu message*/
-    FW_APP_PrintMainMenu();
   }
-  #if 0
-  BSP_LED_Toggle(LED_GREEN);
-  #endif
-  }
-  }
+}
 
-
-  #ifdef  USE_FULL_ASSERT
-
-  /**
-    * @brief  Reports the name of the source file and the source line number
-    *         where the assert_param error has occurred.
-    * @param  file: pointer to the source file name
-    * @param  line: assert_param error line source number
-    * @retval None
+#ifdef USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
   */
-  void assert_failed(uint8_t *file, uint32_t line)
-  {
+void assert_failed(uint8_t *file, uint32_t line)
+{
   /* User can add his own implementation to report the file name and line number,
    ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -232,8 +232,8 @@ void FW_APP_Run(void)
   while (1U)
   {
   }
-  }
-  #endif
+}
+#endif
 
   /**
     * @}

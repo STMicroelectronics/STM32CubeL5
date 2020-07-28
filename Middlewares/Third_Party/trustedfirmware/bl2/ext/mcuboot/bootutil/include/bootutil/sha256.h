@@ -21,13 +21,20 @@
  * This module provides a thin abstraction over some of the crypto
  * primitives to make it easier to swap out the used crypto library.
  *
- * At this point, only mbedTLS is supported.
+ * At this point, only Mbed Crypto is supported.
+ */
+
+/*
+ * Original code taken from mcuboot project at:
+ * https://github.com/JuulLabs-OSS/mcuboot
+ * Git SHA of the original version: ac55554059147fff718015be9f4bd3108123f50a
+ * Modifications are Copyright (c) 2019 Arm Limited.
  */
 
 #ifndef __BOOTUTIL_CRYPTO_H_
 #define __BOOTUTIL_CRYPTO_H_
 
-#include <mbedtls/sha256.h>
+#include "mbedtls/sha256.h"
 
 #include <stdint.h>
 
@@ -40,20 +47,20 @@ typedef mbedtls_sha256_context bootutil_sha256_context;
 static inline void bootutil_sha256_init(bootutil_sha256_context *ctx)
 {
     mbedtls_sha256_init(ctx);
-    mbedtls_sha256_starts(ctx, 0);
+    (void)mbedtls_sha256_starts_ret(ctx, 0);
 }
 
 static inline void bootutil_sha256_update(bootutil_sha256_context *ctx,
                                           const void *data,
                                           uint32_t data_len)
 {
-    mbedtls_sha256_update(ctx, data, data_len);
+    (void)mbedtls_sha256_update_ret(ctx, data, data_len);
 }
 
 static inline void bootutil_sha256_finish(bootutil_sha256_context *ctx,
                                           uint8_t *output)
 {
-    mbedtls_sha256_finish(ctx, output);
+    (void)mbedtls_sha256_finish_ret(ctx, output);
 }
 
 #ifdef __cplusplus

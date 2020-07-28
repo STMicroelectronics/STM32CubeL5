@@ -3,11 +3,11 @@
   * @file    stm32l552e_eval_io.c
   * @author  MCD Application Team
   * @brief   This file provides a set of functions needed to manage the IO pins
-  *          on STM32L552E-EVAL evaluation board.
+  *          on STM32L552E-EV evaluation board.
   @verbatim
   How To use this driver:
   -----------------------
-   - This driver is used to drive the IO module of the STM32L552E-EVAL evaluation
+   - This driver is used to drive the IO module of the STM32L552E-EV evaluation
      board.
    - The MFXSTM32L152 IO expander device component driver must be included with this
      driver in order to run the IO functionalities commanded by the IO expander (MFX)
@@ -410,7 +410,7 @@ int32_t BSP_IOEXPANDER_Init(uint32_t Instance, uint32_t Function)
 /**
   * @brief  De-Initializes the IOExpander component
   * @param  Instance IOE instance
-  * @note   The de-init is common for all IOE functions. It's excuted only if all
+  * @note   The de-init is common for all IOE functions. It is executed only if all
   *         functions are deactivated.
   * @retval BSP status
   */

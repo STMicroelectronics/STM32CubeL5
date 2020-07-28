@@ -798,6 +798,9 @@ void SystemClock_Config(void)
   LL_APB1_GRP1_DisableClock(LL_APB1_GRP1_PERIPH_PWR);
 
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_5);
+  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_5)
+  {
+  }
 
   /* MSI already enabled at reset */
 
@@ -807,7 +810,7 @@ void SystemClock_Config(void)
   LL_RCC_PLL_EnableDomain_SYS();
   while(LL_RCC_PLL_IsReady() != 1)
   {
-  };
+  }
 
   /* Sysclk activation on the main PLL */
   /* Intermediate AHB prescaler 2 when target frequency clock is higher than 80 MHz */
@@ -815,7 +818,7 @@ void SystemClock_Config(void)
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
   while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
   {
-  };
+  }
 
   /* Insure 1µs transition state at intermediate medium speed clock based on DWT*/
   CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;

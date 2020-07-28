@@ -260,7 +260,7 @@ extern SAI_HandleTypeDef haudio_in_sai;
 extern DFSDM_Channel_HandleTypeDef haudio_in_dfsdm_channel[2];
 extern DFSDM_Filter_HandleTypeDef  haudio_in_dfsdm_filter[2];
 
-/* Audio in DFSDM internal buffers and global varibales */
+/* Audio in DFSDM internal buffers and global variables */
 extern int32_t  Audio_DigMic1RecBuff[BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE];
 extern int32_t  Audio_DigMic2RecBuff[BSP_AUDIO_IN_DEFAULT_BUFFER_SIZE];
 extern uint32_t Audio_DmaDigMic1RecHalfBuffCplt;

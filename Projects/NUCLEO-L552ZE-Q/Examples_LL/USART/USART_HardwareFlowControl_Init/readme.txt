@@ -45,6 +45,11 @@ On a specific value ('S' or 's'), LED1 is turned On.
 Received character is echoed on Tx line.
 In case of errors, LED1 is blinking.
 
+@par Keywords
+
+Connectivity, UART/USART, Asynchronous, RS-232, baud rate, Interrupt, HyperTerminal, 
+hardware flow control, CTS/RTS, Transmitter, Receiver
+
 @par Directory contents 
 
   - USART/USART_HardwareFlowControl_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

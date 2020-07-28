@@ -357,7 +357,7 @@
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L552E-EV</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/Common</state>
-          <state>$PROJ_DIR$/../../../../../../Utilities/basic_gui</state>
+          <state>$PROJ_DIR$/../../../../../../Utilities/lcd</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1192,7 +1192,7 @@
     <group>
       <name>Utilities</name>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\basic_gui\basic_gui.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</name>
       </file>
     </group>
   </group>

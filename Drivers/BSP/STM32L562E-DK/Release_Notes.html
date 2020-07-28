@@ -42,17 +42,49 @@
 <li>OctoSPI NOR Flash memory</li>
 <li>Power measurement</li>
 <li>USB Power Delivery</li>
-<li>3D accelerometer, 3D gyroscope and magnetometer</li>
+<li>3D accelerometer and gyroscope</li>
 </ul>
 </div>
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section2" checked aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 12-February-2020</strong></label>
+<input type="checkbox" id="collapse-section3" checked aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.1.0 / 26-June-2020</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
-<p><strong>Second release</strong></p>
+<p><strong>Third release</strong></p>
 <h2 id="contents">Contents</h2>
+<p>Third release of board drivers for <strong>STM32L562E-DK board (MB1373-C01)</strong> in line with STM32Cube BSP drivers development guidelines (UM2298 - revision 2)</p>
+<ul>
+<li>stm32l562e_discovery_bus.h/.c and stm32l562e_discovery_conf_template.h
+<ul>
+<li>Add SPI1 bus interface for Bluetooth® Low Energy (BLE) module SPBTLE-RFTR</li>
+</ul></li>
+<li>stm32l562e_discovery_idd.h/.c
+<ul>
+<li>Communication robustness over UART</li>
+</ul></li>
+<li>stm32l562e_discovery_lcd.c
+<ul>
+<li>Fix GRAM access for data length over 65535 bytes (0xFFFF)</li>
+</ul></li>
+<li>Misspelled words corrections in driver descriptions</li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<p>This software release is compatible with:</p>
+<ul>
+<li>BSP Component ST7789H2 v2.0.1 or above</li>
+<li>BSP Common v6.0.0 or above</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<p>stm32l562e_discovery_conf_template.h file must be copied in user application as stm32l562e_discovery_conf.h with optional configuration update</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.0.1 / 12-February-2020</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<p><strong>Second release</strong></p>
+<h2 id="contents-1">Contents</h2>
 <p>Second official release of board drivers for <strong>STM32L562E-DK board (MB1373-C01)</strong> in line with STM32Cube BSP drivers development guidelines (UM2298 - revision 2)</p>
 <ul>
 <li>stm32l562e_discovery_ts.c
@@ -65,28 +97,28 @@
 </ul></li>
 <li>Rename CHM User Manual: STM32L562E-DK_BSP_User_Manual.chm</li>
 </ul>
-<h2 id="dependencies">Dependencies</h2>
-<p>This software release is compatible with:</p>
-<ul>
-<li>BSP Common v6.0.0 or above</li>
-</ul>
-<h2 id="notes">Notes</h2>
-<p>stm32l562e_discovery_conf_template.h file must be copied in user application as stm32l562e_discovery_conf.h with optional configuration update</p>
-</div>
-</div>
-<div class="collapse">
-<input type="checkbox" id="collapse-section1" unchecked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
-<div>
-<h2 id="main-changes-1">Main Changes</h2>
-<p><strong>First release</strong></p>
-<h2 id="contents-1">Contents</h2>
-<p>First official release of board drivers for <strong>STM32L562E-DK board (MB1373-C01)</strong> in line with STM32Cube BSP drivers development guidelines (UM2298 - revision 2)</p>
 <h2 id="dependencies-1">Dependencies</h2>
 <p>This software release is compatible with:</p>
 <ul>
 <li>BSP Common v6.0.0 or above</li>
 </ul>
 <h2 id="notes-1">Notes</h2>
+<p>stm32l562e_discovery_conf_template.h file must be copied in user application as stm32l562e_discovery_conf.h with optional configuration update</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" unchecked aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<p><strong>First release</strong></p>
+<h2 id="contents-2">Contents</h2>
+<p>First official release of board drivers for <strong>STM32L562E-DK board (MB1373-C01)</strong> in line with STM32Cube BSP drivers development guidelines (UM2298 - revision 2)</p>
+<h2 id="dependencies-2">Dependencies</h2>
+<p>This software release is compatible with:</p>
+<ul>
+<li>BSP Common v6.0.0 or above</li>
+</ul>
+<h2 id="notes-2">Notes</h2>
 <p>stm32l562e_discovery_conf_template.h file must be copied in user application as stm32l562e_discovery_conf.h with optional configuration update</p>
 </div>
 </div>

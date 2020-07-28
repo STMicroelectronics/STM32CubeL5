@@ -3,11 +3,11 @@
   * @file    stm32l552e_eval_ts.c
   * @author  MCD Application Team
   * @brief   This file provides a set of functions needed to manage the Touch
-  *          Screen on STM32L552E-EVAL board.
+  *          Screen on STM32L552E-EV board.
   @verbatim
   1. How To use this driver:
   --------------------------
-   - This driver is used to drive the touch screen module of the STM32L552E-EVAL
+   - This driver is used to drive the touch screen module of the STM32L552E-EV
      evaluation board on the LCD mounted on MB989 daughter board.
      The touch screen driver IC is a STMPE811.
 
@@ -24,7 +24,7 @@
        o Call BSP_TS_EnableIT() (BSP_TS_DisableIT()) to enable (disable) touch
          screen interrupt. BSP_TS_Callback() is called when TS interrupt occurs.
        o Call BSP_TS_GetState() to get the current touch status (detection and
-         coordonates).
+         coordinates).
        o Call BSP_TS_Set_Orientation() to change the current orientation.
          Call BSP_TS_Get_Orientation() to get the current orientation.
        o Call BSP_TS_GetCapabilities() to get the STMPE811 capabilities.

@@ -33,12 +33,10 @@ extern "C" {
 #include "stm32l5xx_ll_rcc.h"
 #include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_tim.h"
+#include "usbpd_pwr_if.h"
 
-#if defined(USE_EVAL_L5_REVA)
-#include "stm32l552e_eval_usbpd_pwr.h"
-#else
+/* Following include file may be replaced with the BSP UBSPD PWR header file */
 #include "usbpd_bsp_pwr.h"
-#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/

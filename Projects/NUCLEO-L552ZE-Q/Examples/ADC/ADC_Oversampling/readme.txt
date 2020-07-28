@@ -66,7 +66,7 @@ NUCLEO-L552ZE-Q C-02 board LED is be used to monitor the program execution statu
 
 @par Keywords
 
-Analog, ADC, Analog to Digital, single conversion , Software trigger, Over sampling.
+ADC, analog digital converter, conversion, voltage, channel, analog input, oversampling
 
 @par Directory contents 
 

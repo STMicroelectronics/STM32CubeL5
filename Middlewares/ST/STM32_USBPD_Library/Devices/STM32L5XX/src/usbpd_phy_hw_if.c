@@ -24,7 +24,9 @@
 #include "usbpd_hw.h"
 #include "usbpd_core.h"
 #include "usbpd_hw_if.h"
+#if !defined(USBPDCORE_LIB_NO_PD)
 #include "usbpd_timersserver.h"
+#endif /* !USBPDCORE_LIB_NO_PD */
 #if defined(_LOW_POWER)
 #include "usbpd_lowpower.h"
 #endif
@@ -45,6 +47,7 @@ void USBPD_HW_IF_GlobalHwInit(void)
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_CRC);
 }
 
+#if !defined(USBPDCORE_LIB_NO_PD)
 void USBPD_HW_IF_StopBISTMode2(uint8_t PortNum)
 {
   uint32_t  _cr = READ_REG(Ports[PortNum].husbpd->CR) & ~(UCPD_CR_TXMODE | UCPD_CR_TXSEND);
@@ -102,9 +105,9 @@ USBPD_StatusTypeDef USBPD_HW_IF_SendBuffer(uint8_t PortNum, USBPD_SOPType_TypeDe
 
     if (USBPD_OK == _status)
     {
-#if defined(_LOW_POWER)       
+#if defined(_LOW_POWER)
       LPM_SetStopMode((LPM_Id_t)(LPM_PE_0 + PortNum), LPM_Disable);
-#endif  
+#endif
       WRITE_REG(Ports[PortNum].hdmatx->CM0AR, (uint32_t)pBuffer);
       WRITE_REG(Ports[PortNum].hdmatx->CNDTR, Size);
       Ports[PortNum].hdmatx->CCR |= DMA_CCR_EN;
@@ -121,6 +124,7 @@ void USBPD_HW_IF_Send_BIST_Pattern(uint8_t PortNum)
   LL_UCPD_SetTxMode(Ports[PortNum].husbpd, LL_UCPD_TXMODE_BIST_CARRIER2);
   LL_UCPD_SendMessage(Ports[PortNum].husbpd);
 }
+#endif /* !USBPDCORE_LIB_NO_PD */
 
 void USBPDM1_AssertRp(uint8_t PortNum)
 {
@@ -152,7 +156,7 @@ void USBPDM1_AssertRp(uint8_t PortNum)
 
 void USBPDM1_DeAssertRp(uint8_t PortNum)
 {
-  /* not needed on L5, so nothing to do, keep only for compatibility */
+  /* not needed on STM32L5xx, so nothing to do, keep only for compatibility */
   UNUSED(PortNum);
 }
 
@@ -174,22 +178,22 @@ void USBPDM1_AssertRd(uint8_t PortNum)
 
   HAL_Delay(1);
 
-#ifndef _LOW_POWER  
+#ifndef _LOW_POWER
   LL_UCPD_TypeCDetectionCC2Enable(Ports[PortNum].husbpd);
   LL_UCPD_TypeCDetectionCC1Enable(Ports[PortNum].husbpd);
 #endif
+}
+
+void USBPDM1_DeAssertRd(uint8_t PortNum)
+{
+  /* not needed on STM32L5xx, so nothing to do, keep only for compatibility */
+  UNUSED(PortNum);
 }
 
 void USBPDM1_EnterErrorRecovery(uint8_t PortNum)
 {
   LL_UCPD_SetSRCRole(Ports[PortNum].husbpd);
   LL_UCPD_SetRpResistor(Ports[PortNum].husbpd, LL_UCPD_RESISTOR_NONE);
-}
-
-void USBPDM1_DeAssertRd(uint8_t PortNum)
-{
-  /* not needed on L5, so nothing to do, keep only for compatibility */
-  UNUSED(PortNum);
 }
 
 void USBPDM1_Set_CC(uint8_t PortNum, CCxPin_TypeDef cc)
@@ -219,11 +223,12 @@ void USBPD_HW_IF_DisableRX(uint8_t PortNum)
 
 void HW_SignalAttachement(uint8_t PortNum, CCxPin_TypeDef cc)
 {
+#if !defined(USBPDCORE_LIB_NO_PD)
   uint32_t _temp;
-    
+
   /* Init timer to detect the reception of goodCRC */
   USBPD_TIM_Init();
- 
+
   /* Prepare ucpd to handle PD message
             RX message start listen
             TX prepare the DMA to be transfer ready
@@ -247,10 +252,14 @@ void HW_SignalAttachement(uint8_t PortNum, CCxPin_TypeDef cc)
                         UCPD_IMR_TXUNDIE     | UCPD_IMR_RXORDDETIE  | UCPD_IMR_RXHRSTDETIE | UCPD_IMR_RXOVRIE    | UCPD_IMR_RXMSGENDIE
 
   MODIFY_REG(Ports[PortNum].husbpd->IMR, INTERRUPT_MASK, INTERRUPT_MASK);
+#endif /* !USBPDCORE_LIB_NO_PD */
 
+#if !defined(USBPDCORE_LIB_NO_PD)||defined(USBPD_TYPE_STATE_MACHINE)
   /* Handle CC enable */
   Ports[PortNum].CCx = cc;
+#endif /* !USBPDCORE_LIB_NO_PD || USBPD_TYPE_STATE_MACHINE */
 
+#if !defined(USBPDCORE_LIB_NO_PD)
   /* Set CC pin for PD message */
   LL_UCPD_SetCCPin(Ports[PortNum].husbpd, (Ports[PortNum].CCx == CC1) ? LL_UCPD_CCPIN_CC1 : LL_UCPD_CCPIN_CC2);
 
@@ -266,7 +275,7 @@ void HW_SignalAttachement(uint8_t PortNum, CCxPin_TypeDef cc)
   /* Initialize Vconn managment */
   (void)BSP_USBPD_PWR_VCONNInit(PortNum, (Ports[PortNum].CCx == CC1) ? 1u : 2u);
 #endif /* _VCONN_SUPPORT */
-  
+
   /* Disable the Resistor on Vconn PIN */
   (Ports[PortNum].CCx == CC1) ? LL_UCPD_SetccEnable(Ports[PortNum].husbpd, LL_UCPD_CCENABLE_CC1) : LL_UCPD_SetccEnable(Ports[PortNum].husbpd, LL_UCPD_CCENABLE_CC2);
 
@@ -274,18 +283,19 @@ void HW_SignalAttachement(uint8_t PortNum, CCxPin_TypeDef cc)
   LL_UCPD_SetRxMode(Ports[PortNum].husbpd, LL_UCPD_RXMODE_NORMAL);
   LL_UCPD_RxDMAEnable(Ports[PortNum].husbpd);
   LL_UCPD_TxDMAEnable(Ports[PortNum].husbpd);
-  LL_UCPD_RxEnable(Ports[PortNum].husbpd);
+#endif /* !USBPDCORE_LIB_NO_PD */
 }
 
 
 void HW_SignalDetachment(uint8_t PortNum)
 {
+#if !defined(USBPDCORE_LIB_NO_PD)
   /* stop DMA RX/TX */
   LL_UCPD_RxDMADisable(Ports[PortNum].husbpd);
   LL_UCPD_TxDMADisable(Ports[PortNum].husbpd);
   LL_UCPD_RxDisable(Ports[PortNum].husbpd);
 
-#ifndef _LOW_POWER  
+#ifndef _LOW_POWER
   /* Enable only detection interrupt */
   WRITE_REG(Ports[PortNum].husbpd->IMR, UCPD_IMR_TYPECEVT1IE | UCPD_IMR_TYPECEVT2IE);
 #endif
@@ -295,18 +305,23 @@ void HW_SignalDetachment(uint8_t PortNum)
 
   LL_UCPD_SetccEnable(Ports[PortNum].husbpd, LL_UCPD_CCENABLE_CC1CC2);
 
-  if (USBPD_PORTPOWERROLE_SNK == Ports[PortNum].params->PE_PowerRole) 
-  {  
+  if (USBPD_PORTPOWERROLE_SNK == Ports[PortNum].params->PE_PowerRole)
+  {
 #if defined(_VCONN_SUPPORT)
     /* DeInitialize Vconn managment */
   (void)BSP_USBPD_PWR_VCONNDeInit(PortNum, (Ports[PortNum].CCx == CC1) ? 1u : 2u);
-#endif  
+#endif
     /* DeInitialise VBUS power */
   (void)BSP_USBPD_PWR_VBUSDeInit(PortNum);
   }
+#endif /* !USBPDCORE_LIB_NO_PD */
+#if !defined(USBPDCORE_LIB_NO_PD)||defined(USBPD_TYPE_STATE_MACHINE)
   Ports[PortNum].CCx = CCNONE;
+#endif /* !USBPDCORE_LIB_NO_PD || USBPD_TYPE_STATE_MACHINE */
+#if !defined(USBPDCORE_LIB_NO_PD)
   /* DeInit timer to detect the reception of goodCRC */
   USBPD_TIM_DeInit();
+#endif /* !USBPDCORE_LIB_NO_PD */
 }
 
 void USBPD_HW_IF_SetResistor_SinkTxNG(uint8_t PortNum)
@@ -326,13 +341,13 @@ uint8_t USBPD_HW_IF_IsResistor_SinkTxOk(uint8_t PortNum)
   switch (Ports[PortNum].CCx)
   {
     case CC1 :
-      if (Ports[PortNum].PIN_CC1 == LL_UCPD_SNK_CC1_VRP30A)
+      if((Ports[PortNum].husbpd->SR & UCPD_SR_TYPEC_VSTATE_CC1) == LL_UCPD_SNK_CC1_VRP30A)
       {
         return USBPD_TRUE;
       }
       break;
     case CC2 :
-      if (Ports[PortNum].PIN_CC2 == LL_UCPD_SNK_CC2_VRP30A)
+      if((Ports[PortNum].husbpd->SR & UCPD_SR_TYPEC_VSTATE_CC2) == LL_UCPD_SNK_CC2_VRP30A)
       {
         return USBPD_TRUE;
       }
@@ -348,5 +363,6 @@ void USBPD_HW_IF_FastRoleSwapSignalling(uint8_t PortNum)
 {
   LL_UCPD_SignalFRSTX(Ports[PortNum].husbpd);
 }
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

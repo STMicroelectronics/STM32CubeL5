@@ -314,7 +314,7 @@
         </option>
         <option>
           <name>CCRequirePrototypes</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>CCDiagWarnAreErr</name>
@@ -1113,22 +1113,22 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_sram.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\..\Firmware\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_bus.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_bus.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\..\Firmware\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_sd.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_sd.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\..\Firmware\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_io.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV\stm32l552e_eval_io.c</name>
         </file>
       </group>
       <group>
         <name>Components</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\..\Firmware\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\..\Firmware\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152_reg.c</name>
         </file>
       </group>
     </group>

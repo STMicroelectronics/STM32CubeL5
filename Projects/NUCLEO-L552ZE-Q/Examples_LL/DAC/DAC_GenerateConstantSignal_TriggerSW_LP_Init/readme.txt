@@ -1,9 +1,9 @@
 /**
   @page DAC_GenerateConstantSignal_TriggerSW_LP_Init DAC example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_LL/DAC/DAC_GenerateConstantSignal_TriggerSW_LP_Init/readme.txt 
+  * @file    Examples_LL/DAC/DAC_GenerateConstantSignal_TriggerSW_LP_Init/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the DAC_GenerateConstantSignal_TriggerSW_LP_Init example.
   ******************************************************************************
@@ -54,16 +54,19 @@ Connection needed:
 External capacitor:
   Mode sample-and-hold requires an external capacitor
   to be connected between DAC channel output and ground.
-  Capacitor value depends on load on DAC channel output and 
+  Capacitor value depends on load on DAC channel output and
   sample-and-hold timings configured.
   GENERATOR_ #error "Specify capacitor typ value and naming in datasheet for the selected STM32 serie"
 Oscilloscope for monitoring DAC channel output (cf pin below).
 Other peripheral used:
   1 GPIO for push button
   1 GPIO for DAC channel output PA.04 (Arduino connector CN7 pin 9, Morpho connector CN11 pin 32)
-  
 
-@par Directory contents 
+@par Keywords
+
+Analog, DAC, Conversion, Voltage output, Oscilloscope, Signal, Software trigger, Low power.
+
+@par Directory contents
 
   - DAC/DAC_GenerateConstantSignal_TriggerSW_LP_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file
   - DAC/DAC_GenerateConstantSignal_TriggerSW_LP_Init/Inc/main.h                  Header for main.c module
@@ -76,12 +79,12 @@ Other peripheral used:
 @par Hardware and Software environment
 
   - This example runs on STM32L552ZETxQ devices.
-    
+
   - This example has been tested with NUCLEO-L552ZE-Q board and can be
     easily tailored to any other supported device and development board.
 
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

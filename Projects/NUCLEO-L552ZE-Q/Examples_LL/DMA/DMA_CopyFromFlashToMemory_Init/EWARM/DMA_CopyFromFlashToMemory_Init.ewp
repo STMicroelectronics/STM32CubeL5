@@ -225,13 +225,9 @@
         <option>
           <name>CCDefines</name>
           <state>USE_FULL_LL_DRIVER</state>
-          <state>HSE_VALUE=8000000</state>
-          <state>HSE_STARTUP_TIMEOUT=100</state>
           <state>LSE_STARTUP_TIMEOUT=5000</state>
           <state>LSE_VALUE=32768</state>
           <state>MSI_VALUE=4000000</state>
-          <state>EXTERNALSAI1_CLOCK_VALUE=48000</state>
-          <state>EXTERNALSAI2_CLOCK_VALUE=48000</state>
           <state>HSI_VALUE=16000000</state>
           <state>LSI_VALUE=32000</state>
           <state>VDD_VALUE=3300</state>

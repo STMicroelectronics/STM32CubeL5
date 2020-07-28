@@ -48,6 +48,12 @@ to run at 110 MHz.
     Once this operation is finished, double-word programming operation will be performed
     in the Flash memory. The written data is then read back and checked.
 
+Selections may be
+
+  - FLASH_PAGE_PROGRAM and WRITE_PROTECTION_ENABLE selected
+  - FLASH_PAGE_PROGRAM and WRITE_PROTECTION_DISABLE selected
+  - FLASH_PAGE_PROGRAM selected
+
 NUCLEO-L552ZE-Q board's LED can be used to monitor the transfer status:
  - LED1 is ON when there are no errors detected after programming
     => should be the case when WRITE_PROTECTION_DISABLE flag is enabled

@@ -48,7 +48,7 @@
 #define IDD_INSTANCES_NBR 1U
 
 
-#define IDD_PRE_DELAY_MIN                  0UL      /*!< Minimum value in millisecond before starting acquisition (unit: ms). */
+#define IDD_PRE_DELAY_MIN                  5UL      /*!< Minimum value in millisecond before starting acquisition (unit: ms). */
 #define IDD_PRE_DELAY_MAX                  30000UL  /*!< Maximum value in millisecond before starting acquisition. This is the default configuration after BSP_IDD_Init (unit: ms). */
 #define IDD_ACQUISITION_DURATION_MIN       1UL      /*!< Minimum duration of the acquisation (unit: ms). */
 #define IDD_ACQUISITION_DURATION_MAX       10000UL  /*!< Maximum duration of the acquisation. This is the default configuration after BSP_IDD_Init (unit: ms). */

@@ -23,7 +23,8 @@
 #include "region_defs.h"
 MEMORY
 {
-  FLASH (rx)  : ORIGIN = BL2_CODE_START, LENGTH = BL2_CODE_SIZE
+  FLASH (rx)  : ORIGIN = PERSO_START, LENGTH = (PERSO_SIZE+BL2_CODE_SIZE)
+  FLASH_NOHDP (rx)  : ORIGIN = BL2_NOHDP_CODE_START, LENGTH = BL2_NOHDP_CODE_SIZE
   RAM   (rwx) : ORIGIN = BL2_DATA_START, LENGTH = BL2_DATA_SIZE
 }
 
@@ -43,7 +44,14 @@ SECTIONS
 		KEEP(*(.provision)) ;
 	} > FLASH
 	
-	.text (BL2_CODE_START+FLASH_AREA_BL2_OFFSET):
+	.BL2_NoHdp_Code :
+    {
+        *mpu_armv8m_drv.o (.text* .rodata*)
+        KEEP(*(.BL2_NoHdp_Code))
+        __hdp_end__ = .;
+    } > FLASH_NOHDP
+
+	.text (BL2_CODE_START):
     {
         
         KEEP(*(.vectors))
@@ -154,7 +162,7 @@ SECTIONS
 
     } > RAM
 	Image$$ER_CODE$$Base = __Vectors ;
-    Image$$ER_CODE$$Limit = __etext + + SIZEOF(.data);
+    Image$$HDP_CODE$$Limit = __hdp_end__;
     .bss :
     {
         . = ALIGN(4);
@@ -167,16 +175,6 @@ SECTIONS
 
     bss_size = __bss_end__ - __bss_start__;
 
-    .heap (COPY):
-    {
-        __HeapBase = .;
-        __end__ = .;
-        end = __end__;
-        KEEP(*(.heap*))
-        __HeapLimit = .;
-    } > RAM
-
-   
     .msp_stack :
     {
         . = ALIGN(8);

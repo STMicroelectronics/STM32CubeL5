@@ -1,5 +1,5 @@
 /**
-  @page RTC_Standby RTC_ActiveTamper example
+  @page RTC_ActiveTamper example
 
   @verbatim
   ******************************************************************************
@@ -49,6 +49,10 @@ One of the below scenario should occur :
 
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+RTC, Active Tamper, LSE,  Reset, System, Tamper
 
 @par Directory contents
 

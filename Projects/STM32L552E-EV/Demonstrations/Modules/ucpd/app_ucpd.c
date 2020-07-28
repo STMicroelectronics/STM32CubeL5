@@ -41,7 +41,7 @@
 #include "usbpd_pwr_if.h"
 #include "demo_application.h"
 
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 #if defined(_GUI_INTERFACE)
 #include "gui_api.h"
 #endif /* _GUI_INTERFACE */

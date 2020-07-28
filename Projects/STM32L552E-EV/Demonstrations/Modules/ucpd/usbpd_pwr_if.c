@@ -822,7 +822,7 @@ uint8_t USBPD_PWR_IF_GetVBUSStatus(uint8_t PortNum, USBPD_VBUSPOWER_STATUS Power
 #if defined (_TRACE)
   uint8_t str[20];
 #endif /* _TRACE */
-  
+
   switch(PowerTypeStatus)
   {
   case USBPD_PWR_BELOWVSAFE0V :
@@ -881,13 +881,13 @@ void USBPD_PWR_IF_UpdateVbusThreshold(uint8_t PortNum)
 /* USER CODE BEGIN USBPD_PWR_IF_UpdateVbusThreshold */
   USBPD_SNKRDO_TypeDef rdo;              /* get the requested RDO */
   USBPD_PDO_TypeDef    SelectedPDO;
-  
+
   rdo.d32 = DPM_Ports[PortNum].DPM_RequestDOMsg;
   SelectedPDO.d32 = DPM_Ports[PortNum].DPM_ListOfRcvSRCPDO[rdo.GenericRDO.ObjectPosition-1];
-  
+
   switch(SelectedPDO.GenericPDO.PowerObject)
   {
-  case USBPD_CORE_PDO_TYPE_FIXED : 
+  case USBPD_CORE_PDO_TYPE_FIXED :
     {
       switch(SelectedPDO.SRCFixedPDO.VoltageIn50mVunits * 50)
       {
@@ -906,7 +906,7 @@ void USBPD_PWR_IF_UpdateVbusThreshold(uint8_t PortNum)
       }
       break;
     }
-    
+
 #if defined(USBPD_REV30_SUPPORT) && defined(USBPDCORE_PPS)
   case USBPD_CORE_PDO_TYPE_APDO :
     {
@@ -914,8 +914,8 @@ void USBPD_PWR_IF_UpdateVbusThreshold(uint8_t PortNum)
       break;
     }
 #endif /*_USBPD_REV30_SUPPORT && PPS*/
-    
-  case USBPD_CORE_PDO_TYPE_BATTERY : 
+
+  case USBPD_CORE_PDO_TYPE_BATTERY :
   case USBPD_CORE_PDO_TYPE_VARIABLE :
     {
       /* Not yet handled */
@@ -1122,7 +1122,7 @@ void _PWR_CheckPDOContent(uint8_t PortNum)
   uint8_t error_in_content = 0U;
 
   /* Add consistency check on PDO definition for Ports 0 and 1 */
-  
+
 #if defined(_SRC)||defined(_DRP)
   /* SRC PDO
      - Nb of SRC PDO should be < USBPD_MAX_NB_PDO

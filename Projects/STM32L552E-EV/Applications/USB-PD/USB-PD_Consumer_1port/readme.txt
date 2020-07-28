@@ -1,5 +1,5 @@
 /**
-  @page USB-PD_Consumer USBPD Consumer example
+  @page USB-PD_Consumer_1port USBPD Consumer example
 
   @verbatim
   ******************************************************************************
@@ -46,7 +46,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-Middleware, UCPD, Type C, USBPD, FreeRTOS
+USB_PD_Lib, UCPD, Type C, USBPD, FreeRTOS
 
 @par Directory contents
     - USB-PD/USB-PD_Consumer_1port/Src/main.c                       Main program file

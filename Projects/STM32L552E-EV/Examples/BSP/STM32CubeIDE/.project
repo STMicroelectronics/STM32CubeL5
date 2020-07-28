@@ -38,9 +38,9 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/readme.txt</locationURI>
 		</link>
 		<link>
-			<name>Utilities/basic_gui.c</name>
+			<name>Utilities/lcd.c</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-5-PROJECT_LOC%7D/Utilities/basic_gui/basic_gui.c</locationURI>
+			<locationURI>$%7BPARENT-5-PROJECT_LOC%7D/Utilities/lcd/stm32_lcd.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/system_stm32l5xx.c</name>

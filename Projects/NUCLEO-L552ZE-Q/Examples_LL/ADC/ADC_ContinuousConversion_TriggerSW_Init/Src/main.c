@@ -21,7 +21,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -137,12 +136,10 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  
 
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
@@ -151,7 +148,7 @@ int main(void)
 
   /* System interrupt init*/
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   LL_PWR_DisableUCPDDeadBattery();
 
@@ -219,8 +216,6 @@ int main(void)
 
 
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -269,11 +264,9 @@ int main(void)
 void SystemClock_Config(void)
 {
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_5);
-
-  if(LL_FLASH_GetLatency() != LL_FLASH_LATENCY_5)
+  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_5)
   {
-    Error_Handler();  
-  };
+  }
 
   LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE0);
   LL_RCC_MSI_Enable();
@@ -281,7 +274,7 @@ void SystemClock_Config(void)
    /* Wait till MSI is ready */
   while(LL_RCC_MSI_IsReady() != 1)
   {
-  };
+  }
 
   LL_RCC_MSI_EnableRangeSelection();
   LL_RCC_MSI_SetRange(LL_RCC_MSIRANGE_6);
@@ -293,26 +286,25 @@ void SystemClock_Config(void)
    /* Wait till PLL is ready */
   while(LL_RCC_PLL_IsReady() != 1)
   {
-  };
+  }
 
    /* Intermediate AHB prescaler 2 when target frequency clock is higher than 80 MHz */
    LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_2);
-  
+
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
 
    /* Wait till System clock is ready */
   while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
   {
-  };
+  }
 
   /* Insure 1µs transition state at intermediate medium speed clock based on DWT*/
   CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-  
 
   DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
   DWT->CYCCNT = 0;
   while(DWT->CYCCNT < 100);
-  
+
   LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
   LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
@@ -344,10 +336,10 @@ static void MX_ADC1_Init(void)
 
   /* Peripheral clock enable */
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_ADC);
-  
+
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOC);
-  /**ADC1 GPIO Configuration  
-  PC3   ------> ADC1_IN4 
+  /**ADC1 GPIO Configuration
+  PC3   ------> ADC1_IN4
   */
   GPIO_InitStruct.Pin = LL_GPIO_PIN_3;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ANALOG;
@@ -362,7 +354,7 @@ static void MX_ADC1_Init(void)
   NVIC_EnableIRQ(ADC1_2_IRQn);
   
   /* USER CODE END ADC1_Init 1 */
-  /** Common config 
+  /** Common config
   */
   ADC_InitStruct.Resolution = LL_ADC_RESOLUTION_12B;
   ADC_InitStruct.DataAlignment = LL_ADC_DATA_ALIGN_RIGHT;
@@ -375,15 +367,28 @@ static void MX_ADC1_Init(void)
   ADC_REG_InitStruct.DMATransfer = LL_ADC_REG_DMA_TRANSFER_NONE;
   ADC_REG_InitStruct.Overrun = LL_ADC_REG_OVR_DATA_PRESERVED;
   LL_ADC_REG_Init(ADC1, &ADC_REG_InitStruct);
-  LL_ADC_DisableIT_EOC(ADC1);
-  LL_ADC_DisableIT_EOS(ADC1);
-  LL_ADC_DisableDeepPowerDown(ADC1);
-  LL_ADC_EnableInternalRegulator(ADC1);
+  LL_ADC_SetOverSamplingScope(ADC1, LL_ADC_OVS_DISABLE);
+
+   /* Disable ADC deep power down (enabled by default after reset state) */
+   LL_ADC_DisableDeepPowerDown(ADC1);
+   /* Enable ADC internal voltage regulator */
+   LL_ADC_EnableInternalRegulator(ADC1);
+   /* Delay for ADC internal voltage regulator stabilization. */
+   /* Compute number of CPU cycles to wait for, from delay in us. */
+   /* Note: Variable divided by 2 to compensate partially */
+   /* CPU processing cycles (depends on compilation optimization). */
+   /* Note: If system core clock frequency is below 200kHz, wait time */
+   /* is only a few CPU processing cycles. */
+   uint32_t wait_loop_index;
+   wait_loop_index = ((LL_ADC_DELAY_INTERNAL_REGUL_STAB_US * (SystemCoreClock / (100000 * 2))) / 10);
+   while(wait_loop_index != 0)
+     {
+   wait_loop_index--;
+     }
   ADC_CommonInitStruct.CommonClock = LL_ADC_CLOCK_SYNC_PCLK_DIV2;
-  ADC_CommonInitStruct.MultiDMATransfer = LL_ADC_MULTI_REG_DMA_EACH_ADC;
-  ADC_CommonInitStruct.MultiTwoSamplingDelay = LL_ADC_MULTI_TWOSMP_DELAY_1CYCLE;
+  ADC_CommonInitStruct.Multimode = LL_ADC_MULTI_INDEPENDENT;
   LL_ADC_CommonInit(__LL_ADC_COMMON_INSTANCE(ADC1), &ADC_CommonInitStruct);
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_4);
   LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_4, LL_ADC_SAMPLINGTIME_47CYCLES_5);
@@ -754,7 +759,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d", file, line) */

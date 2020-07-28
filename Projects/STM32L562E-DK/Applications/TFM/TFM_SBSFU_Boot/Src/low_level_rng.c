@@ -18,11 +18,9 @@
   *
   ******************************************************************************
   */
-#include "main.h"
-#include "entropy_poll.h"
-
+#include "low_level_rng.h"
 #include "stm32l5xx_hal.h"
-
+extern void Error_Handler(void);
 
 static RNG_HandleTypeDef handle;
 static uint8_t users = 0;
@@ -50,15 +48,8 @@ static void RNG_Init(void)
     Error_Handler();
   }
 
-  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
-
-  /*Select PLLQ output as RNG clock source */
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RNG;
-  PeriphClkInitStruct.RngClockSelection = RCC_RNGCLKSOURCE_MSI;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
-   Error_Handler();
-  }
+  /* Select MSI as RNG clock source */
+  __HAL_RCC_RNG_CONFIG(RCC_RNGCLKSOURCE_MSI);
 
   /* RNG Peripheral clock enable */
   __HAL_RCC_RNG_CLK_ENABLE();

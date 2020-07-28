@@ -99,7 +99,6 @@ int main(void)
      */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -178,7 +177,6 @@ int main(void)
   NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -192,7 +190,7 @@ int main(void)
 
 /**
   * @brief  Non-secure call function
-  *         This function is responsible for Non-secure initialization and switch 
+  *         This function is responsible for Non-secure initialization and switch
   *         to non-secure state
   * @retval None
   */
@@ -440,7 +438,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

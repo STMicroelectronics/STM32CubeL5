@@ -1,5 +1,5 @@
 /**
-  @page  Description of OTFDEC Executing Crypted Instruction example
+  @page OTFDEC_ExecutingCryptedInstruction example
 
   @verbatim
   ******************************************************************************

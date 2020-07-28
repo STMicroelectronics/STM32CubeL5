@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-# Copyright (c) 2017-2019, Arm Limited. All rights reserved.
+# Copyright (c) 2017-2020, Arm Limited. All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #
@@ -12,17 +12,24 @@ set(TFM_BUILD_IN_SPE ON)
 #Tell cmake where our modules can be found
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/../../../cmake)
 
-#Set variables to appropriate path
-set(MCUBOOT_DIR ${CMAKE_CURRENT_LIST_DIR})
-get_filename_component(TFM_ROOT_DIR "${MCUBOOT_DIR}/../../.." ABSOLUTE)
-
 #Include common stuff to control cmake.
 include("Common/BuildSys")
 
 #Start an embedded project.
+get_filename_component(TFM_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 embedded_project_start(CONFIG "${TFM_ROOT_DIR}/configs/ConfigDefault.cmake")
 project(mcuboot LANGUAGES ASM C)
 embedded_project_fixup()
+
+#Set the appropriate MCUBoot path
+if (MCUBOOT_REPO STREQUAL "TF-M")
+	get_filename_component(MCUBOOT_DIR ${CMAKE_CURRENT_LIST_DIR} ABSOLUTE)
+else()
+	get_filename_component(MCUBOOT_DIR "${TFM_ROOT_DIR}/../mcuboot/boot" ABSOLUTE)
+	if (NOT EXISTS ${MCUBOOT_DIR})
+		message(FATAL_ERROR "Missing MCUBoot. Please clone the MCUBoot repo to directory \"${MCUBOOT_DIR}\".")
+	endif()
+endif()
 
 #Check input variables
 if (NOT DEFINED BL2)
@@ -32,8 +39,8 @@ elseif(NOT BL2)
     return()
 endif()
 
-if (NOT DEFINED MBEDTLS_C_FLAGS_BL2)
-	message(FATAL_ERROR "Incomplete build configuration: MBEDTLS_C_FLAGS_BL2 is undefined.")
+if (NOT DEFINED MBEDCRYPTO_C_FLAGS_BL2)
+	message(FATAL_ERROR "Incomplete build configuration: MBEDCRYPTO_C_FLAGS_BL2 is undefined.")
 endif()
 
 set(BUILD_CMSIS_CORE On)
@@ -71,38 +78,56 @@ endif()
 
 #Append all our source files to global lists.
 list(APPEND ALL_SRC_C
-		"${MCUBOOT_DIR}/bl2_main.c"
-		"${MCUBOOT_DIR}/flash_map.c"
-		"${MCUBOOT_DIR}/keys.c"
+		"${TFM_ROOT_DIR}/bl2/ext/mcuboot/bl2_main.c"
+		"${TFM_ROOT_DIR}/bl2/ext/mcuboot/flash_map_extended.c"
+		"${TFM_ROOT_DIR}/bl2/ext/mcuboot/flash_map_legacy.c"
+		"${TFM_ROOT_DIR}/bl2/ext/mcuboot/keys.c"
+		"${TFM_ROOT_DIR}/bl2/src/flash_map.c"
 		"${MCUBOOT_DIR}/bootutil/src/loader.c"
 		"${MCUBOOT_DIR}/bootutil/src/bootutil_misc.c"
 		"${MCUBOOT_DIR}/bootutil/src/image_validate.c"
 		"${MCUBOOT_DIR}/bootutil/src/image_rsa.c"
-		"${TFM_ROOT_DIR}/bl2/src/boot_record.c"
-		"${TFM_ROOT_DIR}/bl2/src/security_cnt.c"
+		"${MCUBOOT_DIR}/bootutil/src/tlv.c"
 	)
 
-#Define location of mbedtls source, build, and installation directory.
-get_filename_component(MBEDTLS_SOURCE_DIR "${TFM_ROOT_DIR}/../mbedtls" ABSOLUTE)
-if(NOT EXISTS ${MBEDTLS_SOURCE_DIR})
-	message(FATAL_ERROR "Missing mbedtls. Please clone the mbedtls repo to directory \"${MBEDTLS_SOURCE_DIR}\".")
+if (MCUBOOT_REPO STREQUAL "TF-M")
+	list(APPEND ALL_SRC_C
+			"${TFM_ROOT_DIR}/bl2/src/boot_record.c"
+			"${TFM_ROOT_DIR}/bl2/src/security_cnt.c"
+		)
 endif()
-set (MBEDTLS_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/mbedtls")
-set (MBEDTLS_INSTALL_DIR ${MBEDTLS_BINARY_DIR}/mbedtls_install)
 
-#Build mbedtls as external project.
-#This ensures mbedtls is built with exactly defined settings.
-#mbedtls will be used from is't install location
-set(MBEDTLS_C_FLAGS ${MBEDTLS_C_FLAGS_BL2})
-set(MBEDTLS_TARGET_NAME "mbedtls_mcuboot_lib")
-include(${TFM_ROOT_DIR}/BuildMbedtls.cmake)
+#Define location of Mbed Crypto source, build, and installation directory.
+set(MBEDTLS_CONFIG_FILE "config-rsa.h")
+set(MBEDTLS_CONFIG_PATH "${TFM_ROOT_DIR}/bl2/ext/mcuboot/include")
+get_filename_component(MBEDCRYPTO_SOURCE_DIR "${TFM_ROOT_DIR}/../mbed-crypto" ABSOLUTE)
+if(NOT EXISTS ${MBEDCRYPTO_SOURCE_DIR})
+    message(FATAL_ERROR "Missing mbed-crypto. Please clone the mbed-crypto repo to directory \"${MBEDCRYPTO_SOURCE_DIR}\".")
+endif()
+set (MBEDCRYPTO_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/mbed-crypto/build")
+set (MBEDCRYPTO_INSTALL_DIR ${MBEDCRYPTO_BINARY_DIR}/../install)
+
+if (CRYPTO_HW_ACCELERATOR OR CRYPTO_HW_ACCELERATOR_OTP_STATE STREQUAL "PROVISIONING")
+	if(NOT DEFINED CRYPTO_HW_ACCELERATOR_CMAKE_BUILD)
+		message(FATAL_ERROR "CRYPTO_HW_ACCELERATOR_CMAKE_BUILD not defined.")
+	endif()
+	include(${CRYPTO_HW_ACCELERATOR_CMAKE_BUILD})
+endif()
+
+#Build Mbed Crypto as external project.
+#This ensures Mbed Crypto is built with exactly defined settings.
+#Mbed Crypto will be used from its install location
+string(APPEND MBEDCRYPTO_C_FLAGS " ${MBEDCRYPTO_C_FLAGS_BL2}")
+set(MBEDCRYPTO_TARGET_NAME "mbedcrypto_mcuboot_lib")
+include(${TFM_ROOT_DIR}/BuildMbedCrypto.cmake)
 
 #Setting include directories
 embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${TFM_ROOT_DIR} ABSOLUTE APPEND)
+embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${TFM_ROOT_DIR}/interface/include ABSOLUTE APPEND)
 embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${TFM_ROOT_DIR}/bl2/include ABSOLUTE APPEND)
 embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${TFM_ROOT_DIR}/bl2/ext/mcuboot/include ABSOLUTE APPEND)
-embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${TFM_ROOT_DIR}/bl2/ext/mcuboot/bootutil/include/ ABSOLUTE APPEND)
-embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${MBEDTLS_INSTALL_DIR}/include ABSOLUTE APPEND)
+embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${MCUBOOT_DIR}/bootutil/include ABSOLUTE APPEND)
+embedded_target_include_directories(TARGET ${PROJECT_NAME} PATH ${MBEDCRYPTO_INSTALL_DIR}/include ABSOLUTE APPEND)
 
 #Define linker file
 if(NOT DEFINED BL2_LINKER_CONFIG)
@@ -137,23 +162,37 @@ elseif(TEST_FRAMEWORK_NS)
 endif()
 
 #Link mbedcrypto library to project
-target_link_libraries(${PROJECT_NAME} "${MBEDTLS_INSTALL_DIR}/lib/${CMAKE_STATIC_LIBRARY_PREFIX_C}mbedcrypto${CMAKE_STATIC_LIBRARY_SUFFIX_C}")
-add_dependencies(${PROJECT_NAME} ${MBEDTLS_TARGET_NAME}_install)
+target_link_libraries(${PROJECT_NAME} "${MBEDCRYPTO_INSTALL_DIR}/lib/${CMAKE_STATIC_LIBRARY_PREFIX_C}mbedcrypto${CMAKE_STATIC_LIBRARY_SUFFIX_C}")
+add_dependencies(${PROJECT_NAME} ${MBEDCRYPTO_TARGET_NAME}_install)
+
+#Link crypto accelerator libraries if applicable
+if (CRYPTO_HW_ACCELERATOR OR CRYPTO_HW_ACCELERATOR_OTP_STATE STREQUAL "PROVISIONING")
+	if(NOT DEFINED CRYPTO_HW_ACCELERATOR_CMAKE_LINK)
+		message(FATAL_ERROR "CRYPTO_HW_ACCELERATOR_CMAKE_LINK not defined.")
+	endif()
+	include(${CRYPTO_HW_ACCELERATOR_CMAKE_LINK})
+endif()
 
 #Generate binary file from axf
 compiler_generate_binary_output(${PROJECT_NAME})
 
-message(STATUS "MCUBOOT_IMAGE_NUMBER is set to: '${MCUBOOT_IMAGE_NUMBER}'.")
-message(STATUS "MCUBOOT_UPGRADE_STRATEGY is set to: '${MCUBOOT_UPGRADE_STRATEGY}'.")
-message(STATUS "MCUBOOT_SIGNATURE_TYPE is set to: '${MCUBOOT_SIGNATURE_TYPE}'.")
-message(STATUS "MCUBOOT_HW_KEY is set to: '${MCUBOOT_HW_KEY}'.")
+message("- MCUBOOT_REPO: '${MCUBOOT_REPO}'.")
+message("- MCUBOOT_IMAGE_NUMBER: '${MCUBOOT_IMAGE_NUMBER}'.")
+message("- MCUBOOT_UPGRADE_STRATEGY: '${MCUBOOT_UPGRADE_STRATEGY}'.")
+message("- MCUBOOT_SIGNATURE_TYPE: '${MCUBOOT_SIGNATURE_TYPE}'.")
+message("- MCUBOOT_HW_KEY: '${MCUBOOT_HW_KEY}'.")
+message("- MCUBOOT_LOG_LEVEL: '${MCUBOOT_LOG_LEVEL}'.")
 
 #Set macro definitions for the project.
 target_compile_definitions(${PROJECT_NAME} PRIVATE
 							MCUBOOT_VALIDATE_PRIMARY_SLOT
 							MCUBOOT_USE_FLASH_AREA_GET_SECTORS
-							MBEDTLS_CONFIG_FILE="config-boot.h"
+							MBEDTLS_CONFIG_FILE="${MBEDTLS_CONFIG_FILE}"
 							MCUBOOT_TARGET_CONFIG="flash_layout.h")
+
+if (MCUBOOT_REPO STREQUAL "UPSTREAM")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE MCUBOOT_USE_UPSTREAM)
+endif()
 
 if (MCUBOOT_SIGNATURE_TYPE STREQUAL "RSA-3072")
 	target_compile_definitions(${PROJECT_NAME} PRIVATE MCUBOOT_SIGN_RSA MCUBOOT_SIGN_RSA_LEN=3072)
@@ -179,6 +218,17 @@ endif()
 if (MCUBOOT_HW_KEY)
 	target_compile_definitions(${PROJECT_NAME} PRIVATE MCUBOOT_HW_KEY)
 endif()
+
+if (ATTEST_BOOT_INTERFACE STREQUAL "INDIVIDUAL_CLAIMS")
+	target_compile_definitions(${PROJECT_NAME} PRIVATE MCUBOOT_INDIVIDUAL_CLAIMS)
+	message(WARNING "ATTEST_BOOT_INTERFACE was set to ${ATTEST_BOOT_INTERFACE}. This configuration is "
+			"deprecated and this feature will probably be removed from MCUBoot in the future.")
+endif()
+
+#Configure log level for MCUBoot.
+get_property(_log_levels CACHE MCUBOOT_LOG_LEVEL PROPERTY STRINGS)
+list(FIND _log_levels ${MCUBOOT_LOG_LEVEL} LOG_LEVEL_ID)
+target_compile_definitions(${PROJECT_NAME} PRIVATE MCUBOOT_LOG_LEVEL=${LOG_LEVEL_ID})
 
 #Set install location. Keep original value to avoid overriding command line settings.
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)

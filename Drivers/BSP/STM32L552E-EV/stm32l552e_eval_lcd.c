@@ -3,7 +3,7 @@
   * @file    stm32l552e_eval_lcd.c
   * @author  MCD Application Team
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
-  *          mounted on STM32L552E-EVAL evaluation board.
+  *          mounted on STM32L552E-EV evaluation board.
   @verbatim
   1. How To use this driver:
   --------------------------
@@ -115,8 +115,8 @@ static int32_t HX8347I_PowerDown(void);
 
 static int32_t LCD_FMC_Init(void);
 static int32_t LCD_FMC_DeInit(void);
-static int32_t LCD_FMC_WriteReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length);
-static int32_t LCD_FMC_ReadReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length);
+static int32_t LCD_FMC_WriteReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint32_t Length);
+static int32_t LCD_FMC_ReadReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint32_t Length);
 static int32_t LCD_FMC_GetTick(void);
 static void    FMC_MspInit(SRAM_HandleTypeDef *hSram);
 static void    FMC_MspDeInit(SRAM_HandleTypeDef *hSram);
@@ -943,10 +943,10 @@ static int32_t LCD_FMC_DeInit(void)
   * @param  Length  Number of data.
   * @retval BSP status.
   */
-static int32_t LCD_FMC_WriteReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length)
+static int32_t LCD_FMC_WriteReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint32_t Length)
 {
   int32_t  ret = BSP_ERROR_NONE;
-  uint16_t i = 0;
+  uint32_t i = 0;
 
   if ((DevAddr != LCD_FMC_ADDRESS) || (pData == NULL) || (Length == 0U))
   {
@@ -977,10 +977,10 @@ static int32_t LCD_FMC_WriteReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData
   * @param  Length  Number of data.
   * @retval BSP status.
   */
-static int32_t LCD_FMC_ReadReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length)
+static int32_t LCD_FMC_ReadReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint32_t Length)
 {
   int32_t  ret = BSP_ERROR_NONE;
-  uint16_t i = 0;
+  uint32_t i = 0;
   uint16_t tmp;
 
   if ((DevAddr != LCD_FMC_ADDRESS) || (pData == NULL) || (Length == 0U))

@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include "com.h"
 #include "common.h"
+#include "flash_layout.h"
 #include "secure_nsc.h"
 /* Avoids the semihosting issue */
 #if defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
@@ -172,9 +173,11 @@ int main(int argc, char **argv)
 void FW_APP_PrintMainMenu(void)
 {
   printf("\r\n=================== Main Menu ============================\r\n\n");
-  printf("  Download a new Fw Image ------------------------------- 1\r\n\n");
-  printf("  Test Protections -------------------------------------- 2\r\n\n");
-  printf("  Toggle Secure LED ------------------------------------- 3\r\n\n");
+  printf("  Test Protections -------------------------------------- 1\r\n\n");
+  printf("  Toggle Secure LED ------------------------------------- 2\r\n\n");
+#if !defined(MCUBOOT_PRIMARY_ONLY)
+  printf("  Download a new Fw Image ------------------------------- 3\r\n\n");
+#endif /* !MCUBOOT_PRIMARY_ONLY */
   printf("  Selection :\r\n\n");
 }
 
@@ -200,15 +203,17 @@ void FW_APP_Run(void)
     {
       switch (key)
       {
-        case '1' :
-          FW_UPDATE_Run();
-          break;
-        case '2' :
+	    case '1' :
           TEST_PROTECTIONS_Run();
           break;
-	     case '3' :
+	    case '2' :
           SECURE_GPIO_Toggle();
           break;
+#if !defined(MCUBOOT_PRIMARY_ONLY)
+        case '3' :
+          FW_UPDATE_Run();
+          break;
+#endif /* !MCUBOOT_PRIMARY_ONLY */
         default:
           printf("Invalid Number !\r");
           break;
@@ -219,6 +224,7 @@ void FW_APP_Run(void)
     }
   }
 }
+
 /**
   * @brief  Callback called by secure code following a secure fault interrupt
   * @note   This callback is called by secure code thanks to the registration
@@ -232,7 +238,6 @@ void SecureFault_Callback(void)
   /* because of illegal access */
   Error_Handler();
 }
-
 
 /**
   * @brief  Callback called by secure code following a GTZC TZIC secure interrupt (GTZC_IRQn)
@@ -256,8 +261,8 @@ void Error_Handler(void)
 {
   NVIC_SystemReset();
 }
-#ifdef  USE_FULL_ASSERT
 
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

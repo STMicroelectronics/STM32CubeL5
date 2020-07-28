@@ -1,12 +1,15 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
+  * @file    RTC/RTC_ActiveTamper/Src/main.c
+  * @author  MCD Application Team
+  * @brief   This sample code shows how to use STM32L5xx RTC HAL API to write/read
+  *          data to/from RTC Backup data registers and demonstrates the Active Tamper
+  *          detection feature.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -17,7 +20,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -46,7 +48,8 @@ RTC_HandleTypeDef hrtc;
 RTC_HandleTypeDef hrtc;
 
 /* USER CODE BEGIN PV */
-__IO uint32_t TampIntStatus;
+__IO FlagStatus TamperStatus;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,15 +77,14 @@ int main(void)
   uint32_t i;
   /* USER CODE END 1 */
 
-
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
-  TampIntStatus = 0x00u;
+  /* Configure LED10 */
+  BSP_LED_Init(LED10);
 
   /* USER CODE END Init */
 
@@ -91,9 +93,6 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
-  /* Configure LED10  */
-  BSP_LED_Init(LED10);
-
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -101,7 +100,6 @@ int main(void)
   MX_RTC_Init();
   MX_TAMP_RTC_Init();
   /* USER CODE BEGIN 2 */
-  HAL_Delay(200);
 
   /* Check if Tamper is not detected */
   for (i = 0; i < RTC_BKP_NUMBER; i++)
@@ -120,12 +118,12 @@ int main(void)
     Seed[1] += 0xAAAu;
     Seed[2] += Seed[0] - Seed[1];
     Seed[3] += 4 * Seed[0] + 0x123456u;
-
+  
     if (HAL_RTCEx_SetActiveSeed(&hrtc, Seed) != HAL_OK)
     {
-       Error_Handler();
+      Error_Handler();
     }
-
+  
     HAL_Delay(100);
   }
 
@@ -137,9 +135,11 @@ int main(void)
        Error_Handler();
     }
   }
+  /* Clear tamper interrupt flag */
+  TamperStatus = RESET;
 
-  /* Wait for tamper detection. User must disconnect a wire */
-  while (TampIntStatus == 0x00u);
+  /* Wait for tamper detection. User must disconnect the wire */
+  while (TamperStatus == RESET);
 
   /* Disable Active Tampers */
   if (HAL_RTCEx_DeactivateActiveTampers(&hrtc) != HAL_OK)
@@ -156,7 +156,7 @@ int main(void)
     }
   }
 
-  /* The test is OK */
+  /* Test is OK Turn on LED10 */
   BSP_LED_On(LED10);
 
   /* USER CODE END 2 */
@@ -191,10 +191,11 @@ void SystemClock_Config(void)
   */
   HAL_PWR_EnableBkUpAccess();
   __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
-  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON_RTC_ONLY;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
@@ -209,7 +210,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -240,8 +241,7 @@ static void MX_RTC_Init(void)
 
   /* USER CODE BEGIN RTC_Init 1 */
 
-  /* Uncomment to freeze the RTC during debug */
-  //__HAL_DBGMCU_FREEZE_RTC();
+  /* Use __HAL_DBGMCU_FREEZE_RTC(); to freeze the RTC during debug */
 
   /* USER CODE END RTC_Init 1 */
   /** Initialize RTC Only
@@ -252,6 +252,9 @@ static void MX_RTC_Init(void)
   hrtc.Init.SynchPrediv = 255;
   hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
   hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  hrtc.Init.OutPutPullUp = RTC_OUTPUT_PULLUP_NONE;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
   {
     Error_Handler();
@@ -265,7 +268,8 @@ static void MX_RTC_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN RTC_Init 2 */
-  /* Set Calendar Ultra-Low power mode */
+
+  /* Calendar ultra-low power mode */
   if (HAL_RTCEx_SetLowPowerCalib(&hrtc, RTC_LPCAL_SET) != HAL_OK)
   {
     Error_Handler();
@@ -298,7 +302,9 @@ static void MX_TAMP_RTC_Init(void)
   /* USER CODE BEGIN TAMP_Init 1 */
 
   /* USER CODE END TAMP_Init 1 */
-
+  /** Enable the RTC Active Tamper
+  */
+  sAllTamper.ActiveFilter = RTC_ATAMP_FILTER_DISABLE;
   sAllTamper.ActiveAsyncPrescaler = RTC_ATAMP_ASYNCPRES_RTCCLK;
   sAllTamper.TimeStampOnTamperDetection = RTC_TIMESTAMPONTAMPERDETECTION_ENABLE;
   sAllTamper.ActiveOutputChangePeriod = 0;
@@ -310,12 +316,10 @@ static void MX_TAMP_RTC_Init(void)
   sAllTamper.TampInput[RTC_ATAMP_5].Interrupt = RTC_ATAMP_INTERRUPT_ENABLE;
   sAllTamper.TampInput[RTC_ATAMP_5].Output = RTC_ATAMP_1;
   sAllTamper.TampInput[RTC_ATAMP_5].NoErase = RTC_TAMPER_ERASE_BACKUP_ENABLE;
-  sAllTamper.TampInput[RTC_ATAMP_5].MaskFlag = RTC_TAMPERMASK_FLAG_DISABLE;
   if (HAL_RTCEx_SetActiveTampers(&hrtc, &sAllTamper) != HAL_OK)
   {
     Error_Handler();
   }
-
   /* USER CODE BEGIN TAMP_Init 2 */
 
   /* USER CODE END TAMP_Init 2 */
@@ -337,15 +341,14 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
 /**
-  * @brief  HAL Callbacks
-  * @param  None
+  * @brief  Tamper event callback function
+  * @param  RTC handle
   * @retval None
   */
-void HAL_RTCEx_Tamper5EventCallback(RTC_HandleTypeDef *RTCHandle)
+void HAL_RTCEx_Tamper5EventCallback(RTC_HandleTypeDef *hrtc)
 {
-  TampIntStatus |= TAMP_MISR_TAMP5MF;
+  TamperStatus = SET;
 }
 
 /* USER CODE END 4 */
@@ -357,10 +360,8 @@ void HAL_RTCEx_Tamper5EventCallback(RTC_HandleTypeDef *RTCHandle)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
   while (1)
   {
-    /* Toggle the LED10 */
     BSP_LED_Toggle(LED10);
     HAL_Delay(100);
   }

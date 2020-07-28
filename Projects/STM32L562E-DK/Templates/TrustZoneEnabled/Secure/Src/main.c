@@ -50,14 +50,8 @@ static void SystemIsolation_Config(void);
   */
 int main(void)
 {
-  /* SAU/IDAU, FPU and interrupts secure/non-secure allocation setup done */
-  /* in SystemInit() based on partition_stm32l552xx.h file's definitions. */
-
-  /* Secure/Non-secure Memory and Peripheral isolation configuration */
-  SystemIsolation_Config();
-
-  /* Enable SecureFault handler (HardFault is default) */
-  SCB->SHCSR |= SCB_SHCSR_SECUREFAULTENA_Msk;
+  /* SAU/IDAU, FPU and Interrupts secure/non-secure allocation settings  */
+  /* already done in SystemInit() thanks to partition_stm32l552xx.h file */
 
   /* STM32L5xx **SECURE** HAL library initialization:
        - Secure Systick timer is configured by default as source of time base,
@@ -72,6 +66,14 @@ int main(void)
   /* Secure application may configure the System clock here */
   /* SystemClock_Config(); */
 
+  /* Enable instruction cache (default 2-ways set associative cache) */
+  HAL_ICACHE_Enable();
+
+  /* Secure/Non-secure Memory and Peripheral isolation configuration */
+  SystemIsolation_Config();
+
+  /* Enable SecureFault handler (HardFault is default) */
+  SCB->SHCSR |= SCB_SHCSR_SECUREFAULTENA_Msk;
 
   /* Add your secure application code here prior to non-secure initialization
      */

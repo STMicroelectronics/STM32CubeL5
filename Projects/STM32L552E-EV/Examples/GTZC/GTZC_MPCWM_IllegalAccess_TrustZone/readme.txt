@@ -1,5 +1,5 @@
 /**
-  @page Description of the GTZC_MPCWM_IllegalAccess_TrustZone example with TZEN=1
+  @page GTZC_MPCWM_IllegalAccess_TrustZone example with TZEN=1
 
   @verbatim
   ******************************************************************************
@@ -155,11 +155,6 @@ IAR
 
 MDK-ARM
 
- Requirements for Keil µVision version without ST-LINK debug support on Cortex-M33:
- - Use ST-LINK FW v2J32 available on ST web site
- - Use the ST-LINKIII-Keil_SWO.dll and STLinkUSBDriver.dll (ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip) and copy them at Keil\ARM\ST-LINK
- - Change the TOOLS.INI under Keil install directory as described in the .doc file provided in the ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip package
-
  - Open your toolchain
  - Open Multi-projects workspace file Project.uvmpw
  - Select the xxxxx_S project as Active Project (Set as Active Project)
@@ -177,13 +172,13 @@ MDK-ARM
 STM32CubeIDE
  - Open STM32CubeIDE
  - File > Import. Point to the STM32CubeIDE folder of the example project. Click Finish.
- - Select and build the xxxxx_NS project, this will automatically trigger build of xxxxx_S project
- - Select the xxxxx_S project and select “Debug configuration”
+ - Build configuration: Set the same active build configuration: Debug (default) or Release for both projects xxxxx_S & xxxxx_NS
+ - Select and build the xxxxx_NS project, this will automatically trigger the build of xxxxx_S project
+ - Select the xxxxx_S project and select "Debug configuration" or "Run configuration" in function of teh active build configuration
    - Double click on “STM32 Cortex-M C/C++ Application”
    - Select  “Startup” >  “Add” > 
- - Select the xxxxx_NS project 
- - Build configuration : Select Release/Debug
-   - Click Debug to debug the example
+     - Select the xxxxx_NS project 
+ - Click Debug/Run to debug/run the example
  NOTE:
    - The default Debug configuration runtime option sets "Halt on exception" which 
      makes the code execution halt on SecureFault_Handler() on voluntary security violation.

@@ -66,7 +66,7 @@ STM32L552E-EV board LED is be used to monitor the program execution status:
 
 @par Keywords
 
-Analog, ADC, Analog to Digital, single conversion , Software trigger, Over sampling.
+ADC, analog digital converter, conversion, voltage, channel, analog input, oversampling
 
 @par Directory contents 
 

@@ -61,6 +61,10 @@ and aShowDate variables (watch or live watch).
   - RTC/RTC_Alarm/Src/main.c                  Main program
   - RTC/RTC_Alarm/Src/system_stm32l5xx.c      STM32L5xx system source file
 
+@par Keywords
+
+RTC, Alarm, LSE, Wake Up, Time base
+
 
 @par Hardware and Software environment
 

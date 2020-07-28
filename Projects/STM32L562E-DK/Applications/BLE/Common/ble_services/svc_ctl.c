@@ -18,7 +18,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include <string.h>   
+#include <string.h>
 #include <stdint.h>
 
 #include "config.h"   /* provided by the applic. see config/ble_config_templete.h */
@@ -75,19 +75,12 @@ SVCCTL_CltHandler_t  SVCCTL_CltHandler;
 
 
 /* Fake __Weak functions ------------------------------------------------------*/
-/* This is a dirty trick to avoid putting compilation flags to say which service are included */	
+/* This is a dirty trick to avoid putting compilation flags to say which service are included */
 /* If the related service is added in the project space its Init function will be used */
 /* Otherwise the dummy __Weak function allow to avoid the compilatio error */
 
 __weak void DIS_Init(uint16_t *p_options) {}
 __weak void HRS_Init(void) {}
-__weak void BAS_Init(uint8_t * options, uint8_t battery_index) {}
-__weak void ANS_Init(void) {}
-__weak void HIDS_Init(void) {}
-__weak void HPS_Init(void) {}
-__weak void IPSS_Init(void) {}
-__weak void LNS_Init(void) {}
-__weak void SCPS_Init(void) {}
 __weak void BLESVC_InitCustomSvc( void ) {}
 
 /* Functions Definition ------------------------------------------------------*/
@@ -191,7 +184,7 @@ void SVCCTL_Init( void )
 
 #if (BLE_SVC_ALERT_NOTIFICATION != 0)
   BLE_SVC_AlertNotification_Init();
-#endif  
+#endif
 
 #if (BLE_CLI_ALERT_NOTIFICATION != 0)
   BLE_SVC_AlertNotification_Client_Init();
@@ -199,7 +192,7 @@ void SVCCTL_Init( void )
 
 #if (BLE_SVC_WEIGHT_SCALE != 0)
   BLE_SVC_WeightScale_Init();
-#endif   
+#endif
 
 #if (BLE_SVC_CURRENT_TIME != 0)
   BLE_SVC_CurrentTime_Init();
@@ -215,32 +208,6 @@ void SVCCTL_Init( void )
 
 #if (BLE_SVC_NEXT_DST != 0)
   BLE_SVC_NextDst_Init();
-#endif
-
-  SCPS_Init();
-
-  ANS_Init();
-
-#if ( ERIC_MECHIN == 1)
-#if (MENU_BATTERY == 1)
-  {
-    uint8_t * options;
-    uint8_t service_instance;
-
-    for(service_instance = 0; service_instance < CFG_BAS_NUMBER ; service_instance++)
-    {
-      BAS_Menu(options);
-      BAS_Init(options, service_instance);
-    }
-  }
-#else
-{
-  uint8_t service_instance;
-
-  for(service_instance = 0; service_instance < CFG_BAS_NUMBER ; service_instance++)
-    BAS_Init(NULL, service_instance);
-}
-#endif
 #endif
 
 #if (BLE_SVC_ENV_SENSING != 0)
@@ -307,7 +274,7 @@ void SVCCTL_Init( void )
 
 #if (BLE_SVC_PHONE_ALERT_STATUS != 0)
 BLE_SVC_PhoneAlertStatus_Init();
-#endif   
+#endif
 
 #if (BLE_CLI_PHONE_ALERT_STATUS != 0)
 BLE_SVC_PhoneAlertStatus_Client_Init();
@@ -315,11 +282,11 @@ BLE_SVC_PhoneAlertStatus_Client_Init();
 
 #if (BLE_SVC_DATA_TRANSFER != 0)
 BLE_SVC_DataTransfer_Init();
-#endif   
+#endif
 
 #if (BLE_CLI_DATA_TRANSFER != 0)
 BLE_SVC_DataTransfer_Client_Init();
-#endif   
+#endif
 
 #if (BLE_SVC_HID != 0)
 BLE_SVC_Hid_Init();
@@ -358,14 +325,6 @@ BLE_SVC_IPSupport_Init();
 #if (BLE_SVC_HTTP_PROXY != 0)
 BLE_SVC_Http_Init();
 #endif
-
-HIDS_Init();
-
-LNS_Init();
-
-IPSS_Init();
-
-HPS_Init();
 
 BLESVC_InitCustomSvc();
 
@@ -492,8 +451,8 @@ void SVCCTL_HCI_UserEvtRx(void *pckt)
 /* ----------------------------------------------------------------------------*/
 
 /**
-  * @note  __WEAK function: The application can overload this function  
-           for example in case it needs to retrieve the value from OTP 
+  * @note  __WEAK function: The application can overload this function
+           for example in case it needs to retrieve the value from OTP
            instead of using the harcoded value in the config.h
   */
 __weak const uint8_t* SVCCTL_GetBdAddress( void )

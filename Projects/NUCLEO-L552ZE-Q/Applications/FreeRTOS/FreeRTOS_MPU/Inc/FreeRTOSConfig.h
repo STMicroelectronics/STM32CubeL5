@@ -36,10 +36,10 @@
  * These definitions should be adjusted for your particular hardware and
  * application requirements.
  *
- * THESE PARAMETERS ARE DESCRIBED WITHIN THE 'CONFIGURATION' SECTION OF THE
- * FreeRTOS API DOCUMENTATION AVAILABLE ON THE FreeRTOS.org WEB SITE.
+ * These parameters and more are described within the 'configuration' section of the
+ * FreeRTOS API documentation available on the FreeRTOS.org web site.
  *
- * See http://www.freertos.org/a00110.html.
+ * See http://www.freertos.org/a00110.html
  *----------------------------------------------------------*/
 
 /* Ensure stdint is only used by the compiler, and not the assembler. */
@@ -64,12 +64,12 @@
 #endif
 /* The lowest interrupt priority that can be used in a call to a "set priority"
 function. */
-#define configLIBRARY_LOWEST_INTERRUPT_PRIORITY     0x7
+#define configLIBRARY_LOWEST_INTERRUPT_PRIORITY 7
 
 /*-----------------------------------------------------------------*/
 
 #define configUSE_PREEMPTION                    1
-#define configUSE_IDLE_HOOK                     0
+#define configUSE_IDLE_HOOK                     1
 #define configUSE_TICK_HOOK                     1
 #define configCPU_CLOCK_HZ                      ( SystemCoreClock )
 #define configTICK_RATE_HZ                      ( ( TickType_t ) 1000 )
@@ -88,7 +88,7 @@ function. */
 #define configUSE_APPLICATION_TASK_TAG          0
 #define configUSE_COUNTING_SEMAPHORES           1
 #define configGENERATE_RUN_TIME_STATS           0
-#define configUSE_TICKLESS_IDLE					0
+#define configUSE_TICKLESS_IDLE                 0
 
 /*
  * CMSISRTOS-v2 requires:

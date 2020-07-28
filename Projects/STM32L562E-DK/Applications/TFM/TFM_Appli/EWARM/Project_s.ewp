@@ -44,7 +44,7 @@
                 </option>
                 <option>
                     <name>OGCoreOrChip</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>GRuntimeLibSelect</name>
@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>Default	None</state>
+                    <state>STM32L562QE	ST STM32L562QE</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>Default	None</state>
+                    <state>STM32L562QE	ST STM32L562QE</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -220,12 +220,10 @@
                 <debug>1</debug>
                 <option>
                     <name>CCDefines</name>
+                    <state>NDEBUG</state>
                     <state>STM32L562xx</state>
                     <state>BL2</state>
                     <state>USE_HAL_DRIVER</state>
-                    <state>MCUBOOT_SIGN_RSA</state>
-                    <state>MCUBOOT_VALIDATE_SLOT0</state>
-                    <state>MCUBOOT_USE_FLASH_AREA_GET_SECTORS</state>
                     <state>SST_ENCRYPTION</state>
                     <state>TFM_PSA_API=1</state>
                     <state>TFM_LVL=2</state>
@@ -233,7 +231,6 @@
                     <state>SST_CREATE_FLASH_LAYOUT</state>
                     <state>MULADDC_CANNOT_USE_R7</state>
                     <state>MBEDTLS_CONFIG_FILE=&lt;tfm_mbedcrypto_config.h&gt;</state>
-                    <state>NO_TYPEOF</state>
                     <state>ITS_CREATE_FLASH_LAYOUT</state>
                     <state>Image$$= </state>
                     <state>Load$$LR$$= </state>
@@ -325,17 +322,11 @@
                 </option>
                 <option>
                     <name>IExtraOptionsCheck</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>IExtraOptions</name>
-                    <state>--cmse</state>
-                    <state>-e </state>
-                    <state>--vla </state>
-                    <state>--silent </state>
-                    <state>-DNO_TYPEOF</state>
-                    <state>-DCOMPILER=IARARM </state>
-                    <state>-DCMAKE_BUILD_TYPE=RelWithDebInfo </state>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCLangConformance</name>
@@ -379,19 +370,21 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
+                    <state>$PROJ_DIR$\..\..\Linker</state>
+                    <state>$PROJ_DIR$\..\Secure\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\attestation</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\arch\include</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\interface\include\psa_manifest</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\include</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation\psa_manifest</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\mbedtls</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\psa</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\spm</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\arch\include</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\ipc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\ipc\include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services</state>
@@ -400,25 +393,18 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\audit_logging</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\secure_storage</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation\psa_manifest</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\interface\include</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\interface\include\psa_manifest</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\include</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\common</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\driver</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\util</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\t_cose\inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\t_cose\src</state>
-                    <state>$PROJ_DIR$\..\..\Linker</state>
-                    <state>$PROJ_DIR$\..\Secure\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\common</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\driver</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\include</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\mbedtls</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\psa</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\psa</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\cmake_build_gcc\secure_fw\services\crypto\mbedcrypto\mbedcrypto_install\include\mbedcrypto\psa</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation\psa_manifest</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\attestation</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1133,6 +1119,9 @@
                 <name>$PROJ_DIR$\..\Secure\Src\attest_hal.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Secure\Src\ccm_alt.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Secure\Src\dummy_boot_seed.c</name>
             </file>
             <file>
@@ -1170,6 +1159,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Secure\Src\mpu_armv8m_drv.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Secure\Src\rsa_alt.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Secure\Src\sha1_alt.c</name>
@@ -1304,9 +1296,6 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ccm.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\certs.c</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\chacha20.c</name>
             </file>
             <file>
@@ -1323,9 +1312,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ctr_drbg.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\debug.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\des.c</name>
@@ -1468,317 +1454,6 @@
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\xtea.c</name>
             </file>
-            <configuration>
-                <name>STM32L562E-DK_TFM_Secure</name>
-                <settings>
-                    <name>ICCARM</name>
-                    <data>
-                        <version>35</version>
-                        <wantNonLocal>0</wantNonLocal>
-                        <debug>1</debug>
-                        <option>
-                            <name>CCDefines</name>
-                            <state>STM32L562xx</state>
-                            <state>USE_HAL_DRIVER</state>
-                            <state>MCUBOOT_SIGN_RSA</state>
-                            <state>MCUBOOT_VALIDATE_SLOT0</state>
-                            <state>MCUBOOT_USE_FLASH_AREA_GET_SECTORS</state>
-                            <state>SST_ENCRYPTION</state>
-                            <state>TFM_PSA_API=1</state>
-                            <state>TFM_LVL=2</state>
-                            <state>TFM_LEGACY_API</state>
-                            <state>SST_CREATE_FLASH_LAYOUT</state>
-                            <state>MULADDC_CANNOT_USE_R7</state>
-                            <state>MBEDTLS_CONFIG_FILE=&lt;tfm_mbedcrypto_config.h&gt;</state>
-                            <state>NO_TYPEOF</state>
-                            <state>FLASH_AREA_1_OFFSET</state>
-                            <state>MBEDTLS_PSA_CRYPTO_KEY_FILE_ID_ENCODES_OWNER</state>
-                            <state>PSA_CRYPTO_SECURE</state>
-                        </option>
-                        <option>
-                            <name>CCPreprocFile</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPreprocComments</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPreprocLine</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListCFile</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListCMnemonics</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListCMessages</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListAssFile</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListAssSource</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCEnableRemarks</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCDiagSuppress</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCDiagRemark</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCDiagWarning</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCDiagError</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCObjPrefix</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCAllowList</name>
-                            <version>1</version>
-                            <state>11111110</state>
-                        </option>
-                        <option>
-                            <name>CCDebugInfo</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IEndianMode</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IProcessor</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IExtraOptionsCheck</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IExtraOptions</name>
-                            <state>--cmse</state>
-                            <state>-e </state>
-                            <state>--vla </state>
-                            <state>--silent </state>
-                            <state>-DNO_TYPEOF</state>
-                            <state>-DCOMPILER=IARARM </state>
-                            <state>-DCMAKE_BUILD_TYPE=RelWithDebInfo </state>
-                            <state>-DTARGET_PLATFORM=MUSCA_A</state>
-                        </option>
-                        <option>
-                            <name>CCLangConformance</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCSignedPlainChar</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCRequirePrototypes</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCDiagWarnAreErr</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCCompilerRuntimeInfo</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IFpuProcessor</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>OutputFile</name>
-                            <state>$FILE_BNAME$.o</state>
-                        </option>
-                        <option>
-                            <name>CCLibConfigHeader</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>PreInclude</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CompilerMisraOverride</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCIncludePath2</name>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\mbedtls</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\psa</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\attestation</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\arch\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\interface\include\psa_manifest</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation\psa_manifest</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\spm</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\ipc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\ipc\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\platform</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\crypto</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\audit_logging</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\secure_storage</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\interface\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\util</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\t_cose\inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\t_cose\src</state>
-                            <state>$PROJ_DIR$\..\..\Linker</state>
-                            <state>$PROJ_DIR$\..\Secure\Inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\common</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\driver</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\include</state>
-                            <state>C:\Users\ouejhana\Downloads\realease l5\STM32Cube_FW_L5_V0.7.0 - Copy\Middlewares\Third_Party\trustedfirmware\cmake_build_gcc\secure_fw\services\crypto\mbedcrypto\mbedcrypto_install\include\mbedcrypto\psa</state>
-                        </option>
-                        <option>
-                            <name>CCStdIncCheck</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCCodeSection</name>
-                            <state>.text</state>
-                        </option>
-                        <option>
-                            <name>IProcessorMode2</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCOptLevel</name>
-                            <state>3</state>
-                        </option>
-                        <option>
-                            <name>CCOptStrategy</name>
-                            <version>0</version>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCOptLevelSlave</name>
-                            <state>3</state>
-                        </option>
-                        <option>
-                            <name>CompilerMisraRules98</name>
-                            <version>0</version>
-                            <state>1000111110110101101110011100111111101110011011000101110111101101100111111111111100110011111001110111001111111111111111111111111</state>
-                        </option>
-                        <option>
-                            <name>CompilerMisraRules04</name>
-                            <version>0</version>
-                            <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
-                        </option>
-                        <option>
-                            <name>CCPosIndRopi</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPosIndRwpi</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPosIndNoDynInit</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccLang</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccCDialect</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccAllowVLA</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccStaticDestr</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccCppInlineSemantics</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccCmsis</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccFloatSemantics</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCOptimizationNoSizeConstraints</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCNoLiteralPool</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCOptStrategySlave</name>
-                            <version>0</version>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCEncSource</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCEncOutput</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCEncOutputBom</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCEncInput</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccExceptions2</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccRTTI2</name>
-                            <state>0</state>
-                        </option>
-                    </data>
-                </settings>
-            </configuration>
         </group>
         <group>
             <name>trustedfirmware</name>
@@ -1998,331 +1673,6 @@
                     <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\src\UsefulBuf.c</name>
                 </file>
             </group>
-            <configuration>
-                <name>STM32L562E-DK_TFM_Secure</name>
-                <settings>
-                    <name>ICCARM</name>
-                    <data>
-                        <version>35</version>
-                        <wantNonLocal>0</wantNonLocal>
-                        <debug>1</debug>
-                        <option>
-                            <name>CCDefines</name>
-                            <state>NDEBUG</state>
-                            <state>STM32L562xx</state>
-                            <state>BL2</state>
-                            <state>USE_HAL_DRIVER</state>
-                            <state>MCUBOOT_SIGN_RSA</state>
-                            <state>MCUBOOT_VALIDATE_SLOT0</state>
-                            <state>MCUBOOT_USE_FLASH_AREA_GET_SECTORS</state>
-                            <state>SST_ENCRYPTION</state>
-                            <state>TFM_PSA_API=1</state>
-                            <state>TFM_LVL=2</state>
-                            <state>TFM_LEGACY_API</state>
-                            <state>SST_CREATE_FLASH_LAYOUT</state>
-                            <state>MULADDC_CANNOT_USE_R7</state>
-                            <state>MBEDTLS_CONFIG_FILE=&lt;tfm_mbedcrypto_config.h&gt;</state>
-                            <state>NO_TYPEOF</state>
-                            <state>ITS_CREATE_FLASH_LAYOUT</state>
-                            <state>Image$$= </state>
-                            <state>Load$$LR$$= </state>
-                            <state>$$ZI$$Base=$$Base</state>
-                            <state>$$ZI$$Limit=$$Limit</state>
-                            <state>$$RO$$Base=$$Base</state>
-                            <state>$$RO$$Limit=$$Limit</state>
-                            <state>_DATA$$RW$$Base=_DATA$$Base</state>
-                            <state>_DATA$$RW$$Limit=_DATA$$Limit</state>
-                            <state>_DATA$$ZI$$Base=_DATA$$Base</state>
-                            <state>_DATA$$ZI$$Limit=_DATA$$Limit</state>
-                            <state>_STACK$$ZI$$Base=_STACK$$Base</state>
-                            <state>_STACK$$ZI$$Limit=_STACK$$Limit</state>
-                        </option>
-                        <option>
-                            <name>CCPreprocFile</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPreprocComments</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPreprocLine</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListCFile</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListCMnemonics</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListCMessages</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListAssFile</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCListAssSource</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCEnableRemarks</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCDiagSuppress</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCDiagRemark</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCDiagWarning</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCDiagError</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CCObjPrefix</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCAllowList</name>
-                            <version>1</version>
-                            <state>11111110</state>
-                        </option>
-                        <option>
-                            <name>CCDebugInfo</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IEndianMode</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IProcessor</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IExtraOptionsCheck</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IExtraOptions</name>
-                            <state>--cmse</state>
-                            <state>-e </state>
-                            <state>--vla </state>
-                            <state>--silent </state>
-                            <state>-DNO_TYPEOF</state>
-                            <state>-DCOMPILER=IARARM </state>
-                            <state>-DCMAKE_BUILD_TYPE=RelWithDebInfo </state>
-                            <state>-DTARGET_PLATFORM=MUSCA_A</state>
-                        </option>
-                        <option>
-                            <name>CCLangConformance</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCSignedPlainChar</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCRequirePrototypes</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCDiagWarnAreErr</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCCompilerRuntimeInfo</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IFpuProcessor</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>OutputFile</name>
-                            <state>$FILE_BNAME$.o</state>
-                        </option>
-                        <option>
-                            <name>CCLibConfigHeader</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>PreInclude</name>
-                            <state></state>
-                        </option>
-                        <option>
-                            <name>CompilerMisraOverride</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCIncludePath2</name>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\attestation</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\arch\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\interface\include\psa_manifest</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation\psa_manifest</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\spm</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\ipc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\ipc\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\platform</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\crypto</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\audit_logging</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\secure_storage</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\interface\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\util</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\t_cose\inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\t_cose\src</state>
-                            <state>$PROJ_DIR$\..\..\Linker</state>
-                            <state>$PROJ_DIR$\..\Secure\Inc</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\common</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\driver</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\mbedtls</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include\psa</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\cmake_build_gcc\secure_fw\services\crypto\mbedcrypto\mbedcrypto_install\include\mbedcrypto\psa</state>
-                            <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\services\initial_attestation\psa_manifest</state>
-                        </option>
-                        <option>
-                            <name>CCStdIncCheck</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCCodeSection</name>
-                            <state>.text</state>
-                        </option>
-                        <option>
-                            <name>IProcessorMode2</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCOptLevel</name>
-                            <state>3</state>
-                        </option>
-                        <option>
-                            <name>CCOptStrategy</name>
-                            <version>0</version>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCOptLevelSlave</name>
-                            <state>3</state>
-                        </option>
-                        <option>
-                            <name>CompilerMisraRules98</name>
-                            <version>0</version>
-                            <state>1000111110110101101110011100111111101110011011000101110111101101100111111111111100110011111001110111001111111111111111111111111</state>
-                        </option>
-                        <option>
-                            <name>CompilerMisraRules04</name>
-                            <version>0</version>
-                            <state>111101110010111111111000110111111111111111111111111110010111101111010101111111111111111111111111101111111011111001111011111011111111111111111</state>
-                        </option>
-                        <option>
-                            <name>CCPosIndRopi</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPosIndRwpi</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCPosIndNoDynInit</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccLang</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccCDialect</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccAllowVLA</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccStaticDestr</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccCppInlineSemantics</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccCmsis</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>IccFloatSemantics</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCOptimizationNoSizeConstraints</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCNoLiteralPool</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCOptStrategySlave</name>
-                            <version>0</version>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCEncSource</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCEncOutput</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>CCEncOutputBom</name>
-                            <state>1</state>
-                        </option>
-                        <option>
-                            <name>CCEncInput</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccExceptions2</name>
-                            <state>0</state>
-                        </option>
-                        <option>
-                            <name>IccRTTI2</name>
-                            <state>0</state>
-                        </option>
-                    </data>
-                </settings>
-            </configuration>
         </group>
     </group>
 </project>

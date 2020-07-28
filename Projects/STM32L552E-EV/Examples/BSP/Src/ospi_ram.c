@@ -67,7 +67,7 @@ void OSPI_RAM_demo(void)
   
   led = LED_GREEN;
   OSPI_RAM_SetHint();
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Put JP7 in position OSPI_SRAM_NCS", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Put JP7 in position OSPI_SRAM_NCS", LEFT_MODE);
   while (1)
   {    
     if(WakeupButtonPressed == SET)
@@ -87,7 +87,7 @@ void OSPI_RAM_demo(void)
   led = LED_ORANGE;
   lcd_text_ypos = LCD_TEXT_YPOS_START;
   OSPI_RAM_SetHint();
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part I : Read/Write in polling/DMA modes", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part I : Read/Write in polling/DMA modes", LEFT_MODE);
   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
   /*##-1- Configure the OSPI RAM device ######################################*/
@@ -99,13 +99,13 @@ void OSPI_RAM_demo(void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : Failed", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : Failed", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
   }
   else
   {
-//    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : OK", LEFT_MODE);
+//    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : OK", LEFT_MODE);
 //    lcd_text_ypos+=LCD_TEXT_YPOS_INC;
     
     /*##-2- OSPI RAM memory read/write access  ###############################*/   
@@ -115,37 +115,37 @@ void OSPI_RAM_demo(void)
     /* Write data to the OSPI RAM memory */
     if (BSP_OSPI_RAM_Write(0, ospi_ram_aTxBuffer, WRITE_READ_ADDR, BUFFER_SIZE) != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : Failed", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : Failed", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : OK", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : OK", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
       /* Read back data from the OSPI RAM memory */
       if (BSP_OSPI_RAM_Read(0, ospi_ram_aRxBuffer, WRITE_READ_ADDR, BUFFER_SIZE) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Read : Failed", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Read : Failed", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Read : OK", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Read : OK", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
         
         /*##-3- Checking data integrity ######################################*/  
         if(Buffercmp(ospi_ram_aRxBuffer, ospi_ram_aTxBuffer, BUFFER_SIZE) > 0)
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : Failed", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : Failed", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
         }
         else
         {    
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
           
           /*##-4- OSPI RAM memory read/write access in DMA mode ##############*/  
@@ -156,9 +156,9 @@ void OSPI_RAM_demo(void)
           /* Write data to the OSPI RAM memory */
           if (BSP_OSPI_RAM_Write_DMA(0, ospi_ram_aTxBuffer, WRITE_READ_ADDR, BUFFER_SIZE) != BSP_ERROR_NONE)
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Write : Failed", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Write : Failed", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
           }   
           else
           {
@@ -179,16 +179,16 @@ void OSPI_RAM_demo(void)
             
             if (ubOspiRamDmaCplt != 0)
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Write : OK", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Write : OK", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
               ubOspiRamDmaCplt =0;
               
               /* Read back data from the OSPI RAM memory */
               if (BSP_OSPI_RAM_Read_DMA(0, ospi_ram_aRxBuffer, WRITE_READ_ADDR, BUFFER_SIZE) != BSP_ERROR_NONE)
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Read : Failed", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Read : Failed", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
               }
               else
               {
@@ -209,19 +209,19 @@ void OSPI_RAM_demo(void)
                 
                 if (ubOspiRamDmaCplt != 0)
                 {
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA read : OK", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA read : OK", LEFT_MODE);
                   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
                   /*##-5- Checking data integrity ############################*/
                   if (Buffercmp(ospi_ram_aRxBuffer, ospi_ram_aTxBuffer, BUFFER_SIZE) > 0)
                   {
-                    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : Failed", LEFT_MODE);
+                    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : Failed", LEFT_MODE);
                     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+                    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
                   }
                   else
                   {
-                    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : OK", LEFT_MODE);
+                    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Compare : OK", LEFT_MODE);
                     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
                     /*##-6- OSPI RAM memory in memory-mapped mode ############*/
@@ -230,13 +230,13 @@ void OSPI_RAM_demo(void)
 
                     if (BSP_OSPI_RAM_EnableMemoryMappedMode(0) != BSP_ERROR_NONE)
                     {
-                      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : Failed", LEFT_MODE);
+                      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : Failed", LEFT_MODE);
                       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+                      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
                     }
                     else
                     {
-                      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : OK", LEFT_MODE);
+                      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : OK", LEFT_MODE);
                       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
                       
                       /* Memory-mapped mode write access */
@@ -252,18 +252,18 @@ void OSPI_RAM_demo(void)
                       {
                         if (*data_ptr != ospi_ram_aTxBuffer[index])
                         {
-                          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : Failed", LEFT_MODE);
+                          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : Failed", LEFT_MODE);
                           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+                          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
                           break;
                         }
                       }
                       
                       if (index == BUFFER_SIZE)
                       {
-                        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : OK", LEFT_MODE);
+                        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : OK", LEFT_MODE);
                         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test : OK", LEFT_MODE);
+                        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test : OK", LEFT_MODE);
                         led = LED_GREEN;
                       }
                     }
@@ -271,17 +271,17 @@ void OSPI_RAM_demo(void)
                 }
                 else
                 {
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Read : Failed", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Read : Failed", LEFT_MODE);
                   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
                 }
               }
             }
             else
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Write : Failed", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM DMA Write : Failed", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
             }
           }
         }  
@@ -309,9 +309,9 @@ void OSPI_RAM_demo(void)
   lcd_text_ypos = LCD_TEXT_YPOS_START;
   OSPI_RAM_SetHint();
   
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part II : Enter & Leave HyperRAM Power", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"Part II : Enter & Leave HyperRAM Power", LEFT_MODE);
   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"          Down mode", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"          Down mode", LEFT_MODE);
   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
   /*##-1- Deconfigure the OSPI RAM device ####################################*/
@@ -319,13 +319,13 @@ void OSPI_RAM_demo(void)
   
   if (status != BSP_ERROR_NONE)
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM De-Initialization : Failed", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM De-Initialization : Failed", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
   }
   else
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM De-Initialization : OK", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM De-Initialization : OK", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
     
     /*##-2- Reconfigure the OSPI RAM device ##################################*/
@@ -334,13 +334,13 @@ void OSPI_RAM_demo(void)
     
     if (status != BSP_ERROR_NONE)
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : Failed", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : Failed", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
     }
     else
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : OK", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Initialization : OK", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
       /*##-4- OSPI RAM memory write access ###################################*/
@@ -350,52 +350,52 @@ void OSPI_RAM_demo(void)
       /* Write data to the OSPI RAM memory */
       if (BSP_OSPI_RAM_Write(0, ospi_ram_aTxBuffer, WRITE_READ_ADDR, BUFFER_SIZE) != BSP_ERROR_NONE)
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : Failed", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : Failed", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
       }
       else
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : OK", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Write : OK", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
         
         /*##-5- Enter OSPI RAM memory in deep power down #####################*/ 
         if (BSP_OSPI_RAM_EnterDeepPowerDown(0) != BSP_ERROR_NONE)
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Enter Deep PwrDn : Failed", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Enter Deep PwrDn : Failed", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
         }
         else
         {
           /* !!! Warning : This is only a test of the API. To check if the memory is really in deep power down, 
           need to use Idd to check the consumption !!! */
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Enter Deep PwrDn : OK", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Enter Deep PwrDn : OK", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
           
           /*##-6- Leave OSPI RAM memory from deep power down #################*/ 
           HAL_Delay(100);
           if (BSP_OSPI_RAM_LeaveDeepPowerDown(0) != BSP_ERROR_NONE)
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Leave Deep PwrDn : Failed", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Leave Deep PwrDn : Failed", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
           }
           else
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Leave Deep PwrDn : OK", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Leave Deep PwrDn : OK", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
             
             /*##-7- OSPI RAM memory in memory-mapped mode#####################*/
             if (BSP_OSPI_RAM_EnableMemoryMappedMode(0) != BSP_ERROR_NONE)
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : Failed", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : Failed", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
             }
             else
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : OK", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Cfg : OK", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
               
               for (index = 0, data_ptr = (__IO uint8_t *)(OSPI_RAM_BASE_ADDR + WRITE_READ_ADDR); 
@@ -403,18 +403,18 @@ void OSPI_RAM_demo(void)
               {
                 if (*data_ptr != ospi_ram_aTxBuffer[index])
                 {
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : Failed", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : Failed", LEFT_MODE);
                   lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                  GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
+                  UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test Aborted", LEFT_MODE);
                   break;
                 }
               }
               
               if (index == BUFFER_SIZE)
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : OK", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Mem-Mapped Access : OK", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test : OK", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI HyperRAM Test : OK", LEFT_MODE);
                 led = LED_GREEN;
               }
             }
@@ -451,23 +451,23 @@ void OSPI_RAM_demo(void)
 static void OSPI_RAM_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set LCD Demo description */
-  GUI_FillRect(0, 0, 320, 60, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t*)"OSPI HyperRAM", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t*)"Press Wakeup push-button", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t*)"to switch to next menu", CENTER_MODE); 
+  UTIL_LCD_FillRect(0, 0, 320, 60, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t*)"OSPI HyperRAM", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t*)"Press Wakeup push-button", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t*)"to switch to next menu", CENTER_MODE); 
 
-  GUI_DrawRect(10, 70, 300, 160, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 71, 298, 158, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 70, 300, 160, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 71, 298, 158, UTIL_LCD_COLOR_BLUE);
   
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
 }
 
 /**

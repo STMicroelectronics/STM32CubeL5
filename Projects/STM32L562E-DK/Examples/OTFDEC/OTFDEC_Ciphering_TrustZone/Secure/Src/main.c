@@ -60,11 +60,9 @@ OSPI_HandleTypeDef hospi1;
 OTFDEC_HandleTypeDef hotfdec1;
 
 /* USER CODE BEGIN PV */
-/* OTFDEC handler declaration */
-OTFDEC_HandleTypeDef hotfdec;
 
 OTFDEC_RegionConfigTypeDef Config = {0};
-uint32_t Key[4]={ 0x23456789, 0xABCDEF01, 0x23456789, 0xABCDEF01 };
+const uint32_t Key[4]={ 0x23456789, 0xABCDEF01, 0x23456789, 0xABCDEF01 };
 
 /* Plain data */
 __ALIGN_BEGIN const uint8_t  Plain[] __ALIGN_END = "This is a message ciphered by the secure part and deciphered by the non-secure without key exchange";
@@ -76,6 +74,7 @@ uint32_t Ciphered[BUFFER_SIZE] = { 0x00000000 };
 
 /* Private function prototypes -----------------------------------------------*/
 static void NonSecure_Init(void);
+void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_GTZC_Init(void);
 static void MX_OCTOSPI1_Init(void);
@@ -96,7 +95,7 @@ static void MX_OTFDEC1_Init(void);
 int main(void)
 {
   /* SAU/IDAU, FPU and interrupts secure/non-secure allocation setup done */
-  /* in SystemInit() based on partition_stm32l552xx.h file's definitions. */
+  /* in SystemInit() based on partition_stm32l562xx.h file's definitions. */
   /* USER CODE BEGIN 1 */
 
   /* Enable SecureFault handler (HardFault is default) */
@@ -112,7 +111,6 @@ int main(void)
      */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -128,6 +126,9 @@ int main(void)
   }
 
   /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
 
   /* GTZC initialisation */
   MX_GTZC_Init();
@@ -152,29 +153,20 @@ int main(void)
   HAL_GPIO_ConfigPinAttributes(GPIOD, GPIO_PIN_3, GPIO_PIN_NSEC);
   HAL_GPIO_ConfigPinAttributes(GPIOG, GPIO_PIN_12, GPIO_PIN_NSEC);
 
-    /* Enable the OctoSPI memory interface clock */
-  __HAL_RCC_OSPI1_CLK_ENABLE();
-
-  /* Init Of OTFDEC */
-  hotfdec.Instance = OTFDEC1_S;
-  if (HAL_OTFDEC_Init(&hotfdec) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* Enable all interruptions */
-  __HAL_OTFDEC_ENABLE_IT(&hotfdec, OTFDEC_ALL_INT);
+  __HAL_OTFDEC_ENABLE_IT(&hotfdec1, OTFDEC_ALL_INT);
 
   /* Set enciphering mode */
-  HAL_OTFDEC_EnableEnciphering(&hotfdec);
+  HAL_OTFDEC_EnableEnciphering(&hotfdec1);
 
   /* Set OTFDEC Mode */
-  if (HAL_OTFDEC_RegionSetMode(&hotfdec, OTFDEC_REGION1, OTFDEC_REG_MODE_INSTRUCTION_OR_DATA_ACCESSES) != HAL_OK)
+  if (HAL_OTFDEC_RegionSetMode(&hotfdec1, OTFDEC_REGION1, OTFDEC_REG_MODE_INSTRUCTION_OR_DATA_ACCESSES) != HAL_OK)
   {
     Error_Handler();
   }
 
   /* Set OTFDEC Key */
-  if (HAL_OTFDEC_RegionSetKey(&hotfdec, OTFDEC_REGION1, Key) != HAL_OK)
+  if (HAL_OTFDEC_RegionSetKey(&hotfdec1, OTFDEC_REGION1, (uint32_t *)Key) != HAL_OK)
   {
     Error_Handler();
    }
@@ -185,20 +177,20 @@ int main(void)
   Config.StartAddress = START_ADRESS_OTFDEC1_REGION1;
   Config.EndAddress   = END_ADRESS_OTFDEC1_REGION1;
   Config.Version      = 0x7123;
-  if (HAL_OTFDEC_RegionConfig(&hotfdec, OTFDEC_REGION1, &Config, OTFDEC_REG_CONFIGR_LOCK_ENABLE) != HAL_OK)
+  if (HAL_OTFDEC_RegionConfig(&hotfdec1, OTFDEC_REGION1, &Config, OTFDEC_REG_CONFIGR_LOCK_ENABLE) != HAL_OK)
   {
     Error_Handler();
   }
 
   /* Encipher data */
-  if (HAL_OTFDEC_Cipher(&hotfdec, OTFDEC_REGION1, (uint32_t *)Plain, Ciphered, (strlen((char const *)Plain) / 4) + ((strlen((char const *)Plain)%4) + 3)/4, START_ADRESS_OTFDEC1_REGION1) != HAL_OK)
+  if (HAL_OTFDEC_Cipher(&hotfdec1, OTFDEC_REGION1, (uint32_t *)Plain, Ciphered, (strlen((char const *)Plain) / 4) + ((strlen((char const *)Plain)%4) + 3)/4, START_ADRESS_OTFDEC1_REGION1) != HAL_OK)
   {
     Error_Handler();
   }
 
 
   /* Disable en-ciphering */
-  HAL_OTFDEC_DisableEnciphering(&hotfdec);
+  HAL_OTFDEC_DisableEnciphering(&hotfdec1);
 
   /* Config OCTOSPI */
   OSPI_Config() ;
@@ -210,15 +202,12 @@ int main(void)
   OSPI_MemoryMap();
 
   /* USER CODE END 2 */
- 
- 
 
   /*************** Setup and jump to non-secure *******************************/
 
   NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -232,7 +221,7 @@ int main(void)
 
 /**
   * @brief  Non-secure call function
-  *         This function is responsible for Non-secure initialization and switch 
+  *         This function is responsible for Non-secure initialization and switch
   *         to non-secure state
   * @retval None
   */
@@ -250,6 +239,54 @@ static void NonSecure_Init(void)
 
   /* Start non-secure state software application */
   NonSecure_ResetHandler();
+}
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+  /** Configure the main internal regulator output voltage
+  */
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+  RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+  RCC_OscInitStruct.PLL.PLLM = 1;
+  RCC_OscInitStruct.PLL.PLLN = 55;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /**
@@ -467,7 +504,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

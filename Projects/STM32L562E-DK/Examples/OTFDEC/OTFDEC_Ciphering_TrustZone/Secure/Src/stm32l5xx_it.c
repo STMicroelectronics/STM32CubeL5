@@ -46,7 +46,6 @@ extern funcptr_NS pSecureErrorCallback;
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern OTFDEC_HandleTypeDef hotfdec;
 
 /* USER CODE END PV */
 
@@ -67,7 +66,7 @@ extern OTFDEC_HandleTypeDef hotfdec1;
 /* USER CODE END EV */
 
 /******************************************************************************/
-/*           Cortex Processor Interruption and Exception Handlers          */ 
+/*           Cortex Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.

@@ -69,8 +69,8 @@ STM32L552E-EV's LED can be used to monitor the application status:
   - LED5 toggle when SD card is unplugged.
 
 @par Keywords
-Middleware, SD Card, SRAM, FatFs, File system, FAT Volume, Format, Mount, Read, Write, multidrives
 
+File system, FatFs, SD Card, SRAM, FAT Volume, Format, Mount, Read, Write, multidrives
 
 @par Directory contents
 

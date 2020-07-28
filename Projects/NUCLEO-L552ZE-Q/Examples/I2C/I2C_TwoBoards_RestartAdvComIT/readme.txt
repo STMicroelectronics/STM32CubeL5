@@ -218,7 +218,7 @@ on HW board in order to support Virtual Com Port (Default HW SB configuration al
 
 @par Keywords
 
-Connectivity, I2C, Communication, Trasmission, Reception, SCL, SDA, Interrupt, Request, Sequential
+Connectivity, I2C, Communication, Transmission, Reception, SCL, SDA, Interrupt, Request, Sequential
 
 @par Directory contents 
 

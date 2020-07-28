@@ -22,14 +22,14 @@
 
 
 #define _USBPD_POWER_DEBUG
-#ifdef _USBPD_POWER_DEBUG
+#if  defined(_TRACE)
 #include "usbpd_core.h"
 #include "usbpd_trace.h"
 #endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#if defined(_USBPD_POWER_DEBUG) && defined(_TRACE)
+#if  defined(_TRACE)
 #define POWER_DEBUG(__MSG__,__SIZE__)   USBPD_TRACE_Add(USBPD_TRACE_DEBUG, PortNum, 0,__MSG__,__SIZE__);
 #else
 #define POWER_DEBUG(__MSG__,__SIZE__)
@@ -43,20 +43,6 @@ USBPD_StatusTypeDef HW_IF_PWR_SetVoltage(uint8_t PortNum, uint16_t voltage)
 {
   UNUSED(PortNum);
   UNUSED(voltage);
-  /* Section below has been commented for the P-Nucleo Demo */
-  /*
-  uint32_t off = (PortNum == 0) ? 0 : 2;
-  switch (voltage)
-  {
-  case 12000:
-    HAL_GPIO_WritePin(USBPDM1_POWSELs[0+off].GPIOx, USBPDM1_POWSELs[0+off].GPIO_Pin, GPIO_PIN_SET);
-    break;
-  case 5000:
-  default:
-    HAL_GPIO_WritePin(USBPDM1_POWSELs[0+off].GPIOx, USBPDM1_POWSELs[0+off].GPIO_Pin, GPIO_PIN_RESET);
-    break;
-  }
-  */
   return USBPD_OK;
 }
 
@@ -112,7 +98,7 @@ USBPD_FunctionalState HW_IF_PWR_VBUSIsEnabled(uint8_t PortNum)
 #if defined(_SRC)||defined(_DRP)
   uint8_t _state;
   BSP_USBPD_PWR_VBUSIsOn(PortNum, &_state);
-  return (_state == 0U) ? USBPD_DISABLE : USBPD_ENABLE;
+  return (_state == BSP_ERROR_NONE) ? USBPD_DISABLE : USBPD_ENABLE;
 #else
   return USBPD_DISABLE;
 #endif /* _SRC || _DRP */

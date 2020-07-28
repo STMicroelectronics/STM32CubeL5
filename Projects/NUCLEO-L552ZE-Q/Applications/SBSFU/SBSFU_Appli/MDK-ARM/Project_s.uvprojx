@@ -10,14 +10,14 @@
       <TargetName>NUCLEO-L552ZE-Q_SBSFU_Appli_Secure</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6100001::V6.10.1::.\ARMCLANG</pCCUsed>
+      <pCCUsed>6130001::V6.13.1::.\ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32L552ZETxQ</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32L5xx_DFP.1.0.9</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32L5xx_DFP.1.1.1</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x030000) IRAM2(0x30000000,0x030000) IROM(0x08000000,0x080000) IROM2(0x0C000000,0x080000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ESEL ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -70,10 +70,10 @@
             <nStopU2X>0</nStopU2X>
           </BeforeCompile>
           <BeforeMake>
-            <RunUserProg1>1</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
-            <UserProg1Name>$J\..\bin\armclang --target=arm-arm-none-eabi -march=armv8-m.main -E -P -xc -DBL2 -DMCUBOOT_IMAGE_NUMBER=2 -I..\..\Linker  ..\..\SBSFU_Boot\Src\image_macros_to_preprocess_s.c -o image_macros_preprocessed_s.c</UserProg1Name>
-            <UserProg2Name>$J\..\bin\armclang  --target=arm-arm-none-eabi -march=armv8-m.main -E -P -xc -DBL2 -DMCUBOOT_IMAGE_NUMBER=2 -I..\..\Linker  ..\..\SBSFU_Boot\Src\image_macros_to_preprocess_ns.c -o image_macros_preprocessed_ns.c</UserProg2Name>
+            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg2>0</RunUserProg2>
+            <UserProg1Name></UserProg1Name>
+            <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopB1X>0</nStopB1X>
@@ -312,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>7</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L552xx,USE_HAL_DRIVER,USE_STM32L5XX_NUCLEO_144, BL2,MCUBOOT_IMAGE_NUMBER=2</Define>
+              <Define>STM32L552xx,USE_HAL_DRIVER,BL2</Define>
               <Undefine></Undefine>
-              <IncludePath>../Secure_nsclib;../Secure/Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../Linker</IncludePath>
+              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L5xx_Nucleo;../Secure/Inc;../Secure_nsclib;../../Linker</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -374,7 +374,6 @@
             <IncludeLibsPath></IncludeLibsPath>
             <Misc>--predefine=-I../../Linker
 --predefine=-DBL2
---predefine=-DMCUBOOT_IMAGE_NUMBER=2
 --import_cmse_lib_out=.\..\Secure_nsclib\secure_nsclib.o</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>

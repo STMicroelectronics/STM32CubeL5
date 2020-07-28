@@ -91,6 +91,8 @@ extern "C" {
 /* Bits: 3-5 */
 #define SW_MEASURE_VALUE 0x08
 #define SW_MEASURE_TYPE  0x09
+#define SW_BOOT_RECORD   0x3F
+/*  */
 
 /* Initial attestation: General claim does not belong any particular SW
  * component. But they might be part of the boot status.

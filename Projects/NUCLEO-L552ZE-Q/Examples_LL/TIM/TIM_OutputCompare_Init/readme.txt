@@ -1,9 +1,9 @@
 /**
   @page TIM_OutputCompare_Init TIM example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_LL/TIM/TIM_OutputCompare_Init/readme.txt 
+  * @file    Examples_LL/TIM/TIM_OutputCompare_Init/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the TIM_OutputCompare_Init example.
   ******************************************************************************
@@ -20,9 +20,9 @@
 
 @par Example Description
 
-Configuration of the TIM peripheral to generate an output 
-waveform in different output compare modes. This example is based on the 
-STM32L5xx TIM LL API. The peripheral initialization uses 
+Configuration of the TIM peripheral to generate an output
+waveform in different output compare modes. This example is based on the
+STM32L5xx TIM LL API. The peripheral initialization uses
 LL unitary service functions for optimization purposes (performance and size).
 
 In this example TIM2 input clock (TIM2CLK) frequency is set to APB1 clock (PCLK1),
@@ -52,18 +52,22 @@ The timer output channel must be connected to PA5 on board NUCLEO-L552ZE-Q.
 Thus TIM2_CH1 status (on/off) mirrors the timer output level (active v.s. inactive).
 
 User push-button can be used to change the output compare mode:
-  - When the output channel is configured in output compare toggle:  TIM2_CH1 
+  - When the output channel is configured in output compare toggle:  TIM2_CH1
     TOGGLES when the counter (CNT) matches the capture/compare register (CCR1).
-  - When the output channel is configured in output compare active:  TIM2_CH1 
+  - When the output channel is configured in output compare active:  TIM2_CH1
     switched ON when the counter (CNT) matches the capture/compare register
     (CCR1).
-  - When the output channel is configured in output compare inactive:  TIM2_CH1 
+  - When the output channel is configured in output compare inactive:  TIM2_CH1
     switched OFF when the counter (CNT) matches the capture/compare register
     (CCR1).
-    
+
 Initially the output channel is configured in output compare toggle mode.
 
-@par Directory contents 
+@par Keywords
+
+Timers, TIM, Output, Compare mode, signals, Autoreload, Waveform, Counter, Toggle mode.
+
+@par Directory contents
 
   - TIM/TIM_OutputCompare_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file
   - TIM/TIM_OutputCompare_Init/Inc/main.h                  Header for main.c module
@@ -76,13 +80,13 @@ Initially the output channel is configured in output compare toggle mode.
 @par Hardware and Software environment
 
   - This example runs on STM32L552ZETxQ devices.
-    
+
   - This example has been tested with NUCLEO-L552ZE-Q board and can be
     easily tailored to any other supported device and development board.
   - NUCLEO-L552ZE-Q Set-up:
-      - TIM2_CH1  PA5: connected to pin 10 of CN7 connector 
+      - TIM2_CH1  PA5: connected to pin 10 of CN7 connector
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

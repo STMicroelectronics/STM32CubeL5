@@ -76,6 +76,11 @@ available on the board.
 This example shows how to use motion sensor mounted on board (accelerometer and gyroscope
 capabilities).
 
+@par Keywords
+
+BSP, Board Support Package, Audio Play, Audio Record, Button, Display, LCD, Headphone, Microphone, 
+LED, OctoSPI NOR Flash, SD Card, Sensor, Accelerometer, Gyroscope, Touchscreen
+
 @par Directory contents 
 
   - BSP/Src/main.c                      Main program

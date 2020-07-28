@@ -352,7 +352,7 @@
 //#define MBEDTLS_ARIA_ALT
 //#define MBEDTLS_BLOWFISH_ALT
 //#define MBEDTLS_CAMELLIA_ALT
-//#define MBEDTLS_CCM_ALT
+#define MBEDTLS_CCM_ALT
 //#define MBEDTLS_CHACHA20_ALT
 //#define MBEDTLS_CHACHAPOLY_ALT
 //#define MBEDTLS_CMAC_ALT
@@ -366,7 +366,7 @@
 #define MBEDTLS_MD5_ALT
 //#define MBEDTLS_POLY1305_ALT
 //#define MBEDTLS_RIPEMD160_ALT
-//#define MBEDTLS_RSA_ALT
+#define MBEDTLS_RSA_ALT
 #define MBEDTLS_SHA1_ALT
 #define MBEDTLS_SHA256_ALT
 //#define MBEDTLS_SHA512_ALT
@@ -718,7 +718,9 @@
  *
  * Comment this macro to disable NIST curves optimisation.
  */
-//#define MBEDTLS_ECP_NIST_OPTIM
+#if !defined (MBEDTLS_ECP_ALT)
+#define MBEDTLS_ECP_NIST_OPTIM
+#endif /* !MBEDTLS_ECP_ALT */
 
 /**
  * \def MBEDTLS_ECP_RESTARTABLE

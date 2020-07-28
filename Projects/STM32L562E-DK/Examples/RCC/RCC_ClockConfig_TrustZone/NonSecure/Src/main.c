@@ -150,7 +150,7 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
-  /** Enable instruction cache (default 2-ways set associative cache) 
+  /** Enable instruction cache (default 2-ways set associative cache)
   */
   if (HAL_ICACHE_Enable() != HAL_OK)
   {
@@ -254,7 +254,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

@@ -49,6 +49,10 @@ The reference application project configures the maximum system clock frequency 
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+RTOS, FreeRTOS, MPU
+
 @par Directory contents
 
     - FreeRTOS/FreeRTOS_MPU/Src/main.c                           Main program
@@ -75,11 +79,6 @@ In order to make the program work, you must do the following :
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
  - Run the example
-
-MDK-ARM/Requirements:
- - Use ST-LINK FW v2J32 available on ST web site
- - Use the ST-LINKIII-Keil_SWO.dll and STLinkUSBDriver.dll (ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip) and copy them at Keil\ARM\ST-LINK
- - Change the TOOLS.INI under Keil install directory as described in the .doc file provided in the ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip package
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

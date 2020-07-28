@@ -79,7 +79,7 @@ GLOBAL void * hProgressBar = NULL;
 static KMODULE_RETURN _AudioDemoExec(void)
 {
   /* Prepare the main MMI */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   kMenu_Execute(AudioMenu);
 
   /* Execute the app 8uart */

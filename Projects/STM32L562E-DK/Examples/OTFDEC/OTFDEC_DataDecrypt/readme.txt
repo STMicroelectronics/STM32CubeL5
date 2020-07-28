@@ -1,5 +1,5 @@
 /**
-  @page  Description of OTFDEC Data Decryption example
+  @page OTFDEC_DataDecrypt example
 
   @verbatim
   ******************************************************************************

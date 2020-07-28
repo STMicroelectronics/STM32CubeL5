@@ -16,7 +16,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -54,6 +53,7 @@
 /* Private function prototypes -----------------------------------------------*/
 static void NonSecure_Init(void);
 static void MX_GTZC_Init(void);
+static void MX_ICACHE_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -75,7 +75,6 @@ int main(void)
   /* Enable SecureFault handler (HardFault is default) */
   SCB->SHCSR |= SCB_SHCSR_SECUREFAULTENA_Msk;
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -83,12 +82,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  /* Enable Instruction cache (default 2-ways set associative cache) */
-  if(HAL_ICACHE_Enable() != HAL_OK)
-  {
-    /* Initialization Error */
-    while(1);
-  }
+
   /* USER CODE END Init */
 
   /* GTZC initialisation */
@@ -99,6 +93,7 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_ICACHE_Init();
   /* USER CODE BEGIN 2 */
    /* Add your secure application code here prior to non-secure initialization
      */
@@ -132,15 +127,12 @@ int main(void)
   /* The Secure SysTick shall be resumed on non-secure callable functions */
   HAL_SuspendTick();
   /* USER CODE END 2 */
- 
- 
 
   /*************** Setup and jump to non-secure *******************************/
 
   NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -150,12 +142,11 @@ int main(void)
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
-
 }
 
 /**
   * @brief  Non-secure call function
-  *         This function is responsible for Non-secure initialization and switch 
+  *         This function is responsible for Non-secure initialization and switch
   *         to non-secure state
   * @retval None
   */
@@ -245,10 +236,36 @@ static void MX_GTZC_Init(void)
 
 }
 
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache (default 2-ways set associative cache)
+  */
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
+}
+
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
-
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -273,7 +290,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* Infinite loop */
   while (1)

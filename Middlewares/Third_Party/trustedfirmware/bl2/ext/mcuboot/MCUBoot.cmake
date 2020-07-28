@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Copyright (c) 2018-2019, Arm Limited. All rights reserved.
+# Copyright (c) 2018-2020, Arm Limited. All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #
@@ -329,7 +329,11 @@ function(mcuboot_override_upgrade_strategy strategy)
 	if (NOT _validation_list)
 		#Set the default upgrade strategy if the CACHE variable has not been set yet.
 		set(MCUBOOT_UPGRADE_STRATEGY "OVERWRITE_ONLY" CACHE STRING "Configure BL2 which upgrade strategy to use")
-		set_property(CACHE MCUBOOT_UPGRADE_STRATEGY PROPERTY STRINGS "OVERWRITE_ONLY;SWAP;NO_SWAP;RAM_LOADING")
+		if (MCUBOOT_REPO STREQUAL "TF-M")
+			set_property(CACHE MCUBOOT_UPGRADE_STRATEGY PROPERTY STRINGS "OVERWRITE_ONLY;SWAP;NO_SWAP;RAM_LOADING")
+		else()
+			set_property(CACHE MCUBOOT_UPGRADE_STRATEGY PROPERTY STRINGS "OVERWRITE_ONLY;SWAP")
+		endif()
 	endif()
 	set(MCUBOOT_UPGRADE_STRATEGY ${strategy} PARENT_SCOPE)
 	validate_cache_value(MCUBOOT_UPGRADE_STRATEGY STRINGS)

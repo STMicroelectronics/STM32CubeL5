@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>FreeRTOS_Mutexes</name>
+	<name>FreeRTOS_Timers</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,7 +21,7 @@
 	<natures>
 		<nature>com.st.stm32cube.ide.mcu.MCUProjectNature</nature>
 		<nature>org.eclipse.cdt.core.cnature</nature>
-		<nature>com.st.stm32cube.ide.mcu.MCUCubeIdeServicesRevAProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUCubeIdeServicesRevAev2ProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUNonUnderRootProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUCubeProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUEndUserDisabledTrustZoneProjectNature</nature>
@@ -33,9 +33,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>FreeRTOS_Mutexes.ioc</name>
+			<name>FreeRTOS_Timers.ioc</name>
 			<type>1</type>
-			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/FreeRTOS_Mutexes.ioc</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/FreeRTOS_Timers.ioc</locationURI>
 		</link>
 		<link>
 			<name>Doc/readme.txt</name>
@@ -116,11 +116,6 @@
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_gpio.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_gtzc.c</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_i2c.c</name>

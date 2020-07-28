@@ -58,18 +58,21 @@ NUCLEO-L552ZE-Q's LEDs can be used to monitor the application status:
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".
 
+@par Keywords
+
+RTOS, FreeRTOS, Thread, Message, Queues
 
 @par Directory contents
-    - FreeRTOS/FreeRTOS_Queues/Src/main.c                       Main program
-	- FreeRTOS/FreeRTOS_Queues/Src/app_FreeRTOS.c               Code for freertos applications
-    - FreeRTOS/FreeRTOS_Queues/Src/stm32l5xx_hal_timebase_tim.c HAL timebase file
-    - FreeRTOS/FreeRTOS_Queues/Src/stm32l5xx_it.c               Interrupt handlers
-	- FreeRTOS/FreeRTOS_Queues/Src/stm32l5xx_hal_msp.c          MSP Initialization file
-    - FreeRTOS/FreeRTOS_Queues/Src/system_stm32l5xx.c           STM32L5xx system clock configuration file
-    - FreeRTOS/FreeRTOS_Queues/Inc/main.h                       Main program header file
-    - FreeRTOS/FreeRTOS_Queues/Inc/stm32l5xx_hal_conf.h         HAL Library Configuration file
-    - FreeRTOS/FreeRTOS_Queues/Inc/stm32l5xx_it.h               Interrupt handlers header file
-    - FreeRTOS/FreeRTOS_Queues/Inc/FreeRTOSConfig.h             FreeRTOS Configuration file
+  - FreeRTOS/FreeRTOS_Queues/Src/main.c                       Main program
+  - FreeRTOS/FreeRTOS_Queues/Src/app_FreeRTOS.c               Code for freertos applications
+  - FreeRTOS/FreeRTOS_Queues/Src/stm32l5xx_hal_timebase_tim.c HAL timebase file
+  - FreeRTOS/FreeRTOS_Queues/Src/stm32l5xx_it.c               Interrupt handlers
+  - FreeRTOS/FreeRTOS_Queues/Src/stm32l5xx_hal_msp.c          MSP Initialization file
+  - FreeRTOS/FreeRTOS_Queues/Src/system_stm32l5xx.c           STM32L5xx system clock configuration file
+  - FreeRTOS/FreeRTOS_Queues/Inc/main.h                       Main program header file
+  - FreeRTOS/FreeRTOS_Queues/Inc/stm32l5xx_hal_conf.h         HAL Library Configuration file
+  - FreeRTOS/FreeRTOS_Queues/Inc/stm32l5xx_it.h               Interrupt handlers header file
+  - FreeRTOS/FreeRTOS_Queues/Inc/FreeRTOSConfig.h             FreeRTOS Configuration file
 
 @par Hardware and Software environment
 

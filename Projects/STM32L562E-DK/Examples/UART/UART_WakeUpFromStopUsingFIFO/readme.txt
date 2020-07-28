@@ -1,5 +1,6 @@
-/**
-  @page UART_WakeUpFromStopUsingFIFO  wake up from STOP mode using UART FIFO level example
+﻿/**
+  @page UART_WakeUpFromStopUsingFIFO wake up from STOP mode example using UART 
+        FIFO level through USART1 peripheral
 
   @verbatim
   ******************************************************************************
@@ -8,7 +9,7 @@
   * @brief   Description of the UART_WakeUpFromStopUsingFIFO example.
   ******************************************************************************
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -20,29 +21,13 @@
 
 @par Example Description
 
-This example shows how to use UART HAL API to wake up the MCU from STOP mode
-using the UART FIFO level.
-
-At the beginning of the main program, the HAL_Init() function is called to reset
-all the peripherals, initialize the Flash interface and the systick.
-The SystemClock_Config() function is used to configure the system clock for STM32L562QEIxQ Devices.
-
-In the first part of the example, the UART is configured for reception with Rx FIFO threshold
-set to one 1 QUARTER and the CPU enters into Stop Mode.
-The UART FIFO threshold interrupt is enabled and, by default, the UART FIFO full is disabled.
-The user has to send 2 bytes from the HyperTerminal. After 2 received bytes,
-the UART FIFO will reach the quarter level which will generate an interrupt and wake up the CPU.
-
-In the second part of the example, the UART is configured for reception with
-FIFO threshold interrupt disabled and FIFO full enabled. then the CPU goes to stop mode.
-The user has to send 8 bytes (size of the UART FIFO) from the HyperTerminal.
-After 8 received bytes, the UART FIFO will be full, which will generate an interrupt and wake up the CPU.
-
+Configuration of an UART to wake up the MCU from Stop mode with a FIFO level
+when a given stimulus is received.
 
 Board: STM32L562E-DK
-Tx Pin: PA9
-Rx Pin: PA10
-Virtual COM Port using USART1: Available Through ST-Link Cable: SB127 and SB129 are ON
+Tx Pin: PA.09
+Rx Pin: PA.10
+Virtual COM port available through ST-Link cable:
    _________________________
   |           ______________|                       _______________
   |          |USART         |                      | HyperTerminal |
@@ -59,11 +44,30 @@ Virtual COM Port using USART1: Available Through ST-Link Cable: SB127 and SB129 
   |                         |
   |_STM32_Board_____________|
 
-LED10 is ON when MCU is not in STOP mode.
-LED9 is blinking when there is an error occurrence.
+LED10 is ON when MCU is not in STOP mode and turn off when MCU is in STOP mode.
+If the test fails or if there is an initialization or transfer error, LED10
+transmits a sequence of three dots, three dashes, three dots.
 
-The UART is configured as follows:
-    - BaudRate = 9600 baud
+At the beginning of the main program, the HAL_Init() function is called to reset
+all the peripherals, initialize the Flash interface and the systick.
+The SystemClock_Config() function is used to configure the system clock for
+STM32L562QEI6Q Devices.
+
+In the first part of the example, the USART1 is configured for
+reception with Rx FIFO threshold set to one 1 QUARTER and the CPU enters into
+Stop Mode. The UART FIFO threshold interrupt is enabled and, by default,
+the UART FIFO full is disabled. The user has to send 2 bytes from the
+HyperTerminal. After 2 received bytes, the UART FIFO will reach the quarter
+level which will generate an interrupt and wake up the CPU.
+
+In the second part of the example, the USART1 is configured for
+reception with FIFO threshold interrupt disabled and FIFO full enabled.
+Then the CPU goes to stop mode. The user has to send 8 bytes (size of the UART
+FIFO) from the HyperTerminal. After 8 received bytes, the UART FIFO will be
+full, which will generate an interrupt and wake up the CPU.
+
+The USART1 is configured as follows:
+    - BaudRate = 115200 baud
     - Word Length = 8 Bits (7 data bit + 1 parity bit)
     - One Stop Bit
     - Odd parity
@@ -77,33 +81,37 @@ The UART is configured as follows:
       delay (in milliseconds) based on variable incremented in SysTick ISR. This
       implies that if HAL_Delay() is called from a peripheral ISR process, then
       the SysTick interrupt must have higher priority (numerically lower)
-      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
-      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+      than the peripheral interrupt. Otherwise the caller ISR process will be
+      blocked. To change the SysTick interrupt priority you have to use
+      HAL_NVIC_SetPriority() function.
 
-@note The application needs to ensure that the SysTick time base is always set to
-      1 millisecond to have correct HAL operation.
+@note The application needs to ensure that the SysTick time base is always set
+      to 1 millisecond to have correct HAL operation.
 
+@par Keywords
+
+Connectivity, UART/USART, baud rate, Wake Up, Low Power, HyperTerminal, full-duplex, Interrupt
+Transmitter, Receiver, Asynchronous
 
 @par Directory contents
 
-  - UART/UART_WakeUpFromStopUsingFIFO/Inc/stm32l562e_discovery_conf.h     BSP configuration file
-  - UART/UART_WakeUpFromStopUsingFIFO/Src/main.c                 Main program
-  - UART/UART_WakeUpFromStopUsingFIFO/Src/system_stm32l5xx.c     STM32L5xx system clock configuration file
-  - UART/UART_WakeUpFromStopUsingFIFO/Src/stm32l5xx_it.c         Interrupt handlers
-  - UART/UART_WakeUpFromStopUsingFIFO/Src/stm32l5xx_hal_msp.c    HAL MSP module
-  - UART/UART_WakeUpFromStopUsingFIFO/Inc/main.h                 Main program header file
-  - UART/UART_WakeUpFromStopUsingFIFO/Inc/stm32l5xx_hal_conf.h   HAL Configuration file
-  - UART/UART_WakeUpFromStopUsingFIFO/Inc/stm32l5xx_it.h         Interrupt handlers header file
-
+  - UART_WakeUpFromStopUsingFIFO/Inc/stm32l562e_discovery_conf.h     BSP configuration file
+  - UART_WakeUpFromStopUsingFIFO/Inc/stm32l5xx_hal_conf.h    HAL configuration file
+  - UART_WakeUpFromStopUsingFIFO/Inc/stm32l5xx_it.h          Interrupt handlers header file
+  - UART_WakeUpFromStopUsingFIFO/Inc/main.h                  Header for main.c module
+  - UART_WakeUpFromStopUsingFIFO/Src/stm32l5xx_it.c          Interrupt handlers
+  - UART_WakeUpFromStopUsingFIFO/Src/main.c                  Main program
+  - UART_WakeUpFromStopUsingFIFO/Src/stm32l5xx_hal_msp.c     HAL MSP module
+  - UART_WakeUpFromStopUsingFIFO/Src/system_stm32l5xx.c      STM32L5xx system source file
 
 @par Hardware and Software environment
 
-  - This example runs on STM32L562QEIxQ devices.
+  - This example runs on STM32L562QEI6Q devices.
 
   - This example has been tested with STM32L562E-DK board and can be
     easily tailored to any other supported device and development board.
 
-  - STM32L562QEIxQ Set-up
+  - STM32L562E-DK set-up
       Connect a USB cable between the ST-Link USB connector
       and PC to display data on the HyperTerminal.
 
@@ -111,7 +119,7 @@ The UART is configured as follows:
     - Data Length = 7 Bits
     - One Stop Bit
     - Odd parity
-    - BaudRate = 9600 baud
+    - BaudRate = 115200 baud
     - Flow control: None
 
 @par How to use it?

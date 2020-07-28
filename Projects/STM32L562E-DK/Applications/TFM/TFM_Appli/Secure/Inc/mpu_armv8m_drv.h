@@ -22,6 +22,8 @@
 #define MPU_ARMV8M_MAIR_ATTR_CODE_IDX        1
 #define MPU_ARMV8M_MAIR_ATTR_DATA_VAL        0xFF
 #define MPU_ARMV8M_MAIR_ATTR_DATA_IDX        2
+#define MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_VAL 0x44
+#define MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_IDX 3
 
 struct mpu_armv8m_dev_t {
     const uint32_t base;

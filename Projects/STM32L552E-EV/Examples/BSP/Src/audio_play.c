@@ -96,9 +96,9 @@ void AudioPlay_demo(void)
   /* Check if the audio buffer has been loaded in flash */
   if (*((uint64_t *)AUDIO_FILE_ADDRESS) != 0x017EFE2446464952 )
   {
-    GUI_SetTextColor(GUI_COLOR_RED);    
-    GUI_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
-    GUI_DisplayStringAt(0, 145, (uint8_t*)"No Audio data in Flash", CENTER_MODE); 
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);    
+    UTIL_LCD_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
+    UTIL_LCD_DisplayStringAt(0, 145, (uint8_t*)"No Audio data in Flash", CENTER_MODE); 
     status = 1;
   }
   else
@@ -115,9 +115,9 @@ void AudioPlay_demo(void)
     AudioInit.Volume        = Volume;
     if (BSP_AUDIO_OUT_Init(0, &AudioInit) != BSP_ERROR_NONE)
     {
-      GUI_SetTextColor(GUI_COLOR_RED);    
-      GUI_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
-      GUI_DisplayStringAt(0, 145, (uint8_t*)"Audio Codec not detected", CENTER_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);    
+      UTIL_LCD_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
+      UTIL_LCD_DisplayStringAt(0, 145, (uint8_t*)"Audio Codec not detected", CENTER_MODE);
       status = 1;
     }
     else
@@ -134,9 +134,9 @@ void AudioPlay_demo(void)
         /* Turn ON LED green: start of Audio file play */
         BSP_LED_On(LED_GREEN);
         
-        GUI_DisplayStringAt(20, 210, (uint8_t *)"Playback on-going", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 210, (uint8_t *)"Playback on-going", LEFT_MODE);
         sprintf((char *) Volume_string, "Volume : %lu%% ", (unsigned long)Volume);
-        GUI_DisplayStringAt(20, 210, Volume_string, RIGHT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 210, Volume_string, RIGHT_MODE);
       }
       else
       {
@@ -163,7 +163,7 @@ void AudioPlay_demo(void)
           }        
           PauseStatus = 1;
           HAL_Delay(1000);
-          GUI_DisplayStringAt(20, 210, (uint8_t *)"Playback paused  ", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 210, (uint8_t *)"Playback paused  ", LEFT_MODE);
         }
         else
         {
@@ -175,7 +175,7 @@ void AudioPlay_demo(void)
             Error_Handler();
           }        
           PauseStatus = 0;
-          GUI_DisplayStringAt(20, 210, (uint8_t *)"Playback on-going", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(20, 210, (uint8_t *)"Playback on-going", LEFT_MODE);
         }
         JoyPinPressed = JOY_NONE;
       }
@@ -192,7 +192,7 @@ void AudioPlay_demo(void)
         }
         JoyPinPressed = JOY_NONE;
         sprintf((char *) Volume_string, " Volume : %d%% ", Volume);
-        GUI_DisplayStringAt(20, 210, Volume_string, RIGHT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 210, Volume_string, RIGHT_MODE);
       }
       if (JoyPinPressed == JOY_DOWN)
       {
@@ -207,7 +207,7 @@ void AudioPlay_demo(void)
         }
         JoyPinPressed = JOY_NONE;
         sprintf((char *) Volume_string, " Volume : %d%% ", Volume);
-        GUI_DisplayStringAt(20, 210, Volume_string, RIGHT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 210, Volume_string, RIGHT_MODE);
       }
     }
   }
@@ -247,24 +247,24 @@ void AudioPlay_demo(void)
 static void AudioPlay_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Audio Demo description */
-  GUI_FillRect(0, 0, 320, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Audio Play", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Press Wakeup push-button to stop play", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"Press SEL to pause/resume playback", CENTER_MODE); 
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"Press UP/DOWN to change Volume", CENTER_MODE);   
+  UTIL_LCD_FillRect(0, 0, 320, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Audio Play", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Press Wakeup push-button to stop play", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"Press SEL to pause/resume playback", CENTER_MODE); 
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"Press UP/DOWN to change Volume", CENTER_MODE);   
   
-  GUI_DrawRect(10, 90, 300, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 298, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 300, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 298, 138, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
 }
 
 /**
@@ -277,17 +277,17 @@ static void AudioPlay_DisplayInfos(WAVE_FormatTypeDef * format)
   uint8_t string[50] = {0};
 
   sprintf((char *) string, "Sampling frequency : %lu Hz", (unsigned long)format->SampleRate);
-  GUI_DisplayStringAt(20, 100, string, CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(20, 100, string, CENTER_MODE);
 
   if (format->NbrChannels == 2)
   {
     sprintf((char *) string, "Format : %d bits stereo", format->BitPerSample);
-    GUI_DisplayStringAt(20, 115, string, CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, string, CENTER_MODE);
   }
   else if (format->NbrChannels == 1)
   {
     sprintf((char *) string, "Format : %d bits mono", format->BitPerSample);
-    GUI_DisplayStringAt(20, 115, string, CENTER_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, string, CENTER_MODE);
   }
 }
 

@@ -1270,9 +1270,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_icache.c</name>
-                <excluded>
-                    <configuration>STM32L562E-DK_Templates_TrustZone</configuration>
-                </excluded>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_irda.c</name>

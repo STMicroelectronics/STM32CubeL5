@@ -138,9 +138,9 @@ extern "C" {
 /** @defgroup ST7789H2_REG_Exported_Types ST7789H2_REG Exported Types
   * @{
   */
-typedef int32_t (*ST7789H2_Write_Func)(void *, uint16_t, uint8_t *, uint16_t);
-typedef int32_t (*ST7789H2_Read_Func)(void *, uint16_t, uint8_t *, uint16_t);
-typedef int32_t (*ST7789H2_Send_Func)(void *, uint8_t *, uint16_t);
+typedef int32_t (*ST7789H2_Write_Func)(void *, uint16_t, uint8_t *, uint32_t);
+typedef int32_t (*ST7789H2_Read_Func)(void *, uint16_t, uint8_t *, uint32_t);
+typedef int32_t (*ST7789H2_Send_Func)(void *, uint8_t *, uint32_t);
 
 typedef struct
 {
@@ -156,9 +156,9 @@ typedef struct
 /** @defgroup ST7789H2_REG_Exported_Functions ST7789H2_REG Exported Functions
   * @{
   */
-int32_t st7789h2_write_reg(ST7789H2_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length);
-int32_t st7789h2_read_reg(ST7789H2_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length);
-int32_t st7789h2_send_data(ST7789H2_ctx_t *ctx, uint8_t *pdata, uint16_t length);
+int32_t st7789h2_write_reg(ST7789H2_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint32_t length);
+int32_t st7789h2_read_reg(ST7789H2_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint32_t length);
+int32_t st7789h2_send_data(ST7789H2_ctx_t *ctx, uint8_t *pdata, uint32_t length);
 /**
   * @}
   */

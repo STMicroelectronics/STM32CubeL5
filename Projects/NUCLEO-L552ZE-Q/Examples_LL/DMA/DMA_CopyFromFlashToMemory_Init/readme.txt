@@ -45,6 +45,9 @@ NUCLEO-L552ZE-Q's LED1 can be used to monitor the transfer status:
 - LED1 is turned ON if the DMA data transfer is successfully completed.
 - LED1 is blinking every 1 sec in case of error.
 
+@par Keywords
+
+System, DMA, System, Data Transfer, Memory to memory, Channel, Flash, RAM
 
 @par Directory contents 
 

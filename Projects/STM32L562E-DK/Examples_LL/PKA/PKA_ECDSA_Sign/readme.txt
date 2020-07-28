@@ -45,7 +45,7 @@ In case of errors, LED_GREEN is slowly blinking (1sec period).
 
 @par Keywords
 
-PKA, interrupt, ECDSA, signature, NIST, CAVP
+Security, PKA, NIST, CAVP, ECDSA verification
 
 @par Directory contents 
 

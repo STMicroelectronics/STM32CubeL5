@@ -1,5 +1,5 @@
 /**
-  @page TFM application
+  @page TFM_Appli
 
   @verbatim
   ******************************************************************************
@@ -31,24 +31,32 @@ It has to be compiled after TFM_SBSFU_Boot project.
 The TFM_Appli Non Secure project is used to generate the TFM_Appli Non Secure
 binary file. The core function of this application relies on the trusted
 firmware (TFM) middleware.
-It has to be compiled after TFM_Appli Secure projects.
+It has to be compiled after TFM_Appli Secure project.
 
 In order to ease the developement process, prebuild and postbuild commands are
 integrated in each toolchain for both projects.
 The prebuild command is in charge of preparing the scatter file according to
 common flash layout description in linker folder.
 The postbuild command is in charge of signing the binaries, so that they are
-trusted by TFM firmware update process.
+trusted by firmware update process.
 
-@par TFM_Appli/Secure Directory contents
+@par Keywords
+
+Security, TFM, mbedCrypto, AES, CRYP, GTZC, HASH, PKA, OSPI-HSPI,
+Initial attestation, Secure storage, Internal trusted storage,
+Cryptography, PSA, TrustZone
+
+@par Directory contents
 
   - TFM_Appli/Secure/Inc/aes_alt.h               Header file for aes_alt.c
+  - TFM_Appli/Secure/Inc/ccm_alt.h               Header file for ccm_alt.c
   - TFM_Appli/Secure/Inc/cmsis.h                 Header file for CMSIS
   - TFM_Appli/Secure/Inc/ecp_alt.h               Header file for ecp_alt.c
   - TFM_Appli/Secure/Inc/gcm_alt.h               Header file for gcm_alt.c
   - TFM_Appli/Secure/Inc/md5_alt.h               Header file for md5_alt.c
   - TFM_Appli/Secure/Inc/mpu_armv8m_drv.h        Header file for mpu_armv8m_drv.c
   - TFM_Appli/Secure/Inc/platform_irq.h          Platform interrupt requests
+  - TFM_Appli/Secure/Inc/rsa_alt.h               Header file for rsa_alt.c
   - TFM_Appli/Secure/Inc/sha1_alt.h              Header file for sha1_alt.c
   - TFM_Appli/Secure/Inc/sha256_alt.h            Header file for sha256_alt.c
   - TFM_Appli/Secure/Inc/stm32l5xx_hal_conf.h    HAL configuration file
@@ -58,6 +66,7 @@ trusted by TFM firmware update process.
  
   - TFM_Appli/Secure/Src/aes_alt.c               AES HW crypto interface
   - TFM_Appli/Secure/Src/attest_hal.c            Initial attestation example
+  - TFM_Appli/Secure/Src/ccm_alt.c               CCM HW crypto interface
   - TFM_Appli/Secure/Src/dummy_boot_seed.c       Boot seed implementation
   - TFM_Appli/Secure/Src/dummy_crypto_keys.c     HUK and EAT private key implementation
   - TFM_Appli/Secure/Src/dummy_device_id.c       Device IDs and versions implementation
@@ -71,6 +80,7 @@ trusted by TFM firmware update process.
   - TFM_Appli/Secure/Src/low_level_rng.c         Random generator interface
   - TFM_Appli/Secure/Src/md5_alt.c               MD5 HW crypto interface
   - TFM_Appli/Secure/Src/mpu_armv8m_drv.c        MPU low level interface
+  - TFM_Appli/Secure/Src/rsa_alt.c               RSA HW crypto interface
   - TFM_Appli/Secure/Src/sha1_alt.c              SHA1 HW crypto interface
   - TFM_Appli/Secure/Src/sha256_alt.c            SHA256 HW crypto interface
   - TFM_Appli/Secure/Src/spm_hal.c               Secure Partition Manager HAL interface
@@ -78,8 +88,6 @@ trusted by TFM firmware update process.
   - TFM_Appli/Secure/Src/target_cfg.c            Target start up
   - TFM_Appli/Secure/Src/tfm_platform_system.c   Platform specific implementation
   - TFM_Appli/Secure/Src/tick.c                  HAL Tick implementation
-
-@par TFM_Appli/NonSecure Directory contents
 
   - TFM_Appli/NonSecure/Inc/cmsis.h              Header file for CMSIS
   - TFM_Appli/NonSecure/Inc/com.h                Header file for com.c
@@ -107,16 +115,11 @@ trusted by TFM firmware update process.
   - TFM_Appli/NonSecure/Src/tfm_ns_lock.c        NS secure lock for secure access
   - TFM_Appli/NonSecure/Src/ymodem.c             Ymodem support
 
-@par Linker Directory contents
-
-  - Linker/flash_layout.h                        Flash mapping
-  - Linker/region_defs.h                         RAM and FLASH regions definitions
-
 @par How to use it ?
 
 In order to build the TFM_Appli Secure and Non Secure projects, you must do the
 following:
- - Open your preferred toolchain 
+ - Open your preferred toolchain
  - Rebuild the two projects
 
 Then refer to TFM\readme.txt for TFM usage.

@@ -526,7 +526,7 @@ int32_t BSP_AUDIO_OUT_Play(uint32_t Instance, uint8_t* pData, uint32_t NbrOfByte
   }
   else
   {
-    /* Compute number of DMA datas to tranfser according resolution */
+    /* Compute number of DMA data to transfer according resolution */
     if (Audio_Out_Ctx[Instance].BitsPerSample == AUDIO_RESOLUTION_16b)
     {
       NbrOfDmaDatas = (uint16_t) (NbrOfBytes / 2U);

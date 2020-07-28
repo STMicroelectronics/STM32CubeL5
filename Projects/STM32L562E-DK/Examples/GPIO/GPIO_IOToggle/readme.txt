@@ -22,8 +22,8 @@
 
 How to configure and use GPIOs through the HAL API.
 
-PD.03 IO (configured in output pushpull mode) toggles in a forever loop.
-On STM32L562E-DK board this IO is connected to LED9.
+PG.12 IO (configured in output pushpull mode) toggles in a forever loop.
+On STM32L562E-DK board this IO is connected to LED10.
 
 In this example, HCLK is configured at 110 MHz.
 
@@ -38,7 +38,7 @@ to have correct HAL operation.
 
 @par Keywords
 
-System, GPIO, Output, Push-pull, Toggle
+System, GPIO, Input, Output, Alternate function, Push-pull, Toggle
 
 @par Directory contents
 

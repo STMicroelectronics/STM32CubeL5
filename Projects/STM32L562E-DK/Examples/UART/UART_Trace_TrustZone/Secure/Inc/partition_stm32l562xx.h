@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file     partition_stm32l562xx.h
+  * @file    partition_stm32l562xx.h
   * @author  MCD Application Team
   * @brief   CMSIS STM32L562xx Device Initial Setup for Secure / Non-Secure Zones
   *          for ARMCM33 based on CMSIS CORE V5.3.1 partition_ARMCM33.h Template.
@@ -365,7 +365,7 @@
 #define NVIC_INIT_ITNS0    1
 /*
 // Interrupts 0..31
-//   <o.0>  WWDG_IRQn           <0=> Secure state 
+//   <o.0>  WWDG_IRQn           <0=> Secure state
 //   <o.1>  PVD_PVM_IRQn        <0=> Secure state
 //   <o.2>  RTC_IRQn            <0=> Secure state
 //   <o.3>  RTC_S_IRQn          <0=> Secure state
@@ -458,11 +458,11 @@
 
 /*
 // Interrupts 64..95
-//   <o.0>  UART4_IRQn          <0=> Secure state  	
-//   <o.1>  UART5_IRQn          <0=> Secure state  	
-//   <o.2>  LPUART1_IRQn        <0=> Secure state		
-//   <o.3>  LPTIM1_IRQn         <0=> Secure state		
-//   <o.4>  LPTIM2_IRQn         <0=> Secure state			
+//   <o.0>  UART4_IRQn          <0=> Secure state
+//   <o.1>  UART5_IRQn          <0=> Secure state
+//   <o.2>  LPUART1_IRQn        <0=> Secure state
+//   <o.3>  LPTIM1_IRQn         <0=> Secure state
+//   <o.4>  LPTIM2_IRQn         <0=> Secure state
 //   <o.5>  TIM15_IRQn          <0=> Secure state
 //   <o.6>  TIM16_IRQn          <0=> Secure state
 //   <o.7>  TIM17_IRQn          <0=> Secure state

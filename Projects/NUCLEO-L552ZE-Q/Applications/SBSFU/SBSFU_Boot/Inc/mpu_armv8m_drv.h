@@ -10,23 +10,20 @@
 
 #include <stdint.h>
 
-#include "stm32l5xx.h"
+#include "cmsis.h"
 
 #define PRIVILEGED_DEFAULT_ENABLE 1
 #define HARDFAULT_NMI_ENABLE      1
 
 /* MAIR_ATTR */
 #define MPU_ARMV8M_MAIR_ATTR_DEVICE_VAL      0x04
-
+#define MPU_ARMV8M_MAIR_ATTR_DEVICE_IDX      0
 #define MPU_ARMV8M_MAIR_ATTR_CODE_VAL        0xAA
-
+#define MPU_ARMV8M_MAIR_ATTR_CODE_IDX        1
 #define MPU_ARMV8M_MAIR_ATTR_DATA_VAL        0xFF
-
-enum mpu_armv8m_attr_shared_t {
-    MPU_ARMV8M_MAIR_ATTR_DEVICE_IDX=0,
-    MPU_ARMV8M_MAIR_ATTR_CODE_IDX,
-    MPU_ARMV8M_MAIR_ATTR_DATA_IDX,
-};
+#define MPU_ARMV8M_MAIR_ATTR_DATA_IDX        2
+#define MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_VAL 0x44
+#define MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_IDX 3
 
 struct mpu_armv8m_dev_t {
     const uint32_t base;
@@ -49,6 +46,12 @@ enum mpu_armv8m_attr_access_t {
     MPU_ARMV8M_AP_RO_PRIV_UNPRIV
 };
 
+enum mpu_armv8m_attr_shared_t {
+    MPU_ARMV8M_SH_NONE,
+    MPU_ARMV8M_SH_UNUSED,
+    MPU_ARMV8M_SH_OUTER,
+    MPU_ARMV8M_SH_INNER
+};
 
 struct mpu_armv8m_region_cfg_t {
     uint32_t region_nr;

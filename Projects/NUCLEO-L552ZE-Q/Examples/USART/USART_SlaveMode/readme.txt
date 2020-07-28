@@ -27,13 +27,13 @@ Boards: NUCLEO-L552ZE-Q C-02 (embeds a STM32L552ZETxQ device)
 
    _________________________                        _________________________
   |          _______________|                      |_______________          |
-  |         |      SPI2     |                      |    USART1     |         |
+  |         |      SPI2     |                      |    USART2     |         |
   |         |               |                      |               |         |
-  |         | PB13 (CN7.5)  |SCK_________________CK|(CN10.31)  PA8 |         |
+  |         | PB13 (CN7.5)  |SCK_________________CK|(CN9.2)  PD7   |         |
   |         |               |                      |               |         |
-  |         | PC2 (CN10.A7) |MISO________________TX|(CN12.21)  PA9 |         |
+  |         | PC2 (CN10.A7) |MISO________________TX|(CN9.4)  PD6   |         |
   |         |               |                      |               |         |
-  |         | PC1 (CN9.A4)  |MOSI________________RX|(CN12.33) PA10 |         |
+  |         | PC1 (CN9.A4)  |MOSI________________RX|(CN9.6)  PD5   |         |
   |         |               |                      |               |         |
   |         |_______________|                      |_______________|         |
   |      __                 |                      |                         |
@@ -83,6 +83,10 @@ The SystemClock_Config() function is used to configure the system clock for STM3
 @note The application needs to ensure that the SysTick time base is always set to
       1 millisecond to have correct HAL operation.
 
+@par Keywords
+
+Connectivity, UART/USART, SPI interface, full-duplex, Polling, Receiver, Transmitter, Synchronous, Slave,
+
 @par Directory contents
 
   - USART/USART_SlaveMode/Inc/stm32l5xx_nucleo_conf.h     BSP configuration file
@@ -104,9 +108,9 @@ The SystemClock_Config() function is used to configure the system clock for STM3
     and development board.
 
   - NUCLEO-L552ZE-Q C-02 set-up
-    - Connect Master board PB13 (SCK) to Slave Board PA8 (USART CK)
-    - Connect Master board PC2 (MISO) to Slave Board PA9 (USART TX)
-    - Connect Master board PC1 (MOSI) to Slave Board PA10 (USART RX)
+    - Connect Master board PB13 (SCK) to Slave Board PD7 (USART CK)
+    - Connect Master board PC2 (MISO) to Slave Board PD6 (USART TX)
+    - Connect Master board PC1 (MOSI) to Slave Board PD5 (USART RX)
     - Connect Master board GND to Slave Board GND
 
 @par How to use it ?

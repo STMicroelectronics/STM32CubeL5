@@ -70,7 +70,7 @@ void MotionSensor_demo(void)
   }
   
   /* GetAxes function */
-  GUI_DisplayStringAt(20, 100, (uint8_t*) "Accelerometer axes", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(20, 100, (uint8_t*) "Accelerometer axes", LEFT_MODE);
   while (UserButtonPressed == RESET)
   {
     if (BSP_MOTION_SENSOR_GetAxes(0, MOTION_ACCELERO, &axes) != BSP_ERROR_NONE)
@@ -82,17 +82,17 @@ void MotionSensor_demo(void)
       Error_Handler();
     }
     sprintf((char*)string, "X = %ld      ", (signed long)axes.x);
-    GUI_DisplayStringAt(20, 115, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, string, LEFT_MODE);
     sprintf((char*)string, "Y = %ld      ", (signed long)axes.y);
-    GUI_DisplayStringAt(20, 130, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 130, string, LEFT_MODE);
     sprintf((char*)string, "Z = %ld      ", (signed long)axes.z);
-    GUI_DisplayStringAt(20, 145, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 145, string, LEFT_MODE);
     sprintf((char*)string, "Xraw = %d      ", axesRaw.x);
-    GUI_DisplayStringAt(20, 160, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 160, string, LEFT_MODE);
     sprintf((char*)string, "Yraw = %d      ", axesRaw.y);
-    GUI_DisplayStringAt(20, 175, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 175, string, LEFT_MODE);
     sprintf((char*)string, "Zraw = %d      ", axesRaw.z);
-    GUI_DisplayStringAt(20, 190, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 190, string, LEFT_MODE);
     HAL_Delay(500);
   }
   HAL_Delay(1000);
@@ -129,7 +129,7 @@ void MotionSensor_demo(void)
   }
   
   /* GetAxes function */
-  GUI_DisplayStringAt(20, 100, (uint8_t*) "Gyroscope axes", LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(20, 100, (uint8_t*) "Gyroscope axes", LEFT_MODE);
   while (UserButtonPressed == RESET)
   {
     if (BSP_MOTION_SENSOR_GetAxes(0, MOTION_GYRO, &axes) != BSP_ERROR_NONE)
@@ -141,17 +141,17 @@ void MotionSensor_demo(void)
       Error_Handler();
     }
     sprintf((char*)string, "X = %ld      ", (signed long)axes.x);
-    GUI_DisplayStringAt(20, 115, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, string, LEFT_MODE);
     sprintf((char*)string, "Y = %ld      ", (signed long)axes.y);
-    GUI_DisplayStringAt(20, 130, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 130, string, LEFT_MODE);
     sprintf((char*)string, "Z = %ld      ", (signed long)axes.z);
-    GUI_DisplayStringAt(20, 145, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 145, string, LEFT_MODE);
     sprintf((char*)string, "Xraw = %d      ", axesRaw.x);
-    GUI_DisplayStringAt(20, 160, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 160, string, LEFT_MODE);
     sprintf((char*)string, "Yraw = %d      ", axesRaw.y);
-    GUI_DisplayStringAt(20, 175, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 175, string, LEFT_MODE);
     sprintf((char*)string, "Zraw = %d      ", axesRaw.z);
-    GUI_DisplayStringAt(20, 190, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 190, string, LEFT_MODE);
     HAL_Delay(500);
   }
   HAL_Delay(1000);
@@ -182,24 +182,24 @@ void MotionSensor_demo(void)
 static void MotionSensor_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Audio Demo description */
-  GUI_FillRect(0, 0, 240, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Motion Sensor", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Move the board.", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"Press User push-button", CENTER_MODE);
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"for next step", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 240, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Motion Sensor", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Move the board.", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"Press User push-button", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"for next step", CENTER_MODE);
   
-  GUI_DrawRect(10, 90, 220, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 218, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 220, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 218, 138, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
 }
 
 /**

@@ -76,9 +76,8 @@ static void MX_TIM1_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  GUI_Drv_t pGuiDrv;
+  LCD_UTILS_Drv_t lcdDrv;
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -111,20 +110,20 @@ int main(void)
   MX_DFSDM1_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  /* Link board LCD drivers to BASIC GUI LCD drivers */
-  pGuiDrv.DrawBitmap  = BSP_LCD_DrawBitmap;
-  pGuiDrv.FillRGBRect = BSP_LCD_FillRGBRect;
-  pGuiDrv.DrawHLine   = BSP_LCD_DrawHLine;
-  pGuiDrv.DrawVLine   = BSP_LCD_DrawVLine;
-  pGuiDrv.FillRect    = BSP_LCD_FillRect;
-  pGuiDrv.GetPixel    = BSP_LCD_ReadPixel;
-  pGuiDrv.SetPixel    = BSP_LCD_WritePixel;
-  pGuiDrv.GetXSize    = BSP_LCD_GetXSize;
-  pGuiDrv.GetYSize    = BSP_LCD_GetYSize;
-  pGuiDrv.SetLayer    = BSP_LCD_SetActiveLayer;
-  pGuiDrv.GetFormat   = BSP_LCD_GetFormat;
-  GUI_SetFuncDriver(&pGuiDrv);
-  GUI_Clear(GUI_COLOR_WHITE);
+  /* Link board LCD drivers to UTIL_LCD drivers */
+  lcdDrv.DrawBitmap  = BSP_LCD_DrawBitmap;
+  lcdDrv.FillRGBRect = BSP_LCD_FillRGBRect;
+  lcdDrv.DrawHLine   = BSP_LCD_DrawHLine;
+  lcdDrv.DrawVLine   = BSP_LCD_DrawVLine;
+  lcdDrv.FillRect    = BSP_LCD_FillRect;
+  lcdDrv.GetPixel    = BSP_LCD_ReadPixel;
+  lcdDrv.SetPixel    = BSP_LCD_WritePixel;
+  lcdDrv.GetXSize    = BSP_LCD_GetXSize;
+  lcdDrv.GetYSize    = BSP_LCD_GetYSize;
+  lcdDrv.SetLayer    = BSP_LCD_SetActiveLayer;
+  lcdDrv.GetFormat   = BSP_LCD_GetFormat;
+  UTIL_LCD_SetFuncDriver(&lcdDrv);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Display ON LCD */
   if (BSP_ERROR_NONE != BSP_LCD_DisplayOn(0))
@@ -132,11 +131,11 @@ int main(void)
     Error_Handler();
   }
 
-  GUI_SetFont(&Font24);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
-  GUI_SetTextColor(LCD_COLOR_DARKBLUE);  
-  GUI_DisplayStringAtLine(0, (uint8_t *)"TEMPERATURE :");
-  GUI_SetTextColor(GUI_COLOR_DARKRED);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(LCD_COLOR_DARKBLUE);  
+  UTIL_LCD_DisplayStringAtLine(0, (uint8_t *)"TEMPERATURE :");
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKRED);
 
   /* Start DFSDM conversions */
   if (HAL_OK != HAL_DFSDM_FilterInjectedStart_IT(&hdfsdm1_filter0))
@@ -163,7 +162,7 @@ int main(void)
       /* Compute and display temperature value */
       temperature = ((voltageValue/currentValue) - 100)/0.385f;
       sprintf((char*)LCDstr, "%3.1f oC", temperature);
-      GUI_DisplayStringAtLine(1, (uint8_t *) LCDstr);      
+      UTIL_LCD_DisplayStringAtLine(1, (uint8_t *) LCDstr);      
       
       voltageAvailable = 0;
       currentAvailable = 0;
@@ -184,13 +183,14 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
@@ -207,7 +207,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -435,7 +435,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

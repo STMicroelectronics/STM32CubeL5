@@ -25,27 +25,35 @@ define symbol __region_SRAM2_end__    = 0x2003FFFF;
 
 /*------------- START:  FreeRTOS MPU symbols ------------**/
 
+define symbol __FLASH_segment_start__        =  0x08000000;
+define symbol __FLASH_segment_end__          =  0x0807FFFF;
 define symbol __privileged_functions_start__ =  0x08000000;
-define symbol __privileged_functions_end__   = 0x08001CFF;
+define symbol __privileged_functions_end__   =  0x08001CFF;
 define symbol __syscalls_flash_start__       =  0x08001D00;
-define symbol __syscalls_flash_end__         =  0x0801EFF;
+define symbol __syscalls_flash_end__         =  0x08001EFF;
 define symbol __unprivileged_flash_start__   =  0x08001F00;
 define symbol __unprivileged_flash_end__     =  0x0807FFFF;
+define symbol __SRAM_segment_start__         =  0x20000000;
+define symbol __SRAM_segment_end__           =  0x2003FFFF;
 define symbol __privileged_sram_start__      =  0x20000000;
 define symbol __privileged_sram_end__        =  0x200007FF;
 define symbol __unprivileged_sram_start__    =  0x20000800;
 define symbol __unprivileged_sram_end__      =  0x2002FFFF;
 
+export symbol __FLASH_segment_start__;
+export symbol __FLASH_segment_end__;
+export symbol __privileged_functions_start__;
+export symbol __privileged_functions_end__;
 export symbol __syscalls_flash_start__;
 export symbol __syscalls_flash_end__;
 export symbol __unprivileged_flash_start__;
 export symbol __unprivileged_flash_end__;
+export symbol __SRAM_segment_start__;
+export symbol __SRAM_segment_end__;
 export symbol __privileged_sram_start__;
 export symbol __privileged_sram_end__;
 export symbol __unprivileged_sram_start__;
 export symbol __unprivileged_sram_end__;
-export symbol __privileged_functions_start__;
-export symbol __privileged_functions_end__;
 
 
 /*-------------  END: FreeRTOS MPU symbols ------------**/

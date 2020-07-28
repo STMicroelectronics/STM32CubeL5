@@ -71,6 +71,9 @@ STM32L552E-EV's board's LEDs can be used to monitor the application status:
 For more details about FatFs implementation on STM32Cube, please refer to UM1721 "Developing Applications 
 on STM32Cube with FatFs".
 
+@par Keywords
+
+File system, FatFs, FreeRTOS, SD Card, File system, FAT, Format, Mount, Read, Write
 
 @par Directory contents
  

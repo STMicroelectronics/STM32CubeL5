@@ -1,5 +1,5 @@
 /**
-  @page DMAMUX_RequestGen DMA & DMAMUX request generator Example
+  @page DMA_MUX_RequestGen DMA & DMAMUX request generator Example
   
   @verbatim
   ******************************************************************************

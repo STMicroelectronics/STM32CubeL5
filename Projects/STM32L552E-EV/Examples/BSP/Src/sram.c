@@ -174,94 +174,94 @@ void SRAM_demo(void)
   
   if (ubSramInit == 0)
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Initialization : OK.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Initialization : OK.", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
     
     if (ubSramWrite == 0)
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM WRITE : OK.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM WRITE : OK.", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
       if (ubSramRead == 0)
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM READ : OK.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM READ : OK.", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
         
         if (ubSramCmp == 0)
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : OK.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : OK.", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
 
           if (ubSramDmaWrite == 0)
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA WRITE : OK.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA WRITE : OK.", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
             
             if (ubSramDmaRead == 0)
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA READ : OK.", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA READ : OK.", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
               
               if (ubSramDmaCmp == 0)
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : OK.", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : OK.", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test : OK.", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test : OK.", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
               }
               else
               {
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-                GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+                UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
                 lcd_text_ypos+=LCD_TEXT_YPOS_INC;
               }
             }
             else
             {
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA READ : FAILED.", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA READ : FAILED.", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-              GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+              UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
               lcd_text_ypos+=LCD_TEXT_YPOS_INC;
             }
           }
           else
           {
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA WRITE : FAILED.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM DMA WRITE : FAILED.", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-            GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+            UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
             lcd_text_ypos+=LCD_TEXT_YPOS_INC;
           }
         }
         else
         {
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM COMPARE : FAILED.", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-          GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
           lcd_text_ypos+=LCD_TEXT_YPOS_INC;
         }
       }
       else
       {
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM READ : FAILED.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM READ : FAILED.", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-        GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
         lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       }
     }
     else
     {
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM WRITE : FAILED.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM WRITE : FAILED.", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-      GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+      UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
     }
   }
   else
   {
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Initialization : FAILED.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Initialization : FAILED.", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
-    GUI_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t *)"SRAM Test Aborted.", LEFT_MODE);
     lcd_text_ypos+=LCD_TEXT_YPOS_INC;
   }
       
@@ -299,23 +299,23 @@ void SRAM_demo(void)
 static void SRAM_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set LCD Demo description */
-  GUI_FillRect(0, 0, 320, 60, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"SRAM", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Press Wakeup push-button to exit", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 320, 60, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"SRAM", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Press Wakeup push-button to exit", CENTER_MODE);
  
    /* Set the LCD Text Color */
-  GUI_DrawRect(10, 70, 300, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 71, 298, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 70, 300, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 71, 298, 138, UTIL_LCD_COLOR_BLUE);
   
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
 }
 
 /**

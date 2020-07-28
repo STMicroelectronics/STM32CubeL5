@@ -39,6 +39,11 @@ RX DMA transfer is also ready to retrieve characters from PC ("END" string is ex
 In case of both transfers successfully completed, LED1 is turned on.
 In case of errors, LED1 is blinking (1sec period).
 
+@par Keywords
+
+Connectivity, UART/USART, Asynchronous, RS-232, baud rate, DMA, HyperTerminal, 
+Transmitter, Receiver
+
 @par Directory contents 
 
   - USART/USART_Communication_TxRx_DMA_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

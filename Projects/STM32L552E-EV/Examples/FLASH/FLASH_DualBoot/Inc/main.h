@@ -34,7 +34,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "stm32l552e_eval.h"
 #include "stm32l552e_eval_lcd.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -72,7 +72,7 @@ void Error_Handler(void);
 
 /* Messages to display on LCD */
 #define MESSAGE1     "STM32L552ZET6Q"
-#define MESSAGE2     "Flash Dual-boot example"
+#define MESSAGE2     "Flash Dual-boot"
 #define MESSAGE3     "Device running on"
 #ifdef FLASH_BANK1
 #define MESSAGE4     "FLASH BANK1"

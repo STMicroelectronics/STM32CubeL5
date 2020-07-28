@@ -33,7 +33,7 @@ extern DMA_HandleTypeDef hdma_hash_in;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN Define */
- 
+
 /* USER CODE END Define */
 
 /* Private macro -------------------------------------------------------------*/
@@ -73,7 +73,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 
@@ -93,10 +93,9 @@ void HAL_HASH_MspInit(HASH_HandleTypeDef* hhash)
   /* USER CODE BEGIN HASH_MspInit 0 */
 
   /* USER CODE END HASH_MspInit 0 */
-
     /* Peripheral clock enable */
     __HAL_RCC_HASH_CLK_ENABLE();
-  
+
     /* HASH DMA Init */
     /* HASH_IN Init */
     hdma_hash_in.Instance = DMA2_Channel7;

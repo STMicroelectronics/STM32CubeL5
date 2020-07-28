@@ -44,7 +44,7 @@
                 </option>
                 <option>
                     <name>OGCoreOrChip</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>GRuntimeLibSelect</name>
@@ -78,7 +78,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>Default	None</state>
+                    <state>STM32L562QE	ST STM32L562QE</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -138,17 +138,17 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>Default	None</state>
+                    <state>STM32L562QE	ST STM32L562QE</state>
                 </option>
                 <option>
                     <name>FPU2</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>6</state>
                 </option>
                 <option>
                     <name>NrRegs</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>NEON</name>
@@ -221,12 +221,12 @@
                 <option>
                     <name>CCDefines</name>
                     <state>STM32L562xx</state>
-                    <state>MCUBOOT_IMAGE_NUMBER=2</state>
                     <state>USE_HAL_DRIVER</state>
                     <state>SST_ENCRYPTION</state>
                     <state>TFM_PSA_API</state>
                     <state>TFM_LVL=2</state>
                     <state>TFM_LEGACY_API</state>
+                    <state>BL2</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -319,7 +319,7 @@
                 </option>
                 <option>
                     <name>CCRequirePrototypes</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCDiagWarnAreErr</name>
@@ -368,7 +368,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\crypto</state>
                     <state>$PROJ_DIR$\..\..\Linker</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\lib\ext\qcbor\inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\/secure_fw\core\include</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\secure_fw\core\include</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1076,9 +1076,6 @@
             <name>User</name>
             <file>
                 <name>$PROJ_DIR$\..\NonSecure\Src\com.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\NonSecure\Inc\com.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\NonSecure\Src\common.c</name>

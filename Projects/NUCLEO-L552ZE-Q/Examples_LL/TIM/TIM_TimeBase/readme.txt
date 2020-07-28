@@ -1,9 +1,9 @@
 /**
   @page TIM_TimeBase TIM example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_LL/TIM/TIM_TimeBase/readme.txt 
+  * @file    Examples_LL/TIM/TIM_TimeBase/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the TIM_TimeBase example.
   ******************************************************************************
@@ -20,11 +20,11 @@
 
 @par Example Description
 
-Configuration of the TIM peripheral to generate a timebase. This 
-example is based on the STM32L5xx TIM LL API. The peripheral initialization 
-uses LL unitary service functions for optimization purposes (performance and size). 
+Configuration of the TIM peripheral to generate a timebase. This
+example is based on the STM32L5xx TIM LL API. The peripheral initialization
+uses LL unitary service functions for optimization purposes (performance and size).
 
-   In this example TIM8 input clock TIM8CLK is set to APB2 clock (PCLK2),   
+   In this example TIM8 input clock TIM8CLK is set to APB2 clock (PCLK2),
    since APB2 pre-scaler is equal to 1.
       TIM8CLK = PCLK2
       PCLK2 = HCLK
@@ -47,13 +47,17 @@ blinking of LED1 = 2 * timebase period.
 
 User push-button can be used to modify the timebase period from 100 ms
 to 1 s in 100 ms steps. To do so, every time User push-button is pressed, the
-autoreload register (ARR) is updated. In up-counting update event is generated 
-at each counter overflow (when the counter reaches the auto-reload value). 
+autoreload register (ARR) is updated. In up-counting update event is generated
+at each counter overflow (when the counter reaches the auto-reload value).
 
 Finally the timebase frequency is calculated as follows:
 timebase frequency = TIM8 counter clock /((PSC + 1)*(ARR + 1)*(RCR + 1))
 
-@par Directory contents 
+@par Keywords
+
+Timers, TIM, Time base
+
+@par Directory contents
 
   - TIM/TIM_TimeBase/Inc/stm32l5xx_it.h          Interrupt handlers header file
   - TIM/TIM_TimeBase/Inc/main.h                  Header for main.c module
@@ -66,11 +70,11 @@ timebase frequency = TIM8 counter clock /((PSC + 1)*(ARR + 1)*(RCR + 1))
 @par Hardware and Software environment
 
   - This example runs on STM32L552xx devices.
-    
+
   - This example has been tested with NUCLEO-L552ZE-Q board and can be
     easily tailored to any other supported device and development board.
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

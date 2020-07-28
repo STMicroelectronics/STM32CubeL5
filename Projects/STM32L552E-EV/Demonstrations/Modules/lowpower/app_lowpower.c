@@ -395,9 +395,9 @@ void LowPowerUserAction(uint8_t sel)
   */
 void LowPowerStandbyWakeupPin(void)
 {
-  kWindow_Popup("STANDBY EXTI", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("STANDBY EXTI", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -427,16 +427,16 @@ void LowPowerStandbyWakeupPin(void)
   */
 void LowPowerStandbyRTCAlarm(void)
 {
-  kWindow_Popup("STANDBY Alarm", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("STANDBY Alarm", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\nset delay time\n",                          \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
 
   /* set the alarm */
   LowPowerHandleAlarm();
 
-  kWindow_Popup("STANDBY Alarm", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,  \
+  kWindow_Popup("STANDBY Alarm", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,  \
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -465,9 +465,9 @@ void LowPowerStandbyRTCAlarm(void)
 void LowPowerSleepEXTI(void)
 {
   uint32_t iddValue;
-  kWindow_Popup("SLEEP EXTI", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("SLEEP EXTI", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -520,9 +520,9 @@ void LowPowerSleepEXTI(void)
 void LowPowerRunSmpsBypass(void)
 {
   uint32_t iddValue;
-  kWindow_Popup("RUN SMPS BYPASS", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("RUN SMPS BYPASS", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -582,9 +582,9 @@ void LowPowerRunSmpsBypass(void)
 void LowPowerRunSmpsLowPower(void)
 {
   uint32_t iddValue;
-  kWindow_Popup("RUN SMPS LOW POWER", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("RUN SMPS LOW POWER", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -665,9 +665,9 @@ void LowPowerRunSmpsLowPower(void)
 void LowPowerRunSmpsHighPower(void)
 {
   uint32_t iddValue;
-  kWindow_Popup("RUN SMPS HIGH POWER", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("RUN SMPS HIGH POWER", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -722,16 +722,16 @@ void LowPowerRunSmpsHighPower(void)
 void LowPowerSleepRTCAlarm(void)
 {
   uint32_t iddValue;
-  kWindow_Popup("SLEEP Alarm", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("SLEEP Alarm", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\nset delay time\n",                          \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
 
   /* set the alarm */
   LowPowerHandleAlarm();
 
-  kWindow_Popup("SLEEP Alarm", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,  \
+  kWindow_Popup("SLEEP Alarm", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,  \
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -790,9 +790,9 @@ void LowPowerSleepRTCAlarm(void)
 void LowPowerStopEXTI(void)
 {
   uint32_t iddValue;
-  kWindow_Popup("STOP EXTI", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("STOP EXTI", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -837,16 +837,16 @@ void LowPowerStopEXTI(void)
 void LowPowerStopRTCAlarm(void)
 {
   uint32_t iddValue;
-  kWindow_Popup("STOP Alarm", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
+  kWindow_Popup("STOP Alarm", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
                 "\nset delay time\n",                          \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
 
   /* set the alarm */
   LowPowerHandleAlarm();
 
-  kWindow_Popup("STOP Alarm", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,  \
+  kWindow_Popup("STOP Alarm", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,  \
                 "\n\nPlease wait...\n",   \
-                GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+                UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
   HAL_Delay(1000);
 
   /* Int Measure through MFX */
@@ -915,7 +915,7 @@ static void LowPowerHandleAlarm(void)
   uint32_t pXSize;
 
   /* get current font */
-  font = GUI_GetFont();
+  font = UTIL_LCD_GetFont();
   BSP_LCD_GetXSize(0, &pXSize);
   statpos = (pXSize >> 1) - (4 * font->Width);
 
@@ -924,10 +924,10 @@ static void LowPowerHandleAlarm(void)
   /* Get the alarm time from user */
   do
   {
-    GUI_SetTextColor(GUI_COLOR_ST_BLUE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_BLUE);
     sprintf((char *)temp, "%.2d:%.2d:%.2d", time.Hours, time.Minutes, time.Seconds);
-    GUI_DisplayStringAt(statpos, 5 * font->Height, temp, LEFT_MODE);
-    GUI_SetTextColor(GUI_COLOR_ST_PINK);
+    UTIL_LCD_DisplayStringAt(statpos, 5 * font->Height, temp, LEFT_MODE);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_PINK);
 
     switch(index)
     {
@@ -944,7 +944,7 @@ static void LowPowerHandleAlarm(void)
       sprintf((char *)temp, "%.2d", time.Seconds);
       break;
     }
-    GUI_DisplayStringAt(position, 5 * font->Height, temp, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(position, 5 * font->Height, temp, LEFT_MODE);
 
     user_event = JOY_NONE;
     user_action = 0;
@@ -1072,8 +1072,8 @@ void LowPowerExitDisplay(uint32_t Mode, uint32_t iddValue)
   sprintf(msg + strlen(msg), "\nMeasured value\n%s %s\n", idd.value, idd.unit);
   sprintf(msg + strlen(msg), "\nPress JOY sel Exit\n");
 
-  kWindow_Popup("Low Power", GUI_COLOR_WHITE, GUI_COLOR_ST_BLUE,\
-                msg, GUI_COLOR_ST_BLUE, GUI_COLOR_WHITE );
+  kWindow_Popup("Low Power", UTIL_LCD_COLOR_WHITE, UTIL_LCD_COLOR_ST_BLUE,\
+                msg, UTIL_LCD_COLOR_ST_BLUE, UTIL_LCD_COLOR_WHITE );
 
   /* Restore Joystick in interrupt mode */
   BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);

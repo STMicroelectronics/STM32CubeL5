@@ -139,7 +139,8 @@ The LPUART is configured as follows:
 
 @par Keywords
 
-Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, full-duplex, HyperTerminal,Transmission, Reception, Asynchronous
+Connectivity, LPUART, baud rate, RS-232, HyperTerminal, full-duplex,
+Transmitter, Receiver, Asynchronous, Low Power, Wake Up
 
 @par Directory contents
 

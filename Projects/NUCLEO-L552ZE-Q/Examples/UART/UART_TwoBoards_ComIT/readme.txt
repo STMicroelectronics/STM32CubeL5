@@ -97,7 +97,8 @@ position of the transmitted data.
 
 @par Keywords
 
-Connectivity, UART, Baud rate, RS-232, Full-duplex, DMA, Parity, Stop bit, Transmission, Reception, interrupt
+Connectivity, UART/USART, baud rate, RS-232, full-duplex, Interrupt, parity, stop bit,
+Transmitter, Receiver, Asynchronous
 
 @par Directory contents 
 

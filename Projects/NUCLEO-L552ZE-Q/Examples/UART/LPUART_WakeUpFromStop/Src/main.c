@@ -3,14 +3,14 @@
   ******************************************************************************
   * @file    UART/LPUART_WakeUpFromStop/Src/main.c
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use UART HAL API (LPUART instance)
-  *          to wake up the MCU from STOP mode
+  * @brief   This sample code shows how to use UART through the STM32L5xx
+  *          HAL API (LPUART instance) to wake up the MCU from STOP mode
   *          Two boards are used, one which enters STOP mode and the second
   *          one which sends the wake-up stimuli.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -27,6 +27,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stm32l5xx_nucleo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -76,10 +77,9 @@ static void MX_LPUART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 #if defined(BOARD_IN_STOP_MODE)
 void SystemClock_Config_fromSTOP(void);
-#endif
-#if !defined(BOARD_IN_STOP_MODE)
+#else
 static uint16_t Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength);
-#endif /* !defined(BOARD_IN_STOP_MODE) */
+#endif /* defined(BOARD_IN_STOP_MODE) */
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -94,8 +94,8 @@ static uint16_t Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferL
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  /* USER CODE END 1 */
 
+  /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -118,17 +118,18 @@ int main(void)
   MX_LPUART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-#ifdef BOARD_IN_STOP_MODE
+
   /*##-1- Wake Up first step  ###############################################*/
-#endif
 
-  /* Configure LED2 and LED3*/
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
+  /* Configure LED1*/
+  BSP_LED_Init(LED1);
 
 #ifdef BOARD_IN_STOP_MODE
-  /* LED2 is on till stop mode */
-  BSP_LED_On(LED2);
+  /* LED1 is on till stop mode */
+  BSP_LED_On(LED1);
+
+  /* Specify HSI as the clock source used after wake up from stop mode */
+  __HAL_RCC_WAKEUPSTOP_CLK_CONFIG(RCC_STOP_WAKEUPCLOCK_HSI);
 
   /* wait for two seconds before test start */
   HAL_Delay(2000);
@@ -150,8 +151,9 @@ int main(void)
   /* Enable the UART Wake UP from STOP mode Interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_WUF);
 
-  /* about to enter STOP mode: switch off LED2 */
-  BSP_LED_Off(LED2);
+  /* about to enter STOP mode: switch off LED1 */
+  BSP_LED_Off(LED1);
+
   /* enable MCU wake-up by LPUART */
   HAL_UARTEx_EnableStopMode(&hlpuart1);
   /* enter STOP mode */
@@ -160,7 +162,7 @@ int main(void)
   /* ... STOP mode ... */
 
 
-  /* at that point, MCU has been awoken: LED2 has been turned back on */
+  /* at that point, MCU has been awoken: LED1 has been turned back on */
   SystemClock_Config_fromSTOP();
 
   /* Wake Up based on RXNE flag successful */
@@ -194,8 +196,8 @@ int main(void)
   /* Enable the LPUART Wake UP from STOP mode Interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_WUF);
 
-  /* about to enter STOP mode: switch off LED2 */
-  BSP_LED_Off(LED2);
+  /* about to enter STOP mode: switch off LED1 */
+  BSP_LED_Off(LED1);
   /* enable MCU wake-up by LPUART */
   HAL_UARTEx_EnableStopMode(&hlpuart1);
   /* enter STOP mode */
@@ -204,7 +206,7 @@ int main(void)
   /* ... STOP mode ... */
 
 
-  /* at that point, MCU has been awoken: LED2 has been turned back on */
+  /* at that point, MCU has been awoken: LED1 has been turned back on */
   SystemClock_Config_fromSTOP();
 
   /* Wake Up on start bit detection successful */
@@ -241,8 +243,8 @@ int main(void)
   /* Enable the LPUART Wake UP from stop mode Interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_WUF);
 
-  /* about to enter stop mode: switch off LED2 */
-  BSP_LED_Off(LED2);
+  /* about to enter stop mode: switch off LED1 */
+  BSP_LED_Off(LED1);
   /* enable MCU wake-up by LPUART */
   HAL_UARTEx_EnableStopMode(&hlpuart1);
   /* enter STOP mode */
@@ -251,7 +253,7 @@ int main(void)
   /* ... STOP mode ... */
 
 
-  /* at that point, MCU has been awoken: LED2 has been turned back on */
+  /* at that point, MCU has been awoken: LED1 has been turned back on */
   SystemClock_Config_fromSTOP();
 
   /* Wake Up on 7-bit address detection successful */
@@ -288,8 +290,8 @@ int main(void)
   /* Enable the LPUART Wake UP from STOP mode Interrupt */
   __HAL_UART_ENABLE_IT(&hlpuart1, UART_IT_WUF);
 
-  /* about to enter STOP mode: switch off LED2 */
-  BSP_LED_Off(LED2);
+  /* about to enter STOP mode: switch off LED1 */
+  BSP_LED_Off(LED1);
   /* enable MCU wake-up by LPUART */
   HAL_UARTEx_EnableStopMode(&hlpuart1);
   /* enter STOP mode */
@@ -298,7 +300,7 @@ int main(void)
   /* ... STOP mode ... */
 
 
-  /* at that point, MCU has been awoken: LED2 has been turned back on */
+  /* at that point, MCU has been awoken: LED1 has been turned back on */
   SystemClock_Config_fromSTOP();
 
   /* Wake Up on 4-bit address detection successful */
@@ -317,17 +319,17 @@ int main(void)
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
 
   /* Wait for User push-button press before starting the test.
-     In the meantime, LED2 is blinking */
+     In the meantime, LED1 is blinking (100ms delay)*/
   while (UserButtonStatus == 0)
   {
-    /* Toggle LED2 */
-    BSP_LED_Toggle(LED2);
+    /* Toggle LED1 */
+    BSP_LED_Toggle(LED1);
     HAL_Delay(100);
   }
 
   /*##-2- Send the wake-up from stop mode first trigger ######################*/
   /*      (RXNE flag setting)                                                 */
-  BSP_LED_On(LED2);
+  BSP_LED_On(LED1);
   if (HAL_UART_Transmit(&hlpuart1, &WakeUpTrigger1, 1, 5000) != HAL_OK)
   {
     Error_Handler();
@@ -339,7 +341,7 @@ int main(void)
   {
     Error_Handler();
   }
-  BSP_LED_Off(LED2);
+  BSP_LED_Off(LED1);
 
   /* Compare the expected and received buffers */
   if (Buffercmp((uint8_t *)aTxBuffer1, (uint8_t *)aRxBuffer, COUNTOF(aTxBuffer1) - 1))
@@ -352,7 +354,7 @@ int main(void)
 
   /*##-3- Send the wake-up from stop mode second trigger #####################*/
   /*      (start Bit detection)                                               */
-  BSP_LED_On(LED2);
+  BSP_LED_On(LED1);
   if (HAL_UART_Transmit(&hlpuart1, &WakeUpTrigger2, 1, 5000) != HAL_OK)
   {
     Error_Handler();
@@ -364,7 +366,7 @@ int main(void)
   {
     Error_Handler();
   }
-  BSP_LED_Off(LED2);
+  BSP_LED_Off(LED1);
 
   /* Compare the expected and received buffers */
   if (Buffercmp((uint8_t *)aTxBuffer2, (uint8_t *)aRxBuffer, COUNTOF(aTxBuffer2) - 1))
@@ -377,7 +379,7 @@ int main(void)
 
   /*##-4- Send the wake-up from stop mode third trigger ######################*/
   /*      (7-bit address match)                                               */
-  BSP_LED_On(LED2);
+  BSP_LED_On(LED1);
   if (HAL_UART_Transmit(&hlpuart1, &WakeUpTrigger3, 1, 5000) != HAL_OK)
   {
     Error_Handler();
@@ -389,7 +391,7 @@ int main(void)
   {
     Error_Handler();
   }
-  BSP_LED_Off(LED2);
+  BSP_LED_Off(LED1);
 
   /* Compare the expected and received buffers */
   if (Buffercmp((uint8_t *)aTxBuffer3, (uint8_t *)aRxBuffer, COUNTOF(aTxBuffer3) - 1))
@@ -403,7 +405,7 @@ int main(void)
 
   /*##-5- Send the wake-up from stop mode fourth trigger #####################*/
   /*      (4-bit address match)                                               */
-  BSP_LED_On(LED2);
+  BSP_LED_On(LED1);
   if (HAL_UART_Transmit(&hlpuart1, &WakeUpTrigger4, 1, 5000) != HAL_OK)
   {
     Error_Handler();
@@ -416,7 +418,7 @@ int main(void)
   {
     Error_Handler();
   }
-  BSP_LED_Off(LED2);
+  BSP_LED_Off(LED1);
 
   /* Compare the expected and received buffers */
   if (Buffercmp((uint8_t *)aTxBuffer4, (uint8_t *)aRxBuffer, COUNTOF(aTxBuffer4) - 1))
@@ -429,12 +431,9 @@ int main(void)
 #endif /* BOARD_IN_STOP_MODE */
 
 
-
-  /* Turn on LED2 if test passes then enter infinite loop */
-  BSP_LED_On(LED2);
+  /* Turn on LED1 if test passes then enter infinite loop */
+  BSP_LED_On(LED1);
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -443,7 +442,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
   }
   /* USER CODE END 3 */
 }
@@ -463,7 +461,8 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -479,7 +478,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -510,7 +509,7 @@ static void MX_LPUART1_UART_Init(void)
 
   /* USER CODE END LPUART1_Init 1 */
   hlpuart1.Instance = LPUART1;
-  hlpuart1.Init.BaudRate = 15600;
+  hlpuart1.Init.BaudRate = 115200;
   hlpuart1.Init.WordLength = UART_WORDLENGTH_8B;
   hlpuart1.Init.StopBits = UART_STOPBITS_1;
   hlpuart1.Init.Parity = UART_PARITY_NONE;
@@ -537,7 +536,6 @@ static void MX_LPUART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN LPUART1_Init 2 */
-
   /* USER CODE END LPUART1_Init 2 */
 
 }
@@ -551,14 +549,14 @@ static void MX_GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
 }
 
 /* USER CODE BEGIN 4 */
 #if defined(BOARD_IN_STOP_MODE)
 /**
-  * @brief  System Clock Configuration restored after STOP1 mode
+  * @brief  System Clock Configuration restored after STOP mode
   * @param  None
   * @retval None
   */
@@ -567,24 +565,19 @@ void SystemClock_Config_fromSTOP(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   uint32_t pFLatency = 0;
-
-  /* Get the Oscillators configuration according to the internal RCC registers */
+  /* Get the Oscillators configuration from the internal RCC registers */
   HAL_RCC_GetOscConfig(&RCC_OscInitStruct);
-
-  /* Wake up on HSI, re-enable HSI and PLL with HSI as source */
-        RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-        RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-        RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-        RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-        RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  /* Wake up on HSI, re-enable PLL with HSI as source */
+  /* Oscillator configuration unchanged */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
-
-  /* Get the Clocks configuration according to the internal RCC registers */
+  /* Get the clock prescalers configuration from the internal RCC registers */
   HAL_RCC_GetClockConfig(&RCC_ClkInitStruct, &pFLatency);
-
   /* Select PLL as system clock source */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -594,7 +587,6 @@ void SystemClock_Config_fromSTOP(void)
   }
 }
 #endif
-
 /**
   * @brief  UART error callbacks
   * @param  UartHandle: UART handle
@@ -612,7 +604,7 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
   * @param GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
-  void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == BUTTON_USER_PIN)
   {
@@ -627,8 +619,8 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
   */
 void HAL_UARTEx_WakeupCallback(UART_HandleTypeDef *huart)
 {
-  /* Turn back on LED2 */
-  BSP_LED_On(LED2);
+  /* Turn back on LED1 */
+  BSP_LED_On(LED1);
 }
 
 
@@ -667,42 +659,42 @@ void Error_Handler(void)
   /* User can add his own implementation to report the HAL error return state */
   while (1)
   {
-    /* In case of error, LED3 transmits a sequence of three dots, three dashes, three dots */
-    BSP_LED_On(LED3);
+    /* In case of error, LED1 transmits a sequence of three dots, three dashes, three dots */
+    BSP_LED_On(LED1);
     HAL_Delay(300);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(300);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(300);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(300);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(300);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(300);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(700);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(700);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(700);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(700);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(700);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(700);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(300);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(300);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(300);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(300);
-    BSP_LED_On(LED3);
+    BSP_LED_On(LED1);
     HAL_Delay(300);
-    BSP_LED_Off(LED3);
+    BSP_LED_Off(LED1);
     HAL_Delay(800);
   }
   /* USER CODE END Error_Handler_Debug */

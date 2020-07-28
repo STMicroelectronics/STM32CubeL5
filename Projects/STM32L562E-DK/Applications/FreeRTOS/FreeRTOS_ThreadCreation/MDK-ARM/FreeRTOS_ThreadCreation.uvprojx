@@ -10,20 +10,20 @@
       <TargetName>FreeRTOS_ThreadCreation</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6120000::V6.12::.\ARMCLANG</pCCUsed>
+      <pCCUsed>6130001::V6.13.1::.\ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32L562QEIxQ</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32L5xx_DFP.1.0.9</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000,0x030000) IRAM2(0x30000000,0x030000) IROM(0x08000000,0x080000) IROM2(0x0C000000,0x080000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ESEL ELITTLE</Cpu>
+          <PackID>Keil.STM32L5xx_DFP.1.0.11</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
+          <Cpu>IRAM(0x20000000-0x2003FFFF) IROM(0x8000000-0x807FFFF)  CLOCK(8000000) FPU3(SFPU) CPUTYPE("Cortex-M33") ELITTLE TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2V8M(-S0 -C0 -P0 -FD20000000 -FC1000)</FlashDriverDll>
+          <FlashDriverDll></FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32L562QEIxQ$Drivers\CMSIS\Device\ST\STM32L5xx\Include\stm32l5xx.h</RegisterFile>
+          <RegisterFile></RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32L562QEIxQ$Drivers\CMSIS\SVD\STM32L5x2.svd</SFDFile>
+          <SFDFile>$$Device:STM32L562QEIxQ$CMSIS\SVD\STM32L562.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -48,7 +48,7 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>FreeRTOS_ThreadCreation\Exe\</OutputDirectory>
+          <OutputDirectory>FreeRTOS_ThreadCreation\</OutputDirectory>
           <OutputName>FreeRTOS_ThreadCreation</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
@@ -114,7 +114,7 @@
           <SimDlgDll></SimDlgDll>
           <SimDlgDllArguments></SimDlgDllArguments>
           <TargetDllName>SARMV8M.DLL</TargetDllName>
-          <TargetDllArguments> -MPU</TargetDllArguments>
+          <TargetDllArguments>-MPU</TargetDllArguments>
           <TargetDlgDll>TCM.DLL</TargetDlgDll>
           <TargetDlgDllArguments>-pCM33</TargetDlgDllArguments>
         </DllOption>
@@ -185,11 +185,11 @@
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
-            <hadIRAM2>1</hadIRAM2>
-            <hadIROM2>1</hadIROM2>
+            <hadIRAM2>0</hadIRAM2>
+            <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
             <useUlib>1</useUlib>
-            <EndSel>1</EndSel>
+            <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
             <RoSelD>3</RoSelD>
@@ -245,7 +245,7 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x30000</Size>
+                <Size>0x40000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
@@ -279,8 +279,8 @@
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
-                <StartAddress>0xc000000</StartAddress>
-                <Size>0x80000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
@@ -300,12 +300,12 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x30000</Size>
+                <Size>0x40000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x30000000</StartAddress>
-                <Size>0x30000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L562xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -356,7 +356,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..//Inc</IncludePath>
+              <IncludePath>..\Inc</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -393,14 +393,14 @@
           <GroupName>Application/User</GroupName>
           <Files>
             <File>
-              <FileName>app_freertos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/app_freertos.c</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/main.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/stm32l5xx_it.c</FilePath>
             </File>
             <File>
               <FileName>stm32l5xx_hal_msp.c</FileName>
@@ -413,9 +413,9 @@
               <FilePath>../Src/stm32l5xx_hal_timebase_tim.c</FilePath>
             </File>
             <File>
-              <FileName>stm32l5xx_it.c</FileName>
+              <FileName>app_freertos.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/stm32l5xx_it.c</FilePath>
+              <FilePath>../Src/app_freertos.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -440,77 +440,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>system_stm32l5xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/system_stm32l5xx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Drivers/STM32L5xx_HAL_Driver</GroupName>
           <Files>
-            <File>
-              <FileName>stm32l5xx_hal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_cortex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_dma_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c</FilePath>
-            </File>
             <File>
               <FileName>stm32l5xx_hal_exti.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_i2c_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_pwr_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32l5xx_hal_rcc_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32l5xx_hal_tim.c</FileName>
@@ -523,14 +458,94 @@
               <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32l5xx_hal_uart.c</FileName>
+              <FileName>stm32l5xx_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_uart.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</FilePath>
             </File>
             <File>
-              <FileName>stm32l5xx_hal_uart_ex.c</FileName>
+              <FileName>stm32l5xx_hal_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_uart_ex.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_rcc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_flash_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_flash_ramfunc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_flash_ramfunc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_dma_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_dma_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_pwr_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_cortex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_gtzc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_hal_icache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>system_stm32l5xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/system_stm32l5xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -572,21 +587,11 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/FreeRTOS/Source/timers.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/FreeRTOS/CMSIS_RTOS</GroupName>
-          <Files>
             <File>
               <FileName>cmsis_os2.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/FreeRTOS/portable</GroupName>
-          <Files>
             <File>
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
@@ -595,12 +600,12 @@
             <File>
               <FileName>port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM33_NTZ\non_secure\port.c</FilePath>
+              <FilePath>../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure/port.c</FilePath>
             </File>
             <File>
               <FileName>portasm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM33_NTZ\non_secure\portasm.c</FilePath>
+              <FilePath>../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure/portasm.c</FilePath>
             </File>
           </Files>
         </Group>

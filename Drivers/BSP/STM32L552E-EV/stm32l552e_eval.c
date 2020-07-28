@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @brief   This file provides set of firmware functions to manage:
   *          - LEDs, push-buttons, potentiometer, joystick and COM ports available
-  *            on STM32L552E-EVAL board (MB1372) from STMicroelectronics
+  *            on STM32L552E-EV board (MB1372) from STMicroelectronics
   ******************************************************************************
   * @attention
   *
@@ -38,7 +38,7 @@
 
 /** @defgroup STM32L552E-EV_COMMON STM32L552E-EV COMMON
   * @brief This file provides set of firmware functions to manage Leds and push-buttons
-  *        potentiometer and COM ports available on STM32L552E-EVAL board from STMicroelectronics.
+  *        potentiometer and COM ports available on STM32L552E-EV board from STMicroelectronics.
   * @{
   */
 

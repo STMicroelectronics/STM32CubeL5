@@ -1,9 +1,9 @@
 /**
   @page TIM_PWMOutput TIM example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_LL/TIM/TIM_PWMOutput/readme.txt 
+  * @file    Examples_LL/TIM/TIM_PWMOutput/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the TIM_PWMOutput example.
   ******************************************************************************
@@ -20,9 +20,9 @@
 
 @par Example Description
 
-Use of a timer peripheral to generate a 
-PWM output signal and update the PWM duty cycle. This example is based on the 
-STM32L5xx TIM LL API. The peripheral initialization uses 
+Use of a timer peripheral to generate a
+PWM output signal and update the PWM duty cycle. This example is based on the
+STM32L5xx TIM LL API. The peripheral initialization uses
 LL unitary service functions for optimization purposes (performance and size).
 
 In this example TIM3 input clock TIM3CLK is set to APB2 clock (PCLK2),
@@ -55,11 +55,15 @@ User push-button can be used to change the duty cycle from 0% up to 100% by
 steps of 10%. Duty cycle is periodically measured. It can be observed through
 the debugger by watching the variable uwMeasuredDutyCycle.
 
-@note The LED1 is not toggling. In fact, if the dutycycle is 0% so the LED1 is OFF. When pushing 
-successively the user button, the LED1 is ON and its luminosity rises as the dutycycle value keeps 
+@note The LED1 is not toggling. In fact, if the dutycycle is 0% so the LED1 is OFF. When pushing
+successively the user button, the LED1 is ON and its luminosity rises as the dutycycle value keeps
 increasing.
 
-@par Directory contents 
+@par Keywords
+
+Timers, TIM, Output, Signal, PWM, Frequency, Duty cycle, Waveform, Auto-reload.
+
+@par Directory contents
 
   - TIM/TIM_PWMOutput/Inc/stm32l5xx_it.h          Interrupt handlers header file
   - TIM/TIM_PWMOutput/Inc/main.h                  Header for main.c module
@@ -72,14 +76,14 @@ increasing.
 @par Hardware and Software environment
 
   - This example runs on STM32L552ZETxQ devices.
-    
+
   - This example has been tested with NUCLEO-L552ZE-Q C-02 board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-L552ZE-Q Set-up:
       - TIM3_CH2  PC.07: connected to pin 19 of CN12 connector
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

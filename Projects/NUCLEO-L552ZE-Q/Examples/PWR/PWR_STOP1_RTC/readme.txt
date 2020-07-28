@@ -1,5 +1,5 @@
 /**
-  @page PWR_Stop1_RTC PWR_STOP1_RTC example
+  @page PWR_STOP1_RTC PWR_STOP1_RTC example
   
   @verbatim
   ******************************************************************************
@@ -93,7 +93,7 @@ Power, PWR, STOP1 mode, Interrupt, RTC, Wakeup, Low Power, External reset
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Once the image is loaded, power off the NUCLEO board in unplugging
+ - Once the image is loaded, power off the NUCLEO board by unplugging
    the power cable then power on the board again 
  - Run the example
 

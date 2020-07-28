@@ -38,6 +38,12 @@ Received character is echoed on Tx line.
 On press on User push-button, LED1 is turned Off.
 In case of errors, LED1 is blinking.
 
+
+@par Keywords
+
+Connectivity, UART/USART, Asynchronous, RS-232, baud rate, Interrupt, HyperTerminal, Receiver
+
+
 @par Directory contents 
 
   - USART/USART_Communication_Rx_IT_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

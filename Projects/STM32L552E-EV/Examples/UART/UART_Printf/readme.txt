@@ -63,8 +63,8 @@ position of the transmitted data.
 
 @par Keywords
 
-Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, full-duplex, HyperTerminal, 
-Transmission, Reception, Asynchronous, interrupt
+Connectivity, UART/USART, Printf, baud rate, RS-232, HyperTerminal, full-duplex, Interrupt,
+Transmitter, Receiver, Asynchronous
 
 @par Directory contents
 

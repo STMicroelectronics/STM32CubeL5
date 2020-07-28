@@ -23,7 +23,7 @@
 #define __BLESVC_H
 
 #ifdef __cplusplus
-extern "C" 
+extern "C"
 {
 #endif
 
@@ -34,17 +34,7 @@ extern "C"
 #include "dis.h"
 #include "hrs.h"
 #include "lbs_stm.h"
-/* Other services not provided by this release */
-/*
-#include "ans.h"
-#include "bas.h"
-#include "hids.h"
-#include "hps.h"
-#include "ipss.h"
-#include "lns.h"
-#include "scps.h"
-*/
-  
+
 
 /* Exported functions ------------------------------------------------------- */
 void BLESVC_AddCustomChar( uint16_t svc_uuid, uint16_t svc_hdle );

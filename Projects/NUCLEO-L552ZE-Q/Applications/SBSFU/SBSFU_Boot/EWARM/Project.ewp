@@ -210,18 +210,11 @@
           <name>CCDefines</name>
           <state>STM32L552xx</state>
           <state>USE_HAL_DRIVER</state>
-          <state>USE_STM32L5XX_NUCLEO_144</state>
           <state>NDEBUG</state>
           <state>TFM_DEV_MODE</state>
-          <state>MCUBOOT_SIGN_RSA</state>
-          <state>MCUBOOT_SIGN_RSA_LEN=3072</state>
-          <state>MCUBOOT_VALIDATE_PRIMARY_SLOT</state>
-          <state>MCUBOOT_USE_FLASH_AREA_GET_SECTORS</state>
           <state>MCUBOOT_TARGET_CONFIG=&lt;flash_layout.h&gt;</state>
           <state>MBEDTLS_CONFIG_FILE=&lt;config-boot.h&gt;</state>
-          <state>__thumb2__</state>
-          <state>MCUBOOT_OVERWRITE_ONLY</state>
-          <state>MCUBOOT_IMAGE_NUMBER=2</state>
+          <state>MCUBOOT_DOUBLE_SIGN_VERIF</state>
           <state>BL2</state>
           <state>Image$$=</state>
           <state>Load$$LR$$=</state>
@@ -316,10 +309,6 @@
         <option>
           <name>IExtraOptions</name>
           <state>-DNO_TYPEOF</state>
-          <state>--silent</state>
-          <state>--vla </state>
-          <state>--cmse</state>
-          <state>-e</state>
         </option>
         <option>
           <name>CCLangConformance</name>
@@ -374,11 +363,11 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\include</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\bootutil\include</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedTLS\include</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedTLS\include\mbedtls</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\include</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\ext\tinycrypt\lib\include</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\include</state>
           <state>$PROJ_DIR$\..\..\Linker</state>
-          <state>$PROJ_DIR$\Inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -712,8 +701,8 @@
       <name>BUILDACTION</name>
       <archiveVersion>1</archiveVersion>
       <data>
-        <prebuild>$PROJ_DIR$\prebuild.cmd "$PROJ_DIR$" "--cpu=Cortex-M33 -DBL2 -DMCUBOOT_IMAGE_NUMBER=2"</prebuild>
-        <postbuild></postbuild>
+        <prebuild>$PROJ_DIR$\prebuild.cmd "$PROJ_DIR$"</prebuild>
+        <postbuild>cmd /C "cmd /C $PROJ_DIR$\postbuild.bat""</postbuild>
       </data>
     </settings>
     <settings>
@@ -1075,12 +1064,6 @@
     </settings>
   </configuration>
   <group>
-    <name>Doc</name>
-    <file>
-      <name>$PROJ_DIR$\..\readme.txt</name>
-    </file>
-  </group>
-  <group>
     <name>Drivers</name>
     <group>
       <name>STM32L5xx_HAL_Driver</name>
@@ -1107,6 +1090,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_gtzc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_icache.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_pwr.c</name>
@@ -1140,24 +1126,57 @@
   <group>
     <name>Middlewares</name>
     <group>
+      <name>mcuboot</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\bootutil_misc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\tlv.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\swap_scratch.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\swap_move.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\swap_misc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\image_rsa.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\image_ec.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\image_ec256.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\encrypted.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\image_validate.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\caps.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\boot\bootutil\src\loader.c</name>
+      </file>
+    </group>
+    <group>
       <name>trustedfirmware</name>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\bl2_main.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\bootutil\Src\bootutil_misc.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\Src\flash_map.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\bootutil\Src\image_rsa.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\flash_map_extended.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\bootutil\Src\image_validate.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\bootutil\Src\loader.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\flash_map.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\flash_map_legacy.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\bl2\ext\mcuboot\keys.c</name>
@@ -1170,39 +1189,60 @@
       </file>
     </group>
     <group>
-      <name>mbedtls</name>
+      <name>mbed-crypto</name>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\asn1parse.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\asn1parse.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\bignum.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\bignum.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\ctr_drbg.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ctr_drbg.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\debug.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\rsa.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\error.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\rsa_internal.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\rsa.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\sha256.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\rsa_internal.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\memory_buffer_alloc.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\sha256.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\platform.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\memory_buffer_alloc.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\platform_util.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\platform.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ecdsa.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbedtls\library\platform_util.c</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ecdh.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ecp.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\ecp_curves.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\aes.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\md.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\md_wrap.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\hkdf.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mbed-crypto\library\cipher.c</name>
       </file>
     </group>
   </group>
@@ -1214,13 +1254,16 @@
         <name>$PROJ_DIR$\..\Src\mpu_armv8m_drv.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\main.c</name>
+        <name>$PROJ_DIR$\..\Src\boot_hal.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\low_level_flash.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\low_level_com.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Src\low_level_device.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\bl2_nv_services.c</name>
@@ -1232,9 +1275,6 @@
         <name>$PROJ_DIR$\..\Src\sha256_alt.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\jumper.c</name>
-      </file>
-      <file>
         <name>$PROJ_DIR$\..\Src\system_stm32l5xx.c</name>
       </file>
     </group>
@@ -1244,5 +1284,11 @@
         <name>$PROJ_DIR$\startup_stm32l552xx.s</name>
       </file>
     </group>
+  </group>
+  <group>
+    <name>Doc</name>
+    <file>
+      <name>$PROJ_DIR$\..\readme.txt</name>
+    </file>
   </group>
 </project>

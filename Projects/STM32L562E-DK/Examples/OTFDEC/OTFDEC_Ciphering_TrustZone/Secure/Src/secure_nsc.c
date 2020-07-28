@@ -29,7 +29,6 @@
   * @{
   */
 
-extern OTFDEC_HandleTypeDef hotfdec;
 extern uint8_t  Plain[];
 
 /* Global variables ----------------------------------------------------------*/

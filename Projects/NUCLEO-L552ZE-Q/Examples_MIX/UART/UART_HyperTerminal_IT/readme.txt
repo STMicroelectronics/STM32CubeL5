@@ -1,5 +1,5 @@
 /**
-  @page UART_Hyperterminal_IT UART Hyperterminal IT example (HAL/LL mixed usage example)
+  @page UART_HyperTerminal_IT UART HyperTerminal IT example (HAL/LL mixed usage example)
 
   @verbatim
   ******************************************************************************
@@ -97,6 +97,11 @@ The UART is configured as follows:
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+
+@par Keywords
+
+Connectivity, UART/USART, baud rate, RS-232, HyperTerminal, full-duplex, Interrupt
+Transmitter, Receiver, Asynchronous
 
 @par Directory contents
 

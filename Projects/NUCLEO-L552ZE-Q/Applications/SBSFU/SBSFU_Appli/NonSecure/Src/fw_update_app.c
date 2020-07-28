@@ -31,7 +31,7 @@
 
 
 #include "string.h"
-
+#if !defined(MCUBOOT_PRIMARY_ONLY)
 /** @addtogroup USER_APP User App Example
   * @{
   */
@@ -46,6 +46,18 @@ static uint32_t m_uFileSizeYmodem = 0U;  /* !< Ymodem File size*/
 static uint32_t m_uNbrBlocksYmodem = 0U; /* !< Ymodem Number of blocks*/
 static uint32_t m_uPacketsReceived = 0U; /* !< Ymodem packets received*/
 
+/** @defgroup  FW_UPDATE_Private_Const Private Const
+  * @{
+  */
+
+const uint32_t MagicTrailerValue[] =
+{
+  0xf395c277,
+  0x7fefd260,
+  0x0f505235,
+  0x8079b62c,
+};
+
 /**
   * @}
   */
@@ -56,7 +68,9 @@ static uint32_t m_uPacketsReceived = 0U; /* !< Ymodem packets received*/
 static void FW_UPDATE_PrintWelcome(void);
 static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *pFwImageDwlArea);
 static HAL_StatusTypeDef FW_UPDATE_SECURE_IMAGE(void);
+#if (MCUBOOT_IMAGE_NUMBER == 2)
 static HAL_StatusTypeDef FW_UPDATE_NONSECURE_IMAGE(void);
+#endif
 /**
   * @}
   */
@@ -88,15 +102,17 @@ void FW_UPDATE_Run(void)
       switch (key)
       {
         case '1' :
-          FW_UPDATE_SECURE_IMAGE();
-          break;
-        case '2' :
-          FW_UPDATE_NONSECURE_IMAGE();
-          break;
-        case '3' :
           printf("  -- Install image : reboot\r\n\n");
           NVIC_SystemReset();
           break;
+        case '2' :
+          FW_UPDATE_SECURE_IMAGE();
+          break;
+#if (MCUBOOT_IMAGE_NUMBER == 2)
+        case '3' :
+          FW_UPDATE_NONSECURE_IMAGE();
+          break;
+#endif /* MCUBOOT_IMAGE_NUMBER == 2 */
         case 'x' :
           exit = 1U;
           break;
@@ -110,6 +126,7 @@ void FW_UPDATE_Run(void)
 
   }
 }
+
 /**
   * @brief  Run FW Update process.
   * @param  None
@@ -121,11 +138,18 @@ static HAL_StatusTypeDef FW_UPDATE_SECURE_IMAGE(void)
   SFU_FwImageFlashTypeDef fw_image_dwl_area;
 
   /* Print Firmware Update welcome message */
+#if (MCUBOOT_IMAGE_NUMBER == 2)
   printf("Download Secure Image\r\n");
-
+#else
+  printf("Download Image\r\n");
+#endif
   /* Get Info about the download area */
   fw_image_dwl_area.DownloadAddr =  FLASH_AREA_2_OFFSET + FLASH_BASE;
+#if (MCUBOOT_IMAGE_NUMBER == 2)
   fw_image_dwl_area.MaxSizeInBytes = FLASH_S_PARTITION_SIZE;
+#else
+  fw_image_dwl_area.MaxSizeInBytes = FLASH_PARTITION_SIZE;
+#endif
   fw_image_dwl_area.ImageOffsetInBytes = 0x0;
 
 
@@ -140,6 +164,7 @@ static HAL_StatusTypeDef FW_UPDATE_SECURE_IMAGE(void)
 
   return ret;
 }
+#if (MCUBOOT_IMAGE_NUMBER == 2)
 /**
   * @brief  Run FW Update process.
   * @param  None
@@ -170,7 +195,7 @@ static HAL_StatusTypeDef FW_UPDATE_NONSECURE_IMAGE(void)
 
   return ret;
 }
-
+#endif
 /**
   * @}
   */
@@ -191,9 +216,13 @@ static HAL_StatusTypeDef FW_UPDATE_NONSECURE_IMAGE(void)
 static void FW_UPDATE_PrintWelcome(void)
 {
   printf("\r\n================ New Fw Download =========================\r\n\n");
-  printf("  Download Secure Image --------------------------------- 1\r\n\n");
-  printf("  Download NonSecure Image------------------------------- 2\r\n\n");
-  printf("  Reset to trigger Installation-------------------------- 3\r\n\n");
+  printf("  Reset to trigger Installation ------------------------- 1\r\n\n");
+#if (MCUBOOT_IMAGE_NUMBER == 2)
+  printf("  Download Secure Image --------------------------------- 2\r\n\n");
+  printf("  Download NonSecure Image ------------------------------ 3\r\n\n");
+#else
+  printf("  Download Image ---------------------------------------- 2\r\n\n");
+#endif /* MCUBOOT_IMAGE_NUMBER == 2 */
   printf("  Exit New FW Download Menu ----------------------------- x\r\n\n");
 }
 /**
@@ -225,7 +254,20 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
 #else
     printf("  -- -- Bytes: %lu\r\n\n", u_fw_size);
 #endif /*  __ARMCC_VERSION */
-    ret = HAL_OK;
+    if (u_fw_size <= (pFwImageDwlArea->MaxSizeInBytes - sizeof(MagicTrailerValue)))
+    {
+      uint32_t MagicAddress =
+        pFwImageDwlArea->DownloadAddr + (pFwImageDwlArea->MaxSizeInBytes - sizeof(MagicTrailerValue));
+      /* write the magic to trigger installation at next reset */
+#if defined(__ARMCC_VERSION)
+      printf("  Write Magic Trailer at %x\r\n\n", MagicAddress);
+#else
+      printf("  Write Magic Trailer at %lx\r\n\n", MagicAddress);
+#endif /*  __ARMCC_VERSION */
+      ret = FLASH_If_Write((void *)MagicAddress, MagicTrailerValue, sizeof(MagicTrailerValue));
+    }
+    else
+      ret = HAL_OK;
   }
   else if (e_result == COM_ABORT)
   {
@@ -316,6 +358,7 @@ HAL_StatusTypeDef Ymodem_DataPktRxCpltCallback(uint8_t *pData, uint32_t uFlashDe
     /*Adjust dimension to 64-bit length */
     if (uSize % FLASH_IF_MIN_WRITE_LEN != 0U)
     {
+      memset(&pData[uSize], 0xff, (FLASH_IF_MIN_WRITE_LEN - (uSize % FLASH_IF_MIN_WRITE_LEN)));
       uSize += (FLASH_IF_MIN_WRITE_LEN - (uSize % FLASH_IF_MIN_WRITE_LEN));
     }
 
@@ -346,7 +389,7 @@ HAL_StatusTypeDef Ymodem_DataPktRxCpltCallback(uint8_t *pData, uint32_t uFlashDe
   }
   return e_ret_status;
 }
-
+#endif
 
 /**
   * @}

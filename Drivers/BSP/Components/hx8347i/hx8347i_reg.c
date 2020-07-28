@@ -42,7 +42,7 @@
 * Input         : Driver context, register Address, length of buffer.
 * Output        : Status.
 *******************************************************************************/
-int32_t hx8347i_read_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t* data, uint16_t length)
+int32_t hx8347i_read_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t* data, uint32_t length)
 {
   return ctx->ReadReg(ctx->handle, reg, data, length);
 }
@@ -54,7 +54,7 @@ int32_t hx8347i_read_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t* data, uint16
                   length of buffer.
 * Output        : Status.
 *******************************************************************************/
-int32_t hx8347i_write_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t *data, uint16_t length)
+int32_t hx8347i_write_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t *data, uint32_t length)
 { 
   return ctx->WriteReg(ctx->handle, reg, data, length);
 }

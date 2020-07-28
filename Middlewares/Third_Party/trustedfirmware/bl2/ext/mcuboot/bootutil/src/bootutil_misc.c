@@ -20,8 +20,8 @@
 /*
  * Original code taken from mcuboot project at:
  * https://github.com/JuulLabs-OSS/mcuboot
- * Git SHA of the original version: 3c469bc698a9767859ed73cd0201c44161204d5c
- * Modifications are Copyright (c) 2019 Arm Limited.
+ * Git SHA of the original version: ac55554059147fff718015be9f4bd3108123f50a
+ * Modifications are Copyright (c) 2019-2020 Arm Limited.
  */
 
 #include <assert.h>
@@ -30,12 +30,16 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+#include "sysflash/sysflash.h"
 #include "flash_map/flash_map.h"
+#include "flash_map_backend/flash_map_backend.h"
+
 #include "bootutil/image.h"
 #include "bootutil/bootutil.h"
 #include "bootutil_priv.h"
 #include "bootutil/bootutil_log.h"
 
+/* Currently only used by imgmgr */
 int boot_current_slot;
 
 const uint32_t boot_img_magic[] = {
@@ -47,9 +51,6 @@ const uint32_t boot_img_magic[] = {
 
 #define BOOT_MAGIC_ARR_SZ \
     (sizeof boot_img_magic / sizeof boot_img_magic[0])
-
-const uint32_t BOOT_MAGIC_SZ = sizeof(boot_img_magic);
-const uint32_t BOOT_MAX_ALIGN = MAX_FLASH_ALIGN;
 
 struct boot_swap_table {
     uint8_t magic_primary_slot;
@@ -182,23 +183,16 @@ boot_trailer_sz(uint32_t min_write_sz)
            BOOT_MAGIC_SZ;
 }
 
-static uint32_t
-boot_magic_off(const struct flash_area *fap)
-{
-    return fap->fa_size - BOOT_MAGIC_SZ;
-}
-
 int
-boot_status_entries(const struct flash_area *fap)
+boot_status_entries(int image_index, const struct flash_area *fap)
 {
     if (fap->fa_id == FLASH_AREA_IMAGE_SCRATCH) {
         return BOOT_STATUS_STATE_COUNT;
-    } else if ((fap->fa_id == FLASH_AREA_IMAGE_PRIMARY) ||
-               (fap->fa_id == FLASH_AREA_IMAGE_SECONDARY)) {
+    } else if ((fap->fa_id == FLASH_AREA_IMAGE_PRIMARY(image_index)) ||
+               (fap->fa_id == FLASH_AREA_IMAGE_SECONDARY(image_index))) {
         return BOOT_STATUS_STATE_COUNT * BOOT_STATUS_MAX_ENTRIES;
-    } else {
-        return BOOT_EBADARGS;
     }
+    return -1;
 }
 
 uint32_t
@@ -215,28 +209,34 @@ boot_status_off(const struct flash_area *fap)
     return fap->fa_size - off_from_end;
 }
 
+static inline uint32_t
+boot_magic_off(const struct flash_area *fap)
+{
+    return fap->fa_size - BOOT_MAGIC_SZ;
+}
+
+static inline uint32_t
+boot_image_ok_off(const struct flash_area *fap)
+{
+    return boot_magic_off(fap) - BOOT_MAX_ALIGN;
+}
+
+static inline uint32_t
+boot_copy_done_off(const struct flash_area *fap)
+{
+    return boot_image_ok_off(fap) - BOOT_MAX_ALIGN;
+}
+
 uint32_t
 boot_swap_info_off(const struct flash_area *fap)
 {
-    return fap->fa_size - BOOT_MAGIC_SZ - BOOT_MAX_ALIGN * 3;
+    return boot_copy_done_off(fap) - BOOT_MAX_ALIGN;
 }
 
-static uint32_t
-boot_copy_done_off(const struct flash_area *fap)
-{
-    return fap->fa_size - BOOT_MAGIC_SZ - BOOT_MAX_ALIGN * 2;
-}
-
-static uint32_t
-boot_image_ok_off(const struct flash_area *fap)
-{
-    return fap->fa_size - BOOT_MAGIC_SZ - BOOT_MAX_ALIGN;
-}
-
-static uint32_t
+static inline uint32_t
 boot_swap_size_off(const struct flash_area *fap)
 {
-    return fap->fa_size - BOOT_MAGIC_SZ - BOOT_MAX_ALIGN * 4;
+    return boot_swap_info_off(fap) - BOOT_MAX_ALIGN;
 }
 
 int
@@ -310,15 +310,9 @@ boot_read_swap_state_by_id(int flash_area_id, struct boot_swap_state *state)
     const struct flash_area *fap;
     int rc;
 
-    if (flash_area_id == FLASH_AREA_IMAGE_SCRATCH ||
-        flash_area_id == FLASH_AREA_IMAGE_PRIMARY ||
-        flash_area_id == FLASH_AREA_IMAGE_SECONDARY) {
-        rc = flash_area_open(flash_area_id, &fap);
-        if (rc != 0) {
-            return BOOT_EFLASH;
-        }
-    } else {
-        return BOOT_EBADARGS;
+    rc = flash_area_open(flash_area_id, &fap);
+    if (rc != 0) {
+        return BOOT_EFLASH;
     }
 
     rc = boot_read_swap_state(fap, state);
@@ -326,67 +320,75 @@ boot_read_swap_state_by_id(int flash_area_id, struct boot_swap_state *state)
     return rc;
 }
 
-int
-boot_read_swap_size(uint32_t *swap_size)
+/**
+ * This functions tries to locate the status area after an aborted swap,
+ * by looking for the magic in the possible locations.
+ *
+ * If the magic is sucessfully found, a flash_area * is returned and it
+ * is the responsibility of the called to close it.
+ *
+ * @returns 0 on success, -1 on errors
+ */
+static int
+boot_find_status(int image_index, const struct flash_area **fap)
 {
     uint32_t magic[BOOT_MAGIC_ARR_SZ];
+    uint32_t off;
+    uint8_t areas[2] = {
+        FLASH_AREA_IMAGE_PRIMARY(image_index),
+        FLASH_AREA_IMAGE_SCRATCH,
+    };
+    unsigned int i;
+    int rc;
+
+    /*
+     * In the middle a swap, tries to locate the area that is currently
+     * storing a valid magic, first on the primary slot, then on scratch.
+     * Both "slots" can end up being temporary storage for a swap and it
+     * is assumed that if magic is valid then other metadata is too,
+     * because magic is always written in the last step.
+     */
+
+    for (i = 0; i < sizeof(areas) / sizeof(areas[0]); i++) {
+        rc = flash_area_open(areas[i], fap);
+        if (rc != 0) {
+            return rc;
+        }
+
+        off = boot_magic_off(*fap);
+        rc = flash_area_read(*fap, off, magic, BOOT_MAGIC_SZ);
+        if (rc != 0) {
+            flash_area_close(*fap);
+            return rc;
+        }
+
+        if (boot_secure_memequal(magic, boot_img_magic, BOOT_MAGIC_SZ) == 0) {
+            return 0;
+        }
+
+        flash_area_close(*fap);
+    }
+
+    /* If we got here, no magic was found */
+    return -1;
+}
+
+int
+boot_read_swap_size(int image_index, uint32_t *swap_size)
+{
     uint32_t off;
     const struct flash_area *fap;
     int rc;
 
-    /*
-     * In the middle a swap, tries to locate the saved swap size. Looks
-     * for a valid magic, first on the primary slot, then on scratch.
-     * Both "slots" can end up being temporary storage for a swap and it
-     * is assumed that if magic is valid then swap size is too, because
-     * magic is always written in the last step.
-     */
-
-    rc = flash_area_open(FLASH_AREA_IMAGE_PRIMARY, &fap);
-    if (rc != 0) {
-        return BOOT_EFLASH;
-    }
-
-    off = boot_magic_off(fap);
-    rc = flash_area_read(fap, off, magic, BOOT_MAGIC_SZ);
-    if (rc != 0) {
-        rc = BOOT_EFLASH;
-        goto out;
-    }
-
-    if (boot_secure_memequal(magic, boot_img_magic, BOOT_MAGIC_SZ) != 0) {
-        /*
-         * If the primary slot's magic is not valid, try scratch...
-         */
-
+    rc = boot_find_status(image_index, &fap);
+    if (rc == 0) {
+        off = boot_swap_size_off(fap);
+        rc = flash_area_read(fap, off, swap_size, sizeof *swap_size);
         flash_area_close(fap);
-
-        rc = flash_area_open(FLASH_AREA_IMAGE_SCRATCH, &fap);
-        if (rc != 0) {
-            return BOOT_EFLASH;
-        }
-
-        off = boot_magic_off(fap);
-        rc = flash_area_read(fap, off, magic, BOOT_MAGIC_SZ);
-        if (rc != 0) {
-            rc = BOOT_EFLASH;
-            goto out;
-        }
-
-        assert(boot_secure_memequal(magic, boot_img_magic, BOOT_MAGIC_SZ) == 0);
     }
 
-    off = boot_swap_size_off(fap);
-    rc = flash_area_read(fap, off, swap_size, sizeof(*swap_size));
-    if (rc != 0) {
-        rc = BOOT_EFLASH;
-    }
-
-out:
-    flash_area_close(fap);
     return rc;
 }
-
 
 int
 boot_write_magic(const struct flash_area *fap)
@@ -396,8 +398,9 @@ boot_write_magic(const struct flash_area *fap)
 
     off = boot_magic_off(fap);
 
-    BOOT_LOG_DBG("writing magic; fa_id=%d off=0x%x (0x%x)",
-                 fap->fa_id, off, fap->fa_off + off);
+    BOOT_LOG_DBG("writing magic; fa_id=%d off=0x%lx (0x%lx)",
+                 fap->fa_id, (unsigned long)off,
+                 (unsigned long)(fap->fa_off + off));
     rc = flash_area_write(fap, off, boot_img_magic, BOOT_MAGIC_SZ);
     if (rc != 0) {
         return BOOT_EFLASH;
@@ -406,20 +409,30 @@ boot_write_magic(const struct flash_area *fap)
     return 0;
 }
 
+/**
+ * Write trailer data; status bytes, swap_size, etc
+ *
+ * @returns 0 on success, != 0 on error.
+ */
 static int
-boot_write_trailer_byte(const struct flash_area *fap, uint32_t off,
-                        uint8_t val)
+boot_write_trailer(const struct flash_area *fap, uint32_t off,
+        const uint8_t *inbuf, uint8_t inlen)
 {
     uint8_t buf[BOOT_MAX_ALIGN];
-    uint32_t align;
+    uint8_t align;
     uint8_t erased_val;
     int rc;
 
     align = flash_area_align(fap);
-    assert(align <= BOOT_MAX_ALIGN);
+    if (inlen > BOOT_MAX_ALIGN || align > BOOT_MAX_ALIGN) {
+        return -1;
+    }
     erased_val = flash_area_erased_val(fap);
-    memset(buf, erased_val, BOOT_MAX_ALIGN);
-    buf[0] = val;
+    if (align < inlen) {
+        align = inlen;
+    }
+    memcpy(buf, inbuf, inlen);
+    memset(&buf[inlen], erased_val, align - inlen);
 
     rc = flash_area_write(fap, off, buf, align);
     if (rc != 0) {
@@ -429,15 +442,24 @@ boot_write_trailer_byte(const struct flash_area *fap, uint32_t off,
     return 0;
 }
 
+static int
+boot_write_trailer_flag(const struct flash_area *fap, uint32_t off,
+        uint8_t flag_val)
+{
+    const uint8_t buf[1] = { flag_val };
+    return boot_write_trailer(fap, off, buf, 1);
+}
+
 int
 boot_write_copy_done(const struct flash_area *fap)
 {
     uint32_t off;
 
     off = boot_copy_done_off(fap);
-    BOOT_LOG_DBG("writing copy_done; fa_id=%d off=0x%x (0x%x)",
-                 fap->fa_id, off, fap->fa_off + off);
-    return boot_write_trailer_byte(fap, off, BOOT_FLAG_SET);
+    BOOT_LOG_DBG("writing copy_done; fa_id=%d off=0x%lx (0x%lx)",
+                 fap->fa_id, (unsigned long)off,
+                 (unsigned long)(fap->fa_off + off));
+    return boot_write_trailer_flag(fap, off, BOOT_FLAG_SET);
 }
 
 int
@@ -446,9 +468,10 @@ boot_write_image_ok(const struct flash_area *fap)
     uint32_t off;
 
     off = boot_image_ok_off(fap);
-    BOOT_LOG_DBG("writing image_ok; fa_id=%d off=0x%x (0x%x)",
-                 fap->fa_id, off, fap->fa_off + off);
-    return boot_write_trailer_byte(fap, off, BOOT_FLAG_SET);
+    BOOT_LOG_DBG("writing image_ok; fa_id=%d off=0x%lx (0x%lx)",
+                 fap->fa_id, (unsigned long)off,
+                 (unsigned long)(fap->fa_off + off));
+    return boot_write_trailer_flag(fap, off, BOOT_FLAG_SET);
 }
 
 /**
@@ -465,46 +488,27 @@ boot_write_swap_info(const struct flash_area *fap, uint8_t swap_type,
 
     BOOT_SET_SWAP_INFO(swap_info, image_num, swap_type);
     off = boot_swap_info_off(fap);
-    BOOT_LOG_DBG("writing swap_info; fa_id=%d off=0x%x (0x%x), swap_type=0x%x"
+    BOOT_LOG_DBG("writing swap_info; fa_id=%d off=0x%lx (0x%lx), swap_type=0x%x"
                  " image_num=0x%x",
-                 fap->fa_id, off, fap->fa_off + off,
-                 BOOT_GET_SWAP_TYPE(swap_info),
-                 BOOT_GET_IMAGE_NUM(swap_info));
-    return boot_write_trailer_byte(fap, off, swap_info);
+                 fap->fa_id, (unsigned long)off,
+                 (unsigned long)(fap->fa_off + off), swap_type, image_num);
+    return boot_write_trailer(fap, off, (const uint8_t *) &swap_info, 1);
 }
 
 int
 boot_write_swap_size(const struct flash_area *fap, uint32_t swap_size)
 {
     uint32_t off;
-    int rc;
-    uint8_t buf[BOOT_MAX_ALIGN];
-    uint32_t align;
-    uint8_t erased_val;
 
     off = boot_swap_size_off(fap);
-    align = flash_area_align(fap);
-    assert(align <= BOOT_MAX_ALIGN);
-    if (align < sizeof(swap_size)) {
-        align = sizeof(swap_size);
-    }
-    erased_val = flash_area_erased_val(fap);
-    memset(buf, erased_val, BOOT_MAX_ALIGN);
-    memcpy(buf, (uint8_t *)&swap_size, sizeof(swap_size));
-
-    BOOT_LOG_DBG("writing swap_size; fa_id=%d off=0x%x (0x%x)",
-                 fap->fa_id, off, fap->fa_off + off);
-
-    rc = flash_area_write(fap, off, buf, align);
-    if (rc != 0) {
-        return BOOT_EFLASH;
-    }
-
-    return 0;
+    BOOT_LOG_DBG("writing swap_size; fa_id=%d off=0x%lx (0x%lx)",
+                 fap->fa_id, (unsigned long)off,
+                 (unsigned long)fap->fa_off + off);
+    return boot_write_trailer(fap, off, (const uint8_t *) &swap_size, 4);
 }
 
 int
-boot_swap_type(void)
+boot_swap_type_multi(int image_index)
 {
     const struct boot_swap_table *table;
     struct boot_swap_state primary_slot;
@@ -512,12 +516,13 @@ boot_swap_type(void)
     int rc;
     size_t i;
 
-    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_PRIMARY, &primary_slot);
+    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_PRIMARY(image_index),
+                                    &primary_slot);
     if (rc) {
         return BOOT_SWAP_TYPE_PANIC;
     }
 
-    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_SECONDARY,
+    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_SECONDARY(image_index),
                                     &secondary_slot);
     if (rc) {
         return BOOT_SWAP_TYPE_PANIC;
@@ -541,15 +546,27 @@ boot_swap_type(void)
                          table->swap_type == BOOT_SWAP_TYPE_PERM   ? "perm"   :
                          table->swap_type == BOOT_SWAP_TYPE_REVERT ? "revert" :
                          "BUG; can't happen");
-            assert(table->swap_type == BOOT_SWAP_TYPE_TEST ||
-                   table->swap_type == BOOT_SWAP_TYPE_PERM ||
-                   table->swap_type == BOOT_SWAP_TYPE_REVERT);
+            if (table->swap_type != BOOT_SWAP_TYPE_TEST &&
+                    table->swap_type != BOOT_SWAP_TYPE_PERM &&
+                    table->swap_type != BOOT_SWAP_TYPE_REVERT) {
+                return BOOT_SWAP_TYPE_PANIC;
+            }
             return table->swap_type;
         }
     }
 
     BOOT_LOG_INF("Swap type: none");
     return BOOT_SWAP_TYPE_NONE;
+}
+
+/*
+ * This function is not used by the bootloader itself, but its required API
+ * by external tooling like mcumgr.
+ */
+int
+boot_swap_type(void)
+{
+    return boot_swap_type_multi(0);
 }
 
 /**
@@ -571,7 +588,7 @@ boot_set_pending(int permanent)
     uint8_t swap_type;
     int rc;
 
-    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_SECONDARY,
+    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_SECONDARY(0),
                                     &state_secondary_slot);
     if (rc != 0) {
         return rc;
@@ -583,7 +600,7 @@ boot_set_pending(int permanent)
         return 0;
 
     case BOOT_MAGIC_UNSET:
-        rc = flash_area_open(FLASH_AREA_IMAGE_SECONDARY, &fap);
+        rc = flash_area_open(FLASH_AREA_IMAGE_SECONDARY(0), &fap);
         if (rc != 0) {
             rc = BOOT_EFLASH;
         } else {
@@ -610,7 +627,7 @@ boot_set_pending(int permanent)
         /* The image slot is corrupt.  There is no way to recover, so erase the
          * slot to allow future upgrades.
          */
-        rc = flash_area_open(FLASH_AREA_IMAGE_SECONDARY, &fap);
+        rc = flash_area_open(FLASH_AREA_IMAGE_SECONDARY(0), &fap);
         if (rc != 0) {
             return BOOT_EFLASH;
         }
@@ -639,7 +656,7 @@ boot_set_confirmed(void)
     struct boot_swap_state state_primary_slot;
     int rc;
 
-    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_PRIMARY,
+    rc = boot_read_swap_state_by_id(FLASH_AREA_IMAGE_PRIMARY(0),
                                     &state_primary_slot);
     if (rc != 0) {
         return rc;
@@ -659,6 +676,12 @@ boot_set_confirmed(void)
         return BOOT_EBADVECT;
     }
 
+    rc = flash_area_open(FLASH_AREA_IMAGE_PRIMARY(0), &fap);
+    if (rc) {
+        rc = BOOT_EFLASH;
+        goto done;
+    }
+
     if (state_primary_slot.copy_done == BOOT_FLAG_UNSET) {
         /* Swap never completed.  This is unexpected. */
         rc = BOOT_EBADVECT;
@@ -670,85 +693,9 @@ boot_set_confirmed(void)
         goto done;
     }
 
-    rc = flash_area_open(FLASH_AREA_IMAGE_PRIMARY, &fap);
-    if (rc) {
-        rc = BOOT_EFLASH;
-        goto done;
-    }
-
     rc = boot_write_image_ok(fap);
-    if (rc != 0) {
-        goto done;
-    }
-
-    rc = 0;
 
 done:
     flash_area_close(fap);
     return rc;
-}
-
-#if (BOOT_IMAGE_NUMBER > 1)
-/**
- * Check if the version of the image is not older than required.
- *
- * @param req         Required minimal image version.
- * @param ver         Version of the image to be checked.
- *
- * @return            0 if the version is sufficient, nonzero otherwise.
- */
-int
-boot_is_version_sufficient(struct image_version *req,
-                           struct image_version *ver)
-{
-    if (ver->iv_major > req->iv_major) {
-        return 0;
-    }
-    if (ver->iv_major < req->iv_major) {
-        return BOOT_EBADVERSION;
-    }
-    /* The major version numbers are equal. */
-    if (ver->iv_minor > req->iv_minor) {
-        return 0;
-    }
-    if (ver->iv_minor < req->iv_minor) {
-        return BOOT_EBADVERSION;
-    }
-    /* The minor version numbers are equal. */
-    if (ver->iv_revision < req->iv_revision) {
-        return BOOT_EBADVERSION;
-    }
-
-    return 0;
-}
-#endif /* BOOT_IMAGE_NUMBER > 1 */
-
-/**
- * Checks whether on overflow can happen during a summation operation
- *
- * @param  a  First operand of summation
- *
- * @param  b  Second operand of summation
- *
- * @return    True in case of overflow, false otherwise
- */
-bool
-boot_add_uint32_overflow_check(uint32_t a, uint32_t b)
-{
-    return (a > UINT32_MAX - b);
-}
-
-/**
- * Checks whether on overflow can happen during a summation operation
- *
- * @param  a  First operand of summation
- *
- * @param  b  Second operand of summation
- *
- * @return    True in case of overflow, false otherwise
- */
-bool
-boot_add_uint16_overflow_check(uint16_t a, uint16_t b)
-{
-    return (a > UINT16_MAX - b);
 }

@@ -681,12 +681,12 @@ void USBPD_DPM_Notification(uint8_t PortNum, USBPD_NotifyEventValue_TypeDef Even
       break;
       /*
       ***************************************************************************/
-    
+
     case USBPD_NOTIFY_REQUEST_REJECTED:
     case USBPD_NOTIFY_REQUEST_WAIT:
       /* Requested rejected by the source */
       break;
-    
+
   case USBPD_NOTIFY_POWER_SWAP_TO_SNK_DONE:
     USBPD_PWR_IF_ResetVbusThreshold(PortNum);
     break;
@@ -699,7 +699,7 @@ void USBPD_DPM_Notification(uint8_t PortNum, USBPD_NotifyEventValue_TypeDef Even
 #if defined(_SNK) || defined(DRP)
       USBPD_PWR_IF_ResetVbusThreshold(PortNum);
 #endif
-      
+
 #if defined(_VDM)
       if (USBPD_PORTPOWERROLE_SNK == DPM_Params[PortNum].PE_PowerRole)
       {
@@ -1223,7 +1223,7 @@ void USBPD_DPM_SetDataInfo(uint8_t PortNum, USBPD_CORE_DataInfoType_TypeDef Data
   default :
     break;
   }
-  
+
   /* Forward info to GUI if enabled */
   if (NULL != DPM_GUI_SaveInfo)
   {

@@ -52,7 +52,7 @@ static void     BootCheckAndExec(void);
 uint32_t RccBootFlags = 0;
 uint32_t PwrSBFlag = 0;
 
-GUI_Drv_t LCD_Driver;
+LCD_UTILS_Drv_t LCD_Driver;
 
 /* Exported variables --------------------------------------------------------*/
 RTC_HandleTypeDef RtcHandle = {0};
@@ -170,10 +170,10 @@ void kDemo_Initialization(void)
   LCD_Driver.SetLayer    = BSP_LCD_SetActiveLayer;
   LCD_Driver.GetFormat   = BSP_LCD_GetFormat;
 
-  GUI_SetFuncDriver(&LCD_Driver); /* SetFunc before setting device */
-  GUI_SetDevice(0);            /* SetDevice after funcDriver is set */
+  UTIL_LCD_SetFuncDriver(&LCD_Driver); /* SetFunc before setting device */
+  UTIL_LCD_SetDevice(0);            /* SetDevice after funcDriver is set */
 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set the display on */
   if (BSP_LCD_DisplayOn(0) != BSP_ERROR_NONE)
@@ -219,17 +219,17 @@ void kDemo_Initialization(void)
   if(RccBootFlags != 0)
   {
     /* Display the demonstration window */
-    GUI_SetFont(&GUI_DEFAULT_FONT);
-    GUI_Clear(GUI_COLOR_WHITE);
-    GUI_SetBackColor(GUI_COLOR_ST_PINK);
-    GUI_SetTextColor(GUI_COLOR_ST_PINK);
+    UTIL_LCD_SetFont(&UTIL_LCD_DEFAULT_FONT);
+    UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
+    UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_ST_PINK);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_PINK);
     BSP_LCD_GetXSize(0, &pXSize);
-    GUI_FillRect(0, 0, pXSize, GUI_DEFAULT_FONT.Height*2, GUI_COLOR_ST_PINK);
-    GUI_SetTextColor(GUI_COLOR_WHITE);
-    GUI_DisplayStringAt( 0,              0,      (uint8_t *)EVAL_BOARD, CENTER_MODE);
-    GUI_DisplayStringAt( 0,  GUI_DEFAULT_FONT.Height  , (uint8_t *)"DEMONSTRATION", CENTER_MODE);
+    UTIL_LCD_FillRect(0, 0, pXSize, UTIL_LCD_DEFAULT_FONT.Height*2, UTIL_LCD_COLOR_ST_PINK);
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+    UTIL_LCD_DisplayStringAt( 0,              0,      (uint8_t *)EVAL_BOARD, CENTER_MODE);
+    UTIL_LCD_DisplayStringAt( 0,  UTIL_LCD_DEFAULT_FONT.Height  , (uint8_t *)"DEMONSTRATION", CENTER_MODE);
 
-    kStorage_OpenFileDrawPixel(((GUI_DEFAULT_FONT.Height*2) + 1), ((pXSize - 170) / 2), (uint8_t *)"STFILES/STLogo.bmp");
+    kStorage_OpenFileDrawPixel(((UTIL_LCD_DEFAULT_FONT.Height*2) + 1), ((pXSize - 170) / 2), (uint8_t *)"STFILES/STLogo.bmp");
 
     /* Let time user to see information */
     HAL_Delay(2000);

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32l562e_discovery_conf.h
   * @author  MCD Application Team
-  * @brief   STM32L562E discovery board configuration file.
+  * @brief   STM32L562E-DK discovery board configuration file.
   *          This file should be copied to the application folder and renamed
   *          to stm32l562e_discovery_conf.h .
   ******************************************************************************

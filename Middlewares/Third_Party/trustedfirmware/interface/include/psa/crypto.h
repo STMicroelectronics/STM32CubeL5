@@ -2369,7 +2369,7 @@ psa_status_t psa_generate_key(psa_key_handle_t handle,
 
 /* The file "crypto_struct.h" contains definitions for
  * implementation-specific structs that are declared above. */
-#include "psa/crypto_struct.h"
+#include "interface/include/psa/crypto_struct.h"
 
 /* The file "crypto_extra.h" contains vendor-specific definitions. This
  * can include vendor-defined algorithms, extra functions, etc. */

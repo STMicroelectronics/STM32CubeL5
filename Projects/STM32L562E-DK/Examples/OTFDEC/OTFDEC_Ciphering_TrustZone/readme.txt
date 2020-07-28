@@ -1,5 +1,5 @@
 /**
-  @page Description of the OTFDEC_Ciphering_TrustZone example with TZEN=1
+  @page OTFDEC_Ciphering_TrustZone example with TZEN=1
 
   @verbatim
   ******************************************************************************
@@ -7,6 +7,7 @@
   * @author  MCD Application Team
   * @brief   Description of the STM32L562E-DK OTFDEC_Ciphering_TrustZone example with TZEN=1
   ******************************************************************************
+  * @attention
   *
   * Copyright (c) 2019 STMicroelectronics. All rights reserved.
   *
@@ -26,7 +27,7 @@ to cipher data from secure side and to allow to decipher from non-secure without
 The purpose of this example is to declare a Non-Secure Callable on-the-fly decoding service and
 have it available for non-secure example part. This allows to demonstrate the usage of secure
 OTFDEC peripheral with plain data from secure embedded SRAM1, ciphered data stored in external
-RAM and output (deciphered) data available in non-secure embedded SRAM1.
+NOR flash and output (deciphered) data available in non-secure embedded SRAM1.
 
 
 This project is composed of two sub-projects:
@@ -42,7 +43,7 @@ into two halves:
  - the first half for the secure application and
  - the second half for the non-secure application.
 
-After system boot, the secure example ciphers plain data and stores them in external RAM.
+After system boot, the secure example ciphers plain data and stores them in external NOR flash.
 Note that the Key used to cipher the data is available to the secure example only.
 Then, the non-secure example resorts to the non-secure callable deciphering service to
 get the deciphered data.
@@ -145,11 +146,6 @@ IAR
 
 MDK-ARM
 
- Requirements for Keil µVision version without ST-LINK debug support on Cortex-M33:
- - Use ST-LINK FW v2J32 available on ST web site
- - Use the ST-LINKIII-Keil_SWO.dll and STLinkUSBDriver.dll (ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip) and copy them at Keil\ARM\ST-LINK
- - Change the TOOLS.INI under Keil install directory as described in the .doc file provided in the ST-LINKIII-Keil_SWO_v3.0.5_RC2.zip package
-
  - Open your toolchain
  - Open Multi-projects workspace file Project.uvmpw
  - Select the xxxxx_S project as Active Project (Set as Active Project)
@@ -167,13 +163,13 @@ MDK-ARM
 STM32CubeIDE
  - Open STM32CubeIDE
  - File > Import. Point to the STM32CubeIDE folder of the example project. Click Finish.
- - Select and build the xxxxx_NS project, this will automatically trigger build of xxxxx_S project
- - Select the xxxxx_S project and select “Debug configuration”
+ - Build configuration: Set the same active build configuration: Debug (default) or Release for both projects xxxxx_S & xxxxx_NS
+ - Select and build the xxxxx_NS project, this will automatically trigger the build of xxxxx_S project
+ - Select the xxxxx_S project and select "Debug configuration" or "Run configuration" in function of teh active build configuration
    - Double click on “STM32 Cortex-M C/C++ Application”
    - Select  “Startup” >  “Add” > 
- - Select the xxxxx_NS project 
- - Build configuration : Select Release/Debug
-   - Click Debug to debug the example
+     - Select the xxxxx_NS project 
+ - Click Debug/Run to debug/run the example
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

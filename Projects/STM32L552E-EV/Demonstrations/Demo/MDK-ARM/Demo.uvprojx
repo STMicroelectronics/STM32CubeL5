@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L552xx,USE_HAL_DRIVER,USE_FULL_LL_DRIVER,_SNK,_RTOS,USBPDCORE_LIB_PD3_FULL,USBPD_PORT_COUNT=1,__DEBUG_CAD,_TRACE,_PPS=USBPD_FALSE,_SRC_CAPA_EXT=USBPD_FALSE,_SNK_CAPA_EXT=USBPD_FALSE,_ALERT=USBPD_TRUE,_BATTERY=USBPD_FALSE,_STATUS=USBPD_TRUE,_MANU_INFO=USBPD_TRUE,_GUI_INTERFACE,_VDM</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../Config;../../Common/Inc;../../Core/Inc;../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32L552E-EV;../../../../../Drivers/BSP/Components;../../../../../Drivers/BSP/Components/Common;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5xx/inc;../../Modules/audio;../../Modules/lowpower;../../Modules/filebrowser;../../Modules/calendar;../../Modules/imagebrowser;../../Modules/main_app;../../Modules/ucpd;../../../../../Utilities/basic_gui;../../../../../Utilities/TRACER_EMB;../../../../../Utilities/GUI_INTERFACE</IncludePath>
+              <IncludePath>../Inc;../../Config;../../Common/Inc;../../Core/Inc;../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../Drivers/CMSIS/Include;../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32L552E-EV;../../../../../Drivers/BSP/Components;../../../../../Drivers/BSP/Components/Common;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5xx/inc;../../Modules/audio;../../Modules/lowpower;../../Modules/filebrowser;../../Modules/calendar;../../Modules/imagebrowser;../../Modules/main_app;../../Modules/ucpd;../../../../../Utilities/lcd;../../../../../Utilities/TRACER_EMB;../../../../../Utilities/GUI_INTERFACE</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1045,12 +1045,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Utilities/basic_gui</GroupName>
+          <GroupName>Utilities/lcd</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Utilities/basic_gui/basic_gui.c</FilePath>
+              <FilePath>../../../../../Utilities/lcd/stm32_lcd.c</FilePath>
             </File>
           </Files>
         </Group>

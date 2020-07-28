@@ -73,7 +73,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -123,8 +122,6 @@ int main(void)
   BSP_LED_On(LED1);
 
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -152,16 +149,12 @@ static void MX_RTC_Init(void)
   RTC_AlarmTypeDef sAlarm = {0};
 
   /* USER CODE BEGIN RTC_Init 1 */
+  HAL_NVIC_SetPriority(RTC_IRQn, 0x4, 0); /* Not yet managed by cubeMX */
+  HAL_NVIC_EnableIRQ(RTC_IRQn);  /* Not yet managed by cubeMX */
+  hrtc.Instance = RTC;  /* Not yet managed by cubeMX */
 
   /* USER CODE END RTC_Init 1 */
-  /** Initialize RTC and set the Time and Date 
-  */
-  /* Initlialize interrupt */
-  HAL_NVIC_SetPriority(RTC_IRQn, 0x4, 0);
-  HAL_NVIC_EnableIRQ(RTC_IRQn);
-  hrtc.Instance = RTC;
-
-  /** Enable the Alarm B 
+  /** Enable the Alarm B
   */
   sAlarm.AlarmTime.Hours = 0x2;
   sAlarm.AlarmTime.Minutes = 0x20;
@@ -176,7 +169,6 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-
   /* USER CODE BEGIN RTC_Init 2 */
 
   /* USER CODE END RTC_Init 2 */
@@ -346,7 +338,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

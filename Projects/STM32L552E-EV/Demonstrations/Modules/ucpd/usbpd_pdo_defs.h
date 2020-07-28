@@ -22,7 +22,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #if defined(_GUI_INTERFACE)
@@ -93,7 +93,7 @@ extern uint32_t PORT0_PDO_ListSNK[USBPD_MAX_NB_PDO];
 
 #else
 
-uint8_t USBPD_NbPDO[4] = {(PORT0_NB_SINKPDO + PORT0_NB_SINKAPDO), 
+uint8_t USBPD_NbPDO[4] = {(PORT0_NB_SINKPDO + PORT0_NB_SINKAPDO),
                           ((PORT0_NB_SOURCEPDO + PORT0_NB_SOURCEAPDO)),
                           (0),
                           (0)};
@@ -114,7 +114,7 @@ uint32_t PORT0_PDO_ListSRC[USBPD_MAX_NB_PDO] =
 
 /* Definition of Sink PDO for Port 0 */
 #if (PORT0_NB_SINKPDO > 0) || (PORT0_NB_SINKAPDO > 0)
-uint32_t PORT0_PDO_ListSNK[USBPD_MAX_NB_PDO] = 
+uint32_t PORT0_PDO_ListSNK[USBPD_MAX_NB_PDO] =
 {
   /* PDO 1 */
         ( ((PWR_A_10MA(USBPD_CORE_PDO_SNK_FIXED_MAX_CURRENT / 1000.0)) << USBPD_PDO_SNK_FIXED_OP_CURRENT_Pos) |

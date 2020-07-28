@@ -1,9 +1,9 @@
 /**
   @page TIM_InputCapture_Init TIM example
-  
+
   @verbatim
   ******************************************************************************
-  * @file    Examples_LL/TIM/TIM_InputCapture_Init/readme.txt 
+  * @file    Examples_LL/TIM/TIM_InputCapture_Init/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the TIM_InputCapture_Init example.
   ******************************************************************************
@@ -20,13 +20,13 @@
 
 @par Example Description
 
-Use of the TIM peripheral to measure a periodic signal frequency 
-provided either by an external signal generator or by 
-another timer instance. This example is based on the STM32L5xx TIM 
-LL API. The peripheral initialization uses LL unitary service functions 
+Use of the TIM peripheral to measure a periodic signal frequency
+provided either by an external signal generator or by
+another timer instance. This example is based on the STM32L5xx TIM
+LL API. The peripheral initialization uses LL unitary service functions
 for optimization purposes (performance and size).
-  
-TIM1_CH1 is configured in input capture mode. The TIM1CLK frequency is set to 
+
+TIM1_CH1 is configured in input capture mode. The TIM1CLK frequency is set to
 its maximum value (Prescaler is /2 * 2 = 1) in order to get the best possible resolution.
 So the TIM1 counter clock is SystemCoreClock.
 
@@ -46,7 +46,11 @@ change the frequency of this signal from 2 kHz up to 20 kHz by steps of 2 kHz.
 It is then possible to run this example without a signal generator by connecting
 TIM2_CH1 to TIM1_CH1.
 
-@par Directory contents 
+@par Keywords
+
+Timers, TIM, Frequency, Input, Capture, External Signal, Measurement.
+
+@par Directory contents
 
   - TIM/TIM_InputCapture_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file
   - TIM/TIM_InputCapture_Init/Inc/main.h                  Header for main.c module
@@ -59,16 +63,16 @@ TIM2_CH1 to TIM1_CH1.
 @par Hardware and Software environment
 
   - This example runs on STM32L552ZETxQ devices.
-    
+
   - This example has been tested with NUCLEO-L552ZE-Q board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-L552ZE-Q Set-up
     - When no signal generator is used TIM2_CH1 can be connected to TIM1_CH1:
-      - TIM1_CH1  PA8: connected to pin 31 of CN10 connector  
-      - TIM2_CH1  PA5: connected to pin 10 of CN7 connector 
+      - TIM1_CH1  PA8: connected to pin 31 of CN10 connector
+      - TIM2_CH1  PA5: connected to pin 10 of CN7 connector
 
-@par How to use it ? 
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

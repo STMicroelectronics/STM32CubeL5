@@ -34,7 +34,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "stm32l562e_discovery.h"
 #include "stm32l562e_discovery_lcd.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -72,14 +72,14 @@ void Error_Handler(void);
 
 /* Messages to display on LCD */
 #define MESSAGE1     "STM32L562QEI6Q"
-#define MESSAGE2     "Flash Dual-boot example"
+#define MESSAGE2     "Flash Dual-boot"
 #define MESSAGE3     "Device running on"
 #ifdef FLASH_BANK1
 #define MESSAGE4     "FLASH BANK1"
 #else
 #define MESSAGE4     "FLASH BANK2"
 #endif
-#define MESSAGE5     "Push User push-button"
+#define MESSAGE5     "Push USER push-button"
 #define MESSAGE6     "to swap bank"
 
 

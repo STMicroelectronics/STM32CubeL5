@@ -38,7 +38,7 @@ to have correct HAL operation.
 
 @par Keywords
 
-System, GPIO, Output, Push-pull, Toggle
+System, GPIO, Input, Output, Alternate function, Push-pull, Toggle
 
 @par Directory contents
 

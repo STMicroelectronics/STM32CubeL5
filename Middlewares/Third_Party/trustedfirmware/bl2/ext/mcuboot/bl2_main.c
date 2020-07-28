@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2012-2014 Wind River Systems, Inc.
- * Copyright (c) 2017-2019 Arm Limited.
+ * Copyright (c) 2017-2020 Arm Limited.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,18 +22,16 @@
 #include "uart_stdout.h"
 #include "Driver_Flash.h"
 #include "mbedtls/memory_buffer_alloc.h"
-#ifdef TFM_DEV_MODE
-#define BOOT_LOG_LEVEL BOOT_LOG_LEVEL_INFO
-#else
-#define BOOT_LOG_LEVEL BOOT_LOG_LEVEL_OFF
-#endif
 #include "bootutil/bootutil_log.h"
 #include "bootutil/image.h"
 #include "bootutil/bootutil.h"
-#include "flash_map/flash_map.h"
-#include "bl2/include/boot_record.h"
+#include "flash_map_backend/flash_map_backend.h"
+#include "boot_record.h"
 #include "security_cnt.h"
-#include "bl2/include/boot_hal.h"
+#include "boot_hal.h"
+#if MCUBOOT_LOG_LEVEL > MCUBOOT_LOG_LEVEL_OFF
+#include "uart_stdout.h"
+#endif
 
 /* Avoids the semihosting issue */
 #if defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
@@ -53,22 +51,21 @@ void Error_Handler(void);
 /* Flash device name must be specified by target */
 extern ARM_DRIVER_FLASH FLASH_DEV_NAME;
 
-#define BL2_MBEDTLS_MEM_BUF_LEN 0x2000
+#define BL2_MBEDTLS_MEM_BUF_LEN 0x7200
 /* Static buffer to be used by mbedtls for memory allocation */
 static uint8_t mbedtls_mem_buf[BL2_MBEDTLS_MEM_BUF_LEN];
 
-struct arm_vector_table {
-    uint32_t msp;
-    uint32_t reset;
-};
 #if defined(__ICCARM__)
-extern void boot_clear_bl2_ram_area(void);
 #pragma required=boot_clear_bl2_ram_area
 #endif
-__weak void TFM_BL2_CopySharedData(void)
-{
 
-}
+/* Place code in a specific section */
+#if defined(__ICCARM__)
+#pragma default_function_attributes = @ ".BL2_NoHdp_Code"
+#else
+__attribute__((section(".BL2_NoHdp_Code")))
+#endif /* __ICCARM__ */
+
 /*!
  * \brief Chain-loading the next image in the boot sequence.
  *
@@ -105,6 +102,11 @@ __attribute__((naked)) void boot_jump_to_next_image(uint32_t reset_handler_addr)
         "bx      r7                      \n" /* Jump to Reset_handler */
     );
 }
+
+/* Stop placing data in specified section */
+#if defined(__ICCARM__)
+#pragma default_function_attributes =
+#endif /* __ICCARM__ */
 
 __weak void jumper(struct arm_vector_table * vector)
 {
@@ -158,20 +160,27 @@ static void do_boot(struct boot_rsp *rsp)
     if(rc != ARM_DRIVER_OK) {
         BOOT_LOG_ERR("Error while uninitializing Flash Interface");
     }
-#ifdef TFM_DEV_MODE
+
+#if MCUBOOT_LOG_LEVEL > MCUBOOT_LOG_LEVEL_OFF
     stdio_uninit();
 #endif
-/* customization for st platfomr */
-    TFM_BL2_CopySharedData();
+
+#if defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
+    /* Restore the Main Stack Pointer Limit register's reset value
+     * before passing execution to runtime firmware to make the
+     * bootloader transparent to it.
+     */
+    __set_MSPLIM(0);
+#endif
+
     jumper(vt);
 }
 
-
-int bl2_main(void)
+int main(void)
 {
 #if defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
     uint32_t msp_stack_bottom =
-        (uint32_t)&REGION_NAME(Image$$, ARM_LIB_STACK, $$ZI$$Base);
+            (uint32_t)&REGION_NAME(Image$$, ARM_LIB_STACK, $$ZI$$Base);
 #endif
     struct boot_rsp rsp;
     int rc;
@@ -179,9 +188,17 @@ int bl2_main(void)
 #if defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
     __set_MSPLIM(msp_stack_bottom);
 #endif
-#ifdef TFM_DEV_MODE
+
+    /* Perform platform specific initialization */
+    if (boot_platform_init() != 0) {
+        while (1)
+            ;
+    }
+
+#if MCUBOOT_LOG_LEVEL > MCUBOOT_LOG_LEVEL_OFF
     stdio_init();
 #endif
+
     BOOT_LOG_INF("Starting bootloader");
 
     /* Initialise the mbedtls static memory allocator so that mbedtls allocates
@@ -189,27 +206,26 @@ int bl2_main(void)
      */
     mbedtls_memory_buffer_alloc_init(mbedtls_mem_buf, BL2_MBEDTLS_MEM_BUF_LEN);
 
-    rc = FLASH_DEV_NAME.Initialize(NULL);
-    if(rc != ARM_DRIVER_OK) {
-        BOOT_LOG_ERR("Error while initializing Flash Interface");
-        Error_Handler();
-    }
-
     rc = boot_nv_security_counter_init();
     if (rc != 0) {
         BOOT_LOG_ERR("Error while initializing the security counter");
         Error_Handler();
     }
 
+
     rc = boot_go(&rsp);
     if (rc != 0) {
         BOOT_LOG_ERR("Unable to find bootable image");
-        Error_Handler();
+#ifdef MCUBOOT_EXT_LOADER
+       boot_platform_noimage();
+#else
+	   Error_Handler();
+#endif
     }
 
+
     BOOT_LOG_INF("Bootloader chainload address offset: 0x%x",
-            rsp.br_image_off);
-    flash_area_warn_on_open();
+                 rsp.br_image_off);
     BOOT_LOG_INF("Jumping to the first image slot");
     do_boot(&rsp);
 

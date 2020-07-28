@@ -3,14 +3,14 @@
   * @file    stm32l552e_eval_sram.c
   * @author  MCD Application Team
   * @brief   This file provides a set of functions needed to drive the
-  *          IS61WV102416BLL-10MLI SRAM memory mounted on STM32L552E-EVAL board.
+  *          IS61WV102416BLL-10MLI SRAM memory mounted on STM32L552E-EV board.
   @verbatim
   ==============================================================================
                      ##### How to use this driver #####
   ==============================================================================
   [..]
    (#) This driver is used to drive the IS61WV102416BLL-10MLI SRAM external memory mounted
-       on STM32L552E-EVAL evaluation board.
+       on STM32L552E-EV evaluation board.
 
    (#) This driver does not need a specific component driver for the SRAM device
        to be included with.

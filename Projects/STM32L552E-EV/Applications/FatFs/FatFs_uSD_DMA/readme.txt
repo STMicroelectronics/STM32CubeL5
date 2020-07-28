@@ -67,7 +67,7 @@ STM32L552E-EV's LED can be used to monitor the application status:
 
 @par Keywords
 
-Middleware, SD Card, FatFs, File system, FAT Volume, Format, Mount, Read, Write,
+File system, FatFs, SD Card, FAT Volume, Format, Mount, Read, Write,
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

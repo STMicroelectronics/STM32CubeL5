@@ -42,6 +42,10 @@ At end of transmission, both received buffers are compared to expected ones.
 In case of both transfers successfully completed, LED1 is turned on.
 In case of errors, LED1 is blinking Slowly (1s).
 
+@par Keywords
+
+Connectivity, UART/USART, Synchronous, Interrupt, SPI interface, Receiver, Transmitter, full-duplex
+
 @par Directory contents 
 
   - USART/USART_SyncCommunication_FullDuplex_IT_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

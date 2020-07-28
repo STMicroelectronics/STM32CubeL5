@@ -65,18 +65,20 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 uint32_t StartPage = 0, EndPage = 0;
 uint32_t Address = 0;
 uint32_t PageError = 0;
-__IO TestStatus MemoryProgramStatus = PASSED;
-/*Variable used for Erase procedure*/
+TestStatus MemoryProgramStatus = PASSED;
+/*Variable used for Program/Erase procedures*/
 #ifdef FLASH_PAGE_PROGRAM
-static FLASH_EraseInitTypeDef EraseInitStruct;
+FLASH_EraseInitTypeDef EraseInitStruct;
+HAL_StatusTypeDef FlashProgramStatus;
 #endif
 /*Variable used to handle the Options Bytes*/
-static FLASH_OBProgramInitTypeDef OptionsBytesStruct, OptionsBytesStruct2;
+FLASH_OBProgramInitTypeDef OptionsBytesStruct, OptionsBytesStruct2;
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_ICACHE_Init(void);
 /* USER CODE BEGIN PFP */
 static uint32_t GetPage(uint32_t Address);
 
@@ -105,7 +107,6 @@ int main(void)
      */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -124,6 +125,7 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_ICACHE_Init();
   /* USER CODE BEGIN 2 */
   /* Initialize LED4 and LED5 */
   BSP_LED_Init(LED4);
@@ -134,8 +136,6 @@ int main(void)
 
   /* Unlock the Flash to enable the flash control register access *************/
   HAL_FLASH_Unlock();
-  /* Clear OPTWERR bit set on virgin samples */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_OPTWERR);
 
   /* Unlock the Options Bytes *************************************************/
   HAL_FLASH_OB_Unlock();
@@ -387,11 +387,25 @@ int main(void)
   if (((OptionsBytesStruct.WRPStartOffset  <= StartPage) && (OptionsBytesStruct.WRPEndOffset  >= EndPage)) ||
       ((OptionsBytesStruct2.WRPStartOffset <= StartPage) && (OptionsBytesStruct2.WRPEndOffset >= EndPage)))
   {
+    /* Disable instruction cache prior to internal cacheable memory update */
+    if (HAL_ICACHE_Disable() != HAL_OK)
+    {
+      Error_Handler();
+    }
+
     /* The desired pages are write protected */
     /* Check that it is not allowed to write in this page */
     Address = FLASH_USER_START_ADDR;
-    if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, DATA_64) != HAL_OK)
-      {
+    FlashProgramStatus = HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, Address, DATA_64);
+
+    /* Re-enable instruction cache */
+    if (HAL_ICACHE_Enable() != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    if (FlashProgramStatus != HAL_OK)
+    {
       /* Error returned during programming. */
       /* Check that WRPERR flag is well set */
       if ((HAL_FLASH_GetError() & HAL_FLASH_ERROR_WRP) != 0)
@@ -428,6 +442,12 @@ int main(void)
   }
   else
   {
+    /* Disable instruction cache prior to internal cacheable memory update */
+    if (HAL_ICACHE_Disable() != HAL_OK)
+    {
+      Error_Handler();
+    }
+
     /* The desired pages are not write protected */
     /* Fill EraseInit structure************************************************/
     EraseInitStruct.TypeErase   = FLASH_TYPEERASE_PAGES;
@@ -474,6 +494,12 @@ int main(void)
           HAL_Delay(1000);
         }
       }
+    }
+
+    /* Re-enable instruction cache */
+    if (HAL_ICACHE_Enable() != HAL_OK)
+    {
+      Error_Handler();
     }
 
     /* Check the correctness of written data */
@@ -529,13 +555,14 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
@@ -552,7 +579,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -565,6 +592,33 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache (default 2-ways set associative cache)
+  */
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
 }
 
 /* USER CODE BEGIN 4 */
@@ -617,7 +671,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

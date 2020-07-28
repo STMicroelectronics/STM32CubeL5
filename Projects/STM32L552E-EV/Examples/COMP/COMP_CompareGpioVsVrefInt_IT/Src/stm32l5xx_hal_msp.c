@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN Define */
- 
+
 /* USER CODE END Define */
 
 /* Private macro -------------------------------------------------------------*/
@@ -72,7 +72,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 
@@ -95,10 +95,10 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* hcomp)
   /* USER CODE BEGIN COMP2_MspInit 0 */
 
   /* USER CODE END COMP2_MspInit 0 */
-  
+
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**COMP2 GPIO Configuration    
-    PB4 (NJTRST)     ------> COMP2_INP 
+    /**COMP2 GPIO Configuration
+    PB4 (NJTRST)     ------> COMP2_INP
     */
     GPIO_InitStruct.Pin = GPIO_PIN_4;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -128,9 +128,9 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* hcomp)
   /* USER CODE BEGIN COMP2_MspDeInit 0 */
 
   /* USER CODE END COMP2_MspDeInit 0 */
-  
-    /**COMP2 GPIO Configuration    
-    PB4 (NJTRST)     ------> COMP2_INP 
+
+    /**COMP2 GPIO Configuration
+    PB4 (NJTRST)     ------> COMP2_INP
     */
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_4);
 

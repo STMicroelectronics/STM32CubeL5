@@ -52,12 +52,6 @@ int main(void)
 {
   /* SAU/IDAU, FPU and Interrupts secure/non-secure allocation settings  */
   /* already done in SystemInit() thanks to partition_stm32l552xx.h file */
- 
-  /* Secure/Non-secure Memory and Peripheral isolation configuration */
-  SystemIsolation_Config();
-
-  /* Enable SecureFault handler (HardFault is default) */
-  SCB->SHCSR |= SCB_SHCSR_SECUREFAULTENA_Msk;
 
   /* STM32L5xx **SECURE** HAL library initialization:
        - Secure Systick timer is configured by default as source of time base,
@@ -72,16 +66,24 @@ int main(void)
   /* Secure application may configure the System clock here */
   /* SystemClock_Config(); */
 
+  /* Enable instruction cache (default 2-ways set associative cache) */
+  HAL_ICACHE_Enable();
+
+  /* Secure/Non-secure Memory and Peripheral isolation configuration */
+  SystemIsolation_Config();
+
+  /* Enable SecureFault handler (HardFault is default) */
+  SCB->SHCSR |= SCB_SHCSR_SECUREFAULTENA_Msk;
 
   /* Add your secure application code here prior to non-secure initialization
      */
-  
+
 	/* All IOs are by default allocated to secure */
-	
+
   /* Release PC.07 I/O for LED1 control on non-secure */
   /* __HAL_RCC_GPIOC_CLK_ENABLE(); */
   /* HAL_GPIO_ConfigPinAttributes(GPIOC, GPIO_PIN_7, GPIO_PIN_NSEC); */
-  
+
 	/* Leave the GPIO clocks enabled to let non-secure having I/Os control */
 
   /* Secure SysTick should rather be suspended before calling non-secure  */

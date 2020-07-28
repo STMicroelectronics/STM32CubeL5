@@ -41,6 +41,11 @@ Received character value is checked :
 
 In case of errors, LED1 is slowly blinking (1 sec period).
 
+@par Keywords
+
+Connectivity, LPUART, baud rate, RS-232, HyperTerminal, full-duplex,
+Transmitter, Receiver, Asynchronous, Low Power, Wake Up
+
 @par Directory contents 
 
   - LPUART/LPUART_WakeUpFromStop2_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

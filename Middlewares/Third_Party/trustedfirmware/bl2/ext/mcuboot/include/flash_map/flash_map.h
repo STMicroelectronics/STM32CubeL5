@@ -20,8 +20,8 @@
 /*
  * Original code taken from mcuboot project at:
  * https://github.com/JuulLabs-OSS/mcuboot
- * Git SHA of the original version: 3c469bc698a9767859ed73cd0201c44161204d5c
- * Modifications are Copyright (c) 2018-2019 Arm Limited.
+ * Git SHA of the original version: ac55554059147fff718015be9f4bd3108123f50a
+ * Modifications are Copyright (c) 2018-2020 Arm Limited.
  */
 
 #ifndef H_UTIL_FLASH_MAP_
@@ -50,27 +50,14 @@ extern "C" {
  */
 #include <inttypes.h>
 
-extern uint8_t current_image;
-
-#if (MCUBOOT_IMAGE_NUMBER == 1)
-#define FLASH_AREA_IMAGE_PRIMARY     FLASH_AREA_0_ID
-#define FLASH_AREA_IMAGE_SECONDARY   FLASH_AREA_2_ID
-#elif (MCUBOOT_IMAGE_NUMBER == 2)
-/* MCUBoot currently supports only up to 2 updatable firmware images.
- * If the number of the current image is greater than MCUBOOT_IMAGE_NUMBER - 1
- * then a dummy value will be assigned to the flash area macros.
+/*
+ * For now, we only support one flash device.
+ *
+ * Pick a random device ID for it that's unlikely to collide with
+ * anything "real".
  */
-#define FLASH_AREA_IMAGE_PRIMARY     ((current_image == 0) ? FLASH_AREA_0_ID : \
-                                      (current_image == 1) ? FLASH_AREA_1_ID : \
-                                                             255 )
-#define FLASH_AREA_IMAGE_SECONDARY   ((current_image == 0) ? FLASH_AREA_2_ID : \
-                                      (current_image == 1) ? FLASH_AREA_3_ID : \
-                                                             255 )
-#else
-#error "Image slot and flash area mapping is not defined"
-#endif
-
-#define FLASH_AREA_IMAGE_SCRATCH     FLASH_AREA_SCRATCH_ID
+#define FLASH_DEVICE_ID                 100
+#define FLASH_DEVICE_BASE               FLASH_BASE_ADDRESS
 
 /**
  * @brief Structure describing an area on a flash device.
@@ -124,16 +111,6 @@ struct flash_sector {
 };
 
 /*
- * Retrieve a memory-mapped flash device's base address.
- *
- * On success, the address will be stored in the value pointed to by
- * ret.
- *
- * Returns 0 on success, or an error code on failure.
- */
-int flash_device_base(uint8_t fd_id, uintptr_t *ret);
-
-/*
  * Start using flash area.
  */
 int flash_area_open(uint8_t id, const struct flash_area **area);
@@ -146,22 +123,10 @@ void flash_area_close(const struct flash_area *area);
 int flash_area_read(const struct flash_area *area, uint32_t off, void *dst,
                     uint32_t len);
 
-/*
- * Returns 1 if read data is erased, 0 if non-erased, and -1 on failure.
- */
-int flash_area_read_is_empty(const struct flash_area *area, uint32_t off,
-                             void *dst, uint32_t len);
-
 int flash_area_write(const struct flash_area *area, uint32_t off,
                      const void *src, uint32_t len);
 
 int flash_area_erase(const struct flash_area *area, uint32_t off, uint32_t len);
-
-/*
- * Returns the value expected to be read when accessing any erased
- * flash byte.
- */
-uint8_t flash_area_erased_val(const struct flash_area *area);
 
 /*
  * Alignment restriction for flash writes.
@@ -180,10 +145,6 @@ int flash_area_get_sectors(int fa_id, uint32_t *count,
  */
 __attribute__((deprecated))
 int flash_area_to_sectors(int idx, int *cnt, struct flash_area *ret);
-
-int flash_area_id_from_image_slot(int slot);
-int flash_area_id_to_image_slot(int area_id);
-void flash_area_warn_on_open(void);
 
 #ifdef __cplusplus
 }

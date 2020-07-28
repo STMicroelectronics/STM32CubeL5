@@ -49,7 +49,20 @@ static uint32_t m_uPacketsReceived = 0U; /* !< Ymodem packets received*/
 /**
   * @}
   */
+/** @defgroup  FW_UPDATE_Private_Const Private Const
+  * @{
+  */
 
+const uint32_t MagicTrailerValue[] =
+{
+  0xf395c277,
+  0x7fefd260,
+  0x0f505235,
+  0x8079b62c,
+};
+/**
+  * @}
+  */
 /** @defgroup  FW_UPDATE_Private_Functions Private Functions
   * @{
   */
@@ -88,14 +101,14 @@ void FW_UPDATE_Run(void)
       switch (key)
       {
         case '1' :
-          FW_UPDATE_SECURE_IMAGE();
-          break;
-        case '2' :
-          FW_UPDATE_NONSECURE_IMAGE();
-          break;
-        case '3' :
           printf("  -- Install image : reboot\r\n\n");
           NVIC_SystemReset();
+          break;
+        case '2' :
+          FW_UPDATE_SECURE_IMAGE();
+          break;
+        case '3' :
+          FW_UPDATE_NONSECURE_IMAGE();
           break;
         case 'x' :
           exit = 1U;
@@ -140,6 +153,7 @@ static HAL_StatusTypeDef FW_UPDATE_SECURE_IMAGE(void)
 
   return ret;
 }
+
 /**
   * @brief  Run FW Update process.
   * @param  None
@@ -190,10 +204,11 @@ static HAL_StatusTypeDef FW_UPDATE_NONSECURE_IMAGE(void)
   */
 static void FW_UPDATE_PrintWelcome(void)
 {
+
   printf("\r\n================ New Fw Download =========================\r\n\n");
-  printf("  Download Secure Image --------------------------------- 1\r\n\n");
-  printf("  Download NonSecure Image------------------------------- 2\r\n\n");
-  printf("  Reset to trigger Installation-------------------------- 3\r\n\n");
+  printf("  Reset to trigger Installation ------------------------- 1\r\n\n");
+  printf("  Download Secure Image --------------------------------- 2\r\n\n");
+  printf("  Download NonSecure Image ------------------------------ 3\r\n\n");
   printf("  Exit New FW Download Menu ----------------------------- x\r\n\n");
 }
 /**
@@ -225,7 +240,20 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
 #else
     printf("  -- -- Bytes: %lu\r\n\n", u_fw_size);
 #endif /*  __ARMCC_VERSION */
-    ret = HAL_OK;
+    if (u_fw_size <= (pFwImageDwlArea->MaxSizeInBytes - sizeof(MagicTrailerValue)))
+    {
+      uint32_t MagicAddress =
+        pFwImageDwlArea->DownloadAddr + (pFwImageDwlArea->MaxSizeInBytes - sizeof(MagicTrailerValue));
+      /* write the magic to trigger installation at next reset */
+#if defined(__ARMCC_VERSION)
+      printf("  Write Magic Trailer at %x\r\n\n", MagicAddress);
+#else
+      printf("  Write Magic Trailer at %lx\r\n\n", MagicAddress);
+#endif /*  __ARMCC_VERSION */
+      ret = FLASH_If_Write((void *)MagicAddress, MagicTrailerValue, sizeof(MagicTrailerValue));
+    }
+    else
+      ret = HAL_OK;
   }
   else if (e_result == COM_ABORT)
   {
@@ -316,6 +344,7 @@ HAL_StatusTypeDef Ymodem_DataPktRxCpltCallback(uint8_t *pData, uint32_t uFlashDe
     /*Adjust dimension to 64-bit length */
     if (uSize % FLASH_IF_MIN_WRITE_LEN != 0U)
     {
+      memset(&pData[uSize], 0xff, (FLASH_IF_MIN_WRITE_LEN - (uSize % FLASH_IF_MIN_WRITE_LEN)));
       uSize += (FLASH_IF_MIN_WRITE_LEN - (uSize % FLASH_IF_MIN_WRITE_LEN));
     }
 

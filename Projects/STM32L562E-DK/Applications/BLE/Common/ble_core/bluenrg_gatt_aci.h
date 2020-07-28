@@ -117,11 +117,11 @@ tBleStatus aci_gatt_include_service(uint16_t service_handle, uint16_t included_s
 tBleStatus aci_gatt_add_char(uint16_t serviceHandle,
 			     uint8_t charUuidType,
 			     const uint8_t* charUuid,
-#if (BLUENRG1 == 1)				  
-			     uint16_t charValueLen, 
+#if (BLUENRG1 == 1)
+			     uint16_t charValueLen,
 #else
 			     uint8_t charValueLen,
-#endif				 
+#endif
 			     uint8_t charProperties,
 			     uint8_t secPermissions,
 			     uint8_t gattEvtMask,
@@ -166,10 +166,10 @@ tBleStatus aci_gatt_add_char(uint16_t serviceHandle,
 tBleStatus aci_gatt_add_char_desc(uint16_t serviceHandle,
                                   uint16_t charHandle,
                                   uint8_t descUuidType,
-                                  const uint8_t* uuid, 
+                                  const uint8_t* uuid,
                                   uint8_t descValueMaxLen,
                                   uint8_t descValueLen,
-                                  const void* descValue, 
+                                  const void* descValue,
                                   uint8_t secPermissions,
                                   uint8_t accPermissions,
                                   uint8_t gattEvtMask,
@@ -230,10 +230,10 @@ tBleStatus aci_gatt_add_char_desc(uint16_t serviceHandle,
  * @param[in] charValue Characteristic value
  * @return Value indicating success or error code.
  */
-tBleStatus aci_gatt_update_char_value(uint16_t servHandle, 
+tBleStatus aci_gatt_update_char_value(uint16_t servHandle,
 				      uint16_t charHandle,
 				      uint8_t charValOffset,
-				      uint8_t charValueLen,   
+				      uint8_t charValueLen,
                                       const void *charValue);
 /**
  * @brief Delete the specified characteristic from the service.
@@ -496,7 +496,7 @@ tBleStatus aci_gatt_read_long_charac_val(uint16_t conn_handle, uint16_t attr_han
  * @param set_of_handles The handles for which the attribute value has to be read
  * @return Value indicating success or error code.
  */
-tBleStatus aci_gatt_read_multiple_charac_val(uint16_t conn_handle, uint8_t num_handles, 
+tBleStatus aci_gatt_read_multiple_charac_val(uint16_t conn_handle, uint8_t num_handles,
                                              uint8_t* set_of_handles);
 
 /**
@@ -725,6 +725,8 @@ tBleStatus aci_gatt_set_desc_value(uint16_t servHandle,
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_read_handle_value(uint16_t attr_handle, uint16_t data_len, uint16_t *data_len_out_p, uint8_t *data);
+
+tBleStatus aci_gatt_set_event_mask(uint32_t event_mask);
 
 #if BLUENRG_MS
 ///@cond BLUENRG_MS

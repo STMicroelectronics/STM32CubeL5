@@ -18,7 +18,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "boot_hal_cfg.h"
 
 /** @addtogroup STM32L5xx_HAL_Examples
   * @{

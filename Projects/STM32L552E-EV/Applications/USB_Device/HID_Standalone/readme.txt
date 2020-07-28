@@ -60,7 +60,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 
 @par Keywords
 
-Connectivity, USB Device, HID, Full Speed, Mouse, Remote Wakeup
+Connectivity, USB_Device, USB, HID, Full Speed, Mouse, Remote Wakeup
 
 @par Directory contents
 
@@ -87,7 +87,7 @@ Connectivity, USB Device, HID, Full Speed, Mouse, Remote Wakeup
     and can be easily tailored to any other supported device and development board.
 
   - STM32L552E-EV board Set-up
-    - Connect the STM32L552E-EV board CN1 to the PC through "TYPE-C" to "Standard A" cable.
+    -Connect the STM32L552E-EV board CN1 to the PC through "TYPE-C" to "Standard A" cable.
     - Press the WKUP push-button  to move the cursor.
 
 @par How to use it ?

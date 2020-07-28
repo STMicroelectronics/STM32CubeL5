@@ -72,7 +72,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 
@@ -94,7 +94,6 @@ void HAL_CRC_MspInit(CRC_HandleTypeDef* hcrc)
   /* USER CODE BEGIN CRC_MspInit 0 */
 
   /* USER CODE END CRC_MspInit 0 */
-
     /* Peripheral clock enable */
     __HAL_RCC_CRC_CLK_ENABLE();
   /* USER CODE BEGIN CRC_MspInit 1 */

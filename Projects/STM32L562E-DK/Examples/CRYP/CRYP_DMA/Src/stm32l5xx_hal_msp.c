@@ -35,7 +35,7 @@ extern DMA_HandleTypeDef hdma_aes_out;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN Define */
- 
+
 /* USER CODE END Define */
 
 /* Private macro -------------------------------------------------------------*/
@@ -75,7 +75,7 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 
@@ -99,7 +99,7 @@ void HAL_CRYP_MspInit(CRYP_HandleTypeDef* hcryp)
   /* USER CODE END AES_MspInit 0 */
     /* Peripheral clock enable */
     __HAL_RCC_AES_CLK_ENABLE();
-  
+
     /* AES DMA Init */
     /* AES_IN Init */
     hdma_aes_in.Instance = DMA2_Channel1;

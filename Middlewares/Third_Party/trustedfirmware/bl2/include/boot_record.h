@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, Arm Limited. All rights reserved.
+ * Copyright (c) 2018-2020, Arm Limited. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  *
@@ -11,8 +11,8 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <limits.h>
-#include "../ext/mcuboot/bootutil/include/bootutil/image.h"
-#include "../ext/mcuboot/include/flash_map/flash_map.h"
+#include "bootutil/image.h"
+#include "flash_map/flash_map.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,7 +36,7 @@ enum shared_memory_err_t {
 /*!
  * \enum boot_status_err_t
  *
- * \brief Return values for saving boot status information to shared memory are
+ * \brief Return values for saving boot status information to shared memory area
  */
 enum boot_status_err_t {
     BOOT_STATUS_OK,

@@ -8,11 +8,11 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics. 
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the 
+  * the "License"; You may not use this file except in compliance with the
   * License. You may obtain a copy of the License at:
   *                        opensource.org/licenses/BSD-3-Clause
   *
@@ -84,7 +84,6 @@ int main(void)
      */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -115,8 +114,8 @@ int main(void)
 
   /* Enable Power Clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-  
-  
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -130,17 +129,17 @@ int main(void)
     HAL_Delay(5000);
 
     /* Turn off LED1 */
-    BSP_LED_Off(LED1); 
+    BSP_LED_Off(LED1);
 
     /* Enter STOP 1 mode */
     HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
-    
+
     /* ... STOP 1 mode ... */
 
-    /* At Stop 1 mode exit, enable and select PLL as system clock source 
-       (PLL is disabled in STOP mode) */     
+    /* At Stop 1 mode exit, enable and select PLL as system clock source
+       (PLL is disabled in STOP mode) */
 
-    SYSCLKConfig_FromSTOP(); 
+    SYSCLKConfig_FromSTOP();
   }
   /* USER CODE END 3 */
 }
@@ -154,13 +153,14 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
@@ -177,7 +177,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -203,19 +203,19 @@ void SystemClock_Config(void)
   */
 void SYSCLKConfig_FromSTOP(void)
 {
-  /* Customize process using LL interface to improve the performance 
-     (wake-up time from STOP quicker in LL than HAL) */  
+  /* Customize process using LL interface to improve the performance
+     (wake-up time from STOP quicker in LL than HAL) */
   /* Main PLL activation */
   LL_RCC_PLL_Enable();
-  while(LL_RCC_PLL_IsReady() != 1) 
+  while(LL_RCC_PLL_IsReady() != 1)
   {
-  };
-  
+  }
+
   /* SYSCLK activation on the main PLL */
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL) 
+  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
   {
-  };
+  }
 }
 /**
   * @brief SYSTICK callback
@@ -239,13 +239,13 @@ void HAL_SYSTICK_Callback(void)
 
 
 /**
-  * @brief EXTI line detection callbacks
-  * @param GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
+  * @brief  BSP Push Button callback
+  * @param  Button Specifies the pin connected EXTI line
+  * @retval None.
   */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void BSP_PB_Callback(Button_TypeDef Button)
 {
-  if (GPIO_Pin == BUTTON_USER_PIN)
+  if (Button == BUTTON_USER)
   {
     /* Switch on LED1 */
     BSP_LED_On(LED1);
@@ -262,13 +262,13 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   HAL_SuspendTick();
-  
+
   /* Turn LED3 on */
   BSP_LED_On(LED3);
   while (1)
   {
   }
- 
+
   /* USER CODE END Error_Handler_Debug */
 }
 
@@ -281,7 +281,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
 
   /* User can add his own implementation to report the file name and line number,

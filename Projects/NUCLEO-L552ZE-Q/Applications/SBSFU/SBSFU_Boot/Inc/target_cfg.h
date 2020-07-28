@@ -16,7 +16,6 @@
 
 #ifndef __STM32L5XX_CFG_H__
 #define __STM32L5XX_CFG_H__
-#include "main.h"
 #include "platform/ext/common/uart_stdout.h"
 #include "tfm_peripherals_def.h"
 

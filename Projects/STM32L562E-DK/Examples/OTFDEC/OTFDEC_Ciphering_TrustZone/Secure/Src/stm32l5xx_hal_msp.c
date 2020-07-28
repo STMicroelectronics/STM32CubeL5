@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    OTFDEC/OTFDEC_Ciphering_TrustZone/Secure/Src/stm32l5xx_hal_msp.c
   * @author  MCD Application Team
-  * @brief   This file provides code for the MSP Initialization 
+  * @brief   This file provides code for the MSP Initialization
   *          and de-Initialization codes.
   ******************************************************************************
   * @attention
@@ -33,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN Define */
- 
+
 /* USER CODE END Define */
 
 /* Private macro -------------------------------------------------------------*/
@@ -79,7 +79,7 @@ void HAL_MspInit(void)
   HAL_NVIC_SetPriority(GTZC_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(GTZC_IRQn);
 
-  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral 
+  /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
 
@@ -97,18 +97,28 @@ void HAL_MspInit(void)
 void HAL_OSPI_MspInit(OSPI_HandleTypeDef* hospi)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
   if(hospi->Instance==OCTOSPI1)
   {
   /* USER CODE BEGIN OCTOSPI1_MspInit 0 */
 
   /* USER CODE END OCTOSPI1_MspInit 0 */
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_OSPI;
+    PeriphClkInit.OspiClockSelection = RCC_OSPICLKSOURCE_SYSCLK;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
     /* Peripheral clock enable */
     __HAL_RCC_OSPI1_CLK_ENABLE();
-  
+
     __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**OCTOSPI1 GPIO Configuration    
+    /**OCTOSPI1 GPIO Configuration
     PC2     ------> OCTOSPI1_IO5
     PC3     ------> OCTOSPI1_IO6
     PC1     ------> OCTOSPI1_IO4
@@ -119,7 +129,7 @@ void HAL_OSPI_MspInit(OSPI_HandleTypeDef* hospi)
     PA3     ------> OCTOSPI1_CLK
     PA6     ------> OCTOSPI1_IO3
     PB1     ------> OCTOSPI1_IO0
-    PB0     ------> OCTOSPI1_IO1 
+    PB0     ------> OCTOSPI1_IO1
     */
     GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -178,8 +188,8 @@ void HAL_OSPI_MspDeInit(OSPI_HandleTypeDef* hospi)
   /* USER CODE END OCTOSPI1_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_OSPI1_CLK_DISABLE();
-  
-    /**OCTOSPI1 GPIO Configuration    
+
+    /**OCTOSPI1 GPIO Configuration
     PC2     ------> OCTOSPI1_IO5
     PC3     ------> OCTOSPI1_IO6
     PC1     ------> OCTOSPI1_IO4
@@ -190,7 +200,7 @@ void HAL_OSPI_MspDeInit(OSPI_HandleTypeDef* hospi)
     PA3     ------> OCTOSPI1_CLK
     PA6     ------> OCTOSPI1_IO3
     PB1     ------> OCTOSPI1_IO0
-    PB0     ------> OCTOSPI1_IO1 
+    PB0     ------> OCTOSPI1_IO1
     */
     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_1|GPIO_PIN_0);
 

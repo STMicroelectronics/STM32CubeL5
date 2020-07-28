@@ -8,7 +8,7 @@
   * @brief   Description of the USB MSC application.
   ******************************************************************************
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
   *
   * This software component is licensed by ST under Ultimate Liberty license
   * SLA0044, the "License"; You may not use this file except in compliance with
@@ -33,11 +33,11 @@ function to configure the system clock (SYSCLK). The Full Speed (FS) USB module 
 internally a 48-MHz clock, which is generated from an internal PLL.
 
 
- 
+
 When the application is started, the user has just to plug the USB cable into a PC host and the device
 is automatically detected. A new removable drive appears in the system window and write/read/format
 operations can be performed as with any other removable drive.
- 
+
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
@@ -52,7 +52,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 
 @par Keywords
 
-Connectivity, USB Device, MSC, Full Speed, flash, microSD card
+Connectivity, USB_Device, USB, MSC, Full Speed, flash, microSD card
 
 @par Directory contents
 
@@ -76,12 +76,12 @@ Connectivity, USB Device, MSC, Full Speed, flash, microSD card
 @par Hardware and Software environment
 
   - This application runs on STM32L5xx devices.
-    
+
   - This application has been tested with STMicroelectronics STM32L562E-DK boards
     and can be easily tailored to any other supported device and development board.
   - STM32L562E-DK Set-up
     - Insert a microSD card into the STM32L562E-DK
-    - Connect the STM32L562E-DK board CN15 to the PC through "TYPE-C" to "Standard A" cable
+  - Connect the STM32L562E-DK board CN16 to the PC through "TYPE-C" to "Standard A" cable
 
 @par How to use it ?
 
@@ -89,6 +89,6 @@ In order to make the program work, you must do the following :
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
  - Run the application
-  
+
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

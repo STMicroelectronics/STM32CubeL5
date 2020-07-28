@@ -25,7 +25,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -51,8 +51,6 @@
 void NMI_Handler(void);
 void HardFault_Handler(void);
 void MemManage_Handler(void);
-void BusFault_Handler(void);
-void UsageFault_Handler(void);
 void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
@@ -60,6 +58,8 @@ void SysTick_Handler(void);
 void USB_FS_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 void EXTI13_IRQHandler(void);
+void AUDIO_SAI1_DMAx_IRQHandler(void);
+void DMA2_Channel1_IRQHandler(void);
 /* USER CODE END EFP */
 
 #ifdef __cplusplus

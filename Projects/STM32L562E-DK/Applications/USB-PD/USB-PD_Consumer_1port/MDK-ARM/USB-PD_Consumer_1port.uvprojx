@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_FULL_LL_DRIVER,USBPD_PORT_COUNT=1,USBPDCORE_LIB_PD3_FULL,_SNK,_TRACE,_GUI_INTERFACE,USE_HAL_DRIVER,STM32L562xx,_RTOS</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Utilities/GUI_INTERFACE;../../../../../../Utilities/TRACER_EMB;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc; ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc; ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy; ../../../../../../Utilities/GUI_INTERFACE; ../../../../../../Utilities/TRACER_EMB; ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include; ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2; ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure; ../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc; ../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc; ../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include; ../../../../../../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -598,14 +598,14 @@
               <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_lpuart.c</FilePath>
             </File>
             <File>
-              <FileName>stm32l5xx_ll_ucpd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_ucpd.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32l5xx_ll_rcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l5xx_ll_ucpd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_ucpd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -683,6 +683,11 @@
           <GroupName>Middlewares/USBPD</GroupName>
           <Files>
             <File>
+              <FileName>USBPDCORE_PD3_FULL_CM33_Keil.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USBPD_Library\Core\lib\USBPDCORE_PD3_FULL_CM33_Keil.lib</FilePath>
+            </File>
+            <File>
               <FileName>usbpd_trace.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/src/usbpd_trace.c</FilePath>
@@ -721,11 +726,6 @@
               <FileName>usbpd_timersserver.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/src/usbpd_timersserver.c</FilePath>
-            </File>
-            <File>
-              <FileName>USBPDCORE_PD3_FULL_CM33_Keil.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USBPD_Library\Core\lib\USBPDCORE_PD3_FULL_CM33_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>

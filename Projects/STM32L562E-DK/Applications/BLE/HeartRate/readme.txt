@@ -1,38 +1,33 @@
 /**
-  @page BLE HeartRate  BLE HeartRate application
+  @page HeartRate  BLE HeartRate application
 
   @verbatim
   ******************************************************************************
-  * @file    BLE/HeartRate/readme.txt 
+  * @file    BLE/HeartRate/readme.txt
   * @author  MCD Application Team
   * @brief   Description of the BLE HeartRate application
   ******************************************************************************
   *
   * Copyright (c) 2019 STMicroelectronics. All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                               www.st.com/SLA0044
   *
   ******************************************************************************
   @endverbatim
 
-@par Application Description 
+@par Application Description
 
 This application shows how to use BLE component for HeartRate profile application.
 
 The STM32L562E-DK Discovery board acts as GATT server.
 Once the code is downloaded on the STM32L562E-DK Discovery board and executed,
-the modules are initialized and the device starts advertising. 
+the modules are initialized and the device starts advertising.
 The user needs an application (running for example on smartphone) in order to act as GATT client.
 ST provides the following application (STM32 BLE Profiles):
 https://play.google.com/store/apps/details?id=com.stm.bluetoothlevalidation
-Tip:
-To quickly download and launch the "STM32 BLE Profiles" application the NFC tag can be used.
-By executing the NFC example (available in /Applications/NFC/WrAARtoRunBLEapp/) the NFC EEPROM 
-is programmed (and it remains programmed) such that, each time the smartphone approches the NFC 
-antenna, the "STM32 BLE Profiles" application is automatically launched on the smartphone.
 
 The user should activate Bluetooth Smart, execute such application, and SCAN for Bluetooth devices.
 The device STM32L562E-DK will be detected.
@@ -47,9 +42,12 @@ The STM32L562E-DK example supports the full feature of Heart Rate Service as fro
 https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.heart_rate.xml
 i.e. it provides other information like the sensor location and by writing 0x1 to the Heart Rate Control point
 the Energy Expanded field is reset.
-STM32 BLE Profiles smartphone application does not support these options but other smartphone applications 
+STM32 BLE Profiles smartphone application does not support these options but other smartphone applications
 can be found on the internet and used to test these features.
 
+@par Keywords
+
+Connectivity, BLE, Bluetooth, BlueNRG-MS, BLE pairing, BLE profile, BLE protocol, HCI, SPI
 
 @par Directory contents
 
@@ -62,41 +60,36 @@ can be found on the internet and used to test these features.
  - BLE/HeartRate/Inc/config.h                 Application configuration file
  - BLE/HeartRate/Inc/stm32l5xx_hal_conf.h     HAL configuration file
  - BLE/HeartRate/Inc/stm32l5xx_it.h           STM32 interrupt handlers header file
- - BLE/HeartRate/Inc/hr.h                     Exported files and function of hr.c 
- - BLE/HeartRate/Inc/hrs_app.h                Exported files and function of hrs_app.c 
- - BLE/HeartRate/Inc/dis_app.h                Exported files and function of dis_app.c 
+ - BLE/HeartRate/Inc/hr.h                     Exported files and function of hr.c
+ - BLE/HeartRate/Inc/hrs_app.h                Exported files and function of hrs_app.c
+ - BLE/HeartRate/Inc/dis_app.h                Exported files and function of dis_app.c
  - BLE/Common/                                These files are Common also to other applic/examples then HeartRate
- - BLE/Common/ble_core/*.*                    BlueNRG-MS Bluetooth Low Energy device driver 
+ - BLE/Common/ble_core/*.*                    BlueNRG-MS Bluetooth Low Energy device driver
  - BLE/Common/ble_services/*.*                GATT services according to BLE spec
  - BLE/Common/debug/*.*                       Code usefull for debugging (DBG should be activated in config.h)
- - BLE/Common/tl/*.*                          HCI layer and SPI protocol    
- - BLE/Common/hw/*.*                          HW board and device dependencies (SPI pins, timeserver, low power) 
- - BLE/Common/utilities/*.*                   Scheduler, memory/queue/fifo/list management, otp, etc   
+ - BLE/Common/tl/*.*                          HCI layer and SPI protocol
+ - BLE/Common/hw/*.*                          HW board and device dependencies (SPI pins, timeserver, low power)
+ - BLE/Common/utilities/*.*                   Scheduler, memory/queue/fifo/list management, otp, etc
 
 @par Hardware and Software environment
 
-  - This application runs on STM32L562XX devices, STM32L562E-DK board (MB1373) 
-    
-  - This application has been tested with the following environment:
-     - STM32L562E-DK board. 
+  - This application runs on STM32L562XX devices.
 
-  - STM32L562E-DK Discovery board Set-up    
-    - Connect the Discovery board to your PC with a USB cable type A to mini-B 
-      to ST-LINK connector (CN17).
-    - Please ensure that the ST-LINK connectors and jumpers are fitted.
-  
+  - This application has been tested with the following environment:
+     - STM32L562E-DK board (MB1373)
+
   - When using Android Phone
     - Activate Bluetooth
     - Install a BLE application supporting HeartRate service, e.g.:
-      https://play.google.com/store/apps/details?id=com.stm.bluetoothlevalidation 
+      https://play.google.com/store/apps/details?id=com.stm.bluetoothlevalidation
     - SCAN for bluetooth devices and connect to STM32L562E-DK
 
-@par How to use it ? 
-   
+@par How to use it ?
+
 In order to make the program work, you must do the following :
- - Open your preferred toolchain 
+ - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
  - Run the application
- 
+
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

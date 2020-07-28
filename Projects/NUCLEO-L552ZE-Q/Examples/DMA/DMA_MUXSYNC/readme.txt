@@ -1,5 +1,5 @@
 /**
-  @page DMAMUX_SYNC DMA & DMAMUX Synchronization Example
+  @page DMA_MUXSYNC DMA & DMAMUX Synchronization Example
   
   @verbatim
   ******************************************************************************

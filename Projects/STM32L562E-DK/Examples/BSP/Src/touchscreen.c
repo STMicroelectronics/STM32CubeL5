@@ -78,24 +78,24 @@ void Touchscreen_demo(void)
         x = TsMultipleState.TouchX[0];
         y = TsMultipleState.TouchY[0];
 
-        GUI_SetBackColor(GUI_COLOR_WHITE);
-        GUI_SetTextColor(GUI_COLOR_BLACK);
+        UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
+        UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
         sprintf((char*)text, "Nb touch detected = %lu", (unsigned long)TsMultipleState.TouchDetected);
-        GUI_DisplayStringAt(15, 185, (uint8_t *)&text, LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(15, 185, (uint8_t *)&text, LEFT_MODE);
 
         /* Display 1st touch detected coordinates */
         sprintf((char*)text, "1[%lu,%lu]    ", (unsigned long)x, (unsigned long)y);
-        GUI_DisplayStringAt(15, 200, (uint8_t *)&text, LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(15, 200, (uint8_t *)&text, LEFT_MODE);
         
         if (TsMultipleState.TouchDetected >= 2)  /* Display 2nd touch detected coordinates if applicable */
         {
           sprintf((char*)text, "2[%lu,%lu]    ", (unsigned long)TsMultipleState.TouchX[1], (unsigned long)TsMultipleState.TouchY[1]);
-          GUI_DisplayStringAt(15, 215, (uint8_t *)&text, LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(15, 215, (uint8_t *)&text, LEFT_MODE);
         }
         else
         {
           sprintf((char*)text, "              ");
-          GUI_DisplayStringAt(15, 215, (uint8_t *)&text, LEFT_MODE);
+          UTIL_LCD_DisplayStringAt(15, 215, (uint8_t *)&text, LEFT_MODE);
         }
         
         /* Weight not supported so radius maximum */
@@ -114,7 +114,7 @@ void Touchscreen_demo(void)
               {
                 Touchscreen_DrawBackground(state);
               }
-              GUI_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), radius, GUI_COLOR_BLUE);
+              UTIL_LCD_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), radius, UTIL_LCD_COLOR_BLUE);
               radius_previous = radius;
               state = 1;
             }
@@ -128,7 +128,7 @@ void Touchscreen_demo(void)
               {
                 Touchscreen_DrawBackground(state);
               }
-              GUI_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), radius, GUI_COLOR_RED);
+              UTIL_LCD_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), radius, UTIL_LCD_COLOR_RED);
               radius_previous = radius;
               state = 2;
             }
@@ -143,7 +143,7 @@ void Touchscreen_demo(void)
               {
                 Touchscreen_DrawBackground(state);
               }
-              GUI_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), radius, GUI_COLOR_YELLOW);
+              UTIL_LCD_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), radius, UTIL_LCD_COLOR_YELLOW);
               radius_previous = radius;
               state = 4;
             }
@@ -158,7 +158,7 @@ void Touchscreen_demo(void)
               {
                 Touchscreen_DrawBackground(state);
               }
-              GUI_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), radius, GUI_COLOR_GREEN);
+              UTIL_LCD_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(3), radius, UTIL_LCD_COLOR_GREEN);
               radius_previous = radius;
               state = 8;
             }
@@ -186,21 +186,21 @@ void Touchscreen_demo(void)
 static void Touchscreen_SetHint(void)
 {
   /* Clear the LCD */
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
 
   /* Set Touchscreen Demo description */
-  GUI_FillRect(0, 0, 240, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE);
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Touchscreen", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Please use the Touchscreen to fill", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"the colored circles. Up to 2", CENTER_MODE);
-  GUI_DisplayStringAt(0, 60, (uint8_t *)"touch coordinates are displayed.", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 240, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Touchscreen", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Please use the Touchscreen to fill", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"the colored circles. Up to 2", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 60, (uint8_t *)"touch coordinates are displayed.", CENTER_MODE);
 
-  GUI_DrawRect(10, 90, 220, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 218, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 220, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 218, 138, UTIL_LCD_COLOR_BLUE);
 }
 
 /**
@@ -215,35 +215,35 @@ static void Touchscreen_DrawBackground (uint8_t state)
   {
 
     case 0:
-      GUI_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, GUI_COLOR_BLUE);
-      GUI_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, GUI_COLOR_RED);
-      GUI_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, GUI_COLOR_YELLOW);
-      GUI_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS, GUI_COLOR_GREEN);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, UTIL_LCD_COLOR_RED);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, UTIL_LCD_COLOR_YELLOW);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS, UTIL_LCD_COLOR_GREEN);
 
-      GUI_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
-      GUI_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
-      GUI_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
-      GUI_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
       break;
 
     case 1:
-      GUI_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, GUI_COLOR_BLUE);
-      GUI_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS, UTIL_LCD_COLOR_BLUE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(1), CIRCLE_YPOS(1), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
       break;
 
     case 2:
-      GUI_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, GUI_COLOR_RED);
-      GUI_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS, UTIL_LCD_COLOR_RED);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(2), CIRCLE_YPOS(2), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
       break;
 
     case 4:
-      GUI_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, GUI_COLOR_YELLOW);
-      GUI_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS, UTIL_LCD_COLOR_YELLOW);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(3), CIRCLE_YPOS(3), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
       break;
 
     case 8:
-      GUI_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS, GUI_COLOR_GREEN);
-      GUI_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS - 2, GUI_COLOR_WHITE);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS, UTIL_LCD_COLOR_GREEN);
+      UTIL_LCD_FillCircle(CIRCLE_XPOS(4), CIRCLE_YPOS(4), CIRCLE_RADIUS - 2, UTIL_LCD_COLOR_WHITE);
       break;
 
   }

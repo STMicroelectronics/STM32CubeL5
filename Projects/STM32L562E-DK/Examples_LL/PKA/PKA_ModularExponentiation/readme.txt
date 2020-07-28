@@ -44,7 +44,7 @@ In case of errors, LED_GREEN is slowly blinking (1sec period).
 
 @par Keywords
 
-PKA, interrupt, Modular Exponentiation, cipher, RSA, pem
+Security, PKA, RSA, modular exponentiation, cipher ,decipher
 
 @par Directory contents 
 

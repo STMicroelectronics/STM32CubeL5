@@ -1,5 +1,5 @@
 /**
-  @page SPI_FullDuplex_ComPolling SPI Two Boards Communication example
+  @page SPI_FullDuplex_ComPolling_Slave SPI Two Boards Communication example
   
   @verbatim
   ******************************************************************************

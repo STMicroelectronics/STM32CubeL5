@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, Arm Limited. All rights reserved.
+ * Copyright (c) 2018-2020, Arm Limited. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  *
@@ -10,17 +10,31 @@
 #include "tfm_boot_status.h"
 #include "target.h"
 #include "../ext/mcuboot/bootutil/src/bootutil_priv.h"
-#include "../ext/mcuboot/bootutil/include/bootutil/image.h"
-#include "../ext/mcuboot/bootutil/include/bootutil/sha256.h"
-#include "../ext/mcuboot/include/flash_map/flash_map.h"
+#include "bootutil/image.h"
+#include "bootutil/sha256.h"
+#include "flash_map/flash_map.h"
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
 
-#define SHA256_HASH_SIZE (32u)
+#define SHA256_HASH_SIZE    (32u)
 #if defined(MCUBOOT_SIGN_RSA) && defined(MCUBOOT_HW_KEY)
-#define SIG_BUF_SIZE (MCUBOOT_SIGN_RSA_LEN / 8)
+#   define SIG_BUF_SIZE     (MCUBOOT_SIGN_RSA_LEN / 8)
 #endif
+
+/*!
+ * \def MAX_BOOT_RECORD_SZ
+ *
+ * \brief Maximum size of the measured boot record.
+ *
+ * Its size can be calculated based on the following aspects:
+ *   - There are 5 allowed software component claims,
+ *   - SHA256 is used as the measurement method for the other claims.
+ * Considering these aspects, the only claim which size can vary is the
+ * type of the software component. In case of single image boot it is
+ * "NSPE_SPE" which results the maximum boot record size of 96.
+ */
+//#define MAX_BOOT_RECORD_SZ  (96u)
 
 /*!
  * \var shared_memory_init_done
@@ -54,6 +68,7 @@ static uint32_t shared_memory_init_done;
 #error "Shared data area and non-secure data area is overlapping"
 #endif
 
+#ifdef MCUBOOT_INDIVIDUAL_CLAIMS
 /*!
  * \brief Add the measurement data of SW component to the shared memory area
  *
@@ -75,9 +90,10 @@ boot_save_sw_measurements(uint8_t sw_module,
                           const struct image_header *hdr,
                           const struct flash_area *fap)
 {
-    struct image_tlv_info tlv_header;
-    struct image_tlv tlv_entry;
-    uintptr_t tlv_end, offset;
+    struct image_tlv_iter it;
+    uint32_t offset;
+    uint16_t len;
+    uint16_t type;
     uint8_t buf[32];
     int32_t res;
     uint16_t ias_minor;
@@ -92,37 +108,32 @@ boot_save_sw_measurements(uint8_t sw_module,
     /* Manifest data is concatenated to the end of the image. It is encoded in
      * TLV format.
      */
-    offset = hdr->ih_img_size + hdr->ih_hdr_size;
 
-    res = LOAD_IMAGE_DATA(fap, offset, &tlv_header, sizeof(tlv_header));
+    res = bootutil_tlv_iter_begin(&it, hdr, fap, IMAGE_TLV_ANY, false);
     if (res) {
         return BOOT_STATUS_ERROR;
     }
-    if (tlv_header.it_magic != IMAGE_TLV_INFO_MAGIC) {
-        return BOOT_STATUS_ERROR;
-    }
-    tlv_end = offset + tlv_header.it_tlv_tot;
-    offset += sizeof(tlv_header);
 
     /* Iterates over the manifest data and copy the relevant attributes to the
      * shared data area:
      *  - image hash:      SW component measurement value
      *  - public key hash: Signer ID
      */
-    for (; offset < tlv_end; offset += sizeof(tlv_entry) + tlv_entry.it_len) {
-        res = LOAD_IMAGE_DATA(fap, offset, &tlv_entry, sizeof(tlv_entry));
-        if (res) {
+    while (true) {
+        res = bootutil_tlv_iter_next(&it, &offset, &len, &type);
+        if (res < 0) {
             return BOOT_STATUS_ERROR;
+        } else if (res > 0) {
+            break;
         }
 
-        if (tlv_entry.it_type == IMAGE_TLV_SHA256) {
+        if (type == IMAGE_TLV_SHA256) {
             /* Get the image's hash value from the manifest section */
-            if (tlv_entry.it_len != sizeof(buf)) { /* SHA256 - 32 bytes */
+            if (len != sizeof(buf)) { /* SHA256 - 32 bytes */
                 return BOOT_STATUS_ERROR;
             }
 
-            res = LOAD_IMAGE_DATA(fap, offset + sizeof(tlv_entry),
-                                  buf, tlv_entry.it_len);
+            res = LOAD_IMAGE_DATA(hdr, fap, offset, buf, len);
             if (res) {
                 return BOOT_STATUS_ERROR;
             }
@@ -131,7 +142,7 @@ boot_save_sw_measurements(uint8_t sw_module,
             ias_minor = SET_IAS_MINOR(sw_module, SW_MEASURE_VALUE);
             res2 = boot_add_data_to_shared_area(TLV_MAJOR_IAS,
                                                 ias_minor,
-                                                tlv_entry.it_len,
+                                                len,
                                                 buf);
             if (res2) {
                 return BOOT_STATUS_ERROR;
@@ -149,32 +160,30 @@ boot_save_sw_measurements(uint8_t sw_module,
 
 #ifdef MCUBOOT_SIGN_RSA
 #ifndef MCUBOOT_HW_KEY
-        } else if (tlv_entry.it_type == IMAGE_TLV_KEYHASH) {
+        } else if (type == IMAGE_TLV_KEYHASH) {
             /* Get the hash of the public key from the manifest section */
-            if (tlv_entry.it_len != sizeof(buf)) { /* SHA256 - 32 bytes */
+            if (len != sizeof(buf)) { /* SHA256 - 32 bytes */
                 return BOOT_STATUS_ERROR;
             }
 
-            res = LOAD_IMAGE_DATA(fap, offset + sizeof(tlv_entry),
-                                  buf, tlv_entry.it_len);
+            res = LOAD_IMAGE_DATA(hdr, fap, offset, buf, len);
             if (res) {
                 return BOOT_STATUS_ERROR;
             }
 #else /* MCUBOOT_HW_KEY */
-        } else if (tlv_entry.it_type == IMAGE_TLV_KEY) {
+        } else if (type == IMAGE_TLV_KEY) {
             /* Get the public key from the manifest section. */
-            if (tlv_entry.it_len > sizeof(key_buf)) {
+            if (len > sizeof(key_buf)) {
                 return BOOT_STATUS_ERROR;
             }
-            res = LOAD_IMAGE_DATA(fap, offset + sizeof(tlv_entry),
-                                  key_buf, tlv_entry.it_len);
+            res = LOAD_IMAGE_DATA(hdr, fap, offset, key_buf, len);
             if (res) {
                 return BOOT_STATUS_ERROR;
             }
 
             /* Calculate the hash of the public key. */
             bootutil_sha256_init(&sha256_ctx);
-            bootutil_sha256_update(&sha256_ctx, key_buf, tlv_entry.it_len);
+            bootutil_sha256_update(&sha256_ctx, key_buf, len);
             bootutil_sha256_finish(&sha256_ctx, buf);
 #endif /* MCUBOOT_HW_KEY */
 
@@ -188,7 +197,6 @@ boot_save_sw_measurements(uint8_t sw_module,
                 return BOOT_STATUS_ERROR;
             }
 #endif
-     
         }
     }
 
@@ -278,6 +286,7 @@ boot_save_sw_version(uint8_t sw_module,
 
     return BOOT_STATUS_OK;
 }
+#endif /* MCUBOOT_INDIVIDUAL_CLAIMS */
 
 /* See in boot_record.h */
 enum shared_memory_err_t
@@ -289,6 +298,7 @@ boot_add_data_to_shared_area(uint8_t        major_type,
     struct shared_data_tlv_entry tlv_entry = {0};
     struct tfm_boot_data *boot_data;
     uint8_t *next_tlv;
+    uint16_t boot_data_size;
     uintptr_t tlv_end, offset;
 
     boot_data = (struct tfm_boot_data *)BOOT_TFM_SHARED_DATA_BASE;
@@ -325,15 +335,13 @@ boot_add_data_to_shared_area(uint8_t        major_type,
     tlv_entry.tlv_type = SET_TLV_TYPE(major_type, minor_type);
     tlv_entry.tlv_len  = SHARED_DATA_ENTRY_SIZE(size);
 
-    /* Verify integer overflow */
-    if (boot_add_uint16_overflow_check(boot_data->header.tlv_tot_len,
-                                       tlv_entry.tlv_len)) {
+    if (!boot_u16_safe_add(&boot_data_size, boot_data->header.tlv_tot_len,
+                           tlv_entry.tlv_len)) {
         return SHARED_MEMORY_GEN_ERROR;
     }
 
     /* Verify overflow of shared area */
-    if ((boot_data->header.tlv_tot_len + tlv_entry.tlv_len) >
-         BOOT_TFM_SHARED_DATA_SIZE){
+    if (boot_data_size > BOOT_TFM_SHARED_DATA_SIZE) {
         return SHARED_MEMORY_OVERFLOW;
     }
 
@@ -354,8 +362,17 @@ boot_save_boot_status(uint8_t sw_module,
                       const struct image_header *hdr,
                       const struct flash_area *fap)
 {
-    enum boot_status_err_t res;
+#ifdef MCUBOOT_INDIVIDUAL_CLAIMS
+    /* This implementation is deprecated and will probably
+     * be removed in the future.
+     */
 
+    enum boot_status_err_t res;
+#if (MCUBOOT_IMAGE_NUMBER==2)
+    sw_module+=SW_SPE;
+#else
+    sw_module+=SW_S_NS;
+#endif
     res = boot_save_sw_type(sw_module);
     if (res) {
         return res;
@@ -372,4 +389,106 @@ boot_save_boot_status(uint8_t sw_module,
     }
 
     return BOOT_STATUS_OK;
+
+#else /* MCUBOOT_INDIVIDUAL_CLAIMS */
+
+    struct image_tlv_iter it;
+    uint32_t offset;
+    uint16_t len;
+    uint16_t type;
+    size_t record_len = 0;
+    uint8_t image_hash[32]; /* SHA256 - 32 Bytes */
+    uint8_t buf[MAX_BOOT_RECORD_SZ];
+    uint32_t boot_record_found = 0;
+    uint32_t hash_found = 0;
+    uint16_t ias_minor;
+    int32_t res;
+    enum shared_memory_err_t res2;
+
+    /* Manifest data is concatenated to the end of the image.
+     * It is encoded in TLV format.
+     */
+
+    res = bootutil_tlv_iter_begin(&it, hdr, fap, IMAGE_TLV_ANY, false);
+    if (res) {
+        return BOOT_STATUS_ERROR;
+    }
+
+    /* Traverse through the TLV area to find the boot record
+     * and image hash TLVs.
+     */
+    while (true) {
+        res = bootutil_tlv_iter_next(&it, &offset, &len, &type);
+        if (res < 0) {
+            return BOOT_STATUS_ERROR;
+        } else if (res > 0) {
+            break;
+        }
+
+        if (type == IMAGE_TLV_BOOT_RECORD) {
+            if (len > sizeof(buf)) {
+                return BOOT_STATUS_ERROR;
+            }
+            res = LOAD_IMAGE_DATA(hdr, fap, offset, buf, len);
+            if (res) {
+                return BOOT_STATUS_ERROR;
+            }
+
+            record_len = len;
+            boot_record_found = 1;
+
+        } else if (type == IMAGE_TLV_SHA256) {
+            /* Get the image's hash value from the manifest section. */
+            if (len > sizeof(image_hash)) {
+                return BOOT_STATUS_ERROR;
+            }
+            res = LOAD_IMAGE_DATA(hdr, fap, offset, image_hash, len);
+            if (res) {
+                return BOOT_STATUS_ERROR;
+            }
+
+            hash_found = 1;
+
+            /* The boot record TLV is part of the protected TLV area which is
+             * located before the other parts of the TLV area (including the
+             * image hash) so at this point it is okay to break the loop
+             * as the boot record TLV should have already been found.
+             */
+            break;
+        }
+    }
+
+
+    if (!boot_record_found || !hash_found) {
+        return BOOT_STATUS_ERROR;
+    }
+
+    /* Update the measurement value (hash of the image) data item in the
+     * boot record. It is always the last item in the structure to make
+     * it easy to calculate its position.
+     * The image hash is computed over the image header, the image itself and
+     * the protected TLV area (which should already include the image hash as
+     * part of the boot record TLV). For this reason this field has been
+     * filled with zeros during the image signing process.
+     */
+    offset = record_len - sizeof(image_hash);
+    /* Avoid buffer overflow. */
+    if ((offset + sizeof(image_hash)) > sizeof(buf)) {
+        return BOOT_STATUS_ERROR;
+    }
+    memcpy(buf + offset, image_hash, sizeof(image_hash));
+
+    /* Add the CBOR encoded boot record to the shared data area. */
+    ias_minor = SET_IAS_MINOR(sw_module, SW_BOOT_RECORD);
+    res2 = boot_add_data_to_shared_area(TLV_MAJOR_IAS,
+                                        ias_minor,
+                                        record_len,
+                                        buf);
+    if (res2) {
+        return BOOT_STATUS_ERROR;
+    }
+
+    return BOOT_STATUS_OK;
+
+#endif /* MCUBOOT_INDIVIDUAL_CLAIMS */
 }

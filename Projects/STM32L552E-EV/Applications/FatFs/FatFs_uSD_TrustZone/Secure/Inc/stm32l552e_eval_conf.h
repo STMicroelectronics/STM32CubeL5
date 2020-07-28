@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32l552e_eval_conf.h
   * @author  MCD Application Team
-  * @brief   STM32L552E-EVAL board configuration file.
+  * @brief   STM32L552E-EV board configuration file.
   *          This file should be copied to the application folder and renamed
   *          to stm32l552e_eval_conf.h .
   ******************************************************************************

@@ -38,6 +38,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define ST_SHA256_TIMEOUT     ((uint32_t) 3)
+/* #define ST_HW_CONTEXT_SAVING */
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -92,16 +93,20 @@ int mbedtls_sha256_starts_ret(mbedtls_sha256_context *ctx, int is224)
 
     ctx->is224 = is224;
 
+#ifdef ST_HW_CONTEXT_SAVING
     /* save hw context */
     HAL_HASH_ContextSaving(&ctx->hhash, ctx->ctx_save_regs);
+#endif /* ST_HW_CONTEXT_SAVING */
 
     return 0;
 }
 
 int mbedtls_internal_sha256_process( mbedtls_sha256_context *ctx, const unsigned char data[ST_SHA256_BLOCK_SIZE] )
 {
+#ifdef ST_HW_CONTEXT_SAVING
     /* restore hw context */
     HAL_HASH_ContextRestoring(&ctx->hhash, ctx->ctx_save_regs);
+#endif /* ST_HW_CONTEXT_SAVING */
 
     if (ctx->is224 == 0) {
         if (HAL_HASHEx_SHA256_Accmlt(&ctx->hhash, (uint8_t *) data, ST_SHA256_BLOCK_SIZE) != 0) {
@@ -113,8 +118,10 @@ int mbedtls_internal_sha256_process( mbedtls_sha256_context *ctx, const unsigned
         }
     }
 
+#ifdef ST_HW_CONTEXT_SAVING
     /* save hw context */
     HAL_HASH_ContextSaving(&ctx->hhash, ctx->ctx_save_regs);
+#endif /* ST_HW_CONTEXT_SAVING */
 
     return 0;
 }
@@ -123,8 +130,10 @@ int mbedtls_sha256_update_ret(mbedtls_sha256_context *ctx, const unsigned char *
 {
     size_t currentlen = ilen;
 
+#ifdef ST_HW_CONTEXT_SAVING
     /* restore hw context */
     HAL_HASH_ContextRestoring(&ctx->hhash, ctx->ctx_save_regs);
+#endif /* ST_HW_CONTEXT_SAVING */
 
     if (currentlen < (ST_SHA256_BLOCK_SIZE - ctx->sbuf_len))
     {
@@ -181,15 +190,19 @@ int mbedtls_sha256_update_ret(mbedtls_sha256_context *ctx, const unsigned char *
         }
     }
 
+#ifdef ST_HW_CONTEXT_SAVING
     /* save hw context */
     HAL_HASH_ContextSaving(&ctx->hhash, ctx->ctx_save_regs);
+#endif /* ST_HW_CONTEXT_SAVING */
     return 0;
 }
 
 int mbedtls_sha256_finish_ret(mbedtls_sha256_context *ctx, unsigned char output[32])
 {
+#ifdef ST_HW_CONTEXT_SAVING
     /* restore hw context */
     HAL_HASH_ContextRestoring(&ctx->hhash, ctx->ctx_save_regs);
+#endif /* ST_HW_CONTEXT_SAVING */
 
     /* Last accumulation for pending bytes in sbuf_len, then trig processing and get digest */
     if (ctx->is224 == 0)

@@ -94,9 +94,9 @@ void AudioPlay_demo(void)
   /* Check if the audio buffer has been loaded in flash */
   if (*((uint64_t *)AUDIO_FILE_ADDRESS) != 0x017EFE2446464952 )
   {
-    GUI_SetTextColor(GUI_COLOR_RED);    
-    GUI_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
-    GUI_DisplayStringAt(0, 145, (uint8_t*)"No Audio data in Flash", CENTER_MODE); 
+    UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);    
+    UTIL_LCD_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
+    UTIL_LCD_DisplayStringAt(0, 145, (uint8_t*)"No Audio data in Flash", CENTER_MODE); 
     status = 1;
   }
   else
@@ -113,9 +113,9 @@ void AudioPlay_demo(void)
     AudioInit.Volume        = 80;
     if (BSP_AUDIO_OUT_Init(0, &AudioInit) != BSP_ERROR_NONE)
     {
-      GUI_SetTextColor(GUI_COLOR_RED);    
-      GUI_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
-      GUI_DisplayStringAt(0, 145, (uint8_t*)"Audio Codec not detected", CENTER_MODE);
+      UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_RED);    
+      UTIL_LCD_DisplayStringAt(0, 130, (uint8_t*)"Initialization problem", CENTER_MODE); 
+      UTIL_LCD_DisplayStringAt(0, 145, (uint8_t*)"Audio Codec not detected", CENTER_MODE);
       status = 1;
     }
     else
@@ -132,9 +132,9 @@ void AudioPlay_demo(void)
         /* Turn ON LED green: start of Audio file play */
         BSP_LED_On(LED_GREEN);
         
-        GUI_DisplayStringAt(20, 195, (uint8_t *)"Playback on-going", LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 195, (uint8_t *)"Playback on-going", LEFT_MODE);
         sprintf((char *) Volume_string, "Volume : %lu%% ", (unsigned long)AudioInit.Volume);
-        GUI_DisplayStringAt(20, 210, Volume_string, LEFT_MODE);
+        UTIL_LCD_DisplayStringAt(20, 210, Volume_string, LEFT_MODE);
       }
       else
       {
@@ -182,23 +182,23 @@ void AudioPlay_demo(void)
 static void AudioPlay_SetHint(void)
 {
   /* Clear the LCD */ 
-  GUI_Clear(GUI_COLOR_WHITE);
+  UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
   
   /* Set Audio Demo description */
-  GUI_FillRect(0, 0, 240, 80, GUI_COLOR_BLUE);
-  GUI_SetTextColor(GUI_COLOR_WHITE);
-  GUI_SetBackColor(GUI_COLOR_BLUE); 
-  GUI_SetFont(&Font24);
-  GUI_DisplayStringAt(0, 0, (uint8_t *)"Audio Play", CENTER_MODE);
-  GUI_SetFont(&Font12);
-  GUI_DisplayStringAt(0, 30, (uint8_t *)"Press User push-button", CENTER_MODE);
-  GUI_DisplayStringAt(0, 45, (uint8_t *)"to stop playback", CENTER_MODE);
+  UTIL_LCD_FillRect(0, 0, 240, 80, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_BLUE); 
+  UTIL_LCD_SetFont(&Font24);
+  UTIL_LCD_DisplayStringAt(0, 0, (uint8_t *)"Audio Play", CENTER_MODE);
+  UTIL_LCD_SetFont(&Font12);
+  UTIL_LCD_DisplayStringAt(0, 30, (uint8_t *)"Press User push-button", CENTER_MODE);
+  UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)"to stop playback", CENTER_MODE);
   
-  GUI_DrawRect(10, 90, 220, 140, GUI_COLOR_BLUE);
-  GUI_DrawRect(11, 91, 218, 138, GUI_COLOR_BLUE);
+  UTIL_LCD_DrawRect(10, 90, 220, 140, UTIL_LCD_COLOR_BLUE);
+  UTIL_LCD_DrawRect(11, 91, 218, 138, UTIL_LCD_COLOR_BLUE);
 
-  GUI_SetTextColor(GUI_COLOR_BLACK);
-  GUI_SetBackColor(GUI_COLOR_WHITE); 
+  UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+  UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE); 
 }
 
 /**
@@ -211,17 +211,17 @@ static void AudioPlay_DisplayInfos(WAVE_FormatTypeDef * format)
   uint8_t string[50] = {0};
 
   sprintf((char *) string, "Sampling frequency : %lu Hz", (unsigned long)format->SampleRate);
-  GUI_DisplayStringAt(20, 100, string, LEFT_MODE);
+  UTIL_LCD_DisplayStringAt(20, 100, string, LEFT_MODE);
 
   if (format->NbrChannels == 2)
   {
     sprintf((char *) string, "Format : %d bits stereo", format->BitPerSample);
-    GUI_DisplayStringAt(20, 115, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, string, LEFT_MODE);
   }
   else if (format->NbrChannels == 1)
   {
     sprintf((char *) string, "Format : %d bits mono", format->BitPerSample);
-    GUI_DisplayStringAt(20, 115, string, LEFT_MODE);
+    UTIL_LCD_DisplayStringAt(20, 115, string, LEFT_MODE);
   }
 }
 

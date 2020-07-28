@@ -25,7 +25,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -61,6 +61,8 @@ void DMAMUX1_IRQHandler(void);
 void DMA1_Channel1_IRQHandler(void);
 void USB_FS_IRQHandler(void);
 /* USER CODE BEGIN EFP */
+void EXTI13_IRQHandler(void);
+void EXTI1_IRQHandler(void);
 
 /* USER CODE END EFP */
 

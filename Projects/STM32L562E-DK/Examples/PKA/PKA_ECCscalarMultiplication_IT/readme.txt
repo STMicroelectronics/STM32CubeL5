@@ -55,7 +55,7 @@ In case of any error, the LED10 (LED_GREEN) is toggling slowly.
 
 @par Keywords
 
-PKA, PKA_ECCscalarMultiplication_IT, Security, FIPS PUB 186-4, ECC scalar multiplication
+Security, PKA, FIPS PUB 186-4, ECC scalar multiplication
 
 @par Directory contents 
   

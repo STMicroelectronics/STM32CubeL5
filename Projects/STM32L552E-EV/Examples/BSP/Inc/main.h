@@ -30,7 +30,7 @@
 #include "stm32l552e_eval_sd.h"
 #include "stm32l552e_eval_sram.h"
 #include "stm32l552e_eval_ospi.h"
-#include "basic_gui.h"
+#include "stm32_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

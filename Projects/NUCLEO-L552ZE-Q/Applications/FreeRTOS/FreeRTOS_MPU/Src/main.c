@@ -24,26 +24,56 @@
 #include "task.h"
 #include "queue.h"
 
+/* Callback function prototypes */
+extern void vApplicationIdleHook (void);
+extern void vApplicationTickHook (void);
+#if configCHECK_FOR_STACK_OVERFLOW
+extern void vApplicationStackOverflowHook (TaskHandle_t xTask, signed char *pcTaskName);
+#endif
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#if defined ( __GNUC__ )
-extern uint32_t __privileged_functions_start__[];
-extern uint32_t __privileged_functions_end__[];
-extern uint32_t __unprivileged_flash_start__[];
-extern uint32_t __unprivileged_flash_end__[];
-extern uint32_t __privileged_sram_start__[];
-extern uint32_t __privileged_sram_end__[];
-extern uint32_t __unprivileged_sram_start__[];
-extern uint32_t __unprivileged_sram_end__[];
-#else
+#if defined(__ICCARM__)
+extern uint32_t * __FLASH_segment_start__;
+extern uint32_t * __FLASH_segment_end__;
 extern uint32_t * __privileged_functions_start__;
 extern uint32_t * __privileged_functions_end__ ;
 extern uint32_t * __unprivileged_flash_start__;
 extern uint32_t * __unprivileged_flash_end__;
+extern uint32_t * __SRAM_segment_start__;
+extern uint32_t * __SRAM_segment_end__;
 extern uint32_t * __privileged_sram_start__;
 extern uint32_t * __privileged_sram_end__;
 extern uint32_t * __unprivileged_sram_start__;
 extern uint32_t * __unprivileged_sram_end__;
+#elif defined(__ARMCC_VERSION)
+const uint32_t * __FLASH_segment_start__ = ( uint32_t * ) 0x08000000UL;
+const uint32_t * __FLASH_segment_end__ = ( uint32_t * ) 0x0807FFFFUL;
+const uint32_t * __privileged_functions_start__ = ( uint32_t * ) 0x08000000UL;
+const uint32_t * __privileged_functions_end__ = ( uint32_t * ) 0x08001CFFUL;
+const uint32_t * __syscalls_flash_start__ = ( uint32_t * ) 0x08001D00UL;
+const uint32_t * __syscalls_flash_end__ = ( uint32_t * ) 0x0801EFFUL;
+const uint32_t * __unprivileged_flash_start__ = ( uint32_t * ) 0x08001F00UL;
+const uint32_t * __unprivileged_flash_end__ = ( uint32_t * ) 0x0807FFFFUL;
+const uint32_t * __SRAM_segment_start__ = ( uint32_t * ) 0x20000000UL;
+const uint32_t * __SRAM_segment_end__ = ( uint32_t * ) 0x2003FFFFUL;
+const uint32_t * __privileged_sram_start__ = ( uint32_t * ) 0x20000000UL;
+const uint32_t * __privileged_sram_end__ = ( uint32_t * ) 0x200007FFUL;
+const uint32_t * __unprivileged_sram_start__ = ( uint32_t * ) 0x20000800UL;
+const uint32_t * __unprivileged_sram_end__ = ( uint32_t * ) 0x2002FFFFUL;
+#else /* __GNUC__ */
+extern uint32_t __FLASH_segment_start__[];
+extern uint32_t __FLASH_segment_end__[];
+extern uint32_t __privileged_functions_start__[];
+extern uint32_t __privileged_functions_end__[];
+extern uint32_t __unprivileged_flash_start__[];
+extern uint32_t __unprivileged_flash_end__[];
+extern uint32_t __SRAM_segment_start__[];
+extern uint32_t __SRAM_segment_end__[];
+extern uint32_t __privileged_sram_start__[];
+extern uint32_t __privileged_sram_end__[];
+extern uint32_t __unprivileged_sram_start__[];
+extern uint32_t __unprivileged_sram_end__[];
 #endif
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -51,7 +81,7 @@ extern uint32_t * __unprivileged_sram_end__;
 /* Private function prototypes -----------------------------------------------*/
 static void ReadTask(void *argument);
 static void WriteTask(void *argument);
-                      
+
 int8_t VAR = 0 ;
 uint8_t PB_Pressed = 0;
 static void SystemClock_Config(void);
@@ -85,17 +115,17 @@ int main(void)
 
   /* Initialize button */
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
-  
+
   /* Initialize LEDs */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
- 
+
   xTaskCreate( ReadTask, "Task1", 512, NULL,( 3 | portPRIVILEGE_BIT ), &hReadTask );
   xTaskCreate( WriteTask, "Task2", 512, NULL,( 3 | portPRIVILEGE_BIT ), &hWriteTask );
-  
+
   /* Start the scheduler. */
   vTaskStartScheduler();
-  
+
   /* We should never get here as control is now taken by the scheduler */
   for (;;);
 
@@ -175,7 +205,7 @@ static void WriteTask(void *argument)
   }
   while(1)
   {
-    
+
   }
 }
 
@@ -183,37 +213,37 @@ void vApplicationIdleHook( void )
 {
   volatile const uint32_t *pul;
   volatile uint32_t ulReadData;
-  
+
   /* The idle task, and therefore this function, run in Supervisor mode and
   can therefore access all memory.  Try reading from corners of flash and
   RAM to ensure a memory fault does not occur.
-  
+
   Start with the edges of the privileged data area. */
   pul = __privileged_sram_start__;
   ulReadData = *pul;
   pul = __privileged_sram_end__ - 1;
   ulReadData = *pul;
-  
+
   /* Next the standard SRAM area. */
   pul = __unprivileged_sram_end__ - 1;
   ulReadData = *pul;
-  
+
   /* And the standard Flash area - the start of which is marked for
   privileged access only. */
   pul = __privileged_functions_start__;
   ulReadData = *pul;
   pul = __unprivileged_flash_end__ - 1;
   ulReadData = *pul;
-  
+
   /* Reading off the end of Flash or SRAM space should cause a fault.
   Uncomment one of the following two pairs of lines to test. */
-  
+
   /* pul = __FLASH_segment_end__ + 4;
   ulReadData = *pul; */
-  
+
   /* pul = __SRAM_segment_end__ + 1;
   ulReadData = *pul; */
-  
+
   ( void ) ulReadData;
 }
 
@@ -221,13 +251,13 @@ void vApplicationTickHook( void )
 {
   static uint32_t ulCallCount = 0;
   const uint32_t ulCallsBetweenSends = pdMS_TO_TICKS( 5000 );
-  
+
   /* If configUSE_TICK_HOOK is set to 1 then this function will get called
   from each RTOS tick.  It is called from the tick interrupt and therefore
   will be executing in the privileged state. */
-  
+
   ulCallCount++;
-  
+
   /* Is it time to print out the pass/fail message again? */
   if( ulCallCount >= ulCallsBetweenSends )
   {
@@ -236,7 +266,7 @@ void vApplicationTickHook( void )
 }
 
 #if configCHECK_FOR_STACK_OVERFLOW
-void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, signed char *pcTaskName )
 {
   /* If configCHECK_FOR_STACK_OVERFLOW is set to either 1 or 2 then this
   function will automatically get called if a task overflows its stack. */

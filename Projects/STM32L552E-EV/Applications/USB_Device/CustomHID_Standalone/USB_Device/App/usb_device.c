@@ -20,7 +20,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
- 
+
 #include "usb_device.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
@@ -71,8 +71,8 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == BUTTON_WAKEUP_PIN)
   {
-    SendBuffer[0] = BUTTON_WAKEUP_REPORT_ID; 
-    
+    SendBuffer[0] = BUTTON_WAKEUP_REPORT_ID;
+
     if(BUTTON_WAKEUP_PB_State == 0)
     {
       SendBuffer[1] = 0x01;
@@ -88,8 +88,8 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
 
   if(GPIO_Pin == BUTTON_TAMPER_PIN)
   {
-    SendBuffer[0] = BUTTON_TAMPER_REPORT_ID; 
-    
+    SendBuffer[0] = BUTTON_TAMPER_REPORT_ID;
+
     if(BUTTON_TAMPER_PB_State == 0)
     {
       SendBuffer[1] = 0x01;
@@ -101,7 +101,7 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
       BUTTON_TAMPER_PB_State = 0;
     }
     USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, SendBuffer, 2);
-  }  
+  }
 }
 
 /* USER CODE END 1 */
@@ -116,7 +116,7 @@ void MX_USB_Device_Init(void)
 
   /* USB Clock Initialization */
   /* USER CODE END USB_Device_Init_PreTreatment */
-  
+
   /* Init Device Library, add supported class and start the library. */
   if (USBD_Init(&hUsbDeviceFS, &CUSTOM_HID_Desc, DEVICE_FS) != USBD_OK) {
     Error_Handler();
@@ -131,7 +131,7 @@ void MX_USB_Device_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USB_Device_Init_PostTreatment */
-  
+
   /* USER CODE END USB_Device_Init_PostTreatment */
 }
 

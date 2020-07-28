@@ -1,5 +1,5 @@
 [ProjectFiles]
-HeaderPath=..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152;..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV;
+HeaderPath=..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc;..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc\Legacy;..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L5xx\Include;..\..\..\..\..\..\Drivers\BSP\STM32L552E-EV;..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152
 [Others]
 Define=
 HALModule=ADC;DMA;I2C;ICACHE;EXTI;SPI;SRAM;UART;SD;MMC

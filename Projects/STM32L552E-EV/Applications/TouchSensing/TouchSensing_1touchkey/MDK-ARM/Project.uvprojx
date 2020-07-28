@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L552xx,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L552E-EV;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/ST/STM32_TouchSensing_Library/inc;../../../../../../Utilities/basic_gui</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L552E-EV;../../../../../../Drivers/BSP/Components/Common;../../../../../../Middlewares/ST/STM32_TouchSensing_Library/inc;../../../../../../Utilities/lcd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -628,9 +628,9 @@
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
-              <FileName>basic_gui.c</FileName>
+              <FileName>stm32_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Utilities/basic_gui/basic_gui.c</FilePath>
+              <FilePath>../../../../../../Utilities/lcd/stm32_lcd.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -36,7 +36,7 @@
 /* Exported functions ------------------------------------------------------- */
 uint32_t OSPI_Config(void);
 uint32_t OSPI_Write(uint32_t * pBuffer, uint32_t FlashAddress, uint32_t Size);
-uint32_t OSPI_MemoryMap();
+uint32_t OSPI_MemoryMap(void);
 extern void Error_Handler(void);
 
 #endif /* __HAL_OCTOSPI_UTILITY_H */

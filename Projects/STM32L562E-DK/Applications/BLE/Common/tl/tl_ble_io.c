@@ -21,6 +21,7 @@
 #include "common.h"
 #include "tl_types.h"
 #include "tl_ble_io.h"
+#include "tl_ble_reassembly.h"
 #include "hw.h"
 #include "scheduler.h"
 #include "svc_ctl.h"
@@ -117,7 +118,7 @@ void TL_BLE_HCI_UserEvtRx(void *pckt)
  *        The applicaiton shall not send a new command when the status is set to TL_BLE_HCI_CmdBusy.
  *        At least, TL_BLE_HCI_UserEvtProc shall not be executed while the TL remains busy
  *        This __WEAK function has to be OVERLOADED by the application, because only the application
- *        knows which TASKs are currently running and should be paused/resumed 
+ *        knows which TASKs are currently running and should be paused/resumed
  * @param status
  * @retval None
  */
@@ -125,9 +126,9 @@ __weak void TL_BLE_HCI_StatusNot(TL_BLE_HCI_CmdStatus_t status)
 {
   switch(status)
   {
-    case TL_BLE_HCI_CmdBusy: 
-      /* 
-      Only the application knows which TASKs are currently running and should be paused   
+    case TL_BLE_HCI_CmdBusy:
+      /*
+      Only the application knows which TASKs are currently running and should be paused
       SCH_PauseTask( CFG_IdleTask_XXXX );
       SCH_PauseTask( CFG_IdleTask_YYYY );
       */
@@ -135,8 +136,8 @@ __weak void TL_BLE_HCI_StatusNot(TL_BLE_HCI_CmdStatus_t status)
       break;
 
     case TL_BLE_HCI_CmdAvailable:
-      /* 
-      Only the application knows which TASKs are currently running and should be resumed   
+      /*
+      Only the application knows which TASKs are currently running and should be resumed
       SCH_ResumeTask( CFG_IdleTask_XXXX );
       SCH_ResumeTask( CFG_IdleTask_YYYY );
       */

@@ -24,14 +24,13 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbpd_pdo_defs.h"
-#include "usbpd_vdm_user.h"
 #include "usbpd_dpm_user.h"
+#include "usbpd_vdm_user.h"
 
-/* Section where include file can be added */
 #include "gui_api.h"
 #include "usbpd_gui_memmap.h"
 
@@ -68,7 +67,7 @@ USBPD_SettingsTypeDef       DPM_Settings[USBPD_PORT_COUNT] =
   {
     .PE_SupportedSOP = USBPD_SUPPORTED_SOP_SOP    , /* Supported SOP : SOP, SOP' SOP" SOP'Debug SOP"Debug */
     .PE_SpecRevision = USBPD_SPECIFICATION_REV3,/* spec revision value                                     */
-    .PE_DefaultRole = USBPD_PORTPOWERROLE_SNK,  /* Default port role                                       */    
+    .PE_DefaultRole = USBPD_PORTPOWERROLE_SNK,  /* Default port role                                       */
     .PE_RoleSwap = USBPD_FALSE,                  /* support port role swap                                  */
     .PE_VDMSupport = USBPD_FALSE,
     .PE_RespondsToDiscovSOP = USBPD_FALSE,      /*!< Can respond successfully to a Discover Identity */

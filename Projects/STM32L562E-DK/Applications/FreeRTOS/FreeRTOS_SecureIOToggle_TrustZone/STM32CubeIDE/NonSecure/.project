@@ -22,7 +22,7 @@
 	<natures>
 		<nature>com.st.stm32cube.ide.mcu.MCUProjectNature</nature>
 		<nature>org.eclipse.cdt.core.cnature</nature>
-		<nature>com.st.stm32cube.ide.mcu.MCUCubeIdeServicesRevAProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUCubeIdeServicesRevAev2ProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUNonUnderRootProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUCubeProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUNonSecureProjectNature</nature>
@@ -110,11 +110,6 @@
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_gpio.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gpio.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_gtzc.c</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_i2c.c</name>

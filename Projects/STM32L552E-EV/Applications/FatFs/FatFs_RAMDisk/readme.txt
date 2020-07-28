@@ -57,6 +57,9 @@ STM32L552E-EV's board's LEDs can be used to monitor the application status:
   - LED4 ON when the application runs successfully.
   - LED6 ON when any error occurs. 
 
+@par Keywords
+
+File system, FatFs, RAM disk, SRAM, FAT Volume, Format, Mount, Read, Write,
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

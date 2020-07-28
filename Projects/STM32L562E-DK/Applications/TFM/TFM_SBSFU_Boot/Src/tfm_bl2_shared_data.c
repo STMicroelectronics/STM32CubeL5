@@ -17,10 +17,11 @@
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "boot_hal_cfg.h"
 #include "region_defs.h"
 #include "tfm_boot_status.h"
 #include "tfm_bl2_shared_data.h"
+#include "low_level_rng.h"
 #ifdef TFM_DEV_MODE
 #define BOOT_LOG_LEVEL BOOT_LOG_LEVEL_ERROR
 #else
@@ -28,7 +29,7 @@
 #endif /* TFM_DEV_MODE */
 #include "bootutil/bootutil_log.h"
 #include "boot_record.h"
-#include "entropy_poll.h"
+#include "mbedtls/entropy_poll.h"
 #include "platform/include/tfm_plat_boot_seed.h"
 #include "platform/include/tfm_attest_hal.h"
 #include "platform/include/tfm_plat_crypto_keys.h"
@@ -43,7 +44,7 @@ extern RTC_HandleTypeDef RTCHandle;
 #define REGION_DECLARE(a, b, c) extern uint32_t REGION_NAME(a, b, c)
 
 #if defined(__ICCARM__)
-#define CODE_START (void *)(BL2_CODE_START+FLASH_AREA_PERSO_SIZE)
+#define CODE_START (void *)(BL2_CODE_START)
 #else
 REGION_DECLARE(Image$$, ER_CODE, $$Base);
 #define CODE_START &REGION_NAME(Image$$, ER_CODE, $$Base)
@@ -54,8 +55,8 @@ REGION_DECLARE(Image$$, ER_CODE, $$Base);
 LOAD_DECLARE(Load$$, LR$$, LR_CODE, $$Limit);
 #define CODE_LIMIT &LOAD_NAME(Load$$, LR$$, LR_CODE, $$Limit)
 #else
-REGION_DECLARE(Image$$, ER_CODE, $$Limit);
-#define CODE_LIMIT &REGION_NAME(Image$$, ER_CODE, $$Limit)
+REGION_DECLARE(Image$$, HDP_CODE, $$Limit);
+#define CODE_LIMIT &REGION_NAME(Image$$, HDP_CODE, $$Limit)
 #endif /*__ARMCC_VERSION */
 /**
   * @}
@@ -232,11 +233,15 @@ void TFM_BL2_CopySharedData(void)
                                (const uint8_t *)&implementation_id);
 
 
-  /* secure the read/write access to tamper backup register 0 to 7 */
-  MODIFY_REG(TAMP->SMCR, TAMP_SMCR_BKPRWDPROT, 8U);
+  /* secure the read/write access to tamper backup register BL2_RTC_SHARED_DATA_SIZE */
+  MODIFY_REG(TAMP->SMCR, TAMP_SMCR_BKPRWDPROT, BL2_RTC_SHARED_DATA_SIZE>>2);
   TAMP->PRIVCR |= TAMP_PRIVCR_BKPRWPRIV;
-  /* recopy priv key in back up 0 to 7  */
-
+ 
+  if (sizeof(initial_attestation_private_key) > BL2_RTC_SHARED_DATA_SIZE)
+  {
+    BOOT_LOG_ERR("RTC BL2 SHARED DATA Failed too small!!");
+    Error_Handler();;
+  }
   for (i = 0; i < sizeof(initial_attestation_private_key); i += 4)
   {
     HAL_RTCEx_BKUPWrite(&RTCHandle, i / 4, *((uint32_t *)(&initial_attestation_private_key[i])));
@@ -262,7 +267,7 @@ static void ComputeImplementationId(uint8_t *hash_result)
                          (uint32_t)CODE_LIMIT - (uint32_t)CODE_START);
 
   bootutil_sha256_finish(&sha256_ctx, hash_result);
-  BOOT_LOG_INF("hash TFM_boot  %x%x%x%x .. %x%x%x%x",
+  BOOT_LOG_INF("hash TFM_SBSFU_Boot  %x%x%x%x .. %x%x%x%x",
                hash_result[0], hash_result[1], hash_result[2], hash_result[3],
                hash_result[28], hash_result[29], hash_result[30], hash_result[31]);
 

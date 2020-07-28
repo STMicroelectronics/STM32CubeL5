@@ -96,7 +96,11 @@ int32_t MX25LM51245G_AutoPollingMemReady(OSPI_HandleTypeDef *Ctx, MX25LM51245G_I
 
   /* Configure automatic polling mode to wait for memory ready */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -156,7 +160,11 @@ int32_t MX25LM51245G_ReadSTR(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t M
 
   /* Initialize the read command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -205,7 +213,11 @@ int32_t MX25LM51245G_ReadDTR(OSPI_HandleTypeDef *Ctx, uint8_t *pData, uint32_t R
 
   /* Initialize the read command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = HAL_OSPI_INSTRUCTION_DTR_ENABLE;
   s_command.InstructionSize    = HAL_OSPI_INSTRUCTION_16_BITS;
@@ -262,7 +274,11 @@ int32_t MX25LM51245G_PageProgram(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface
 
   /* Initialize the program command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -310,7 +326,11 @@ int32_t MX25LM51245G_PageProgramDTR(OSPI_HandleTypeDef *Ctx, uint8_t *pData, uin
 
   /* Initialize the program command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = HAL_OSPI_INSTRUCTION_DTR_ENABLE;
   s_command.InstructionSize    = HAL_OSPI_INSTRUCTION_16_BITS;
@@ -371,7 +391,11 @@ int32_t MX25LM51245G_BlockErase(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_
 
   /* Initialize the erase command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -439,7 +463,11 @@ int32_t MX25LM51245G_ChipErase(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t
 
   /* Initialize the erase command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -468,7 +496,7 @@ int32_t MX25LM51245G_ChipErase(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t
   * @param  AddressSize Address size
   * @retval OSPI memory status
   */
-int32_t MX25LM51245G_EnableMemoryMappedModeSTR(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode, MX25LM51245G_AddressSize_t AddressSize)
+int32_t MX25LM51245G_EnableSTRMemoryMappedMode(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode, MX25LM51245G_AddressSize_t AddressSize)
 {
   OSPI_RegularCmdTypeDef      s_command = {0};
   OSPI_MemoryMappedTypeDef s_mem_mapped_cfg = {0};
@@ -481,7 +509,11 @@ int32_t MX25LM51245G_EnableMemoryMappedModeSTR(OSPI_HandleTypeDef *Ctx, MX25LM51
 
   /* Initialize the read command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_READ_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -532,7 +564,7 @@ int32_t MX25LM51245G_EnableMemoryMappedModeSTR(OSPI_HandleTypeDef *Ctx, MX25LM51
   * @note   Only OPI mode support DTR transfer rate
   * @retval OSPI memory status
   */
-int32_t MX25LM51245G_EnableMemoryMappedModeDTR(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode)
+int32_t MX25LM51245G_EnableDTRMemoryMappedMode(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mode)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(Mode);
@@ -542,7 +574,11 @@ int32_t MX25LM51245G_EnableMemoryMappedModeDTR(OSPI_HandleTypeDef *Ctx, MX25LM51
 
   /* Initialize the read command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_READ_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = HAL_OSPI_INSTRUCTION_DTR_ENABLE;
   s_command.InstructionSize    = HAL_OSPI_INSTRUCTION_16_BITS;
@@ -605,7 +641,11 @@ int32_t MX25LM51245G_Suspend(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t M
 
   /* Initialize the suspend command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -646,7 +686,11 @@ int32_t MX25LM51245G_Resume(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mo
 
   /* Initialize the resume command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -689,7 +733,11 @@ int32_t MX25LM51245G_WriteEnable(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface
 
   /* Initialize the write enable command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -759,7 +807,11 @@ int32_t MX25LM51245G_WriteDisable(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interfac
 
   /* Initialize the write disable command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -801,7 +853,11 @@ int32_t MX25LM51245G_ReadStatusRegister(OSPI_HandleTypeDef *Ctx, MX25LM51245G_In
 
   /* Initialize the reading of status register */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -865,7 +921,11 @@ int32_t MX25LM51245G_WriteStatusRegister(OSPI_HandleTypeDef *Ctx, MX25LM51245G_I
 
   /* Initialize the writing of status register */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -932,7 +992,11 @@ int32_t MX25LM51245G_WriteCfgRegister(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Inte
 
   /* Initialize the writing of configuration register */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -984,7 +1048,11 @@ int32_t MX25LM51245G_ReadCfgRegister(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Inter
 
   /* Initialize the reading of configuration register */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1037,7 +1105,11 @@ int32_t MX25LM51245G_WriteCfg2Register(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Int
 
   /* Initialize the writing of configuration register 2 */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1089,7 +1161,11 @@ int32_t MX25LM51245G_ReadCfg2Register(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Inte
 
   /* Initialize the reading of status register */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1145,7 +1221,11 @@ int32_t MX25LM51245G_WriteSecurityRegister(OSPI_HandleTypeDef *Ctx, MX25LM51245G
 
   /* Initialize the write of security register */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1187,7 +1267,11 @@ int32_t MX25LM51245G_ReadSecurityRegister(OSPI_HandleTypeDef *Ctx, MX25LM51245G_
 
   /* Initialize the reading of security register */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1243,7 +1327,11 @@ int32_t MX25LM51245G_ReadID(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface_t Mo
 
   /* Initialize the read ID command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1296,7 +1384,11 @@ int32_t MX25LM51245G_ResetEnable(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface
 
   /* Initialize the reset enable command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1337,7 +1429,11 @@ int32_t MX25LM51245G_ResetMemory(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface
 
   /* Initialize the reset enable command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1378,7 +1474,11 @@ int32_t MX25LM51245G_NoOperation(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interface
 
   /* Initialize the no operation command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;
@@ -1419,7 +1519,11 @@ int32_t MX25LM51245G_EnterPowerDown(OSPI_HandleTypeDef *Ctx, MX25LM51245G_Interf
 
   /* Initialize the enter power down command */
   s_command.OperationType      = HAL_OSPI_OPTYPE_COMMON_CFG;
+#if defined (OCTOSPI_CR_MSEL)
+  s_command.FlashSelect        = HAL_OSPI_FLASH_SELECT_IO_7_0;
+#else
   s_command.FlashId            = HAL_OSPI_FLASH_ID_1;
+#endif
   s_command.InstructionMode    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_1_LINE : HAL_OSPI_INSTRUCTION_8_LINES;
   s_command.InstructionDtrMode = (Rate == MX25LM51245G_DTR_TRANSFER) ? HAL_OSPI_INSTRUCTION_DTR_ENABLE : HAL_OSPI_INSTRUCTION_DTR_DISABLE;
   s_command.InstructionSize    = (Mode == MX25LM51245G_SPI_MODE) ? HAL_OSPI_INSTRUCTION_8_BITS : HAL_OSPI_INSTRUCTION_16_BITS;

@@ -62,6 +62,10 @@ Other peripherals used:
   1 GPIO for LED1
   1 GPIO for analog input: PA.04 (Arduino connector CN7 pin 9, Morpho connector CN11 pin 32)
 
+@par Keywords
+
+ADC, analog digital converter, conversion, voltage, channel, analog input, trigger
+
 @par Directory contents 
 
   - ADC/ADC_ContinuousConversion_TriggerSW/Inc/stm32l5xx_it.h          Interrupt handlers header file

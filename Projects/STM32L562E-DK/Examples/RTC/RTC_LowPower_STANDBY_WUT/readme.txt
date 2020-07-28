@@ -1,5 +1,5 @@
 /**
-  @page RTC_Standby RTC_LowPower_STANDBY_WUT example
+  @page RTC_LowPower_STANDBY_WUT example
 
   @verbatim
   ******************************************************************************
@@ -56,6 +56,10 @@ One of the below scenario can occur :
 
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@par Keywords
+
+RTC, Wake Up, wakeuptimer, Standby, LSE
 
 @par Directory contents
 

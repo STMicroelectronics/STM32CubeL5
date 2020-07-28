@@ -1160,7 +1160,7 @@ static void USBPD_VDM_InformSpecific(uint8_t PortNum, USBPD_SOPType_TypeDef SOPT
         VDM_USER_DEBUG_TRACE(PortNum, "USBPD_VDM_InformSpecific(DP_CONFIG)");
         /* Handle DP configuration information sending : to be completed */
         break;
-        
+
       default :
         return;
       }
@@ -1172,9 +1172,9 @@ static void USBPD_VDM_InformSpecific(uint8_t PortNum, USBPD_SOPType_TypeDef SOPT
       case SVDM_DP_STATUS :
         {
           USBPD_DPStatus_TypeDef vdo_received;
-          
+
           vdo_received.d32 = pVDO[0];
-          
+
           VDM_USER_DEBUG_TRACE(PortNum, "USBPD_VDM_InformSpecific(DP_STATUS)");
           if (vdo_received.d.ConnectStatus != MODE_DP_STATUS_CONNECT_NO)
           {
@@ -1190,7 +1190,7 @@ static void USBPD_VDM_InformSpecific(uint8_t PortNum, USBPD_SOPType_TypeDef SOPT
       case SVDM_DP_CONFIG :
         VDM_USER_DEBUG_TRACE(PortNum, "USBPD_VDM_InformSpecific(DP_CONFIG)");
         break;
-        
+
       default :
         break;
       }

@@ -39,6 +39,10 @@ Once started, LED10 is toggling on STM32L562E-DK.
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@par Keywords
+
+Audio, SAI, DMA, Buffer update, play, headphone, audio protocol
+
 @par Directory contents
 
   - SAI/SAI_AudioPlay/Inc/stm32l562e_discovery_conf.h     BSP configuration file
