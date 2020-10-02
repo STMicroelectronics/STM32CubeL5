@@ -17,6 +17,10 @@ t
   ******************************************************************************
   @endverbatim
 
+### 25-August-2020 ###
+==========================
+    + imgtool: imgtool.exe is signed ST
+
 ### 23-June-2020 ###
 ==========================
     + imgtool: Cryptodome python module not required
