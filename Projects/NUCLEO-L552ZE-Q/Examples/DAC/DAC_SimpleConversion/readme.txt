@@ -41,6 +41,9 @@ NUCLEO-L552ZE-Q C-02 board's LEDs can be used to monitor the process status:
   - LED3 is ON and example is stopped (using infinite loop)
   when there is an error during process.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Analog, DAC, Conversion, Voltage output, Oscilloscope

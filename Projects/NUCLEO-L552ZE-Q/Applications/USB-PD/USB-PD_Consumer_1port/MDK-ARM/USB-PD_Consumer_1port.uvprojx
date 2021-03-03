@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_projx.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="project_projx.xsd">
 
   <SchemaVersion>2.1</SchemaVersion>
 
@@ -10,7 +9,7 @@
       <TargetName>USB-PD_Consumer_1port</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6100001::V6.10.1::.\ARMCLANG</pCCUsed>
+      <pCCUsed>6140000::V6.14::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -19,28 +18,28 @@
           <PackID>Keil.STM32L5xx_DFP.1.0.9</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000-0x2003FFFF) IROM(0x8000000-0x807FFFF) CLOCK(8000000) FPU3(SFPU) CPUTYPE("Cortex-M33") ELITTLE TZ</Cpu>
-          <FlashUtilSpec></FlashUtilSpec>
-          <StartupFile></StartupFile>
-          <FlashDriverDll></FlashDriverDll>
+          <FlashUtilSpec/>
+          <StartupFile/>
+          <FlashDriverDll/>
           <DeviceId>0</DeviceId>
-          <RegisterFile></RegisterFile>
-          <MemoryEnv></MemoryEnv>
-          <Cmp></Cmp>
-          <Asm></Asm>
-          <Linker></Linker>
-          <OHString></OHString>
-          <InfinionOptionDll></InfinionOptionDll>
-          <SLE66CMisc></SLE66CMisc>
-          <SLE66AMisc></SLE66AMisc>
-          <SLE66LinkerMisc></SLE66LinkerMisc>
+          <RegisterFile/>
+          <MemoryEnv/>
+          <Cmp/>
+          <Asm/>
+          <Linker/>
+          <OHString/>
+          <InfinionOptionDll/>
+          <SLE66CMisc/>
+          <SLE66AMisc/>
+          <SLE66LinkerMisc/>
           <SFDFile>$$Device:STM32L552ZETxQ$Drivers\CMSIS\SVD\STM32L5x2.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
-          <BinPath></BinPath>
-          <IncludePath></IncludePath>
-          <LibPath></LibPath>
-          <RegisterFilePath></RegisterFilePath>
-          <DBRegisterFilePath></DBRegisterFilePath>
+          <BinPath/>
+          <IncludePath/>
+          <LibPath/>
+          <RegisterFilePath/>
+          <DBRegisterFilePath/>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -55,15 +54,15 @@
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath></ListingPath>
+          <ListingPath/>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
           <BeforeCompile>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopU1X>0</nStopU1X>
@@ -72,8 +71,8 @@
           <BeforeMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopB1X>0</nStopB1X>
@@ -82,15 +81,15 @@
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
-            <UserProg2Name></UserProg2Name>
+            <UserProg1Name/>
+            <UserProg2Name/>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopA1X>0</nStopA1X>
             <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>1</SelectedForBatchBuild>
-          <SVCSIdString></SVCSIdString>
+          <SVCSIdString/>
         </TargetCommonOption>
         <CommonProperty>
           <UseCPPCompiler>0</UseCPPCompiler>
@@ -104,15 +103,15 @@
           <AssembleAssemblyFile>0</AssembleAssemblyFile>
           <PublicsOnly>0</PublicsOnly>
           <StopOnExitCode>3</StopOnExitCode>
-          <CustomArgument></CustomArgument>
-          <IncludeLibraryModules></IncludeLibraryModules>
+          <CustomArgument/>
+          <IncludeLibraryModules/>
           <ComprImg>0</ComprImg>
         </CommonProperty>
         <DllOption>
-          <SimDllName></SimDllName>
-          <SimDllArguments></SimDllArguments>
-          <SimDlgDll></SimDlgDll>
-          <SimDlgDllArguments></SimDlgDllArguments>
+          <SimDllName/>
+          <SimDllArguments/>
+          <SimDlgDll/>
+          <SimDlgDllArguments/>
           <TargetDllName>SARMV8M.DLL</TargetDllName>
           <TargetDllArguments>-MPU</TargetDllArguments>
           <TargetDlgDll>TCM.DLL</TargetDlgDll>
@@ -138,11 +137,11 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2V8M.DLL</Flash2>
-          <Flash3></Flash3>
-          <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
-          <pFcArmRoot></pFcArmRoot>
+          <Flash3/>
+          <Flash4/>
+          <pFcarmOut/>
+          <pFcarmGrp/>
+          <pFcArmRoot/>
           <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
@@ -175,7 +174,7 @@
             <RvctClst>0</RvctClst>
             <GenPPlst>0</GenPPlst>
             <AdsCpuType>"Cortex-M33"</AdsCpuType>
-            <RvctDeviceName></RvctDeviceName>
+            <RvctDeviceName/>
             <mOS>0</mOS>
             <uocRom>0</uocRom>
             <uocRam>0</uocRam>
@@ -185,6 +184,7 @@
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
+            <RvdsCdeCp>0</RvdsCdeCp>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -308,7 +308,7 @@
                 <Size>0x0</Size>
               </OCR_RVCT10>
             </OnChipMemories>
-            <RvctStartVector></RvctStartVector>
+            <RvctStartVector/>
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
@@ -329,16 +329,16 @@
             <useXO>0</useXO>
             <v6Lang>5</v6Lang>
             <v6LangP>3</v6LangP>
-            <vShortEn>0</vShortEn>
-            <vShortWch>0</vShortWch>
+            <vShortEn>1</vShortEn>
+            <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls/>
               <Define>USE_FULL_LL_DRIVER,USBPD_PORT_COUNT=1,USBPDCORE_LIB_PD3_FULL,_SNK,_TRACE,_GUI_INTERFACE,USE_HAL_DRIVER,STM32L552xx,_RTOS</Define>
-              <Undefine></Undefine>
-              <IncludePath>../Inc;   ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;   ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;   ../../../../../../Utilities/GUI_INTERFACE;   ../../../../../../Utilities/TRACER_EMB;   ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;   ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;   ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;   ../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;   ../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc;   ../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;   ../../../../../../Drivers/CMSIS/Include</IncludePath>
+              <Undefine/>
+              <IncludePath>../Inc;     ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;     ../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;     ../../../../../../Utilities/GUI_INTERFACE;     ../../../../../../Utilities/TRACER_EMB;     ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;     ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;     ../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;     ../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;     ../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc;     ../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;     ../../../../../../Drivers/CMSIS/Include; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Drivers/STM32L5xx_HAL_Driver/Inc; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Drivers/STM32L5xx_HAL_Driver/Inc/Legacy; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Utilities/GUI_INTERFACE; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Utilities/TRACER_EMB; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Middlewares/Third_Party/FreeRTOS/Source/include; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Middlewares/ST/STM32_USBPD_Library/Core/inc; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Drivers/CMSIS/Device/ST/STM32L5xx/Include; C:/Users/gucadier/STM32Cube/Repository/STM32Cube_FW_L5_V1.4.0RC1/Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -351,11 +351,11 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
-            <uClangAs>0</uClangAs>
+            <ClangAsOpt>4</ClangAsOpt>
             <VariousControls>
-              <MiscControls></MiscControls>
-              <Define></Define>
-              <Undefine></Undefine>
+              <MiscControls/>
+              <Define/>
+              <Undefine/>
               <IncludePath>..\Inc</IncludePath>
             </VariousControls>
           </Aads>
@@ -366,15 +366,15 @@
             <noStLib>0</noStLib>
             <RepFail>1</RepFail>
             <useFile>0</useFile>
-            <TextAddressRange></TextAddressRange>
-            <DataAddressRange></DataAddressRange>
-            <pXoBase></pXoBase>
+            <TextAddressRange/>
+            <DataAddressRange/>
+            <pXoBase/>
             <ScatterFile>stm32l552xe_flash.sct</ScatterFile>
-            <IncludeLibs></IncludeLibs>
-            <IncludeLibsPath></IncludeLibsPath>
-            <Misc></Misc>
-            <LinkerInputFile></LinkerInputFile>
-            <DisabledWarnings></DisabledWarnings>
+            <IncludeLibs/>
+            <IncludeLibsPath/>
+            <Misc/>
+            <LinkerInputFile/>
+            <DisabledWarnings/>
           </LDads>
         </TargetArmAds>
       </TargetOption>
@@ -778,5 +778,20 @@
     </components>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>&lt;Project Info&gt;</LayName>
+        <LayDesc/>
+        <LayUrl/>
+        <LayKeys/>
+        <LayCat/>
+        <LayLic/>
+        <LayTarg>0</LayTarg>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

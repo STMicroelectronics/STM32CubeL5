@@ -630,7 +630,7 @@ void LowPowerRunSmpsLowPower(void)
     while (1);
   }
 
-  /* Volatage scale 0 */
+  /* Voltage scale 0 */
   __HAL_RCC_PWR_CLK_ENABLE();
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE0) != HAL_OK)
   {

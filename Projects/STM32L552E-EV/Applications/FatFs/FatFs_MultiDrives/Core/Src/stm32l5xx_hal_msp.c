@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_MultiDrives/Src/stm32l5xx_hal_msp.c
+  * @file    FatFs/FatFs_MultiDrives/Core/Src/stm32l5xx_hal_msp.c
   * @author  MCD Application Team
   * @brief   This file provides code for the MSP Initialization
   *                      and de-Initialization codes.

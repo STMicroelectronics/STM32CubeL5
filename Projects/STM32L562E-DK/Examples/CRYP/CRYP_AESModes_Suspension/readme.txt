@@ -40,6 +40,13 @@ User can use any other interruption to request the suspension.
 When all enciphering and deciphering operations are successful, LED_GREEN is turned on.
 In case of ciphering, initialization, suspension or resumption issue, LED_RED is turned on.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+Security, Cryptography, CRYPT, AES, ECB, CBC, CTR, MAC, USART
+
 @par Directory contents
 
   - CRYP/CRYP_AESModes_Suspension/Inc/stm32l5xx_hal_conf.h         HAL configuration file

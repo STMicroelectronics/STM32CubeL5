@@ -21,11 +21,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32l5xx_it.h"
+#include "usbpd.h"
+#include "tracer_emb.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#if defined(_TRACE)
-#include "tracer_emb.h"
-#endif /* _TRACE */
 #include "usbpd_hw_if.h"
 /* USER CODE END Includes */
 
@@ -216,11 +215,10 @@ void DMA1_Channel5_IRQHandler(void)
 void DMA1_Channel6_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel6_IRQn 0 */
-#if defined(_TRACE)
-  TRACER_EMB_IRQHandlerDMA();
-#endif /* _TRACE */
+
   /* USER CODE END DMA1_Channel6_IRQn 0 */
 
+  TRACER_EMB_IRQHandlerDMA();
   /* USER CODE BEGIN DMA1_Channel6_IRQn 1 */
 
   /* USER CODE END DMA1_Channel6_IRQn 1 */
@@ -246,11 +244,9 @@ void TIM6_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-#if defined(_TRACE)
-  TRACER_EMB_IRQHandlerUSART();
-#endif /* _TRACE */
 
   /* USER CODE END USART1_IRQn 0 */
+  TRACER_EMB_IRQHandlerUSART();
   /* USER CODE BEGIN USART1_IRQn 1 */
 
   /* USER CODE END USART1_IRQn 1 */
@@ -262,9 +258,10 @@ void USART1_IRQHandler(void)
 void UCPD1_IRQHandler(void)
 {
   /* USER CODE BEGIN UCPD1_IRQn 0 */
-  USBPD_PORT0_IRQHandler();
 
   /* USER CODE END UCPD1_IRQn 0 */
+  USBPD_PORT0_IRQHandler();
+
   /* USER CODE BEGIN UCPD1_IRQn 1 */
 
   /* USER CODE END UCPD1_IRQn 1 */

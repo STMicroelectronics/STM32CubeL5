@@ -40,8 +40,8 @@
 /* Public functions ----------------------------------------------------------*/
 
 /**
-  * @brief   Initilaiilze queue strcuture .
-  * @note   This function is used to initialize the global queue strcuture.  
+  * @brief   Initilaiilze queue structure .
+  * @note   This function is used to initialize the global queue structure.  
   * @param  q: pointer on queue strcture to be initialised 
   * @param  queueBuffer: pointer on Queue Buffer
   * @param  queueSize:  Size of Queue Buffer
@@ -102,7 +102,7 @@ uint8_t* CircularQueue_Add(queue_t *q, uint8_t* x, uint16_t elementSize, uint32_
       curBuffPosition = q->last;
 
       /* store the element  */
-      /* store fisrt the element size if element size is varaible */
+      /* store first the element size if element size is variable */
       if (q->elementSize == 0) 
       {
         q->qBuff[curBuffPosition++]= elementSize & 0xFF;

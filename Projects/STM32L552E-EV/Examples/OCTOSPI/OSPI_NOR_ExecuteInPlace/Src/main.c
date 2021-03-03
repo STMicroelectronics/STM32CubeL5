@@ -19,7 +19,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -53,6 +52,7 @@ extern uint32_t _ospi_nor_init_length;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+
 OSPI_HandleTypeDef hospi1;
 DMA_HandleTypeDef hdma_octospi1;
 
@@ -62,6 +62,7 @@ __IO uint8_t CmdCplt, TxCplt;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_ICACHE_Init(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_OCTOSPI1_Init(void);
@@ -110,10 +111,16 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_ICACHE_Init();
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_OCTOSPI1_Init();
   /* USER CODE BEGIN 2 */
+
+  /* Caution: Despite instruction cache is enabled, no need for cache invalidation here */
+  /*          since no previous fetch (read/execute) instructions were executed on      */
+  /*          a different memory content                                                */
+
   /* Configure the memory in octal mode ------------------------------------- */
   OSPI_OctalModeCfg(&hospi1);
 
@@ -359,6 +366,37 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
 }
 
 /**

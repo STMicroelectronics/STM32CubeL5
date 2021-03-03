@@ -25,7 +25,7 @@
   * @{
   */
 
-/** @addtogroup GPIO_SecureIOToggle
+/** @addtogroup FatFs_uSD_TrustZone
   * @{
   */
 
@@ -39,7 +39,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-static void NonSecure_main(void);
+static void NonSecure_Init(void);
 static void SystemIsolation_Config(void);
 static void SystemClock_Config(void); /* provided as example if secure sets clocks */
 HAL_StatusTypeDef MX_SDMMC1_SD_Init(SD_HandleTypeDef *hsd);
@@ -49,14 +49,8 @@ HAL_StatusTypeDef MX_SDMMC1_SD_Init(SD_HandleTypeDef *hsd);
   */
 int main(void)
 {
-  /* SAU/IDAU, FPU and interrupts secure/non-secure allocation setup done */
-  /* in SystemInit() based on partition_stm32l552xx.h file's definitions. */
-
-  /* Secure/Non-secure Memory and Peripheral isolation configuration */
-  SystemIsolation_Config();
-
-  /* Enable SecureFault handler (HardFault is default) */
-  SCB->SHCSR |= SCB_SHCSR_SECUREFAULTENA_Msk;
+  /* SAU/IDAU, FPU and Interrupts secure/non-secure allocation settings  */
+  /* already done in SystemInit() thanks to partition_stm32l552xx.h file */
 
   /* STM32L5xx **SECURE** HAL library initialization:
        - Secure Systick timer is configured by default as source of time base,
@@ -68,16 +62,18 @@ int main(void)
      */
   HAL_Init();
 
-  /* Enable Instruction cache (default 2-ways set associative cache) */
-  if(HAL_ICACHE_Enable() != HAL_OK)
-  {
-    /* Initialization Error */
-    while(1);
-  }
-
   /* Configure the System clock to have a frequency of 110 MHz */
   SystemClock_Config();
 
+  /* For better performances, enable the instruction cache in 1-way direct mapped mode */
+  HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY);
+  HAL_ICACHE_Enable();
+
+  /* Secure/Non-secure Memory and Peripheral isolation configuration */
+  SystemIsolation_Config();
+
+  /* Enable SecureFault handler (HardFault is default) */
+  SCB->SHCSR |= SCB_SHCSR_SECUREFAULTENA_Msk;
 
   /* Add your secure application code here prior to non-secure initialization
      */
@@ -102,9 +98,14 @@ int main(void)
   
 	/* Leave the GPIO clocks enabled to let non-secure having I/Os control */
 
+  /* Secure SysTick should rather be suspended before calling non-secure  */
+  /* in order to avoid wake-up from sleep mode entered by non-secure      */
+  /* The Secure SysTick shall be resumed on non-secure callable functions */
+  HAL_SuspendTick();
+
   /*************** Setup and jump to non-secure *******************************/
 
-  NonSecure_main();
+  NonSecure_Init();
 
   /* Non-secure software does not return, this code is not executed */
   while (1) {
@@ -118,7 +119,7 @@ int main(void)
   *         to non-secure state
   * @retval None
   */
-static void NonSecure_main(void)
+static void NonSecure_Init(void)
 {
   funcptr_NS NonSecure_ResetHandler;
 
@@ -144,9 +145,6 @@ static void SystemIsolation_Config(void)
 {
   uint32_t index;
   MPCBB_ConfigTypeDef MPCBB_desc;
-
-  /* At this stage  IDAU/SAU setup has already been done in SystemInit() */
-  /* based on partition_stm32l552xx.h */
 
   /* Enable GTZC peripheral clock */
   __HAL_RCC_GTZC_CLK_ENABLE();
@@ -284,7 +282,7 @@ static void SystemIsolation_Config(void)
   *            PLL_N                          = 55
   *            PLL_Q                          = 2
   *            PLL_R                          = 2
-  *            PLL_P                          = 2
+  *            PLL_P                          = 7
   *            Flash Latency(WS)              = 5
   * @retval None
   */
@@ -306,7 +304,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 55;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     /* Initialization Error */
@@ -335,8 +333,6 @@ static void SystemClock_Config(void)
     while(1);
   }
 }
-
-#ifdef  USE_FULL_ASSERT
 
 /**
   * @brief This function provides accurate delay (in milliseconds) based
@@ -392,11 +388,14 @@ HAL_StatusTypeDef MX_SDMMC1_SD_Init(SD_HandleTypeDef *hsd)
   }
   return ret;
 }
+
+#ifdef  USE_FULL_ASSERT
+
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
+  * @param  file pointer to the source file name
+  * @param  line assert_param error line source number
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)

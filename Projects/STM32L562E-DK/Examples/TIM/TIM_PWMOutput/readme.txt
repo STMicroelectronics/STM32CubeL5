@@ -66,6 +66,9 @@ The PWM waveforms can be displayed using an oscilloscope.
       to have correct HAL operation.
 	  
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timer, Output, signal, PWM, Oscilloscope, Frequency, Duty cycle, Waveform

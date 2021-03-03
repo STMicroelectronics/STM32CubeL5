@@ -66,6 +66,9 @@ The PWM waveforms can be displayed using an oscilloscope.
       to have correct HAL operation.
 	  
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timer, Output, signal, PWM, Oscilloscope, Frequency, Duty cycle, Waveform
@@ -98,6 +101,10 @@ Timer, Output, signal, PWM, Oscilloscope, Frequency, Duty cycle, Waveform
         - TIM1_CH3 : PA.10 (pin 15 in CN5 connector)
         - TIM1_CH4 : PA.11 (pin 13 in CN5 connector)
 
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

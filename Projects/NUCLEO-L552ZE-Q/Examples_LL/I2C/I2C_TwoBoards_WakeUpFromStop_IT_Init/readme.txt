@@ -46,7 +46,7 @@ SDA Pin: PB.9 (CN7, pin 4)
   |        USER       GND|_____________________|GND         USER      |
   |___STM32L5xx_Nucleo___|                     |___STM32L5xx_Nucleo___|
 
-The project is splitted in two parts the Master Board and the Slave Board
+The project is split in two parts the Master Board and the Slave Board
 - Master Board
   I2C1 Peripheral is configured in Master mode with EXTI (Clock 100Khz).
   And GPIO associated to User push-button is linked with EXTI.
@@ -87,6 +87,13 @@ LED1 is ON on Slave side if the byte is well transmitted.
 LED1 is ON on Master side if the expected byte is well received.
 
 In case of errors, LED1 is blinking slowly (1s).
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+Connectivity, I2C, Communication, Transmission, Reception, SCL, SDA, Wake up, Interrupt
 
 @par Directory contents
 

@@ -69,6 +69,10 @@ int main(void)
 {
   /* Configure the system clock to 110 MHz */
   SystemClock_Config();
+  
+  /* For better performances, enable the instruction cache in 1-way direct mapped mode */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
 
   /* Initialize LED1 */
   LED_Init();
@@ -301,14 +305,14 @@ void SystemClock_Config(void)
 void TransferComplete()
 {
   /* DMA transfer completed */
-  /* Verify the data transfered */
+  /* Verify the data transferred */
   if (Buffercmp((uint32_t*)aSRC_Const_Buffer, (uint32_t*)aDST_Buffer, BUFFER_SIZE) == 1)
   {
-    /* DMA data transfered not consistency */
+    /* DMA data transferred not consistency */
     LED_Blinking(LED_BLINK_ERROR);
   }
   
-  /* DMA data transfered consistency */
+  /* DMA data transferred consistency */
   LED_On();
 }
 

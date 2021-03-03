@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_RTOS/FatFs/Target/sram_diskio.h
+  * @file    FatFs/FatFs_uSD_RTOS/FATFS/Target/sd_diskio.h
   * @author  MCD Application Team
   * @brief   Header for sd_diskio.c module
   ******************************************************************************

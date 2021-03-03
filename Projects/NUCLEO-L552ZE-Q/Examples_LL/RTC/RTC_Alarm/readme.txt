@@ -61,6 +61,9 @@ and aShowDate variables (watch or live watch).
   - RTC/RTC_Alarm/Src/main.c                  Main program
   - RTC/RTC_Alarm/Src/system_stm32l5xx.c      STM32L5xx system source file
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 RTC, Alarm, LSE, Wake Up, Time base

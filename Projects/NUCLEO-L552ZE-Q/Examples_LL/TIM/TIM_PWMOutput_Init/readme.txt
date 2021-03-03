@@ -55,6 +55,9 @@ User push-button can be used to change the duty cycle from 0% up to 100% by
 steps of 10%. Duty cycle is periodically measured. It can be observed through
 the debugger by watching the variable uwMeasuredDutyCycle.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, TIM, Output, Signal, PWM, Frequency, Duty cycle, Waveform, Auto-reload.

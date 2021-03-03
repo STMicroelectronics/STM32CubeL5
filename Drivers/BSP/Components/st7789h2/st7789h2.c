@@ -648,10 +648,10 @@ int32_t ST7789H2_DrawBitmap(ST7789H2_Object_t *pObj, uint32_t Xpos, uint32_t Ypo
   /* Get image width */
   width = ((uint32_t)pBmp[21] << 24) | ((uint32_t)pBmp[20] << 16) | ((uint32_t)pBmp[19] << 8) | (uint32_t)pBmp[18];
   width--;
-  /* Get image heigth */
+  /* Get image height */
   height = ((uint32_t)pBmp[25] << 24) | ((uint32_t)pBmp[24] << 16) | ((uint32_t)pBmp[23] << 8) | (uint32_t)pBmp[22];
   height--;
-  /* Get size of datas */
+  /* Get size of data */
   size = size - index;
   size = size / 2U;
 

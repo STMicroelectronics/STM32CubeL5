@@ -28,6 +28,7 @@
 #include "stm32l5xx_ll_utils.h"
 #include "stm32l5xx_ll_gpio.h"
 #include "stm32l5xx_ll_exti.h"
+#include "stm32l5xx_ll_icache.h"
 #include "stm32l5xx_ll_usart.h"
 #include "stm32l5xx_ll_pwr.h"
 #if defined(USE_FULL_ASSERT)

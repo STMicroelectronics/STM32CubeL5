@@ -34,6 +34,9 @@ Different configuration will be observed
 
 When user press User push-button, a LED1 toggle is done to indicate a change in MCO config.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, RCC, PLL, HSI, PLLCLK, SYSCLK, HSE, Clock, Oscillator

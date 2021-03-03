@@ -45,6 +45,9 @@ the Energy Expanded field is reset.
 STM32 BLE Profiles smartphone application does not support these options but other smartphone applications
 can be found on the internet and used to test these features.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, BLE, Bluetooth, BlueNRG-MS, BLE pairing, BLE profile, BLE protocol, HCI, SPI
@@ -66,7 +69,7 @@ Connectivity, BLE, Bluetooth, BlueNRG-MS, BLE pairing, BLE profile, BLE protocol
  - BLE/Common/                                These files are Common also to other applic/examples then HeartRate
  - BLE/Common/ble_core/*.*                    BlueNRG-MS Bluetooth Low Energy device driver
  - BLE/Common/ble_services/*.*                GATT services according to BLE spec
- - BLE/Common/debug/*.*                       Code usefull for debugging (DBG should be activated in config.h)
+ - BLE/Common/debug/*.*                       Code useful for debugging (DBG should be activated in config.h)
  - BLE/Common/tl/*.*                          HCI layer and SPI protocol
  - BLE/Common/hw/*.*                          HW board and device dependencies (SPI pins, timeserver, low power)
  - BLE/Common/utilities/*.*                   Scheduler, memory/queue/fifo/list management, otp, etc

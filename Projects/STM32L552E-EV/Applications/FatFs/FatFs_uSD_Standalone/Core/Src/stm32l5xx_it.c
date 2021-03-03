@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_DMA/Core/Src/stm32l5xx_it.c
+  * @file    FatFs/FatFs_uSD_Standalone/Core/Src/stm32l5xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************

@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
+extern DMA_HandleTypeDef hdma_hash_in;
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
@@ -74,6 +75,11 @@ void HAL_MspInit(void)
 
   /* System interrupt init*/
 
+  /* Peripheral interrupt init */
+  /* GTZC_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(GTZC_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(GTZC_IRQn);
+
   /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
   HAL_PWREx_DisableUCPDDeadBattery();
@@ -83,66 +89,87 @@ void HAL_MspInit(void)
   /* USER CODE END MspInit 1 */
 }
 
+/**
+* @brief HASH MSP Initialization
+* This function configures the hardware resources used in this example
+* @param hhash: HASH handle pointer
+* @retval None
+*/
+void HAL_HASH_MspInit(HASH_HandleTypeDef* hhash)
+{
+  /* USER CODE BEGIN HASH_MspInit 0 */
+
+  /* USER CODE END HASH_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_HASH_CLK_ENABLE();
+
+    /* HASH DMA Init */
+    /* HASH_IN Init */
+    hdma_hash_in.Instance = DMA2_Channel7;
+    hdma_hash_in.Init.Request = DMA_REQUEST_HASH_IN;
+    hdma_hash_in.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_hash_in.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_hash_in.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_hash_in.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    hdma_hash_in.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+    hdma_hash_in.Init.Mode = DMA_NORMAL;
+    hdma_hash_in.Init.Priority = DMA_PRIORITY_HIGH;
+    if (HAL_DMA_Init(&hdma_hash_in) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    if (HAL_DMA_ConfigChannelAttributes(&hdma_hash_in, DMA_CHANNEL_NPRIV) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    if (HAL_DMA_ConfigChannelAttributes(&hdma_hash_in, DMA_CHANNEL_SEC) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    if (HAL_DMA_ConfigChannelAttributes(&hdma_hash_in, DMA_CHANNEL_SRC_NSEC) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    if (HAL_DMA_ConfigChannelAttributes(&hdma_hash_in, DMA_CHANNEL_DEST_SEC) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    __HAL_LINKDMA(hhash,hdmain,hdma_hash_in);
+
+  /* USER CODE BEGIN HASH_MspInit 1 */
+
+  /* USER CODE END HASH_MspInit 1 */
+
+}
+
+/**
+* @brief HASH MSP De-Initialization
+* This function freeze the hardware resources used in this example
+* @param hhash: HASH handle pointer
+* @retval None
+*/
+void HAL_HASH_MspDeInit(HASH_HandleTypeDef* hhash)
+{
+  /* USER CODE BEGIN HASH_MspDeInit 0 */
+
+  /* USER CODE END HASH_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_HASH_CLK_DISABLE();
+
+    /* HASH DMA DeInit */
+    HAL_DMA_DeInit(hhash->hdmain);
+  /* USER CODE BEGIN HASH_MspDeInit 1 */
+
+  /* USER CODE END HASH_MspDeInit 1 */
+
+}
+
 /* USER CODE BEGIN 1 */
-/**
-  * @brief  Initializes the HASH MSP.
-  *        This function configures the hardware resources used in this example:
-  *           - HASH's clock enable
-  *           - DMA's clocks enable
-  * @param  hhash: HASH handle pointer
-  * @retval None
-  */
-void HAL_HASH_MspInit(HASH_HandleTypeDef *hhash)
-{
-  static DMA_HandleTypeDef  hdma_hash;
-
-  /* Enable HASH clock */
-  __HAL_RCC_HASH_CLK_ENABLE();
-
-  /* Enable DMA clocks */
-  __HAL_RCC_DMA2_CLK_ENABLE();
-  __HAL_RCC_DMAMUX1_CLK_ENABLE();
-
-  /***************** Configure common DMA In parameters ***********************/
-  hdma_hash.Init.Request             = DMA_REQUEST_HASH_IN;
-  hdma_hash.Init.Direction           = DMA_MEMORY_TO_PERIPH;
-  hdma_hash.Init.PeriphInc           = DMA_PINC_DISABLE;
-  hdma_hash.Init.MemInc              = DMA_MINC_ENABLE;
-  hdma_hash.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
-  hdma_hash.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
-  hdma_hash.Init.Mode                = DMA_NORMAL;
-  hdma_hash.Init.Priority            = DMA_PRIORITY_HIGH;
-  hdma_hash.Instance                 = DMA2_Channel7;
-
-  /* Associate the DMA handle */
-  __HAL_LINKDMA(hhash, hdmain, hdma_hash);
-
-  /* Configure the DMA channel */
-  HAL_DMA_Init(hhash->hdmain);
-
-  /* Set Channel secure attributes: channel secure, source non-secure (non-secure SRAM), destination secure (HASH) */
-  HAL_DMA_ConfigChannelAttributes(hhash->hdmain, DMA_CHANNEL_SEC | DMA_CHANNEL_SRC_NSEC | DMA_CHANNEL_DEST_SEC);
-
-  /* NVIC configuration for DMA Input data interrupt */
-  HAL_NVIC_SetPriority(DMA2_Channel7_IRQn, 0x07, 0x00);
-  HAL_NVIC_EnableIRQ(DMA2_Channel7_IRQn);
-}
-
-/**
-  * @brief  DeInitializes the HASH MSP.
-  *        This function disables the peripheral.
-  * @param  hhash: HASH handle pointer
-  * @retval None
-  */
-void HAL_HASH_MspDeInit(HASH_HandleTypeDef *hhash)
-{
-  /* Disable HASH clock */
-  __HAL_RCC_HASH_CLK_DISABLE();
-
-  /* Reset HASH peripheral */
-  __HAL_RCC_HASH_FORCE_RESET();
-  __HAL_RCC_HASH_RELEASE_RESET();
-}
 
 /* USER CODE END 1 */
 

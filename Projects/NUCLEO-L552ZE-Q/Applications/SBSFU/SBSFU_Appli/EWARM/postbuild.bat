@@ -53,7 +53,7 @@ exit 0
 goto exe:
 goto py:
 :exe
-::line for window executeable
+::line for window executable
 echo Postbuild with windows executable
 set "imgtool=%mcuboot_dir%\scripts\dist\imgtool\imgtool.exe"
 set "python="

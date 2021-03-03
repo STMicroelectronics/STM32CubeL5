@@ -254,7 +254,7 @@ uint32_t WavProcess_DecSetProgressTime(uint32_t NewTime)
 * @param  fLength: File length.
 * @retval return the stream length.
 */
-uint32_t WavProcess_DecGetStreamLenght(uint32_t fLength)
+uint32_t WavProcess_DecGetStreamLength(uint32_t fLength)
 {
   return (uint32_t)(((fLength - DecWavFmtStruct.AudioStartAddr) /
                      ((DecWavFmtStruct.BitsPerSample/8) * DecWavFmtStruct.NumChannels)) /
@@ -525,7 +525,7 @@ uint32_t WavProcess_EncodeData(int8_t *pBufIn, int8_t *pBufOut, uint32_t* nEnc, 
 {
   if (WavEncInited)
   {
-    /* Retrun the same buffer without processing */
+    /* Return the same buffer without processing */
     *(uint32_t*)pBufOut = (uint32_t)pBufIn;
 
     /* Update the total audio data size */

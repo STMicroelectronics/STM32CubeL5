@@ -530,9 +530,7 @@
                 </option>
                 <option>
                     <name>ADefines</name>
-                    <state>configENABLE_FPU=0</state>
-                    <state>configENABLE_MPU=1</state>
-                    <state>configENABLE_TRUSTZONE=0</state>
+                    <state></state>
                 </option>
                 <option>
                     <name>AList</name>
@@ -624,7 +622,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\Inc</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>

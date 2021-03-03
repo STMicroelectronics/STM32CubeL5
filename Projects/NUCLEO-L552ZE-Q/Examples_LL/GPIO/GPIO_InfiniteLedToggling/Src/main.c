@@ -51,7 +51,11 @@ int main(void)
   /* Configure the system clock to 110 MHz */
   SystemClock_Config();
   
-  /* -2- Configure IO in output push-pull mode to drive external LED */
+  /* For better performances, enable the instruction cache in 1-way direct mapped mode */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  
+  /* Configure IO in output push-pull mode to drive external LED */
   Configure_GPIO();
 
   /* Toggle IO in an infinite loop */

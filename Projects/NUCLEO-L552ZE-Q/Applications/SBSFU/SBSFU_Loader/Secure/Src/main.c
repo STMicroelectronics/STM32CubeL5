@@ -142,7 +142,7 @@ static void  unsecure_sram1(uint32_t offset_start, uint32_t offset_end)
   uint32_t block_end = offset_end / (256);
 
   if (offset_start & 0xff)
-    /*  Check alignment to avoid futher problem  */
+    /*  Check alignment to avoid further problem  */
     /*  FIX ME  */
     while (1);
 

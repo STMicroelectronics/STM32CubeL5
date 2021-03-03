@@ -284,7 +284,7 @@ else
   Error_Callback();
 }
   /* USER CODE END I2C1_EV_IRQn 0 */
-  
+
   /* USER CODE BEGIN I2C1_EV_IRQn 1 */
 
   /* USER CODE END I2C1_EV_IRQn 1 */
@@ -299,7 +299,7 @@ void I2C1_ER_IRQHandler(void)
   /* Call Error function */
   Error_Callback();
   /* USER CODE END I2C1_ER_IRQn 0 */
-  
+
   /* USER CODE BEGIN I2C1_ER_IRQn 1 */
 
   /* USER CODE END I2C1_ER_IRQn 1 */

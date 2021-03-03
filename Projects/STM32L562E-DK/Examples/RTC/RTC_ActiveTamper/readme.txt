@@ -42,7 +42,7 @@ This example performs the following:
 2. Run the software
 3. It configures the Active Tamper Input associated to an Output and enables the interrupt.
 4. It writes  data to the RTC Backup registers, then check if the data are correctly written.
-5. It updates the seed (optionnal).
+5. It updates the seed (optional).
 6. Please disconnect the pins. 
 7. The RTC backup register are reset and the Tamper interrupt is generated.
    The firmware then checks if the RTC Backup register are cleared.
@@ -55,8 +55,11 @@ This example performs the following:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

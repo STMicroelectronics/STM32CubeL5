@@ -71,6 +71,9 @@ Other peripherals used:
   1 GPIO for analog input: PC.03 (Arduino connector CN9 pin A2, Morpho connector CN11 pin 37)
   DMA
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 ADC, analog digital converter, conversion, voltage, channel, analog input, DMA transfer

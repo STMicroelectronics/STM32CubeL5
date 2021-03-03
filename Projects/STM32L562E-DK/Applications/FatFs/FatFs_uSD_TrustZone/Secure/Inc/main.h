@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_TrustZone/Secure/Src/main.h
+  * @file    FatFs/FatFs_uSD_TrustZone/Secure/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************

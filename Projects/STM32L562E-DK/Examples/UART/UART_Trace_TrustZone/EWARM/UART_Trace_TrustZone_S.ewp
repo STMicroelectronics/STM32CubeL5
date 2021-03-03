@@ -357,6 +357,7 @@
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1086,6 +1087,9 @@
     <group>
       <name>STM32L5xx_HAL_Driver</name>
       <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</name>
       </file>
       <file>
@@ -1131,9 +1135,6 @@
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</name>
-      </file>
-      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
       </file>
       <file>
@@ -1154,6 +1155,15 @@
       <file>
         <name>$PROJ_DIR$/../Secure/Src/system_stm32l5xx_s.c</name>
       </file>
+    </group>
+    <group>
+      <name>BSP</name>
+      <group>
+        <name>STM32L562E-DK</name>
+        <file>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
+        </file>
+      </group>
     </group>
   </group>
 </project>

@@ -93,6 +93,11 @@
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_i2c_ex.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_icache.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_pwr.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-6-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pwr.c</locationURI>

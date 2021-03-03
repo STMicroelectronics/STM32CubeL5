@@ -46,6 +46,9 @@ Other peripheral used:
   1 GPIO for push button
   1 GPIO for DAC channel output PA.04 (Arduino connector CN7 pin 9, Morpho connector CN11 pin 32)
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Analog, DAC, Conversion, Voltage output, Oscilloscope, Signal, Software trigger.

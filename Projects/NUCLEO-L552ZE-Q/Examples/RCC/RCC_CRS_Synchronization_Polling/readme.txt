@@ -44,6 +44,9 @@ In this test, there are results which could occur:
 
 Note: HSI48 frequency can be checked with oscilloscope using MCO PIN PA.08
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 RCC, System, Clock Configuration, CRS, System clock, HSI48, LSE, Oscillator, PLL, Polling

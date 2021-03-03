@@ -99,6 +99,9 @@ The sections below describe the features of each sub-demonstration.
   the demonstration firmware version
  Exit is done by tapping on the BACK icon.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Demonstration, BLE, Bluetooth, BlueNRG-MS, Sensors, Accelerometer, Gyroscope, BLE pairing, BLE profile

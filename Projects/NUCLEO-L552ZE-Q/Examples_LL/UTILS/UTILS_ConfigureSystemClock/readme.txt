@@ -33,6 +33,9 @@ A LED1 toggle of 1sec provides this information that system is well configured t
 
 Anyway, user can connect on oscilloscope to MCO pin (PA.08) to check requested frequency: 50MHz
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, Utils, Clock, HSI, PLL, flash latency, SYSCLK, frequency, Oscilloscope

@@ -42,6 +42,9 @@ At end of transmission, both received buffers are compared to expected ones.
 In case of both transfers successfully completed, LED1 is turned on.
 In case of errors, LED1 is blinking Slowly (1s).
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, UART/USART, Synchronous, Interrupt, SPI interface, Receiver, Transmitter, full-duplex

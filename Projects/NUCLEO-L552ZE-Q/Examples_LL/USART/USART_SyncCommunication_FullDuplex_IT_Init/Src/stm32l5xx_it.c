@@ -230,8 +230,8 @@ void DMA1_Channel1_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
   if (LL_DMA_IsActiveFlag_TC1(DMA1))
   {
-    LL_DMA_ClearFlag_GI1(DMA1);
-    /* Call function Tranmission complete Callback */
+    LL_DMA_ClearFlag_TC1(DMA1);
+    /* Call function Transmission complete Callback */
     SPI1_DMA1_TransmitComplete_Callback();
   }
   else if (LL_DMA_IsActiveFlag_TE1(DMA1))
@@ -240,7 +240,7 @@ void DMA1_Channel1_IRQHandler(void)
     SPI_TransferError_Callback();
   }
   /* USER CODE END DMA1_Channel1_IRQn 0 */
-  
+
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
 
   /* USER CODE END DMA1_Channel1_IRQn 1 */
@@ -254,7 +254,7 @@ void DMA1_Channel2_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel2_IRQn 0 */
   if (LL_DMA_IsActiveFlag_TC2(DMA1))
   {
-    LL_DMA_ClearFlag_GI2(DMA1);
+    LL_DMA_ClearFlag_TC2(DMA1);
     /* Call function Reception complete Callback */
     SPI1_DMA1_ReceiveComplete_Callback();
   }
@@ -264,7 +264,7 @@ void DMA1_Channel2_IRQHandler(void)
     SPI_TransferError_Callback();
   }
   /* USER CODE END DMA1_Channel2_IRQn 0 */
-  
+
   /* USER CODE BEGIN DMA1_Channel2_IRQn 1 */
 
   /* USER CODE END DMA1_Channel2_IRQn 1 */
@@ -310,7 +310,7 @@ void USART1_IRQHandler(void)
     /* Clear TC flag */
     LL_USART_ClearFlag_TC(USART1);
     /* Call function in charge of handling end of transmission of sent character
-       and prepare next charcater transmission */
+       and prepare next character transmission */
     USART_CharTransmitComplete_Callback();
   }
 

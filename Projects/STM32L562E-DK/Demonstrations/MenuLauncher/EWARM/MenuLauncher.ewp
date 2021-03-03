@@ -360,7 +360,6 @@
           <state>$PROJ_DIR$\..\..\Config</state>
           <state>$PROJ_DIR$\..\TouchGFX\gui\include</state>
           <state>$PROJ_DIR$\..\TouchGFX\target\</state>
-          <state>$PROJ_DIR$\..\TouchGFX\platform\os</state>
           <state>$PROJ_DIR$\..\TouchGFX\generated\fonts\include</state>
           <state>$PROJ_DIR$\..\TouchGFX\generated\images\include</state>
           <state>$PROJ_DIR$\..\TouchGFX\generated\texts\include</state>

@@ -44,7 +44,7 @@ configurated to operate in SPI mode with rising edge and with internal clock.
 
 DFSDM filter 0 will be used to perform voltage and current conversions.
 We will use a SINC3 filter with oversampling at 64 and integrator oversampling at 64 (for averaging).
-Injected conversions in scan mode on channels 2 and 3 will be perfomed in interrupt mode.
+Injected conversions in scan mode on channels 2 and 3 will be performed in interrupt mode.
 A timer will be used to periodically launch new injected conversions (every second).
 When new conversion values are available, temperature is computed and displayed on LCD.
 
@@ -55,8 +55,11 @@ When new conversion values are available, temperature is computed and displayed 
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -87,6 +90,10 @@ Analog, DFSDM, Thermometer, Thermistor, Sigma delta modulator
     - Make sure that SB2, SB5 and SB97 are in default open state.
     - Set SB3 in close state.
     - Remove C16.
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

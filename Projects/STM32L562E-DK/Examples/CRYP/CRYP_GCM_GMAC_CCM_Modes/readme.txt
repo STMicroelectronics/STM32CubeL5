@@ -43,6 +43,13 @@ This example successively carries out
 When all ciphering and tag generation are successful, LED_GREEN is turned on.
 In case of ciphering or tag generation issue, LED_RED is turned on.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+Security, Cryptography, CRYPT, AESGCM, AESGMAC, AESCCM
+
 @par Directory contents
 
   - CRYP/CRYP_GCM_GMAC_CCM_Modes/Inc/stm32l5xx_hal_conf.h         HAL configuration file

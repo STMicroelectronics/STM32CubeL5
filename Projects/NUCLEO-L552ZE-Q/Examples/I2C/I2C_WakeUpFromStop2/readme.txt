@@ -53,7 +53,7 @@ the configuration of the needed I2C resources according to the used hardware (CL
 GPIO and NVIC). You may update this function to change I2C configuration.
 
 The I2C communication is then initiated.
-The project is splitted in two parts the Master Board and the Slave Board
+The project is split in two parts the Master Board and the Slave Board
 - Master Board
   The HAL_I2C_Master_Receive_IT() and the HAL_I2C_Master_Transmit_IT() functions 
   allow respectively the reception and the transmission of a predefined data buffer
@@ -93,8 +93,11 @@ NUCLEO-L552ZE-Q C-02's LEDs can be used to monitor the transfer status on the Sl
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

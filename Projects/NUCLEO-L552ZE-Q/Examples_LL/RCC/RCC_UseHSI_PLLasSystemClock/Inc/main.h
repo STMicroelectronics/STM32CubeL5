@@ -28,6 +28,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "stm32l5xx_ll_icache.h"
 #include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_crs.h"
 #include "stm32l5xx_ll_rcc.h"
@@ -37,7 +38,6 @@ extern "C" {
 #include "stm32l5xx_ll_cortex.h"
 #include "stm32l5xx_ll_utils.h"
 #include "stm32l5xx_ll_dma.h"
-#include "stm32l5xx.h"
 #include "stm32l5xx_ll_gpio.h"
 
 #if defined(USE_FULL_ASSERT)

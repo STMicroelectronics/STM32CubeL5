@@ -19,7 +19,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -100,7 +99,9 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  /* Configure the system clock to 110 MHz */
+  /* Initialize LED4 and LED5 */
+  BSP_LED_Init(LED4);
+  BSP_LED_Init(LED5);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -113,9 +114,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_ICACHE_Init();
   /* USER CODE BEGIN 2 */
-  /* Initialize LED4 and LED5 */
-  BSP_LED_Init(LED4);
-  BSP_LED_Init(LED5);
 
   /* Disable instruction cache prior to internal cacheable memory update */
   if (HAL_ICACHE_Disable() != HAL_OK)
@@ -305,8 +303,12 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
-  /** Enable instruction cache (default 2-ways set associative cache)
+  /** Enable instruction cache in 1-way (direct mapped cache)
   */
+  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
+  {
+    Error_Handler();
+  }
   if (HAL_ICACHE_Enable() != HAL_OK)
   {
     Error_Handler();

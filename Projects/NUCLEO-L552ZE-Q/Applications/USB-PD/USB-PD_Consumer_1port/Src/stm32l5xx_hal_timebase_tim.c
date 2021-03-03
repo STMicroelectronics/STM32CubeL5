@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    stm32l5xx_hal_timebase_TIM.c 
+  * @file    stm32l5xx_hal_timebase_tim.c 
   * @brief   HAL time base based on the hardware TIM.
   ******************************************************************************
   * @attention
@@ -58,9 +58,8 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
 
   /* Compute TIM6 clock */
   uwTimclock = HAL_RCC_GetPCLK1Freq();
-
   /* Compute the prescaler value to have TIM6 counter clock equal to 1MHz */
-  uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000) - 1);
+  uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000U) - 1U);
 
   /* Initialize TIM6 */
   htim6.Instance = TIM6;
@@ -71,7 +70,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
   + ClockDivision = 0
   + Counter direction = Up
   */
-  htim6.Init.Period = (1000000 / 1000) - 1;
+  htim6.Init.Period = (1000000U / 1000U) - 1U;
   htim6.Init.Prescaler = uwPrescalerValue;
   htim6.Init.ClockDivision = 0;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;

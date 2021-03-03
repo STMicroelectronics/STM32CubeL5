@@ -31,7 +31,7 @@
 /** @addtogroup BSP
   * @{
   */
-#define CONF_OSPI_RAM_ODS                         ISS66WVH8M8_CR0_DS_34   /* ISS66WVH8M8 Output Driver Strenght         */
+#define CONF_OSPI_RAM_ODS                         ISS66WVH8M8_CR0_DS_34   /* ISS66WVH8M8 Output Driver Strength         */
 
 #define RW_RECOVERY_TIME                          3 /* 40ns @ 60MHz */
 #define DEFAULT_INITIAL_LATENCY                   6

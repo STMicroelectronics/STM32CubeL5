@@ -30,9 +30,12 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l5xx_hal.h"
 
+/* Usage of nucleo board */
+#define USE_NUCLEO_144      1U
+
 /* Usage of COM feature */
-#define USE_BSP_COM_FEATURE 1U
-#define USE_COM_LOG         1U
+#define USE_BSP_COM_FEATURE 0U
+#define USE_COM_LOG         0U
 
 /* Button user interrupt priority */
 #define BSP_BUTTON_USER_IT_PRIORITY 0x07UL  /* Default is lowest priority level */

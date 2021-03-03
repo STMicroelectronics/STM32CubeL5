@@ -34,6 +34,13 @@ After a reset when re-entering in the main, RCC WWDG Reset Flag will be checked 
 
 Waiting a new User push-button pressed to re-activate the WWDG
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+System, WWDG, Timeout, Refresh, Counter update, MCU Reset, Downcounter, Event, Window
+
 @par Directory contents 
 
   - WWDG/WWDG_RefreshUntilUserEvent_Init/Inc/stm32l5xx_it.h          Interrupt handlers header file

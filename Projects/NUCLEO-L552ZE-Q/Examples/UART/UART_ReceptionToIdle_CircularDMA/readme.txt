@@ -109,6 +109,9 @@ position of the transmitted data.
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, UART/USART, baud rate, RS-232, full-duplex, DMA, parity, stop bit, Receiver, Asynchronous
@@ -128,7 +131,7 @@ Connectivity, UART/USART, baud rate, RS-232, full-duplex, DMA, parity, stop bit,
 @par Hardware and Software environment
 
   - This example runs on STM32L552ZETx devices.
-  - This example has been tested with two NUCLEO-L552ZE-Q boards embedding
+  - This example has been tested with one NUCLEO-L552ZE-Q board embedding
     a STM32L552ZETx device and can be easily tailored to any other supported device
     and development board.
 

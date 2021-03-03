@@ -16,7 +16,7 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef HX8347I_REG_H
@@ -24,7 +24,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
@@ -44,9 +44,9 @@ extern "C" {
 /** @defgroup HX8347I_REG_Exported_Constants HX8347I_REG Exported Constants
   * @{
   */
-/** 
-* @brief  HX8347I Registers Page 0
-*/
+/**
+  * @brief  HX8347I Registers Page 0
+  */
 #define HX8347I_HIMAX_ID                        0x00U
 #define HX8347I_DISPLAY_MODE_CTRL               0x01U
 #define HX8347I_COLUMN_ADDRESS_START2           0x02U
@@ -154,9 +154,9 @@ extern "C" {
 #define HX8347I_POWER_SAVING_INTERNAL_CTRL6     0xF4U
 #define HX8347I_PAGE_SELECT                     0xFFU
 
-/** 
-* @brief  HX8347I Registers Page 1
-*/
+/**
+  * @brief  HX8347I Registers Page 1
+  */
 #define HX8347I_DGC_CTRL                        0x00U
 #define HX8347I_DGC_LUT_START                   0x01U  /* 99 bytes LUT 0x01U-0x63*/
 #define HX8347I_CE_CTRL1                        0x70U
@@ -174,9 +174,9 @@ extern "C" {
 
 /** @defgroup HX8347I_REG_Exported_Types HX8347I_REG Exported Types
   * @{
-  */ 
-typedef int32_t (*HX8347I_Write_Func)(void *, uint16_t, uint8_t*, uint32_t);
-typedef int32_t (*HX8347I_Read_Func) (void *, uint16_t, uint8_t*, uint32_t);
+  */
+typedef int32_t (*HX8347I_Write_Func)(void *, uint16_t, uint8_t *, uint32_t);
+typedef int32_t (*HX8347I_Read_Func)(void *, uint16_t, uint8_t *, uint32_t);
 
 typedef struct
 {
@@ -190,12 +190,12 @@ typedef struct
 
 /** @defgroup HX8347I_REG_Exported_Functions HX8347I_REG Exported Functions
   * @{
-  */ 
+  */
 int32_t hx8347i_write_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint32_t length);
 int32_t hx8347i_read_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint32_t length);
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
@@ -203,7 +203,7 @@ int32_t hx8347i_read_reg(HX8347I_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint3
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

@@ -226,7 +226,6 @@
           <name>CCDefines</name>
           <state>USE_HAL_DRIVER</state>
           <state>STM32L562xx</state>
-          <state>STM32L552xx</state>
         </option>
         <option>
           <name>CCPreprocFile</name>

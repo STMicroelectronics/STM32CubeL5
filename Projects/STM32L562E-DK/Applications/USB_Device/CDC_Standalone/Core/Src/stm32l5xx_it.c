@@ -45,8 +45,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern TIM_HandleTypeDef    TimHandle;
-extern UART_HandleTypeDef UartHandle;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

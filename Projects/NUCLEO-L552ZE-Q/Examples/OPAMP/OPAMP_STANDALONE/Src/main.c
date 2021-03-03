@@ -19,7 +19,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -63,10 +62,10 @@ __IO uint32_t UserButtonStatus = 0;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_OPAMP2_Init(void);
 static void MX_DAC1_Init(void);
 static void MX_TIM2_Init(void);
-static void MX_ICACHE_Init(void);
 /* USER CODE BEGIN PFP */
 static void OPAMP_Config_Power(uint32_t powermode);
 /* USER CODE END PFP */
@@ -166,10 +165,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
+  MX_ICACHE_Init();
   MX_OPAMP2_Init();
   MX_DAC1_Init();
   MX_TIM2_Init();
-  MX_ICACHE_Init();
   /* USER CODE BEGIN 2 */
 
   /*##- Configure and enable the User push-button in EXTI mode used as DMA external request signal #####*/
@@ -331,8 +330,12 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
-  /** Enable instruction cache (default 2-ways set associative cache)
+  /** Enable instruction cache in 1-way (direct mapped cache)
   */
+  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
+  {
+    Error_Handler();
+  }
   if (HAL_ICACHE_Enable() != HAL_OK)
   {
     Error_Handler();
@@ -362,7 +365,7 @@ static void MX_OPAMP2_Init(void)
   hopamp2.Init.PowerSupplyRange = OPAMP_POWERSUPPLY_HIGH;
   hopamp2.Init.Mode = OPAMP_FOLLOWER_MODE;
   hopamp2.Init.NonInvertingInput = OPAMP_NONINVERTINGINPUT_DAC_CH;
-  hopamp2.Init.PowerMode = OPAMP_POWERMODE_NORMAL;
+  hopamp2.Init.PowerMode = OPAMP_POWERMODE_NORMALPOWER;
   hopamp2.Init.UserTrimming = OPAMP_TRIMMING_FACTORY;
   if (HAL_OPAMP_Init(&hopamp2) != HAL_OK)
   {

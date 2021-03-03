@@ -1,9 +1,9 @@
 /**
   @page BSP  Example on how to use the BSP drivers
-  
+
   @verbatim
   ******************************************************************************
-  * @file    readme.txt 
+  * @file    readme.txt
   * @author  MCD Application Team
   * @brief   Description of the BSP example.
   ******************************************************************************
@@ -19,11 +19,11 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Example Description
 
 How to use the different BSP drivers of the board.
 
-Considered board is STM32L552E-EV. 
+Considered board is STM32L552E-EV.
 
 The project configures the maximum system clock frequency at 110Mhz.
 
@@ -33,22 +33,22 @@ The project configures the maximum system clock frequency at 110Mhz.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-This example shows how to use the different functionalities of components 
+This example shows how to use the different functionalities of components
 available on the board by switching between all tests using Wakeup button.
 
 Red LED toggles every 500ms whenever any error is detected.
 
- ** Push the Wakeup push-button to start first Test.  
+ ** Push the Wakeup push-button to start first Test.
 Press Wakeup push-button to start another test:
 
  ** LED **
 This example shows how to switch on, switch off, toggle all leds.
 
  ** JOYSTICK **
-Use the joystick button to move a pointer inside a rectangle 
+Use the joystick button to move a pointer inside a rectangle
 (up/down/right/left) and change the pointer color(select).
 
  ** LCD **
@@ -63,26 +63,26 @@ This example shows how to play/pause/resume or change the volume (min 50% / max 
 of an audio playback using Key or Joystick button.
 
       Plug a headphone to the CN21 connector to hear the sound  /!\ Take care of yours ears.
-      Default volume is 60%.
+      Default volume is 80%.
       A press of JOY_SEL button will pause the audio file play (LED green ON
        and LED orange ON).
       Another press on JOY_SEL button will resumes audio file play (only LED green ON)
-      @Note: Copy file 'audio.bin' (available in BSP\AudioFile folder) directly in the flash 
+      @Note: Copy file 'audio.bin' (available in BSP\AudioFile folder) directly in the flash
       at @0x08040000 using STM32CubeProgrammer.
 
  ** AUDIO RECORD **
-This example will use microphones available on the board. Automatically, sound 
+This example will use microphones available on the board. Automatically, sound
 will be recorded and played on the CN21 connector.
 LED green will blink during record.
 
  ** SD **
-This example shows how to erase, write and read the SD card and also 
+This example shows how to erase, write and read the SD card and also
 how to detect the presence of the card.
 
  ** SRAM **
-This example shows how to erase, write and read data available on the external 
+This example shows how to erase, write and read data available on the external
 SRAM available on the board.
-@note : Due to IO sharing between FMC and LTDC interfaces, LCD display is switched off 
+@note : Due to IO sharing between FMC and LTDC interfaces, LCD display is switched off
 during SRAM operations (specially noticeable for few seconds during SRAM erase)
 
   ** OSPI NOR **
@@ -93,12 +93,15 @@ available on the board.
 This example shows how to write and read data available on the Octal HyperRAM memory
 available on the board.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
-BSP, Board Support Package, Audio Play, Audio Record, Button, Display, LCD, Headphone, Microphone, 
+BSP, Board Support Package, Audio Play, Audio Record, Button, Display, LCD, Headphone, Microphone,
 Joystick, LED, OctoSPI NOR Flash, OctoSPI HyperRAM, SD Card, SRAM, Touchscreen
 
-@par Directory contents 
+@par Directory contents
 
   - BSP/Src/main.c                 Main program
   - BSP/Src/system_stm32l5xx.c     STM32L5xx system clock configuration file
@@ -122,15 +125,19 @@ Joystick, LED, OctoSPI NOR Flash, OctoSPI HyperRAM, SD Card, SRAM, Touchscreen
   - BSP/Inc/mx25lm51245g_conf.h    OSPI NOR memory configuration file
   - BSP/Inc/iss66wvh8m8_conf.h     OSPI RAM memory configuration file
   - BSP/AudioFile/audio.bin        Audio wave extract.
-        
-@par Hardware and Software environment  
+
+@par Hardware and Software environment
 
   - This template runs on STM32L552ZETxQ devices without security enabled (TZEN=0).
 
   - This template has been tested with STMicroelectronics STM32L552E-EV (MB1372)
     board and can be easily tailored to any other supported device
     and development board.
-  
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
+
 @par How to use it ?
 
 In order to make the program work, you must do the following :

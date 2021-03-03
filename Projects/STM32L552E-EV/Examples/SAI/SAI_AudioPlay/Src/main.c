@@ -20,7 +20,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -50,6 +49,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+
 SAI_HandleTypeDef hsai_BlockB1;
 DMA_HandleTypeDef hdma_sai1_b;
 
@@ -73,6 +73,7 @@ __IO int16_t UpdatePointer = -1;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_ICACHE_Init(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_SAI1_Init(void);
@@ -112,7 +113,11 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  /* Configure LED4 */
+  BSP_LED_Init(LED4);
 
+  /* Configure LED5 */
+  BSP_LED_Init(LED5);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -120,15 +125,10 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
-  /* Configure LED4 */
-  BSP_LED_Init(LED4);
-
-  /* Configure LED5 */
-  BSP_LED_Init(LED5);
-
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_ICACHE_Init();
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_SAI1_Init();
@@ -164,7 +164,7 @@ int main(void)
 
   audio_drv               = (AUDIO_Drv_t *)&CS42L51_Driver;
   comp_out_obj            = &CS42L51Obj;
-  codec_init.Resolution   = CS42L51_RESOLUTION_16b;
+  codec_init.Resolution   = CS42L51_RESOLUTION_16B;
   codec_init.Frequency    = AUDIO_FREQUENCY_22K;
   codec_init.InputDevice  = CS42L51_IN_NONE;
   codec_init.OutputDevice = CS42L51_OUT_HEADPHONE;
@@ -207,7 +207,7 @@ int main(void)
     int position = UpdatePointer;
     UpdatePointer = -1;
 
-    /* Upate the first or the second part of the buffer */
+    /* Update the first or the second part of the buffer */
     for(int i = 0; i < PLAY_BUFF_SIZE/2; i++)
     {
       PlayBuff[i+position] = *(uint16_t *)(AUDIO_FILE_ADDRESS + PlaybackPosition);
@@ -280,6 +280,37 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
 }
 
 /**

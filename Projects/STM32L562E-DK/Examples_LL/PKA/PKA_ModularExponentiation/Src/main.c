@@ -49,6 +49,7 @@ uint8_t buffer[256] = {0};
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_PKA_Init(void);
 /* USER CODE BEGIN PFP */
 void     LED_On(void);
@@ -103,6 +104,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ICACHE_Init();
   MX_PKA_Init();
   /* USER CODE BEGIN 2 */
   /* Set mode to ECDSA signature generation in interrupt mode */
@@ -123,7 +125,7 @@ int main(void)
   while(endOfProcess != 1);
   endOfProcess = 0;
   
-  /* Retreive the result and output buffer */
+  /* Retrieve the result and output buffer */
   PKA_Memcpy_u32_to_u8(buffer, &PKA->RAM[PKA_MODULAR_EXP_OUT_SM_ALGO_ACC1], rsa_pub_2048_modulus_len / 4);
   
   /* Compare to expected results */
@@ -145,7 +147,7 @@ int main(void)
   while(endOfProcess != 1);
   endOfProcess = 0;
   
-  /* Retreive the result and output buffer */
+  /* Retrieve the result and output buffer */
   PKA_Memcpy_u32_to_u8(buffer, &PKA->RAM[PKA_MODULAR_EXP_OUT_SM_ALGO_ACC1], rsa_pub_2048_modulus_len / 4);
   
   /* Compare to expected results */
@@ -224,6 +226,31 @@ void SystemClock_Config(void)
   LL_Init1msTick(110000000);
 
   LL_SetSystemCoreClock(110000000);
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
 }
 
 /**

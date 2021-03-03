@@ -24,7 +24,7 @@
 #define __STM32L5xx_IT_H
 
 #ifdef __cplusplus
-extern "C" {
+ extern "C" {
 #endif
 
 /* Private includes ----------------------------------------------------------*/
@@ -62,6 +62,6 @@ void SysTick_Handler(void);
 }
 #endif
 
-#endif /* STM32L5xx_IT_H */
+#endif /* __STM32L5xx_IT_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

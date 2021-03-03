@@ -17,7 +17,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -51,6 +50,7 @@ uint8_t SBuffer[32] = {0};
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_PKA_Init(void);
 /* USER CODE BEGIN PFP */
 void     LED_On(void);
@@ -103,6 +103,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ICACHE_Init();
   MX_PKA_Init();
   /* USER CODE BEGIN 2 */
   /* Set mode to ECDSA signature generation in interrupt mode */
@@ -154,7 +155,7 @@ int main(void)
   /* Wait for the interrupt callback */
   while(endOfProcess != 1);
   
-  /* Retreive the result and output buffer */
+  /* Retrieve the result and output buffer */
   result = PKA->RAM[PKA_ECDSA_SIGN_OUT_ERROR];
   PKA_Memcpy_u32_to_u8(RBuffer, &PKA->RAM[PKA_ECDSA_SIGN_OUT_SIGNATURE_R], prime256v1_Prime_len / 4);
   PKA_Memcpy_u32_to_u8(SBuffer, &PKA->RAM[PKA_ECDSA_SIGN_OUT_SIGNATURE_S], prime256v1_Prime_len / 4);
@@ -246,6 +247,31 @@ void SystemClock_Config(void)
   LL_Init1msTick(110000000);
 
   LL_SetSystemCoreClock(110000000);
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
 }
 
 /**

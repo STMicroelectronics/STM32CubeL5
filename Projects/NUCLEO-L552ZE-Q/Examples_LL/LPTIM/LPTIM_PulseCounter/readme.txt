@@ -40,6 +40,9 @@ the frequency of the changes on the external Input1 signal should never exceed h
 frequency of the internal clock provided to the LPTIM2 (LSI for the
 present example).
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, LPTIM, Low power, Pulse Counter, Stop mode, Interrupt

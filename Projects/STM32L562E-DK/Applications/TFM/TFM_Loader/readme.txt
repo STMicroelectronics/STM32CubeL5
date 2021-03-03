@@ -24,11 +24,14 @@ The TFM_Loader application consists in one single project: the TFM_Loader
 Non Secure project.
 It has to be compiled after all TFM other ptojects.
 
-In order to ease the developement process, prebuild and postbuild commands are
+In order to ease the development process, prebuild and postbuild commands are
 integrated in each toolchain project.
 The prebuild command is in charge of preparing the scatter file according to common
 flash layout description in linker folder.
 The postbuild command is in charge of preparing the loader image.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

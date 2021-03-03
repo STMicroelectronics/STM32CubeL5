@@ -51,6 +51,9 @@ at each counter overflow (when the counter reaches the auto-reload value).
 Finally the timebase frequency is calculated as follows:
 timebase frequency = TIM1 counter clock /((PSC + 1)*(ARR + 1)*(RCR + 1))
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, TIM, Time base

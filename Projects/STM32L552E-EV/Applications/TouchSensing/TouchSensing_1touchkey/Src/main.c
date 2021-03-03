@@ -84,6 +84,10 @@ int main(void)
   /* Configure the System clock to have a frequency of 110 MHz */
   SystemClock_Config();
 
+  /* For better performances, enable the instruction cache in 1-way direct mapped mode */
+  HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY);
+  HAL_ICACHE_Enable();
+
   /* Configure LEDs */
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
@@ -193,7 +197,7 @@ int main(void)
   *            PLL_N                          = 55
   *            PLL_Q                          = 2
   *            PLL_R                          = 2
-  *            PLL_P                          = 2
+  *            PLL_P                          = 7
   *            Flash Latency(WS)              = 5
   * @param  None
   * @retval None
@@ -216,7 +220,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 55;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     /* Initialization Error */

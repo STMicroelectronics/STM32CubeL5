@@ -51,7 +51,7 @@ Other peripherals used:
 Board settings:
  - ADC is configured to convert ADC_CHANNEL_9 (Arduino connector CN7 pin 9, Morpho connector CN11 pin 32).
  - The voltage input on ADC channel is provided from DAC (DAC1_CHANNEL_1).
-   ADC input from pin PA4 and DAC ouput to pin PA4:
+   ADC input from pin PA4 and DAC output to pin PA4:
    If same pin is used no connection is required, it is done internally. Otherwise, user need to connect a wire between Arduino connector CN7 pin 9, Morpho connector CN11 pin 32 and Arduino connector CN7 pin 9, Morpho connector CN11 pin 32
  - Voltage is increasing at each click on User push-button, from 0 to maximum range in 4 steps.
    Clicks on User push-button follow circular cycles: At clicks counter maximum value reached, counter is set back to 0.
@@ -62,7 +62,10 @@ pin PA4 (Arduino connector CN7 pin 9, Morpho connector CN11 pin 32).
 
 NUCLEO-L552ZE-Q C-02 board LED is be used to monitor the program execution status:
  - Normal operation: LED1 is toggling at each conversion.
- - Error: In case of error, LED1 is toggling twice at a frequency of 1Hz.
+ - Error: In case of error, LED1 is toggling at a frequency of 1Hz.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

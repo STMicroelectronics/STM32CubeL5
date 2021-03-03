@@ -61,6 +61,9 @@ Please configure hyperterminal serial link as follows:
 When all ciphering and deciphering operations are successful, LED_GREEN is turned on.
 In case of ciphering or deciphering issue, LED_RED is turned on.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Security, Cryptography, CRYPT, AES, ECB, CBC, CTR, MAC, USART

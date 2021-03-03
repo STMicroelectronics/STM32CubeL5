@@ -61,6 +61,9 @@ Other peripheral used:
   1 GPIO for analog input of comparator: PB.02 (connector CN9 pin 13)
   EXTI line 21 (connected to COMP1 output)
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Comparator, voltage, VREFINT, COMP1, Vdda, interrupt

@@ -51,7 +51,7 @@ Other peripherals used:
 Board settings:
  - ADC is configured to convert ADC_CHANNEL_9 (connector CN6 pin 17).
  - The voltage input on ADC channel is provided from DAC (DAC1_CHANNEL_1).
-   ADC input from pin PA4 and DAC ouput to pin PA4:
+   ADC input from pin PA4 and DAC output to pin PA4:
    If same pin is used no connection is required, it is done internally. Otherwise, user need to connect a wire between connector CN6 pin 17 and connector CN6 pin 17
  - Voltage is increasing at each click on WKUP push-button, from 0 to maximum range in 4 steps.
    Clicks on WKUP push-button follow circular cycles: At clicks counter maximum value reached, counter is set back to 0.
@@ -63,6 +63,9 @@ pin PA4 (connector CN6 pin 17).
 STM32L552E-EV board LED is be used to monitor the program execution status:
  - Normal operation: LED4 is toggling at each conversion.
  - Error: In case of error, LED4 is toggling twice at a frequency of 1Hz.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -87,6 +90,10 @@ ADC, analog digital converter, conversion, voltage, channel, analog input, overs
   - This example has been tested with STM32L552E-EV board and can be
     easily tailored to any other supported device and development board.
 
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

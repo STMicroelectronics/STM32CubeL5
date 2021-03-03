@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_RAMDisk/FatFs/App/app_fatfs.c
+  * @file    FatFs/FatFs_RAMDisk/FATFS/App/app_fatfs.c
   * @author  MCD Application Team
-  * @brief   FatFs_uSD_Standalone application file
+  * @brief   FatFs_RAMDisk application file
   ******************************************************************************
   * @attention
   *

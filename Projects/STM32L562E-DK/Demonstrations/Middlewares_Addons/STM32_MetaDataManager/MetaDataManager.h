@@ -159,7 +159,7 @@ typedef enum
  */
 typedef struct {
   uint32_t Type;
-  uint32_t Lenght;    // Meta Data Lenght In bytes
+  uint32_t Length;    // Meta Data Length In bytes
   uint8_t *puint8_PayLoad[]; // Flexible Array (C99)
 } MDM_MetaDataHeader_t;
 

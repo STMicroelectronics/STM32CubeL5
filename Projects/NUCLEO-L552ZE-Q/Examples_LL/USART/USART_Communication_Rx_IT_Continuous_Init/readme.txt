@@ -1,5 +1,5 @@
 /**
-  @page USART_Communication_Rx_IT_Continuous_Init USART Receiver example (IT Mode, Continous reception)
+  @page USART_Communication_Rx_IT_Continuous_Init USART Receiver example (IT Mode, Continuous reception)
   
   @verbatim
   ******************************************************************************
@@ -40,6 +40,9 @@ Each time a reception buffer is full, user data process callback is called.
 Data processing consists in echoing data buffer content on PC Com port, and making LED1 toggle.
 In case of errors, LED1 is blinking.
 
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

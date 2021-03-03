@@ -51,6 +51,9 @@ suspends itself, the thread 1 toggles the LED4 each 500 ms.
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 RTOS, FreeRTOS, Thread
@@ -75,6 +78,10 @@ RTOS, FreeRTOS, Thread
   - This application has been tested with STM32L552E-EV board and can be
     easily tailored to any other supported device and development board.
     
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ?
 

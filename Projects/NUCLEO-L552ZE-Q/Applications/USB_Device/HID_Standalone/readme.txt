@@ -58,6 +58,9 @@ To manually enable the wake from standby option for the USB mouse, proceed as fo
 For more details about the STM32Cube USB Device library, please refer to UM1734
 "STM32Cube USB Device library".
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, USB_Device, USB, HID, Full Speed, Mouse, Remote Wakeup

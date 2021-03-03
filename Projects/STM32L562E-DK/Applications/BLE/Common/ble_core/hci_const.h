@@ -495,7 +495,7 @@ typedef __PACKED_STRUCT _le_advertising_info{
   uint8_t    bdaddr_type;
   tBDAddr      bdaddr;
   uint8_t    data_length;
-  uint8_t    data_RSSI[VARIABLE_SIZE]; // RSSI is last octect (signed integer).
+  uint8_t    data_RSSI[VARIABLE_SIZE]; // RSSI is last octet (signed integer).
 } PACKED le_advertising_info;
 #define LE_ADVERTISING_INFO_SIZE 11
 

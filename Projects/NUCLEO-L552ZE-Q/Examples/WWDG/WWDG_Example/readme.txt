@@ -73,6 +73,9 @@ LED3 is turned ON and remains ON if any error occurs.
       to have correct HAL operation.
 
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, WWDG, EXTI, update counter, MCU Reset, Timeout, Software fault

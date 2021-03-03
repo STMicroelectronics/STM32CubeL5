@@ -19,7 +19,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -102,7 +101,9 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  /* Initialize LED4 and LED5 */
+  BSP_LED_Init(LED4);
+  BSP_LED_Init(LED5);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -117,10 +118,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   /* Configure BUTTON_WAKEUP */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
-
-  /* Initialize LED4 and LED5 */
-  BSP_LED_Init(LED4);
-  BSP_LED_Init(LED5);
 
   /* Display messages on LCD */
   Display_ExampleDescription();
@@ -293,8 +290,12 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
-  /** Enable instruction cache (default 2-ways set associative cache)
+  /** Enable instruction cache in 1-way (direct mapped cache)
   */
+  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
+  {
+    Error_Handler();
+  }
   if (HAL_ICACHE_Enable() != HAL_OK)
   {
     Error_Handler();

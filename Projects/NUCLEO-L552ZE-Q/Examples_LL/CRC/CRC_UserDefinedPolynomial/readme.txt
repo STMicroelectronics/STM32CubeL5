@@ -40,6 +40,9 @@ and if both are equal, LED1 is turned On.
 In case of errors, LED1 is blinking (1sec period).
 
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Security, CRC, CRC Polynomial, IEC 60870-5, hardware CRC, user-defined, generating polynomial

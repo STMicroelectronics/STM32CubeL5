@@ -269,7 +269,7 @@ int main(void)
 #endif /* ALLMEMS1_DEBUG_CONNECTION */
 
 #ifdef ALLMEMS1_DEBUG_NOTIFY_TRAMISSION
-  ALLMEMS1_PRINTF("Debug Notify Trasmission Enabled\r\n\n");
+  ALLMEMS1_PRINTF("Debug Notify Transmission Enabled\r\n\n");
 #endif /* ALLMEMS1_DEBUG_NOTIFY_TRAMISSION */
 
   /* Set Node Name */

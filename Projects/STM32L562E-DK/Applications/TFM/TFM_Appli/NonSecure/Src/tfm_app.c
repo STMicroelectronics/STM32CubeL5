@@ -119,57 +119,57 @@ void tfm_app_menu(void)
           tests_success = 0;
           ret.val = TEST_FAILED;
           psa_aead_test(PSA_KEY_TYPE_AES, PSA_ALG_GCM, &ret);
-          printf("AES GCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("AES GCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           INVOKE_SCHEDULE_NEEDS();
           ret.val = TEST_FAILED;
           psa_cipher_test(PSA_KEY_TYPE_AES, PSA_ALG_CBC_NO_PADDING, &ret);;
-          printf("AES CBC test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("AES CBC test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           ret.val = TEST_FAILED;
           psa_aead_test(PSA_KEY_TYPE_AES, PSA_ALG_CCM, &ret);
-          printf("AES CCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("AES CCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           tfm_sst_set_uid(&ret);
-          printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           tfm_sst_read_uid(&ret);
-          printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           tfm_sst_remove_uid(&ret);
-          printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           ret.val = TEST_FAILED;
           tfm_eat_test_circuit_sig(TOKEN_OPT_NORMAL_CIRCUIT_SIGN, &ret);
-          printf("EAT normal circuit sig test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("EAT normal circuit sig test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           tfm_its_set_uid(&ret);
-          printf("ITS set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("ITS set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           tfm_its_read_uid(&ret);
-          printf("ITS read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("ITS read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           tfm_its_remove_uid(&ret);
-          printf("ITS remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("ITS remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           ret.val = TEST_FAILED;
           psa_hash_test(PSA_ALG_SHA_224, &ret);
-          printf("SHA224 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SHA224 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
           ret.val = TEST_FAILED;
           psa_hash_test(PSA_ALG_SHA_256, &ret);
-          printf("SHA256 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SHA256 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tests_executed++;
           tests_success += (ret.val == TEST_PASSED) ? 1 : 0;
 
@@ -181,75 +181,75 @@ void tfm_app_menu(void)
         case '1' :
           ret.val = TEST_FAILED;
           psa_aead_test(PSA_KEY_TYPE_AES, PSA_ALG_GCM, &ret);
-          printf("AES GCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("AES GCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         /* 2 = Tests AES-CBC Static key */
         case '2' :
           ret.val = TEST_FAILED;
           psa_cipher_test(PSA_KEY_TYPE_AES, PSA_ALG_CBC_NO_PADDING, &ret);;
-          printf("AES CBC test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("AES CBC test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
          /* 3 = Tests AES-CCM Static key */
         case '3' :
           ret.val = TEST_FAILED;
           psa_aead_test(PSA_KEY_TYPE_AES, PSA_ALG_CCM, &ret);
-          printf("AES CCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("AES CCM test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case '4' :
           ret.val = TEST_FAILED;
           tfm_sst_set_uid(&ret);
-          printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case '5' :
           ret.val = TEST_FAILED;
           tfm_sst_read_uid(&ret);
-          printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case '6' :
           ret.val = TEST_FAILED;
           tfm_sst_remove_uid(&ret);
-          printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case '7' :
           ret.val = TEST_FAILED;
           tfm_eat_test_circuit_sig(TOKEN_OPT_NORMAL_CIRCUIT_SIGN, &ret);
-          printf("EAT normal circuit sig test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("EAT normal circuit sig test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case '8' :
           ret.val = TEST_FAILED;
           tfm_its_set_uid(&ret);
-          printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST set UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case '9' :
           ret.val = TEST_FAILED;
           tfm_its_read_uid(&ret);
-          printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST read / check UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case 'a' :
           ret.val = TEST_FAILED;
           tfm_its_remove_uid(&ret);
-          printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SST remove UID test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case 'b' :
           ret.val = TEST_FAILED;
           psa_hash_test(PSA_ALG_SHA_224, &ret);
-          printf("SHA224 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SHA224 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
         case 'c' :
           ret.val = TEST_FAILED;
           psa_hash_test(PSA_ALG_SHA_256, &ret);
-          printf("SHA256 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFULL" : "FAILED");
+          printf("SHA256 test %s\r\n", (ret.val == TEST_PASSED) ? "SUCCESSFUL" : "FAILED");
           tfm_app_print_menu();
           break;
 

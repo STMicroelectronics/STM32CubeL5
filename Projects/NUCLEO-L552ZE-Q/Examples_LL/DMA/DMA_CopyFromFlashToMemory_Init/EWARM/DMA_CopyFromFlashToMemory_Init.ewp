@@ -232,10 +232,11 @@
           <state>LSI_VALUE=32000</state>
           <state>VDD_VALUE=3300</state>
           <state>PREFETCH_ENABLE=0</state>
-          <state>INSTRUCTION_CACHE_ENABLE=0</state>
-          <state>DATA_CACHE_ENABLE=0</state>
           <state>STM32L552xx</state>
           <state>HSE_VALUE=16000000</state>
+          <state>HSE_STARTUP_TIMEOUT=100</state>
+          <state>EXTERNALSAI1_CLOCK_VALUE=48000</state>
+          <state>EXTERNALSAI2_CLOCK_VALUE=48000</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -362,7 +363,6 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$/../Inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</state>
-          <state>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
         </option>
@@ -1101,6 +1101,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_dma.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_icache.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_pwr.c</name>

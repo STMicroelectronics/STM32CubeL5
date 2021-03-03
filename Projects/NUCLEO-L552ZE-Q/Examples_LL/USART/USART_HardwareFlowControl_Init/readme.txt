@@ -45,6 +45,9 @@ On a specific value ('S' or 's'), LED1 is turned On.
 Received character is echoed on Tx line.
 In case of errors, LED1 is blinking.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, UART/USART, Asynchronous, RS-232, baud rate, Interrupt, HyperTerminal, 

@@ -4,9 +4,9 @@
   * @author  MCD Application Team
   * @brief   Template for HAL time base based on the peripheral hardware TIM6.
   *    
-  *          This file override the native HAL time base functions (defined as weak)
+  *          This file overrides the native HAL time base functions (defined as weak)
   *          the TIM time base:
-  *           + Intializes the TIM6 peripheral to generate a Period elapsed Event each 1ms
+  *           + Initializes the TIM6 peripheral to generate a Period elapsed Event each 1ms
   *           + HAL_IncTick is called inside HAL_TIM_PeriodElapsedCallback ie each 1ms
   * 
   @verbatim

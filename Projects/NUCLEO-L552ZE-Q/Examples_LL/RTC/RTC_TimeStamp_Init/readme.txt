@@ -50,6 +50,9 @@ The associated firmware performs the following:
    The current time and date are updated and displayed on the debugger (live watch) in aShowTime, aShowDate variables .
 
 - LED1 is toggling : This indicates that the system generates an error.
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 RTC, Timer, Timestamp, Counter, LSE, LSI, Current time, Real Time Clock

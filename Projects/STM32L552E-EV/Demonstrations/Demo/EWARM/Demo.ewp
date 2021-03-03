@@ -657,7 +657,6 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state>$PROJ_DIR$\..\Config</state>
                     <state>$PROJ_DIR$\..\..\Modules\ucpd</state>
                 </option>
                 <option>
@@ -1516,12 +1515,6 @@
     <group>
         <name>Utilities</name>
         <group>
-            <name>lcd</name>
-            <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</name>
-            </file>
-        </group>
-        <group>
             <name>GUI_INTERFACE</name>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Utilities\GUI_INTERFACE\bsp_gui.c</name>
@@ -1531,6 +1524,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Utilities\GUI_INTERFACE\gui_api.c</name>
+            </file>
+        </group>
+        <group>
+            <name>lcd</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\..\Utilities\lcd\stm32_lcd.c</name>
             </file>
         </group>
         <group>

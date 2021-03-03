@@ -46,7 +46,6 @@ extern funcptr_NS pSecureErrorCallback;
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern HASH_HandleTypeDef     HashHandle;
 
 /* USER CODE END PV */
 
@@ -61,7 +60,7 @@ extern HASH_HandleTypeDef     HashHandle;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern DMA_HandleTypeDef hdma_hash_in;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -78,7 +77,9 @@ void NMI_Handler(void)
 
   /* USER CODE END NonMaskableInt_IRQn 0 */
   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-
+  while (1)
+  {
+  }
   /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
@@ -159,10 +160,14 @@ void SecureFault_Handler(void)
   }
   else
   {
-    while(1);  /* Something went wrong */
-  }
-
+    /* Something went wrong */
   /* USER CODE END SecureFault_IRQn 0 */
+  while (1)
+  {
+    /* USER CODE BEGIN W1_SecureFault_IRQn 0 */
+  }
+    /* USER CODE END W1_SecureFault_IRQn 0 */
+  }
 }
 
 /**
@@ -232,8 +237,7 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles GTZC interrupt request.
-  * @retval None
+  * @brief This function handles Global TrustZone controller global interrupt.
   */
 void GTZC_IRQHandler(void)
 {
@@ -241,7 +245,6 @@ void GTZC_IRQHandler(void)
   funcptr_NS callback_NS; // non-secure callback function pointer
 
   /* USER CODE END GTZC_IRQn 0 */
-
   HAL_GTZC_IRQHandler();
   /* USER CODE BEGIN GTZC_IRQn 1 */
 
@@ -261,28 +264,20 @@ void GTZC_IRQHandler(void)
 }
 
 /**
-  * @brief  This function handles DMA interrupt request.
-  * @retval None
+  * @brief This function handles DMA2 channel7 global interrupt.
   */
 void DMA2_Channel7_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Channel7_IRQn 0 */
 
   /* USER CODE END DMA2_Channel7_IRQn 0 */
-  HAL_DMA_IRQHandler(HashHandle.hdmain);
-
+  HAL_DMA_IRQHandler(&hdma_hash_in);
   /* USER CODE BEGIN DMA2_Channel7_IRQn 1 */
 
   /* USER CODE END DMA2_Channel7_IRQn 1 */
 }
 
+/* USER CODE BEGIN 1 */
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
+/* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

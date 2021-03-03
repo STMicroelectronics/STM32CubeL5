@@ -29,6 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l5xx_hal.h"
+
 #include "stm32l5xx_ll_dma.h"
 #include "stm32l5xx_ll_crs.h"
 #include "stm32l5xx_ll_rcc.h"
@@ -40,7 +41,6 @@ extern "C" {
 #include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_ucpd.h"
 #include "stm32l5xx_ll_usart.h"
-#include "stm32l5xx.h"
 #include "stm32l5xx_ll_gpio.h"
 
 /* Private includes ----------------------------------------------------------*/

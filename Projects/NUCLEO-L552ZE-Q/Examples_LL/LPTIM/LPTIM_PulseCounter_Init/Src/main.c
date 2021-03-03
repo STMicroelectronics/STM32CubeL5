@@ -17,7 +17,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -49,6 +48,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_LPTIM2_Init(void);
 /* USER CODE BEGIN PFP */
 static void EnterStop1Mode(void);
@@ -97,6 +97,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ICACHE_Init();
   MX_LPTIM2_Init();
   /* USER CODE BEGIN 2 */
   /* Enter STOP 1 mode */
@@ -179,6 +180,31 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
+}
+
+/**
   * @brief LPTIM2 Initialization Function
   * @param None
   * @retval None
@@ -196,10 +222,10 @@ static void MX_LPTIM2_Init(void)
 
   /* Peripheral clock enable */
   LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_LPTIM2);
-  
+
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOD);
-  /**LPTIM2 GPIO Configuration  
-  PD12   ------> LPTIM2_IN1 
+  /**LPTIM2 GPIO Configuration
+  PD12   ------> LPTIM2_IN1
   */
   GPIO_InitStruct.Pin = LL_GPIO_PIN_12;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
@@ -222,6 +248,7 @@ static void MX_LPTIM2_Init(void)
   LL_LPTIM_SetPolarity(LPTIM2, LL_LPTIM_OUTPUT_POLARITY_REGULAR);
   LL_LPTIM_SetUpdateMode(LPTIM2, LL_LPTIM_UPDATE_MODE_IMMEDIATE);
   LL_LPTIM_SetCounterMode(LPTIM2, LL_LPTIM_COUNTER_MODE_EXTERNAL);
+  LL_LPTIM_ConfigClock(LPTIM2, LL_LPTIM_CLK_FILTER_NONE, LL_LPTIM_CLK_POLARITY_RISING);
   LL_LPTIM_TrigSw(LPTIM2);
   LL_LPTIM_SetInput1Src(LPTIM2, LL_LPTIM_INPUT1_SRC_GPIO);
   /* USER CODE BEGIN LPTIM2_Init 2 */

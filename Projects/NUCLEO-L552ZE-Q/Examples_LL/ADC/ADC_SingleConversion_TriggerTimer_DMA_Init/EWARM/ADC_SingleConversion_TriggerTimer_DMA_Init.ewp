@@ -231,6 +231,11 @@
           <state>HSI_VALUE=16000000</state>
           <state>LSI_VALUE=32000</state>
           <state>STM32L552xx</state>
+          <state>HSE_VALUE=16000000</state>
+          <state>HSE_STARTUP_TIMEOUT=100</state>
+          <state>EXTERNALSAI1_CLOCK_VALUE=48000</state>
+          <state>EXTERNALSAI2_CLOCK_VALUE=48000</state>
+          <state>VDD_VALUE=3300</state>
           <state></state>
         </option>
         <option>
@@ -1093,6 +1098,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_dma.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_icache.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_pwr.c</name>

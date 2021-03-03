@@ -50,6 +50,9 @@ operations can be performed as with any other removable drive.
 For more details about the STM32Cube USB Device library, please refer to UM1734
 "STM32Cube USB Device library".
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, USB_Device, USB, MSC, Full Speed, flash, microSD card
@@ -82,6 +85,10 @@ Connectivity, USB_Device, USB, MSC, Full Speed, flash, microSD card
   - STM32L552E-EV Set-up
     - Insert a microSD card into the STM32L552E-EV
   - Connect the STM32L552E-EV board CN1 to the PC through "TYPE-C" to "Standard A" cable
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ?
 

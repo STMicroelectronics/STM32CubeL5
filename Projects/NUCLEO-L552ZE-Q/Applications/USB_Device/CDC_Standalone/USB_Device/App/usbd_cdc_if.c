@@ -150,9 +150,6 @@ static int8_t CDC_TransmitCplt_FS(uint8_t *pbuf, uint32_t *Len, uint8_t epnum);
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_DECLARATION */
 void TIM_Config(void);
 static void ComPort_Config(void);
-extern void MX_DMA_Init(void);
-extern void MX_TIM2_Init(void);
-extern void MX_LPUART1_UART_Init(void);
 /* USER CODE END PRIVATE_FUNCTIONS_DECLARATION */
 
 /**
@@ -176,7 +173,6 @@ USBD_CDC_ItfTypeDef USBD_Interface_fops_FS =
 static int8_t CDC_Init_FS(void)
 {
   /* USER CODE BEGIN 3 */
-  MX_DMA_Init();
   MX_LPUART1_UART_Init();
   if(HAL_UART_Receive_IT(&hlpuart1, (uint8_t *)UserTxBufferFS, 1) != HAL_OK)
   {
@@ -185,7 +181,7 @@ static int8_t CDC_Init_FS(void)
   }
 
   TIM_Config();
-  
+
   USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, 0);
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, UserRxBufferFS);
 
@@ -329,7 +325,7 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len)
 
 /**
   * @brief  CDC_TransmitCplt_FS
-  *         Data transmited callback
+  *         Data transmitted callback
   *
   *         @note
   *         This function is IN transfer complete callback used to inform user that
@@ -454,6 +450,7 @@ static void ComPort_Config(void)
  void TIM_Config(void)
 {
   MX_TIM2_Init();
+  /* Start the TIM Base generation in interrupt mode ####################*/
   if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK)
   {
     Error_Handler();

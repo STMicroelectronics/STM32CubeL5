@@ -78,6 +78,9 @@ STM32L552E-EV board LED is be used to monitor the program execution status:
                 "Off" upon half conversion completion (half DMA buffer filled)
  - Error: In case of error, LED4 is toggling twice at a frequency of 1Hz.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 ADC, analog digital converter, conversion, voltage, channel, analog input, sequencer, temperature sensor, VrefInt
@@ -102,6 +105,10 @@ ADC, analog digital converter, conversion, voltage, channel, analog input, seque
   - This example has been tested with STM32L552E-EV board and can be
     easily tailored to any other supported device and development board.
 
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

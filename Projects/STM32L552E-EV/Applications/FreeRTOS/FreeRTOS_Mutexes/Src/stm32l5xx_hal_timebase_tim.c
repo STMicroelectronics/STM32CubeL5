@@ -1,13 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    stm32g0xx_hal_timebase_tim.c
+  * @file    stm32l5xx_hal_timebase_tim.c
   * @author  MCD Application Team
   * @brief   HAL time base based on the hardware TIM.
   *
   *          This file overrides the native HAL time base functions (defined as weak)
   *          the TIM time base:
-  *           + Intializes the TIM peripheral to generate a Period elapsed Event each 1ms
+  *           + Initializes the TIM peripheral to generate a Period elapsed Event each 1ms
   *           + HAL_IncTick is called inside HAL_TIM_PeriodElapsedCallback ie each 1ms
   *
  @verbatim
@@ -16,7 +16,7 @@
   ==============================================================================
     [..]
     This file must be copied to the application folder and modified as follows:
-    (#) Rename it to 'stm32g0xx_hal_timebase_tim.c'
+    (#) Rename it to 'stm32l5xx_hal_timebase_tim.c'
     (#) Add this file and the TIM HAL driver files to your project and make sure
        HAL_TIM_MODULE_ENABLED is defined in stm32l4xx_hal_conf.h
 
@@ -80,9 +80,8 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
 
   /* Compute TIM6 clock */
   uwTimclock = HAL_RCC_GetPCLK1Freq();
-
   /* Compute the prescaler value to have TIM6 counter clock equal to 1MHz */
-  uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000) - 1);
+  uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000U) - 1U);
 
   /* Initialize TIM6 */
   htim6.Instance = TIM6;
@@ -93,7 +92,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
   + ClockDivision = 0
   + Counter direction = Up
   */
-  htim6.Init.Period = (1000000 / 1000) - 1;
+  htim6.Init.Period = (1000000U / 1000U) - 1U;
   htim6.Init.Prescaler = uwPrescalerValue;
   htim6.Init.ClockDivision = 0;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;

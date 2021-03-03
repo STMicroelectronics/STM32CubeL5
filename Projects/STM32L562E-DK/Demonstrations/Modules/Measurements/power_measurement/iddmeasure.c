@@ -178,7 +178,7 @@ static void Idd_SaveSignature(void)
 */
 void IddMeasureInit(void)
 {
-  /* Initialize Idd measurment component */
+  /* Initialize Idd measurement component */
   if(IddInitialized != SET)
   {
     IddInitialized = SET;
@@ -242,7 +242,7 @@ void Idd_ExecuteAction(uint32_t IddIndex)
     /* Unconfigure HW resources */
     SystemHardwareDeInit(IddIndex);
 
-    /* if function pointer exists, execute correponsing low power action */
+    /* if function pointer exists, execute corresponding low power action */
     if(IddTest[IddIndex].IddEnter != NULL)
     {
       IddTest[IddIndex].IddEnter();

@@ -74,7 +74,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct ={0};
 
-  /* Configue LSE as RTC clock soucre */
+  /* Configure LSE as RTC clock source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON_RTC_ONLY;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
@@ -115,7 +115,7 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
   /* Disable Irq */
   HAL_NVIC_DisableIRQ(RTC_IRQn);
 
-  /* Configue LSE as RTC clock soucre */
+  /* Configure LSE as RTC clock source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.LSEState = RCC_LSE_OFF;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;

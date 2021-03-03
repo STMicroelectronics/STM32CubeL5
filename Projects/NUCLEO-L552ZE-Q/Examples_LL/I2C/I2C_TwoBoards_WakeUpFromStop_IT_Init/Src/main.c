@@ -20,7 +20,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -70,6 +69,7 @@ __IO uint8_t ubButtonPress       = 0;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
 #ifndef SLAVE_BOARD
@@ -132,6 +132,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ICACHE_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 #ifndef SLAVE_BOARD
@@ -241,9 +242,9 @@ static void MX_I2C1_Init(void)
   LL_RCC_SetI2CClockSource(LL_RCC_I2C1_CLKSOURCE_PCLK1);
 
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOB);
-  /**I2C1 GPIO Configuration  
+  /**I2C1 GPIO Configuration
   PB8   ------> I2C1_SCL
-  PB9   ------> I2C1_SDA 
+  PB9   ------> I2C1_SDA
   */
   GPIO_InitStruct.Pin = LL_GPIO_PIN_8|LL_GPIO_PIN_9;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
@@ -277,7 +278,7 @@ static void MX_I2C1_Init(void)
   NVIC_EnableIRQ(I2C1_ER_IRQn);
 
   /* USER CODE END I2C1_Init 1 */
-  /** I2C Initialization 
+  /** I2C Initialization
   */
   LL_I2C_EnableAutoEndMode(I2C1);
   LL_I2C_DisableOwnAddress2(I2C1);
@@ -328,6 +329,31 @@ static void MX_I2C1_Init(void)
   LL_I2C_EnableIT_STOP(I2C1);
 
   /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
 
 }
 

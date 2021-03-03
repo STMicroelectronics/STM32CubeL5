@@ -26,11 +26,9 @@
   * @{
   */
 
-/** @addtogroup Templates_TZ
+/** @addtogroup Templates
   * @{
   */
-
-extern HASH_HandleTypeDef     HashHandle;
 
 /* Global variables ----------------------------------------------------------*/
 void *pSecureFaultCallback = NULL;   /* Pointer to secure fault callback in Non-secure */
@@ -57,10 +55,10 @@ CMSE_NS_ENTRY void SECURE_RegisterCallback(SECURE_CallbackIDTypeDef CallbackId, 
   {
     switch(CallbackId)
     {
-      case SECURE_FAULT_CB_ID:           /* SecureFault IT */
+      case SECURE_FAULT_CB_ID:           /* SecureFault Interrupt occurred */
         pSecureFaultCallback = func;
         break;
-      case GTZC_ERROR_CB_ID:             /* GTZC IT */
+      case GTZC_ERROR_CB_ID:             /* GTZC Interrupt occurred */
         pSecureErrorCallback = func;
         break;
       default:
@@ -87,13 +85,13 @@ CMSE_NS_ENTRY ErrorStatus SECURE_HASH_SHA1_8BITS(uint8_t *pInputData, uint32_t I
       cmse_check_address_range(pOutputSignature, HASH_SHA1_DIGEST_SIZE * sizeof(uint8_t), CMSE_NONSECURE))
   {
     /* Start HASH computation using DMA transfer */
-    if (HAL_HASH_SHA1_Start_DMA(&HashHandle, pInputData, InputDataSize) == HAL_OK)
+    if (HAL_HASH_SHA1_Start_DMA(&hhash, pInputData, InputDataSize) == HAL_OK)
     {
       /* Wait for DMA transfer to complete */
-      while (HAL_HASH_GetState(&HashHandle) == HAL_HASH_STATE_BUSY);
+      while (HAL_HASH_GetState(&hhash) == HAL_HASH_STATE_BUSY);
 
       /* Get the computed digest value */
-      if (HAL_HASH_SHA1_Finish(&HashHandle, pOutputSignature, HASH_SHA1_DIGEST_TIMEOUT) == HAL_OK)
+      if (HAL_HASH_SHA1_Finish(&hhash, pOutputSignature, HASH_SHA1_DIGEST_TIMEOUT) == HAL_OK)
       {
         ret = SUCCESS;
       }

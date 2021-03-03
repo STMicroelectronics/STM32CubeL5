@@ -177,8 +177,8 @@
 #define BL2_NOHDP_CODE_SIZE                 (FLASH_AREA_BL2_NOHDP_SIZE)
 #define BL2_NOHDP_CODE_LIMIT                (BL2_NOHDP_CODE_START + BL2_NOHDP_CODE_SIZE - 1)
 
-/*  keep 256 bytes unsed to place while(1) for non secure to enable */
-/*  regression from local tool with non secure attachement
+/*  keep 256 bytes unused to place while(1) for non secure to enable */
+/*  regression from local tool with non secure attachment
  *  This avoid blocking board in case of hardening error */
 #define BL2_DATA_START                      (S_RAM_ALIAS(_SRAM1_SIZE_MAX))
 #define BL2_DATA_SIZE                       (BOOT_TFM_SHARED_DATA_BASE - BL2_DATA_START)
@@ -225,7 +225,7 @@
 #define LOADER_MAX_CODE_SIZE                 (FLASH_TOTAL_SIZE - FLASH_AREA_3_OFFSET - FLASH_AREA_3_SIZE) 
 #endif
 #if LOADER_CODE_SIZE > LOADER_MAX_CODE_SIZE
-#error "Loader mapping overlaping  slot" 
+#error "Loader mapping overlapping slot"
 #endif /* LOADER_CODE_SIZE > LOADER_MAX_CODE_SIZE */
 #endif /* TFM_EXTERNAL_FLASH_ENABLE */
 #endif /* MCUBOOT_EXT_LOADER */

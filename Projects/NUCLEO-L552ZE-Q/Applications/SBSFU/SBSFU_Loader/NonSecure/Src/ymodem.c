@@ -39,7 +39,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-/* @note ATTENTION - please keep this variable 32bit alligned */
+/* @note ATTENTION - please keep this variable 32bit aligned */
 static uint8_t m_aPacketData[PACKET_1K_SIZE + PACKET_DATA_INDEX +
                              PACKET_TRAILER_SIZE]; /*!<Array used to store Packet Data*/
 uint8_t m_aFileName[FILE_NAME_LENGTH + 1U]; /*!< Array used to store File Name data */
@@ -101,7 +101,7 @@ static HAL_StatusTypeDef ReceivePacket(uint8_t *pData, uint32_t *puLength, uint3
         status = HAL_BUSY;
         break;
       case RB:
-        COM_Receive(&char1, 1U, uTimeout);                /* Ymodem starup sequence : rb ==> 0x72 + 0x62 + 0x0D */
+        COM_Receive(&char1, 1U, uTimeout);                /* Ymodem startup sequence : rb ==> 0x72 + 0x62 + 0x0D */
         COM_Receive(&char1, 1U, uTimeout);
         packet_size = 3U;
         break;

@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_DMA/FatFs/Target/sd_diskio.c
+  * @file    FatFs/FatFs_uSD_DMA/FATFS/Target/sd_diskio.c
   * @author  MCD Application Team
   * @brief   SD Disk I/O driver
   ******************************************************************************
@@ -156,7 +156,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
     while((ReadStatus == 0) && ((HAL_GetTick() - timeout) < SD_TIMEOUT))
     {
     }
-    /* incase of a timeout return error */
+    /* in case of a timeout return error */
     if (ReadStatus == 0)
     {
       res = RES_ERROR;
@@ -201,7 +201,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
     while((WriteStatus == 0) && ((HAL_GetTick() - timeout) < SD_TIMEOUT))
     {
     }
-    /* incase of a timeout return error */
+    /* in case of a timeout return error */
     if (WriteStatus == 0)
     {
       res = RES_ERROR;

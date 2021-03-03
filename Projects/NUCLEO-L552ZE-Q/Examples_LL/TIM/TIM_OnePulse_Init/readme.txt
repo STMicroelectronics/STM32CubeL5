@@ -66,6 +66,9 @@ stops automatically at the next update event (UEV).
 Connecting TIM1 OC1 to TIM2 TI2 allows to trigger TIM2 counter by pressing
 the User push-button.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, TIM, Output, signals, One Pulse, PWM, Oscilloscope, External signal, Autoreload, Waveform.

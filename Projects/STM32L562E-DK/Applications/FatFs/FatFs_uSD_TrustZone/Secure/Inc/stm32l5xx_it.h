@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_TrustZone/Secure/Src/stm32l5xx_it.h
+  * @file    FatFs/FatFs_uSD_TrustZone/Secure/Inc/stm32l5xx_it.h
   * @author  MCD Application Team
   * @brief   This file contains the headers of the secure interrupt handlers.
   ******************************************************************************

@@ -99,16 +99,29 @@ The sections below describe the features of each sub-demonstration.
   the demonstration firmware version
  Exit is done by tapping on the BACK icon.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Demonstration, TouchGFX, AI, Audio Player, BLE, Information, Measurements
 
 @par Hardware and Software environment
 
-  - This demonstration runs on STM32L562QEIQx devices.
+  - This demonstration runs on STM32L562QEIQx devices without security enabled (TZEN=0).
 
   - This application has been tested with STM32L562E-DK board (MB1373C)
-    can be easily tailored to any other supported device and development board.
+    and can be easily tailored to any other supported device and development board.
+
+@note Jumpers and switches setup on MB1373C STM32L562E-DK:
+   TOP side
+      JP1  : OPENED          / JP2  : CLOSED
+      JP3  : 1-2 (3V3)(LEFT) / JP4  : 1-2 (5V_STLK)
+      SW1  : PM MEAS (LEFT) for Measurements features
+   BOTTOM side
+      JP5  : CLOSED  /  JP6  : OPENED  /  JP7  : OPENED
+      SW2  : APPLI (LEFT)
+
 
 @par How to use it ?
 

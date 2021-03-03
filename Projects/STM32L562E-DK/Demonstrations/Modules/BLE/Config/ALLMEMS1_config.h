@@ -56,15 +56,15 @@
 /* For enabling connection and notification subscriptions debug */
 //#define ALLMEMS1_DEBUG_CONNECTION
 
-/* For enabling trasmission for notified services */
+/* For enabling transmission for notified services */
 //#define ALLMEMS1_DEBUG_NOTIFY_TRAMISSION
 
 /*************** Don't Change the following defines *************/
 
-/*************************************/
-/*  Remapping istance sensor defines */
-/*************************************/
-/* Motion Sensor Istance */
+/**************************************/
+/*  Remapping instance sensor defines */
+/**************************************/
+/* Motion Sensor Instance */
 #define LSM6DS0_0                0
 #define ACCELERO_INSTANCE        LSM6DS0_0
 #define GYRO_INSTANCE            LSM6DS0_0

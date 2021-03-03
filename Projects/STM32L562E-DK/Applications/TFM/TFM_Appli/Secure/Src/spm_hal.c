@@ -199,7 +199,7 @@ static enum spm_err_t tfm_spm_mpu_init(void)
   region_cfg.region_base = TFM_NV_DATA_START;
   region_cfg.region_limit = TFM_NV_DATA_LIMIT;
   region_cfg.region_attridx = MPU_ARMV8M_MAIR_ATTR_DATANOCACHE_IDX;
-  region_cfg.attr_access = MPU_ARMV8M_AP_RW_PRIV_UNPRIV;
+  region_cfg.attr_access = MPU_ARMV8M_AP_RW_PRIV_ONLY;
   region_cfg.attr_sh = MPU_ARMV8M_SH_NONE;
   region_cfg.attr_exec = MPU_ARMV8M_XN_EXEC_NEVER;
   if (mpu_armv8m_region_enable(&dev_mpu_s, &region_cfg) != MPU_ARMV8M_OK)

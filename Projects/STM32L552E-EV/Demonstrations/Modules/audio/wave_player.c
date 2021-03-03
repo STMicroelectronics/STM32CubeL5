@@ -654,7 +654,7 @@ static void WavePlayer_DisplayPlaybackScreen(uint8_t Select)
   UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_BLUE);
   UTIL_LCD_DisplayStringAt(35, 46, (uint8_t *)PlayList[Select-1], CENTER_MODE);
 
-  /* Retreive file size */
+  /* Retrieve file size */
   sprintf(file_name, "USER/%s", PlayList[Select-1]);
 
   if (f_stat (file_name, &fno) != FR_OK)

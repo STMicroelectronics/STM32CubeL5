@@ -308,9 +308,7 @@ void                USBPD_DPM_PowerRoleSwap(uint8_t PortNum, USBPD_PortPowerRole
 USBPD_StatusTypeDef USBPD_DPM_EvaluateVconnSwap(uint8_t PortNum);
 USBPD_StatusTypeDef USBPD_DPM_PE_VconnPwr(uint8_t PortNum, USBPD_FunctionalState State);
 #endif /* _VCONN_SUPPORT */
-#ifdef _ERROR_RECOVERY
 void                USBPD_DPM_EnterErrorRecovery(uint8_t PortNum);
-#endif /* _ERROR_RECOVERY */
 USBPD_StatusTypeDef USBPD_DPM_EvaluateDataRoleSwap(uint8_t PortNum);
 USBPD_FunctionalState USBPD_DPM_IsPowerReady(uint8_t PortNum, USBPD_VSAFE_StatusTypeDef Vsafe);
 

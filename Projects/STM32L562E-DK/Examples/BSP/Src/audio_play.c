@@ -203,7 +203,7 @@ static void AudioPlay_SetHint(void)
 
 /**
   * @brief  Display audio play demo hint
-  * @param  format : structure containing informations of the file
+  * @param  format : structure containing information of the file
   * @retval None
   */
 static void AudioPlay_DisplayInfos(WAVE_FormatTypeDef * format)
@@ -234,7 +234,7 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(uint32_t Instance)
 {
   if ((Instance == 0U) && (AudioPlayTest == 1))
   {
-    /* Upate the first or the second part of the buffer */
+    /* Update the first or the second part of the buffer */
     for(int i = 0; i < PLAY_BUFF_SIZE/2; i++)
     {
       PlayBuff[i+ (PLAY_BUFF_SIZE/2)] = *(uint16_t *)(AUDIO_FILE_ADDRESS + PlaybackPosition);
@@ -258,7 +258,7 @@ void BSP_AUDIO_OUT_HalfTransfer_CallBack(uint32_t Instance)
 {
   if ((Instance == 0U) && (AudioPlayTest == 1))
   {
-    /* Upate the first or the second part of the buffer */
+    /* Update the first or the second part of the buffer */
     for(int i = 0; i < PLAY_BUFF_SIZE/2; i++)
     {
       PlayBuff[i] = *(uint16_t *)(AUDIO_FILE_ADDRESS + PlaybackPosition);

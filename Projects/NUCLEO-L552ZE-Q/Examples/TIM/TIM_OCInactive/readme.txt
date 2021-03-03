@@ -65,6 +65,9 @@ with the corresponding Interrupt requests for each channel.
 @note This example needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timer, Output, Compare, InActive, Signals, Delay, Frequency

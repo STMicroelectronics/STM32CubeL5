@@ -60,7 +60,7 @@ void kMenu_Init(void) {
 }
 
 /**
-  * @brief  Function in charge to hanlde the menu selection
+  * @brief  Function in charge to handle the menu selection
   * @param  MainMenu   menu to set
   * @param  sel        pointer to the selected item
   * @retval None
@@ -202,7 +202,7 @@ void kMenu_HandleSelection(tMenu MainMenu, uint8_t *sel)
         }
 
         while((joyState = BSP_JOY_GetState(JOY1)) == JOY_NONE);
-        /* Anti rebounce */
+        /* Anti rebound */
         while(BSP_JOY_GetState(JOY1)!= JOY_NONE);
 
         switch(joyState)
@@ -422,7 +422,7 @@ void kMenu_Header(char *string)
 
 
 /**
-  * @brief  Function in charge to hanlde user event and forward them to the module
+  * @brief  Function in charge to handle user event and forward them to the module
   * @param  GPIO_Pin
   * @retval None
   */

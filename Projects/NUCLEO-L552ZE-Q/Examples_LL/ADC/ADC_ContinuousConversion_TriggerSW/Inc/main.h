@@ -28,6 +28,7 @@
 #include "stm32l5xx_ll_utils.h"
 #include "stm32l5xx_ll_cortex.h"
 #include "stm32l5xx_ll_gpio.h"
+#include "stm32l5xx_ll_icache.h"
 #include "stm32l5xx_ll_exti.h"
 #include "stm32l5xx_ll_adc.h"
 #include "stm32l5xx_ll_pwr.h"

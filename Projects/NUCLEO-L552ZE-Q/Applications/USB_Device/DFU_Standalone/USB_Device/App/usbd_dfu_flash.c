@@ -63,7 +63,7 @@
   * @{
   */
 
-#define FLASH_DESC_STR      "@Internal Flash   /0x08000000/8*02Ka,248*02Kg"
+#define FLASH_DESC_STR      "@Internal Flash   /0x08000000/9*02Ka,247*02Kg"
 
 /* USER CODE BEGIN PRIVATE_DEFINES */
 #define FLASH_ERASE_TIME    (uint16_t)50

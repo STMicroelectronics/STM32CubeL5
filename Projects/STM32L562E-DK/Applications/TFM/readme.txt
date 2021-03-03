@@ -80,6 +80,9 @@ assets but can only use secure services that use the critical assets:
 For more details, refer to UM2671 "Getting Started with the TF-M applications"
 available from the STMicroelectronics microcontroller website www.st.com.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Directory contents
 
    - Linker     Linker files definition shared between TFM_SBSFU_Boot,
@@ -116,9 +119,14 @@ Several steps to run TFM application :
 
 0. Prerequisite
 
-   In case of STM32CubeIDE usage on non Windows host, python3 is needed with
-   modules from Middlewares\Third_Party\mcuboot\scripts\requirements.txt:
-      pip3 install -r requirements.txt
+   Two versions of imgtool (used during build process) are available in mcuboot
+   middleware: windows executable and python version. By default, the windows
+   executable is selected. It is possible to switch to python version by:
+   - installing python (Python 3.6 or newer) with the required modules from
+     Middlewares\Third_Party\mcuboot\scripts\requirements.txt:
+       pip install -r requirements.txt
+   - having python in execution path variable
+   - deleting imgtool.exe in Middlewares\Third_Party\mcuboot\scripts\dist\imgtool
 
 1. Build
 

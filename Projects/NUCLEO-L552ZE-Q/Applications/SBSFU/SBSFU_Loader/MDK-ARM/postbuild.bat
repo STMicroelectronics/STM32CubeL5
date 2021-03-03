@@ -13,7 +13,7 @@ set loader_s_size=0x3000
 pushd %projectdir%\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot
 set mcuboot_dir=%cd%
 popd
-::line for window executeable
+::line for window executable
 echo Postbuild with windows executable
 set "imgtool=%mcuboot_dir%\scripts\dist\imgtool\imgtool.exe"
 set "python="

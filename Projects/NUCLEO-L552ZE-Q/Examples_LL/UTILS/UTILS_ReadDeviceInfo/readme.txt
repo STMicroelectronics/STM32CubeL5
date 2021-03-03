@@ -31,6 +31,9 @@ Then UID, Device ID and Revision ID will be saved in following global variables:
 - aShowWaferNumber: WAF_NUM[7:0], Wafer number (8-bit unsigned number)
 - aShowLotNumber: LOT_NUM[55:0], Lot number (ASCII encoded)
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, Utils, Device info, UID, Device ID, Revision ID, Wafer, Lot number, 

@@ -123,7 +123,7 @@ void kStorage_SdDetection(uint8_t status)
 }
 
 /**
-  * @brief  Return the first file present inside a direcory with FileExt
+  * @brief  Return the first file present inside a directory with FileExt
   * @param  DirName  pointer to the Directory name
   * @param  action   Opendir, previous or next files, Closedir
   * @param  FileName pointer to the File name
@@ -143,7 +143,7 @@ STORAGE_RETURN kStorage_GetDirectoryFiles(const uint8_t *DirName, uint8_t action
     switch(action)
     {
     case KSTORAGE_FINDPREV :
-      /* Recherche du prev */
+      /* Select previous */
       if (count == 1 ) return KSTORAGE_FIND_NOPREV;
       prev = count-1;
       count = 0;
@@ -253,7 +253,7 @@ STORAGE_RETURN kStorage_OpenFileDrawBMP(uint16_t xpos, uint16_t ypos, uint8_t *B
     return KSTORAGE_ERROR_OPEN;
   }
 
-  /* Memory allocation to get picture data (limited to 8k*/
+  /* Memory allocation to get picture data (limited to 8k) */
   kstorage_tmpbuffer = malloc(sizeof(uint8_t)*(8192+1024));
   if (kstorage_tmpbuffer == NULL)
   {

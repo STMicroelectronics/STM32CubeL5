@@ -1,5 +1,5 @@
 /**
-  @page USART_Communication_Rx_IT_Continuous_VCP_Init USART Receiver example (IT Mode, Continous reception)
+  @page USART_Communication_Rx_IT_Continuous_VCP_Init USART Receiver example (IT Mode, Continuous reception)
   
   @verbatim
   ******************************************************************************
@@ -41,6 +41,9 @@ Data processing consists in echoing data buffer content on PC Com port, and maki
 In case of errors, LED1 is blinking.
 
 Virtual Com port feature of STLINK could be used for UART communication between board and PC.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

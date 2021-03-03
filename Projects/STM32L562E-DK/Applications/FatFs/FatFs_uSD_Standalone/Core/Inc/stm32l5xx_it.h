@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_DMA/Core/Inc/stm32l5xx_it.h
+  * @file    FatFs/FatFs_uSD_Standalone/Core/Inc/stm32l5xx_it.h
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************

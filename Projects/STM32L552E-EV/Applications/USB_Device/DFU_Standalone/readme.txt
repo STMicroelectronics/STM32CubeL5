@@ -40,7 +40,7 @@ The Internal flash memory is split as follows:
 In this application, two operating modes are available:
  1. DFU operating mode:
     This mode is entered after an MCU reset in case:
-     - The DFU mode is forced by the user: the user presses the key sw2 button.
+     - The DFU mode is forced by the user when pressing WKUP push-button.
      - No valid code found in the application area: a code is considered valid if the MSB of the initial
        Main Stack Pointer (MSP) value located in the first address of the application area is equal to
        0x2000
@@ -91,6 +91,9 @@ requirements, such as:
 
 Device's end address is the end address of the flash memory and it is dependent on the device in use.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, USB_Device, USB, DFU, Firmware upgrade
@@ -129,6 +132,10 @@ Connectivity, USB_Device, USB, DFU, Firmware upgrade
       "Program Files\STMicroelectronics\Software\DfuSe v3.0.5\Bin\Driver\Win8.1" directory.
     -Connect the STM32L552E-EV board CN1 to the PC through "TYPE-C" to "Standard A" cable.
 
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ?
 

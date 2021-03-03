@@ -59,6 +59,9 @@ To port a LL example to the targeted board:
    - Replace file stm32l5xx_it.c
 
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Directory contents
 
   - Templates_LL/Legacy/Inc/stm32l5xx_it.h          Interrupt handlers header file

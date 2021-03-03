@@ -461,7 +461,7 @@ static int32_t Flash_EraseSector(uint32_t addr)
 #else
   EraseInit.TypeErase = FLASH_TYPEERASE_PAGES;
 #endif
-  /*  fix me assum dual bank, reading DBANK in OPTR in Flash init is better */
+  /*  fix me assume dual bank, reading DBANK in OPTR in Flash init is better */
   /*  flash size in  DB256K in OPTR */
   EraseInit.Banks = bank_number(&ARM_FLASH0_DEV, addr);
   /*  erase 2 pages because we declare that we have 4096 pages */

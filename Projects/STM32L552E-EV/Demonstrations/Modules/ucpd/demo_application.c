@@ -629,7 +629,7 @@ static void Display_build_info(void)
 }
 
 /**
-  * @brief  Menu selection managment
+  * @brief  Menu selection management
   * @param  PortNum     The handle of the port
   * @param  IndexMax    MAX index
   * @param  LineMax     MAX line
@@ -769,7 +769,7 @@ static void Display_cableinfo_menu(uint8_t PortNum)
 
   if(pIdentity.CableVDO_Presence == 0)
   {
-    sprintf((char *)str, "no information availble");
+    sprintf((char *)str, "no information available");
     UTIL_LCD_DisplayStringAt(0, 1 + 8 * Font12.Height + Font16.Height , str, LEFT_MODE);
   }
   else
@@ -1562,7 +1562,7 @@ static void Display_debug_port(uint8_t PortNum, uint8_t *msg)
 }
 
 /**
-  * @brief  main demo function to manage all the appplication event and to update MMI
+  * @brief  main demo function to manage all the application event and to update MMI
   * @retval None
   */
 static void Display_Selected_port(void)
@@ -1608,7 +1608,7 @@ static void Display_Selected_port(void)
 }
 
 /**
-  * @brief  main demo function to manage all the appplication event and to update MMI
+  * @brief  main demo function to manage all the application event and to update MMI
   * @param  Event Event value
   * @retval None
   */
@@ -1674,7 +1674,7 @@ static void DEMO_Manage_event(uint32_t Event)
            break;
        case USBPD_CAD_EVENT_DETACHED :
 
-         /* Reset cable information : vconn availble only for port 0 */
+         /* Reset cable information : vconn available only for port 0 */
          if (_portnum == 0 )
          {
            pIdentity.CableVDO_Presence = 0;

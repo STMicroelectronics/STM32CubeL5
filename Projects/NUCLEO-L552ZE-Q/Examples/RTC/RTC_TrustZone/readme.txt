@@ -60,8 +60,11 @@ application.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -145,7 +148,7 @@ STM32CubeIDE
  - File > Import. Point to the STM32CubeIDE folder of the example project. Click Finish.
  - Build configuration: Set the same active build configuration: Debug (default) or Release for both projects xxxxx_S & xxxxx_NS
  - Select and build the xxxxx_NS project, this will automatically trigger the build of xxxxx_S project
- - Select the xxxxx_S project and select "Debug configuration" or "Run configuration" in function of teh active build configuration
+ - Select the xxxxx_S project and select "Debug configuration" or "Run configuration" in function of the active build configuration
    - Double click on “STM32 Cortex-M C/C++ Application”
    - Select  “Startup” >  “Add” > 
      - Select the xxxxx_NS project 

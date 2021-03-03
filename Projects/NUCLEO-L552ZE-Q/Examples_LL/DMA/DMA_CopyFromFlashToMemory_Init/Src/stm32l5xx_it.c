@@ -217,7 +217,7 @@ void DMA1_Channel1_IRQHandler(void)
     TransferError();
   }
   /* USER CODE END DMA1_Channel1_IRQn 0 */
-  
+
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
 
   /* USER CODE END DMA1_Channel1_IRQn 1 */

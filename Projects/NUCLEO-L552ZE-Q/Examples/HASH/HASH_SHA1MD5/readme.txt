@@ -34,6 +34,9 @@ HASH tool. Those values are compared to those computed by the HASH peripheral.
 When SHA1 (respectively MD5) digest computation is successful, LED_GREEN (resp. LED_BLUE) is turned on.
 In case of digest computation or initialization issue, LED_RED is turned on.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, Security, HASH, SHA1, MD5, digest

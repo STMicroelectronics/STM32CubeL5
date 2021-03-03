@@ -59,6 +59,9 @@ the debugger by watching the variable uwMeasuredDutyCycle.
 successively the user button, the LED1 is ON and its luminosity rises as the dutycycle value keeps
 increasing.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, TIM, Output, Signal, PWM, Frequency, Duty cycle, Waveform, Auto-reload.

@@ -233,7 +233,7 @@ int HCR_demo(void)
   touch_time = HAL_GetTick();
   txt[0] = 0;
 
-  /*DWT intitialization*/
+  /*DWT initialization*/
   dwtIpInit();
 
   while(1)
@@ -306,13 +306,13 @@ int HCR_demo(void)
         /* DWT reset*/
         dwtReset();
 
-        /* inference duration measurment*/
+        /* inference duration measurement*/
         tstart = dwtGetCycles();
 
         /* run NN*/
         ai_mnetwork_run(net_exec_ctx[0].handle, &ai_input[0], &ai_output[0]);
 
-        /* inference duration measurment*/
+        /* inference duration measurement*/
         tend = dwtGetCycles() - tstart;
 
         dwtCyclesToTime(tend, &t);

@@ -119,7 +119,7 @@ void TFM_LL_SECU_ApplyRunTimeProtections(void)
   mpc_init_cfg();
 
   /* Set MPU to forbidd execution outside of not muteable code  */
-  /* Initialialize not secure MPU to forbidd execution on Flash /SRAM */
+  /* Initialize not secure MPU to forbidd execution on Flash /SRAM */
   mpu_init_cfg();
 
   /* Enable SAU to gain access to flash area non secure for write/read */
@@ -215,21 +215,21 @@ void TFM_LL_SECU_CheckStaticProtections(void)
   /* Check TZEN = 1 , we are in secure */
   if ((flash_option_bytes_bank1.USERConfig & FLASH_OPTR_TZEN) != FLASH_OPTR_TZEN)
   {
-    BOOT_LOG_ERR("Error while checking TZEN value");
+    BOOT_LOG_ERR("Unexpected value for TZEN value");
     Error_Handler();
   }
 
   /* Check if dual bank is set */
   if ((flash_option_bytes_bank1.USERConfig & FLASH_OPTR_DBANK) != FLASH_OPTR_DBANK)
   {
-    BOOT_LOG_ERR("Error while checking dual bank configuration");
+    BOOT_LOG_ERR("Unexpected value for dual bank configuration");
     Error_Handler();
   }
 
   /* Check if swap bank is reset */
   if ((flash_option_bytes_bank1.USERConfig & FLASH_OPTR_SWAP_BANK) != 0)
   {
-    BOOT_LOG_ERR("Error while checking swap bank configuration");
+    BOOT_LOG_ERR("Unexpected value for swap bank configuration");
     Error_Handler();
   }
 
@@ -237,7 +237,7 @@ void TFM_LL_SECU_CheckStaticProtections(void)
   if (flash_option_bytes_bank1.BootAddr != SBSFU_BOOT_VTOR_ADDR)
   {
     BOOT_LOG_INF("BootAddr 0x%x", flash_option_bytes_bank1.BootAddr);
-    BOOT_LOG_ERR("Error while checking SEC BOOT Address");
+    BOOT_LOG_ERR("Unexpected value for SEC BOOT Address");
     Error_Handler();
   }
 
@@ -246,7 +246,7 @@ void TFM_LL_SECU_CheckStaticProtections(void)
   if ((flash_option_bytes_nsboot0.BootAddr != SBSFU_BOOT_VTOR_ADDR)
       || (flash_option_bytes_nsboot1.BootAddr != SBSFU_BOOT_VTOR_ADDR))
   {
-    BOOT_LOG_ERR("Error while checking NS BOOT Address");
+    BOOT_LOG_ERR("Unexpected value for NS BOOT Address");
     Error_Handler();
   }
 #endif /* TFM_NSBOOT_CHECK_ENABLE */
@@ -264,10 +264,10 @@ void TFM_LL_SECU_CheckStaticProtections(void)
     BOOT_LOG_INF("BANK 1 secure flash [%d, %d] : OB [%d, %d]",
                  start, end, flash_option_bytes_bank1.WMSecStartPage, flash_option_bytes_bank1.WMSecEndPage);
 #ifndef TFM_ENABLE_SET_OB
-    BOOT_LOG_ERR("Error while checking secure flash protection");
+    BOOT_LOG_ERR("Unexpected value for secure flash protection");
     Error_Handler();
 #else
-    BOOT_LOG_ERR("Error while checking secure flash protection: set wmsec1");
+    BOOT_LOG_ERR("Unexpected value for secure flash protection: set wmsec1");
     flash_option_bytes_bank1.WMSecStartPage = start;
     flash_option_bytes_bank1.WMSecEndPage = end;
     flash_option_bytes_bank1.OptionType |= OPTIONBYTE_WMSEC;
@@ -287,10 +287,10 @@ void TFM_LL_SECU_CheckStaticProtections(void)
     BOOT_LOG_INF("BANK 2 secure flash [%d, %d] : OB [%d, %d]", start, end, flash_option_bytes_bank2.WMSecStartPage,
                    flash_option_bytes_bank2.WMSecEndPage);
 #ifndef TFM_ENABLE_SET_OB
-    BOOT_LOG_ERR("Error while checking secure flash protection");
+    BOOT_LOG_ERR("Unexpected value for secure flash protection");
     Error_Handler();
 #else
-    BOOT_LOG_ERR("Error while checking secure flash protection : set wmsec2");
+    BOOT_LOG_ERR("Unexpected value for secure flash protection : set wmsec2");
     flash_option_bytes_bank2.WMSecStartPage = start;
     flash_option_bytes_bank2.WMSecEndPage = end;
     flash_option_bytes_bank2.OptionType = OPTIONBYTE_WMSEC;
@@ -304,7 +304,7 @@ void TFM_LL_SECU_CheckStaticProtections(void)
     BOOT_LOG_INF("BANK 2 secure flash [%d, %d] : OB [%d, %d]", 127, 0, flash_option_bytes_bank2.WMSecStartPage,
                  flash_option_bytes_bank2.WMSecEndPage);
 #ifndef TFM_ENABLE_SET_OB
-    BOOT_LOG_ERR("Error while checking secure flash protection");
+    BOOT_LOG_ERR("Unexpected value for secure flash protection");
     Error_Handler();
 #else
     /* bank is not unsecured , modify option bytes */
@@ -328,14 +328,14 @@ void TFM_LL_SECU_CheckStaticProtections(void)
                  flash_option_bytes_bank1.WRPStartOffset,
                  flash_option_bytes_bank1.WRPEndOffset);
 #ifndef TFM_ENABLE_SET_OB
-    BOOT_LOG_ERR("Error while checking write protection ");
+    BOOT_LOG_ERR("Unexpected value for write protection ");
     Error_Handler();
 #else
     flash_option_bytes_bank1.WRPStartOffset = start;
     flash_option_bytes_bank1.WRPEndOffset = end;
     flash_option_bytes_bank1.WRPArea |= OB_WRPAREA_BANK1_AREAA;
 
-    BOOT_LOG_ERR("Error while checking write protection : set wrp1");
+    BOOT_LOG_ERR("Unexpected value for write protection : set wrp1");
     flash_option_bytes_bank1.OptionType |= OPTIONBYTE_WRP;
 #endif /* TFM_ENABLE_SET_OB */
   }
@@ -351,14 +351,14 @@ void TFM_LL_SECU_CheckStaticProtections(void)
                  flash_option_bytes_bank2.WRPStartOffset,
                  flash_option_bytes_bank2.WRPEndOffset);
 #ifndef TFM_ENABLE_SET_OB
-    BOOT_LOG_ERR("Error while checking write protection ");
+    BOOT_LOG_ERR("Unexpected value for write protection ");
     Error_Handler();
 #else
     flash_option_bytes_bank2.WRPStartOffset = start;
     flash_option_bytes_bank2.WRPEndOffset = end;
     flash_option_bytes_bank2.WRPArea |= OB_WRPAREA_BANK2_AREAA;
 
-    BOOT_LOG_ERR("Error while checking write protection : set wrp2");
+    BOOT_LOG_ERR("Unexpected value for write protection : set wrp2");
     flash_option_bytes_bank2.OptionType |= OPTIONBYTE_WRP;
 #endif /* TFM_ENABLE_SET_OB */
   }
@@ -381,10 +381,10 @@ void TFM_LL_SECU_CheckStaticProtections(void)
                  flash_option_bytes_bank1.WMSecStartPage,
                  flash_option_bytes_bank1.WMHDPEndPage);
 #ifndef TFM_ENABLE_SET_OB
-    BOOT_LOG_ERR("Error while checking secure user flash protection");
+    BOOT_LOG_ERR("Unexpected value for secure user flash protection");
     Error_Handler();
 #else
-    BOOT_LOG_ERR("Error while checking secure user flash protection : set hdp1");
+    BOOT_LOG_ERR("Unexpected value for secure user flash protection : set hdp1");
     flash_option_bytes_bank1.WMSecStartPage = start;
     flash_option_bytes_bank1.WMHDPEndPage = end;
     flash_option_bytes_bank1.OptionType |= OPTIONBYTE_WMSEC;
@@ -405,7 +405,7 @@ void TFM_LL_SECU_CheckStaticProtections(void)
   /* Check SRAM2 ERASE on reset */
   if ((flash_option_bytes_bank1.USERConfig & FLASH_OPTR_SRAM2_RST) != 0)
   {
-    BOOT_LOG_ERR("Error while checking OB for SRAM2 ERASE at Reset");
+    BOOT_LOG_ERR("Unexpected value for SRAM2 ERASE at Reset");
     Error_Handler();
   }
 #endif /*TFM_SECURE_USER_SRAM2_ERASE_AT_RESET */
@@ -423,12 +423,12 @@ void TFM_LL_SECU_CheckStaticProtections(void)
     /* Verify Options Bytes to configure */
     if ((flash_option_bytes_bank1.OptionType & OPTIONBYTE_RDP) != 0)
     {
-      BOOT_LOG_ERR("Error while checking OB RDP to program");
+      BOOT_LOG_ERR("Unexpected value for OB RDP to program");
       Error_Handler();
     }
     if ((flash_option_bytes_bank2.OptionType & OPTIONBYTE_RDP) != 0)
     {
-      BOOT_LOG_ERR("Error while checking OB RDP to program");
+      BOOT_LOG_ERR("Unexpected value for OB RDP to program");
       Error_Handler();
     }
 #ifdef MCUBOOT_EXT_LOADER
@@ -437,12 +437,12 @@ void TFM_LL_SECU_CheckStaticProtections(void)
 	if ((flash_option_bytes_bank2.WRPArea & ~OB_WRPAREA_BANK2_AREAA) != 0)
 #endif
 	{
-      BOOT_LOG_ERR("Error while checking bank 2 OB WRP AREA to program");
+      BOOT_LOG_ERR("Unexpected value for bank 2 OB WRP AREA to program");
       Error_Handler();
     }
     if ((flash_option_bytes_bank1.WRPArea & ~OB_WRPAREA_BANK1_AREAA) != 0)
     {
-      BOOT_LOG_ERR("Error while checking bank 1 OB WRP AREA to program");
+      BOOT_LOG_ERR("Unexpected value for bank 1 OB WRP AREA to program");
       Error_Handler();
     }
     if ((flash_option_bytes_bank1.OptionType) != 0)
@@ -484,7 +484,7 @@ void TFM_LL_SECU_CheckStaticProtections(void)
   if (flash_option_bytes_bank1.BootLock != TFM_OB_BOOT_LOCK)
   {
     BOOT_LOG_INF("BootLock 0x%x", flash_option_bytes_bank1.BootLock);
-    BOOT_LOG_ERR("Error while checking SEC BOOT LOCK");
+    BOOT_LOG_ERR("Unexpected value for SEC BOOT LOCK");
     Error_Handler();
   }
 #endif /* TFM_OB_BOOT_LOCK */
@@ -494,7 +494,7 @@ void TFM_LL_SECU_CheckStaticProtections(void)
   if (flash_option_bytes_bank1.RDPLevel != TFM_OB_RDP_LEVEL_VALUE)
   {
     BOOT_LOG_INF("RDPLevel 0x%x (0x%x)", flash_option_bytes_bank1.RDPLevel, TFM_OB_RDP_LEVEL_VALUE);
-    BOOT_LOG_ERR("Error while checking RDP level");
+    BOOT_LOG_ERR("Unexpected value for RDP level");
     rdp_level(TFM_OB_RDP_LEVEL_VALUE, flash_option_bytes_bank1.RDPLevel);
     Error_Handler();
   }
@@ -518,6 +518,7 @@ static void rdp_level(uint32_t rdplevel, uint32_t current_rdplevel)
   flash_option_bytes_bank.OptionType = OPTIONBYTE_RDP;
   flash_option_bytes_bank.RDPLevel = rdplevel;
   BOOT_LOG_INF("Programming RDP to %x", rdplevel);
+  BOOT_LOG_INF("Unplug/Plug jumper JP2 (IDD)");
 
   /* Unlock the Flash to enable the flash control register access */
   HAL_FLASH_Unlock();
@@ -557,7 +558,7 @@ static void secure_internal_flash(uint32_t offset_start, uint32_t offset_end)
     uint32_t block_end =  offset_end;
     block_start = block_start / PAGE_SIZE;
     block_end = (block_end / PAGE_SIZE) ;
-    /*  Check alignment to avoid futher problem  */
+    /*  Check alignment to avoid further problem  */
     if (offset_start & (PAGE_SIZE-1))
 		Error_Handler();
     /*  1f is for 32 bits */

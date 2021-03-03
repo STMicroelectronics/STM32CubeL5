@@ -354,7 +354,7 @@
             <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L552xx</Define>
+              <Define>STM32L562xx</Define>
               <Undefine></Undefine>
               <IncludePath></IncludePath>
             </VariousControls>

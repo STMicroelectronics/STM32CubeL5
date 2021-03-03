@@ -38,8 +38,8 @@ Below are the steps to run this example:
  - You can avoid step 1 by directly loading the binary file provided with the example
  - You have to configure your preferred toolchain in order to generate the binary
    file after compiling the project.
- - You can use STM32 CubeProgrammer or any similar tool to initially reset the
-   BFB2 bit (disable the dual boot feature).
+ - You can use STM32CubeProgrammer or any similar tool to insure DBANK=1 and initially
+   reset the SWAP_BANK bit (bank 1 and bank 2 address are not swapped).
 
 3- Select bank1 configuration by uncommenting FLASH_BANK1 and commenting FLASH_BANK2 defines
    in "main.h", and run it, this project will be loaded in the bank1 of the flash: at the
@@ -64,6 +64,9 @@ Below are the steps to run this example:
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Memory, Flash, Dual-Boot, Dual-Bank, Execute, Binary, Option-Bytes
@@ -86,6 +89,10 @@ Memory, Flash, Dual-Boot, Dual-Bank, Execute, Binary, Option-Bytes
 
   - This example has been tested with STM32L552E-EV board and can be
     easily tailored to any other supported device and development board.
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ?
 

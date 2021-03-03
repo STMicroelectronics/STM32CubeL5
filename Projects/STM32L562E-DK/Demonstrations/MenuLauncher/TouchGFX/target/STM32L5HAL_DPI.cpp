@@ -16,7 +16,7 @@ extern "C"
 DMA_HandleTypeDef hdma;
 #endif // TGFX_USE_REGULAR_DMA_FOR_LCD_REFRESH
 
-// Retreive Display Orientation
+// Retrieve Display Orientation
 extern LCD_Drv_t *Lcd_Drv[];
 }
 

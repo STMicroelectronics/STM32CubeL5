@@ -404,7 +404,7 @@ int mbedtls_aes_crypt_cbc(mbedtls_aes_context *ctx,
 
 #if defined(MBEDTLS_CIPHER_MODE_XTS)
 
-/* Endianess with 64 bits values */
+/* Endianness with 64 bits values */
 #ifndef GET_UINT64_LE
 #define GET_UINT64_LE(n,b,i)                            \
 {                                                       \
@@ -438,7 +438,7 @@ int mbedtls_aes_crypt_cbc(mbedtls_aes_context *ctx,
  *
  * This function multiplies a field element by x in the polynomial field
  * representation. It uses 64-bit word operations to gain speed but compensates
- * for machine endianess and hence works correctly on both big and little
+ * for machine endianness and hence works correctly on both big and little
  * endian machines.
  */
 static void mbedtls_gf128mul_x_ble( unsigned char r[16],
@@ -767,7 +767,7 @@ int mbedtls_internal_aes_encrypt(mbedtls_aes_context *ctx,
                                  unsigned char output[16])
 {
 
-    if (HAL_CRYP_Encrypt(&ctx->hcryp_aes, (uint32_t *)input, 4, (uint32_t *)output, ST_AES_TIMEOUT) != HAL_OK) {
+    if (HAL_CRYP_Encrypt(&ctx->hcryp_aes, (uint32_t *)input, 16, (uint32_t *)output, ST_AES_TIMEOUT) != HAL_OK) {
         return (MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED);
     }
     return (0);
@@ -778,7 +778,7 @@ int mbedtls_internal_aes_decrypt(mbedtls_aes_context *ctx,
                                  const unsigned char input[16],
                                  unsigned char output[16])
 {
-    if (HAL_CRYP_Decrypt(&ctx->hcryp_aes, (uint32_t *)input, 4, (uint32_t *)output, ST_AES_TIMEOUT) != HAL_OK) {
+    if (HAL_CRYP_Decrypt(&ctx->hcryp_aes, (uint32_t *)input, 16, (uint32_t *)output, ST_AES_TIMEOUT) != HAL_OK) {
         return MBEDTLS_ERR_PLATFORM_HW_ACCEL_FAILED;
     }
     return (0);

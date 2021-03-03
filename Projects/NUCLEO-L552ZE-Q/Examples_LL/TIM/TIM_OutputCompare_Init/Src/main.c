@@ -20,7 +20,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -71,6 +70,7 @@ static uint32_t tim_pulse_value = 0;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 __STATIC_INLINE void     Configure_OCMode(uint32_t OCMode);
@@ -129,6 +129,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ICACHE_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
@@ -218,6 +219,31 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
+}
+
+/**
   * @brief TIM2 Initialization Function
   * @param None
   * @retval None
@@ -263,8 +289,8 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 2 */
   LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
-  /**TIM2 GPIO Configuration  
-  PA5   ------> TIM2_CH1 
+  /**TIM2 GPIO Configuration
+  PA5   ------> TIM2_CH1
   */
   GPIO_InitStruct.Pin = TIM2_CH1_Pin;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;

@@ -60,6 +60,9 @@ These steps are repeated in an infinite loop.
       that the Cortex-M33 core is no longer clocked during low power mode 
       so debugging features are disabled.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Power, PWR, Standby mode, Interrupt, EXTI, Wakeup, Low Power, External reset,

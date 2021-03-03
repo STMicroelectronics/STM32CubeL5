@@ -27,7 +27,6 @@
 #include "mbedtls/platform.h"
 #include "mbedtls/platform_util.h"
 #include "stm32l5xx_hal.h"
-
 #if defined(MCUBOOT_DOUBLE_SIGN_VERIF)
 #include "boot_hal_imagevalid.h"
 #include "bootutil_priv.h"
@@ -36,7 +35,9 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define ST_ECDSA_TIMEOUT     (5000U)
+#if defined(MCUBOOT_DOUBLE_SIGN_VERIF)
 #define PKA_ECDSA_VERIF_OUT_SIGNATURE_R                ((0x055CUL - PKA_RAM_OFFSET)>>2)   /*!< Output result */
+#endif /* MCUBOOT_DOUBLE_SIGN_VERIF */
 
 /* Private macro -------------------------------------------------------------*/
 /* Parameter validation macros based on platform_util.h */
@@ -189,6 +190,39 @@ cleanup:
 #error "MBEDTLS_ECP_ALT must be defined, if MBEDTLS_ECDSA_VERIFY_ALT is"
 #endif
 
+#if  defined(MCUBOOT_DOUBLE_SIGN_VERIF)
+/**
+  * @brief  Check PKA signature with a constant time execution.
+  * @param  hpka PKA handle
+  * @param  in Input information
+  * @retval IMAGE_VALID if equal, IMAGE_INVALID otherwise.
+  */
+static int CheckPKASignature(PKA_HandleTypeDef *hpka, PKA_ECDSAVerifInTypeDef *in)
+{
+  __IO uint8_t result = 0;
+  uint32_t i;
+  uint32_t j;
+  uint8_t* p_sign_PKA = (uint8_t*) &hpka->Instance->RAM[PKA_ECDSA_VERIF_OUT_SIGNATURE_R];
+  uint8_t* pSign = (uint8_t*)in->RSign;
+  uint32_t Size =  in->primeOrderSize;
+
+  /* Signature comparison LSB vs MSB */
+  for (i = 0U, j = Size - 1U; i < Size; i++, j--)
+  {
+    result |= pSign[i] ^ IMAGE_VALID ^ p_sign_PKA[j];
+  }
+
+  /* Loop fully executed ==> no basic HW attack */
+  /* Any other unexpected result */
+  if ( (i != Size) || (result != IMAGE_VALID) )
+  {
+    result = IMAGE_INVALID;
+  }
+
+  return result;
+}
+#endif /* MCUBOOT_DOUBLE_SIGN_VERIF */
+
 /*
  * Verify ECDSA signature of hashed message
  */
@@ -285,10 +319,7 @@ int mbedtls_ecdsa_verify( mbedtls_ecp_group *grp,
         /* Check ImageValidIndex is in expected range MCUBOOT_IMAGE_NUMBER */
         MBEDTLS_MPI_CHK((ImageValidIndex >= MCUBOOT_IMAGE_NUMBER) ? MBEDTLS_ERR_ECP_VERIFY_FAILED : 0);
 
-        hpka.Instance->RAM[PKA_ECDSA_VERIF_IN_SIGNATURE_R] ^= IMAGE_VALID;
-        ImageValidStatus[ImageValidIndex++] = boot_secure_memequal((void *)&(hpka.Instance->RAM[PKA_ECDSA_VERIF_IN_SIGNATURE_R]),
-                                                                   (void *)&(hpka.Instance->RAM[PKA_ECDSA_VERIF_OUT_SIGNATURE_R]),
-                                                                   ECDSA_VerifyIn.primeOrderSize);
+        ImageValidStatus[ImageValidIndex++] = CheckPKASignature(&hpka, &ECDSA_VerifyIn);
     }
 #endif /* MCUBOOT_DOUBLE_SIGN_VERIF */
 

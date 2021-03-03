@@ -2,7 +2,7 @@
 /**
   ******************************************************************************
   * File Name          : stm32l5xx_hal_msp.c
-  * Description        : This file provides code for the MSP Initialization 
+  * Description        : This file provides code for the MSP Initialization
   *                      and de-Initialization codes.
   ******************************************************************************
   * @attention
@@ -97,7 +97,7 @@ void HAL_DFSDM_FilterMspInit(DFSDM_Filter_HandleTypeDef* hdfsdm_filter)
   if(DFSDM1_Init == 0)
   {
   /* USER CODE BEGIN DFSDM1_MspInit 0 */
-  DFSDM1_Init++;
+
   /* USER CODE END DFSDM1_MspInit 0 */
   /** Initializes the peripherals clock
   */
@@ -140,6 +140,7 @@ void HAL_DFSDM_FilterMspInit(DFSDM_Filter_HandleTypeDef* hdfsdm_filter)
   /* USER CODE BEGIN DFSDM1_MspInit 1 */
 
   /* USER CODE END DFSDM1_MspInit 1 */
+  DFSDM1_Init++;
   }
 
 }
@@ -157,7 +158,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef* hdfsdm_channel)
   if(DFSDM1_Init == 0)
   {
   /* USER CODE BEGIN DFSDM1_MspInit 0 */
-  DFSDM1_Init++;
+
   /* USER CODE END DFSDM1_MspInit 0 */
   /** Initializes the peripherals clock
   */
@@ -197,6 +198,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef* hdfsdm_channel)
   /* USER CODE BEGIN DFSDM1_MspInit 1 */
 
   /* USER CODE END DFSDM1_MspInit 1 */
+  DFSDM1_Init++;
   }
 
 }

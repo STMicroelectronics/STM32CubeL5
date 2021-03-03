@@ -74,6 +74,9 @@ STM32L562E-DK's LED can be used to monitor the application status:
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 File system, FatFs, SD Card, SRAM, FAT Volume, Format, Mount, Read, Write

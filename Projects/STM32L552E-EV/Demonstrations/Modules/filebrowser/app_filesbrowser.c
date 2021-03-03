@@ -98,18 +98,20 @@ uint8_t stringline[MAX_LINE][256];
 /**
   * @brief  Run the Files browser
   * @param  None.
-  * @note   run and display Files accordng the user action.
+  * @note   run and display Files according the user action.
   * @retval None.
   */
 void FilesBrowserDemo(void)
 {
   uint8_t filename[256];
   uint8_t foldername[256];
+  uint8_t fullname[(256*2)+1];
   uint8_t folder_level = 0;
-  uint16_t folderposition= 0, foldertargetposition;
   uint8_t index;
   uint8_t sel = 1;
   uint8_t application_state = FILESBROWSER_INIT;
+  uint16_t folderposition= 0, foldertargetposition;
+  uint16_t len;
 
   do
   {
@@ -131,14 +133,12 @@ void FilesBrowserDemo(void)
       sel = 0;
       if(kStorage_GetDirectoryFiles(foldername, KSTORAGE_FINDFIRST, stringline[1], NULL) == KSTORAGE_NOERROR)
       {
-        sprintf((char *)stringline[1], "%s",stringline[1]);
         folderposition = 1;
         sel = 1;
         for(index = 2; index < MAX_LINE; index++)
         {
           if(kStorage_GetDirectoryFiles(foldername, KSTORAGE_FINDNEXT, stringline[index], NULL) == KSTORAGE_NOERROR)
           {
-            sprintf((char *)stringline[index], "%s",stringline[index]);
             folderposition++;
           }
         }
@@ -172,7 +172,13 @@ void FilesBrowserDemo(void)
             folderposition++;
             for(index = 1 ; index < (MAX_LINE - 1); index++)
             {
-              strcpy((char *)stringline[index],(char *)stringline[index+1]);
+              len = 0;
+              while (stringline[index+1][len] != '\0')
+              {
+                stringline[index][len] = stringline[index+1][len];
+                len++;
+              }
+              stringline[index][len] = '\0';
             }
             sprintf((char *)stringline[index], "%s",filename);
           }
@@ -200,12 +206,10 @@ void FilesBrowserDemo(void)
               folderposition++;
             } while(folderposition != (foldertargetposition - (MAX_LINE - 1)));
 
-            sprintf((char *)stringline[1], "%s",stringline[1]);
             for(index = 2; index < MAX_LINE; index++)
             {
               if(kStorage_GetDirectoryFiles(foldername, KSTORAGE_FINDNEXT, stringline[index], NULL) == KSTORAGE_NOERROR)
               {
-                sprintf((char *)stringline[index], "%s",stringline[index]);
                 folderposition++;
               }
             }
@@ -226,16 +230,16 @@ void FilesBrowserDemo(void)
         {
           if (sel != 0 )
           {
-            sprintf((char *)filename,"%s\\%s", stringline[0], stringline[sel]);
-            kStorage_GetFileInfo(filename, &fileinfo);
-
-            sprintf((char *)filename,"%d", fileinfo.fattrib);
+            strcpy((char *)foldername, (char *)stringline[0]);
+            sprintf((char *)fullname,"%s\\%s", foldername, stringline[sel]);
+            kStorage_GetFileInfo(fullname, &fileinfo);
 
             /* enter inside the folder */
             if(((fileinfo.fattrib & AM_DIR)== AM_DIR) && (folder_level < FOLDER_LEVEL_MAX))
             {
               kStorage_GetDirectoryFiles(foldername, KSTORAGE_FINDCLOSE, filename, NULL);
-              sprintf((char *)stringline[0],"%s\\%s", stringline[0], fileinfo.fname);
+              sprintf((char *)fullname,"%s\\%s", stringline[0], fileinfo.fname);
+              strcpy((char *)stringline[0], (char *)fullname);
               strcpy((char *)foldername, (char *)stringline[0]);
               folder_level++;
               application_state = FILEBROWSER_GETFILE;
@@ -306,7 +310,8 @@ static void FilesBrowserDisplayFiles(uint8_t sel)
 {
   uint32_t pXSize;
   uint8_t index;
-  uint8_t buff[200] = {0};
+  uint8_t len;
+  uint8_t buff[256*2+1];
   uint8_t strtmp[13];
   FILINFO fileinfo;
 
@@ -342,9 +347,18 @@ static void FilesBrowserDisplayFiles(uint8_t sel)
     else
     {
       /* add space to guarantee right display */
-      while(strlen((char*)stringline[index]) < 12)
+      if(strlen((char*)stringline[index]) < 12)
       {
-        sprintf((char*)stringline[index], "%s ", stringline[index]);
+        len = 0;
+        while(stringline[index][len] != '\0')
+        {
+          len++;
+        }
+        for(;len<12;len++)
+        {
+          stringline[index][len] = ' ';
+        }
+        stringline[index][12]= '\0';
       }
       if(strlen((char*)stringline[index]) >12)
       {
@@ -395,7 +409,7 @@ static void FilesBrowserDisplayFiles(uint8_t sel)
       UTIL_LCD_DisplayStringAt(170, 46+Font16.Height*3, (uint8_t *)"fsize   :", LEFT_MODE);
       UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_ST_BLUE);
 
-      /* Convert and Dispaly file size in Bytes, Kilo or Mega Bytes */
+      /* Convert and Display file size in Bytes, Kilo or Mega Bytes */
       if( fileinfo.fsize < 1024)
       {
         sprintf((char *)buff,"%d Bytes     ", (unsigned int)fileinfo.fsize);

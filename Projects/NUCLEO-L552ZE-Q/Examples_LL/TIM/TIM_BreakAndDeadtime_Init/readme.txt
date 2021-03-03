@@ -53,6 +53,9 @@ The break Polarity is used at High level.
 
 The TIM1 waveforms can be displayed using an oscilloscope.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timer, TIM, PWM, Signal, Duty cycle, Dead time, Break-time, Break polarity, Oscilloscope.

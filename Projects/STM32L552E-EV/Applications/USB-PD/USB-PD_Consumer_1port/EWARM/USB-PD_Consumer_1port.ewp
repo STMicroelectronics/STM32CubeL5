@@ -1111,6 +1111,9 @@
     <group>
       <name>STM32L5xx_HAL_Driver</name>
       <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_tim.c</name>
       </file>
       <file>
@@ -1198,7 +1201,7 @@
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_ucpd.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_tim.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_tim.c</name>
       </file>
     </group>
     <group>
@@ -1274,9 +1277,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/src/usbpd_timersserver.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_tim.c</name>
       </file>
     </group>
   </group>

@@ -96,8 +96,11 @@ The STM32L552E-EV (MB1372) board LEDs can be used to monitor the transfer status
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -141,6 +144,10 @@ Security, TrustZone, Memory, Flash, Erase, Program
      SECWM2_PSTRT=0x1  SECWM2_PEND=0x0   No page of internal Flash Bank2 set as secure, hence Bank2 non-secure
 
 
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
+
 @par How to use it ?
 
 In order to make the program work, you must do the following :
@@ -182,7 +189,7 @@ STM32CubeIDE
  - File > Import. Point to the STM32CubeIDE folder of the example project. Click Finish.
  - Build configuration: Set the same active build configuration: Debug (default) or Release for both projects xxxxx_S & xxxxx_NS
  - Select and build the xxxxx_NS project, this will automatically trigger the build of xxxxx_S project
- - Select the xxxxx_S project and select "Debug configuration" or "Run configuration" in function of teh active build configuration
+ - Select the xxxxx_S project and select "Debug configuration" or "Run configuration" in function of the active build configuration
    - Double click on “STM32 Cortex-M C/C++ Application”
    - Select  “Startup” >  “Add” > 
      - Select the xxxxx_NS project 

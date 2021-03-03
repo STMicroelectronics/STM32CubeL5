@@ -320,7 +320,7 @@ void Storage_DeInit(void)
     osStorageThreadHandle = 0;
   }
 
-  /* Delate Storage Message Queue */
+  /* Delete Storage Message Queue */
   if(osStorageEventQueueHandle != 0)
   {
     osMessageQueueDelete(osStorageEventQueueHandle);

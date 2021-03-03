@@ -67,7 +67,7 @@ software obtained with BOARD_IN_STOP_MODE disabled.
 
 At the very beginning, board 1 LED1 is ON then is turned off.
 This means that board 1 has entered STOP mode.
-Parallely, board 2 LED1 is quickly blinking (100 ms period). The user has
+Parallelly, board 2 LED1 is quickly blinking (100 ms period). The user has
 just to wait for board 1 LED1 to be turned off then to press board 2
 BUTTON_USER to send the first wake-up stimulus to board 1.
 This starts the test sequence and no more action is required from the user
@@ -137,6 +137,9 @@ The LPUART is configured as follows:
 
 @note The application needs to ensure that the SysTick time base is always set
       to 1 millisecond to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

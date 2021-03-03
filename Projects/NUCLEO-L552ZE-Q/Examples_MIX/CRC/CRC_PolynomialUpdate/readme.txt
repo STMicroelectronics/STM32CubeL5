@@ -55,6 +55,9 @@ STM32 board LEDs are used to monitor the example status:
 @note The example needs to ensure that the SysTick time base is always set to 1 millisecond
  to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Security, CRC, CRC Polynomial, IEC 60870-5, hardware CRC, user-defined, generating polynomial, polynomial update

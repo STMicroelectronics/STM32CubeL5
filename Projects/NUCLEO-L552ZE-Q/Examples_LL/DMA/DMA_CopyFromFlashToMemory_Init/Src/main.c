@@ -21,7 +21,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -75,6 +74,7 @@ static uint32_t aDST_Buffer[BUFFER_SIZE];
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
+static void MX_ICACHE_Init(void);
 /* USER CODE BEGIN PFP */
 
 uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint32_t BufferLength);
@@ -127,6 +127,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
+  MX_ICACHE_Init();
   /* USER CODE BEGIN 2 */
 
   /* Set DMA transfer addresses of source and destination */
@@ -216,6 +217,31 @@ void SystemClock_Config(void)
   LL_Init1msTick(110000000);
 
   LL_SetSystemCoreClock(110000000);
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
 }
 
 /**
@@ -360,14 +386,14 @@ void LED_Blinking(uint32_t Period)
 void TransferComplete()
 {
   /* DMA transfer completed */
-  /* Verify the data transfered */
+  /* Verify the data transferred */
   if (Buffercmp((uint32_t*)aSRC_Const_Buffer, (uint32_t*)aDST_Buffer, BUFFER_SIZE) == 1)
   {
-    /* DMA data transfered not consistency */
+    /* DMA data transferred not consistency */
     LED_Blinking(LED_BLINK_ERROR);
   }
   
-  /* DMA data transfered consistency */
+  /* DMA data transferred consistency */
   LED_On();
 }
 

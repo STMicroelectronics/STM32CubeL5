@@ -95,6 +95,9 @@ in this case the sync signal IP should be configured (replacing the function LPT
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 	  
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, DMA, DMAMUX, LPTIM, USART, Data Transfer, Memory to periph, synchronization

@@ -135,7 +135,7 @@ typedef struct
   */
 #define STM32L562E_DISCOVERY_BSP_VERSION_MAIN   (0x01U) /*!< [31:24] main version */
 #define STM32L562E_DISCOVERY_BSP_VERSION_SUB1   (0x01U) /*!< [23:16] sub1 version */
-#define STM32L562E_DISCOVERY_BSP_VERSION_SUB2   (0x00U) /*!< [15:8]  sub2 version */
+#define STM32L562E_DISCOVERY_BSP_VERSION_SUB2   (0x01U) /*!< [15:8]  sub2 version */
 #define STM32L562E_DISCOVERY_BSP_VERSION_RC     (0x00U) /*!< [7:0]  release candidate */
 #define STM32L562E_DISCOVERY_BSP_VERSION       ((STM32L562E_DISCOVERY_BSP_VERSION_MAIN << 24U)\
                                                |(STM32L562E_DISCOVERY_BSP_VERSION_SUB1 << 16U)\

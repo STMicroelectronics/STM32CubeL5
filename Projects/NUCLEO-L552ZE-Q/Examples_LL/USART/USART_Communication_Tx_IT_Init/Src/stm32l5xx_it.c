@@ -243,7 +243,7 @@ void USART3_IRQHandler(void)
     /* Clear TC flag */
     LL_USART_ClearFlag_TC(USART3);
     /* Call function in charge of handling end of transmission of sent character
-       and prepare next charcater transmission */
+       and prepare next character transmission */
     USART_CharTransmitComplete_Callback();
   }
 

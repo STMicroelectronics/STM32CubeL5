@@ -1096,7 +1096,7 @@ void TimeClient_Event_Handler(void *pckt)
             if ( (pr->attr_handle == timeClient.currentTimeCharHandle) && 
                  (pr->event_data_length == (2+10)) ) 
             {
-               TIME_CLIENT_MESG_DBG(profiledbgfile,"---- Received notification,  Handle 0x%04x, Lenght 0x%02x\n",
+               TIME_CLIENT_MESG_DBG(profiledbgfile,"---- Received notification,  Handle 0x%04x, Length 0x%02x\n",
                                     pr->attr_handle, pr->event_data_length);
               
               TIME_CLIENT_MESG_DBG(profiledbgfile,"\n Current Time Value: ");

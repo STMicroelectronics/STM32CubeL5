@@ -365,7 +365,6 @@
                     <state>$PROJ_DIR$\..\Addons\SRC441\Inc</state>
                     <state>$PROJ_DIR$\..\TouchGFX\gui\include</state>
                     <state>$PROJ_DIR$\..\TouchGFX\target\</state>
-                    <state>$PROJ_DIR$\..\TouchGFX\platform\os</state>
                     <state>$PROJ_DIR$\..\TouchGFX\generated\fonts\include</state>
                     <state>$PROJ_DIR$\..\TouchGFX\generated\images\include</state>
                     <state>$PROJ_DIR$\..\TouchGFX\generated\texts\include</state>
@@ -462,7 +461,7 @@
                 <option>
                     <name>CCOptStrategySlave</name>
                     <version>0</version>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCGuardCalls</name>
@@ -649,7 +648,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\Core\Inc</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -1104,12 +1103,6 @@
             <name>User</name>
             <group>
                 <name>Core</name>
-                <file>
-                    <name>$PROJ_DIR$\..\Core\Src\audio_lowpower.c</name>
-                    <excluded>
-                        <configuration>STM32L562E-DK</configuration>
-                    </excluded>
-                </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\audio_player_app.c</name>
                 </file>

@@ -68,6 +68,9 @@ for test (located in main.h):
    to connect a voltage source to the selected ADC channel input to run this example.
 
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 ADC, analog digital converter, conversion, voltage, channel, analog input, trigger

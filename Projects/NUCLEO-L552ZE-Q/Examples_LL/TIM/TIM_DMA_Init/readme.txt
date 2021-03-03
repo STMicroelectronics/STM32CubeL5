@@ -49,6 +49,9 @@ Whenever a DMA transfer fails LED1 flashes with a frequency of 1 Hz.
       clock frequency may vary from one board to another observed PWM signal
       frequency might be slightly different.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, TIM, DMA, PWM, Frequency, Duty Cycle, Waveform, Oscilloscope, Output, Signal.

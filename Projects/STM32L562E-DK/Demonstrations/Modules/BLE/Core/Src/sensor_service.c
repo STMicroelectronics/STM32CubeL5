@@ -278,7 +278,7 @@ fail:
 /**
  * @brief  Update Stderr characteristic value
  * @param  uint8_t *data string to write
- * @param  uint8_t lenght lengt of string to write
+ * @param  uint8_t length lengt of string to write
  * @retval tBleStatus      Status
  */
 tBleStatus Stderr_Update(uint8_t *data,uint8_t length)
@@ -309,7 +309,7 @@ tBleStatus Stderr_Update(uint8_t *data,uint8_t length)
 /**
  * @brief  Update Terminal characteristic value
  * @param  uint8_t *data string to write
- * @param  uint8_t lenght lengt of string to write
+ * @param  uint8_t length lengt of string to write
  * @retval tBleStatus      Status
  */
 tBleStatus Term_Update(uint8_t *data,uint8_t length)
@@ -410,7 +410,7 @@ tBleStatus ActivityRec_Update(MAR_output_t ActivityCode)
 
 /* Code for MotionCP integration - Start Section */
 /**
- * @brief  Update Carry Postion Recognition value
+ * @brief  Update Carry Position Recognition value
  * @param  MCP_output_t CarryPositionCode Carry Position Recognized
  * @retval tBleStatus      Status
  */
@@ -700,7 +700,7 @@ void setConnectable(void)
   //char local_name[8] = {AD_TYPE_COMPLETE_LOCAL_NAME,NAME_BLUEMS};
   char local_name[8] = {AD_TYPE_COMPLETE_LOCAL_NAME,NodeName[1],NodeName[2],NodeName[3],NodeName[4],NodeName[5],NodeName[6],NodeName[7]};
   uint8_t manuf_data[26] = {
-    2,0x0A,0x00 /* 0 dBm */, // Trasmission Power
+    2,0x0A,0x00 /* 0 dBm */, // Transmission Power
     //8,0x09,NAME_BLUEMS, // Complete Name
     8,0x09,NodeName[1],NodeName[2],NodeName[3],NodeName[4],NodeName[5],NodeName[6],NodeName[7], // Complete Name
     13,0xFF,0x01/*SKD version */,
@@ -972,10 +972,10 @@ void Attribute_Modified_CB(uint16_t attr_handle, uint8_t * att_data, uint8_t dat
       Force_UUID_Rescan();
     } else {
       if(W2ST_CHECK_CONNECTION(W2ST_CONNECT_STD_ERR)){
-        BytesToWrite =sprintf((char *)BufferToWrite, "Notification UNKNOW handle\r\n");
+        BytesToWrite =sprintf((char *)BufferToWrite, "Notification UNKNOWN handle\r\n");
         Stderr_Update(BufferToWrite,BytesToWrite);
       } else {
-        ALLMEMS1_PRINTF("Notification UNKNOW handle\r\n");
+        ALLMEMS1_PRINTF("Notification UNKNOWN handle\r\n");
       }
     }
 }

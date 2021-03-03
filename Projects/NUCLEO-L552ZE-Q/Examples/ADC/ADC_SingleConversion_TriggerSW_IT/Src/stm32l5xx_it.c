@@ -61,6 +61,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern ADC_HandleTypeDef hadc1;
 extern DAC_HandleTypeDef hdac1;
 /* USER CODE BEGIN EV */
 extern ADC_HandleTypeDef    AdcHandle;
@@ -203,6 +204,20 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles ADC1 and ADC2 interrupts.
+  */
+void ADC1_2_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC1_2_IRQn 0 */
+
+  /* USER CODE END ADC1_2_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc1);
+  /* USER CODE BEGIN ADC1_2_IRQn 1 */
+
+  /* USER CODE END ADC1_2_IRQn 1 */
+}
+
+/**
   * @brief This function handles DAC1 interrupt.
   */
 void DAC_IRQHandler(void)
@@ -227,15 +242,6 @@ void DAC_IRQHandler(void)
 void EXTI13_IRQHandler(void)
 {
   HAL_GPIO_EXTI_IRQHandler(BUTTON_USER_PIN);
-}
-/**
-  * @brief  This function handles ADC interrupt request.
-  * @param  None
-  * @retval None
-  */
-void ADCx_IRQHandler(void)
-{
-  HAL_ADC_IRQHandler(&AdcHandle);
 }
 
 /* USER CODE END 1 */

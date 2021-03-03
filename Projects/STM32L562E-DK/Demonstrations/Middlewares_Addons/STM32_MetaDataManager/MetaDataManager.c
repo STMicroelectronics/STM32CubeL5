@@ -227,7 +227,7 @@ void InitMetaDataManager(void *Ptr,...) {
         }
       }
       /* Move the next Meta Data Header */
-      pMetaDataHeader = (MDM_MetaDataHeader_t *) (((uint32_t) pMetaDataHeader)+pMetaDataHeader->Lenght);
+      pMetaDataHeader = (MDM_MetaDataHeader_t *) (((uint32_t) pMetaDataHeader)+pMetaDataHeader->Length);
     }
 
 MDM_ADD_META_DATA:
@@ -265,7 +265,7 @@ MDM_ADD_META_DATA:
             MDM_PRINTF("pMetaDataHeader=%x ",puint8_RW_MetaData);
 #endif /* MDM_DEBUG_PARSING */
             pMetaDataHeader->Type = MDM_DATA_TYPE_LIC;
-            pMetaDataHeader->Lenght = sizeof(MDM_PayLoadLic_t) + 8 /* For Meta Data Header */;
+            pMetaDataHeader->Length = sizeof(MDM_PayLoadLic_t) + 8 /* For Meta Data Header */;
             PayLoad = (MDM_PayLoadLic_t *) pMetaDataHeader->puint8_PayLoad;
 #ifdef MDM_DEBUG_PARSING
             MDM_PRINTF("PayLoad=%x ",PayLoad);
@@ -276,7 +276,7 @@ MDM_ADD_META_DATA:
             MDM_PRINTF("Adding=%s%s Version=%s\r\n",MDM_LicTable[known_OsxLic[Index].LicEnum].LicType,MDM_LicTable[known_OsxLic[Index].LicEnum].LicName,PayLoad->osxLibVersion);
             MDM_LicTable[PayLoad->LicEnum].Address = (uint32_t)PayLoad;
             /* Move the R/W pointer */
-            puint8_RW_MetaData +=pMetaDataHeader->Lenght;
+            puint8_RW_MetaData +=pMetaDataHeader->Length;
           }
 #ifdef MDM_DEBUG_PARSING
           else {
@@ -331,7 +331,7 @@ MDM_ADD_META_DATA:
             MDM_PRINTF("pMetaDataHeader=%x ",puint8_RW_MetaData);
 #endif /* MDM_DEBUG_PARSING */
             pMetaDataHeader->Type = MDM_DATA_TYPE_GMD;
-            pMetaDataHeader->Lenght = (((known_GMD[Index].GMDSize+7)>>3)<<3) /* Round to Multiple of 8 bytes */ + 
+            pMetaDataHeader->Length = (((known_GMD[Index].GMDSize+7)>>3)<<3) /* Round to Multiple of 8 bytes */ + 
               8 + 8 /* For Meta Data Header */;
             PayLoad = (MDM_PayLoadGMD_t *) pMetaDataHeader->puint8_PayLoad;
 #ifdef MDM_DEBUG_PARSING
@@ -345,7 +345,7 @@ MDM_ADD_META_DATA:
                        known_GMD[Index].GMDType,
                        MDM_GMDTable[known_GMD[Index].GMDType].GMDSize);
             /* Move the R/W pointer */
-            puint8_RW_MetaData +=pMetaDataHeader->Lenght;
+            puint8_RW_MetaData +=pMetaDataHeader->Length;
           }
 #ifdef MDM_DEBUG_PARSING
           else {
@@ -418,7 +418,7 @@ static uint32_t ReCallMetaDataManager(void)
       /* Next Meta Data is Valid */
       MDM_MetaDataHeader_t *pMetaDataHeader;
       MDM_MetaDataType_t Type;
-      uint32_t Lenght;
+      uint32_t Length;
       uint32_t Index;
       uint32_t *puint32_MetaData;
       RetValue =1;
@@ -426,29 +426,29 @@ static uint32_t ReCallMetaDataManager(void)
       /* Meta Data Type */
       Type = (MDM_MetaDataType_t) data32;
       Address+=4;
-      /* Read the Meta Data Lenght */
+      /* Read the Meta Data Length */
       data32 = *(__IO uint32_t*) Address;
-      Lenght = data32;
+      Length = data32;
       Address+=4;
 
       pMetaDataHeader = (MDM_MetaDataHeader_t *) puint8_RW_MetaData;
       pMetaDataHeader->Type = Type;
-      pMetaDataHeader->Lenght =  Lenght;      
+      pMetaDataHeader->Length =  Length;      
       puint32_MetaData = (uint32_t *) pMetaDataHeader->puint8_PayLoad;
       puint8_RW_MetaData +=8;
 
 #ifdef MDM_DEBUG_PARSING
-      MDM_PRINTF("Found one MetaData puint8_RW_MetaData=%x Type=%d Lenght=%d\r\n",puint8_RW_MetaData,Type,Lenght);
+      MDM_PRINTF("Found one MetaData puint8_RW_MetaData=%x Type=%d Length=%d\r\n",puint8_RW_MetaData,Type,Length);
 #endif /* MDM_DEBUG_PARSING */
 
       /* Fill the Meta Data Payload (Word read) */
-      for(Index=0;Index<(Lenght-8);Index+=4) {
+      for(Index=0;Index<(Length-8);Index+=4) {
         data32 = *(__IO uint32_t*) (Address+Index);
         puint32_MetaData[Index>>2] = data32;
       }
       /* Move to next Meta Data Type */
-      Address +=Lenght-8;
-      puint8_RW_MetaData +=Lenght-8;
+      Address +=Length-8;
+      puint8_RW_MetaData +=Length-8;
       data32 = *(__IO uint32_t*) Address;
     }
 

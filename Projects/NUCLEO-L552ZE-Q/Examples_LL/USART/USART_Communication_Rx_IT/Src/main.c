@@ -58,6 +58,10 @@ int main(void)
 {
   /* Configure the system clock to 110 MHz */
   SystemClock_Config();
+  
+  /* For better performances, enable the instruction cache in 1-way direct mapped mode */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
 
   /* Initialize LED1 */
   LED_Init();

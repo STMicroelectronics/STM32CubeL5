@@ -24,7 +24,7 @@ How to configure and use, through the LPTIM HAL API, the LPTIM peripheral
 to count pulses.
 
 To reduce power consumption, MCU enters stop mode after starting counting. Each
-time the counter reachs the maximum value (Period/Autoreload), an interruption
+time the counter reaches the maximum value (Period/Autoreload), an interruption
 is generated, the MCU is woke up from stop mode and LED_GREEN toggles the last state.
   
 In this example Period value is set to 1000, so each time the counter counts
@@ -44,8 +44,11 @@ present example).
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -72,6 +75,10 @@ Timer, Low Power, Pulse Counter, Stop mode, Interrupt
     and development board.      
 
   - Generate pulses on PC0 (pin 24 in CN6 connector). (Connect a square waveform).
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

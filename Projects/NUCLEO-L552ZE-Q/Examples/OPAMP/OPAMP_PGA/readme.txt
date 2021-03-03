@@ -22,17 +22,17 @@
 How to configure the OPAMP peripheral in PGA mode (OPAMP programmable gain).
 
 - Test description:
-      - The example uses the the built-in PGA mode (OPAMP programmable gain).
-      - The DMA provides samples (sinewave) to the DAC.
-      - The DAC peripheral generates a sine wave signal on DAC_OUT2 (PA5) which is
-        amplified by the OPAMP2.
-      - The OPAMP2 amplifies output is on PB0 with gain of either 2 or 4.
-        The OPAMP gain is changed on the fly while OPAMP remains enabled.
-      - The OPAMP is used in both normal and low power mode (sample and hold mode).
-      - The low power mode of OPAMP (and DAC)can also be used while Cortex stays
-        in sleep mode.
-      - The Cortex can be set into sleep mode
-      - The tests steps are:
+  - The example uses the the built-in PGA mode (OPAMP programmable gain).
+  - The DMA provides samples (sinewave) to the DAC.
+  - The DAC peripheral generates a sine wave signal on DAC_OUT2 (PA5) which is
+    amplified by the OPAMP2.
+  - The OPAMP2 amplifies output is on PB0 with gain of either 2 or 4.
+  - The OPAMP gain is changed on the fly while OPAMP remains enabled.
+  - The OPAMP is used in both normal and low power mode (sample and hold mode).
+  - The low power mode of OPAMP (and DAC)can also be used while Cortex stays
+    in sleep mode.
+  - The Cortex can be set into sleep mode
+  - The tests steps are:
       - Step 0:
         DAC:     normal power mode
         OPAMP:   normal power mode - gain = 2
@@ -53,15 +53,18 @@ How to configure the OPAMP peripheral in PGA mode (OPAMP programmable gain).
         OPAMP:   Low power mode - gain = 4
         DMA:     circular mode
         Cortex:  sleep mode
-   @par Keywords
-
-Analog, OPAMP, DAC, PGA mode, Normal power mode, Low power mode, DMA
-
-   - Step 4:
+      - Step 4:
         DAC:     Low power mode
         OPAMP:   Low power mode - gain = 2
         DMA:     circular mode
         Cortex:  sleep mode
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+Analog, OPAMP, DAC, DMA, PGA mode, Normal power mode, Low power mode
 
 @par Directory contents
 

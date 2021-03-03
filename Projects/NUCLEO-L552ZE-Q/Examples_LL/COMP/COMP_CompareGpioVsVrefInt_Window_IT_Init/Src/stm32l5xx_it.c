@@ -226,7 +226,7 @@ void COMP_IRQHandler(void)
     ComparatorTrigger_Callback();
   }
   /* USER CODE END COMP_IRQn 0 */
-  
+
   /* USER CODE BEGIN COMP_IRQn 1 */
 
   /* USER CODE END COMP_IRQn 1 */

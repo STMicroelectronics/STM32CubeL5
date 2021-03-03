@@ -164,7 +164,7 @@ ai_handle ai_mnetwork_destroy(ai_handle network);
 /*!
  * @brief Initialize the data structures of the network.
  * @ingroup network
- * @details This API initialized the network after a successfull
+ * @details This API initialized the network after a successful
  * @ref ai_network_create. Both the activations memory buffer
  * and params (i.e. weights) need to be provided by caller application
  *

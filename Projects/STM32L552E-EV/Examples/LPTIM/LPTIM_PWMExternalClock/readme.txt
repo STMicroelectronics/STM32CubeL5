@@ -49,8 +49,11 @@ generation is stopped.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -79,6 +82,10 @@ Timer, Low Power, PWM, Stop mode, Interrupt, External Clock, Output, Duty Cycle
   - Connect a clock signal to PC.00 (pin 24 in CN6 connector).
   - Connect PB.02 (pin 3 in CN6 connector) to an oscilloscope 
     to monitor the LPTIM output waveform.
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

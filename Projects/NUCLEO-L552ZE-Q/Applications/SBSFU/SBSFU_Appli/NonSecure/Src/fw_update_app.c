@@ -235,7 +235,20 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
   COM_StatusTypeDef e_result;
   uint32_t u_fw_size = pFwImageDwlArea->MaxSizeInBytes ;
 
+  /* Clear download area */
+  printf("  -- Erasing download area \r\n\n");
+  if ((pFwImageDwlArea->DownloadAddr >= 0x8000000) && (pFwImageDwlArea->DownloadAddr + pFwImageDwlArea->MaxSizeInBytes < 0x8080000))
+  {
+    ret = FLASH_If_Erase_Size((void *)(pFwImageDwlArea->DownloadAddr), pFwImageDwlArea->MaxSizeInBytes);
+    if (ret != HAL_OK)
+    {
+      return HAL_ERROR;
+    }
+  }
+  else while (1);
+
   printf("  -- Send Firmware \r\n\n");
+
   /* Download binary */
   printf("  -- -- File> Transfer> YMODEM> Send \t\n");
 
@@ -302,7 +315,6 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
   */
 HAL_StatusTypeDef Ymodem_HeaderPktRxCpltCallback(uint32_t uFlashDestination, uint32_t uFileSize)
 {
-  HAL_StatusTypeDef ret = HAL_ERROR;
   /*Reset of the ymodem variables */
   m_uFileSizeYmodem = 0U;
   m_uPacketsReceived = 0U;
@@ -313,14 +325,10 @@ HAL_StatusTypeDef Ymodem_HeaderPktRxCpltCallback(uint32_t uFlashDestination, uin
 
   /* compute the number of 1K blocks */
   m_uNbrBlocksYmodem = (m_uFileSizeYmodem + (PACKET_1K_SIZE - 1U)) / PACKET_1K_SIZE;
-  if ((uFlashDestination >= 0x8000000) && (uFlashDestination < 0x8080000))
-  {
-    ret = FLASH_If_Erase_Size((void *)(uFlashDestination), uFileSize);
-  }
-  else while (1);
+
   /* NOTE : delay inserted for Ymodem protocol*/
   HAL_Delay(1000);
-  return ret;
+  return HAL_OK;
 }
 
 extern uint32_t total_size_received;

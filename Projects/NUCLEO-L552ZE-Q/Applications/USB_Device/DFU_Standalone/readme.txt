@@ -91,6 +91,9 @@ requirements, such as:
 
 Device's end address is the end address of the flash memory and it is dependent on the device in use.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, USB_Device, USB, DFU, Firmware upgrade

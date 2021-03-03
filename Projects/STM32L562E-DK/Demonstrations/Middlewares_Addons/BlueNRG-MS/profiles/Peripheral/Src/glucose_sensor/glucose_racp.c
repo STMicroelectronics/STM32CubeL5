@@ -581,7 +581,7 @@ static BOOL glucoseRACP_CheckOperatorIsCorrect(uint8_t op_code, uint8_t racp_ope
 *******************************************************************************/
 
 /**
-  * @brief Manage the notification of next glucose measurment from database records 
+  * @brief Manage the notification of next glucose measurement from database records 
   *        It should be called on HCI_VENDOR_CMD_GATT_UPD_CHAR_VAL event, GL_CONNECTED state.
   * @retval TRUE: if other selected measurement has to be sent; false otherwise
   */

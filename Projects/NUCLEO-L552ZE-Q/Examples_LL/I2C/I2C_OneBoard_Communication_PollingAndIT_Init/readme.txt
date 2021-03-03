@@ -61,6 +61,9 @@ LED1 is On if data are well received.
 
 In case of errors, LED1 is blinking slowly (1s).
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, Communication, I2C, Interrupt, Polling, Master, Slave, Transmission, Reception, Fast mode

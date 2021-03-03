@@ -63,6 +63,9 @@ Other peripheral used:
   EXTI line 21 (connected to COMP1 output)
   EXTI line 22 (connected to COMP2 output)
   
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Comparator, voltage, analog input, channel output, 1/2 VREFINT, COMP1, COMP2, Vdda, interrupt

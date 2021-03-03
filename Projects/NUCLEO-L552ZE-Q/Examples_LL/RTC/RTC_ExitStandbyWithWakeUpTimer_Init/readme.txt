@@ -57,6 +57,9 @@ One of the below scenario can occur :
 
 
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, RTC, RTC Wakeup timer, Standby mode, LSE, LSI, Interrupt

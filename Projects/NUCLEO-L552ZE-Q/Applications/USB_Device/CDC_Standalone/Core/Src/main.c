@@ -18,7 +18,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usb_device.h"
@@ -56,9 +55,7 @@ TIM_HandleTypeDef htim2;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-void MX_DMA_Init(void);
-void MX_LPUART1_UART_Init(void);
-void MX_TIM2_Init(void);
+static void MX_DMA_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -96,6 +93,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USB_Device_Init();
   /* USER CODE BEGIN 2 */
   BSP_LED_Init(LED3);
@@ -272,7 +270,7 @@ void MX_TIM2_Init(void)
 /**
   * Enable DMA controller clock
   */
-void MX_DMA_Init(void)
+static void MX_DMA_Init(void)
 {
 
   /* DMA controller clock enable */
@@ -348,7 +346,10 @@ void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* Infinite loop */
+  while (1)
+  {}
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

@@ -39,10 +39,13 @@ In this test, this is the scenario:
  - Interrupt is raised to indicate a SYNC MISS and then power on LED3
  - in main program, wait for 1 sec and reconfigure source to LSE
  - LED2 is power on when SYNC WARN is detected
- - Increase tollerance (FELIM value) when SYNC WARN is detected
+ - Increase tolerance (FELIM value) when SYNC WARN is detected
  - At the end of the test LED1 should stay ON
 
 Note: HSI48 frequency can be checked with oscilloscope using MCO PIN PA.08
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

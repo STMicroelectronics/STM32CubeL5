@@ -29,6 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l5xx_ll_adc.h"
+#include "stm32l5xx_ll_icache.h"
 #include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_crs.h"
 #include "stm32l5xx_ll_rcc.h"

@@ -189,7 +189,7 @@ typedef struct _tGlucoseContext
 
   /**
    * flag used to keep last sequence number related to the 
-   * stored measurments on database. 
+   * stored measurements on database. 
    */
   uint16_t sequenceNumber;
 	

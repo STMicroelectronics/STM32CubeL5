@@ -44,6 +44,9 @@ The UCPD Cube Monitor will be used to trace all the messages exchange between th
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications
 on STM32Cube with RTOS".
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 USB_PD_Lib, UCPD, Type C, USBPD, FreeRTOS
@@ -70,7 +73,7 @@ USB_PD_Lib, UCPD, Type C, USBPD, FreeRTOS
     - USB-PD/USB-PD_Consumer_1port/Inc/usbpd.h                      Header of UCPD init file
     - USB-PD/USB-PD_Consumer_1port/Inc/usbpd_devices_conf.h         UCPD device configuration file
     - USB-PD/USB-PD_Consumer_1port/Inc/usbpd_dpm_conf.h             UCPD stack configuration file
-    - USB-PD/USB-PD_Consumer_1port/Inc/usbpd_dpm_core.h             Device policy manger core header file
+    - USB-PD/USB-PD_Consumer_1port/Inc/usbpd_dpm_core.h             Device policy manager core header file
     - USB-PD/USB-PD_Consumer_1port/Inc/usbpd_dpm_user.h             Device policy manager user header file
     - USB-PD/USB-PD_Consumer_1port/Inc/usbpd_gui_memmap.h           Memory mapping configuration configuration file for Cube-Monitor-UCPD link
     - USB-PD/USB-PD_Consumer_1port/Inc/usbpd_pdo_defs.h             PDO definition header file
@@ -85,6 +88,10 @@ USB_PD_Lib, UCPD, Type C, USBPD, FreeRTOS
 
   - This application has been tested with STM32L552E-EVAL board.
 
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ?
 

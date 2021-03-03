@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L562xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L562E-DK;../Drivers/STM32L4xx_HAL_Driver/Inc</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L562E-DK</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

@@ -59,6 +59,9 @@ In an infinite loop, LED1 toggles spaced out over 500ms delay, except when tick 
 @note The application needs to ensure that the HAL time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, RTC Wakeup, Time base, HAL

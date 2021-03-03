@@ -40,9 +40,8 @@
 /*#define HAL_DAC_MODULE_ENABLED   */
 /*#define HAL_DFSDM_MODULE_ENABLED   */
 /*#define HAL_FDCAN_MODULE_ENABLED   */
-#define HAL_GTZC_MODULE_ENABLED
+/*#define HAL_GTZC_MODULE_ENABLED   */
 /*#define HAL_HASH_MODULE_ENABLED   */
-/*#define HAL_I2C_MODULE_ENABLED   */
 /*#define HAL_IRDA_MODULE_ENABLED   */
 /*#define HAL_IWDG_MODULE_ENABLED   */
 /*#define HAL_LPTIM_MODULE_ENABLED   */
@@ -234,7 +233,7 @@
 #define USE_HAL_CRYP_SUSPEND_RESUME   1U
 
 /* ################## SDMMC peripheral configuration ######################### */
- 
+
 #define USE_SD_TRANSCEIVER            0U
 
 /* Includes ------------------------------------------------------------------*/

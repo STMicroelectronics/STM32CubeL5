@@ -17,7 +17,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -140,6 +139,7 @@ __ALIGN_BEGIN static uint8_t ExpectedHMAC256[32] __ALIGN_END   = {0xc5, 0x01, 0x
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_DMA_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_HASH_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -181,6 +181,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_DMA_Init();
+  MX_ICACHE_Init();
   MX_HASH_Init();
   /* USER CODE BEGIN 2 */
   /****************************************************************************/
@@ -476,6 +477,37 @@ static void MX_HASH_Init(void)
   /* USER CODE BEGIN HASH_Init 2 */
 
   /* USER CODE END HASH_Init 2 */
+
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
 
 }
 

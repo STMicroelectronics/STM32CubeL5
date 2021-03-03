@@ -17,7 +17,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -67,6 +66,7 @@ AUDIO_Drv_t *Audio_Drv = NULL;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void PeriphCommonClock_Config(void);
+static void MX_ICACHE_Init(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_DFSDM1_Init(void);
@@ -114,6 +114,7 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_ICACHE_Init();
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_DFSDM1_Init();
@@ -228,7 +229,7 @@ void PeriphCommonClock_Config(void)
 {
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the common periph clock 
+  /** Initializes the common periph clock
   */
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_DFSDM1AUDIO|RCC_PERIPHCLK_SAI1;
   PeriphClkInit.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLLSAI1;
@@ -296,6 +297,37 @@ static void MX_DFSDM1_Init(void)
   /* USER CODE BEGIN DFSDM1_Init 2 */
 
   /* USER CODE END DFSDM1_Init 2 */
+
+}
+
+/**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
 
 }
 
@@ -448,7 +480,7 @@ static void Playback_Init(void)
     codec_init.InputDevice  = CS42L51_IN_NONE;
     codec_init.OutputDevice = CS42L51_OUT_HEADPHONE;
     codec_init.Frequency    = CS42L51_FREQUENCY_44K;
-    codec_init.Resolution   = CS42L51_RESOLUTION_16b;
+    codec_init.Resolution   = CS42L51_RESOLUTION_16B;
     codec_init.Volume       = 90;
     if (Audio_Drv->Init(Audio_CompObj, &codec_init) < 0)
     {

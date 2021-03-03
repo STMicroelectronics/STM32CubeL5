@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD_TrustZone/NonSecure/FATFS/App/app_fatfs.c
   * @author  MCD Application Team
-  * @brief   FatFs_uSD_Standalone application file
+  * @brief   FatFs_uSD_TrustZone application file
     ******************************************************************************
   * @attention
   *

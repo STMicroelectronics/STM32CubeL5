@@ -71,6 +71,9 @@ STM32L552E-EV's board's LEDs can be used to monitor the application status:
 For more details about FatFs implementation on STM32Cube, please refer to UM1721 "Developing Applications 
 on STM32Cube with FatFs".
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 File system, FatFs, FreeRTOS, SD Card, File system, FAT, Format, Mount, Read, Write
@@ -99,6 +102,10 @@ File system, FatFs, FreeRTOS, SD Card, File system, FAT, Format, Mount, Read, Wr
     evaluation boards and can be easily tailored to any other supported device 
     and development board.  
 
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

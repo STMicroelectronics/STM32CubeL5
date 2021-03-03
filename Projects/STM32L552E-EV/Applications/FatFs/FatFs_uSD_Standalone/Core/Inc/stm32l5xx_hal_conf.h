@@ -22,7 +22,6 @@
  extern "C" {
 #endif
 
-/*#include "main.h" */
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
@@ -39,8 +38,8 @@
 /*#define HAL_DFSDM_MODULE_ENABLED   */
 #define HAL_EXTI_MODULE_ENABLED
 /*#define HAL_FDCAN_MODULE_ENABLED   */
+/*#define HAL_GTZC_MODULE_ENABLED   */
 /*#define HAL_HASH_MODULE_ENABLED   */
-#define HAL_ICACHE_MODULE_ENABLED
 /*#define HAL_IRDA_MODULE_ENABLED   */
 /*#define HAL_IWDG_MODULE_ENABLED   */
 /*#define HAL_LPTIM_MODULE_ENABLED   */
@@ -63,7 +62,6 @@
 /*#define HAL_TIM_MODULE_ENABLED   */
 /*#define HAL_TSC_MODULE_ENABLED   */
 #define HAL_UART_MODULE_ENABLED
-/*#define HAL_UCPD _MODULE_ENABLED   */
 /*#define HAL_USART_MODULE_ENABLED   */
 /*#define HAL_WWDG_MODULE_ENABLED   */
 #define HAL_GPIO_MODULE_ENABLED
@@ -167,7 +165,7 @@
 
 #define  VDD_VALUE					  3300UL /*!< Value of VDD in mv */
 #define  TICK_INT_PRIORITY            0UL    /*!< tick interrupt priority */
-#define  USE_RTOS                     0U     
+#define  USE_RTOS                     0U
 #define  PREFETCH_ENABLE              0U
 #define  INSTRUCTION_CACHE_ENABLE     0U
 
@@ -390,10 +388,6 @@
 #ifdef HAL_UART_MODULE_ENABLED
   #include "stm32l5xx_hal_uart.h"
 #endif /* HAL_UART_MODULE_ENABLED */
-
-#ifdef HAL_UCPD_MODULE_ENABLED
-  #include "stm32l5xx_hal_ucpd.h"
-#endif /* HAL_UCPD_MODULE_ENABLED */
 
 #ifdef HAL_USART_MODULE_ENABLED
   #include "stm32l5xx_hal_usart.h"

@@ -55,6 +55,9 @@ In an infinite loop, LED10 toggles spaced out over 1s delay.
 @note The application needs to ensure that the TIM7 time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, TIM, Time base, HAL

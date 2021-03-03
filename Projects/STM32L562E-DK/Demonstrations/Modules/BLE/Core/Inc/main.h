@@ -68,7 +68,7 @@ extern int32_t BytesToWrite;
 #define ALGO_FREQ_CP_GR_SD_TL_VC        50U
 /* Algorithm period for MotionCP, MotionGR, MotionSD, MotionTL and MotionVC [ms] */
 #define ALGO_PERIOD_CP_GR_SD_TL_VC      (1000U / ALGO_FREQ_CP_GR_SD_TL_VC)
-/* 10kHz/50 as defaul value for:
+/* 10kHz/50 as default value for:
   MotionCP@50Hz or
   MotionGR@50Hz or
   MotionSD@50Hz or
@@ -82,7 +82,7 @@ extern int32_t BytesToWrite;
 #define ALGO_FREQ_AR_ID_PE      16U
 /* Algorithm period for MotionAR, MotionID and MotionPE libraries [ms] */
 #define ALGO_PERIOD_AR_ID_PE    (1000U / ALGO_FREQ_AR_ID_PE)
-/* 10kHz/16 as defaul value for:
+/* 10kHz/16 as default value for:
   MotionAR@16Hz
   MotionID@16Hz
   MotionPE@16Hz  */

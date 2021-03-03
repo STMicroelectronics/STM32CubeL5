@@ -94,7 +94,6 @@
 #define TIMX                           TIM2
 #define TIMX_CLK_ENABLE                LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2)
 #define TIMX_CLK_DISABLE               LL_APB1_GRP1_DisableClock(LL_APB1_GRP1_PERIPH_TIM2)
-#define TIMX_IRQ                       TIM2_IRQn
 #define TIMX_CHANNEL_CH1               LL_TIM_CHANNEL_CH1
 #define TIMX_CHANNEL_CH2               LL_TIM_CHANNEL_CH2
 #define TIMX_CHANNEL_CH3               LL_TIM_CHANNEL_CH3

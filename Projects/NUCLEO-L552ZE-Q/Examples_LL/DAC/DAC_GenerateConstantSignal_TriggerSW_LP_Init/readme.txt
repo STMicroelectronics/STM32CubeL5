@@ -56,11 +56,15 @@ External capacitor:
   to be connected between DAC channel output and ground.
   Capacitor value depends on load on DAC channel output and
   sample-and-hold timings configured.
-  GENERATOR_ #error "Specify capacitor typ value and naming in datasheet for the selected STM32 serie"
+  As indication, capacitor typical value is 100nF
+  (refer to device datasheet, parameter "CSH").
 Oscilloscope for monitoring DAC channel output (cf pin below).
 Other peripheral used:
   1 GPIO for push button
   1 GPIO for DAC channel output PA.04 (Arduino connector CN7 pin 9, Morpho connector CN11 pin 32)
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

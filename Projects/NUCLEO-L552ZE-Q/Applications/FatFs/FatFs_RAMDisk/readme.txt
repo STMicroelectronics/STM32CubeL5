@@ -54,6 +54,9 @@ NUCLEO-L552ZE-Q's board's LEDs can be used to monitor the application status:
   - LED1 ON when the application runs successfully.
   - LED3 ON when any error occurs.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 File system, FatFs, RAM disk, SRAM, FAT Volume, Format, Mount, Read, Write,

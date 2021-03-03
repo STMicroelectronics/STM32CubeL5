@@ -22,6 +22,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+/** @addtogroup STM32L5xx_LL_Examples
+  * @{
+  */
+
+/** @addtogroup LPTIM_PulseCounter
+  * @{
+  */
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -44,6 +52,10 @@ int main(void)
 {
   /* Configure the system clock */
   SystemClock_Config();
+  
+  /* For better performances, enable the instruction cache in 1-way direct mapped mode */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
 
   /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
@@ -298,5 +310,15 @@ void assert_failed(uint8_t *file, uint32_t line)
   }
 }
 #endif /* USE_FULL_ASSERT */
+
+
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

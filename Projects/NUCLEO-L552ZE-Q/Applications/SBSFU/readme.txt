@@ -39,7 +39,7 @@ on-device data:
     activates STM32 runtime protections and then verifies the authenticity
     (RSA or ECDSA signature) and integrity (SHA256) of the application code
     before execution in order to ensure that invalid or malicious
-    code cannot be run. The default asymetric key (RSA or ECDSA) is taken from
+    code cannot be run. The default asymmetric key (RSA or ECDSA) is taken from
     Middlewares/Third_Party/trustedfirmware/bl2/ext/mcuboot/keys.c
     and is embedded in the provisionned data area in the secure boot and secure
     firmware update binary.
@@ -51,7 +51,7 @@ on-device data:
     flash, image remains AES-CTR encrypted, as it will be on-the-fly decrytped
     during its execution.
     The AES-CTR key is encrypted (RSA-OAEP or ECIES-P256) and provided in the
-    firmware image itself. The default asymetric key (RSA or ECDSA) used to
+    firmware image itself. The default asymmetric key (RSA or ECDSA) used to
     encrypt the AES-CTR key is distinct from the signature key, but also taken
     from Middlewares/Third_Party/trustedfirmware/bl2/ext/mcuboot/keys.c.
     The firmware update can be done either on the secure part of firmware
@@ -104,9 +104,14 @@ Several steps to run SBSFU application :
 
 0. Prerequisite
 
-   In case of STM32CubeIDE usage on non Windows host, python3 is needed with
-   modules from Middlewares\Third_Party\mcuboot\scripts\requirements.txt:
-      pip3 install -r requirements.txt
+   Two versions of imgtool (used during build process) are available in mcuboot
+   middleware: windows executable and python version. By default, the windows
+   executable is selected. It is possible to switch to python version by:
+   - installing python (Python 3.6 or newer) with the required modules from
+     Middlewares\Third_Party\mcuboot\scripts\requirements.txt:
+       pip install -r requirements.txt
+   - having python in execution path variable
+   - deleting imgtool.exe in Middlewares\Third_Party\mcuboot\scripts\dist\imgtool
 
 1. Build
 
@@ -184,7 +189,7 @@ Several steps to run SBSFU application :
    - Flow control = none 
    Terminal emulator is used for UART connection with the board.
    Connect terminal emulator to COM port of the board.
-   The terminal emulator is used to log SBSFU_Boot informations, and enter commands
+   The terminal emulator is used to log SBSFU_Boot information, and enter commands
    for User application.
 
 4. Program the SBSFU into flash
@@ -231,7 +236,7 @@ Several steps to run SBSFU application :
         Several succesives unauthorized accesses to different areas are performed.
 
       - RDP regression (#2): For 'production mode', put the device in a state
-        where RDP regresion can be performed. The RDP regression can be performed
+        where RDP regression can be performed. The RDP regression can be performed
         either by connecting STM32CubeProgrammer tool in HotPlug mode and
         performing RDP level regression to RDP level 0, or by executing the
         regression script (described in step 2).
@@ -305,7 +310,7 @@ Several steps to run SBSFU application :
                                             2: Two separated images for S and NS application binaries. */
 
       Note: When 2 images are selected, the local loader menu proposes to download
-      separatly a new SBSFU Secure image or SBSFU Non Secure image or both.
+      separately a new SBSFU Secure image or SBSFU Non Secure image or both.
       - Download Secure Image (#2): Download Secure signed image
         (ex: TFM_Appli\Binary\tfm_s_enc_sign.bin)
       - Download NonSecure Image (#3): Download Non Secure signed image

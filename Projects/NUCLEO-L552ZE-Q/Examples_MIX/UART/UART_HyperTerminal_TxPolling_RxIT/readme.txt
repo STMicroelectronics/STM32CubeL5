@@ -101,6 +101,9 @@ The UART is configured as follows:
       to have correct HAL operation.
 
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Connectivity, UART/USART, baud rate, RS-232, HyperTerminal, full-duplex, Interrupt, Polling,

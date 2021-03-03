@@ -17,6 +17,11 @@
   ******************************************************************************
   @endverbatim
 
+### 25-August-2020 ###
+========================
+   + Update GCM templates with Additional data not 4 bytes aligned
+   (default configuration enabled by define : STM32_AAD_ANY_LENGTH_SUPPORT)
+
 ### 02-April-2020 ###
 ========================
    + Add in template directory the files :
@@ -32,7 +37,7 @@
 
    + Fix GCM selftest by skipping tests with IV out of the values supported by HW.
    Hw implementation limit IV to a length of 96-bits.
-   Tt is the value recommended for situations in which efficiency is critical.
+   It is the value recommended for situations in which efficiency is critical.
 
 ### 17-Jan-2020 ###
 ========================

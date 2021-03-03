@@ -46,7 +46,7 @@ The communication is done with 2 boards through SPI.
 This example shows how to configure GPIO and SPI peripherals
 to use a Full-Duplex communication using IT mode through the STM32L5xx COM_INSTANCE1_TYPE LL API.
 
-This example is splitted in two projects, Master board and Slave board:
+This example is split in two projects, Master board and Slave board:
 
 - Master Board
   SPI1 Peripheral is configured in Master mode.
@@ -74,6 +74,13 @@ In case of errors, LED1 is blinking Slowly (1s).
 @note You need to perform a reset on Master board, then perform it on Slave board
       to have the correct behaviour of this example.
 
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+Connectivity, SPI, Full-duplex, Transmission, Reception, Master, MISO, MOSI, Interrupt
 
 @par Directory contents 
 

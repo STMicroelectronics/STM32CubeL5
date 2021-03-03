@@ -561,7 +561,7 @@ uint8_t Master_TerminateDiscovery(void);
   * - 0 = Public Device Address
   * - 1 = Random Device Address
   * @param  addr Remote device address
-  * @param  data_length Lenght of advertising or scan response data.
+  * @param  data_length Length of advertising or scan response data.
   * @param  data Advertising or scan response data 
   * @param  RSSI RSSI (signed integer).
   * @retval None

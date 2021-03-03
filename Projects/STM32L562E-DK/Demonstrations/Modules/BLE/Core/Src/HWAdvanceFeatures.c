@@ -294,7 +294,7 @@ void EnableHWFreeFall(void)
   }
   
   if(BSP_MOTION_SENSOR_Set_Free_Fall_Threshold(ACCELERO_INSTANCE,LSM6DSO_FF_TSH_219mg)!=BSP_ERROR_NONE) {
-    ALLMEMS1_PRINTF("Error setting Free Fall Treshold\r\n");
+    ALLMEMS1_PRINTF("Error setting Free Fall Threshold\r\n");
   }
 }
 
@@ -337,7 +337,7 @@ void EnableHWDoubleTap(void)
   }
   
 //    if(BSP_ACCELERO_Set_Tap_Threshold_Ext(0,LSM6DSL_TAP_THRESHOLD_MID)!= BSP_ERROR_NONE) {
-//      ALLMEMS1_PRINTF("Error setting Double Tap Treshold\r\n");
+//      ALLMEMS1_PRINTF("Error setting Double Tap Threshold\r\n");
 //    }
 //#ifdef STM32_NUCLEO
 //   if(BSP_ACCELERO_Set_Tap_Threshold_Ext(ACCELERO_INSTANCE,LSM6DSL_TAP_THRESHOLD_MID)==COMPONENT_ERROR) {
@@ -346,7 +346,7 @@ void EnableHWDoubleTap(void)
 //#elif STM32_BLUECOIN
 //    if(BSP_ACCELERO_Set_Tap_Threshold_Ext(ACCELERO_INSTANCE,LSM6DSM_TAP_THRESHOLD_MID)==COMPONENT_ERROR) {      
 //#endif /* STM32_NUCLEO */
-//      ALLMEMS1_PRINTF("Error setting Double Tap Treshold\r\n");
+//      ALLMEMS1_PRINTF("Error setting Double Tap Threshold\r\n");
 //    }
 }
 
@@ -384,7 +384,7 @@ void EnableHWSingleTap(void)
   if(BSP_MOTION_SENSOR_Enable_Single_Tap_Detection(ACCELERO_INSTANCE, BSP_MOTION_SENSOR_INT1_PIN)!= BSP_ERROR_NONE) {
     ALLMEMS1_PRINTF("Error Enabling Single Tap Detection\r\n");
   } else {
-    ALLMEMS1_PRINTF("Enabled Sigle Tap\r\n");
+    ALLMEMS1_PRINTF("Enabled Single Tap\r\n");
     W2ST_ON_HW_FEATURE(W2ST_HWF_SINGLE_TAP);
   }
 }
@@ -400,7 +400,7 @@ void DisableHWSingleTap(void)
   if(BSP_MOTION_SENSOR_Disable_Single_Tap_Detection(ACCELERO_INSTANCE)!= BSP_ERROR_NONE) {
     ALLMEMS1_PRINTF("Error Disabling Single Tap Detection\r\n");
   } else {
-    ALLMEMS1_PRINTF("Disabled Sigle Tap\r\n");
+    ALLMEMS1_PRINTF("Disabled Single Tap\r\n");
     W2ST_OFF_HW_FEATURE(W2ST_HWF_SINGLE_TAP);
   }
 
@@ -460,7 +460,7 @@ void ResetHWPedometer(void)
 }
 
 /**
-  * @brief  This function retunrs the HW's pedometer steps counter value
+  * @brief  This function returns the HW's pedometer steps counter value
   * @param  None
   * @retval uint16_t Steps Counter
   */

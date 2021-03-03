@@ -38,6 +38,8 @@ Below are the steps to run this example:
  - You can avoid step 1 by directly loading the binary file provided with the example
  - You have to configure your preferred toolchain in order to generate the binary
    file after compiling the project.
+ - You can use STM32CubeProgrammer or any similar tool to insure DBANK=1 and initially
+   reset the SWAP_BANK bit (bank 1 and bank 2 address are not swapped).
 
 3- Select bank1 configuration by uncommenting FLASH_BANK1 and commenting FLASH_BANK2 defines
    in "main.h", and run it, this project will be loaded in the bank1 of the flash: at the
@@ -61,6 +63,9 @@ Below are the steps to run this example:
 
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

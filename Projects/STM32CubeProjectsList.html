@@ -21,13 +21,13 @@
     <p class="copyright">Copyright 2019 STMicroelectronics</p>
 
     <div class="picture">
-      <img alt="" id="_x0000_i1025" src="../_htmresc/st_logo.png" style="border: 0px solid ; width: 104px; height: 77px;"/>
+      <img alt="" id="_x0000_i1025" src="../_htmresc/st_logo_2020.png" style="border: 0px solid ; width: 104px; height: 77px;"/>
     </div>
 
     <p>The STM32CubeL5 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains.</p>
 
     <div class="picture">
-      <img alt="" src="../_htmresc/STM32Cube.bmp"/>
+      <img alt="" src="../_htmresc/STM32Cube_2020.bmp"/>
     </div>
 
     <p>The examples are classified depending on the STM32Cube level they apply to, and are named as follows:</p>
@@ -76,7 +76,11 @@
 
     <p>The provided examples can be tailored to run on any compatible hardware; user simply need to update the BSP drivers for his board, if it has the same hardware functions (LED, LCD display, pushbuttons...etc.). The BSP is based on a modular architecture that allows it to be ported easily to any hardware by just implementing the low level routines.</p>
 
-    <p>The table below contains the list of examples provided within STM32CubeL5 Firmware package.</p>
+    <p>
+      <div>The table below contains the list of examples provided within STM32Cube_FW_L5 Firmware package.</div>
+      <div>In this table, the label <b>CubeMX</b> means the projects have been created using <a href="https://www.st.com/en/development-tools/stm32cubemx.html" target="_blank">STM32CubeMX</a>, the STM32Cube initialization code generator. Those projects can be opened with this tools to modify the projects itself. The others projects are manually created to demonstrate the product features.</div>
+      <div>In this table, the label <b>TrustZone</b> means the projects have been created for devices with Arm® TrustZone® enabled. Please read the projects readme.txt file for user option bytes configuration.</div>
+    </p>
 
     <p id="STM32L5xxImportantLink">
       <div>Reference materials available on <a href="http://www.st.com/stm32cubefw" target="_blank">www.st.com/stm32cubefw</a></div>
@@ -149,7 +153,7 @@ to build any firmware application.
         <td>1</td>
       </tr>
       <tr align=center>
-        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=149><p id="Examples">Examples</p></td>
+        <td style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" rowspan=150><p id="Examples">Examples</p></td>
         <td align=left rowspan=1><p id="-">-</p></td>
         <td align=left><p id="BSP">BSP</p></td>
         <td align=left>
@@ -789,6 +793,16 @@ using an interrupt when the device is in Stop 2 mode.
         <td>-</td>
         <td>-</td>
         <td><font size="5" color=green>CubeMx</font></td>
+      </tr>
+      <tr align=center>
+        <td align=left rowspan=1><p id="ICACHE">ICACHE</p></td>
+        <td align=left><p id="ICACHE_SRAM_Memory_Remap">ICACHE_SRAM_Memory_Remap</p></td>
+        <td align=left>
+How to execute code from an external SRAM remapped region configured through the ICACHE HAL driver.
+</td>
+        <td>-</td>
+        <td><font size="5" color=green>CubeMx</font></td>
+        <td>-</td>
       </tr>
       <tr align=center>
         <td align=left rowspan=2><p id="IWDG">IWDG</p></td>
@@ -1609,9 +1623,9 @@ generates an MCU WWDG reset when a predefined time period has elapsed.
         <td><font size="5" color=green>CubeMx</font></td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-        <td colspan="3"><b>Total number of examples: 212</b></td>
+        <td colspan="3"><b>Total number of examples: 213</b></td>
         <td>65</td>
-        <td>50</td>
+        <td>51</td>
         <td>97</td>
       </tr>
       <tr align=center>
@@ -2823,7 +2837,7 @@ This application shows how to use the USB device application based on the Mass S
         <td align=left>
 This application implements on STM32L562E-DK board a set of cryptographic features
 through mbed TLS selftest functions of individual mbed TLS components selectively
-choosen in a single configuration file "mbedtls_config.h".
+chosen in a single configuration file "mbedtls_config.h".
 </td>
         <td><font size="5" color=green>CubeMx</font></td>
         <td>-</td>
@@ -2856,9 +2870,9 @@ interface. It is based on the STM32Cube HAL, BSP and several middleware componen
         <td>0</td>
       </tr>
       <tr style="background-repeat: no-repeat;background-position: right center;background-color: #39A9DC;color: #FFF;" align=center>
-      	<td colspan="4"><b>Total number of projects: 351</b></td>
+      	<td colspan="4"><b>Total number of projects: 352</b></td>
       	<td>85</td>
-      	<td>74</td>
+      	<td>75</td>
       	<td>192</td>
       </tr>
     </table>

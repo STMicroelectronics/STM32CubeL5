@@ -78,6 +78,7 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
+extern HASH_HandleTypeDef hhash;
 
 /* USER CODE END Private defines */
 

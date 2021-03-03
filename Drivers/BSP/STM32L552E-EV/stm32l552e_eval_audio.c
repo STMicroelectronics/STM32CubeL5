@@ -441,7 +441,7 @@ int32_t BSP_AUDIO_OUT_Init(uint32_t Instance, BSP_AUDIO_Init_t *AudioInit)
             codec_init.InputDevice  = (Audio_In_Ctx[0].State == AUDIO_IN_STATE_RESET) ? CS42L51_IN_NONE : CS42L51_IN_MIC1;
             codec_init.OutputDevice = CS42L51_OUT_HEADPHONE;
             codec_init.Frequency    = AudioInit->SampleRate;
-            codec_init.Resolution   = CS42L51_RESOLUTION_16b; /* Not used */
+            codec_init.Resolution   = CS42L51_RESOLUTION_16B; /* Not used */
             codec_init.Volume       = AudioInit->Volume;
             if (Audio_Drv->Init(Audio_CompObj, &codec_init) < 0)
             {
@@ -1636,7 +1636,7 @@ int32_t BSP_AUDIO_IN_Init(uint32_t Instance, BSP_AUDIO_Init_t *AudioInit)
               codec_init.InputDevice  = CS42L51_IN_MIC1;
               codec_init.OutputDevice = (Audio_Out_Ctx[0].State == AUDIO_OUT_STATE_RESET) ? CS42L51_OUT_NONE : CS42L51_OUT_HEADPHONE;
               codec_init.Frequency    = AudioInit->SampleRate;
-              codec_init.Resolution   = CS42L51_RESOLUTION_16b; /* Not used */
+              codec_init.Resolution   = CS42L51_RESOLUTION_16B; /* Not used */
               codec_init.Volume       = Audio_Out_Ctx[0].Volume;
               if (Audio_Drv->Init(Audio_CompObj, &codec_init) < 0)
               {

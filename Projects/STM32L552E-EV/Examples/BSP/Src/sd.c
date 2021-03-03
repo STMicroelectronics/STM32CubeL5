@@ -46,7 +46,7 @@ __IO uint32_t SDWriteStatus = 0, SDReadStatus = 0, SDDetectStatus = 0, SDDetectI
 
 /* Private function prototypes -----------------------------------------------*/
 static void SD_SetHint(void);
-static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset);
+static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLength, uint32_t uwOffset);
 static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t BufferLength);
 /* Private functions ---------------------------------------------------------*/
 
@@ -232,16 +232,16 @@ static void SD_SetHint(void)
 /**
   * @brief  Fills buffer with user predefined data.
   * @param  pBuffer: pointer on the buffer to fill
-  * @param  uwBufferLenght: size of the buffer to fill
+  * @param  uwBufferLength: size of the buffer to fill
   * @param  uwOffset: first value to fill on the buffer
   * @retval None
   */
-static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
+static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLength, uint32_t uwOffset)
 {
   uint32_t tmpIndex = 0;
 
   /* Put in global buffer different values */
-  for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
+  for (tmpIndex = 0; tmpIndex < uwBufferLength; tmpIndex++ )
   {
     pBuffer[tmpIndex] = tmpIndex + uwOffset;
   }

@@ -32,7 +32,7 @@ extern "C" {
 /* Exported constants --------------------------------------------------------*/
 #define STMPE811_MAX_X_LENGTH                  4096U
 #define STMPE811_MAX_Y_LENGTH                  4096U
-  
+
 #ifdef __cplusplus
 }
 #endif

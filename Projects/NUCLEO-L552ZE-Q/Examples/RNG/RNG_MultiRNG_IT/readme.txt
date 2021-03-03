@@ -43,6 +43,9 @@ The random numbers can be displayed on the debugger in aRandom32bit variable.
 
 In case of error, LED3 is toggling at a frequency of 1Hz.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Analog, RNG, Random, FIPS PUB 140-2, Analog Random number generator, Entropy, Period, interrupt

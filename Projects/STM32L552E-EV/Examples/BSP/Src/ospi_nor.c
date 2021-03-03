@@ -148,6 +148,9 @@ void OSPI_NOR_demo(void)
       UTIL_LCD_DisplayStringAt(LCD_TEXT_XPOS, lcd_text_ypos, (uint8_t*)"OSPI NOR Get Info : OK", LEFT_MODE);
       lcd_text_ypos+=LCD_TEXT_YPOS_INC;
       
+      /* Caution: Despite instruction cache is enabled, no need for cache invalidation here since no previous */
+      /*          fetch (read/execute) instructions were executed from OSPI_NOR_WRITE_READ_ADDR               */
+
       /*##-3- Erase OSPI NOR memory ##########################################*/ 
       if (BSP_OSPI_NOR_Erase_Block(0, OSPI_NOR_WRITE_READ_ADDR, MX25LM51245G_ERASE_64K) != BSP_ERROR_NONE)
       {
@@ -698,16 +701,16 @@ static void OSPI_NOR_SetHint(void)
 /**
 * @brief  Fills buffer with user predefined data.
 * @param  pBuffer: pointer on the buffer to fill
-* @param  uwBufferLenght: size of the buffer to fill
+* @param  uwBufferLength: size of the buffer to fill
 * @param  uwOffset: first value to fill on the buffer
 * @retval None
 */
-static void Fill_Buffer(uint8_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
+static void Fill_Buffer(uint8_t *pBuffer, uint32_t uwBufferLength, uint32_t uwOffset)
 {
   uint32_t tmpIndex = 0;
   
   /* Put in global buffer different values */
-  for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
+  for (tmpIndex = 0; tmpIndex < uwBufferLength; tmpIndex++ )
   {
     pBuffer[tmpIndex] = tmpIndex + uwOffset;
   }

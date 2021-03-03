@@ -77,6 +77,9 @@ LED5 will turn on if any error occurs.
 @note The example needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, IWDG, reload counter, MCU Reset, Timeout, Software fault
@@ -100,6 +103,10 @@ System, IWDG, reload counter, MCU Reset, Timeout, Software fault
   - This example has been tested with STM32L552E-EV board and can be
     easily tailored to any other supported device and development board.
 
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

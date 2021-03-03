@@ -22,7 +22,7 @@
 
 This application implements on STM32L562E-DK board a set of cryptographic features
 through mbed TLS selftest functions of individual mbed TLS components selectively
-choosen in a single configuration file "mbedtls_config.h".
+chosen in a single configuration file "mbedtls_config.h".
 
 This application contains in particular proprietary implementations (xxx_alt.c
 alternate files) with adaptation layers (HAL API) which activates the
@@ -34,7 +34,7 @@ Following IPs are executed :
 
 Tests result will be displayed on LCD.
 
-A detailled log is also displayed on the hyperTerminal to inform user about all
+A detailed log is also displayed on the hyperTerminal to inform user about all
 cryptographic algorithms which are executed according to the mbed TLS configuration.
 UART must be configured with the required settings (to be done only once):
    - When the board is connected to a PC,
@@ -72,6 +72,9 @@ Mbed TLS can be built with a larger variety of features so that more test suites
 User can customize the set of features and trigger more tests by enabling more features in the
 configuration file "mbedtls_config.h" available under the project includes directory.
 
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -133,7 +136,7 @@ Src
 
 In order to make the program work, you must do the following:
  - Open your preferred toolchain
- - Optionaly, disable/enable others mbed TLS components
+ - Optionally, disable/enable others mbed TLS components
  - Rebuild all files and load your image into target memory
 
     - Connect the STM32L562E-DK board to the PC through 'USB micro B-Male

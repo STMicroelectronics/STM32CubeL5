@@ -64,6 +64,9 @@ User push-button can be used to change the output compare mode:
 
 Initially the output channel is configured in output compare toggle mode.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, TIM, Output, Compare mode, signals, Autoreload, Waveform, Counter, Toggle mode.

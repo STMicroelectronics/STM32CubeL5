@@ -29,7 +29,8 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l5xx_hal.h"
-#include "secure_nsc.h"
+
+#include "secure_nsc.h" /* For export Non-secure callable APIs */
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */

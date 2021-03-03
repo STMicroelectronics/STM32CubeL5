@@ -87,7 +87,7 @@ uint16_t glucoseDataBase_FindNextSelectedRecord(uint16_t database_index);
 void glucoseRACP_RequestHandler(uint8_t attValueLen);
 
 /**
-  * @brief Manage the notification of next glucose measurment from database records 
+  * @brief Manage the notification of next glucose measurement from database records 
   *        It should be called periodically on notification timer timeout
   * @retval TRUE : if other selected measurement has to be sent; false otherwise
   */

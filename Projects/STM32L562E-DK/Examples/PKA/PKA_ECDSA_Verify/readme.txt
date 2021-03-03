@@ -28,10 +28,10 @@ For this example, a test vector have been extracted from National Institute of S
 This reference files can be found under:
 "http://csrc.nist.gov/groups/STM/cavp/documents/dss/186-3ecdsatestvectors.zip (ZIP SigGen.rsp)"
 
-This test vector has been choosen to demonstrate the behavior in a case where the input signature
+This test vector has been chosen to demonstrate the behavior in a case where the input signature
 is valid. A second input is provided where one element of the hash message has been modified to 
 demonstrate the behavior in a case where the signature is invalid. Their definitions are included 
-in SigVer.c. You can refer to this file for more informations.
+in SigVer.c. You can refer to this file for more information.
 
 The selected curve for this example is P-256 (ECDSA-256) published by NIST in 
 Federal Information Processing Standards Publication FIPS PUB 186-4. The description
@@ -48,6 +48,9 @@ In case of any error, the LED10 (LED_GREEN) is toggling slowly.
       
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

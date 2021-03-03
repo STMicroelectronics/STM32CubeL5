@@ -287,8 +287,8 @@ static int32_t Ospi_Flash_ReadData(uint32_t addr, void *data, uint32_t cnt)
   ARM_OSPI_FLASH0_STATUS.busy = DRIVER_STATUS_BUSY;
 
   /* ensure previous operation is finished (erase/write) : GetStatus()
-     such verification is done (inside BSP driver) at the begining of erase or write operation  but
-     not for read operation ==> in order to maximise BSP driver execution timing efficency */
+     such verification is done (inside BSP driver) at the beginning of erase or write operation  but
+     not for read operation ==> in order to maximise BSP driver execution timing efficiency */
   while (BSP_OSPI_NOR_GetStatus(0) !=  BSP_ERROR_NONE)
   {
   }
@@ -496,8 +496,8 @@ int32_t Ospi_Flash_Config_Exe(void)
   ARM_OSPI_FLASH0_STATUS.busy = DRIVER_STATUS_BUSY;
 
   /* ensure previous operation is finished (erase/write) : GetStatus()
-     such verification is done (inside BSP driver) at the begining of erase or write operation  but
-     not for read operation ==> in order to maximise BSP driver execution timing efficency */
+     such verification is done (inside BSP driver) at the beginning of erase or write operation  but
+     not for read operation ==> in order to maximise BSP driver execution timing efficiency */
   while (BSP_OSPI_NOR_GetStatus(0) !=  BSP_ERROR_NONE)
   {
   }

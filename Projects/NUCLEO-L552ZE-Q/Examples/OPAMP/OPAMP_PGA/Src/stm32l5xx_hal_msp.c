@@ -98,10 +98,10 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
   /* USER CODE END DAC1_MspInit 0 */
     /* Peripheral clock enable */
     __HAL_RCC_DAC1_CLK_ENABLE();
-  
+
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    /**DAC1 GPIO Configuration    
-    PA5     ------> DAC1_OUT2 
+    /**DAC1 GPIO Configuration
+    PA5     ------> DAC1_OUT2
     */
     GPIO_InitStruct.Pin = GPIO_PIN_5;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -156,9 +156,9 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
   /* USER CODE END DAC1_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_DAC1_CLK_DISABLE();
-  
-    /**DAC1 GPIO Configuration    
-    PA5     ------> DAC1_OUT2 
+
+    /**DAC1 GPIO Configuration
+    PA5     ------> DAC1_OUT2
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_5);
 
@@ -190,12 +190,12 @@ void HAL_OPAMP_MspInit(OPAMP_HandleTypeDef* hopamp)
   /* USER CODE END OPAMP2_MspInit 0 */
     /* Peripheral clock enable */
     __HAL_RCC_OPAMP_CLK_ENABLE();
-  
+
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**OPAMP2 GPIO Configuration    
+    /**OPAMP2 GPIO Configuration
     PA7     ------> OPAMP2_VINM
-    PB0     ------> OPAMP2_VOUT 
+    PB0     ------> OPAMP2_VOUT
     */
     GPIO_InitStruct.Pin = GPIO_PIN_7;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -229,10 +229,10 @@ void HAL_OPAMP_MspDeInit(OPAMP_HandleTypeDef* hopamp)
   /* USER CODE END OPAMP2_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_OPAMP_CLK_DISABLE();
-  
-    /**OPAMP2 GPIO Configuration    
+
+    /**OPAMP2 GPIO Configuration
     PA7     ------> OPAMP2_VINM
-    PB0     ------> OPAMP2_VOUT 
+    PB0     ------> OPAMP2_VOUT
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_7);
 

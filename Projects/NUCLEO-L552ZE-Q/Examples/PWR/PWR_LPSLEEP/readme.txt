@@ -24,7 +24,7 @@ How to enter the Low-power sleep mode and wake up from this mode by using
 an interrupt.
 
 In the associated software, the system clock is set to 110 MHz.
-An EXTI line is connected to the user button thru PC.13 and configured 
+An EXTI line is connected to the user button through PC.13 and configured 
 to generate an interrupt on falling edge upon key press.
  
 The SysTick is programmed to generate an interrupt each 1 ms and in the SysTick 
@@ -58,6 +58,9 @@ These steps are repeated in an infinite loop.
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Power, PWR, Low Power, Sleep mode, Interrupt, Wakeup, External reset

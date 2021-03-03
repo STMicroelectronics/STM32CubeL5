@@ -64,6 +64,9 @@ signals at four different frequencies.
       to have correct HAL operation.
 
 LED3 is ON when there are an error.
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timer, Output, signals, Output compare toggle, PWM, Oscilloscope

@@ -20,7 +20,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -84,6 +83,7 @@ uint32_t Timeout = 0; /* Variable used for Timeout management */
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 uint32_t WaitForSynchro_RTC(void);
@@ -174,6 +174,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ICACHE_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 
@@ -215,8 +216,6 @@ void SystemClock_Config(void)
   LL_RCC_MSI_SetRange(LL_RCC_MSIRANGE_6);
   LL_RCC_MSI_SetCalibTrimming(0);
   LL_PWR_EnableBkUpAccess();
-  LL_RCC_ForceBackupDomainReset();
-  LL_RCC_ReleaseBackupDomainReset();
   LL_RCC_LSE_SetDriveCapability(LL_RCC_LSEDRIVE_LOW);
   LL_RCC_LSE_Enable();
 
@@ -261,6 +260,31 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief ICACHE Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ICACHE_Init(void)
+{
+
+  /* USER CODE BEGIN ICACHE_Init 0 */
+
+  /* USER CODE END ICACHE_Init 0 */
+
+  /* USER CODE BEGIN ICACHE_Init 1 */
+
+  /* USER CODE END ICACHE_Init 1 */
+  /** Enable instruction cache in 1-way (direct mapped cache)
+  */
+  LL_ICACHE_SetMode(LL_ICACHE_1WAY);
+  LL_ICACHE_Enable();
+  /* USER CODE BEGIN ICACHE_Init 2 */
+
+  /* USER CODE END ICACHE_Init 2 */
+
+}
+
+/**
   * @brief RTC Initialization Function
   * @param None
   * @retval None
@@ -276,7 +300,12 @@ static void MX_RTC_Init(void)
   LL_RTC_TimeTypeDef RTC_TimeStruct = {0};
   LL_RTC_DateTypeDef RTC_DateStruct = {0};
 
-  LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
+  if(LL_RCC_GetRTCClockSource() != LL_RCC_RTC_CLKSOURCE_LSE)
+  {
+    LL_RCC_ForceBackupDomainReset();
+    LL_RCC_ReleaseBackupDomainReset();
+    LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
+  }
 
   /* Peripheral clock enable */
   LL_RCC_EnableRTC();
@@ -310,10 +339,11 @@ static void MX_RTC_Init(void)
   LL_RTC_Init(RTC, &RTC_InitStruct);
   LL_RTC_SetBackupRegisterPrivilege(RTC, LL_RTC_PRIVILEGE_BKUP_ZONE_NONE);
   LL_RTC_SetBackupRegProtection(RTC, LL_RTC_BKP_DR0, LL_RTC_BKP_DR0);
-  /** Initialize RTC and set the Time and Date 
+  LL_RTC_SetRtcPrivilege(RTC, LL_RTC_PRIVILEGE_FULL_NO);
+  /** Initialize RTC and set the Time and Date
   */
   if(LL_RTC_BKP_GetRegister(RTC,LL_RTC_BKP_DR0) != 0x32F2){
-  
+
   RTC_TimeStruct.TimeFormat = LL_RTC_TIME_FORMAT_AM_OR_24;
   RTC_TimeStruct.Hours = 0x11;
   RTC_TimeStruct.Minutes = 0x59;

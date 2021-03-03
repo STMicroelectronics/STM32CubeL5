@@ -447,7 +447,7 @@ tBleStatus HRProfile_Send_HRM_Value ( tHeartRateMeasure heartRateVal )
       (HRProfile_Read_SubStateMachine() == HRPROFILE_STATE_CONNECTED_IDLE))
   {
     {
-      /* set the status that heart rate measurment value
+      /* set the status that heart rate measurement value
       * communication has already started */
       heartRate.hrmCommunicationStarted = 1;
       
@@ -567,7 +567,7 @@ tBleStatus HRProfile_Send_HRM_Value ( tHeartRateMeasure heartRateVal )
       {
         HRPROFILE_MESG_DBG ( profiledbgfile, "HRProfile_Send_HRM_Value(), HRM value sent successfully \n");
         
-        /* start a timer to count starvation of heart rate measurment value timeout. */
+        /* start a timer to count starvation of heart rate measurement value timeout. */
         /*Timer_Start_Timeout (20, HRProfile_Device_Disconnect);*/
         
         /* TBR: notify characteristic update to main profile */
@@ -659,7 +659,7 @@ tBleStatus HRProfile_Add_Services_Characteristics(void)
   HRPROFILE_MESG_DBG( profiledbgfile, "Adding Heart Rate Service \n");
   /* Max_Attribute_Records = 2*no_of_char + 1 */
   /* serviceMaxAttributeRecord = 1 for heart rate service +
-  *                             2 for hear rate measurment characteristic +
+  *                             2 for hear rate measurement characteristic +
   *                             1 for client char configuration descriptor +
   *                             2 for body sensor location characteristic + 
   *                             2 for control point characteristic

@@ -57,10 +57,10 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
+void ADC1_2_IRQHandler(void);
 void DAC_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 void EXTI13_IRQHandler(void);
-void ADCx_IRQHandler(void);
 /* USER CODE END EFP */
 
 #ifdef __cplusplus

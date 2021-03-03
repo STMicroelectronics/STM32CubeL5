@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_RTOS/FatFs/Target/sd_diskio1.c
+  * @file    FatFs/FatFs_uSD_RTOS/FATFS/Target/sd_diskio.c
   * @author  MCD Application Team
   * @brief   SD Disk I/O driver
   ******************************************************************************

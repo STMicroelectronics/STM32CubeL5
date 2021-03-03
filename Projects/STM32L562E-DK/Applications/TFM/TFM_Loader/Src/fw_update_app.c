@@ -241,9 +241,26 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
 {
   HAL_StatusTypeDef ret = HAL_ERROR;
   COM_StatusTypeDef e_result;
+  int32_t ret_arm;
   uint32_t u_fw_size = pFwImageDwlArea->MaxSizeInBytes ;
+  uint32_t sector_address;
+
+  /* Clear download area */
+  printf("  -- Erasing download area \r\n\n");
+
+  for (sector_address = pFwImageDwlArea->DownloadAddr;
+       sector_address < pFwImageDwlArea->DownloadAddr + pFwImageDwlArea->MaxSizeInBytes;
+       sector_address += m_uFlashSectorSize)
+  {
+    ret_arm = LOADER_FLASH_DEV_NAME.EraseSector(sector_address);
+    if (ret_arm < 0)
+    {
+      return HAL_ERROR;
+    }
+  }
 
   printf("  -- Send Firmware \r\n\n");
+
   /* Download binary */
   printf("  -- -- File> Transfer> YMODEM> Send \t\n");
 
@@ -314,8 +331,6 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
   */
 HAL_StatusTypeDef Ymodem_HeaderPktRxCpltCallback(uint32_t uFlashDestination, uint32_t uFileSize)
 {
-  uint32_t sector_address;
-  int32_t ret;
   /*Reset of the ymodem variables */
   m_uFileSizeYmodem = 0U;
   m_uPacketsReceived = 0U;
@@ -326,27 +341,7 @@ HAL_StatusTypeDef Ymodem_HeaderPktRxCpltCallback(uint32_t uFlashDestination, uin
 
   /* compute the number of 1K blocks */
   m_uNbrBlocksYmodem = (m_uFileSizeYmodem + (PACKET_1K_SIZE - 1U)) / PACKET_1K_SIZE;
-  for (sector_address = uFlashDestination;
-       sector_address < uFlashDestination + uFileSize;
-       sector_address += m_uFlashSectorSize)
-  {
-#if defined(MCUBOOT_PRIMARY_ONLY)
-    if (sector_address < NS_IMAGE_PRIMARY_PARTITION_OFFSET)
-    {
-      ret = SECURE_Flash_EraseSector(sector_address);
-    }
-    else
-    {
-      ret = LOADER_FLASH_DEV_NAME.EraseSector(sector_address);
-    }
-#else
-    ret = LOADER_FLASH_DEV_NAME.EraseSector(sector_address);
-#endif /*  defined(MCUBOOT_PRIMARY_ONLY) */
-    if (ret < 0)
-    {
-      return HAL_ERROR;
-    }
-  }
+
   /* NOTE : delay inserted for Ymodem protocol*/
   HAL_Delay(1000);
   return HAL_OK;

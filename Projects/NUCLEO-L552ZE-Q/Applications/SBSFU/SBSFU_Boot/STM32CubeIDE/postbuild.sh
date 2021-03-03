@@ -18,31 +18,14 @@ cd $current_directory
 imgtool=$mcuboot"/scripts/dist/imgtool/imgtool.exe"
 uname | grep -i -e windows -e mingw
 if [ $? == 0 ] && [ -e "$imgtool" ]; then
-#line for window executeable
+#line for window executable
 echo Postbuild with windows executable
 cmd=""
 else
 #line for python
 echo Postbuild with python script
 imgtool=$mcuboot"/scripts/imgtool.py"
-#determine/check python version command
-cmd="python3"
-$cmd --version  &> /dev/null
-ret=$?
-if [ $ret != 0 ]; then
-  cmd="python"
-  $cmd --version  &> /dev/null
-  ret=$?
-  if [ $ret != 0 ]; then
-    echo "This script requires python 3.0 or greater"
-    exit 1
-  fi
-  ver=$(python -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
-  if [ "$ver" -lt "30" ]; then
-    echo "This script requires python 3.0 or greater"
-    exit 1
-  fi
-fi
+cmd="python"
 fi
 
 command=$cmd" "$imgtool" flash --layout "$preprocess_bl2_file" -b secbootadd0 -m  RE_BL2_BOOT_ADDRESS  -d 0x80  -s 0 "$regression

@@ -11,24 +11,22 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="_htmresc/mini-st.css" />
+  <link rel="stylesheet" href="_htmresc/mini-st_2020.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
+  <link rel="icon" type="image/x-icon" href="_htmresc/favicon.png" />
 </head>
 <body>
 <div class="row">
 <div class="col-sm-12 col-lg-4">
-<div class="card fluid">
-<div class="sectione dark">
 <center>
-<h1 id="release-notes-for-stm32cubel5-firmware-package"><small>Release Notes for</small> <strong>STM32CubeL5 Firmware Package</strong></h1>
+<h1 id="release-notes-for">Release Notes for</h1>
+<h1 id="stm32cubel5-firmware-package"><mark>STM32CubeL5 Firmware Package</mark></h1>
 <p>Copyright © 2019 STMicroelectronics<br />
 </p>
-<a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo.png" alt="ST logo" /></a>
+<a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo_2020.png" alt="ST logo" /></a>
 </center>
-</div>
-</div>
 <h1 id="license">License</h1>
 <p>Licensed by ST under ST license SLA0048 (the "License"); You may not use this package except in compliance with the License. You may obtain a copy of the License at:</p>
 <p><a href="http://www.st.com/SLA0048">http://www.st.com/SLA0048</a></p>
@@ -47,9 +45,7 @@
 </ul>
 <p>All embedded software utilities come with a full set of examples.</p>
 <p>The STM32Cube firmware solution offers a straightforward API with a modular architecture, making it simple to fine tune custom applications and scalable to fit most requirements.</p>
-<figure>
-<img src="_htmresc/STM32Cube.png" alt="STM32Cube" /><figcaption>STM32Cube</figcaption>
-</figure>
+<p><img src="_htmresc/STM32Cube_2020.bmp" /></p>
 <p>The set of middleware components depends on the STM32 Series.</p>
 <p>The HAL (Hardware Abstraction Layer) and LL (Low Layers) drivers provided within this package support the <strong>STM32L552xx/62xx</strong> lines.</p>
 <p>The HAL and LL drivers provided within this package are compliant with MISRA-C:2012 guidelines, and have been reviewed with a static analysis tool to eliminate possible run-time errors. Reports are available on demand.</p>
@@ -57,14 +53,574 @@
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section5" checked aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.1 / 18-September-2020</strong></label>
+<input type="checkbox" id="collapse-section6" checked aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.4.0 / 10-February-2021</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<p><strong>Maintenance release</strong></p>
+<ul>
+<li>Corrections and enhancements of CMSIS Device, HAL and Low Layer drivers</li>
+<li>Middlewares updates: FreeRTOS, USB Device and USBPD Core &amp; Device</li>
+<li>Renamed Middlewares/mbedTLS path to fix Linux build</li>
+<li>ICACHE peripheral enabled in projects to get a 0 wait-state execution from Flash memory and external memories, and reach the maximum performance</li>
+<li>Project examples updated to STM32CubeMX 6.2.0</li>
+</ul>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><strong>CMSIS Device</strong> updates
+<ul>
+<li>Add TAMP_CFGR register description for monitoring functions</li>
+<li>Fix I2C4_EV_IRQn and I2C4_ER_IRQn order in IRQn_Type</li>
+<li>Note: default Security Attribute Unit (SAU) configuration in partition_stm32l552xx.h and partition_stm32l562xx.h is available from \Include\Templates
+<ul>
+<li>default SAU setup is:
+<ul>
+<li>SAU region 0: 0x0C03E000-0x0C03FFFF (Secure, Non-Secure Callable)</li>
+<li>SAU region 1: 0x08040000-0x0807FFFF (Non-Secure FLASH Bank2 (256 Kbytes))</li>
+<li>SAU region 2: 0x20018000-0x2003FFFF (Non-Secure RAM (2nd half SRAM1 + SRAM2 (160 Kbytes)))</li>
+<li>SAU region 3: 0x40000000-0x4FFFFFFF (Non-Secure Peripherals mapped memory)</li>
+<li>SAU region 4: 0x60000000-0x9FFFFFFF (Non-Secure external memories)</li>
+<li>SAU region 5: 0x0BF90000-0x0BFA8FFF (Non-Secure System memory)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>HAL/LL drivers</strong> updates
+<ul>
+<li>HAL drivers
+<ul>
+<li>HAL ADC
+<ul>
+<li>Update timeout mechanism to avoid false timeout detection in case of preemption</li>
+</ul></li>
+<li>HAL CORTEX
+<ul>
+<li>Add APIs for MPU control</li>
+</ul></li>
+<li>HAL CRYP
+<ul>
+<li>Add capability to manage GCM/GMAC/CCM header feed in DMA mode</li>
+</ul></li>
+<li>HAL DAC
+<ul>
+<li>Update timeout mechanism to avoid false timeout detection in case of preemption</li>
+</ul></li>
+<li>HAL ICACHE
+<ul>
+<li>Update timeout mechanism to avoid false timeout detection in case of preemption</li>
+</ul></li>
+<li>HAL IWDG
+<ul>
+<li>Update timeout mechanism to avoid false timeout detection in case of preemption</li>
+</ul></li>
+<li>HAL LPTIM
+<ul>
+<li>Update external clock configuration for some ClockSource/CounterSource combinations</li>
+</ul></li>
+<li>HAL MMC
+<ul>
+<li>High speed mode frequency computed based on real clock value</li>
+</ul></li>
+<li>HAL NAND
+<ul>
+<li>Fix read and write in spare area (16-bits addressing)</li>
+</ul></li>
+<li>HAL OPAMP
+<ul>
+<li>Rename definition OPAMP_POWERMODE_NORMAL to OPAMP_POWERMODE_NORMALPOWER</li>
+</ul></li>
+<li>HAL PCD
+<ul>
+<li>Fix device ISO IN double buffer mode</li>
+<li>Fix PMA rx count descriptor update</li>
+</ul></li>
+<li>HAL RCC
+<ul>
+<li>Update timeout mechanism to avoid false timeout detection in case of preemption</li>
+</ul></li>
+<li>HAL RNG
+<ul>
+<li>Update timeout mechanism to avoid false timeout detection in case of preemption</li>
+</ul></li>
+<li>HAL RTC
+<ul>
+<li>Add APIs for daylight saving time:
+<ul>
+<li>HAL_RTC_DST_Add1Hour(), HAL_RTC_DST_Sub1Hour(), HAL_RTC_DST_SetStoreOperation(), HAL_RTC_DST_ClearStoreOperation() and HAL_RTC_DST_ReadStoreOperation()</li>
+</ul></li>
+<li>Add APIs for monitoring functions:
+<ul>
+<li>HAL_RTCEx_EnableTemperatureMonitoring() and HAL_RTCEx_DisableTemperatureMonitoring()</li>
+<li>HAL_RTCEx_EnableVoltageMonitoring() and HAL_RTCEx_DisableVoltageMonitoring()</li>
+<li>HAL_RTCEx_EnableWUTMonitoring() and HAL_RTCEx_DisableWUTMonitoring()</li>
+</ul></li>
+</ul></li>
+<li>HAL SDMMC
+<ul>
+<li>High speed mode frequency computed based on real clock value</li>
+</ul></li>
+<li>HAL SMSBUS
+<ul>
+<li>Add extension files stm32l5xx_hal_smbus_ex.h/.c for new APIs:
+<ul>
+<li>HAL_SMBUSEx_EnableFastModePlus() and HAL_SMBUSEx_DisableFastModePlus()</li>
+</ul></li>
+</ul></li>
+<li>HAL SPI
+<ul>
+<li>Fix code optimization problem in SPI_WaitFifoStateUntilTimeout()</li>
+</ul></li>
+<li>HAL TIM
+<ul>
+<li>Fix HAL_TIM_OnePulse_Start() not to ignore OutputChannel parameter</li>
+<li>Update timeout mechanism to avoid false timeout detection in case of preemption</li>
+</ul></li>
+<li>HAL TSC
+<ul>
+<li>Add assert macro to avoid wrong CPLT/PGPSC configuration</li>
+</ul></li>
+</ul></li>
+<li>LL drivers
+<ul>
+<li>New LL ICACHE
+<ul>
+<li>New stm32l5xx_ll_icache.h/.c files</li>
+</ul></li>
+<li>LL ADC
+<ul>
+<li>Increase internal regulator stabilization time from 10us to 20us (LL_ADC_DELAY_INTERNAL_REGUL_STAB_US)</li>
+</ul></li>
+<li>LL CORTEX
+<ul>
+<li>Add APIs for MPU control</li>
+</ul></li>
+<li>LL OPAMP
+<ul>
+<li>Rename definition LL_OPAMP_POWERMODE_NORMAL to LL_OPAMP_POWERMODE_NORMALPOWER</li>
+</ul></li>
+<li>LL RTC
+<ul>
+<li>Add APIs for monitoring functions:
+<ul>
+<li>LL_RTC_EnableTemperatureMonitoring() and LL_RTC_DisableTemperatureMonitoring()</li>
+<li>LL_RTC_EnableVoltageMonitoring() and LL_RTC_DisableVoltageMonitoring()</li>
+<li>LL_RTC_EnableWUTMonitoring() and LL_RTC_DisableWUTMonitoring()</li>
+</ul></li>
+</ul></li>
+<li>LL SPI
+<ul>
+<li>Fix LL_SPI_Init() for Rx FIFO threshold if 8-bits mode</li>
+</ul></li>
+<li>LL TIM
+<ul>
+<li>Fix LL_TIM_GetCounterMode()</li>
+<li>Fix inverted comment for One Pulse Mode definitions</li>
+</ul></li>
+<li>LL USART
+<ul>
+<li>Fix LL_USART_ClockInit() to configure clock phase and clock polarity when CR2_CLKEN is cleared</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Projects</strong> updates</p>
+<p>ICACHE peripheral enabled in all projects to get a 0 wait-state execution from Flash memory and external memories</p>
+<p>All Projects updated to STM32CubeMX V6.2.0</p>
+<p>STM32CubeIDE optimization level to recommended -Os</p>
+<p>All FreeRTOS-based applications updated to FreeRTOS V10.3.1 (FreeRTOSConfig.h)</p>
+<ul>
+<li>NUCLEO-L552ZE-Q
+<ul>
+<li>Examples/ADC projects updated to STM32CubeMX format</li>
+<li>Examples/HASH/HASH_SHA1_DMA_TrustZone updated to STM32CubeMX format</li>
+<li>Examples_LL/RTC/RTC_TimeStamp_Init: Fix Linux compilation</li>
+<li>Examples_LL/USART/USART_Communication_Rx_IT_Continuous_VCP_Init: Fix STM32CubeIDE build</li>
+<li>Examples_LL/UTILS/UTILS_ConfigureSystemClock: Remove wrong SystemClock_Config()</li>
+<li>Applications/SBSFU: Various fixes and improvements</li>
+</ul></li>
+<li>STM32L552E-EV
+<ul>
+<li>New Examples/ICACHE/ICACHE_SRAM_Memory_Remap example</li>
+<li>Demonstrations: Fix gcc v9 compilation</li>
+</ul></li>
+<li>STM32L562E-DK
+<ul>
+<li>Applications/TFM: Various fixes and improvements</li>
+<li>Applications/mbedTLS/Crypto_Selftest: Fix issue with GCM accelerator</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<ul>
+<li>The STM32CubeL5 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains.</li>
+<li>The exhaustive list of projects is provided in this table (<a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>).</li>
+</ul>
+<p><br />
+</p>
+<p><strong>Projects</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Projects</strong></td>
+<td><strong>V1.4.0</strong></td>
+<td style="text-align: left;">see Projects Release note for details</td>
+<td style="text-align: left;"><a href="Projects/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<ul>
+<li><strong>Middleware</strong> updates
+<ul>
+<li>FreeRTOS V10.3.1
+<ul>
+<li>User application impact for CMSIS-OS V2 (Projects updated in package)</li>
+</ul></li>
+<li>MbedTLS v2.16.2 update</li>
+<li>USB Device</li>
+<li>USBPD Core and L5 Device</li>
+</ul></li>
+<li><strong>Utilities</strong> updates
+<ul>
+<li>GUI_INTERFACE and TRACER_EMB for UCPD applications and use of UCPD Monitor tool</li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<h2 id="components-vs-v1.3.1">Components vs V1.3.1</h2>
+<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<p><br />
+</p>
+<p><strong>Drivers</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cortex-M CMSIS</td>
+<td style="text-align: left;">V5.6.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/Apache-2.0">Apache-2.0</a></td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/docs/index.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L5xx CMSIS</td>
+<td style="text-align: left;">V1.0.4 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/Apache-2.0">Apache-2.0</a></td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/Device/ST/STM32L5xx/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L5xx HAL</td>
+<td style="text-align: left;">V1.0.4 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/STM32L5xx_HAL_Driver/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L552E-EV</td>
+<td style="text-align: left;">V1.0.3 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32L552E-EV/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32L562E-DK</td>
+<td style="text-align: left;">V1.1.1 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32L562E-DK/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L5xx_Nucleo</td>
+<td style="text-align: left;">V1.0.3 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32L5xx_Nucleo/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP Common</td>
+<td style="text-align: left;">V7.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/Common/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP cs42l51</td>
+<td style="text-align: left;">V2.0.2 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/cs42l51/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP ft6x06</td>
+<td style="text-align: left;">V2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ft6x06/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP hx8347i</td>
+<td style="text-align: left;">V2.0.2 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/hx8347i/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP iss66wvh8m8</td>
+<td style="text-align: left;">V2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/iss66wvh8m8/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP lsm6dso</td>
+<td style="text-align: left;">V1.3.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/lsm6dso/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP mfxstm32l152</td>
+<td style="text-align: left;">V3.0.3 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mfxstm32l152/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP mx25lm51245g</td>
+<td style="text-align: left;">V2.0.5 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mx25lm51245g/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP stmpe811</td>
+<td style="text-align: left;">V3.0.1 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/stmpe811/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP st7789h2</td>
+<td style="text-align: left;">V2.0.2 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/st7789h2/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Middlewares</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32 USB Device Library</td>
+<td style="text-align: left;">V2.7.1 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USB_Device_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 USBPD Core Library</td>
+<td style="text-align: left;">V3.3.0 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Core/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32 USBPD Device Library</td>
+<td style="text-align: left;">L5 V4.0.0 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 TouchSensing Library</td>
+<td style="text-align: left;">V2.2.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_TouchSensing_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FatFS R0.12c ST modified 20191011</td>
+<td style="text-align: left;">R0.12c</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/00history.txt">FatFS release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20191011</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FreeRTOS</td>
+<td style="text-align: left;">V10.3.1 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/MIT">MIT</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/readme.txt">FreeRTOS release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20200831 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mbedTLS ST modified 20200825</td>
+<td style="text-align: left;">V2.16.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/Apache-2.0">Apache-2.0</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20200825 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mbed-crypto ST modified 20200612</td>
+<td style="text-align: left;">V1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/Apache-2.0">Apache-2.0</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20200612</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mcuboot ST modified 20200825</td>
+<td style="text-align: left;">V1.5.0.1-cypress</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/Apache-2.0">Apache-2.0</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mcuboot/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20200825</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mcuboot/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trustedfirmware ST modified 20200622</td>
+<td style="text-align: left;">TF-Mv1.0-RC2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/trustedfirmware/readme.rst">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20200622</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/trustedfirmware/st_readme.txt">ST release notes</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Utilities</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">lcd</td>
+<td style="text-align: left;">V2.0.1 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Utilities/lcd/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fonts</td>
+<td style="text-align: left;">V2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Utilities/Fonts/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUI_INTERFACE</td>
+<td style="text-align: left;">V1.13.0 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Utilities/GUI_INTERFACE/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRACER_EMB</td>
+<td style="text-align: left;">V1.6.0 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;"><a href="Utilities/TRACER_EMB/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution from Flash memory and external memories, and reach the maximum performance.</li>
+<li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
+</ul>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 minimum + ST-Link
+<ul>
+<li>Projects compilation verified with V8.50.5</li>
+</ul></li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27 minimum (ARM Compiler 6 (“AC5-like Warnings” selected))
+<ul>
+<li>Projects compilation verified with V5.31</li>
+</ul></li>
+<li>STM32CubeIDE V1.3.0 minimum (gcc 7_2018_q2_update)
+<ul>
+<li>Projects compilation verified with STM32CubeIDE V1.6.0 (gcc 9_2020-q2_update)</li>
+</ul></li>
+</ul>
+<h2 id="supported-devices-and-hw-boards">Supported Devices and HW boards</h2>
+<ul>
+<li>STM32L552xx/STM32L562xx devices</li>
+<li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
+<li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
+<li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
+</ul>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<ul>
+<li>This release is compatible with the previous versions</li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li><p>STM32CubeMX V6.2.0</p></li>
+<li>STM32CubeProgrammer V2.4.0
+<ul>
+<li>This tool shall be used to enable the security on the devices (TZEN=1)</li>
+<li>For TrustZone projects, to match the CMSIS Device Template partition_stm32l552xx.h/partition_stm32l562xx.h for SAU declaration and secure project examples Flash configuration, please set the User Option bytes as follows before download and execution:
+<ul>
+<li>TZEN=1</li>
+<li>DBANK=1</li>
+<li>SECWM1_STRT=0x0 SECWM1_PEND=0x7F meaning all 128 pages of Internal Flash Bank1 set as secure</li>
+<li>SECWM2_STRT=0x1 SECWM1_PEND=0x0 meaning no page of Flash Bank2 set as secure, hence Bank2 non-secure</li>
+</ul></li>
+<li>For other projects with no TrustZone, please set the User Option Bytes as follows before download and execution:
+<ul>
+<li>TZEN=0</li>
+<li>DBANK=1</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.1 / 18-September-2020</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <p><strong>Patch release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>Middlewares updates: mcuboot is provided with exe file digitally signed by ST</li>
 </ul>
-<h2 id="contents">Contents</h2>
+<h2 id="contents-1">Contents</h2>
 <ul>
 <li><strong>Middlewares</strong> updates
 <ul>
@@ -357,32 +913,32 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes">Notes</h2>
+<h2 id="notes-1">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations">Known Limitations</h2>
+<h2 id="known-limitations-1">Known Limitations</h2>
 <ul>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 minimum + ST-Link</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27 minimum</li>
 <li>STM32CubeIDE V1.3.0 minimum</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-1">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility">Backward Compatibility</h2>
+<h2 id="backward-compatibility-1">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies">Dependencies</h2>
+<h2 id="dependencies-1">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.4.0
 <ul>
@@ -407,7 +963,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.0 / 26-June-2020</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-2">Main Changes</h2>
 <p><strong>Fourth release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>CMSIS 5.6.0 (updated DSP libraries)</li>
@@ -417,7 +973,7 @@
 <li>TFM/SBSFU applications updates (crypto scheme with FW encryption, single image and external flash support)</li>
 <li>Several corrections applied to provide project examples generated from STM32CubeMX</li>
 </ul>
-<h2 id="contents-1">Contents</h2>
+<h2 id="contents-2">Contents</h2>
 <ul>
 <li><strong>CMSIS</strong> updates
 <ul>
@@ -924,32 +1480,32 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-1">Notes</h2>
+<h2 id="notes-2">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-1">Known Limitations</h2>
+<h2 id="known-limitations-2">Known Limitations</h2>
 <ul>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 minimum + ST-Link</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27 minimum</li>
 <li>STM32CubeIDE V1.3.0 minimum</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-1">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-2">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies-1">Dependencies</h2>
+<h2 id="dependencies-2">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.4.0
 <ul>
@@ -974,7 +1530,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.2.0 / 12-February-2020</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-3">Main Changes</h2>
 <p><strong>Third release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>CMSIS Device / HAL / LL Drivers updates</li>
@@ -982,7 +1538,7 @@
 <li>SBSFU application projects added for NUCLEO-L552ZE-Q</li>
 <li>New TrustZone projects for STM32L562E-DK</li>
 </ul>
-<h2 id="contents-2">Contents</h2>
+<h2 id="contents-3">Contents</h2>
 <ul>
 <li><strong>CMSIS Device</strong> updates
 <ul>
@@ -1336,17 +1892,17 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-2">Notes</h2>
+<h2 id="notes-3">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-2">Known Limitations</h2>
+<h2 id="known-limitations-3">Known Limitations</h2>
 <ul>
 <li>Projects partially available for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 but not preventing to run and debug.</li>
 <li>STM32L562E-DK demonstration firmware not available</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link
 <ul>
@@ -1366,18 +1922,18 @@
 </ul></li>
 <li>STM32CubeIDE V1.3.0</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-2">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-3">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-2">Backward Compatibility</h2>
+<h2 id="backward-compatibility-3">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies-2">Dependencies</h2>
+<h2 id="dependencies-3">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.3.0
 <ul>
@@ -1402,7 +1958,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.1.0 / 06-January-2020</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <p><strong>Second release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>TFM application (STM32L562E-DK)
@@ -1412,7 +1968,7 @@
 </ul></li>
 <li>More MDK-ARM and STM32CubeIDE projects</li>
 </ul>
-<h2 id="contents-3">Contents</h2>
+<h2 id="contents-4">Contents</h2>
 <ul>
 <li>CMSIS Device STM32L5xx for STM32L552xx/STM32L562xx
 <ul>
@@ -1702,16 +2258,16 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-3">Notes</h2>
+<h2 id="notes-4">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-3">Known Limitations</h2>
+<h2 id="known-limitations-4">Known Limitations</h2>
 <ul>
 <li>Projects partially available for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
 <li>STM32L562E-DK demonstration firmware not available</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link
 <ul>
@@ -1731,18 +2287,18 @@
 </ul></li>
 <li>STM32CubeIDE V1.2.0</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-3">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-4">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-3">Backward Compatibility</h2>
+<h2 id="backward-compatibility-4">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies-3">Dependencies</h2>
+<h2 id="dependencies-4">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.3.0
 <ul>
@@ -1770,9 +2326,9 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <p><strong>First release of STM32CubeL5 Firmware Package</strong></p>
-<h2 id="contents-4">Contents</h2>
+<h2 id="contents-5">Contents</h2>
 <ul>
 <li>CMSIS Device STM32L5xx for STM32L552xx/STM32L562xx
 <ul>
@@ -2061,16 +2617,16 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-4">Notes</h2>
+<h2 id="notes-5">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-4">Known Limitations</h2>
+<h2 id="known-limitations-5">Known Limitations</h2>
 <ul>
 <li>Projects partially available for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
 <li>STM32L562E-DK demonstration firmware not available</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link
 <ul>
@@ -2090,18 +2646,18 @@
 </ul></li>
 <li>STM32CubeIDE V1.2.0</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-4">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-5">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-4">Backward Compatibility</h2>
+<h2 id="backward-compatibility-5">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies-4">Dependencies</h2>
+<h2 id="dependencies-5">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.3.0
 <ul>

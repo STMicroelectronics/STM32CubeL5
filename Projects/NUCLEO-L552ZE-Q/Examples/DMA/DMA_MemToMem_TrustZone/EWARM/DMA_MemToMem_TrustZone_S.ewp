@@ -1085,9 +1085,12 @@
     <name>Drivers</name>
     <group>
       <name>BSP</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L5xx_Nucleo\stm32l5xx_nucleo.c</name>
-      </file>
+      <group>
+        <name>STM32L5xx_Nucleo</name>
+        <file>
+          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L5xx_Nucleo/stm32l5xx_nucleo.c</name>
+        </file>
+      </group>
     </group>
     <group>
       <name>CMSIS</name>
@@ -1097,6 +1100,9 @@
     </group>
     <group>
       <name>STM32L5xx_HAL_Driver</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_gtzc.c</name>
+      </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal.c</name>
       </file>
@@ -1141,9 +1147,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_cortex.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_gtzc.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Src\stm32l5xx_hal_icache.c</name>

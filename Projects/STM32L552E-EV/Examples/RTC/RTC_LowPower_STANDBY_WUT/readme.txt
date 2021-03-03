@@ -54,8 +54,11 @@ One of the below scenario can occur :
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -79,7 +82,11 @@ RTC, Wake Up, wakeuptimer, Standby, LSE
     evaluation board and can be easily tailored to any other supported device
     and development board.
 
- @par How to use it ?
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
+
+@par How to use it ?
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain

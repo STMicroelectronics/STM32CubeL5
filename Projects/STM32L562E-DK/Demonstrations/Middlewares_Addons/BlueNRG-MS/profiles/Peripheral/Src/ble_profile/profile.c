@@ -624,7 +624,7 @@ tBleStatus BLE_Profile_Unregister_Profile ( tProfileInterfaceContext * profileCo
     return (BLE_STATUS_FAILED);
   }
   
-  /* here the profile context cant be removed directly from the registered list, because at 
+  /* here the profile context cannot be removed directly from the registered list, because at 
   * the moment the profile call this function, the same list is being used for notification 
   * processing. hence removing current profile context will cause problem. */
   list_remove_node ((tListNode *)profileContext);
@@ -645,7 +645,7 @@ tBleStatus BLE_Profile_Vote_For_Advertisable_State(tProfileInterfaceContext* pro
   /* check that requesting profile has not voted before for Advertisable state */
   if (profileContext->voteForAdvertisableState != 0)
   {
-    /* the profile has alreadt voted for advertisable state */
+    /* the profile has already voted for advertisable state */
     return (BLE_STATUS_FAILED);
   }
   
@@ -897,7 +897,7 @@ void HCI_Event_CB(void *pckt)
           if(gMainProfileCtxt.bleProfileMainState == BLE_PROFILE_STATE_CONNECTABLE) 
           {
             PROFILE_MESG_DBG ( profiledbgfile, "state\n");
-            /* check comand status */
+            /* check command status */
             if (cc->status == BLE_STATUS_SUCCESS)
             {
               PROFILE_MESG_DBG ( profiledbgfile, "BLE_STATUS_SUCCESS\n");
@@ -1107,7 +1107,7 @@ void HCI_Event_CB(void *pckt)
         {
           PROFILE_MESG_DBG ( profiledbgfile, "EVT_BLUE_GATT_PROCEDURE_TIMEOUT \n");
           /* when a gatt procedure timeout occurs no more gatt pdus can be exchanged
-          * since profiles are hugely dependant on GATT we can as well start a 
+          * since profiles are hugely dependent on GATT we can as well start a 
           * disconnection here
           */ 
           BLE_Profile_Disconnect();

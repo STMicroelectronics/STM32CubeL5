@@ -31,12 +31,15 @@ firmware (TFM) middleware and the mbed-crypto middleware.
 
 It has to be compiled first.
 
-In order to ease the developement process, a prebuild command and postbuild command are
+In order to ease the development process, a prebuild command and postbuild command are
 integrated in each toolchain project.
 The prebuild command is in charge of preparing the scatter file according to common
 flash layout description in linker folder.
 The postbuild command is in charge of preparing the board programming scripts and
 the images preparation scripts according to the flash layout and crypto scheme.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

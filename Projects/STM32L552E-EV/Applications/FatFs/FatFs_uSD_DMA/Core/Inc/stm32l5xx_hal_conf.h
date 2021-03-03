@@ -22,7 +22,6 @@
  extern "C" {
 #endif
 
-/*#include "main.h" */
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
@@ -40,7 +39,6 @@
 #define HAL_EXTI_MODULE_ENABLED
 /*#define HAL_FDCAN_MODULE_ENABLED   */
 /*#define HAL_HASH_MODULE_ENABLED   */
-#define HAL_ICACHE_MODULE_ENABLED
 /*#define HAL_IRDA_MODULE_ENABLED   */
 /*#define HAL_IWDG_MODULE_ENABLED   */
 /*#define HAL_LPTIM_MODULE_ENABLED   */
@@ -63,7 +61,6 @@
 /*#define HAL_TIM_MODULE_ENABLED   */
 /*#define HAL_TSC_MODULE_ENABLED   */
 #define HAL_UART_MODULE_ENABLED
-/*#define HAL_UCPD _MODULE_ENABLED   */
 /*#define HAL_USART_MODULE_ENABLED   */
 /*#define HAL_WWDG_MODULE_ENABLED   */
 #define HAL_GPIO_MODULE_ENABLED
@@ -164,12 +161,9 @@
 /**
   * @brief This is the HAL system configuration section
   */
-
 #define  VDD_VALUE					  3300UL /*!< Value of VDD in mv */
-#define  TICK_INT_PRIORITY            0UL    /*!< tick interrupt priority */
+#define TICK_INT_PRIORITY  ((1UL<<__NVIC_PRIO_BITS) - 1UL)  /*!< tick interrupt priority (lowest by default) */
 #define  USE_RTOS                     0U     
-#define  PREFETCH_ENABLE              0U
-#define  INSTRUCTION_CACHE_ENABLE     0U
 
 /* ########################## Assert Selection ############################## */
 /**
@@ -189,21 +183,23 @@
   *        for each PPP peripheral).
   */
 #define USE_HAL_ADC_REGISTER_CALLBACKS        0U
-#define USE_HAL_CAN_REGISTER_CALLBACKS        0U
 #define USE_HAL_COMP_REGISTER_CALLBACKS       0U
 #define USE_HAL_CRYP_REGISTER_CALLBACKS       0U
 #define USE_HAL_DAC_REGISTER_CALLBACKS        0U
 #define USE_HAL_DFSDM_REGISTER_CALLBACKS      0U
+#define USE_HAL_FDCAN_REGISTER_CALLBACKS      0U
 #define USE_HAL_HASH_REGISTER_CALLBACKS       0U
 #define USE_HAL_I2C_REGISTER_CALLBACKS        0U
 #define USE_HAL_IRDA_REGISTER_CALLBACKS       0U
 #define USE_HAL_LPTIM_REGISTER_CALLBACKS      0U
 #define USE_HAL_MMC_REGISTER_CALLBACKS        0U
+#define USE_HAL_NAND_REGISTER_CALLBACKS       0U
+#define USE_HAL_NOR_REGISTER_CALLBACKS        0U
 #define USE_HAL_OPAMP_REGISTER_CALLBACKS      0U
 #define USE_HAL_OSPI_REGISTER_CALLBACKS       0U
 #define USE_HAL_OTFDEC_REGISTER_CALLBACKS     0U
 #define USE_HAL_PCD_REGISTER_CALLBACKS        0U
-#define USE_HAL_QSPI_REGISTER_CALLBACKS       0U
+#define USE_HAL_PKA_REGISTER_CALLBACKS        0U
 #define USE_HAL_RNG_REGISTER_CALLBACKS        0U
 #define USE_HAL_RTC_REGISTER_CALLBACKS        0U
 #define USE_HAL_SAI_REGISTER_CALLBACKS        0U
@@ -211,6 +207,7 @@
 #define USE_HAL_SMARTCARD_REGISTER_CALLBACKS  0U
 #define USE_HAL_SMBUS_REGISTER_CALLBACKS      0U
 #define USE_HAL_SPI_REGISTER_CALLBACKS        0U
+#define USE_HAL_SRAM_REGISTER_CALLBACKS       0U
 #define USE_HAL_TIM_REGISTER_CALLBACKS        0U
 #define USE_HAL_TSC_REGISTER_CALLBACKS        0U
 #define USE_HAL_UART_REGISTER_CALLBACKS       0U
@@ -224,7 +221,17 @@
  * Deactivated: CRC code cleaned from driver
  */
 
-#define USE_SPI_CRC                   0U
+#define USE_SPI_CRC                   1U
+
+/* ################## CRYP peripheral configuration ########################## */
+
+#define USE_HAL_CRYP_SUSPEND_RESUME   1U
+
+/* ################## SDMMC peripheral configuration ######################### */
+
+#define USE_SD_TRANSCEIVER            0U
+
+
 
 /* Includes ------------------------------------------------------------------*/
 /**
@@ -391,10 +398,6 @@
   #include "stm32l5xx_hal_uart.h"
 #endif /* HAL_UART_MODULE_ENABLED */
 
-#ifdef HAL_UCPD_MODULE_ENABLED
-  #include "stm32l5xx_hal_ucpd.h"
-#endif /* HAL_UCPD_MODULE_ENABLED */
-
 #ifdef HAL_USART_MODULE_ENABLED
   #include "stm32l5xx_hal_usart.h"
 #endif /* HAL_USART_MODULE_ENABLED */
@@ -425,5 +428,6 @@
 #endif
 
 #endif /* STM32L5xx_HAL_CONF_H */
+
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

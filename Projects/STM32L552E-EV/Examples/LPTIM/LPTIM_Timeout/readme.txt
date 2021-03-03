@@ -47,6 +47,9 @@ Once the system is woken up it remains in run mode. The led keeps toggling each 
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timer, Low Power Timer, Wake up, Stop mode, LSI, Run mode
@@ -74,6 +77,10 @@ Timer, Low Power Timer, Wake up, Stop mode, LSI, Run mode
   - Connect an external trigger (ETR) to PC.03 (pin 30 in CN6 connector). 
     If the trigger is higher than 1Hz, the counter is regularly reset, the system stays in STOP mode.
     If the trigger is lower than 1Hz, the counter expires and the system is woken up.
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

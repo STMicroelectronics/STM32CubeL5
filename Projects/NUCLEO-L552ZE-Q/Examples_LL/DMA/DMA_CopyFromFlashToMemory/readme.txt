@@ -45,6 +45,9 @@ NUCLEO-L552ZE-Q C-02's LED1 can be used to monitor the transfer status:
 - LED1 is turn on if DMA data transferred consistency.
 - LED1 is blinking every 1 sec in case of error.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, DMA, System, Data Transfer, Memory to memory, Channel, Flash, RAM

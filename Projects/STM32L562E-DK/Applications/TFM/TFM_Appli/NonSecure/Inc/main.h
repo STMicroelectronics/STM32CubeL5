@@ -34,9 +34,9 @@
 #define BUTTON_PUSHED()      (BSP_PB_GetState(BUTTON_USER) == GPIO_PIN_SET)
 
 
-/* Exported macro ------------------------------------------------------------*/
+/* Exported macros -----------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-/* Exported varaible --------------------------------------------------------*/
+/* Exported variables --------------------------------------------------------*/
 extern uint32_t TestNumber;
 #endif /* MAIN_H */
 

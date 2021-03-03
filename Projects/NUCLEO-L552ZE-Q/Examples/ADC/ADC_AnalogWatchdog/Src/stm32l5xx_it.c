@@ -61,6 +61,8 @@ extern ADC_HandleTypeDef    AdcHandle;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef hdma_adc1;
+extern ADC_HandleTypeDef hadc1;
 extern DAC_HandleTypeDef hdac1;
 /* USER CODE BEGIN EV */
 
@@ -203,6 +205,34 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles DMA1 channel1 global interrupt.
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc1);
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles ADC1 and ADC2 interrupts.
+  */
+void ADC1_2_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC1_2_IRQn 0 */
+
+  /* USER CODE END ADC1_2_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc1);
+  /* USER CODE BEGIN ADC1_2_IRQn 1 */
+
+  /* USER CODE END ADC1_2_IRQn 1 */
+}
+
+/**
   * @brief This function handles DAC1 interrupt.
   */
 void DAC_IRQHandler(void)
@@ -226,29 +256,6 @@ void EXTI13_IRQHandler(void)
 {
   HAL_GPIO_EXTI_IRQHandler(BUTTON_USER_PIN);
 }
-
-
-/**
-  * @brief  This function handles ADC interrupt request.
-  * @param  None
-  * @retval None
-  */
-void ADCx_IRQHandler(void)
-{
-  HAL_ADC_IRQHandler(&AdcHandle);
-}
-
-/**
-* @brief  This function handles DMA interrupt request.
-* @param  None
-* @retval None
-*/
-void ADCx_DMA_IRQHandler(void)
-{
-  HAL_DMA_IRQHandler(AdcHandle.DMA_Handle);
-}
-
-
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

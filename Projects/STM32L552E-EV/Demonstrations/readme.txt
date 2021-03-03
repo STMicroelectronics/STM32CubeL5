@@ -80,7 +80,7 @@ Below you find an overview of the different modules present in the demonstration
  + Images viewer
  --------------
  The Image viewer module allows to display BMP pictures read from the USER folder of the
- the connected SD card. Navigation accross the images is done with Joystick RIGHT/LEFT keys.
+ the connected SD card. Navigation across the images is done with Joystick RIGHT/LEFT keys.
  SEL key exists the module.
 
  + Calendar
@@ -100,6 +100,9 @@ Below you find an overview of the different modules present in the demonstration
 
 @note The application needs to ensure that the HAL time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -121,6 +124,10 @@ Demonstration, Audio Player, Audio Recorder, Calendar, File Browser,  Measuremen
    JP15 : 1-2 (VDD)     / JP16 : 5V-STLK       / JP17 : 1-2 (RIGHT)   / JP18 : OPENED
    JP19 : OPENED        / JP20 : OPENED        / JP21 : OPENED        / JP22 : OPENED
    JP23 : OPENED        / CN12 : OPENED        / CN23 : OPENED
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ?
 

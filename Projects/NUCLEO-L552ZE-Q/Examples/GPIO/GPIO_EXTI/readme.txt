@@ -44,6 +44,9 @@ In this example, HCLK is configured at 110 MHz.
 @note The example needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, GPIO, EXTI, Output, Alternate function, Push-pull, Toggle

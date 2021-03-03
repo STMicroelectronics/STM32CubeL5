@@ -39,6 +39,9 @@ above the target threshold, LED4 starts blinking again.
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Power, PWR, EXTI, PVD, Interrupt, Wakeup, External reset
@@ -67,6 +70,10 @@ Power, PWR, EXTI, PVD, Interrupt, Wakeup, External reset
     - Power Supply can be adjusted thanks to the potentiometer VDD_ADJ/RV3 [1.65V to 3.61V]
     - LED4 (GREEN) connected to PB.03 pin indicates the behavior of
       the test software as explained above.
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

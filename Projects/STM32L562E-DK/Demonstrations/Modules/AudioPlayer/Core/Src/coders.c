@@ -59,7 +59,7 @@ int8_t CODERS_SelectDecoder(Decoder_TypeDef* pDecoderStruct, int8_t ch)
     pDecoderStruct->Decoder_GetNbBits = NULL;
     
     pDecoderStruct->Decoder_SetProgressTime = Mp3Process_DecSetProgressTime;
-    pDecoderStruct->Decoder_GetStreamLength = Mp3Process_GetStreamLenght;
+    pDecoderStruct->Decoder_GetStreamLength = Mp3Process_GetStreamLength;
     pDecoderStruct->Decoder_GetElapsedTime = Mp3Process_GetElapsedTime;
     pDecoderStruct->Decoder_VBRDetected = Mp3Process_VBRDetected;
     pDecoderStruct->PacketSize = MP3_PACKET_SZE;
@@ -84,7 +84,7 @@ int8_t CODERS_SelectDecoder(Decoder_TypeDef* pDecoderStruct, int8_t ch)
     pDecoderStruct->Decoder_GetNbChannels = WmaProcess_GetNbChannels;
     pDecoderStruct->Decoder_GetNbBits = NULL;
 
-    pDecoderStruct->Decoder_GetStreamLength = WmaProcess_GetStreamLenght;
+    pDecoderStruct->Decoder_GetStreamLength = WmaProcess_GetStreamLength;
     pDecoderStruct->Decoder_GetElapsedTime = WmaProcess_GetElapsedTime;
     pDecoderStruct->Decoder_VBRDetected = NULL;
     pDecoderStruct->PacketSize = WMA_PACKET_SZE;
@@ -109,7 +109,7 @@ int8_t CODERS_SelectDecoder(Decoder_TypeDef* pDecoderStruct, int8_t ch)
     pDecoderStruct->Decoder_GetNbBits = WavProcess_GetNbBits;
     
     pDecoderStruct->Decoder_SetProgressTime = WavProcess_DecSetProgressTime;
-    pDecoderStruct->Decoder_GetStreamLength = WavProcess_DecGetStreamLenght;
+    pDecoderStruct->Decoder_GetStreamLength = WavProcess_DecGetStreamLength;
     pDecoderStruct->Decoder_GetElapsedTime = WavProcess_DecGetElapsedTime;
     pDecoderStruct->Decoder_VBRDetected = NULL;
     pDecoderStruct->PacketSize = WAV_PACKET_SZE;
@@ -133,7 +133,7 @@ int8_t CODERS_SelectDecoder(Decoder_TypeDef* pDecoderStruct, int8_t ch)
     pDecoderStruct->Decoder_GetNbChannels = NULL;
     pDecoderStruct->Decoder_GetNbBits = NULL;
 
-    pDecoderStruct->Decoder_GetStreamLength = SpeexProcess_GetStreamLenght;
+    pDecoderStruct->Decoder_GetStreamLength = SpeexProcess_GetStreamLength;
     pDecoderStruct->Decoder_GetElapsedTime = SpeexProcess_GetElapsedTime;
     pDecoderStruct->Decoder_VBRDetected = NULL;
     pDecoderStruct->PacketSize = SPEEX_PACKET_SZE;
@@ -180,7 +180,7 @@ int8_t CODERS_SelectDecoder(Decoder_TypeDef* pDecoderStruct, int8_t ch)
     pDecoderStruct->Decoder_GetNbChannels = NULL;
     pDecoderStruct->Decoder_GetNbBits = NULL;
 
-    pDecoderStruct->Decoder_GetStreamLength = G726Process_GetStreamLenght;
+    pDecoderStruct->Decoder_GetStreamLength = G726Process_GetStreamLength;
     pDecoderStruct->Decoder_GetElapsedTime = G726Process_GetElapsedTime;
     pDecoderStruct->Decoder_VBRDetected = NULL;
     pDecoderStruct->PacketSize = G726_PACKET_SZE;
@@ -205,7 +205,7 @@ int8_t CODERS_SelectDecoder(Decoder_TypeDef* pDecoderStruct, int8_t ch)
     pDecoderStruct->Decoder_GetNbChannels = NULL;
     pDecoderStruct->Decoder_GetNbBits = NULL;
 
-    pDecoderStruct->Decoder_GetStreamLength = AdpcmProcess_GetStreamLenght;
+    pDecoderStruct->Decoder_GetStreamLength = AdpcmProcess_GetStreamLength;
     pDecoderStruct->Decoder_GetElapsedTime = AdpcmProcess_GetElapsedTime;
     pDecoderStruct->Decoder_VBRDetected = NULL;
     pDecoderStruct->PacketSize = ADPCM_PACKET_SZE;

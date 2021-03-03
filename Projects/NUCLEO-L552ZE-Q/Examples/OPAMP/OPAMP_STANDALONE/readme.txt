@@ -31,6 +31,9 @@ in this mode can be set externally (external gain setting mode).
    - Push the User Push button to alternatively switch from
      normal power mode to low power mode.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Analog, OPAMP, DAC, Standalone mode, Follower, Normal power mode, Low power mode
@@ -47,9 +50,9 @@ Analog, OPAMP, DAC, Standalone mode, Follower, Normal power mode, Low power mode
 
 @par Hardware and Software environment
 
-  - This example runs on STM32L552ZE devices.
+  - This example runs on STM32L552ZETxQ devices.
 
-  - This example has been tested with NUCLEO-L552ZE (144 pins) board and can be
+  - This example has been tested with NUCLEO-L552ZE-Q (144 pins) board and can be
     easily tailored to any other supported device and development board.
 
   - NUCLEO-L552ZE-Q (144 pins) Set-up

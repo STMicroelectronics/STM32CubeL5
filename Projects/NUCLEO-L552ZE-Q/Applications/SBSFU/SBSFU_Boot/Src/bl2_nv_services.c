@@ -13,7 +13,7 @@
       write Non volatile Monothonic Counters.
 
       (#) NVCNT initialization functions:
-               (++) Initialize NVCNT using tfm_plat_init_nv_counter fucntion,
+               (++) Initialize NVCNT using tfm_plat_init_nv_counter function,
          it must be performed at system start up.
          At first boot, on a virgin flash, the NV area is formatted and
          HUK seed (32bits) is randomly generated and written in NV area.
@@ -112,7 +112,7 @@ static uint32_t uwAddressNextWrite = PAGE_HEADER_SIZE;     /*!< Initialize write
 /*!< Get element value from id, data and crc values */
 #define NVCNT_ELEMENT_VALUE(__ID__,__DATA__,__CRC__) (((NVCNT_ELEMENT_TYPE)(__DATA__) << NVCNT_DATA_SHIFT)\
                                                       | (__CRC__) << NVCNT_CRC_SHIFT | (__ID__))
-#define CRC_POLYNOMIAL_LENGTH   LL_CRC_POLYLENGTH_16B /* CRC polynomial lenght 16 bits */
+#define CRC_POLYNOMIAL_LENGTH   LL_CRC_POLYLENGTH_16B /* CRC polynomial length 16 bits */
 #define CRC_POLYNOMIAL_VALUE    0x8005U /* Polynomial to use for CRC calculation */
 #define NVCNT_ELEMENT_TYPE uint64_t
 #define NVCNT_ELEMENT_SIZE sizeof(NVCNT_ELEMENT_TYPE)
@@ -170,10 +170,10 @@ enum tfm_plat_err_t tfm_plat_init_nv_counter(void)
     /* page is fully erase */
     /* no power down/reset is expected during this 1st initialization  */
     /* a regression is required to be able to restart the initialization */
-    /*  uncomplete initialization is detected in step 1, and bl2 will */
+    /*  incomplete initialization is detected in step 1, and bl2 will */
     /*  not launch installed image*/
 
-    /* Delay to avoid voltage rebounce effect (power down) at start up
+    /* Delay to avoid voltage rebound effect (power down) at start up
        during BL2 NV area initialization period */
     HAL_Delay(500);
 
@@ -206,18 +206,18 @@ enum tfm_plat_err_t tfm_plat_init_nv_counter(void)
     BOOT_LOG_ERR("Wrong BL2 NV Area header");
     return TFM_PLAT_ERR_SYSTEM_ERR;
   }
-  BOOT_LOG_INF("Checking BL2 NV Counter consitency");
+  BOOT_LOG_INF("Checking BL2 NV Counter consistency");
   if (tfm_plat_read_nv_counter(PLAT_NV_COUNTER_3, sizeof(counter_value),
                                (uint8_t *)&counter_value) != TFM_PLAT_ERR_SUCCESS)
   {
-    BOOT_LOG_ERR("NV Counter Not consitent %d", PLAT_NV_COUNTER_3);
+    BOOT_LOG_ERR("NV Counter Not consistent %d", PLAT_NV_COUNTER_3);
     return TFM_PLAT_ERR_SYSTEM_ERR;
   }
   BOOT_LOG_INF("Consistent BL2 NV Counter %d  = 0x%x", PLAT_NV_COUNTER_3, counter_value);
   if (tfm_plat_read_nv_counter(PLAT_NV_COUNTER_4, sizeof(counter_value),
                                (uint8_t *)&counter_value) != TFM_PLAT_ERR_SUCCESS)
   {
-    BOOT_LOG_ERR("NV Counter Not consitent %d", PLAT_NV_COUNTER_4);
+    BOOT_LOG_ERR("NV Counter Not consistent %d", PLAT_NV_COUNTER_4);
     return TFM_PLAT_ERR_SYSTEM_ERR;
   }
   BOOT_LOG_INF("Consistent BL2 NV Counter %d  = 0x%x", PLAT_NV_COUNTER_4, counter_value);
@@ -252,7 +252,7 @@ enum tfm_plat_err_t tfm_plat_init_nv_counter(void)
   }
 
   /*********************************************************************/
-  /* Step 2 : Check consistancy of PLAT_NV_COUNTER_3 counter history   */
+  /* Step 2 : Check consistency of PLAT_NV_COUNTER_3 counter history   */
   /*********************************************************************/
   return TFM_PLAT_ERR_SUCCESS;
 }
@@ -263,7 +263,7 @@ enum tfm_plat_err_t tfm_plat_init_nv_counter(void)
   * @param  CounterId to be written
   * @param  Data 32bits data to be written
   * @retval enum tfm_plat_err_t
-  *           TFM_PLAT_ERR_SUCCESS on write sucessfully done.
+  *           TFM_PLAT_ERR_SUCCESS on write successfully done.
               TFM_PLAT_ERR_MAX_VALUE when max updateable value written
   */
 enum tfm_plat_err_t tfm_plat_set_nv_counter(enum tfm_nv_counter_t CounterId,
@@ -318,7 +318,7 @@ enum tfm_plat_err_t tfm_plat_set_nv_counter(enum tfm_nv_counter_t CounterId,
   * @warning This function is not reentrant
   * @param  CounterId to be written
    * @retval enum tfm_plat_err_t
-  *           TFM_PLAT_ERR_SUCCESS on write sucessfully done.
+  *           TFM_PLAT_ERR_SUCCESS on write successfully done.
               TFM_PLAT_ERR_MAX_VALUE when max updateable value written
   */
 

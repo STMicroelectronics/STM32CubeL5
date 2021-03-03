@@ -334,7 +334,7 @@ void USBPD_DPM_SetNotification_GUI(GUI_NOTIFICATION_FORMAT_SEND PtrFormatSend, G
 }
 
 /**
-  * @brief  User delay implementation which is OS dependant
+  * @brief  User delay implementation which is OS dependent
   * @param  Time time in ms
   * @retval None
   */
@@ -449,7 +449,7 @@ void USBPD_DPM_UserCableDetection(uint8_t PortNum, USBPD_CAD_EVENT State)
       {
         /* display the error */
         DEMO_PostMMIMessage(DEMO_MMI_ACTION_ERROR_POWER);
-        /* Should not occurr */
+        /* Should not occur */
         USBPD_DPM_WaitForTime(6000);
         NVIC_SystemReset();
       }
@@ -479,7 +479,7 @@ void USBPD_DPM_UserCableDetection(uint8_t PortNum, USBPD_CAD_EVENT State)
     {
       if (USBPD_OK != USBPD_PWR_IF_VBUSDisable(PortNum))
       {
-        /* Should not occurr */
+        /* Should not occur */
         while(1);
       }
     }
@@ -1569,7 +1569,6 @@ void USBPD_DPM_ExtendedMessageReceived(uint8_t PortNum, USBPD_ExtendedMsg_TypeDe
 }
 #endif /* USBPD_REV30_SUPPORT */
 
-#ifdef _ERROR_RECOVERY
 /**
   * @brief  DPM callback to allow PE to enter ERROR_RECOVERY state.
   * @param  PortNum Port number
@@ -1585,7 +1584,6 @@ void USBPD_DPM_EnterErrorRecovery(uint8_t PortNum)
   /* Inform CAD to enter recovery mode */
   USBPD_CAD_EnterErrorRecovery(PortNum);
 }
-#endif /* _ERROR_RECOVERY */
 
 /**
   * @brief  DPM callback used to know user choice about Data Role Swap.
@@ -1970,7 +1968,7 @@ USBPD_StatusTypeDef USBPD_DPM_RequestGetSinkCapabilityExt(uint8_t PortNum)
 }
 
 /**
-  * @brief  Request the PE to get a manufacturer infor
+  * @brief  Request the PE to get the manufacturer info
   * @param  PortNum The current port number
   * @param  SOPType SOP Type
   * @param  pManuInfoData Pointer on manufacturer info based on @ref USBPD_GMIDB_TypeDef
@@ -2472,7 +2470,7 @@ uint32_t USBPD_DPM_SNK_EvaluateMatchWithSRCPDO(uint8_t PortNum, uint32_t SrcPDO,
                 snkmaxvoltage100mv = snkpdo.SRCSNKAPDO.MaxVoltageIn100mV;
                 snkmaxcurrent50ma = snkpdo.SRCSNKAPDO.MaxCurrentIn50mAunits;
 
-                /* Match if voltage matchs with the APDO voltage range */
+                /* Match if voltage matches with the APDO voltage range */
                 if ((PWR_DECODE_100MV(snkminvoltage100mv) <= (*PtrRequestedVoltage))
                  && ((*PtrRequestedVoltage) <= PWR_DECODE_100MV(snkmaxvoltage100mv))
                  && (snkmaxcurrent50ma <= srcmaxcurrent50ma))

@@ -180,7 +180,7 @@ static int ccm_auth_crypt( mbedtls_ccm_context *ctx, int mode, size_t length,
     unsigned char *b1_padded_addr = NULL;            /* Formatting of B1   */
     unsigned char *b1_aligned_addr = NULL;
     size_t b1_length;                                /* B1 with padding    */
-    uint8_t b1_padding;                              /* B1 word alignement */
+    uint8_t b1_padding;                              /* B1 word alignment  */
 
     __ALIGN_BEGIN uint8_t mac[16]      __ALIGN_END;  /* temporary mac      */
 
@@ -259,7 +259,7 @@ static int ccm_auth_crypt( mbedtls_ccm_context *ctx, int mode, size_t length,
         b1_padding = ((add_len + H_LENGTH) % 4);
         b1_length = add_len + H_LENGTH + b1_padding;
 
-         /* reserve extra bytes to deal with 4-bytes memory alignement */
+         /* reserve extra bytes to deal with 4-bytes memory alignment */
         b1_padded_addr =
             mbedtls_calloc( 1, b1_length + 3);
 

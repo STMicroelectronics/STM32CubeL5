@@ -23,7 +23,7 @@
 How to decrypt data located on the OCTOSPI external flash using the OTFDEC peripheral.
 Decrypted information is displayed on the debugger Terminal I/O.
 
-This projects is configured for STM32L562xx devices using STM32CubeL5 HAL and running on
+This project is configured for STM32L562xx devices using STM32CubeL5 HAL and running on
 STM32L562E-DK board from STMicroelectronics mounted with an STM32L562QE-Q chip.
 
 At the beginning of the main program the HAL_Init() function is called to reset
@@ -54,6 +54,9 @@ Otherwise, the red LED is turned on.
 
 @note The example needs to ensure that the SysTick time base is always set to 1 millisecond
 to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

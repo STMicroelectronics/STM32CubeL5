@@ -76,7 +76,10 @@ NUCLEO-L552ZE-Q C-02 board LED is be used to monitor the program execution statu
    result.
     - Toggling: "On" upon conversion completion (full DMA buffer filled)
                 "Off" upon half conversion completion (half DMA buffer filled)
- - Error: In case of error, LED1 is toggling twice at a frequency of 1Hz.
+ - Error: In case of error, LED1 is toggling at a frequency of 1Hz.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

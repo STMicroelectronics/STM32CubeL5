@@ -16,7 +16,7 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  */  
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stmpe811_reg.h"
@@ -27,19 +27,19 @@
 
 /** @addtogroup Components
   * @{
-  */ 
-  
+  */
+
 /** @addtogroup STMPE811
   * @{
-  */   
+  */
 
 /** @addtogroup STMPE811_Exported_Functions
   * @{
   */
 /*******************************************************************************
 * Function Name : stmpe811_read_reg
-* Description   : Generic Reading function. It must be fullfilled with either
-*                 I2C or SPI reading functions
+* Description   : Generic Reading function. It must be fulfilled with either
+*                 I2C or SPI reading functions.
 * Input         : Register Address, length of buffer
 * Output        : Data Read
 *******************************************************************************/
@@ -50,8 +50,8 @@ int32_t stmpe811_read_reg(stmpe811_ctx_t *ctx, uint16_t reg, uint8_t* data, uint
 
 /*******************************************************************************
 * Function Name : stmpe811_write_reg
-* Description   : Generic Writing function. It must be fullfilled with either
-*                 I2C or SPI writing function
+* Description   : Generic Writing function. It must be fulfilled with either
+*                 I2C or SPI writing function.
 * Input         : Register Address, Data to be written, length of buffer
 * Output        : None
 *******************************************************************************/
@@ -63,18 +63,18 @@ int32_t stmpe811_write_reg(stmpe811_ctx_t *ctx, uint16_t reg, uint8_t* data, uin
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

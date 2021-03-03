@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_DMA/FatFs/App/app_fatfs.c
+  * @file    FatFs/FatFs_uSD_Standalone/FATFS/App/app_fatfs.c
   * @author  MCD Application Team
-  * @brief   FatFs_uSD_DMA application file
+  * @brief   FatFs_uSD_Standalone application file
   ******************************************************************************
   *
   * Copyright (c) 2019 STMicroelectronics. All rights reserved.

@@ -59,6 +59,9 @@ How to use the TIM peripheral to measure an external signal frequency.
       to have correct HAL operation.
 
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timer, DMA, Frequency, Input, Capture, External Signal, Measurement

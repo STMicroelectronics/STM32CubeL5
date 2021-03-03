@@ -29,6 +29,9 @@ On NUCLEO-L552ZE-Q C-02 board this IO is connected to LED1.
 
 In this example, HCLK is configured at 110 MHz.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, GPIO, Output, No pull, Speed, Push-pull, Toggle

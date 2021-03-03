@@ -62,7 +62,7 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN Private defines */
 #define LED_OK                     LED4
-#define LED_ERROR                  LED6
+#define LED_ERROR                  LED5
 #define APP_OK                     0
 #define APP_ERROR                  -1
 #define APP_SD_UNPLUGGED           -2

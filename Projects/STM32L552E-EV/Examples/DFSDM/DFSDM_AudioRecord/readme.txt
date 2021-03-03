@@ -66,8 +66,11 @@ on second half of playback buffer.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 
@@ -97,6 +100,10 @@ Audio, DFSDM, Audio record, Digital Microphone, Stereo, IMP34DT05TR, DMA, PDM, F
     - Make sure that nothing is plugged on CN24 connector.
     - Make sure that JP23 is in open state.
     - Plug headset on CN21 connector.
+
+@note Due to the sharing of some I/Os of STM32L552ZET6QU by multiple peripherals,
+      the following limitations apply in using the LED features:
+      The green LED I/O cannot be operated simultaneously with JTAG SWO
 
 @par How to use it ? 
 

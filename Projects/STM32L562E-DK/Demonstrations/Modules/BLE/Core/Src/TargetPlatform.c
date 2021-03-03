@@ -153,7 +153,7 @@ void InitTargetPlatform(void)
   /* Reset all the Target's Features */
   memset(&TargetBoardFeatures, 0, sizeof(TargetFeatures_t));
 
-  /* Discovery and Intialize all the MEMS Target's Features */
+  /* Discovery and Initialize all the MEMS Target's Features */
   Init_MEM1_Sensors();
 
   Enable_MEM1_Sensors();

@@ -36,6 +36,9 @@ To detect a problem with PLL configuration, switch USE_TIMEOUT can be enabled. T
 LED1 will toggle every 1 second.
 Note: "uwFrequency" variable can be added in LiveWatch to monitor the system clock frequency.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, RCC, PLL, PLLCLK, SYSCLK, HSE, Clock, Oscillator, HSI

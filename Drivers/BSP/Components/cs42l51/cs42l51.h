@@ -37,12 +37,12 @@
 /** @addtogroup CS42L51
   * @{
   */
-typedef int32_t (*CS42L51_Init_Func)    (void);
-typedef int32_t (*CS42L51_DeInit_Func)  (void);
-typedef int32_t (*CS42L51_GetTick_Func) (void);
-typedef int32_t (*CS42L51_Delay_Func)   (uint32_t);
-typedef int32_t (*CS42L51_WriteReg_Func)(uint16_t, uint16_t, uint8_t*, uint16_t);
-typedef int32_t (*CS42L51_ReadReg_Func) (uint16_t, uint16_t, uint8_t*, uint16_t);
+typedef int32_t (*CS42L51_Init_Func)(void);
+typedef int32_t (*CS42L51_DeInit_Func)(void);
+typedef int32_t (*CS42L51_GetTick_Func)(void);
+typedef int32_t (*CS42L51_Delay_Func)(uint32_t);
+typedef int32_t (*CS42L51_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
+typedef int32_t (*CS42L51_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 
 typedef struct
 {
@@ -71,26 +71,26 @@ typedef struct
   uint32_t   Volume;
 } CS42L51_Init_t;
 
- typedef struct
+typedef struct
 {
-  int32_t ( *Init                 ) ( CS42L51_Object_t *, CS42L51_Init_t* );
-  int32_t ( *DeInit               ) ( CS42L51_Object_t * );
-  int32_t ( *ReadID               ) ( CS42L51_Object_t *, uint32_t * );
-  int32_t ( *Play                 ) ( CS42L51_Object_t * );
-  int32_t ( *Pause                ) ( CS42L51_Object_t * );
-  int32_t ( *Resume               ) ( CS42L51_Object_t * );
-  int32_t ( *Stop                 ) ( CS42L51_Object_t *, uint32_t );
-  int32_t ( *SetFrequency         ) ( CS42L51_Object_t *, uint32_t );
-  int32_t ( *GetFrequency         ) ( CS42L51_Object_t *, uint32_t*);
-  int32_t ( *SetVolume            ) ( CS42L51_Object_t *, uint32_t, uint8_t );
-  int32_t ( *GetVolume            ) ( CS42L51_Object_t *, uint32_t, uint8_t*);
-  int32_t ( *SetMute              ) ( CS42L51_Object_t *, uint32_t );
-  int32_t ( *SetOutputMode        ) ( CS42L51_Object_t *, uint32_t );
-  int32_t ( *SetResolution        ) ( CS42L51_Object_t *, uint32_t );
-  int32_t ( *GetResolution        ) ( CS42L51_Object_t *, uint32_t*);
-  int32_t ( *SetProtocol          ) ( CS42L51_Object_t *, uint32_t );
-  int32_t ( *GetProtocol          ) ( CS42L51_Object_t *, uint32_t*);
-  int32_t ( *Reset                ) ( CS42L51_Object_t * );
+  int32_t (*Init)(CS42L51_Object_t *, CS42L51_Init_t *);
+  int32_t (*DeInit)(CS42L51_Object_t *);
+  int32_t (*ReadID)(CS42L51_Object_t *, uint32_t *);
+  int32_t (*Play)(CS42L51_Object_t *);
+  int32_t (*Pause)(CS42L51_Object_t *);
+  int32_t (*Resume)(CS42L51_Object_t *);
+  int32_t (*Stop)(CS42L51_Object_t *, uint32_t);
+  int32_t (*SetFrequency)(CS42L51_Object_t *, uint32_t);
+  int32_t (*GetFrequency)(CS42L51_Object_t *, uint32_t *);
+  int32_t (*SetVolume)(CS42L51_Object_t *, uint32_t, uint8_t);
+  int32_t (*GetVolume)(CS42L51_Object_t *, uint32_t, uint8_t *);
+  int32_t (*SetMute)(CS42L51_Object_t *, uint32_t);
+  int32_t (*SetOutputMode)(CS42L51_Object_t *, uint32_t);
+  int32_t (*SetResolution)(CS42L51_Object_t *, uint32_t);
+  int32_t (*GetResolution)(CS42L51_Object_t *, uint32_t *);
+  int32_t (*SetProtocol)(CS42L51_Object_t *, uint32_t);
+  int32_t (*GetProtocol)(CS42L51_Object_t *, uint32_t *);
+  int32_t (*Reset)(CS42L51_Object_t *);
 } CS42L51_Drv_t;
 
 
@@ -129,10 +129,10 @@ typedef struct
 #define CS42L51_FREQUENCY_8K      8000
 
 /* AUDIO RESOLUTION */
-#define CS42L51_RESOLUTION_16b    0x05U
-#define CS42L51_RESOLUTION_18b    0x04U
-#define CS42L51_RESOLUTION_20b    0x03U
-#define CS42L51_RESOLUTION_24b    0x02U
+#define CS42L51_RESOLUTION_16B    0x05U
+#define CS42L51_RESOLUTION_18B    0x04U
+#define CS42L51_RESOLUTION_20B    0x03U
+#define CS42L51_RESOLUTION_24B    0x02U
 
 /* Codec stop options */
 #define CS42L51_PDWN_HW           0x00U
@@ -175,7 +175,7 @@ typedef struct
                            Audio Codec functions
 ------------------------------------------------------------------------------*/
 /* High Layer codec functions */
-int32_t CS42L51_RegisterBusIO (CS42L51_Object_t *pObj, CS42L51_IO_t *pIO);
+int32_t CS42L51_RegisterBusIO(CS42L51_Object_t *pObj, CS42L51_IO_t *pIO);
 int32_t CS42L51_Init(CS42L51_Object_t *pObj, CS42L51_Init_t *pInit);
 int32_t CS42L51_DeInit(CS42L51_Object_t *pObj);
 int32_t CS42L51_ReadID(CS42L51_Object_t *pObj, uint32_t *Id);

@@ -192,6 +192,7 @@
 /** @addtogroup STM32L5xx_System_Private_FunctionPrototypes
   * @{
   */
+static void SetSysClock(void);
 
 /**
   * @}
@@ -217,6 +218,10 @@ void SystemInit(void)
 #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
   SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
 #endif
+
+  /* Configure the System clock source, PLL Multiplier and Divider factors,
+     AHB/APBx prescalers and Flash settings for System clock 110 MHz ---------*/
+  SetSysClock();
 }
 
 /**
@@ -328,6 +333,52 @@ void SystemCoreClockUpdate(void)
   SystemCoreClock >>= tmp;
 }
 
+/**
+  * @brief  Configures the System clock source, PLL Multiplier and Divider factors,
+  *         AHB/APBx prescalers and Flash settings for System clock 110MHz
+  * @retval None
+  */
+static void SetSysClock(void)
+{
+  __IO uint32_t tmp;
+
+  /* Enable voltage range 0 mode for frequency above 80 Mhz */
+  RCC->APB1ENR1 |= RCC_APB1ENR1_PWREN;
+  tmp = RCC->APB1ENR1;
+  UNUSED(tmp);
+  PWR->CR1 &= ~PWR_CR1_VOS;  /* voltage range 0 */
+
+  /* Set Flash latency prior to system clock change */
+  FLASH->ACR = 5U;
+  while ((FLASH->ACR & FLASH_ACR_LATENCY) != 5U)
+  {
+  }
+
+  /* Configure and enable the main PLL */
+  /* PLLSRC=MSI, PLLM=1, PLLN=55, PLLR=2, PLLREN=1 */
+  RCC->PLLCFGR = RCC_PLLCFGR_PLLSRC_0 | (55 << RCC_PLLCFGR_PLLN_Pos) | RCC_PLLCFGR_PLLREN;
+  RCC->CR |= RCC_CR_PLLON;
+  while ((RCC->CR & RCC_CR_PLLRDY) != RCC_CR_PLLRDY)
+  {
+  }
+
+  /* Sysclk activation on the main PLL */
+  /* Intermediate AHB prescaler 2 when target frequency clock is higher than 80 MHz */
+  RCC->CFGR = RCC_CFGR_HPRE_3 | RCC_CFGR_SW;
+  /* Wait till the main PLL is used as system clock source */
+  while ((RCC->CFGR & RCC_CFGR_SW) != RCC_CFGR_SW)
+  {
+  }
+
+  /* Insure 1µs transition state at intermediate medium speed clock based on DWT*/
+  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+  DWT->CYCCNT = 0;
+  while(DWT->CYCCNT < 100);
+
+  /* AHB prescaler 1 */
+  RCC->CFGR &= ~RCC_CFGR_HPRE_3;
+}
 
 /**
   * @}

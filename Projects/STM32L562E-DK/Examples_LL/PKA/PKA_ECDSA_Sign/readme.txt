@@ -37,11 +37,14 @@ The example:
   Loads the input buffers to PKA RAM.
   Launch the computation in interrupt mode.
   Wait for the interrupt callback.
-  Retreive the output buffer.
+  Retrieve the output buffer.
   Compare to expected results.
 
 After successful sequence, LED_GREEN is turned On. 
 In case of errors, LED_GREEN is slowly blinking (1sec period).
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

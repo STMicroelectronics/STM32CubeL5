@@ -63,6 +63,9 @@ Other peripheral used:
   1 GPIO for analog input of comparator: PB.02 (connector CN9 pin 13)
   1 GPIO for digital output of comparator: PB.00 (connector CN10 pin 21)
   
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Comparator, voltage, analog input, digital output, VREFINT, COMP1, Vdda, interrupt

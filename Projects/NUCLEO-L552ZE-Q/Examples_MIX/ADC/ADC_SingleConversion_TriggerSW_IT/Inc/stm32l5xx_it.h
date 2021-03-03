@@ -57,21 +57,9 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-/* USER CODE BEGIN EFP */
-
-void EXTI13_IRQHandler(void);
-
-/* Note: Lines of code commented below correspond to the example using        */
-/*       HAL driver only.                                                     */
-/*       This example demonstrating a mix of HAL and LL drivers has replaced  */
-/*       these lines using LL driver.                                         */
-// void ADCx_IRQHandler(void);
-
 void ADC1_2_IRQHandler(void);
-#if defined(WAVEFORM_VOLTAGE_GENERATION_FOR_TEST)
-void DAC_IRQHandler(void);
-
-#endif /* WAVEFORM_VOLTAGE_GENERATION_FOR_TEST */
+/* USER CODE BEGIN EFP */
+void EXTI13_IRQHandler(void);
 /* USER CODE END EFP */
 
 #ifdef __cplusplus

@@ -108,9 +108,9 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     }
 
     __HAL_RCC_GPIOC_CLK_ENABLE();
-    /**I2C3 GPIO Configuration    
+    /**I2C3 GPIO Configuration
     PC0     ------> I2C3_SCL
-    PC1     ------> I2C3_SDA 
+    PC1     ------> I2C3_SDA
     */
     GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
@@ -146,10 +146,10 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
   /* USER CODE END I2C3_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_I2C3_CLK_DISABLE();
-  
-    /**I2C3 GPIO Configuration    
+
+    /**I2C3 GPIO Configuration
     PC0     ------> I2C3_SCL
-    PC1     ------> I2C3_SDA 
+    PC1     ------> I2C3_SDA
     */
     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_0);
 

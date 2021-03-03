@@ -138,7 +138,7 @@ typedef struct {
   uint32_t WavProcess_DecodeData(__IO int16_t* OutPutBuffer,uint32_t NbSamples,void * none);
 
   uint32_t WavProcess_DecSetProgressTime(uint32_t NewTime);
-  uint32_t WavProcess_DecGetStreamLenght(uint32_t fLength);
+  uint32_t WavProcess_DecGetStreamLength(uint32_t fLength);
   uint32_t WavProcess_DecGetElapsedTime(uint32_t CurPos);
   uint32_t WavProcess_DecGetSamplingRate(void);
 

@@ -58,6 +58,9 @@ NUCLEO-L552ZE-Q's LEDs can be used to monitor the application status:
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 RTOS, FreeRTOS, Thread, Message, Queues

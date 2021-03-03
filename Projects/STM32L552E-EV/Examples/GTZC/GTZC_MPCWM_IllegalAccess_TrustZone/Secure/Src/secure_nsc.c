@@ -90,7 +90,7 @@ CMSE_NS_ENTRY void SECURE_ToggleRedLed(void)
   * @note   SAU and MPCWM2 are setup so that only first half FMC NOR memory
   *         is accessible from non-secure
   *         Also used to restore initial configuration with
-  *         FMC SRAM memeory split into 2 halves:
+  *         FMC SRAM memory split into 2 halves:
   *         0x60000000-0x600FFFFF : non-secure
   *         0x60100000-0x601FFFFF : secure
   * @retval None

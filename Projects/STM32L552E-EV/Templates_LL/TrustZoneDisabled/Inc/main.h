@@ -30,6 +30,7 @@
 #include "stm32l5xx_ll_pwr.h"
 #include "stm32l5xx_ll_exti.h"
 #include "stm32l5xx_ll_gpio.h"
+#include "stm32l5xx_ll_icache.h"
 /* LL drivers specific to LL examples IPs */
 #include "stm32l5xx_ll_adc.h"
 #include "stm32l5xx_ll_comp.h"

@@ -46,6 +46,9 @@ change the frequency of this signal from 2 kHz up to 20 kHz by steps of 2 kHz.
 It is then possible to run this example without a signal generator by connecting
 TIM2_CH1 to TIM1_CH1.
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 Timers, TIM, Frequency, Input, Capture, External Signal, Measurement.

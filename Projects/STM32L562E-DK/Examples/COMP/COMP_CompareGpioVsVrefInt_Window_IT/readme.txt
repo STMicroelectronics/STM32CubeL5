@@ -45,12 +45,15 @@ NB: The MCU wakes up from STOP1 mode when the input voltage is out of the thresh
       peripheral interrupt. Otherwise the caller ISR process will be blocked. 
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set 
+@note The application needs to ensure that the SysTick time base is always set 
       to 1 millisecond to have correct HAL operation.
 
 @note This example can not be used in DEBUG mode due to the fact that the Cortex-M33 core is no longer 
       clocked during low power mode so debugging features are disabled. Power on/off is needed to run 
       correctly the example.
+
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
 
 @par Keywords
 

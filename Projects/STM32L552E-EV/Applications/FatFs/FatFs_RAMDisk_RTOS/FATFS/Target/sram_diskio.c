@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_RAMDisk_RTOS/FatFs/Target/sram_diskio.c
+  * @file    FatFs/FatFs_RAMDisk_RTOS/FATFS/Target/sram_diskio.c
   * @author  MCD Application Team
   * @brief   SRAM Disk I/O driver
   ******************************************************************************

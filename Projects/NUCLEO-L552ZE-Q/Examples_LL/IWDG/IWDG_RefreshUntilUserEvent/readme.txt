@@ -38,6 +38,13 @@ is switched ON.
 
 Waiting a new User push-button pressed to re-activate the IWDG
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+System, IWDG, reload counter, MCU Reset
+
 @par Directory contents 
 
   - IWDG/IWDG_RefreshUntilUserEvent/Inc/stm32l5xx_it.h          Interrupt handlers header file
@@ -50,7 +57,7 @@ Waiting a new User push-button pressed to re-activate the IWDG
 
 @par Hardware and Software environment
 
-  - This example runs on STM32L5XX devices.
+  - This example runs on STM32L552ZETxQ devices.
     
   - This example has been tested with NUCLEO-L552ZE-Q C-02 board and can be
     easily tailored to any other supported device and development board.

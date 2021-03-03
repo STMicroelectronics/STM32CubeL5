@@ -40,7 +40,7 @@ __IO FlagStatus TouchDetected       = RESET;
 typedef struct
 {
   void   (*DemoFunc)(void);
-  uint8_t DemoName[50]; 
+  uint8_t DemoName[50];
   uint32_t DemoIndex;
 } BSP_DemoTypedef;
 
@@ -101,6 +101,14 @@ int main(void)
   /* Configure the System clock to have a frequency of 110 MHz */
   SystemClock_Config();
 
+  /* For better performances, enable the instruction cache in 1-way direct mapped mode */
+  HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY);
+  if (HAL_ICACHE_Enable() != HAL_OK)
+  {
+    /* Initialization Error */
+    Error_Handler();
+  }
+
   /* System common Hardware components initialization (Leds, button, joystick and LCD) */
   SystemHardwareInit();
 
@@ -115,9 +123,9 @@ int main(void)
       /* Add delay to avoid rebound and reset it status */
       HAL_Delay(500);
       WakeupButtonPressed = RESET;
-      
+
       BSP_examples[DemoIndex++].DemoFunc();
-      
+
       if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
       {
         DemoIndex = 0;
@@ -223,7 +231,7 @@ static void SystemHardwareInit(void)
     }
     LedInitialized = SET;
   }
-  
+
   /* Init Wakeup and tamper push-buttons in EXTI Mode */
   if (ButtonInitialized != SET)
   {
@@ -233,7 +241,7 @@ static void SystemHardwareInit(void)
     }
     ButtonInitialized = SET;
   }
-  
+
   /* Init Joystick in interrupt mode */
   if (JoyInitialized != SET)
   {
@@ -243,13 +251,13 @@ static void SystemHardwareInit(void)
     }
     JoyInitialized = SET;
   }
-  
+
 
   /* Initialize the LCD */
   if (LcdInitialized != SET)
   {
     LCD_UTILS_Drv_t lcdDrv;
-    
+
     /* Initialize the LCD */
     if (BSP_LCD_Init(0, LCD_ORIENTATION_LANDSCAPE) != BSP_ERROR_NONE)
     {
@@ -281,7 +289,7 @@ static void SystemHardwareInit(void)
 
     LcdInitialized = SET;
   }
-  
+
   /* Initialize the TouchScreen */
   if (TsInitialized != SET)
   {
@@ -302,7 +310,7 @@ static void SystemHardwareInit(void)
     {
       Error_Handler();
     }
-    
+
     TsInitialized = SET;
   }
 }
@@ -321,21 +329,21 @@ static void Display_DemoDescription(void)
 
   /* Clear the LCD */
   UTIL_LCD_Clear(UTIL_LCD_COLOR_WHITE);
-  
+
   /* Set the LCD Text Color */
   UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_DARKBLUE);
   UTIL_LCD_SetBackColor(UTIL_LCD_COLOR_WHITE);
-  
+
   /* Display LCD messages */
   UTIL_LCD_DisplayStringAt(0, 10, (uint8_t *)"STM32L552-EV BSP", CENTER_MODE);
   UTIL_LCD_DisplayStringAt(0, 35, (uint8_t *)"drivers example", CENTER_MODE);
- 
+
   /* Draw Bitmap */
   UTIL_LCD_DrawBitmap(120, 65, (uint8_t *)stlogo);
-  
+
   UTIL_LCD_SetFont(&Font12);
   UTIL_LCD_DisplayStringAt(0, 220, (uint8_t *)"Copyright (c) STMicroelectronics 2019", CENTER_MODE);
-  
+
   UTIL_LCD_SetFont(&Font16);
   UTIL_LCD_FillRect(0, 150, 320, 50, UTIL_LCD_COLOR_BLUE);
   UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
@@ -401,7 +409,7 @@ void BSP_JOY_Callback(JOY_TypeDef JOY, JOYPin_TypeDef JoyPin)
   * @retval None.
   */
 void BSP_TS_Callback(uint32_t Instance)
-{  
+{
   if (Instance == 0)
   {
     TouchDetected = SET;

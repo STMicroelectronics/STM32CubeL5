@@ -37,6 +37,9 @@ In this example:
 On NUCLEO-L552ZE-Q:
     - External line 13 is connected to User push-button
 
+@note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
+      from Flash memory and external memories, and reach the maximum performance.
+
 @par Keywords
 
 System, GPIO, Output, Alternate function, EXTI, Toggle

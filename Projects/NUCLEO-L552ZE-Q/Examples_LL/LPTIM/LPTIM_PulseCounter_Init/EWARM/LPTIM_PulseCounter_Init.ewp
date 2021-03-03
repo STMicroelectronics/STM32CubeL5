@@ -237,6 +237,8 @@
           <state>DATA_CACHE_ENABLE=1</state>
           <state>STM32L552xx</state>
           <state>HSE_VALUE=16000000</state>
+          <state>EXTERNALSAI1_CLOCK_VALUE=48000</state>
+          <state>EXTERNALSAI2_CLOCK_VALUE=48000</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -1098,6 +1100,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_gpio.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_icache.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_lptim.c</name>

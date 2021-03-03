@@ -56,7 +56,7 @@ extern "C" {
       Definitions for TRACE Hw information
 -------------------------------------------------------------------------------*/
 
-#define TRACER_EMB_IS_INSTANCE_LPUART_TYPE           1UL /* set to 1UL as LPUART is used instead of USART */
+#define TRACER_EMB_IS_INSTANCE_LPUART_TYPE           1UL /* set to 1UL if LPUART is used instead of USART */
 
 #define TRACER_EMB_USART_INSTANCE                    LPUART1
 
