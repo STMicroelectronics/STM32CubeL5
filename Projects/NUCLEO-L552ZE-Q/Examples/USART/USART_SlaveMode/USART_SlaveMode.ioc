@@ -181,3 +181,5 @@ VP_SYS_VS_Systick.Signal=SYS_VS_Systick
 VP_USART2_VNSS.Mode=Software NSS Management
 VP_USART2_VNSS.Signal=USART2_VNSS
 board=custom
+ProjectManager.Example=USART_SlaveMode
+ProjectManager.ExampleSource=CubeFw

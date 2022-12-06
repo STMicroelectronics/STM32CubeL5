@@ -46,7 +46,7 @@ namespace touchgfx
  *           i.e. it cannot be simply calculated as width_in_pixels * bytes_per_pixel. For
  *           example, it must be aligned to 4 bytes in Windows bitmaps. Method attach() can be
  *           called more than once. The execution time of it is very little, still it allocates
- *           memory of heigh * sizeof(char*) bytes and has a loop while (height--) {...}, so
+ *           memory of height * sizeof(char*) bytes and has a loop while (height--) {...}, so
  *           it's unreasonable to call it every time before drawing any single pixel :-)
  *
  *        3. Create an object (or a number of objects) of a rendering class, such as

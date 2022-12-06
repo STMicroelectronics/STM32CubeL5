@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -68,7 +67,7 @@ The following variables can be displayed on the debugger via LiveWatch:
 @note The application needs to ensure that the HAL time base is always set to 1 millisecond
       to have correct HAL operation.
 
-@note The FreeRTOS heap size configTOTAL_HEAP_SIZE defined in FreeRTOSConfig.h is set accordingly to the 
+@note The FreeRTOS heap size config TOTAL_HEAP_SIZE defined in FreeRTOSConfig.h is set accordingly to the 
       OS resources memory requirements of the application with +10% margin and rounded to the upper Kbyte boundary.
 
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
@@ -79,7 +78,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-RTOS, FreeRTOS, Thread, Mutexes
+RTOS, FreeRTOS, Threading, Mutexes
 
 @par Directory contents
     - FreeRTOS/FreeRTOS_Mutexes/Src/main.c                       Main program
@@ -108,5 +107,5 @@ In order to make the program work, you must do the following:
  - Rebuild all files and load your image into target memory
  - Run the example
  
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

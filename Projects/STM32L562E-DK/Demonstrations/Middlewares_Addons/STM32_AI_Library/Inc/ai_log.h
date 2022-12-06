@@ -67,7 +67,7 @@ typedef void (*log_MsgFn)(
   const char* msg, const uint32_t len);
 
 /*!
- * @brief Get gloabal log context handle
+ * @brief Get global log context handle
  * @ingroup ai_log
  */
 void* ai_log_acquire(void);

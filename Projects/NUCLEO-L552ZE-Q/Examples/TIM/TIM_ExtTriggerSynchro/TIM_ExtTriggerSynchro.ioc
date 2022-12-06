@@ -220,3 +220,5 @@ VP_TIM3_VS_ClockSourceITR.Signal=TIM3_VS_ClockSourceITR
 VP_TIM3_VS_ControllerModeGated.Mode=Gated Mode
 VP_TIM3_VS_ControllerModeGated.Signal=TIM3_VS_ControllerModeGated
 board=custom
+ProjectManager.Example=TIM_ExtTriggerSynchro
+ProjectManager.ExampleSource=CubeFw

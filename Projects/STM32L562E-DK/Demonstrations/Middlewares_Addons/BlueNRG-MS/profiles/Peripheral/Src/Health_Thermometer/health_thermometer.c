@@ -102,7 +102,7 @@
 /* health thermometer profile specific error code */
 #define INTERVAL_OUT_OF_RANGE 			(0x80)
 #else
-/* Core spec supplement (CSS v4) erro code or out of range: PTS 5.2.0, TC_SP_BI_01_C 
+/* Core spec supplement (CSS v4) error code or out of range: PTS 5.2.0, TC_SP_BI_01_C 
    is expecting this value */
 #define INTERVAL_OUT_OF_RANGE 			(0xFF)
 #endif
@@ -161,7 +161,7 @@ typedef struct _tThermometerContext
       
   /**
    * current measurement interval. This field is
-   * updated everytime, the client writes to this
+   * updated every time, the client writes to this
    * characteristic or the user updates this field.
    * The default value of this field is 0
    */ 
@@ -423,7 +423,7 @@ tBleStatus HT_Send_Temperature_Measurement(tTempMeasurementVal tempMeasurementVa
       charval[idx++] = tempMeasurementVal.timeStamp.seconds;
     }
     
-    /* only if the temperture type is non-static i.e, the
+    /* only if the temperature type is non-static i.e, the
      * TEMPERATURE_TYPE flag is not set this field
      * has to be included
      */ 
@@ -508,7 +508,7 @@ tBleStatus HT_Send_Intermediate_Temperature(tTempMeasurementVal tempMeasurementV
       charval[idx++] = tempMeasurementVal.timeStamp.seconds;
     }
     
-    /* only if the temperture type is non-static i.e, the
+    /* only if the temperature type is non-static i.e, the
      * TEMPERATURE_TYPE flag is not set this field
      * has to be included
      */ 

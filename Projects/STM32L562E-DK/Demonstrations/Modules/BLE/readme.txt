@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of STM32L562E-DK Demonstration BLE
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license SLA0044,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       http://www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -154,5 +155,5 @@ Demonstration, BLE, Bluetooth, BlueNRG-MS, Sensors, Accelerometer, Gyroscope, BL
 
  5 - Run the demonstration
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

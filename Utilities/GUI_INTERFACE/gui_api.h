@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2021 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -214,9 +213,9 @@ typedef struct
   * @{
   */
 extern GUI_USER_ParamsTypeDef GUI_USER_Params[USBPD_PORT_COUNT];
-#if !defined(_RTOS)
+#if !(defined(_RTOS) || defined(USBPD_THREADX))
 extern __IO uint32_t      GUI_Flag;
-#endif /* !_RTOS */
+#endif /* !(_RTOS || USBPD_THREADX) */
 
 /**
   * @}
@@ -229,6 +228,9 @@ extern __IO uint32_t      GUI_Flag;
 
 USBPD_FunctionalState GUI_Init(const uint8_t *(*CB_HWBoardVersion)(void), const uint8_t *(*CB_HWPDType)(void),
                                uint16_t (*CB_GetVoltage)(uint8_t), int16_t (*CB_GetCurrent)(uint8_t));
+uint32_t              GUI_InitOS(void *MemoryPtr);
+void                  GUI_Reset(void);
+
 void                  GUI_Start(void);
 void                  GUI_TimerCounter(void);
 uint32_t              GUI_RXProcess(uint32_t Event);

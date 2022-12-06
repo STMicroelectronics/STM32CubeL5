@@ -6,13 +6,14 @@
   * @file    readme.txt
   * @brief   This application shows SBSFU on Cortex-M 
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -68,6 +69,12 @@ the SBSFU secure application.
 For more details, refer to AN5447 "Overview of Secure Boot and Secure Firmware
 Update solution on Arm® TrustZone® STM32L5 Series microcontrollers"
 available from the STMicroelectronics microcontroller website www.st.com.
+
+@par Keywords
+
+Security, SBSFU, FLASH, mcuboot, mbedCrypto, AES, CRYP, FLASH, GTZC, HASH, PKA,
+ICACHE, Secure boot, Firmware update, Authentication, Integrity, Confidentiality,
+cipher, Signature, ECDSA verification, RSA, Option bytes, TrustZone
 
 @par Directory contents
 
@@ -337,5 +344,5 @@ Several steps to run SBSFU application :
       application. Its usage is exactly the same as the local loader application.
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

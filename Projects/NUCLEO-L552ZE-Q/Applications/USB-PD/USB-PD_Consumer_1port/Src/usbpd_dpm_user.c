@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -250,20 +249,6 @@ void USBPD_DPM_UserTimerCounter(uint8_t PortNum)
   */
 
 /**
-  * @brief  Callback function called by PE layer when HardReset message received from PRL
-  * @param  PortNum The current port number
-  * @param  CurrentRole the current role
-  * @param  Status status on hard reset event
-  * @retval None
-  */
-void USBPD_DPM_HardReset(uint8_t PortNum, USBPD_PortPowerRole_TypeDef CurrentRole, USBPD_HR_Status_TypeDef Status)
-{
-/* USER CODE BEGIN USBPD_DPM_HardReset */
-  DPM_USER_DEBUG_TRACE(PortNum, "HELP: update USBPD_DPM_HardReset");
-/* USER CODE END USBPD_DPM_HardReset */
-}
-
-/**
   * @brief  Callback function called by PE to inform DPM about PE event.
   * @param  PortNum The current port number
   * @param  EventVal @ref USBPD_NotifyEventValue_TypeDef
@@ -279,6 +264,20 @@ void USBPD_DPM_Notification(uint8_t PortNum, USBPD_NotifyEventValue_TypeDef Even
 /* USER CODE BEGIN USBPD_DPM_Notification */
 
 /* USER CODE END USBPD_DPM_Notification */
+}
+
+/**
+  * @brief  Callback function called by PE layer when HardReset message received from PRL
+  * @param  PortNum The current port number
+  * @param  CurrentRole the current role
+  * @param  Status status on hard reset event
+  * @retval None
+  */
+void USBPD_DPM_HardReset(uint8_t PortNum, USBPD_PortPowerRole_TypeDef CurrentRole, USBPD_HR_Status_TypeDef Status)
+{
+/* USER CODE BEGIN USBPD_DPM_HardReset */
+  DPM_USER_DEBUG_TRACE(PortNum, "HELP: update USBPD_DPM_HardReset");
+/* USER CODE END USBPD_DPM_HardReset */
 }
 
 /**
@@ -953,5 +952,3 @@ USBPD_StatusTypeDef USBPD_DPM_RequestSecurityRequest(uint8_t PortNum)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

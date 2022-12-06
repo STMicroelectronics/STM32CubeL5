@@ -55,7 +55,7 @@
 /******************************************************************************
 * Macro Declarations
 ******************************************************************************/
-/* Max number of expected notifications recevied as consequence of a 
+/* Max number of expected notifications received as consequence of a 
    single RACP procedure: To BE TUNED based on expected glucose 
    sensor max notifications*/ 
 #define RACP_MAX_EXPECTED_NOTIFICATIONS_NUMBER 255
@@ -77,7 +77,7 @@
 * @brief  It stores the Glucose Sensor  Notifications (measurement, measurement context) 
 *         for a single RACP procedure 
 * @param  attr_handle: glucose sensor characteristic handle
-* @param  data_lenght: glucose sensor characteristic value lenght
+* @param  data_lenght: glucose sensor characteristic value length
 * @param  value: glucose sensor characteristic value 
 */
 void GL_Collector_RACP_Notifications_Storage(uint16_t attr_handle, uint8_t data_length,uint8_t * value);

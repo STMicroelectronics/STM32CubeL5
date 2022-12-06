@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics. 
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the 
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -172,6 +171,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -190,6 +190,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -220,6 +221,7 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
+
   /** Enable instruction cache in 1-way (direct mapped cache)
   */
   if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
@@ -496,5 +498,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

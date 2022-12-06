@@ -17,7 +17,7 @@
 #define ATOMIC_HPP
 
 /**
- * Defines a atomic write on suported platforms
+ * Defines a atomic write on supported platforms
  */
 
 #if defined(WIN32) || defined(_WIN32)

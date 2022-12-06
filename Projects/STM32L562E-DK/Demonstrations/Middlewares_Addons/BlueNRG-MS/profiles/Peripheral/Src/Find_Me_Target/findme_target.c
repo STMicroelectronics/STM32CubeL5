@@ -28,7 +28,7 @@
 *
 *  File Description 
 *  ---------------------
-*  This file conatins the implementation of the Find Me profile for the target
+*  This file contains the implementation of the Find Me profile for the target
 * role
 ******************************************************************************/
 /******************************************************************************

@@ -199,7 +199,7 @@ typedef struct _tTimeServerContext
   tProfileInterfaceContext TStoBLEInf;
       
       /**
-       * this falg is used to send the allow
+       * this flag is used to send the allow
        * read command
        */ 
       uint8_t timeServerAllowRead;
@@ -720,7 +720,7 @@ static void TSProfile_Attribute_Modified_CB(uint16_t handle, uint8_t data_length
       if (attValue == GET_REFERENCE_UPDATE)
       {
         retval = BLE_STATUS_SUCCESS;
-        /* start the referrence time update state machine */
+        /* start the reference time update state machine */
         timeServer.applicationNotifyFunc(EVT_TS_START_REFTIME_UPDATE,1,&retval);
         /* update the time update state in the server */
         refTimeUpdateStatus.currentStatus = TIME_UPDATE_STATUS_UPDATE_PENDING;
@@ -832,7 +832,7 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
 
   /* serviceMaxAttributeRecord = 1 for current time service itself +
    *                             2 for current time characteristic +
-   *                             1 for current time client char configuraton descriptor +
+   *                             1 for current time client char configuration descriptor +
    *                             2 for local time information characteristic +
    *                             2 for reference time information characteristic
    */
@@ -868,7 +868,7 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
                                    10, 
                                    (CHAR_PROP_READ |CHAR_PROP_NOTIFY), 
                                    ATTR_PERMISSION_NONE, 
-                                   GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP, /* this is required for controled notification */
+                                   GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP, /* this is required for controlled notification */
                                    10,  /* encryKeySize */
                                    CHAR_VALUE_LEN_CONSTANT, /* isVariable */
                                    &(timeServer.currentTimeCharHandle));
@@ -1018,7 +1018,7 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
       return hciCmdResult;
     }
                
-    /* Add Time Update Controle Point Characteristic */
+    /* Add Time Update Control Point Characteristic */
     TIME_SERVER_MESG_DBG (profiledbgfile,"TimeServer_Add_Services_Characteristics(), Adding Time Update Controle Point Characteristic. \n");
     
     uuid = TIME_UPDATE_CONTROL_POINT_CHAR_UUID;    
@@ -1497,7 +1497,7 @@ tBleStatus TimeServer_Make_Discoverable ( uint8_t useBoundedDeviceList )
       retval = aci_gap_set_undirected_connectable(PUBLIC_ADDR, WHITE_LIST_FOR_ALL);   
       if ( retval == BLE_STATUS_SUCCESS)
       {
-        /* start a timer of 10 seconds to try to connnect to white list device */
+        /* start a timer of 10 seconds to try to connect to white list device */
         Blue_NRG_Timer_Start (10, TimeServer_Advertise_Period_Timeout_Handler,&timeServer.timerID);
     
         /* change profile's sub states */

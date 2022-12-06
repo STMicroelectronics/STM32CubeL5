@@ -339,3 +339,5 @@ VP_PWR_VS_DBSignals.Signal=PWR_VS_DBSignals
 VP_SYS_VS_Systick.Mode=SysTick
 VP_SYS_VS_Systick.Signal=SYS_VS_Systick
 board=custom
+ProjectManager.Example=ICACHE_SRAM_Memory_Remap
+ProjectManager.ExampleSource=CubeFw

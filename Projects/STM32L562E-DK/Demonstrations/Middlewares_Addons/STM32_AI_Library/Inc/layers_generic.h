@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -84,8 +83,8 @@ typedef AI_ALIGNED_TYPE(struct, 4) ai_layer_topK_{
 typedef AI_ALIGNED_TYPE(struct, 4) ai_layer_slice_ {
   AI_LAYER_COMMON_FIELDS_DECLARE
   AI_CONST ai_array* axes;    /*!< Axes that 'starts' and 'ends' apply to. It's optional*/
-  AI_CONST ai_array* starts;  /*!< Starting indices of corrisponding axis in axes*/
-  AI_CONST ai_array* ends;    /*!< Ending indices (exclusive) of corrisponding axis in axes*/
+  AI_CONST ai_array* starts;  /*!< Starting indices of corresponding axis in axes*/
+  AI_CONST ai_array* ends;    /*!< Ending indices (exclusive) of corresponding axis in axes*/
 } ai_layer_slice;
 
 
@@ -109,7 +108,7 @@ typedef AI_ALIGNED_TYPE(struct, 4) ai_layer_tile_{
  * @brief Upsample layer definition
  *
  * This layer defines the param of an upsampling layer. It overloads its params
- * to allow zeros upsampling, helpful traspose convolutions, for instance.
+ * to allow zeros upsampling, helpful transpose convolutions, for instance.
  * It is intended to be used by its associated forward function @ref forward_upsample
  */
 typedef AI_ALIGNED_TYPE(struct, 4) ai_layer_upsample_{

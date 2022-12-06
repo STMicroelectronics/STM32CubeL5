@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the USB MSC application.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -84,7 +85,7 @@ Connectivity, USB_Device, USB, MSC, Full Speed, flash, microSD card
     and can be easily tailored to any other supported device and development board.
   - STM32L562E-DK Set-up
     - Insert a microSD card into the STM32L562E-DK
-  - Connect the STM32L562E-DK board CN16 to the PC through "TYPE-C" to "Standard A" cable
+  - Connect the STM32L562E-DK board CN15 to the PC through "TYPE-C" to "Standard A" cable
 
 @par How to use it ?
 
@@ -93,5 +94,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the application
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

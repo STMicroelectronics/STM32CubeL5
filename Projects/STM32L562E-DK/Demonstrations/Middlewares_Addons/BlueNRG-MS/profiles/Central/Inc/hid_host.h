@@ -326,7 +326,7 @@ typedef struct hidConfDevS {
 } hidConfDevType;
 
 /**
- * @brief Connection update paramters suggested from the HID peripheral device
+ * @brief Connection update parameters suggested from the HID peripheral device
  */
 typedef struct hidConnUpdateParamS {
   /** This is the identifier which associates the request to the
@@ -437,7 +437,7 @@ uint8_t HID_DeviceDisconnection(void);
  * connection parameter update request from the peer device. If the master rejects these parameters can send the
  * response with the accepted parameter set to FALSE or ignore the request. This function shall be managed only if the 
  * master has already discovered all the services and characteristics.
- * If theese discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
+ * If these discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
  * with status rejected.
  * @param accepted TRUE if the peripheral peer request is accepted, FALSE otherwise.
  * @param param Connection parameter to update
@@ -458,7 +458,7 @@ uint8_t HID_ServicesDiscovery(void);
 
 /**
  * @brief This function performs the relationship discovery to find included
- * services, to dicovery all Battery Services with characteristis described within
+ * services, to discovery all Battery Services with characteristis described within
  * a HID Service Report Map characteristic value.
  * @retval Status of call
  * @note All the information of the included services will be returned
@@ -601,7 +601,7 @@ uint8_t HID_ScanRefreshNotificationStatus(uint8_t enabled);
 
 /**
  * @brief Runs a profile state machine to execute all the central role procedure:
- * connection, service discovery, characteristic dicovery and 
+ * connection, service discovery, characteristic discovery and 
  * peer device configuration procedure.
  * @param connParam Contains all the values used during the connection
  * procedure (see @ref hidConnDevType)
@@ -892,8 +892,8 @@ extern void HID_InformationData_CB(uint8_t status, uint16_t version,
  * @brief This callback returns the level of the Battery services present in the HID Device.
  * This callback will be called for each Battery Service present in the HID peer Device.
  * @param status Status of the read procedure
- * @param namespace If there are more than 1 battery service this value is unique for that instance of the Battery Serivce
- * @param description If there are more than 1 battery service this value is unique for that instance of the Battery Serivce
+ * @param namespace If there are more than 1 battery service this value is unique for that instance of the Battery Service
+ * @param description If there are more than 1 battery service this value is unique for that instance of the Battery Service
  * @param level Battery level as a percentage from 0% to 100%. 0% represents a battery that is 
  * full discharged, 100% represents a battery that is fully charged.
  * @retVal None
@@ -963,7 +963,7 @@ extern void HID_SetProcedure_CB(uint8_t status);
 extern void HID_NotificationChageStatus_CB(uint8_t status);
 
 /**
- * @brief This callbak reports the notification recevied from the HID Host
+ * @brief This callbak reports the notification received from the HID Host
  * @param type Report Type
  * @param id Report ID
  * @param data_length Length of the data received

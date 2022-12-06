@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -255,11 +254,8 @@ void SystemClock_Config(void)
   {
   }
 
-  /* Insure 1µs transition state at intermediate medium speed clock based on DWT*/
-  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-  DWT->CYCCNT = 0;
-  while(DWT->CYCCNT < 100);
+  /* Insure 1µs transition state at intermediate medium speed clock*/
+  for (__IO uint32_t i = (RCC_MAX_FREQUENCY_MHZ >> 1); i !=0; i--);
 
   /* AHB prescaler 1 */
   LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
@@ -320,5 +316,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

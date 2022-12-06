@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -50,6 +49,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
 
   /* Enable the TIM7 global Interrupt */
   HAL_NVIC_EnableIRQ(TIM7_IRQn);
+
   /* Enable TIM7 clock */
   __HAL_RCC_TIM7_CLK_ENABLE();
 
@@ -74,6 +74,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
   htim7.Init.Prescaler = uwPrescalerValue;
   htim7.Init.ClockDivision = 0;
   htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
+
   if(HAL_TIM_Base_Init(&htim7) == HAL_OK)
   {
     /* Start the TIM time Base generation in interrupt mode */
@@ -108,4 +109,3 @@ void HAL_ResumeTick(void)
   __HAL_TIM_ENABLE_IT(&htim7, TIM_IT_UPDATE);
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -413,7 +413,7 @@ tBleStatus PXR_Add_Services_Characteristics(void)
       return hciCmdResult;
     }
 
-    /* Add Tx Pwr Levl Char Presentation Format Descriptor */
+    /* Add Tx Pwr Level Char Presentation Format Descriptor */
     
     txPwrLevlCharPresFormatDescValue[0] = 0x0C;
     txPwrLevlCharPresFormatDescValue[1] = 0x00;

@@ -409,7 +409,7 @@ void FML_Event_Handler(void *pckt)
 	     * 2bytes start handle
 	     * 2bytes end handle
 	     * 2 or 16 bytes data
-	     * we are intersted only if the UUID is 16 bit.
+	     * we are interested only if the UUID is 16 bit.
 	     * So check if the data length is 6
 	     */
 	    if (pr->attribute_data_length == 6)

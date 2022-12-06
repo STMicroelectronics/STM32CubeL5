@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -121,24 +120,24 @@
                             printf("\n");
 #else
 #define USBD_UsrLog(...)
-#endif
+#endif /* (USBD_DEBUG_LEVEL > 0U) */
 
 #if (USBD_DEBUG_LEVEL > 1)
 
-#define USBD_ErrLog(...)    printf("ERROR: ") ;\
+#define USBD_ErrLog(...)    printf("ERROR: ");\
                             printf(__VA_ARGS__);\
                             printf("\n");
 #else
 #define USBD_ErrLog(...)
-#endif
+#endif /* (USBD_DEBUG_LEVEL > 1U) */
 
 #if (USBD_DEBUG_LEVEL > 2)
-#define USBD_DbgLog(...)    printf("DEBUG : ") ;\
+#define USBD_DbgLog(...)    printf("DEBUG : ");\
                             printf(__VA_ARGS__);\
                             printf("\n");
 #else
 #define USBD_DbgLog(...)
-#endif
+#endif /* (USBD_DEBUG_LEVEL > 2U) */
 
 /**
   * @}
@@ -180,4 +179,3 @@ void USBD_static_free(void *p);
 
 #endif /* __USBD_CONF__H__ */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

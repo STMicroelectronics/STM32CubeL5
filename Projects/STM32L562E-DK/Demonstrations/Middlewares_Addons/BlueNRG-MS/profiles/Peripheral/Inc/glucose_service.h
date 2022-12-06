@@ -256,7 +256,7 @@
 #define RACP_FILTER_TYPE_SEQUENCE_NUMBER  (0x01)
 #define RACP_FILTER_TYPE_USER_FACING_TIME (0x02)
 
-/* Record Access Control Point: filter types valid lenght */
+/* Record Access Control Point: filter types valid length */
 #define RACP_FILTER_TYPE_NO_OPERAND_LENGHT                    (2)
 #define RACP_FILTER_TYPE_LESS_GREATER_SEQUENCE_NUMBER_LENGHT  (5)
 #define RACP_FILTER_TYPE_LESS_GREATER_USER_FACING_TIME_LENGHT (10)

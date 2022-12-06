@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -402,10 +401,13 @@ static void USBPD_VDM_InformSpecific(uint8_t PortNum, USBPD_SOPType_TypeDef SOPT
 
 /**
   * @brief  VDM Send Unstructured message callback
-  * @param  PortNum    current port number
+  * @note   Aim of this function is to fill the UVDM message which contains 1 VDM Header + 6 VDO
+  *         This callback will be called when user requests to send a UVDM message thanks
+  *         to USBPD_DPM_RequestUVDMMessage function
+  * @param  PortNum       current port number
   * @param  pUVDM_Header  Pointer on UVDM header based on @ref USBPD_UVDMHeader_TypeDef
-  * @param  pNbData       Pointer of number of VDO to send
-  * @param  pVDO          Pointer of VDO to send
+  * @param  pNbData       Pointer of number of VDO to send (max size must be equal to 6)
+  * @param  pVDO          Pointer of VDO to send (up to 6 x uint32_t)
   * @retval None
   */
 static void USBPD_VDM_SendUVDM(uint8_t PortNum, USBPD_UVDMHeader_TypeDef *pUVDM_Header, uint8_t *pNbData, uint32_t *pVDO)
@@ -470,6 +472,4 @@ void USBPD_VDM_UserReset(uint8_t PortNum)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

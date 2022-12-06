@@ -162,3 +162,5 @@ VP_SYS_VS_Systick.Signal=SYS_VS_Systick
 VP_TIM1_VS_no_output1.Mode=PWM Generation1 No Output
 VP_TIM1_VS_no_output1.Signal=TIM1_VS_no_output1
 board=custom
+ProjectManager.Example=DFSDM_Thermometer
+ProjectManager.ExampleSource=CubeFw

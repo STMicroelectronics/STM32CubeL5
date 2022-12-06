@@ -337,7 +337,7 @@ tBleStatus TimeClient_Make_Discoverable(uint8_t useBoundedDeviceList)
       retval = aci_gap_set_undirected_connectable (PUBLIC_ADDR, WHITE_LIST_FOR_ALL);
       if ( retval == BLE_STATUS_SUCCESS)
       {
-        /* start a timer of 10 seconds to try to connnect to white list device */
+        /* start a timer of 10 seconds to try to connect to white list device */
         Blue_NRG_Timer_Start (10, TimeClient_Advertise_Period_Timeout_Handler,&timeClient.timerID);
       
         /* change profile's sub states */
@@ -408,7 +408,7 @@ tBleStatus TimeClient_Get_Current_Time(void)
  * the time update notification, it need to enable the notification
  * using this function.Once enabled, the notification of time 
  * update on time server will remain enabled. if the application 
- * dont want to receive the notification any more, it need to 
+ * don't want to receive the notification any more, it need to 
  * disable the notification using this function. 
  */
 tBleStatus TimeClient_SetReset_Time_Update_Notification(uint8_t onoff)
@@ -1045,7 +1045,7 @@ void TimeClient_Event_Handler(void *pckt)
           {
             numServ = (pr->event_data_length  - 1) / pr->attribute_data_length;    
             /**
-             * Resp event group data fromat:
+             * Resp event group data format:
              * uint16_t Start_Handle,
              * uint16_t End_Handle, 
              * uint16_t UUID
@@ -1435,7 +1435,7 @@ tBleStatus TimeClient_StateMachine(void)
     break;
     case TIME_CLIENT_STATE_WAITING_BLE_INIT:
     {
-      /* chech whether the main profile has done with ble init or not */
+      /* check whether the main profile has done with ble init or not */
       if (BLE_Profile_Get_Main_State() == BLE_PROFILE_STATE_INIT_PROFILE)
       {
         TIME_CLIENT_MESG_DBG( profiledbgfile, "Time Client is in initialized State \n");

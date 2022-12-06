@@ -573,7 +573,7 @@ tBleStatus ProximityReporterProfile_StateMachine(void)
     break;
   case PROXIMITY_REPORTER_STATE_WAITING_BLE_INIT:
     {
-      /* chech whether the main profile has done with ble init or not */
+      /* check whether the main profile has done with ble init or not */
       if (BLE_Profile_Get_Main_State() == BLE_PROFILE_STATE_INIT_PROFILE)
       {
 	PROXIMITY_REPORTER_MESG_DBG ( profiledbgfile, "Adding Link Loss Service \n");
@@ -798,7 +798,7 @@ tBleStatus ProximityReporterProfile_StateMachine(void)
 	{
 	  uint16_t charDescHandle;
 
-	  PROXIMITY_REPORTER_MESG_DBG (profiledbgfile,"Adding Tx Pwr Levl Char Presentation Format Descriptor. \n");
+	  PROXIMITY_REPORTER_MESG_DBG (profiledbgfile,"Adding Tx Pwr Level Char Presentation Format Descriptor. \n");
 	  
 	  txPwrLevlCharPresFormatDescValue[0] = 0x0C;
 	  txPwrLevlCharPresFormatDescValue[1] = 0x00;
@@ -946,7 +946,7 @@ tBleStatus ProximityReporterProfile_StateMachine(void)
 	  hciCmdResult = aci_gap_set_undirected_connectable(PUBLIC_ADDR, WHITE_LIST_FOR_ALL);
 	  if (hciCmdResult == BLE_STATUS_SUCCESS)
 	  {
-	    /* start a timer of 10 secconds to try to connnect to white list device */
+	    /* start a timer of 10 seconds to try to connect to white list device */
 	    Blue_NRG_Timer_Start (10, ProximityReporter_Advertise_Period_Timeout_Handler,&proximityReporter.timerID);
 
 	    /* change profile's sub states */

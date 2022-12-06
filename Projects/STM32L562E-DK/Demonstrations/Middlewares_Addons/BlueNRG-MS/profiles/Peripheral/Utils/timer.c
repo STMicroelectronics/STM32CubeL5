@@ -122,7 +122,7 @@ void Blue_NRG_Timer_ExpiryCallback(void)
 ******************************************************************************/
 #define TIMER_MAX_COUNT			(0xFFFF)/* 16 bit counter */
 #define TIMER_THRESH			(100) /* 100 milliseconds */
-/* this macro should be set to the maximum numer of 
+/* this macro should be set to the maximum number of 
  * milliseconds for which the timer can be started
  */ 
 #define MAX_MS_TIMEOUT          (30000)
@@ -269,7 +269,7 @@ tBleStatus Blue_NRG_Timer_Init(void)
  * Blue_NRG_Timer_Start
  * 
  * @param[in] expiryTime: duration of the timer in seconds
- * @param[in] timercb   : callback funtion to be called on expiry
+ * @param[in] timercb   : callback function to be called on expiry
  * 
  * When a timer needs to be started, the current expiry time
  * is compared with the new expiry time received. If the expiry time is

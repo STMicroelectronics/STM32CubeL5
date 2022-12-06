@@ -202,7 +202,7 @@ tBleStatus TimeClient_StateMachine(void);
  * the time update notification, it need to enable the notification
  * using this function.Once enabled, the notification of time 
  * update on time server will remain enabled. if the application 
- * dont want to receive the notification any more, it need to 
+ * don't want to receive the notification any more, it need to 
  * disable the notification using this function. 
  */
 tBleStatus TimeClient_SetReset_Time_Update_Notification(uint8_t onoff);

@@ -195,3 +195,5 @@ VP_PWR_VS_DBSignals.Signal=PWR_VS_DBSignals
 VP_SYS_VS_tim6.Mode=TIM6
 VP_SYS_VS_tim6.Signal=SYS_VS_tim6
 board=custom
+ProjectManager.Example=FreeRTOS_Mutexes
+ProjectManager.ExampleSource=CubeFw

@@ -76,7 +76,7 @@
 #define GLUCOSE_MEASUREMENT_CONTEXT_MAX_LEN (17)
 #define GLUCOSE_FEATURE_MAX_LEN             (2)
 #define RACP_COMMAND_MAX_LEN                (17) /* TBC (Within Range with Time)*/
-/* RACP response lenght */
+/* RACP response length */
 #define RACP_RESPONSE_LENGHT                (4)
 
 /* Chacteristic Descriptors handles are properly configured */

@@ -132,7 +132,7 @@ tBleStatus ANC_Client_Init(BLE_CALLBACK_FUNCTION_TYPE applcb);
  * is configured to use the whitelist which is configured
  * with bonded devices at the time of initialization else
  * limited discoverable mode is entered to connect to any
- * of the avialable devices
+ * of the available devices
  */ 
 tBleStatus ANC_Advertize(uint8_t useWhitelist);
 

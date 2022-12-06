@@ -10,13 +10,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -66,7 +65,7 @@ static const uint8_t aDataBuffer[BUFFER_SIZE] =
 };
 
 /* Expected CRC Value */
-uint8_t ubExpectedCRCValue = 0xA6;
+uint8_t ubExpectedCRCValue = 0x0C;
 
 /* USER CODE END PV */
 
@@ -101,13 +100,11 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 
-  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_3);
-
   /* System interrupt init*/
+  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_3);
 
   /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
   */
@@ -190,12 +187,8 @@ void SystemClock_Config(void)
   {
   }
 
-  /* Insure 1µs transition state at intermediate medium speed clock based on DWT*/
-  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-  DWT->CYCCNT = 0;
-  while(DWT->CYCCNT < 100);
+  /* Insure 1µs transition state at intermediate medium speed clock*/
+  for (__IO uint32_t i = (RCC_MAX_FREQUENCY_MHZ >> 1); i !=0; i--);
 
   LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
   LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
@@ -254,6 +247,7 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
+
   /** Enable instruction cache in 1-way (direct mapped cache)
   */
   LL_ICACHE_SetMode(LL_ICACHE_1WAY);
@@ -304,7 +298,7 @@ uint8_t Calculate_CRC(uint32_t BufferSize)
   /* Compute the CRC of Data Buffer array*/
   for (index = 0; index < (BufferSize / 4); index++)
   {
-    data = (uint32_t)((aDataBuffer[4 * index + 3] << 24) | (aDataBuffer[4 * index + 2] << 16) | (aDataBuffer[4 * index + 1] << 8) | aDataBuffer[4 * index]);
+    data = ((uint32_t)aDataBuffer[4 * index] << 24) | ((uint32_t)aDataBuffer[(4 * index) + 1] << 16) | ((uint32_t)aDataBuffer[(4 * index) + 2] << 8)  | (uint32_t)aDataBuffer[(4 * index) + 3];
     LL_CRC_FeedData32(CRC, data);
   }
 
@@ -317,11 +311,11 @@ uint8_t Calculate_CRC(uint32_t BufferSize)
     }
     if (BUFFER_SIZE % 4 == 2)
     {
-      LL_CRC_FeedData16(CRC, (uint16_t)((aDataBuffer[4 * index + 1] << 8) | aDataBuffer[4 * index]));
+      LL_CRC_FeedData16(CRC,  ((uint16_t)(aDataBuffer[4 * index]) << 8) | (uint16_t)aDataBuffer[(4 * index) + 1]);
     }
     if (BUFFER_SIZE % 4 == 3)
     {
-      LL_CRC_FeedData16(CRC, (uint16_t)((aDataBuffer[4 * index + 1] << 8) | aDataBuffer[4 * index]));
+      LL_CRC_FeedData16(CRC, ((uint16_t)(aDataBuffer[4 * index]) << 8) | (uint16_t)aDataBuffer[(4 * index) + 1]);
       LL_CRC_FeedData8(CRC, aDataBuffer[4 * index + 2]);
     }
   }
@@ -420,5 +414,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

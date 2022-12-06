@@ -6,13 +6,14 @@
   * @file    readme.txt
   * @brief   This application shows Trusted Firmware on Cortex-M (TFM)
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -82,6 +83,13 @@ available from the STMicroelectronics microcontroller website www.st.com.
 
 @note The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution
       from Flash memory and external memories, and reach the maximum performance.
+
+@par Keywords
+
+Security, SBSFU, TFM, mcuboot, mbedCrypto, AES, CRYP, FLASH, GTZC, HASH, PKA, OSPI-HSPI,
+OTFD, ICACHE, Secure boot, Firmware update, Authentication,Integrity, Confidentiality,
+Signature, ECDSA verification, RSA, Option bytes, Initial attestation, Secure storage, 
+Internal trusted storage, Cryptography, PSA, TrustZone
 
 @par Directory contents
 
@@ -349,5 +357,5 @@ Several steps to run TFM application :
       same as the local loader application.
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

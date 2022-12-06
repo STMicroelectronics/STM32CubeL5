@@ -596,7 +596,7 @@ BOOL glucoseRACP_SendNextMeasurementRecord(void)
     GL_Send_Glucose_Measurement_Context(*(glucose.glucoseDataBase_MeasurementContextRecords_ptr + glucose.RACP_NextMeasurementRecord_Index));
     return (TRUE);
   }
-  /* chek if another measurement context has to be sent  as consequence of a report stored RACP request */
+  /* check if another measurement context has to be sent  as consequence of a report stored RACP request */
   else if((glucose.RACP_SendNextMeasurementRecord_Flag) && (!glucose.RACP_Abort_Flag))
   {
     glucose.RACP_NextMeasurementRecord_Index = glucoseDataBase_FindNextSelectedRecord(glucose.RACP_NextMeasurementRecord_Index + 1);
@@ -699,7 +699,7 @@ uint16_t glucoseDataBase_FindNextSelectedRecord(uint16_t database_index)
 
 /**
   * @brief RACP request handler 
-  * @param attValueLen: received RACP request lenght
+  * @param attValueLen: received RACP request length
   * @retval none
   */
 void glucoseRACP_RequestHandler(uint8_t attValueLen)

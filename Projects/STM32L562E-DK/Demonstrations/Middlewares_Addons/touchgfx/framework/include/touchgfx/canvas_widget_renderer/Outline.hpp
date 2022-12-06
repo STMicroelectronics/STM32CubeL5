@@ -26,7 +26,7 @@ namespace touchgfx
  * @brief An internal class that implements the main rasterization algorithm.
  *
  *        An internal class that implements the main rasterization algorithm. Used in the
- *        Rasterizer. Should not be used direcly.
+ *        Rasterizer. Should not be used directly.
  */
 class Outline
 {

@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the FreeRTOS_SecureIOToggle_TrustZone example with TZEN=1
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -76,7 +77,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-Security, RTOS, FreeRTOS, TrustZone, Thread, GPIO, toggle
+Security, RTOS, FreeRTOS, TrustZone, Threading, GPIO, toggle
 
 @par Directory contents
   - Secure/Src/main.c                            Secure Main program
@@ -168,5 +169,5 @@ STM32CubeIDE
      - Select the xxxxx_NS project 
  - Click Debug/Run to debug/run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

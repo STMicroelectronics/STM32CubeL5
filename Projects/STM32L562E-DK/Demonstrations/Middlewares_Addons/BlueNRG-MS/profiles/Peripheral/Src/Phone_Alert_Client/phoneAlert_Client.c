@@ -328,7 +328,7 @@ void PAC_Event_Handler(void *pckt)
 	     * 2bytes start handle
 	     * 2bytes end handle
 	     * 2 or 16 bytes data
-	     * we are intersted only if the UUID is 16 bit.
+	     * we are interested only if the UUID is 16 bit.
 	     * So check if the data length is 6
 	     */
 	    if (pr->attribute_data_length == 6)
@@ -944,7 +944,7 @@ tBleStatus PAC_Configure_Ringer(uint8_t ringerMode)
  * 
  * When this function is called by the application,
  * the profile starts a gatt procedure to read the
- * characteristic value. The value read will be retuned
+ * characteristic value. The value read will be returned
  * via the event to the application.
  * 
  * @return returns BLE_STATUS_SUCCESS if the procedure

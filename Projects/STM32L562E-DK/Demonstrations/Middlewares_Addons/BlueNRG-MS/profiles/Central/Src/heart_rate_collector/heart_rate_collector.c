@@ -558,7 +558,7 @@ void HRC_Notification_Handler(uint16_t attr_handle, uint8_t data_lenght, uint8_t
     HR_INFO_MSG(profiledbgfile, "HR_Notification_Handler()\n");
     BLUENRG_memset(&HRMeasurement, 0 , sizeof(HRMeasurement)); 
   
-    /* data_length  is the lenght of attribute value + handle (2 bytes).*/
+    /* data_length  is the length of attribute value + handle (2 bytes).*/
     dimAttrValue = data_lenght;
     
     /* To check the Flags value field to determine the contents of Heart  
@@ -567,7 +567,7 @@ void HRC_Notification_Handler(uint16_t attr_handle, uint8_t data_lenght, uint8_t
 
     HRMeasurement.flags = value[index];  
     /* If the first bit is 0 then index++ because HRM value is uint8
-       Heart Rate Value Format is setted to UINT8 */
+       Heart Rate Value Format is set to UINT8 */
     if (!(HRMeasurement.flags & HEART_RATE_VALUE_FORMAT_MASK))
     {
       index++;
@@ -576,7 +576,7 @@ void HRC_Notification_Handler(uint16_t attr_handle, uint8_t data_lenght, uint8_t
     } 
     else 
     { /* If the first bit is 1 then index+=2 because HRM value is uint16 */
-      /* Heart Rate Value Format is setted to UINT16 */
+      /* Heart Rate Value Format is set to UINT16 */
       index += 2;
       HRMeasurement.HRM_value16 = (uint16_t)(value[index]<<8) | value[index-1];
       bHRMformat16 = TRUE;

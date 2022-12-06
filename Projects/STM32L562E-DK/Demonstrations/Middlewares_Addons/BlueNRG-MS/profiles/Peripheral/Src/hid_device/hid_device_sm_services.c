@@ -993,7 +993,7 @@ tBleStatus HIDProfile_StateMachine(void)
     break;
     case HID_DEVICE_STATE_WAITING_BLE_INIT:
     {
-      /* chech whether the main profile has done with ble init or not */
+      /* check whether the main profile has done with ble init or not */
       if (BLE_Profile_Get_Main_State() == BLE_PROFILE_STATE_INIT_PROFILE)
       {
         /* Add HID service & characteristics */ 

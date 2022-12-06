@@ -351,7 +351,7 @@ uint8_t PXM_DeviceDisconnection(void);
  * connection parameter update request from the peer device. If the master rejects these parameters can send the
  * response with the accepted parameter set to FALSE or ignore the request. This function shall be managed only if the 
  * master has already discovered all the services and characteristics.
- * If theese discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
+ * If these discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
  * with status rejected.
  * @param accepted TRUE if the peripheral peer request is accepted, FALSE otherwise.
  * @param param Connection parameter to update
@@ -437,7 +437,7 @@ uint8_t PXM_ConfigureImmediateAlert(uint8_t level);
 
 /**
  * @brief Runs a profile state machine to execute all the central role procedure:
- * connection, service discovery, characteristic dicovery and 
+ * connection, service discovery, characteristic discovery and 
  * peer device configuration procedure.
  * @param connParam Contains all the values used during the connection
  * procedure (see @ref pxmConnDevType)
@@ -459,7 +459,7 @@ uint8_t PXM_ConnConf(pxmConnDevType connParam, pxmConfDevType confParam);
 void PXM_StateMachine(void);
 
 /**
- * @brief Returns the RSSI value from the currrent connection
+ * @brief Returns the RSSI value from the current connection
  * @param value RSSI value returned
  * @retval Status of call
  */
@@ -485,7 +485,7 @@ extern void PXM_DeviceDiscovery_CB(uint8_t status, uint8_t addr_type, uint8_t *a
 /**
  * @brief This callback contains all the information of the service discovery procedure
  * @param status Status of the service discovery procedure
- * @param numServices Nubmer of services discovered
+ * @param numServices Number of services discovered
  * @param services Data of the services discovered.
  *  * The array will be a sequence of elements with the following format:
  * - 1 byte  UUID Type (1 = 16 bit, 2 = 128 bit)
@@ -555,7 +555,7 @@ extern void PXM_CharacOfService_CB(uint8_t status, uint8_t numCharac, uint8_t *c
 extern void PXM_CharacDesc_CB(uint8_t status, uint8_t numCharac, uint8_t *charac);
 
 /**
- * @brief This callack returns the status of the Link Loss Alert Configuration procedure on the
+ * @brief This callback returns the status of the Link Loss Alert Configuration procedure on the
  * proximity reporter peer device
  * @param status Status of the configuration procedure 
  * @retval None
@@ -573,7 +573,7 @@ extern void PXM_ConfigureAlert_CB(uint8_t status);
 extern void PXM_DataValueRead_CB(uint8_t status, uint16_t data_len, uint8_t *data);
 
 /**
- * @brief This funtion is called from the proximity monitor profile 
+ * @brief This function is called from the proximity monitor profile 
  * to alert the application that the peer device is disconnected,
  * so, the application needs to alert the user with the right level.
  * @param level Link Loss Alert level
@@ -582,7 +582,7 @@ extern void PXM_DataValueRead_CB(uint8_t status, uint16_t data_len, uint8_t *dat
 extern void PXM_LinkLossAlert(uint8_t level);
 
 /**
- * @brief This funtion is called from the proximity monitor profile 
+ * @brief This function is called from the proximity monitor profile 
  * to alert the application that the path loss exceeds a threshold during the 
  * connection with the peer device. So, the application needs to alert the user with the right level.
  * @param level Path Loss Aler level
@@ -606,7 +606,7 @@ extern void PXM_TxPowerNotificationReceived(int8_t data_value);
 extern void PXM_PinCodeRequired_CB(void);
 
 /**
- * @brief This callack returns the status of the Tx Power enable notification procedure on the
+ * @brief This callback returns the status of the Tx Power enable notification procedure on the
  * proximity reporter peer device
  * @param status Status of the procedure 
  * @retval None

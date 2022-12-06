@@ -76,13 +76,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Apache License, Version 2.0,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/Apache-2.0
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -370,11 +369,8 @@ static void SetSysClock(void)
   {
   }
 
-  /* Insure 1µs transition state at intermediate medium speed clock based on DWT*/
-  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-  DWT->CYCCNT = 0;
-  while(DWT->CYCCNT < 100);
+  /* Insure 1µs transition state at intermediate medium speed clock*/
+  for (__IO uint32_t i = (RCC_MAX_FREQUENCY_MHZ >> 1); i !=0; i--);
 
   /* AHB prescaler 1 */
   RCC->CFGR &= ~RCC_CFGR_HPRE_3;
@@ -391,5 +387,3 @@ static void SetSysClock(void)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

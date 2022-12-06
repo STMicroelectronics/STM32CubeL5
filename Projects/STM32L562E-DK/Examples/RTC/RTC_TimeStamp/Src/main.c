@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -60,8 +59,8 @@ __IO uint8_t  RTCStatus = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_ICACHE_Init(void);
 static void MX_GPIO_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
 static void RTC_CalendarShow(void);
@@ -107,8 +106,8 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_ICACHE_Init();
   MX_GPIO_Init();
+  MX_ICACHE_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 
@@ -145,6 +144,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -165,6 +165,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -195,6 +196,7 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
+
   /** Enable instruction cache in 1-way (direct mapped cache)
   */
   if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
@@ -230,6 +232,7 @@ static void MX_RTC_Init(void)
   /* USER CODE BEGIN RTC_Init 1 */
 
   /* USER CODE END RTC_Init 1 */
+
   /** Initialize RTC Only
   */
   hrtc.Instance = RTC;
@@ -277,6 +280,7 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
+
   /** Enable the TimeStamp
   */
   if (HAL_RTCEx_SetTimeStamp_IT(&hrtc, RTC_TIMESTAMPEDGE_RISING, RTC_TIMESTAMPPIN_DEFAULT) != HAL_OK)
@@ -389,5 +393,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

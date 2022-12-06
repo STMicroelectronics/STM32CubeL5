@@ -567,7 +567,7 @@ void ANC_Event_Handler(void *pckt)
       case  EVT_BLUE_GAP_PAIRING_CMPLT:
 	{
           ANC_DBG_MSG(profiledbgfile,"HCI_EVT_BLUE_GAP_PAIRING_CMPLT %x %x\n",ANCProfile_Read_MainStateMachine(),alertNotificationClient.disconnected);
-          /* Do nothing when you receieve a pairing complete
+          /* Do nothing when you receive a pairing complete
             * because all actions required are taken on connection complete
             * itself. Pairing does not have any special meaning
             * in case of alert notification profile
@@ -695,7 +695,7 @@ void ANC_Event_Handler(void *pckt)
 	     * 2bytes start handle
 	     * 2bytes end handle
 	     * 2 or 16 bytes data
-	     * we are intersted only if the UUID is 16 bit.
+	     * we are interested only if the UUID is 16 bit.
 	     * So check if the data length is 6
 	     */
 	    if (pr->attribute_data_length == 6)

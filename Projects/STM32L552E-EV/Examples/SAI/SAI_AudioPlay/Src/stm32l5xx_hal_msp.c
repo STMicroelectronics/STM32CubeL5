@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -94,6 +93,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     if(hsai->Instance==SAI1_Block_B)
     {
       /* Peripheral clock enable */
+
   /** Initializes the peripherals clock
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_SAI1;
@@ -129,7 +129,7 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     GPIO_InitStruct.Alternate = GPIO_AF13_SAI1;
     HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
-    /* Peripheral DMA init*/
+      /* Peripheral DMA init*/
 
     hdma_sai1_b.Instance = DMA2_Channel1;
     hdma_sai1_b.Init.Request = DMA_REQUEST_SAI1_B;
@@ -177,6 +177,7 @@ void HAL_SAI_MspDeInit(SAI_HandleTypeDef* hsai)
     */
     HAL_GPIO_DeInit(GPIOF, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9);
 
+    /* SAI1 DMA Deinit */
     HAL_DMA_DeInit(hsai->hdmarx);
     HAL_DMA_DeInit(hsai->hdmatx);
     }
@@ -185,5 +186,3 @@ void HAL_SAI_MspDeInit(SAI_HandleTypeDef* hsai)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -115,7 +115,7 @@ tBleStatus PAC_Configure_Ringer(uint8_t ringerMode);
  * 
  * When this function is called by the application,
  * the profile starts a gatt procedure to read the
- * characteristic value. The value read will be retuned
+ * characteristic value. The value read will be returned
  * via the event to the application.
  * 
  * @return returns BLE_STATUS_SUCCESS if the procedure

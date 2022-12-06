@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Secure/non-secure RTC features for TZEN=1 devices.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -68,7 +69,7 @@ application.
 
 @par Keywords
 
-RTC, TrustZone, LSE, Backup, Alarm, wakeuptimer, Time base
+RTC, TrustZone, LSE, Backup, Alarm, Wake-up timer, Time base
 
 @par Directory contents
 
@@ -154,5 +155,5 @@ STM32CubeIDE
      - Select the xxxxx_NS project 
  - Click Debug/Run to debug/run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -103,7 +103,7 @@ struct colortype
      *
      * @brief Constructor.
      *
-     *        Contructor which creates a colortype with the given color. Use
+     *        Constructor which creates a colortype with the given color. Use
      *        Color::getColorFrom24BitRGB() to create a color that will work on both 16 bit LCD
      *        and 24 bit LCD.
      *
@@ -224,7 +224,7 @@ public:
      *
      *        Gets the y coordinate of the bottom edge of the Rect.
      *
-     * @return y coordinate of the buttom edge.
+     * @return y coordinate of the bottom edge.
      */
     inline int16_t bottom() const
     {

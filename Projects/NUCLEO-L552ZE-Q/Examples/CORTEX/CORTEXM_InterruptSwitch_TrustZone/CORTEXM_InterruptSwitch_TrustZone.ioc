@@ -151,3 +151,5 @@ VP_SYS_S_VS_Systick.Signal=SYS_S_VS_Systick
 VP_SYS_VS_Systick.Mode=SysTick
 VP_SYS_VS_Systick.Signal=SYS_VS_Systick
 board=custom
+ProjectManager.Example=CORTEXM_InterruptSwitch_TrustZone
+ProjectManager.ExampleSource=CubeFw

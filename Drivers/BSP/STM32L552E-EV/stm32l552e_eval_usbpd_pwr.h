@@ -7,13 +7,14 @@
   *          USB-PD Power
   *          available on STM32L552E-EV board(MB1352) from STMicroelectronics.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -245,5 +246,3 @@ int32_t BSP_USBPD_PWR_VCONNIsOn(uint32_t Instance,
 #endif
 
 #endif /* STM32L552E_EVAL_USBPD_PWR_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

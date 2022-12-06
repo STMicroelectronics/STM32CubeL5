@@ -89,7 +89,7 @@ void FML_LimDisc_Timeout_Handler(void);
 /**
  * FML_ALert_Target
  * 
- * @param[in] alertLevel : thw alert level the target has to be
+ * @param[in] alertLevel : the alert level the target has to be
  *            configured to\n
  *            NO_ALERT	   (0x00)\n
  *            MILD_ALERT   (0x01)\n

@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -52,7 +51,7 @@ osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
   .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 256
+  .stack_size = 256 * 4
 };
 /* USER CODE BEGIN PV */
 
@@ -60,9 +59,9 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_ICACHE_Init(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
+static void MX_ICACHE_Init(void);
 static void MX_ADC1_Init(void);
 void StartDefaultTask(void *argument);
 
@@ -102,9 +101,9 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_ICACHE_Init();
   MX_GPIO_Init();
   MX_DMA_Init();
+  MX_ICACHE_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
@@ -197,12 +196,8 @@ void SystemClock_Config(void)
   {
   }
 
-  /* Insure 1µs transition state at intermediate medium speed clock based on DWT*/
-  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-  DWT->CYCCNT = 0;
-  while(DWT->CYCCNT < 100);
+  /* Insure 1µs transition state at intermediate medium speed clock*/
+  for (__IO uint32_t i = (RCC_MAX_FREQUENCY_MHZ >> 1); i !=0; i--);
 
   LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
   LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
@@ -234,6 +229,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
+
   /** Common config
   */
   hadc1.Instance = ADC1;
@@ -255,6 +251,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
+
   /** Configure the ADC multi-mode
   */
   multimode.Mode = ADC_MODE_INDEPENDENT;
@@ -262,6 +259,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
+
   /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_9;
@@ -296,6 +294,7 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
+
   /** Enable instruction cache in 1-way (direct mapped cache)
   */
   if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
@@ -407,7 +406,7 @@ void StartDefaultTask(void *argument)
   /* USER CODE END 5 */
 }
 
- /**
+/**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM6 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
@@ -469,5 +468,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

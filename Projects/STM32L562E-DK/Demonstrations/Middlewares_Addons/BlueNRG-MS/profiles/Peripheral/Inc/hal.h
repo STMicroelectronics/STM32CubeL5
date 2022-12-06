@@ -24,7 +24,7 @@
 /******************************************************************************
  * Macros
  *****************************************************************************/
-/* Little Endian buffer to host endianess conversion */
+/* Little Endian buffer to host endianness conversion */
 #define LE_TO_HOST_16(ptr)  (uint16_t) ( ((uint16_t) \
                                            *((uint8_t *)ptr)) | \
                                           ((uint16_t) \
@@ -39,7 +39,7 @@
                                            ((uint32_t) \
                                             *((uint8_t *)ptr + 3) << 24) )
 
-/* Big Endian buffer to host endianess conversion */
+/* Big Endian buffer to host endianness conversion */
 #define BE_TO_HOST_16(ptr)  (uint16_t) ( ((uint16_t) \
                                            *((uint8_t *)ptr)) << 8 | \
                                           ((uint16_t) \

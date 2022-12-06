@@ -827,7 +827,7 @@ float convert_Temperature_Measurement(uint32_t mantissa, int8_t exponent)
 /**
 * @brief  It stores the Temperature Measurement Characteristics Indication
 * @param  attr_handle: Temperature Measurement characteristic handle
-* @param  data_lenght: Temperature Measurement characteristic value lenght
+* @param  data_lenght: Temperature Measurement characteristic value length
 * @param  value: Temperature Measurement characteristic value 
 */
 void HT_Collector_Temperature_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,uint8_t * value)
@@ -920,7 +920,7 @@ void HT_Collector_Temperature_Measurement_Indication_CB(uint16_t attr_handle, ui
 /**
 * @brief  It stores the Intermediate Temperature Characteristics Notification
 * @param  attr_handle: Intermediate Temperature characteristic handle
-* @param  data_lenght: Intermediate Temperature characteristic value lenght
+* @param  data_lenght: Intermediate Temperature characteristic value length
 * @param  value: Intermediate Temperature characteristic value 
 */
 void HT_Collector_Intermediate_Temperature_Notification_CB(uint16_t attr_handle, uint8_t data_length,uint8_t * value)
@@ -1005,7 +1005,7 @@ void HT_Collector_Intermediate_Temperature_Notification_CB(uint16_t attr_handle,
 /**
 * @brief  It stores the Measurement Interval Characteristics Indication
 * @param  attr_handle: Measurement Interval characteristic handle
-* @param  data_lenght: Measurement Interval characteristic value lenght
+* @param  data_lenght: Measurement Interval characteristic value length
 * @param  value: Measurement Interval characteristic value 
 */
 void HT_Collector_Measurement_Interval_Indication_CB(uint16_t attr_handle, uint8_t data_length,uint8_t * value)

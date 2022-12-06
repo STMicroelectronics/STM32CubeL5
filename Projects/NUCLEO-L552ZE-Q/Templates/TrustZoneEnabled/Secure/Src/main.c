@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -79,13 +78,6 @@ int main(void)
   /* Add your secure application code here prior to non-secure initialization
      */
 
-	/* All IOs are by default allocated to secure */
-
-  /* Release PC.07 I/O for LED1 control on non-secure */
-  /* __HAL_RCC_GPIOC_CLK_ENABLE(); */
-  /* HAL_GPIO_ConfigPinAttributes(GPIOC, GPIO_PIN_7, GPIO_PIN_NSEC); */
-
-	/* Leave the GPIO clocks enabled to let non-secure having I/Os control */
 
   /* Secure SysTick should rather be suspended before calling non-secure  */
   /* in order to avoid wake-up from sleep mode entered by non-secure      */
@@ -257,6 +249,18 @@ static void SystemIsolation_Config(void)
   /* non-secure (GPIO (secured by default))                                   */
   /* -------------------------------------------------------------------------*/
 
+  /* All IOs are by default allocated to secure */
+
+  /* Release PC.07 I/O for LED_GREEN (LED1) control in non-secure */
+  /* __HAL_RCC_GPIOC_CLK_ENABLE(); */
+  /* HAL_GPIO_ConfigPinAttributes(GPIOC, GPIO_PIN_7, GPIO_PIN_NSEC); */
+
+  /* Leave the GPIO clocks enabled to let non-secure having I/Os control */
+
+  /* -------------------------------------------------------------------------*/
+  /*                   Activation of illegal access errors                    */
+  /* -------------------------------------------------------------------------*/
+
   /* Clear all illegal access flags in TZIC */
   if(HAL_GTZC_TZIC_ClearFlag(GTZC_PERIPH_ALL) != HAL_OK)
   {
@@ -373,5 +377,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1177,6 +1177,9 @@
                     <name>$PROJ_DIR$\..\..\Modules\ucpd\demo_application.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\..\Modules\ucpd\usbpd_dpm_core.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\..\Modules\ucpd\usbpd_dpm_user.c</name>
                 </file>
                 <file>
@@ -1409,9 +1412,6 @@
                 <name>STM32_USBPD_Library</name>
                 <group>
                     <name>Core</name>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USBPD_Library\Core\src\usbpd_dpm_core.c</name>
-                    </file>
                     <file>
                         <name>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_USBPD_Library\Core\src\usbpd_trace.c</name>
                     </file>

@@ -139,3 +139,5 @@ VP_PWR_VS_DBSignals.Signal=PWR_VS_DBSignals
 VP_SYS_VS_Systick.Mode=SysTick
 VP_SYS_VS_Systick.Signal=SYS_VS_Systick
 board=custom
+ProjectManager.Example=CRC_Bytes_Stream_7bit_CRC
+ProjectManager.ExampleSource=CubeFw

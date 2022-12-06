@@ -518,3 +518,5 @@ VP_SYS_VS_tim6.Mode=TIM6
 VP_SYS_VS_tim6.Signal=SYS_VS_tim6
 board=STM32L562E-DK
 boardIOC=true
+ProjectManager.Example=Crypto_Selftest
+ProjectManager.ExampleSource=CubeFw

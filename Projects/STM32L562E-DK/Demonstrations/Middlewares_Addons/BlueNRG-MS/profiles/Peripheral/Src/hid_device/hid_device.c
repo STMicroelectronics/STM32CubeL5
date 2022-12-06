@@ -296,7 +296,7 @@ tBleStatus HidDevice_Make_Discoverable(uint8_t useBoundedDeviceList)
       {
         /* change profile's sub states */
         HID_DEVICE_MESG_DBG ( profiledbgfile, "HidDevice_Make_Discoverable(), STARTING Undirect connectable mode \n");
-        /* start a timer of 10 secconds to try to connnect to white list device */
+        /* start a timer of 10 seconds to try to connect to white list device */
         Blue_NRG_Timer_Start (10, HidDevice_Advertise_Period_Timeout_Handler,&hidDevice.timerID);
         /* change profile's sub states */
         HIDProfile_Write_SubStateMachine(HID_DEVICE_STATE_ADVERTISING_FOR_WHITE_LIST);
@@ -931,7 +931,7 @@ static void HIDProfile_Attribute_Modified_CB(uint16_t handle, uint8_t data_lengt
   {
     if (attrHandle == (hidDevice.scanParamService.scanIntervalWinCharHandle + 1))
     {
-      /* scan interval window char attribute is wirtten by the client */
+      /* scan interval window char attribute is written by the client */
     }
   }  
 }

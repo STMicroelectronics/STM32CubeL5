@@ -628,7 +628,7 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
 
   /* serviceMaxAttributeRecord = 1 for current time service itself +
    *                             2 for current time characteristic +
-   *                             1 for current time client char configuraton descriptor +
+   *                             1 for current time client char configuration descriptor +
    *                             2 for local time information characteristic +
    *                             2 for reference time information characteristic
    */
@@ -662,7 +662,7 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
                                    10, 
                                    (CHAR_PROP_READ |CHAR_PROP_NOTIFY), 
                                    ATTR_PERMISSION_NONE, 
-                                   GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP, /* this is required for controled notification */
+                                   GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP, /* this is required for controlled notification */
                                    10,  /* encryKeySize */
                                    CHAR_VALUE_LEN_CONSTANT, /* isVariable */
                                    &(TimeServerContext.currentTimeCharHandle));

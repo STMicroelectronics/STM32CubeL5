@@ -124,3 +124,5 @@ VP_PWR_VS_DBSignals.Signal=PWR_VS_DBSignals
 VP_SYS_VS_tim7.Mode=TIM7
 VP_SYS_VS_tim7.Signal=SYS_VS_tim7
 board=custom
+ProjectManager.Example=HAL_TimeBase_TIM
+ProjectManager.ExampleSource=CubeFw

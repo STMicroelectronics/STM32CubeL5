@@ -183,7 +183,7 @@ typedef struct notificationAttrS {
    *  iOS notification.
    */
   uint32_t UID;
-  /** App Identifer flag, if TRUE this attribute is requested from the Get Notification Attributes command */
+  /** App Identifier flag, if TRUE this attribute is requested from the Get Notification Attributes command */
   uint8_t  appID_flag;
   /** Title flag, if TRUE this attribute is requested from the Get Notification Attributes command */
   uint8_t  title_flag;
@@ -191,7 +191,7 @@ typedef struct notificationAttrS {
   uint16_t title_max_size;
   /** Subtitle flag, if TRUE this attribute is requested from the Get Notification Attributes command */
   uint8_t  subtitle_flag;
-  /** Max Subtitle length paramter */
+  /** Max Subtitle length parameter */
   uint16_t subtitle_max_size;
   /** Message flag, if TRUE this attribute is requested from the Get Notification Attributes command */
   uint8_t  message_flag;

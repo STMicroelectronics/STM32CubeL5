@@ -182,7 +182,7 @@ typedef struct _tANSContext
 ******************************************************************************/
 static tANSContext alertNotificationServer;
 
-/* stores the alerts sent by the appication
+/* stores the alerts sent by the application
  * these will be sent to server only when the
  * client enables notification by writing to the
  * control point

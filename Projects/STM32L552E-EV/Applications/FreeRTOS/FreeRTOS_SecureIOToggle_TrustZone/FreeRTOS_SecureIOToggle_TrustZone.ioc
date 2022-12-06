@@ -169,3 +169,5 @@ VP_SYS_S_VS_Systick.Signal=SYS_S_VS_Systick
 VP_SYS_VS_tim6.Mode=TIM6
 VP_SYS_VS_tim6.Signal=SYS_VS_tim6
 board=custom
+ProjectManager.Example=FreeRTOS_SecureIOToggle_TrustZone
+ProjectManager.ExampleSource=CubeFw

@@ -56,7 +56,7 @@ public:
      * @brief Handles the click event described by event.
      *
      *        Handles the click event described by event. The action
-     *        callback is called when receiving a REALEASED event in
+     *        callback is called when receiving a RELEASED event in
      *        PRESSED state.
      *
      * @param event The event.

@@ -498,7 +498,7 @@ tBleStatus HT_Collector_DeviceDisconnection(void);
  * connection parameter update request from the peer device. If the master rejects these parameters can send the
  * response with the accepted parameter set to FALSE or ignore the request. This function shall be managed only if the 
  * master has already discovered all the services and characteristics.
- * If theese discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
+ * If these discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
  * with status rejected.
  * @param accepted TRUE if the peripheral peer request is accepted, FALSE otherwise.
  * @param param Connection parameter to update
@@ -533,7 +533,7 @@ tBleStatus HT_Collector_DiscCharacServ(uint16_t uuid_service);
 
 /**
  * @brief Run a profile state machine to execute all the central role procedure:
- * connection, service discovery, characteristic dicovery and 
+ * connection, service discovery, characteristic discovery and 
  * peer device configuration procedure.
  * @param connParam Contains all the values used during the connection
  * procedure (see @ref htcConnDevType)
@@ -687,7 +687,7 @@ void HT_Collector_Read_Temperature_Type_CB(void);
 /**
 * @brief  It stores the Temperature Measurement Characteristics Indication
 * @param  attr_handle: Temperature Measurement characteristic handle
-* @param  data_lenght: Temperature Measurement characteristic value lenght
+* @param  data_lenght: Temperature Measurement characteristic value length
 * @param  value: Temperature Measurement characteristic value 
 */
 void HT_Collector_Temperature_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,uint8_t * value);
@@ -695,7 +695,7 @@ void HT_Collector_Temperature_Measurement_Indication_CB(uint16_t attr_handle, ui
 /**
 * @brief  It stores the Intermediate Temperature Characteristics Notification
 * @param  attr_handle: Intermediate Temperature characteristic handle
-* @param  data_lenght: Intermediate Temperature characteristic value lenght
+* @param  data_lenght: Intermediate Temperature characteristic value length
 * @param  value: Intermediate Temperature characteristic value 
 */
 void HT_Collector_Intermediate_Temperature_Notification_CB(uint16_t attr_handle, uint8_t data_length,uint8_t * value);
@@ -703,7 +703,7 @@ void HT_Collector_Intermediate_Temperature_Notification_CB(uint16_t attr_handle,
 /**
 * @brief  It stores the Measurement Interval Characteristics Indication
 * @param  attr_handle: Measurement Interval characteristic handle
-* @param  data_lenght: Measurement Interval characteristic value lenght
+* @param  data_lenght: Measurement Interval characteristic value length
 * @param  value: Measurement Interval characteristic value 
 */
 void HT_Collector_Measurement_Interval_Indication_CB(uint16_t attr_handle, uint8_t data_length,uint8_t * value);
@@ -736,7 +736,7 @@ extern void HT_Collector_DeviceDiscovery_CB(uint8_t status, uint8_t addr_type, u
 /**
  * @brief This callback contains all the information of the service discovery procedure
  * @param status Status of the service discovery procedure
- * @param numServices Nubmer of services discovered
+ * @param numServices Number of services discovered
  * @param services Data of the services discovered.
  *  * The array will be a sequence of elements with the following format:
  * - 1 byte  UUID Type (1 = 16 bit, 2 = 128 bit)
@@ -823,7 +823,7 @@ extern void HT_Collector_DataValueRead_CB(uint8_t status, uint16_t data_len, uin
 extern void HT_Collector_PinCodeRequired_CB(void);
 
 /**
- * @brief This callack returns the status of the characteristic  enable notification procedure on the
+ * @brief This callback returns the status of the characteristic  enable notification procedure on the
  * connected peer device
  * @param status Status of the procedure 
  * @retval None
@@ -842,7 +842,7 @@ extern void HT_Collector_EnableNotification_CB(uint8_t status);
 extern void HT_Collector_FullConfError_CB(uint8_t error_type, uint8_t code);
 
 /**
- * @brief This callack returns the status of Characteristic notification/indication procedure 
+ * @brief This callback returns the status of Characteristic notification/indication procedure 
  * @param status Status of the procedure 
  * @retval None
  */

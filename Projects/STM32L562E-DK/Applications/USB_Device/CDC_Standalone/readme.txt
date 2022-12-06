@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the USB Device CDC application.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -131,7 +132,7 @@ Connectivity, USB_Device, USB, CDC, Virtual COM Port
     board and can be easily tailored to any other supported device and development board.
 
   - STM32L562E-DK Set-up
-  - Connect the STM32L562E-DK board CN16 to the PC through "TYPE-C" to "Standard A" cable.
+  - Connect the STM32L562E-DK board CN15 to the PC through "TYPE-C" to "Standard A" cable.
     - For loopback mode test: connect directly USART1 TX and RX pins,
   The USART1  interface available on PA9 and PA10 of the microcontroller can be
   connected to ST-LINK MCU. The choice can be changed by setting the related jumpers.
@@ -155,5 +156,5 @@ In order to make the program work, you must do the following :
  - Find out the number of the COM port assigned to the STM32 CDC device
  - Open a serial terminal application and start the communication
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

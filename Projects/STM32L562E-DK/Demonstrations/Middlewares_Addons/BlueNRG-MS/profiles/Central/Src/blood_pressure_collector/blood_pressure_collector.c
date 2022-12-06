@@ -687,7 +687,7 @@ static tMeasurementStatus printMeasurementStatus(uint16_t MeasurStatusFlag)
 /**
 * @brief  It stores the Temperature Measurement Characteristics Indication
 * @param  attr_handle: Temperature Measurement characteristic handle
-* @param  data_lenght: Temperature Measurement characteristic value lenght
+* @param  data_lenght: Temperature Measurement characteristic value length
 * @param  value: Temperature Measurement characteristic value 
 */
 
@@ -740,7 +740,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
       }
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         BPMeasFinal = (float)(mantissa * pow(10, exponent)); 
@@ -761,7 +761,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
       }
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         BPMeasFinal = (float)(mantissa * pow(10, exponent)); 
@@ -782,7 +782,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
       }
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         BPMeasFinal = (float)(mantissa * pow(10, exponent)); 
@@ -809,7 +809,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
       }
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         BPMeasFinal = (float)(mantissa * pow(10, exponent)); 
@@ -830,7 +830,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
       }
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         BPMeasFinal = (float)(mantissa * pow(10, exponent)); 
@@ -851,7 +851,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
       }
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         BPMeasFinal = (float)(mantissa * pow(10, exponent)); 
@@ -883,7 +883,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
         BP_INFO_MSG(profiledbgfile, "Pulse Rate Field Value: NaN.\n");
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         BPMeasFinal = (float)(mantissa * pow(10, exponent)); 
@@ -945,7 +945,7 @@ void BPC_BP_Measurement_Indication_CB(uint16_t attr_handle, uint8_t data_length,
 /**
 * @brief  It stores the Intermediate Temperature Characteristics Notification
 * @param  attr_handle: Intermediate Temperature characteristic handle
-* @param  data_lenght: Intermediate Temperature characteristic value lenght
+* @param  data_lenght: Intermediate Temperature characteristic value length
 * @param  value: Intermediate Temperature characteristic value 
 */
 void BPC_ICP_Notification_CB(uint16_t attr_handle, uint8_t data_length,uint8_t * value)
@@ -996,7 +996,7 @@ void BPC_ICP_Notification_CB(uint16_t attr_handle, uint8_t data_length,uint8_t *
         BP_INFO_MSG(profiledbgfile, "Intermediate Cuff Pressure Value: NaN.\n");
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         ICPFinal = (float)(mantissa * pow(10, exponent)); 
@@ -1019,7 +1019,7 @@ void BPC_ICP_Notification_CB(uint16_t attr_handle, uint8_t data_length,uint8_t *
         BP_INFO_MSG(profiledbgfile, "Intermediate Cuff Pressure Value: NaN.\n");
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         ICPFinal = (float)(mantissa * pow(10, exponent)); 
@@ -1061,7 +1061,7 @@ void BPC_ICP_Notification_CB(uint16_t attr_handle, uint8_t data_length,uint8_t *
         BP_INFO_MSG(profiledbgfile, "Pulse Rate Field Value: NaN.\n");
       else
       {
-        /* Bload Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
+        /* Bloat Pressure Measurement Value = Mantissa * pow(10, Exponent)*/
         if (exponent == 0x0f)
           exponent = -1;
         ICPFinal = (float)(mantissa * pow(10, exponent)); 

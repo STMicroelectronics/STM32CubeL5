@@ -25,10 +25,10 @@ namespace touchgfx
 /**
  * @class   ModalWindow ModalWindow.hpp include/gui/common/ModalWindow.hpp
  *
- * @brief   Container for displaying a modal window and hijacking touch event to underlaying view
+ * @brief   Container for displaying a modal window and hijacking touch event to underlying view
  *          and widgets.
  *
- *          Container for displaying a modal window and hijacking touch event to underlaying view
+ *          Container for displaying a modal window and hijacking touch event to underlying view
  *          and widgets. The container has a background image and a surround box that acts as a
  *          shade on top of the rest of the screen. The background image must be set (using the
  *          setBackground method) and the shade can be adjusted (using the setShadeAlpha and

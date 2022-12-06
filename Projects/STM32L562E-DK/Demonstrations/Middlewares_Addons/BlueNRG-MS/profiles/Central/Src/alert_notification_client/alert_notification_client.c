@@ -781,7 +781,7 @@ void ANC_Read_Unread_Alert_Status_Category_CB(void)
 /**
 * @brief  It stores the New Alert Characteristics Notification
 * @param  attr_handle: New Alert characteristic handle
-* @param  data_lenght: New Alert characteristic value lenght
+* @param  data_lenght: New Alert characteristic value length
 * @param  value: New Alert characteristic value 
 */
 void ANC_New_Alert_Notification_CB(uint16_t attr_handle, uint8_t data_length, uint8_t * value)
@@ -830,7 +830,7 @@ void ANC_New_Alert_Notification_CB(uint16_t attr_handle, uint8_t data_length, ui
 /**
 * @brief  It stores the Unread Alert Status Characteristics Notification
 * @param  attr_handle: Unread Alert Status characteristic handle
-* @param  data_lenght: Unread Alert Status characteristic value lenght
+* @param  data_lenght: Unread Alert Status characteristic value length
 * @param  value: Unread Alert Status characteristic value 
 */
 void ANC_Unread_Alert_Status_Notification_CB(uint16_t attr_handle, uint8_t data_length, uint8_t * value)

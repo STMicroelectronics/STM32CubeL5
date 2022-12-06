@@ -116,7 +116,7 @@ public:
      *        A function that causes executing task to sleep for a number of milliseconds.
      *        This function is OPTIONAL. It is only used by the TouchGFX in the case of
      *        a specific frame refresh strategy (REFRESH_STRATEGY_OPTIM_SINGLE_BUFFER_TFT_CTRL).
-     *        Due to backwards compatibility, in order for this function to be useable by the HAL
+     *        Due to backwards compatibility, in order for this function to be usable by the HAL
      *        the function must be explicitly registered:
      *          hal.registerTaskDelayFunction(&OSWrappers::taskDelay)
      * @param ms The number of milliseconds to sleep

@@ -403,6 +403,11 @@
 			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/Modules/ucpd/demo_application.c</locationURI>
 		</link>
 		<link>
+			<name>Application/Modules/Ucpd/usbpd_dpm_core.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/Modules/ucpd/usbpd_dpm_core.c</locationURI>
+		</link>
+		<link>
 			<name>Application/Modules/Ucpd/usbpd_dpm_user.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/Modules/ucpd/usbpd_dpm_user.c</locationURI>
@@ -501,11 +506,6 @@
 			<name>Middlewares/Third_Party/FreeRTOS/tasks.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-5-PROJECT_LOC%7D/Middlewares/Third_Party/FreeRTOS/Source/tasks.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/ST/STM32_USBPD_Library/Core/usbpd_dpm_core.c</name>
-			<type>1</type>
-			<locationURI>$%7BPARENT-5-PROJECT_LOC%7D/Middlewares/ST/STM32_USBPD_Library/Core/src/usbpd_dpm_core.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ST/STM32_USBPD_Library/Core/usbpd_trace.c</name>

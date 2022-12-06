@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -99,6 +98,7 @@ void HAL_DFSDM_FilterMspInit(DFSDM_Filter_HandleTypeDef* hdfsdm_filter)
   /* USER CODE BEGIN DFSDM1_MspInit 0 */
 
   /* USER CODE END DFSDM1_MspInit 0 */
+
   /** Initializes the peripherals clock
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_DFSDM1;
@@ -160,6 +160,7 @@ void HAL_DFSDM_ChannelMspInit(DFSDM_Channel_HandleTypeDef* hdfsdm_channel)
   /* USER CODE BEGIN DFSDM1_MspInit 0 */
 
   /* USER CODE END DFSDM1_MspInit 0 */
+
   /** Initializes the peripherals clock
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_DFSDM1;
@@ -316,5 +317,3 @@ void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef* htim_pwm)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -153,7 +153,7 @@ tBleStatus HT_Init(tThermometerFeatures thermometerFeatures,
  * is configured to use the whitelist which is configured
  * with bonded devices at the time of initialization else
  * limited discoverable mode is entered to connect to any
- * of the avialable devices
+ * of the available devices
  */ 
 tBleStatus HT_Advertize(uint8_t useWhitelist);
 
@@ -166,7 +166,7 @@ tBleStatus HT_Advertize(uint8_t useWhitelist);
  * 
  * updates the temperature measurement characteristic
  * 
- * @return BLE_STATUS_SUCCESS if the update was started succesfully.
+ * @return BLE_STATUS_SUCCESS if the update was started successfully.
  * Once the update is completed, an event 
  */ 
 tBleStatus HT_Send_Temperature_Measurement(tTempMeasurementVal tempMeasurementVal);
@@ -181,7 +181,7 @@ tBleStatus HT_Send_Temperature_Measurement(tTempMeasurementVal tempMeasurementVa
  * 
  * updates the temperature measurement characteristic
  * 
- * @return BLE_STATUS_SUCCESS if the update was started succesfully.
+ * @return BLE_STATUS_SUCCESS if the update was started successfully.
  * Once the update is completed, an event 
  */ 
 tBleStatus HT_Send_Intermediate_Temperature(tTempMeasurementVal tempMeasurementVal);

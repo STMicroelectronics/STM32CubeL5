@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -31,7 +30,7 @@
 /*!
  * @defgroup core_common Common Core Library Routines
  * @brief Common macros, datatypes and routines of core common module
- * @details This module contains the definitons and handling of the @ref ai_node
+ * @details This module contains the definitions and handling of the @ref ai_node
  * datastructures. An ai_node is a generic abstraction for a network node that 
  * could be either a fixed function layer or an operator. Ideally the platform 
  * interface defined in api module should handle an process generic nodes in the
@@ -237,7 +236,7 @@ typedef void (*node_forward_func)(struct ai_node_s* node);
 /*!
  * @typedef ai_float (*func_nl_el)(const ai_float x)
  * @ingroup core_common
- * @brief Fuction pointer for generic elementwise transforms
+ * @brief Function pointer for generic elementwise transforms
  *
  * This function pointer abstracts a generic nonlinear function applied to a
  * single element. See @ref ai_math_sqrt in @ref math_helpers as examples.

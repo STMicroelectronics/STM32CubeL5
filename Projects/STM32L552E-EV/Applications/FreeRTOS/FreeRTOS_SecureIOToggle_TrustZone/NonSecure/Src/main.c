@@ -5,13 +5,14 @@
   * @author  MCD Application Team
   * @brief   Main program body (non-secure)
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -45,7 +46,7 @@ osThreadId_t LEDThreadHandleHandle;
 const osThreadAttr_t LEDThreadHandle_attributes = {
   .name = "LEDThreadHandle",
   .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 512
+  .stack_size = 512 * 4
 };
 /* USER CODE BEGIN PV */
 
@@ -163,6 +164,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -181,6 +183,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -250,7 +253,7 @@ void LED_Thread(void *argument)
   /* USER CODE END 5 */
 }
 
- /**
+/**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM6 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
@@ -307,5 +310,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

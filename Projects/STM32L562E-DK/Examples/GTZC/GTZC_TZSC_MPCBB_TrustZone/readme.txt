@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the GTZC_TZSC_MPCBB_TrustZone example with TZEN=1
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2019 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -170,5 +171,5 @@ STM32CubeIDE
      makes the code execution halt on SecureFault_Handler() on voluntary security violation.
      Press "Resume (F8)" to get the expected error led switched on.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

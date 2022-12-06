@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   This application runs crypto through mbed TLS selftest functions.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2020 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2020 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                               www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -184,5 +185,5 @@ licensed under Apache 2.0 license. Respecting the original Apache 2.0 license
 terms obliges us to retain ARM copyright declarations as well as Apache 2.0
 file headers.
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

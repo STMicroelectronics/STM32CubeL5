@@ -495,7 +495,7 @@ protected:
     bool scrollableY; ///< Is the container scrollable in the vertical direction.
 
     bool scrollbarsVisible; ///< Are scrollbars always visible.
-    bool scrollbarsPermanentlyVisible; ///< Are scrollbars alway visible.
+    bool scrollbarsPermanentlyVisible; ///< Are scrollbars always visible.
 
     uint16_t scrollDuration; ///< Number of ticks the scroll animation should use.
 

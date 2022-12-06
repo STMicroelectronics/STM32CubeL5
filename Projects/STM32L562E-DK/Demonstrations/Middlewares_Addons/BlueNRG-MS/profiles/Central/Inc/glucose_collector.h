@@ -498,7 +498,7 @@ tBleStatus GL_Collector_DeviceDisconnection(void);
  * connection parameter update request from the peer device. If the master rejects these parameters can send the
  * response with the accepted parameter set to FALSE or ignore the request. This function shall be managed only if the 
  * master has already discovered all the services and characteristics.
- * If theese discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
+ * If these discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
  * with status rejected.
  * @param accepted TRUE if the peripheral peer request is accepted, FALSE otherwise.
  * @param param Connection parameter to update
@@ -533,7 +533,7 @@ tBleStatus GL_Collector_DiscCharacServ(uint16_t uuid_service);
 
 /**
  * @brief Run a profile state machine to execute all the central role procedure:
- * connection, service discovery, characteristic dicovery and 
+ * connection, service discovery, characteristic discovery and 
  * peer device configuration procedure.
  * @param connParam Contains all the values used during the connection
  * procedure (see @ref glcConnDevType)
@@ -672,7 +672,7 @@ void GL_Collector_RACP_Check_Write_Response(uint8_t err_code);
 /**
 * @brief  It handles the RACP Characteristic Indication from a Glucose Sensor
 * @param  attr_handle: glucose  characteristic handle
-* @param  data_lenght: glucose sensor characteristic value lenght
+* @param  data_lenght: glucose sensor characteristic value length
 * @param  value: glucose sensor characteristic value 
 */
 void GL_Collector_RACP_Indications(uint16_t attr_handle, uint8_t data_lenght,uint8_t * value);
@@ -704,7 +704,7 @@ extern void GL_Collector_DeviceDiscovery_CB(uint8_t status, uint8_t addr_type, u
 /**
  * @brief This callback contains all the information of the service discovery procedure
  * @param status Status of the service discovery procedure
- * @param numServices Nubmer of services discovered
+ * @param numServices Number of services discovered
  * @param services Data of the services discovered.
  *  * The array will be a sequence of elements with the following format:
  * - 1 byte  UUID Type (1 = 16 bit, 2 = 128 bit)
@@ -791,7 +791,7 @@ extern void GL_Collector_DataValueRead_CB(uint8_t status, uint16_t data_len, uin
 extern void GL_Collector_PinCodeRequired_CB(void);
 
 /**
- * @brief This callack returns the status of the characteristic  enable notification procedure on the
+ * @brief This callback returns the status of the characteristic  enable notification procedure on the
  * connected peer device
  * @param status Status of the procedure 
  * @retval None
@@ -830,7 +830,7 @@ extern void GL_Collector_RACP_Write_Response_CB(uint8_t err_code);
 extern void GL_Collector_RACP_Received_Indication_CB(uint8_t racp_response, uint8_t value, uint8_t  num_records); 
 
 /**
- * @brief This callack returns the status of Characteristic notification/indication procedure 
+ * @brief This callback returns the status of Characteristic notification/indication procedure 
  * @param status Status of the procedure 
  * @retval None
  */

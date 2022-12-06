@@ -120,7 +120,7 @@ typedef struct _tHeartRateMeasure
 
 	/**
 	 * 9 is the maximum length of RR interval values allowed
-	 * (if EE is not present and mesurement value is 8bit)
+	 * (if EE is not present and measurement value is 8bit)
 	 * if the length is more than 9, then only the last 9
 	 * will be considered assuming they correspond to the 
 	 * latest collected data. 

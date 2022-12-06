@@ -232,7 +232,7 @@
 
 /**
  * @brief The insufficient encryption error code
- * is received when the master wnats read/write
+ * is received when the master wants read/write
  * a characteristic with encryption security enabled,
  * and the pairing/bonding procedure is still not started.
  * Define used in Master_Pairing_CB()
@@ -448,7 +448,7 @@ typedef struct connUpdateParamS {
 typedef struct dataReceivedS {
   /** Attribute Value handle */
   uint16_t attr_handle;
-  /** Data received lentgh */
+  /** Data received length */
   uint8_t  data_length;
   /** Data received */
   uint8_t  *data_value;
@@ -654,7 +654,7 @@ uint8_t Master_CloseConnection(uint16_t handle);
  * connection parameter update request from the peer device. If the master rejects these parameters can send the
  * response with the accepted parameter set to FALSE or ignore the request. This function shall be managed only if the 
  * master has already discovered all the services and characteristics.
- * If theese discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
+ * If these discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
  * with status rejected.
  * @param conn_handle Connection handle
  * @param accepted TRUE if the peripheral peer request is accepted, FALSE otherwise.
@@ -864,8 +864,8 @@ uint8_t Master_WriteWithoutResponse_Value(uint16_t conn_handle,  uint16_t attr_v
 					  uint8_t value_len, uint8_t* attr_value);
 
 /**
- * @brief This function allows or rejects a write reqeust from the peer device.
- * @param conn_handle Conenction handle
+ * @brief This function allows or rejects a write request from the peer device.
+ * @param conn_handle Connection handle
  * @param attr_value_handle Handle of the attribute to write
  * @param write_status 0x00: The value can be written to the attribute specified by attr_handle\n
  * 		       0x01: The value cannot be written to the attribute specified by the attr_handle.
@@ -879,8 +879,8 @@ uint8_t Master_WriteResponse(uint16_t conn_handle, uint16_t attr_value_handle, u
 			     uint8_t attr_value_len, uint8_t *attr_value);
 
 /**
- * @brief This function allows the master to send a response to a read reqeust from the peer device.
- * @param conn_handle Conenction handle
+ * @brief This function allows the master to send a response to a read request from the peer device.
+ * @param conn_handle Connection handle
  * @retval Status of call
  * @note This function must be called inside the Master_PeerDataPermitExchange_CB() callback
  */

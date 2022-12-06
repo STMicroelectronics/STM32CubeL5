@@ -384,7 +384,7 @@ tBleStatus FML_DeviceDisconnection(void);
  * connection parameter update request from the peer device. If the master rejects these parameters can send the
  * response with the accepted parameter set to FALSE or ignore the request. This function shall be managed only if the 
  * master has already discovered all the services and characteristics.
- * If theese discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
+ * If these discovery procedure are ongoing, the master basic profile sends automatically the connection parameter response
  * with status rejected.
  * @param accepted TRUE if the peripheral peer request is accepted, FALSE otherwise.
  * @param param Connection parameter to update
@@ -419,7 +419,7 @@ tBleStatus FML_DiscCharacServ(uint16_t uuid_service);
 
 /**
  * @brief Run a profile state machine to execute all the central role procedure:
- * connection, service discovery, characteristic dicovery and 
+ * connection, service discovery, characteristic discovery and 
  * peer device configuration procedure.
  * @param connParam Contains all the values used during the connection
  * procedure (see @ref fmlConnDevType)
@@ -475,7 +475,7 @@ extern void FML_DeviceDiscovery_CB(uint8_t status, uint8_t addr_type, uint8_t *a
 /**
  * @brief This callback contains all the information of the service discovery procedure
  * @param status Status of the service discovery procedure
- * @param numServices Nubmer of services discovered
+ * @param numServices Number of services discovered
  * @param services Data of the services discovered.
  *  * The array will be a sequence of elements with the following format:
  * - 1 byte  UUID Type (1 = 16 bit, 2 = 128 bit)

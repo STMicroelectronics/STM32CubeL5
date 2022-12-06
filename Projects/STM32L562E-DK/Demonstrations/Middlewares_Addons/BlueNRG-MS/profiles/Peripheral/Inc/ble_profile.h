@@ -461,7 +461,7 @@ tBleStatus BLE_Profile_Disconnect(void);
  * If the profile requesting the state change is a registered profile and 
  * the main profile is in a state to accept the change, the sub state is changed.
  * This function has to be called by the upper profiles to notify the main profile
- * about teh advertising status. This function has to be called with the nextState 
+ * about the advertising status. This function has to be called with the nextState 
  * parameter set to BLE_PROFILE_STATE_CONNECTABLE_IDLE when advertising is disabled
  * and BLE_PROFILE_STATE_ADVERTISING when the advertising has been successfully enabled
  */ 

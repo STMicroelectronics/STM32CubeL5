@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -114,7 +113,6 @@ USBPD_USER_SettingsTypeDef       DPM_USER_Settings[USBPD_PORT_COUNT] =
     .PE_VconnSwap = USBPD_FALSE,                 /* support VCONN swap                                  */
     .PE_DR_Swap_To_DFP = USBPD_TRUE,                  /*  Support of DR Swap to DFP                                  */
     .PE_DR_Swap_To_UFP = USBPD_TRUE,                  /*  Support of DR Swap to UFP                                  */
-#if defined(USBPD_REV30_SUPPORT)
 #if _MANU_INFO
     .DPM_ManuInfoPort =                      /*!< Manufacturer information used for the port            */
     {
@@ -123,7 +121,6 @@ USBPD_USER_SettingsTypeDef       DPM_USER_Settings[USBPD_PORT_COUNT] =
       .ManuString = "STMicroelectronics",    /*!< Vendor defined byte array                 */
     },
 #endif /* _MANU_INFO */
-#endif /* USBPD_REV30_SUPPORT */
   },
 };
 
@@ -151,5 +148,3 @@ USBPD_USER_SettingsTypeDef       DPM_USER_Settings[USBPD_PORT_COUNT] =
 #endif
 
 #endif /* __USBPD_DPM_CONF_H_ */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

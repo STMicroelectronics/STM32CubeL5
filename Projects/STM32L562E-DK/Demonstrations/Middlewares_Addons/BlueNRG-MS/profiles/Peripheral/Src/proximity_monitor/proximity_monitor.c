@@ -617,7 +617,7 @@ static void ProximityMonitor_Rx_Event_Handler(void *pckt)
 	    }
 	    groupBaseIndx = 0;
 	    /**
-	     * Resp event group data fromat:
+	     * Resp event group data format:
 	     * uint16_t Start_Handle,
 	     * uint8_t Char_Properties, 
 	     * uint16_t Char_Handle, 
@@ -708,7 +708,7 @@ static void ProximityMonitor_Rx_Event_Handler(void *pckt)
 	    }
 	    groupBaseIndx = 0;
 	    /**
-	     * Resp event group data fromat:
+	     * Resp event group data format:
 	     * uint16_t Start_Handle,
 	     * uint16_t End_Handle, 
 	     * uint16_t UUID
@@ -1098,7 +1098,7 @@ tBleStatus ProximityMonitorProfile_StateMachine(void)
   {
   case PROXIMITY_MONITOR_STATE_WAITING_BLE_INIT:
     {
-      /* chech whether the main profile has done with ble init or not */
+      /* check whether the main profile has done with ble init or not */
       if (BLE_Profile_Get_Main_State() == BLE_PROFILE_STATE_INIT_PROFILE)
       {
 	PROXIMITY_REPORTER_MESG_DBG( profiledbgfile, "Proximity Monitor Profile is in initialized State \n");
@@ -1167,7 +1167,7 @@ tBleStatus ProximityMonitorProfile_StateMachine(void)
 	    
 	    proximityMonitor.opCode = HCI_VENDOR_CMD_GAP_SET_UNDIRECTED_CONNECTABLE;
                       
-	    /* start a timer of 10 secconds to try to connnect to white list device */
+	    /* start a timer of 10 seconds to try to connect to white list device */
 	    Blue_NRG_Timer_Start (10, ProximityMonitor_Advertise_Period_Timeout_Handler,&proximityMonitor.timerID);
 	  }
 	}

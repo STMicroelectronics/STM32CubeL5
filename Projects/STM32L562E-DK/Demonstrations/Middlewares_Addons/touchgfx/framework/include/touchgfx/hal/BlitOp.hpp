@@ -53,7 +53,7 @@ struct BlitOp
 {
     uint32_t        operation;  ///< The operation to perform @see BlitOperations
     const uint16_t* pSrc;          ///< Pointer to the source (pixels or indexes)
-    const uint8_t*  pClut;         ///< Pointer to the source CLUT entires
+    const uint8_t*  pClut;         ///< Pointer to the source CLUT entries
     uint16_t*       pDst;          ///< Pointer to the destination
     uint16_t        nSteps;        ///< The number of pixels in a line
     uint16_t        nLoops;        ///< The number of lines

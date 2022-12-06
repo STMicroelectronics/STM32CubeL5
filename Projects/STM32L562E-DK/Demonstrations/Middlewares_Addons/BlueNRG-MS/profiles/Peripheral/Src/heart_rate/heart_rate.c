@@ -322,7 +322,7 @@ tBleStatus HR_Sensor_Make_Discoverable(uint8_t useBoundedDeviceList)
       retval = HR_Sensor_Set_Discoverable(HRP_FAST_CONN_ADV_INTERVAL_MIN,HRP_FAST_CONN_ADV_INTERVAL_MAX, WHITE_LIST_FOR_ALL);  /* use white list */
       if (retval == BLE_STATUS_SUCCESS)
       {
-        /* start a timer of 10 seconds to try to connnect to white list device */
+        /* start a timer of 10 seconds to try to connect to white list device */
         Blue_NRG_Timer_Start (10, HRProfile_Advertise_Period_Timeout_Handler,&heartRate.timerID); 
         
         HRPROFILE_MESG_DBG ( profiledbgfile, "HR_Sensor_Make_Discoverable(), Device is now in Advertising for White List devices \n");
@@ -455,7 +455,7 @@ tBleStatus HRProfile_Send_HRM_Value ( tHeartRateMeasure heartRateVal )
       BLUENRG_memset ( (void*)hrmCharValue, 0, 30);
       hrmCharLength = 1;
       
-      /* Heart Rate Measurment Value */
+      /* Heart Rate Measurement Value */
       if (heartRateVal.valueformat == HRM_VALUE_FORMAT_UINT8)
       {
         hrmCharValue[hrmCharLength] = (uint8_t)heartRateVal.heartRateValue;

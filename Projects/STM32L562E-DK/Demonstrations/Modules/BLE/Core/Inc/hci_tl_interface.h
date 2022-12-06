@@ -1,29 +1,24 @@
 /**
-******************************************************************************
-* @file  : hci_tl_interface.h
-* @author  Central Labs
-* @version V2.0.0
-* @date    10-December-2018
-* @brief : This file contains all the functions prototypes for the STM32
-*          BlueNRG-MS HCI Transport Layer interface
-*		   This file must be moved in the application folder by the user 
-*		   and renamed 'hci_tl_interface'		   
-******************************************************************************
-*
-* COPYRIGHT 2019 STMicroelectronics
-*
-* Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-* You may not use this file except in compliance with the License.
-* You may obtain a copy of the License at:
-*
-*        http://www.st.com/software_license_agreement_liberty_v2
-*
-* Unless required by applicable law or agreed to in writing, software 
-* distributed under the License is distributed on an "AS IS" BASIS, 
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-******************************************************************************
+  ******************************************************************************
+  * @file  : hci_tl_interface.h
+  * @author  Central Labs
+  * @version V2.0.0
+  * @date    10-December-2018
+  * @brief : This file contains all the functions prototypes for the STM32
+  *          BlueNRG-MS HCI Transport Layer interface
+  *		   This file must be moved in the application folder by the user 
+  *		   and renamed 'hci_tl_interface'		   
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -82,6 +77,3 @@ void hci_tl_lowlevel_isr(void);
 }
 #endif
 #endif /* __SENSORTILE_BLUENRG_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

@@ -157,7 +157,7 @@ typedef struct _tBPMValue
 
   /**
    * if the timestamp flag is set to true,
-   * this field chould contain the date and
+   * this field should contain the date and
    * time
    */ 
   tDateTime timeStamp;
@@ -264,7 +264,7 @@ tBleStatus BPS_Init(BOOL intermediateCuffPressureChar,
  * is configured to use the whitelist which is configured
  * with bonded devices at the time of initialization else
  * limited discoverable mode is entered to connect to any
- * of the avialable devices
+ * of the available devices
  */ 
 tBleStatus BPS_Advertize(uint8_t useWhitelist);
 

@@ -77,7 +77,7 @@ public:
      * @param x        The x coordinate.
      * @param xAdjust  The minor adjustment of x (used when a pixel is smaller than a byte to
      *                 specify that the pointer should have been advanced "xAdjust" pixels
-     *                 futher).
+     *                 further).
      * @param y        The y coordinate.
      * @param count    Number of pixels to fill.
      * @param covers   The coverage in of each pixel.

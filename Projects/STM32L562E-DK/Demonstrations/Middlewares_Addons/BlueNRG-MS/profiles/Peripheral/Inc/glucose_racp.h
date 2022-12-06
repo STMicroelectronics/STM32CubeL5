@@ -81,7 +81,7 @@ uint16_t glucoseDataBase_FindNextSelectedRecord(uint16_t database_index);
 
 /**
   * @brief RACP request handler 
-  * @param [in] attValueLen : received RACP request lenght
+  * @param [in] attValueLen : received RACP request length
   * @retval none
   */
 void glucoseRACP_RequestHandler(uint8_t attValueLen);

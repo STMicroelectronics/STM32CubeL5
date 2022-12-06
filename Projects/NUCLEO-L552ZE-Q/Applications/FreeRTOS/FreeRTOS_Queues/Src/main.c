@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -49,14 +48,14 @@ osThreadId_t MessageQueueProHandle;
 const osThreadAttr_t MessageQueuePro_attributes = {
   .name = "MessageQueuePro",
   .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 512
+  .stack_size = 512 * 4
 };
 /* Definitions for MessageQueueCon */
 osThreadId_t MessageQueueConHandle;
 const osThreadAttr_t MessageQueueCon_attributes = {
   .name = "MessageQueueCon",
   .priority = (osPriority_t) osPriorityLow,
-  .stack_size = 512
+  .stack_size = 512 * 4
 };
 /* Definitions for osQueue */
 osMessageQueueId_t osQueueHandle;
@@ -187,6 +186,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -205,6 +205,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -235,6 +236,7 @@ static void MX_ICACHE_Init(void)
   /* USER CODE BEGIN ICACHE_Init 1 */
 
   /* USER CODE END ICACHE_Init 1 */
+
   /** Enable instruction cache in 1-way (direct mapped cache)
   */
   if (HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
@@ -329,7 +331,7 @@ void MessageQueueConsumer(void *argument)
   /* USER CODE END MessageQueueConsumer */
 }
 
- /**
+/**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM6 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
@@ -384,5 +386,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
