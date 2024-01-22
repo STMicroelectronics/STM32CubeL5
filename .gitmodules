@@ -6,3 +6,15 @@
 	path = Drivers/CMSIS/Device/ST/STM32L5xx
 	url = https://github.com/STMicroelectronics/cmsis_device_l5.git
 	branch = master
+[submodule "Drivers/BSP/STM32L5xx_Nucleo"]
+	path = Drivers/BSP/STM32L5xx_Nucleo
+	url = https://github.com/STMicroelectronics/stm32l5xx-nucleo-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32L552E-EV"]
+	path = Drivers/BSP/STM32L552E-EV
+	url = https://github.com/STMicroelectronics/stm32l552e-ev-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32L562E-DK"]
+	path = Drivers/BSP/STM32L562E-DK
+	url = https://github.com/STMicroelectronics/stm32l562e-dk-bsp.git
+	branch = main
