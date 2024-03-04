@@ -469,7 +469,7 @@ tBleStatus ANS_Update_New_Alert_Category(uint8_t len,uint8_t* category)
   tBleStatus retval = ERR_COMMAND_DISALLOWED;
 	
   /* the value of this characteristic should not be changed
-   * while in connection. So donot allow an update during connection
+   * while in connection. So do not allow an update during connection
    */ 
   if((alertNotificationServerContext.state != ANS_CONNECTED) &&
      (alertNotificationServerContext.state >= ANS_INITIALIZED))
@@ -508,7 +508,7 @@ tBleStatus ANS_Update_New_Alert_Category(uint8_t len,uint8_t* category)
  * 
  * @param[in] len : length of the category field. It has to be 0 or 1.
  * @param[in] category : bitmask of the categories supported. The bitmasks
- * are split across 2 octets and hav the meaning as described in the
+ * are split across 2 octets and have the meaning as described in the
  * bluetooth assigned numbers documentation
  * 
  * updates the unread alert status category characteristic with the new bitmask.
@@ -522,7 +522,7 @@ tBleStatus ANS_Update_Unread_Alert_Category(uint8_t len,uint8_t* category)
   tBleStatus retval = ERR_COMMAND_DISALLOWED;
 	
   /* the value of this characteristic should not be changed
-   * while in connection. So donot allow an update during connection
+   * while in connection. So do not allow an update during connection
    */ 
   if((alertNotificationServerContext.state != ANS_CONNECTED) &&
      (alertNotificationServerContext.state >= ANS_INITIALIZED))
@@ -768,7 +768,7 @@ tBleStatus ANC_Handle_ControlPoint_Write(uint8_t *attVal)
     {
       if(attVal[1] == 0xFF)
       {
-        ANS_INFO_MSG(profiledbgfile,"DISABLE_UNREAD_ALERT_STATUS_NOTIFICATION for ALL supported Catagories (0xFF)");
+        ANS_INFO_MSG(profiledbgfile,"DISABLE_UNREAD_ALERT_STATUS_NOTIFICATION for ALL supported Categories (0xFF)");
 	/* disable notifications for all supported
 	 * categories
 	 */

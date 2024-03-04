@@ -97,11 +97,6 @@ int main(void)
   
 	/* Leave the GPIO clocks enabled to let non-secure having I/Os control */
 
-  /* Secure SysTick should rather be suspended before calling non-secure  */
-  /* in order to avoid wake-up from sleep mode entered by non-secure      */
-  /* The Secure SysTick shall be resumed on non-secure callable functions */
-  HAL_SuspendTick();
-
   /*************** Setup and jump to non-secure *******************************/
 
   NonSecure_Init();
@@ -332,7 +327,7 @@ static void SystemClock_Config(void)
     while(1);
   }
 }
-
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Initializes the SDMMC1 peripheral.
   * @param  hsd SD handle
@@ -370,7 +365,7 @@ HAL_StatusTypeDef MX_SDMMC1_SD_Init(SD_HandleTypeDef *hsd)
   return ret;
 }
 
-#ifdef  USE_FULL_ASSERT
+
 
 /**
   * @brief  Reports the name of the source file and the source line number

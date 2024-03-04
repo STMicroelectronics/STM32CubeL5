@@ -189,7 +189,7 @@
 #ifndef TFM_EXTERNAL_FLASH_ENABLE
 #define LOADER_MAX_CODE_SIZE                 (FLASH_TOTAL_SIZE - FLASH_AREA_3_OFFSET - FLASH_AREA_3_SIZE) /* 20 Kbytes  : 18kbytes are fine*/
 #if LOADER_NS_CODE_SIZE > LOADER_MAX_CODE_SIZE
-#error "Loder mapping overlap download slot" 
+#error "Loader mapping overlap download slot" 
 #endif /* LOADER_NS_CODE_SIZE > LOADER_MAX_CODE_SIZE */
 #endif /* TFM_EXTERNAL_FLASH_ENABLE */
 #define FLASH_AREA_LOADER_BANK_OFFSET       (FLASH_B_SIZE-LOADER_NS_CODE_SIZE)

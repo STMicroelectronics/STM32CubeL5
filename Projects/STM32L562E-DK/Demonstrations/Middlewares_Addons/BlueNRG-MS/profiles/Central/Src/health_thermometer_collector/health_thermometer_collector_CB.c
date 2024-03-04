@@ -378,7 +378,7 @@ void Master_HTC_PeerDataExchange_CB(uint8_t *procedure, uint8_t *status,
       } 
       else if ((healthThermometerCollectorContext.fullConf) && (healthThermometerCollectorContext.state == HEALTH_THERMOMETER_COLLECTOR_WAIT_READ_MEASUREMENT_INTERVAL))
       {
-        /* Start enable temparature measurement indication */
+        /* Start enable temperature measurement indication */
         healthThermometerCollectorContext.state = HEALTH_THERMOMETER_COLLECTOR_ENABLE_TEMPERATURE_MEASUREMENT_INDICATION;
       } 
       else 

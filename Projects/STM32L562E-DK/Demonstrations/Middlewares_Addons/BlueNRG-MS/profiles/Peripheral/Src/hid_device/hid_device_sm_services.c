@@ -1110,7 +1110,7 @@ tBleStatus HIDProfile_StateMachine(void)
           {
             HID_DEVICE_MESG_DBG (profiledbgfile,"HIDProfile_StateMachine(), FAILED to start Fast discoverable mode, Error: %02X !!\n", hciCmdResult);
             /* Request to put the device in limited discoverable mode is 
-               * unsuccess, put the device back in advrtisable idle mode */
+               * unsuccessful, put the device back in advrtisable idle mode */
             HIDProfile_Write_SubStateMachine(HID_DEVICE_STATE_ADVERTISABLE_IDLE);
             return hciCmdResult; 
           }
@@ -1148,7 +1148,7 @@ tBleStatus HIDProfile_StateMachine(void)
             {
               HID_DEVICE_MESG_DBG (profiledbgfile,"HIDProfile_StateMachine(), FAILED to start Low Power Limited Discoverable mode, Error: %02X !!\n", hciCmdResult);
               /* Request to put the device in limited discoverable mode is 
-              * unsuccess, put the device back in advrtisable idle mode */
+              * unsuccessful, put the device back in advrtisable idle mode */
               HIDProfile_Write_SubStateMachine(HID_DEVICE_STATE_ADVERTISABLE_IDLE);
               return hciCmdResult; 
             }

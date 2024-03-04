@@ -99,7 +99,7 @@ File system, FatFs, SD Card, SRAM, FAT Volume, Format, Mount, Read, Write
 
 @par Hardware and Software environment
 
-  - This application runs on STM32L552ZETxQ devices
+  - This application runs on STM32L562QEIxQ devices
 
   - This application has been tested with STM32L562E-DK board and can be
     easily tailored to any other supported device and development board.

@@ -36,7 +36,7 @@ AI_API_DECLARE_BEGIN
 
 
 /*!
- * @brief Convert tensors from float to quantized or viceversa
+ * @brief Convert tensors from float to quantized or vice-versa
  * @ingroup core_convert
  * @param[in] pNode in a handler to node (layer or operator)
  */
@@ -52,7 +52,7 @@ AI_INTERNAL_API
 void node_convert_fixed(ai_node *pNode);
 
 /*!
- * @brief Convert integer tensors between signed and usigned (int8/uint8) formats
+ * @brief Convert integer tensors between signed and unsigned (int8/uint8) formats
  * @ingroup core_convert
  * @param[in] pNode in a handler to node (layer or operator)
  */

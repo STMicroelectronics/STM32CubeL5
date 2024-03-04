@@ -40,7 +40,7 @@ The system isolation splits the internal Flash and internal SRAM memories into t
 Secure Application :
 After Reset, the Flash memory Program/Erase Controller is locked. HAL_FLASH_Unlock() function
 is used to enable the FLASH control register access.
-A secure area is defined in non-secure Flash area (bank 2) with the block-based functionnality.
+A secure area is defined in non-secure Flash area (bank 2) with the block-based functionality.
 Before programming this secure area, an erase operation is performed using
 the flash erase page feature. The erase procedure is done by filling the erase init
 structure giving the starting erase page and the number of pagess to erase.

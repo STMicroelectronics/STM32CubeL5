@@ -123,7 +123,7 @@ int main(void)
       /* Re-enable wakeup source */
     /* ## Setting the Wake up time ############################################*/
     /* RTC Wakeup Interrupt Generation: 
-      the wake-up counter is set to its maximum value to yield the longuest
+      the wake-up counter is set to its maximum value to yield the longest
       stop time to let the current reach its lowest operating point.
       The maximum value is 0xFFFF, corresponding to about 33 sec. when 
       RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16
@@ -245,6 +245,8 @@ static void MX_ICACHE_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOE_CLK_ENABLE();
@@ -359,6 +361,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */

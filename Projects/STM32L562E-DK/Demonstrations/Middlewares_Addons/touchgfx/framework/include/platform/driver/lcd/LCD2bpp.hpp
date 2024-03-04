@@ -78,7 +78,7 @@ public:
      *
      * @brief Blits a 2D source-array to the framebuffer.
      *
-     *        Blits a 2D source-array to the framebuffer perfoming alpha-blending (and
+     *        Blits a 2D source-array to the framebuffer performing alpha-blending (and
      *        tranparency keying) as specified Performs a software blend if HAL does not
      *        support BLIT_COPY_WITH_ALPHA and alpha != 255.
      *
@@ -98,7 +98,7 @@ public:
      *
      * @brief Blits a 2D source-array to the framebuffer while converting the format.
      *
-     *        Blits a 2D source-array to the framebuffer perfoming alpha-blending (and
+     *        Blits a 2D source-array to the framebuffer performing alpha-blending (and
      *        tranparency keying) as specified. Performs a software blend if HAL does not
      *        support BLIT_COPY_WITH_ALPHA and alpha != 255. LCD2 supports source data
      *        formats: RGB565 and ARGB8888.
@@ -347,7 +347,7 @@ public:
 
 protected:
     static const uint16_t TRANSPARENT_COL = 0xABCD; ///< Transparency color. Deprecated, do not use.
-    static const uint8_t alphaTable2bpp[256];       ///< The alpha lookup table to avoid arithmetics when alpha blending
+    static const uint8_t alphaTable2bpp[256];       ///< The alpha lookup table to avoid arithmetic when alpha blending
 
     /**
      * @fn virtual void LCD2bpp::drawTextureMapScanLine(const DrawingSurface& dest, const Gradients& gradients, const Edge* leftEdge, const Edge* rightEdge, const TextureSurface& texture, const Rect& absoluteRect, const Rect& dirtyAreaAbsolute, RenderingVariant renderVariant, uint8_t alpha, uint16_t subDivisionSize);

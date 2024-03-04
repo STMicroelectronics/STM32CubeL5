@@ -225,7 +225,7 @@ typedef struct Attribute_Group_Handle_Pair_t_s {
  * @brief Configures the Notification Consumer.
  * @param conn_handle Connection handle used from the notification consumer to exchange commands.
  * @param dataBuffer_len Max length of the data buffer
- * @param dataBuffer Buffer used from the ANCS profile to provide the data recieved from the Notification Provider.
+ * @param dataBuffer Buffer used from the ANCS profile to provide the data received from the Notification Provider.
  * @return Value indicating success or error code.
  */
 uint8_t ANCS_ConsumerSetup(uint16_t conn_handle, uint16_t dataBuffer_len, uint8_t *dataBuffer);

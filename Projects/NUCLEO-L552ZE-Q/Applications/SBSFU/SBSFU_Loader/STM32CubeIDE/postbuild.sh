@@ -37,7 +37,7 @@ fi
 if [ $operation == "secure" ]; then
 ret=0
 elif [ $operation == "nonsecure" ]; then
-#according to secure_nsclib.o size select build with or wihtout MCUBOOT_PRIMARY_ONLY
+#according to secure_nsclib.o size select build with or without MCUBOOT_PRIMARY_ONLY
 filesize=$(stat -c%s "$secure_nsc")
 
 if [ $filesize -ge $maxbytesize ]; then

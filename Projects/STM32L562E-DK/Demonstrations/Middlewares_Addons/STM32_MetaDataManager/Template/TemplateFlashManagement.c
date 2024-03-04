@@ -4,7 +4,7 @@
   * @author  Central LAB
   * @version V0.1.0
   * @date    02-November-2016
-  * @brief   Templete File User specialization of Flash Management for MetaDataManager
+  * @brief   Template File User specialization of Flash Management for MetaDataManager
   ******************************************************************************
   * @attention
   *

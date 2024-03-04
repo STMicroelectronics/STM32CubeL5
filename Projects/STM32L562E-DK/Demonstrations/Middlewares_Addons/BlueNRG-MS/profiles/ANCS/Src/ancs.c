@@ -133,7 +133,7 @@ static void notificationSource_process_data(uint8_t Attribute_Value_Length,
   uint8_t status = BLE_STATUS_SUCCESS;
   
   if (Attribute_Value_Length != NOTIFY_SOURCE_DATA_LEN) {
-    PRINTF("Error in Notification Source data received. Wrong Length %d (exepcted 8 bytes)\r\n", Attribute_Value_Length);
+    PRINTF("Error in Notification Source data received. Wrong Length %d (expected 8 bytes)\r\n", Attribute_Value_Length);
     status = ERROR_WRONG_NOTIFICATION_LENGTH;
   }
 

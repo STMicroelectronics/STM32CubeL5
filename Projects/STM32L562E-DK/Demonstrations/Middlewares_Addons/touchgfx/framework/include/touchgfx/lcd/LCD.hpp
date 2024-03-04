@@ -88,7 +88,7 @@ public:
      *
      * @brief Blits a 2D source-array to the framebuffer.
      *
-     *        Blits a 2D source-array to the framebuffer perfoming alpha-blending (and
+     *        Blits a 2D source-array to the framebuffer performing alpha-blending (and
      *        tranparency keying) as specified. Performs a software blend if HAL does not
      *        support BLIT_COPY_WITH_ALPHA and alpha != 255.
      *

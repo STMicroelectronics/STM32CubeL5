@@ -40,7 +40,7 @@ typedef enum
 {
   MMI_INIT_POWER_ON = 0, /* Hard reset */
   MMI_INIT_RESET, /* Reset */
-  MMI_INIT_STANDBY, /* Return from standy mode */
+  MMI_INIT_STANDBY, /* Return from standby mode */
   MMI_INIT_SHUTDOWN, /* Return from shutdown mode */
   MMI_INIT_AFTER_IDD_MEASURE, /* Reset after a IDD measure */
 }MMI_init_mode_t;

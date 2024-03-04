@@ -4,7 +4,7 @@
 #include <platform/driver/lcd/LCD16bpp.hpp>
 
 #if defined(USE_BPP) && USE_BPP!=16
-#error "This platfrom support only 16bpp LCD display"
+#error "This platform support only 16bpp LCD display"
 #endif
 
 #include <touchgfx/hal/OSWrappers.hpp>

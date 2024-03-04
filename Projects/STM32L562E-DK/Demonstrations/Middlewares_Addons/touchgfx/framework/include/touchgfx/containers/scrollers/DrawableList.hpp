@@ -42,7 +42,7 @@ public:
      *
      * @brief Destructor.
      *
-     *        Destuctor.
+     *        Destructor.
      */
     virtual ~DrawableListItemsInterface()
     {

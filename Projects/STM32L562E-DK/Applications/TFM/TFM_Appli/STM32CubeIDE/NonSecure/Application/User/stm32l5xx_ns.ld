@@ -18,7 +18,7 @@
 ; */
 
 /* Linker script to configure memory regions. */
-/* This file will be run trough the pre-processor. */
+/* This file will be run through the pre-processor. */
 
 #include "region_defs.h"
 
@@ -71,13 +71,13 @@ SECTIONS
         KEEP(*(.eh_frame*))
     } > FLASH
 
-    .ARM.extab :
+    .ARM.extab (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
     {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
     } > FLASH
 
     __exidx_start = .;
-    .ARM.exidx :
+    .ARM.exidx (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
     {
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
     } > FLASH

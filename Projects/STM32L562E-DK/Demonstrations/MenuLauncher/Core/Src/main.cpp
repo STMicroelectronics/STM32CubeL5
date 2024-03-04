@@ -245,7 +245,7 @@ void SystemClock_Config(void)
   HAL_PWR_EnableBkUpAccess();
 
   /* Enable MSI Oscillator and activate PLL with MSI as source */
-  /* Enable LSE Oscilator */
+  /* Enable LSE Oscillator */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI | RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;

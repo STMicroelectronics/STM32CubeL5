@@ -16,6 +16,9 @@
   *
   ******************************************************************************
   @endverbatim
+### 22-January-2024 ###
+========================
+    + cmac.c fix warning parameter declaration in function mbedtls_aes_cmac_prf_128
 
 ### 12-June-2020 ###
 ========================

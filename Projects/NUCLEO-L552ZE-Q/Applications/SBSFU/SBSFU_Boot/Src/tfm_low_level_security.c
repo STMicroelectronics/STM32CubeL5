@@ -741,7 +741,7 @@ static void mpu_init_cfg(void)
   /* background region is enabled , secure execution on unsecure flash is not possible*/
   /* but non secure execution on unsecure flash is possible , non secure mpu is used to protect execution */
   /* since SAU is enabled later to gain access to non secure flash */
-  /* Forbid execuction outside of flash write protected area  */
+  /* Forbid execution outside of flash write protected area  */
   /* descriptor 0 is set execute readonly before jumping in Secure application */
   region_cfg.region_nr = 0;
   region_cfg.region_base = FLASH_BASE_S + S_IMAGE_PRIMARY_PARTITION_OFFSET ;
@@ -792,7 +792,7 @@ static void mpu_init_cfg(void)
   {
     Error_Handler();
   }
-  /* Forbid execuction on full SRAM area */
+  /* Forbid execution on full SRAM area */
   region_cfg.region_nr = 4;
   region_cfg.region_base = SRAM1_BASE_S ;
   region_cfg.region_limit = SRAM1_BASE_S + TOTAL_RAM_SIZE - 1;
@@ -846,7 +846,7 @@ static void mpu_init_cfg(void)
     Error_Handler();
   }
 #endif /* MCUBOOT_PRIMARY_ONLY */
-  /* Forbid execuction on full SRAM area */
+  /* Forbid execution on full SRAM area */
   region_cfg.region_nr = 2;
 #ifdef TFM_ERROR_HANDLER_NON_SECURE
   region_cfg.region_base = SRAM1_BASE_NS + (~MPU_RBAR_BASE_Msk) + 1;

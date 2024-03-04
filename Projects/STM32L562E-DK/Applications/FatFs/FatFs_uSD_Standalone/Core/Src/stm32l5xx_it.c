@@ -204,7 +204,7 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void EXTI10_IRQHandler(void)
+void EXTI2_IRQHandler(void)
 {
   BSP_SD_DETECT_IRQHandler(0);
 }

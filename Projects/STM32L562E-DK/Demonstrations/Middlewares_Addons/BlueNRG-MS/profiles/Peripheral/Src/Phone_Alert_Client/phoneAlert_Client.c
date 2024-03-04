@@ -547,7 +547,7 @@ void PAC_Event_Handler(void *pckt)
 	       phoneAlertClient.ringerCntrlPntCharHandle &&
 	       phoneAlertClient.ringerSettingCharHandle)
 	    {
-	      /* we have found all the characteritics. now find the descriptors */		
+	      /* we have found all the characteristics. now find the descriptors */		
 	      if (aci_gatt_disc_all_charac_descriptors(phoneAlertClient.connHandle, phoneAlertClient.alertStatusCharHandle, 
 						       phoneAlertClient.phoneAlertServEndHandle) == BLE_STATUS_SUCCESS)
 	      {

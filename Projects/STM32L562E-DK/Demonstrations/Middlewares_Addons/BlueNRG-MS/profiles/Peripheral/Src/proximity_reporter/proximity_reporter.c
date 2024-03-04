@@ -1007,7 +1007,7 @@ tBleStatus ProximityReporterProfile_StateMachine(void)
 	  else
 	  {
 	    /* Request to put the device in limited discoverable mode is 
-	     * unsuccess, put the device back in advrtisable idle mode */
+	     * unsuccessful, put the device back in advrtisable idle mode */
 	    PRProfile_Write_SubStateMachine(PROXIMITY_REPORTER_STATE_ADVERTISABLE_IDLE);
 	  }
 	}
@@ -1059,7 +1059,7 @@ tBleStatus ProximityReporterProfile_StateMachine(void)
 	  else
 	  {
 	    /* Request to put the device in limited discoverable mode is 
-	     * unsuccess, put the device back in advrtisable idle mode */
+	     * unsuccessful, put the device back in advrtisable idle mode */
 	    PRProfile_Write_SubStateMachine(PROXIMITY_REPORTER_STATE_ADVERTISABLE_IDLE);
 	  }
 	}

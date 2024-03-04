@@ -172,7 +172,7 @@ tBleStatus HRProfile_Init(uint8_t featureSupportFlag,
 /**
  * HR_Sensor_Make_Discoverable
  * 
- * @param[in] useBoundedDeviceList: advertize with whitelist which contains previously
+ * @param[in] useBoundedDeviceList: advertise with whitelist which contains previously
  *            bonded devices
  * 
  * puts the device into discoverable mode

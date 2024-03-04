@@ -146,7 +146,7 @@ void InitMetaDataManager(void *Ptr,...) {
 #endif /* MDM_DEBUG_PARSING */
       break;
       default:
-        MDM_PRINTF("Error Unknow Meta Data Type\r\n");
+        MDM_PRINTF("Error Unknown Meta Data Type\r\n");
         return;
     }
 
@@ -218,7 +218,7 @@ MDM_ADD_META_DATA:
              ((uint32_t)uint64_MetaDataVector) +
              (NumberOfKnownLic-NumberofFoundedLic)*(sizeof(MDM_PayLoadLic_t) + 8 /* MetaDataHeader */))>(MDM_MAX_DATASIZE_64<<3)) {
           /* We don't have enough spaces.... Reset everything */
-          MDM_PRINTF("Meta Data Manager has not enough free space.. It will be reseted\r\n");
+          MDM_PRINTF("Meta Data Manager has not enough free space.. It will be reset\r\n");
           puint8_RW_MetaData = ((uint8_t *) uint64_MetaDataVector)+8;
           for(Index=1;Index<OSX_LICENSE_NUM;Index++) {
             MDM_LicTable[Index].Address =0;
@@ -284,7 +284,7 @@ MDM_ADD_META_DATA:
              ((uint32_t)uint64_MetaDataVector) +
              HowManyExtraSpaceINeed)>(MDM_MAX_DATASIZE_64<<3)) {
           /* We don't have enough spaces.... Reset everything */
-          MDM_PRINTF("Meta Data Manager has not enough free space.. It will be reseted\r\n");
+          MDM_PRINTF("Meta Data Manager has not enough free space.. It will be reset\r\n");
           puint8_RW_MetaData = ((uint8_t *) uint64_MetaDataVector)+8;
           for(Index=1;Index<GMD_NUM;Index++) {
             MDM_GMDTable[Index].Address =0;

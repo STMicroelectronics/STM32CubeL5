@@ -570,7 +570,7 @@ uint8_t Master_Start_Pairing_Procedure(uint16_t conn_handle, uint8_t force_rebon
   bondingContextType *bondingContext = (bondingContextType *)masterGlobalContext;
 
 
-  /* The device shall be in the state connected, conencted idle or
+  /* The device shall be in the state connected, connected idle or
      discovery service before to start the bonding procedure */
   current_state = GET_CURRENT_STATE();
   if ((current_state != STATE_CONNECTED_IDLE) &&

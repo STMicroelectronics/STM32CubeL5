@@ -18,7 +18,7 @@
 ; */
 
 /* Linker script to configure memory regions. */
-/* This file will be run trough the pre-processor. */
+/* This file will be run through the pre-processor. */
 
 #include "region_defs.h"
 MEMORY
@@ -37,7 +37,7 @@ GROUP(libgcc.a libc.a libm.a libnosys.a)
 
 ENTRY(Reset_Handler)
 
-SECTIONS
+SECTIONS 
 {   
 	.provision :
 	{
@@ -51,7 +51,7 @@ SECTIONS
         __hdp_end__ = .;
     } > FLASH_NOHDP
 
-	.text (BL2_CODE_START):
+	.text (BL2_CODE_START) :
     {
         
         KEEP(*(.vectors))
@@ -84,13 +84,13 @@ SECTIONS
         KEEP(*(.eh_frame*))
     } > FLASH
 
-    .ARM.extab :
+    .ARM.extab (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
     {
         *(.ARM.extab* .gnu.linkonce.armextab.*)
     } > FLASH
 
     __exidx_start = .;
-    .ARM.exidx :
+    .ARM.exidx (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
     {
         *(.ARM.exidx* .gnu.linkonce.armexidx.*)
     } > FLASH
@@ -99,7 +99,7 @@ SECTIONS
     /* To copy multiple ROM to RAM sections,
      * define etext2/data2_start/data2_end and
      * define __STARTUP_COPY_MULTIPLE in startup_cmsdk_mps2_an519_bl2.S */
-    .copy.table :
+    .copy.table  (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
     {
         . = ALIGN(4);
         __copy_table_start__ = .;
@@ -115,7 +115,7 @@ SECTIONS
     /* To clear multiple BSS sections,
      * uncomment .zero.table section and,
      * define __STARTUP_CLEAR_BSS_MULTIPLE in startup_cmsdk_mps2_an519_bl2.S */
-    .zero.table :
+    .zero.table  (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
     {
         . = ALIGN(4);
         __zero_table_start__ = .;

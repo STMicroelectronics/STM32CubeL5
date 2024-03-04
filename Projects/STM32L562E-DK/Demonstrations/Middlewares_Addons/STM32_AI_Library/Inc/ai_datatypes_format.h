@@ -344,7 +344,7 @@ ai_size ai_array_fmt_get_formats(const ai_array_format** formats);
 
 /*! ai_buffer section *********************************************************
  * Only 25 LSB bits are used for storing actual format bits. 7 bits are reserved
- * for format atrtributes, see @ref AI_FMT_FLAG_CONST flag
+ * for format attributes, see @ref AI_FMT_FLAG_CONST flag
  */
 
 #define AI_BUFFER_FMT_ENTRY(name_) \

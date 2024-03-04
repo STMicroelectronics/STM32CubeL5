@@ -60,8 +60,8 @@ __IO uint32_t uwMeasuredFrequency = 0;
 static uint32_t TimOutClock = 1;
 
 /* Private function prototypes -----------------------------------------------*/
+void     Configure_TIMPWMOutput(void);
 __STATIC_INLINE void     SystemClock_Config(void);
-__STATIC_INLINE void     Configure_TIMPWMOutput(void);
 __STATIC_INLINE void     Configure_TIMInputCapture(void);
 __STATIC_INLINE void     Configure_Frequency(uint32_t Frequency);
 __STATIC_INLINE void     LED_Init(void);
@@ -181,7 +181,7 @@ __STATIC_INLINE void Configure_TIMInputCapture(void)
   * @param  None
   * @retval None
   */
-__STATIC_INLINE void  Configure_TIMPWMOutput(void)
+void  Configure_TIMPWMOutput(void)
 {
   /*************************/
   /* GPIO AF configuration */

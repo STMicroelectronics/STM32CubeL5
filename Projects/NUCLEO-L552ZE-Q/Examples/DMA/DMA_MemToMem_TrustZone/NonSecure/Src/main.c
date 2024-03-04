@@ -71,7 +71,7 @@ static void MX_DMA_Init(void);
 /* Private function prototypes -----------------------------------------------*/
 static void NonSecureTransferComplete(DMA_HandleTypeDef *hdma_memtomem_dma1_channel1);
 static void NonSecureTransferError(DMA_HandleTypeDef *hdma_memtomem_dma1_channel1);
-/* Following callabcks are called by secure */
+/* Following callbacks are called by secure */
 static void SecureNonSecureTransferCompleteCallback(DMA_HandleTypeDef *hdma_memtomem_dma1_channelx);
 static void NonSecureSecureTransferCompleteCallback(DMA_HandleTypeDef *hdma_memtomem_dma1_channelx);
 /* USER CODE END PFP */

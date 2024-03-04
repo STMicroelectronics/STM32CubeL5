@@ -945,7 +945,7 @@ void ProximityMonitor_GATT_Procedure_Complete_EvtHandler (void)
 	    {
 	      /* we have to just enter a wait state. Since we did not discover
 	       * the TX power level and immediate alert services we cannot
-	       * not monitor the path loss since we donot know the  TX power
+	       * not monitor the path loss since we do not know the  TX power
 	       * level
 	       */ 
 	      PMProfile_Write_SubStateMachine(PROXIMITY_MONITOR_STATE_WAIT);
@@ -1127,7 +1127,7 @@ tBleStatus ProximityMonitorProfile_StateMachine(void)
 	PMProfile_Write_MainStateMachine(PROXIMITY_MONITOR_STATE_ADVERTIZE);
 	PMProfile_Write_SubStateMachine(PROXIMITY_MONITOR_STATE_ADVERTISABLE_IDLE);
 	pathLoss = BLE_STATUS_SUCCESS;
-	/* inform the application that the profile is ready to advertize */
+	/* inform the application that the profile is ready to advertise */
 	proximityMonitor.applicationNotifyFunc(EVT_PM_INITIALIZED,1,&pathLoss);
       }
     }
@@ -1248,7 +1248,7 @@ tBleStatus ProximityMonitorProfile_StateMachine(void)
 	  else 
 	  {
 	    /* Request to put the device in limited discoverable mode is 
-	     * unsuccess, put the device back in advrtisable idle mode */
+	     * unsuccessful, put the device back in advrtisable idle mode */
 	    PMProfile_Write_SubStateMachine(PROXIMITY_MONITOR_STATE_ADVERTISABLE_IDLE);
 	    /* request for main profile's state change */
 	    BLE_Profile_Change_Advertise_Sub_State (&proximityMonitor.PMtoBLEInf, 
@@ -1319,7 +1319,7 @@ tBleStatus ProximityMonitorProfile_StateMachine(void)
 	  else
 	  {
 	    /* Request to put the device in limited discoverable mode is 
-	     * unsuccess, put the device back in advrtisable idle mode */
+	     * unsuccessful, put the device back in advrtisable idle mode */
 	    PMProfile_Write_SubStateMachine(PROXIMITY_MONITOR_STATE_ADVERTISABLE_IDLE);
 	    /* request for main profile's state change */
 	    BLE_Profile_Change_Advertise_Sub_State (&proximityMonitor.PMtoBLEInf, 
@@ -1419,7 +1419,7 @@ tBleStatus ProximityMonitorProfile_StateMachine(void)
 	    else if(proximityMonitor.pathLossNotify && (pathLoss <= PATH_LOSS_THRESHOLD))
 	    {
 	      /* we had previously notified a path loss. So the reporter would have started
-	       * alerting. Now write to the alert level charcteristic to stop the alerting
+	       * alerting. Now write to the alert level characteristic to stop the alerting
 	       */ 
 	      proximityMonitor.pathLossNotify = 0x00;
 	    }

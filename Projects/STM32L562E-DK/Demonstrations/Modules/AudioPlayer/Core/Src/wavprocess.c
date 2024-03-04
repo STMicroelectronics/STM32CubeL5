@@ -604,7 +604,7 @@ static uint32_t WavProcess_HeaderInit(uint8_t* pHeader, WAVE_FormatTypeDef* pAud
 
   /* Write the file length ----------------------------------------------------*/
   /* The sampling time: this value will be be written back at the end of the
-  recording opearation.  Example: 661500 Btyes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
+  recording operation.  Example: 661500 Bytes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
   pHeader[4] = 0xFC;
   pHeader[5] = 0x17;
   pHeader[6] = 0x0A;
@@ -684,7 +684,7 @@ uint32_t WavProcess_HeaderUpdate(uint8_t* pHeader, WAVE_FormatTypeDef* pWaveForm
 {
   /* Write the file length ---------------------------------------------------*/
   /* The sampling time: this value will be written back at the end of the
-  recording operation.  Example: 661500 Btyes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
+  recording operation.  Example: 661500 Bytes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
   pHeader[4] = (uint8_t)(*fptr);
   pHeader[5] = (uint8_t)(*fptr >> 8);
   pHeader[6] = (uint8_t)(*fptr >> 16);

@@ -65,7 +65,7 @@ tBleStatus TimeServer_Init(uint8_t servicesToBeSupported,
 /**
  * TimeServer_Make_Discoverable
  * 
- * @param[in] useBoundedDeviceList: advertize with whitelist which contains 
+ * @param[in] useBoundedDeviceList: advertise with whitelist which contains 
  *             devices that were previously bonded
  * 
  * puts the device into discoverable mode

@@ -154,7 +154,7 @@ typedef struct
   * this is a counter to maintain the status of initialization of all profiles
   * Each time a profile notifies that it has completed its initialization, 
   * this counter will be incremented. The device will be allowed to start 
-  * advertising only when all the profiles have completd theur initialization
+  * advertising only when all the profiles have completed theur initialization
   */	
   uint8_t bleProfileCanAdvertise;
   
@@ -380,7 +380,7 @@ int Profile_Process_Q()
   if (bleProfileIintFlag == 0x00)
   {
     /* the profile is not yet initialized
-    * so donot do any processing
+    * so do not do any processing
     */ 
     return 0x01;
   }
@@ -517,7 +517,7 @@ int Profile_Process_Q()
     {
       /* when the profiles have been notified, the profile processQ
       * needs to run once again so that it can set its state machine.
-      * So donot set the profileProcess flag to false
+      * So do not set the profileProcess flag to false
       */ 
       //PROFILE_MESG_DBG ( profiledbgfile, "Notifying to all registered profiles about main profile state change \n");
       //BLE_Profile_Notify_State_Change();
@@ -1054,7 +1054,7 @@ void HCI_Event_CB(void *pckt)
         {
           PROFILE_MESG_DBG ( profiledbgfile, "EVT_BLUE_GAP_AUTHORIZATION_REQUEST \n");
           /* send the authorization response.
-          * currently we donot have a profile 
+          * currently we do not have a profile 
           * which requires authorization
           */ 
           aci_gap_authorization_response(gBLEProfileContext.connectionHandle, CONNECTION_AUTHORIZED);

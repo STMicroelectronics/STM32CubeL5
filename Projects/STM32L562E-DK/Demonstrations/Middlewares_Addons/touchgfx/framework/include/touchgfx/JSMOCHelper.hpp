@@ -27,7 +27,7 @@ namespace touchgfx
  *        during draw operations.
  *
  *         Helper class providing caching of certain information while the JSMOC algorithm runs
- *         during draw operations. Not intented for application-level use.
+ *         during draw operations. Not intended for application-level use.
  */
 class JSMOCHelper
 {

@@ -828,7 +828,7 @@ void HRProfile_Rx_Event_Handler(void *pckt)
   
   if(hci_pckt->type != HCI_EVENT_PKT)
   {
-    HRPROFILE_MESG_ERR (profiledbgfile,"HRProfile_Rx_Event_Handler(),Recevied packed is not an HCI Event: %02X !!\n", hci_pckt->type);
+    HRPROFILE_MESG_ERR (profiledbgfile,"HRProfile_Rx_Event_Handler(),Received packed is not an HCI Event: %02X !!\n", hci_pckt->type);
     return;
   }
   

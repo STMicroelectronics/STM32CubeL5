@@ -144,7 +144,7 @@ typedef ai_storage_klass ai_shape;
 #else
 AI_PACKED_STRUCT_START
 typedef AI_ALIGNED_TYPE(struct, 4) AI_PACKED ai_shape_s {
-  ai_shape_dimension* dimension; /*!< ND tensor shape */
+  ai_shape_dimension* dimension; /*!< 4D tensor shape */
 } ai_shape;
 AI_PACKED_STRUCT_END
 #endif
@@ -533,7 +533,7 @@ AI_PACKED_STRUCT_START
 typedef AI_ALIGNED_TYPE(struct, 4) AI_PACKED ai_tensor_list_info_s {
     ai_tensor_state*      state;   /*!< I/O buffer internal pointers state */
     ai_buffer*            buffer;  /*!< I/O buffer pointer */
-    ai_buffer_meta_info*  meta;    /*!< I/O buffer meta informations */
+    ai_buffer_meta_info*  meta;    /*!< I/O buffer meta information */
 } ai_tensor_list_info;
 AI_PACKED_STRUCT_END
 

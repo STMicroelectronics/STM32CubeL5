@@ -79,7 +79,7 @@ public:
      *
      * @brief Blits a 2D source-array to the framebuffer.
      *
-     *        Blits a 2D source-array to the framebuffer perfoming alpha-blending (and
+     *        Blits a 2D source-array to the framebuffer performing alpha-blending (and
      *        tranparency keying) as specified Performs a software blend if HAL does not
      *        support BLIT_COPY_WITH_ALPHA and alpha != 255.
      *
@@ -99,7 +99,7 @@ public:
      *
      * @brief Blits a 2D source-array to the framebuffer while converting the format.
      *
-     *        Blits a 2D source-array to the framebuffer perfoming alpha-blending (and
+     *        Blits a 2D source-array to the framebuffer performing alpha-blending (and
      *        tranparency keying) as specified. Performs a software blend if HAL does not
      *        support BLIT_COPY_WITH_ALPHA and alpha != 255. LCD32 supports source data
      *        formats: RGB565, RGB888 and ARGB8888.
@@ -438,7 +438,7 @@ protected:
      *
      * @brief Blits a 2D source-array to the framebuffer.
      *
-     *        Blits a 2D source-array to the framebuffer perfoming alpha-blending per pixel as
+     *        Blits a 2D source-array to the framebuffer performing alpha-blending per pixel as
      *        specified. If RGB888 is not supported by the DMA a software blend is performed.
      *
      * @param sourceData16 The source-array pointer (points to the beginning of the data). The
@@ -455,7 +455,7 @@ protected:
      *
      * @brief Blits a 2D source-array to the framebuffer.
      *
-     *        Blits a 2D source-array to the framebuffer perfoming alpha-blending per pixel as
+     *        Blits a 2D source-array to the framebuffer performing alpha-blending per pixel as
      *        specified. If! RGB565 is not supported by the DMA a software blend is performed.
      *
      * @param sourceData The source-array pointer (points to the beginning of the data). The
@@ -472,7 +472,7 @@ protected:
      *
      * @brief Blits a 2D indexed 8-bit source to the framebuffer.
      *
-     *        Blits a 2D indexed 8-bit source to the framebuffer perfoming alpha-blending per pixel as
+     *        Blits a 2D indexed 8-bit source to the framebuffer performing alpha-blending per pixel as
      *        specified if indexed format is not supported by the DMA a software blend is performed.
      *
      * @param sourceData The source-indexes pointer (points to the beginning of the data). The
@@ -491,7 +491,7 @@ protected:
      *
      * @brief Blits a 2D indexed 8-bit source to the framebuffer.
      *
-     *        Blits a 2D indexed 8-bit source to the framebuffer perfoming alpha-blending per pixel as
+     *        Blits a 2D indexed 8-bit source to the framebuffer performing alpha-blending per pixel as
      *        specified if L8_ARGB8888 is not supported by the DMA a software blend is performed.
      *
      * @param sourceData The source-indexes pointer (points to the beginning of the data). The
@@ -510,7 +510,7 @@ protected:
      *
      * @brief Blits a 2D indexed 8-bit source to the framebuffer.
      *
-     *        Blits a 2D indexed 8-bit source to the framebuffer perfoming alpha-blending per pixel as
+     *        Blits a 2D indexed 8-bit source to the framebuffer performing alpha-blending per pixel as
      *        specified if L8_RGB888 is not supported by the DMA a software blend is performed.
      *
      * @param sourceData The source-indexes pointer (points to the beginning of the data). The
@@ -529,7 +529,7 @@ protected:
      *
      * @brief Blits a 2D indexed 8-bit source to the framebuffer.
      *
-     *        Blits a 2D indexed 8-bit source to the framebuffer perfoming alpha-blending per pixel as
+     *        Blits a 2D indexed 8-bit source to the framebuffer performing alpha-blending per pixel as
      *        specified if L8_RGB565 is not supported by the DMA a software blend is performed.
      *
      * @param sourceData The source-indexes pointer (points to the beginning of the data). The

@@ -379,7 +379,7 @@ tBleStatus ANS_Update_New_Alert_Category(uint8_t len,uint8_t* category)
   tBleStatus retval = ERR_COMMAND_DISALLOWED;
 	
   /* the value of this characteristic should not be changed
-   * while in connection. So donot allow an update during connection
+   * while in connection. So do not allow an update during connection
    */ 
   if((ANSProfile_Read_MainStateMachine() != ANS_CONNECTED) &&
      (ANSProfile_Read_MainStateMachine() >= ANS_IDLE))
@@ -418,7 +418,7 @@ tBleStatus ANS_Update_Unread_Alert_Category(uint8_t len,uint8_t* category)
   tBleStatus retval = ERR_COMMAND_DISALLOWED;
 	
   /* the value of this characteristic should not be changed
-   * while in connection. So donot allow an update during connection
+   * while in connection. So do not allow an update during connection
    */ 
   if((ANSProfile_Read_MainStateMachine() != ANS_CONNECTED) &&
      (ANSProfile_Read_MainStateMachine() >= ANS_IDLE))

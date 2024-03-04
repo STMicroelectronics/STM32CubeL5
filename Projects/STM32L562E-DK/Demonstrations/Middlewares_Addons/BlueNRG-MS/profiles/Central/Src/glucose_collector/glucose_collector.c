@@ -781,7 +781,7 @@ void GL_Collector_RACP_Check_Write_Response(uint8_t err_code)
   
   else if (err_code == RACP_RESPONSE_PROCEDURE_ALREADY_IN_PROGRESS) /* err_code is not 0: some errors occurs */
   {
-    /* Possible error code sent from the glucose sensor trough aci_gatt_write_response(): 
+    /* Possible error code sent from the glucose sensor through aci_gatt_write_response(): 
        RACP_RESPONSE_PROCEDURE_ALREADY_IN_PROGRESS; 
        RACP_RESPONSE_CLIENT_CHAR_CONF_DESC_IMPROPERLY_CONFIGURED.
     */

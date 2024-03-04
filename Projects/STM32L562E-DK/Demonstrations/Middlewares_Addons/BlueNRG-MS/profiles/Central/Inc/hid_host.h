@@ -838,7 +838,7 @@ extern void HID_CharacOfService_CB(uint8_t status, uint8_t numCharac, uint8_t *c
 /**
  * @brief This callback contains all the information of the characterisitcs descriptor
  * of a service
- * @param status Status of the charcteristics descriptor discovery procedure
+ * @param status Status of the characteristics descriptor discovery procedure
  * @param numCharac Number of characteristic descriptors of a service found on the peer device
  * @param charac Data of the characteristic descriptots discovered.
  * The array will be a sequence of elements with the following format:\n
@@ -963,7 +963,7 @@ extern void HID_SetProcedure_CB(uint8_t status);
 extern void HID_NotificationChageStatus_CB(uint8_t status);
 
 /**
- * @brief This callbak reports the notification received from the HID Host
+ * @brief This callback reports the notification received from the HID Host
  * @param type Report Type
  * @param id Report ID
  * @param data_length Length of the data received

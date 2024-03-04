@@ -734,7 +734,7 @@ size_t mbedtls_rsa_get_len( const mbedtls_rsa_context *ctx )
 #if defined(MBEDTLS_GENPRIME)
 
 /*
- * Generate an RSA keypair
+ * Generate an RSA key pair
  *
  * This generation method follows the RSA key pair generation procedure of
  * FIPS 186-4 if 2^16 < exponent < 2^256 and nbits = 2048 or nbits = 3072.

@@ -161,7 +161,7 @@ public:
      *        work with the given amount of memory passed when calling setupBuffer(). If the
      *        outline of the figure is too complex, this will be reported.
      *
-     *        "CWR requires X bytes" means that X bytes is the highest number of bytesd requied
+     *        "CWR requires X bytes" means that X bytes is the highest number of bytesd required
      *        by CWR so far, but since the size of the invalidated area and the shape of things
      *        draw can influence this, this may be reported several times with a higher and
      *        higher number. Leave your app running for a long time to find out what the memory

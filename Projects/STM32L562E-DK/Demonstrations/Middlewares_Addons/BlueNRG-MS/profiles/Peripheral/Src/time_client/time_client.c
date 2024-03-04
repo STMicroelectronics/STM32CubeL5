@@ -1521,7 +1521,7 @@ tBleStatus TimeClient_StateMachine(void)
           else
           {
             /* Request to put the device in limited discoverable mode is 
-             * unsuccess, put the device back in advrtisable idle mode */
+             * unsuccessful, put the device back in advrtisable idle mode */
             TCProfile_Write_SubStateMachine(TIME_CLIENT_STATE_ADVERTISABLE_IDLE);
           }
         }
@@ -1560,7 +1560,7 @@ tBleStatus TimeClient_StateMachine(void)
             {
               TIME_CLIENT_MESG_DBG ( profiledbgfile, "TimeClient_Set_Discoverable() FAILED: %02X \n", hciCmdResult ); 
               /* Request to put the device in limited discoverable mode is 
-                * unsuccess, put the device back in advertisable idle mode */
+                * unsuccessful, put the device back in advertisable idle mode */
               TCProfile_Write_SubStateMachine(TIME_CLIENT_STATE_ADVERTISABLE_IDLE);
               break;
             }

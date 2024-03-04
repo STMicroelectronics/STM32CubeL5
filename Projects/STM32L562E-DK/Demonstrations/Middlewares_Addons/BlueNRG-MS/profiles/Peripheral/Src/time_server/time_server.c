@@ -1019,7 +1019,7 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
     }
                
     /* Add Time Update Control Point Characteristic */
-    TIME_SERVER_MESG_DBG (profiledbgfile,"TimeServer_Add_Services_Characteristics(), Adding Time Update Controle Point Characteristic. \n");
+    TIME_SERVER_MESG_DBG (profiledbgfile,"TimeServer_Add_Services_Characteristics(), Adding Time Update Control Point Characteristic. \n");
     
     uuid = TIME_UPDATE_CONTROL_POINT_CHAR_UUID;    
     hciCmdResult = aci_gatt_add_char(timeServer.referenceUpdateTimeServiceHandle, 
@@ -1034,11 +1034,11 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
                                      &(timeServer.timeUpdateControlPointCharHandle));
     if (hciCmdResult == BLE_STATUS_SUCCESS)
     {
-      TIME_SERVER_MESG_DBG (profiledbgfile, "TimeServer_Add_Services_Characteristics(), Time Update Controle Point Characteristic Added Successfully %04X\n", timeServer.timeUpdateControlPointCharHandle);
+      TIME_SERVER_MESG_DBG (profiledbgfile, "TimeServer_Add_Services_Characteristics(), Time Update Control Point Characteristic Added Successfully %04X\n", timeServer.timeUpdateControlPointCharHandle);
     }
     else
     {
-      TIME_SERVER_MESG_ERR (profiledbgfile,"TimeServer_Add_Services_Characteristics(), FAILED to add Time Update Controle Point Characteristic: Error: %02X !!\n", hciCmdResult);
+      TIME_SERVER_MESG_ERR (profiledbgfile,"TimeServer_Add_Services_Characteristics(), FAILED to add Time Update Control Point Characteristic: Error: %02X !!\n", hciCmdResult);
       TimeServer_Exit(hciCmdResult);
       return hciCmdResult;
     }   
@@ -1382,7 +1382,7 @@ tBleStatus TimeServer_StateMachine(void)
             else
             {
               /* Request to put the device in limited discoverable mode is 
-              * unsuccess, put the device back in advertisable idle mode */
+              * unsuccessful, put the device back in advertisable idle mode */
               TIME_SERVER_MESG_DBG ( profiledbgfile, "TimeServer_Make_Discoverable(), FAST Limited Discoverable Mode FAILED with hciCmdResult: %02X \n", hciCmdResult );
               TSProfile_Write_SubStateMachine(TIME_SERVER_STATE_ADVERTISABLE_IDLE);
             }                 
@@ -1421,7 +1421,7 @@ tBleStatus TimeServer_StateMachine(void)
                 {
                   TIME_SERVER_MESG_DBG ( profiledbgfile, "TimeServer_Set_Discoverable() FAILED: %02X \n", hciCmdResult );
                   /* Request to put the device in limited discoverable mode is 
-                    * unsuccess, put the device back in advertisable idle mode */
+                    * unsuccessful, put the device back in advertisable idle mode */
                   TSProfile_Write_SubStateMachine(TIME_SERVER_STATE_ADVERTISABLE_IDLE);
                   break;
                 }
@@ -1430,7 +1430,7 @@ tBleStatus TimeServer_StateMachine(void)
               {
                 TIME_SERVER_MESG_DBG ( profiledbgfile, "aci_gap_set_non_discoverable() FAILED: %02X \n", hciCmdResult );
                 /* Request to put the device non discoverable mode is 
-                * unsuccess: which state to be set? */  //TBR 
+                * unsuccessful: which state to be set? */  //TBR 
                 break;
               }
             }

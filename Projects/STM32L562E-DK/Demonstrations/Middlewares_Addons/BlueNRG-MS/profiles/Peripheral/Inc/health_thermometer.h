@@ -120,11 +120,11 @@ typedef struct _tTempMeasurementVal
  * If the temperature type has to be notified in every measurement
  * value, then this bit should not be set
  * @param[in] minValidInterval: the minimum valid interval
- * value for the measurement interval characteritic. This is
+ * value for the measurement interval characteristic. This is
  * valid only if the MEASUREMENT_INTERVAL_CHAR flag is set
  * in the thermometerFeatures
  * @param[in] maxValidInterval: the maximum valid interval
- * value for the measurement interval characteritic. This is
+ * value for the measurement interval characteristic. This is
  * valid only if the MEASUREMENT_INTERVAL_CHAR flag is set
  * in the thermometerFeatures
  * @param[in] applcb: callback function to be called by

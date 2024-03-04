@@ -125,7 +125,7 @@ tBleStatus ANS_Advertize(uint8_t useWhitelist);
  * 
  * @param[in] len : length of the category field. It has to be 0 or 1.
  * @param[in] category : bitmask of the categories supported. The bitmasks
- * are split across 2 octets and hav the meaning as described in the
+ * are split across 2 octets and have the meaning as described in the
  * bluetooth assigned numbers documentation
  * 
  * updates the alert category characteristic with the new bitmask.
@@ -141,7 +141,7 @@ tBleStatus ANS_Update_New_Alert_Category(uint8_t len,uint8_t* category);
  * 
  * @param[in] len : length of the category field. It has to be 0 or 1.
  * @param[in] category : bitmask of the categories supported. The bitmasks
- * are split across 2 octets and hav the meaning as described in the
+ * are split across 2 octets and have the meaning as described in the
  * bluetooth assigned numbers documentation
  * 
  * updates the unread alert status category characteristic with the new bitmask.

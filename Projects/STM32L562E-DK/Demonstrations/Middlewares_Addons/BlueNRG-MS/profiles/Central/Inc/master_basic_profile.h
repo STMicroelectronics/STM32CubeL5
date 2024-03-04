@@ -789,7 +789,7 @@ extern void Master_GC_ServiceCharacPeerDiscovery_CB(uint8_t *procedure, uint8_t 
 
 /**
  * @brief This function sets the notification and indication status on the peer BLE device.
- * @param conn_handle Connction handle
+ * @param conn_handle Connection handle
  * @param config_desc_handle Configuration descriptor handle
  * @param notification_enable TRUE if the client enables the server notification. FALSE otherwise
  * @param indication_enable TRUE if the client enables the server indication. FALSE otherwise
@@ -802,7 +802,7 @@ uint8_t Master_NotifIndic_Status(uint16_t conn_handle, uint16_t config_desc_hand
 
 /**
  * @brief This function starts a read procedure on the peer BLE device.
- * @param conn_handle Connction handle
+ * @param conn_handle Connection handle
  * @param attr_value_handle Attribute value handle of the characteristic to read
  * @param data_length Length of data received
  * When the Master_PeerDataExchange_CB() will be received, the content of this parameter will be available.
@@ -820,7 +820,7 @@ uint8_t Master_Read_Value(uint16_t conn_handle, uint16_t attr_value_handle,
 
 /**
  * @brief This function starts a read long procedure on the peer BLE device.
- * @param conn_handle Connction handle
+ * @param conn_handle Connection handle
  * @param attr_value_handle Attribute value handle of the characteristic to read
  * @param data_length Length of data received
  * When the Master_PeerDataExchange_CB() will be received, the content of this parameter will be available.
@@ -839,7 +839,7 @@ uint8_t Master_Read_Long_Value(uint16_t conn_handle, uint16_t attr_value_handle,
 
 /**
  * @brief This function starts a write procedure on the peer BLE device.
- * @param conn_handle Connction handle
+ * @param conn_handle Connection handle
  * @param attr_value_handle Attribute handle of the characteristic value to write
  * @param value_len Length of the data to write
  * @param attr_value Data to write
@@ -852,7 +852,7 @@ uint8_t Master_Write_Value(uint16_t conn_handle, uint16_t attr_value_handle,
 
 /**
  * @brief This function executes a write without response on the peer BLE device.
- * @param conn_handle Connction handle
+ * @param conn_handle Connection handle
  * @param attr_value_handle Attribute handle of the characteristic value to write
  * @param value_len Length of the data to write
  * @param attr_value Data to write
@@ -945,14 +945,14 @@ extern void Master_GC_PeerDataPermitExchange_CB(uint8_t *procedure, uint16_t *co
 
 /**
  * @brief Sets the security parameter on the master device
- * @param param Master security settings (see @ref securitySetType strucure)
+ * @param param Master security settings (see @ref securitySetType structure)
  * @retval Status of call.
  */
 uint8_t Master_SecuritySet(securitySetType *param);
 
 /**
  * @brief This function starts the pairing and bonding procedure with the peer BLE device.
- * @param conn_handle Connction handle
+ * @param conn_handle Connection handle
  * @param force_rebond TRUE if the master device wants force the rebond.
  * @note The Master_Pairing_CB() function is called with the status of the pairing procedure.
  * @retval Status of call

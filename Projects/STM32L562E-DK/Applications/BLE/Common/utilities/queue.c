@@ -41,7 +41,7 @@
 /**
   * @brief   Initilaiilze queue structure .
   * @note   This function is used to initialize the global queue structure.  
-  * @param  q: pointer on queue strcture to be initialised 
+  * @param  q: pointer on queue structure to be initialised 
   * @param  queueBuffer: pointer on Queue Buffer
   * @param  queueSize:  Size of Queue Buffer
   * @param  elementSize: Size of an element in the queue. if =0, the queue will manage variable sizze elements

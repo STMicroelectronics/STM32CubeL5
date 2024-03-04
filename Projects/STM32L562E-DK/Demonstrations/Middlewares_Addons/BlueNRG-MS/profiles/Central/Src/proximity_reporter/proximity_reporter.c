@@ -305,7 +305,7 @@ tBleStatus PXR_Add_Services_Characteristics(void)
     return hciCmdResult;
   }
  
-  /* check if Immediate Alert service and the Tx Power service should be supproted */
+  /* check if Immediate Alert service and the Tx Power service should be supported */
   if (proximity_reporter_context.immAlertTxPowerServSupport)
   { 
     /* Max_Attribute_Records = 2*no_of_char + 1 */

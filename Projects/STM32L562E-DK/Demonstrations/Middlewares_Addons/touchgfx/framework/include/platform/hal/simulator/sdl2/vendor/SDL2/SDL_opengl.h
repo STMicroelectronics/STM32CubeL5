@@ -106,7 +106,7 @@
  * WINDOWS: Include windows.h here to define APIENTRY.
  * It is also useful when applications include this file by
  * including only glut.h, since glut.h depends on windows.h.
- * Applications needing to include windows.h with parms other
+ * Applications needing to include windows.h with params other
  * than "WIN32_LEAN_AND_MEAN" may include windows.h before
  * glut.h or gl.h.
  */

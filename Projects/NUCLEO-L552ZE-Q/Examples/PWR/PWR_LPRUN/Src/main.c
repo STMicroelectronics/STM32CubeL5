@@ -98,20 +98,6 @@ int main(void)
   /* Enable Power Clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* Enable Instruction cache (default 2-ways set associative cache) */
-  if(HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY) != HAL_OK)
-   {
-     Error_Handler();
-   }
-  if(HAL_ICACHE_Enable() != HAL_OK)
-  {
-   {
-     Error_Handler();
-   }
-  }
-  
-  /**/
-  
   /* Re-init LED1 to toggle during Run mode */
   BSP_LED_Init(LED1);
 

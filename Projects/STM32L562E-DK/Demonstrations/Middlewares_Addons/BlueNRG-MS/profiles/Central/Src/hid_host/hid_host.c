@@ -2558,7 +2558,7 @@ void Master_PeerDataExchange_CB(uint8_t *procedure, uint8_t *status,
       if (hidContext.scanParamPresent && hidContext.scanParamService.scanRefreshPresent &&
           (data->attr_handle == hidContext.scanParamService.scanRefresh.start)) {
         if (HID_WriteScanIntervalWindowParam(hidContext.scanParamService.le_scan_interval, hidContext.scanParamService.le_scan_window))
-          CALLBACKS_MESG_DBG(profiledbgfile, "**** Write Scan Interval Window Paramters Error\r\n");
+          CALLBACKS_MESG_DBG(profiledbgfile, "**** Write Scan Interval Window Parameters Error\r\n");
       } else {
         if (findNotificationSource(data->attr_handle, &type, &id)) {
           HID_ReportDataReceived_CB(type, id, data->data_length, data->data_value);

@@ -447,7 +447,7 @@ tBleStatus ANS_Add_Services_Characteristics(void);
  * The supported categories have to be constant when in connection.
  * @param[in] len : length of the category field. It has to be 0 or 1.
  * @param[in] category : bitmask of the categories supported. The bitmasks
- * are split across 2 octets and hav the meaning as described in the
+ * are split across 2 octets and have the meaning as described in the
  * bluetooth assigned numbers documentation
  * @return BLE_STATUS_SUCCESS if the update is successfully started
  * BLE_STATUS_INVALID_PARAMS if bitmask for non existent category is set
@@ -459,7 +459,7 @@ tBleStatus ANS_Update_New_Alert_Category(uint8_t len,uint8_t* category);
  * The supported categories have to be constant when in connection
  * @param[in] len : length of the category field. It has to be 0 or 1.
  * @param[in] category : bitmask of the categories supported. The bitmasks
- * are split across 2 octets and hav the meaning as described in the
+ * are split across 2 octets and have the meaning as described in the
  * bluetooth assigned numbers documentation.
  * @return BLE_STATUS_SUCCESS if the update is successfully started
  * BLE_STATUS_INVALID_PARAMS if bitmask for non existent category is set

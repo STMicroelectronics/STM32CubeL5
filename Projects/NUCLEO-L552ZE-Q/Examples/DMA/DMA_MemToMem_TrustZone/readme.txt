@@ -66,7 +66,7 @@ data transfers:
    This last local data copy is then shared to the secure application with
    a non-secure call function (the secure application stores this data).
    Finally the non-secure application calls the last non-secure
-   callable service to get a comparaison status on the original secure data buffer
+   callable service to get a comparison status on the original secure data buffer
    and the latest data buffer shared by the non-secure.
 
 All DMA transfers are done with interrupts:  the secure partition_stm32l552xx.h

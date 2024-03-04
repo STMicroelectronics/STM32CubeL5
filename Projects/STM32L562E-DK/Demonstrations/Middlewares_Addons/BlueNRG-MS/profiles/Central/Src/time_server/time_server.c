@@ -806,8 +806,8 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
       return hciCmdResult;
     }
                
-    /* Add Time Update Controle Point Characteristic */
-    TIME_SERVER_MESG_DBG (profiledbgfile,"TimeServer_Add_Services_Characteristics(), Adding Time Update Controle Point Characteristic. \n");
+    /* Add Time Update Control Point Characteristic */
+    TIME_SERVER_MESG_DBG (profiledbgfile,"TimeServer_Add_Services_Characteristics(), Adding Time Update Control Point Characteristic. \n");
     
     uuid = TIME_UPDATE_CONTROL_POINT_CHAR_UUID;    
     hciCmdResult = aci_gatt_add_char(TimeServerContext.referenceUpdateTimeServiceHandle, 
@@ -822,11 +822,11 @@ tBleStatus TimeServer_Add_Services_Characteristics(void)
                                      &(TimeServerContext.timeUpdateControlPointCharHandle));
     if (hciCmdResult == BLE_STATUS_SUCCESS)
     {
-      TIME_SERVER_MESG_DBG (profiledbgfile, "TimeServer_Add_Services_Characteristics(), Time Update Controle Point Characteristic Added Successfully %04X\n", TimeServerContext.timeUpdateControlPointCharHandle);
+      TIME_SERVER_MESG_DBG (profiledbgfile, "TimeServer_Add_Services_Characteristics(), Time Update Control Point Characteristic Added Successfully %04X\n", TimeServerContext.timeUpdateControlPointCharHandle);
     }
     else
     {
-      TIME_SERVER_MESG_ERR (profiledbgfile,"TimeServer_Add_Services_Characteristics(), FAILED to add Time Update Controle Point Characteristic: Error: %02X !!\n", hciCmdResult);
+      TIME_SERVER_MESG_ERR (profiledbgfile,"TimeServer_Add_Services_Characteristics(), FAILED to add Time Update Control Point Characteristic: Error: %02X !!\n", hciCmdResult);
       return hciCmdResult;
     }   
                 

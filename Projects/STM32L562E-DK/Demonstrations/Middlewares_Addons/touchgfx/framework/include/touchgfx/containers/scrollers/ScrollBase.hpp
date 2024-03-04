@@ -261,7 +261,7 @@ public:
      * @param acceleration The acceleration times 10, so "60" means "6" and "75" means "7.5".
      *
      * @note The reason for multiplying the acceleration by 10 is to avoid introducing floating point
-     *       arithmetics.
+     *       arithmetic.
      *
      * @see getSwipeAcceleration
      */
@@ -277,7 +277,7 @@ public:
      * @return The swipe acceleration.
      *
      * @note The reason for multiplying the acceleration by 10 is to avoid introducing floating point
-     *       arithmetics.
+     *       arithmetic.
      *
      * @see setSwipeAcceleration
      */
@@ -322,7 +322,7 @@ public:
      *                     values makes the containers move faster.
      *
      * @note The reason for multiplying the acceleration by 10 is to avoid introducing floating point
-     *       arithmetics.
+     *       arithmetic.
      *
      * @see getDragAcceleration
      */
@@ -338,7 +338,7 @@ public:
      * @return The drag acceleration.
      *
      * @note The reason for multiplying the acceleration by 10 is to avoid introducing floating point
-     *       arithmetics.
+     *       arithmetic.
      *
      * @see setDragAcceleration
      */

@@ -1031,11 +1031,11 @@ void BPC_ICP_Notification_CB(uint16_t attr_handle, uint8_t data_length,uint8_t *
     index += 2; 
     charValue = (uint16_t)(value[index]<<8) | value[index-1]; 
     if (charValue != 0x07FF)
-      BP_INFO_MSG(profiledbgfile, "Subfield 2 of ICP Compund Value is different from NaN.\n");
+      BP_INFO_MSG(profiledbgfile, "Subfield 2 of ICP Compound Value is different from NaN.\n");
     index += 2; 
     charValue = (uint16_t)(value[index]<<8) | value[index-1];  
     if (charValue != 0x07FF)  
-      BP_INFO_MSG(profiledbgfile, "Subfield 3 of ICP Compund Value is different from NaN.\n");
+      BP_INFO_MSG(profiledbgfile, "Subfield 3 of ICP Compound Value is different from NaN.\n");
     
     /* Time Stamp field is present */
     if (ICPValue.flags & FLAG_TIME_STAMP_PRESENT)

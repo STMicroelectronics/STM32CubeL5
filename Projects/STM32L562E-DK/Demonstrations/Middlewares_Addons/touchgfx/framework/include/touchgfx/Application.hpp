@@ -183,7 +183,7 @@ public:
      *        Handle an incoming character received by the HAL layer. Standard implementation
      *        delegates to current screen (which, in turn, does nothing).
      *
-     * @param c The incomming character to handle.
+     * @param c The incoming character to handle.
      */
     virtual void handleKeyEvent(uint8_t c);
 

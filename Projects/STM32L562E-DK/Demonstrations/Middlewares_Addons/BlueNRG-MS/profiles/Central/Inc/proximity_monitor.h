@@ -541,7 +541,7 @@ extern void PXM_CharacOfService_CB(uint8_t status, uint8_t numCharac, uint8_t *c
 /**
  * @brief This callback contains all the information of the characterisitcs descriptor
  * of a service
- * @param status Status of the charcteristics descriptor discovery procedure
+ * @param status Status of the characteristics descriptor discovery procedure
  * @param numCharac Number of characteristic descriptors of a service found on the peer device
  * @param charac Data of the characteristic descriptots discovered.
  * The array will be a sequence of elements with the following format:\n

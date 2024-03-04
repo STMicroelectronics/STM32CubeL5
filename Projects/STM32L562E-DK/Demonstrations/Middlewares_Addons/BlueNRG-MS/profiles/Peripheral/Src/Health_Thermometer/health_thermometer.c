@@ -592,7 +592,7 @@ tBleStatus HT_Update_Temperature_Type(uint8_t type)
   tBleStatus retval = BLE_STATUS_FAILED;
   
   /* if this characteristic is present, then the value has to be static
-   * while in connection. So donot allow an update during connection
+   * while in connection. So do not allow an update during connection
    */ 
   if((thermometer.thermometerFeatures & TEMPERATURE_TYPE) &&
      (HTProfile_Read_MainStateMachine() != HT_CONNECTED))
@@ -960,7 +960,7 @@ void HT_Event_Handler(void *pckt)
   
   if(hci_pckt->type != HCI_EVENT_PKT)
   {
-    HT_DBG_MSG (profiledbgfile,"HT_Event_Handler(),Recevied packed is not an HCI Event: %02X !!\n", hci_pckt->type);
+    HT_DBG_MSG (profiledbgfile,"HT_Event_Handler(),Received packed is not an HCI Event: %02X !!\n", hci_pckt->type);
     return;
   }
   
@@ -1012,7 +1012,7 @@ void HT_Event_Handler(void *pckt)
       {
       case EVT_BLUE_GAP_LIMITED_DISCOVERABLE: 
         {
-          HT_DBG_MSG(profiledbgfile,"HT_Event_Handler(), Recevied event EVT_BLUE_GAP_LIMITED_DISCOVERABLE \n");
+          HT_DBG_MSG(profiledbgfile,"HT_Event_Handler(), Received event EVT_BLUE_GAP_LIMITED_DISCOVERABLE \n");
           if((HTProfile_Read_MainStateMachine() == HT_ADV_IN_FAST_DISC_MODE) ||
              (HTProfile_Read_MainStateMachine() == HT_ADV_IN_LOW_PWR_MODE))
           {

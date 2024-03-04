@@ -270,7 +270,7 @@ tBleStatus GL_Advertize(uint8_t useWhitelist)
     }
     else
     {
-        GL_DBG_MSG(profiledbgfile,"GL_Advertize(), FAILED to start advertize, since glucose.state = %x\n",GLProfile_Read_MainStateMachine()); 
+        GL_DBG_MSG(profiledbgfile,"GL_Advertize(), FAILED to start advertise, since glucose.state = %x\n",GLProfile_Read_MainStateMachine()); 
     }
     return (status);
 }/* end GL_Advertize() */
@@ -540,7 +540,7 @@ static void GLProfile_Attribute_Modified_CB(uint16_t handle, uint8_t data_length
   
   attrHandle = handle;
   
-  GL_DBG_MSG(profiledbgfile,"GL_Event_Handler(), Recevied event EVT_BLUE_GATT_ATTRIBUTE_MODIFIED %x\n",attrHandle);
+  GL_DBG_MSG(profiledbgfile,"GL_Event_Handler(), Received event EVT_BLUE_GATT_ATTRIBUTE_MODIFIED %x\n",attrHandle);
   /* TBR: Store  glucose characteristics client descriptors */
   if (attrHandle == (glucose.RACPCharHandle + 2)) /* Indicate value: 0x02 */
   { 
@@ -819,7 +819,7 @@ void GL_Event_Handler(void *pckt)
   
   if(hci_pckt->type != HCI_EVENT_PKT)
   {
-    GL_DBG_MSG (profiledbgfile,"GL_Event_Handler(),Recevied packed is not an HCI Event: %02X !!\n", hci_pckt->type);
+    GL_DBG_MSG (profiledbgfile,"GL_Event_Handler(),Received packed is not an HCI Event: %02X !!\n", hci_pckt->type);
     return;
   }
 	
@@ -873,7 +873,7 @@ void GL_Event_Handler(void *pckt)
       {
       case EVT_BLUE_GAP_LIMITED_DISCOVERABLE: /* THis event is received when in limited discoverable mode after advertising timeout: ~ 180 sec */
 	{
-          GL_DBG_MSG(profiledbgfile,"GL_Event_Handler(), Recevied event EVT_BLUE_GAP_LIMITED_DISCOVERABLE \n");
+          GL_DBG_MSG(profiledbgfile,"GL_Event_Handler(), Received event EVT_BLUE_GAP_LIMITED_DISCOVERABLE \n");
 	  if((GLProfile_Read_MainStateMachine() == GL_ADV_IN_FAST_DISC_MODE) ||
 	     (GLProfile_Read_MainStateMachine() == GL_ADV_IN_LOW_PWR_MODE))
 	  {

@@ -334,7 +334,7 @@ int main(void)
         }
       }
 
-      /* Now update the BLE advertize data and make the Board connectable */
+      /* Now update the BLE advertise data and make the Board connectable */
       setConnectable();
       set_connectable = FALSE;
     }
@@ -1061,7 +1061,7 @@ static void SystemClock_Config(void)
 
   HAL_PWR_EnableBkUpAccess();
 
-  /* Enable the LSE Oscilator */
+  /* Enable the LSE Oscillator */
   /* Activate PLL with MSI as source (MSI is on at reset at 4Mhz) */
   RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.LSEState            = RCC_LSE_ON_RTC_ONLY;
