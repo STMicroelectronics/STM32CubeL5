@@ -18,3 +18,43 @@
 	path = Drivers/BSP/STM32L562E-DK
 	url = https://github.com/STMicroelectronics/stm32l562e-dk-bsp.git
 	branch = main
+[submodule "Drivers/BSP/Components/Common"]
+	path = Drivers/BSP/Components/Common
+	url = https://github.com/STMicroelectronics/stm32-bsp-common.git
+	branch = main
+[submodule "Drivers/BSP/Components/cs42l51"]
+	path = Drivers/BSP/Components/cs42l51
+	url = https://github.com/STMicroelectronics/stm32-cs42l51.git
+	branch = main
+[submodule "Drivers/BSP/Components/ft6x06"]
+	path = Drivers/BSP/Components/ft6x06
+	url = https://github.com/STMicroelectronics/stm32-ft6x06.git
+	branch = main
+[submodule "Drivers/BSP/Components/hx8347i"]
+	path = Drivers/BSP/Components/hx8347i
+	url = https://github.com/STMicroelectronics/stm32-hx8347i.git
+	branch = main
+[submodule "Drivers/BSP/Components/iss66wvh8m8"]
+	path = Drivers/BSP/Components/iss66wvh8m8
+	url = https://github.com/STMicroelectronics/stm32-iss66wvh8m8.git
+	branch = main
+[submodule "Drivers/BSP/Components/lsm6dso"]
+	path = Drivers/BSP/Components/lsm6dso
+	url = https://github.com/STMicroelectronics/stm32-lsm6dso.git
+	branch = main
+[submodule "Drivers/BSP/Components/mfxstm32l152"]
+	path = Drivers/BSP/Components/mfxstm32l152
+	url = https://github.com/STMicroelectronics/stm32-mfxstm32l152.git
+	branch = main
+[submodule "Drivers/BSP/Components/mx25lm51245g"]
+	path = Drivers/BSP/Components/mx25lm51245g
+	url = https://github.com/STMicroelectronics/stm32-mx25lm51245g.git
+	branch = main
+[submodule "Drivers/BSP/Components/st7789h2"]
+	path = Drivers/BSP/Components/st7789h2
+	url = https://github.com/STMicroelectronics/stm32-st7789h2.git
+	branch = main
+[submodule "Drivers/BSP/Components/stmpe811"]
+	path = Drivers/BSP/Components/stmpe811
+	url = https://github.com/STMicroelectronics/stm32-stmpe811.git
+	branch = main
