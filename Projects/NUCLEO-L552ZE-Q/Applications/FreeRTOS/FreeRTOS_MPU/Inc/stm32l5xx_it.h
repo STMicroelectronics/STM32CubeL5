@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FreeRTOS/FreeRTOS_Thread_Creation/Inc/stm32l5xx_it.h 
+  * @file    FreeRTOS/FreeRTOS_MPU/Inc/stm32l5xx_it.h
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
@@ -39,7 +39,6 @@ void BusFault_Handler(void);
 void UsageFault_Handler(void);
 void SecureFault_Handler(void);
 void DebugMon_Handler(void);
-void EXTI13_IRQHandler(void);
 
 #ifdef __cplusplus
 }

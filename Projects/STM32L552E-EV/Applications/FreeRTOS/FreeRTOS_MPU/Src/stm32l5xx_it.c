@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FreeRTOS/FreeRTOS_Thread_Creation/Src/stm32l5xx_it.c
+  * @file    FreeRTOS/FreeRTOS_MPU/Src/stm32l5xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************
@@ -63,6 +63,8 @@ void MemManage_Handler(void)
   /* Go to infinite loop when Memory Manage exception occurs */
   while (1)
   {
+    MemManage_Recover();
+    return;
   }
 }
 
@@ -115,14 +117,4 @@ void DebugMon_Handler(void)
   while (1)
   {
   }
-}
-
-/**
-  * @brief  This function handles external line 13 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void EXTI1_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(BUTTON_TAMPER_PIN);
 }

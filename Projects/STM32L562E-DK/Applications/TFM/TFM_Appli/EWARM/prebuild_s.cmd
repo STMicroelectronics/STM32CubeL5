@@ -1,1 +1,0 @@
-iccarm.exe --cpu=Cortex-M33 -DBL2 -DTFM_PSA_API -I%1\..\..\Linker  %1\tfm_common_s.icf  --silent --preprocess=ns %1\tfm_common_s.icf.i > %1\output.txt 2>&1

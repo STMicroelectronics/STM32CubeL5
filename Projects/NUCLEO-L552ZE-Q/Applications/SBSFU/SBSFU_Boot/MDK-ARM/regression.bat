@@ -1,5 +1,5 @@
 echo "regression script started"
-set stm32programmercli="C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin\STM32_Programmer_CLI.exe"
+call ..\..\env.bat
 set secbootadd0=0x180030
 set connect="-c port=SWD mode=UR --hardRst"
 set connect_no_reset="-c port=SWD mode=HotPlug"

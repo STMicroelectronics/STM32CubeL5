@@ -23,18 +23,18 @@
 #include "stm32l5xx_hal.h"
 #include "com.h"
 #include "common.h"
-#include "flash_if.h"
 #include "ymodem.h"
 #include "fw_update_app.h"
 #include "flash_layout.h"
-
-
+#include "Driver_Flash.h"
+#include "secure_nsc.h"
 #include "string.h"
+
 #if !defined(MCUBOOT_PRIMARY_ONLY)
 /** @addtogroup USER_APP User App Example
   * @{
   */
-
+extern ARM_DRIVER_FLASH LOADER_FLASH_DEV_NAME;
 /** @addtogroup  FW_UPDATE Firmware Update Example
   * @{
   */
@@ -44,7 +44,8 @@
 static uint32_t m_uFileSizeYmodem = 0U;  /* !< Ymodem File size*/
 static uint32_t m_uNbrBlocksYmodem = 0U; /* !< Ymodem Number of blocks*/
 static uint32_t m_uPacketsReceived = 0U; /* !< Ymodem packets received*/
-
+static uint32_t m_uFlashSectorSize = 0U; /* !< Flash Sector Size */
+static uint32_t m_uFlashMinWriteSize = 0U;/*!< FLash Min Write access*/
 /** @defgroup  FW_UPDATE_Private_Const Private Const
   * @{
   */
@@ -56,7 +57,6 @@ const uint32_t MagicTrailerValue[] =
   0x0f505235,
   0x8079b62c,
 };
-
 /**
   * @}
   */
@@ -69,7 +69,7 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
 static HAL_StatusTypeDef FW_UPDATE_SECURE_IMAGE(void);
 #if (MCUBOOT_IMAGE_NUMBER == 2)
 static HAL_StatusTypeDef FW_UPDATE_NONSECURE_IMAGE(void);
-#endif
+#endif /* (MCUBOOT_IMAGE_NUMBER == 2) */
 /**
   * @}
   */
@@ -122,7 +122,6 @@ void FW_UPDATE_Run(void)
       /* Print Main Menu message */
       FW_UPDATE_PrintWelcome();
     }
-
   }
 }
 
@@ -135,23 +134,19 @@ static HAL_StatusTypeDef FW_UPDATE_SECURE_IMAGE(void)
 {
   HAL_StatusTypeDef ret = HAL_ERROR;
   SFU_FwImageFlashTypeDef fw_image_dwl_area;
-
+  ARM_FLASH_INFO *data = LOADER_FLASH_DEV_NAME.GetInfo();
   /* Print Firmware Update welcome message */
 #if (MCUBOOT_IMAGE_NUMBER == 2)
   printf("Download Secure Image\r\n");
 #else
   printf("Download Image\r\n");
-#endif
+#endif /* (MCUBOOT_IMAGE_NUMBER == 2) */
   /* Get Info about the download area */
-  fw_image_dwl_area.DownloadAddr =  FLASH_AREA_2_OFFSET + FLASH_BASE;
-#if (MCUBOOT_IMAGE_NUMBER == 2)
-  fw_image_dwl_area.MaxSizeInBytes = FLASH_S_PARTITION_SIZE;
-#else
-  fw_image_dwl_area.MaxSizeInBytes = FLASH_PARTITION_SIZE;
-#endif
+  fw_image_dwl_area.DownloadAddr =  FLASH_AREA_2_OFFSET;
+  fw_image_dwl_area.MaxSizeInBytes = FLASH_AREA_2_SIZE;
   fw_image_dwl_area.ImageOffsetInBytes = 0x0;
-
-
+  m_uFlashSectorSize = data->sector_size;
+  m_uFlashMinWriteSize = data->program_unit;
   /* Download new firmware image*/
   ret = FW_UPDATE_DownloadNewFirmware(&fw_image_dwl_area);
 
@@ -173,16 +168,16 @@ static HAL_StatusTypeDef FW_UPDATE_NONSECURE_IMAGE(void)
 {
   HAL_StatusTypeDef ret = HAL_ERROR;
   SFU_FwImageFlashTypeDef fw_image_dwl_area;
-
+  ARM_FLASH_INFO *data = LOADER_FLASH_DEV_NAME.GetInfo();
   /* Print Firmware Update welcome message */
   printf("Download NonSecure Image\r\n");
 
   /* Get Info about the download area */
-  fw_image_dwl_area.DownloadAddr =  FLASH_AREA_3_OFFSET + FLASH_BASE;
+  fw_image_dwl_area.DownloadAddr =  FLASH_AREA_3_OFFSET;
   fw_image_dwl_area.MaxSizeInBytes = FLASH_NS_PARTITION_SIZE;
   fw_image_dwl_area.ImageOffsetInBytes = 0x0;
-
-
+  m_uFlashSectorSize = data->sector_size;
+  m_uFlashMinWriteSize = data->program_unit;
   /* Download new firmware image*/
   ret = FW_UPDATE_DownloadNewFirmware(&fw_image_dwl_area);
 
@@ -232,19 +227,23 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
 {
   HAL_StatusTypeDef ret = HAL_ERROR;
   COM_StatusTypeDef e_result;
+  int32_t ret_arm;
   uint32_t u_fw_size = pFwImageDwlArea->MaxSizeInBytes ;
+  uint32_t sector_address;
 
   /* Clear download area */
   printf("  -- Erasing download area \r\n\n");
-  if ((pFwImageDwlArea->DownloadAddr >= 0x8000000) && (pFwImageDwlArea->DownloadAddr + pFwImageDwlArea->MaxSizeInBytes < 0x8080000))
+
+  for (sector_address = pFwImageDwlArea->DownloadAddr;
+       sector_address < pFwImageDwlArea->DownloadAddr + pFwImageDwlArea->MaxSizeInBytes;
+       sector_address += m_uFlashSectorSize)
   {
-    ret = FLASH_If_Erase_Size((void *)(pFwImageDwlArea->DownloadAddr), pFwImageDwlArea->MaxSizeInBytes);
-    if (ret != HAL_OK)
+    ret_arm = LOADER_FLASH_DEV_NAME.EraseSector(sector_address);
+    if (ret_arm < 0)
     {
       return HAL_ERROR;
     }
   }
-  else while (1);
 
   printf("  -- Send Firmware \r\n\n");
 
@@ -266,6 +265,7 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
 #else
     printf("  -- -- Bytes: %lu\r\n\n", u_fw_size);
 #endif /*  __ARMCC_VERSION */
+    ret = HAL_OK;
     if (u_fw_size <= (pFwImageDwlArea->MaxSizeInBytes - sizeof(MagicTrailerValue)))
     {
       uint32_t MagicAddress =
@@ -276,10 +276,11 @@ static HAL_StatusTypeDef FW_UPDATE_DownloadNewFirmware(SFU_FwImageFlashTypeDef *
 #else
       printf("  Write Magic Trailer at %lx\r\n\n", MagicAddress);
 #endif /*  __ARMCC_VERSION */
-      ret = FLASH_If_Write((void *)MagicAddress, MagicTrailerValue, sizeof(MagicTrailerValue));
+      if (LOADER_FLASH_DEV_NAME.ProgramData(MagicAddress, MagicTrailerValue, sizeof(MagicTrailerValue)) != ARM_DRIVER_OK)
+      {
+        ret = HAL_ERROR;
+      }
     }
-    else
-      ret = HAL_OK;
   }
   else if (e_result == COM_ABORT)
   {
@@ -339,8 +340,7 @@ extern uint32_t total_size_received;
   */
 HAL_StatusTypeDef Ymodem_DataPktRxCpltCallback(uint8_t *pData, uint32_t uFlashDestination, uint32_t uSize)
 {
-  HAL_StatusTypeDef e_ret_status = HAL_ERROR;
-
+  int32_t ret;
   m_uPacketsReceived++;
 
   /*Increase the number of received packets*/
@@ -360,44 +360,34 @@ HAL_StatusTypeDef Ymodem_DataPktRxCpltCallback(uint8_t *pData, uint32_t uFlashDe
 
     m_uPacketsReceived = 0U;
   }
-  if ((uFlashDestination >= 0x8000000) && (uFlashDestination < 0x8080000))
+  /*Adjust dimension to 64-bit length */
+  if (uSize %  m_uFlashMinWriteSize != 0U)
   {
-    /*Adjust dimension to 64-bit length */
-    if (uSize % FLASH_IF_MIN_WRITE_LEN != 0U)
-    {
-      memset(&pData[uSize], 0xff, (FLASH_IF_MIN_WRITE_LEN - (uSize % FLASH_IF_MIN_WRITE_LEN)));
-      uSize += (FLASH_IF_MIN_WRITE_LEN - (uSize % FLASH_IF_MIN_WRITE_LEN));
-    }
-
-    /* Write Data in Flash - size has to be 64-bit aligned */
-    if (FLASH_If_Write((void *)uFlashDestination, pData, uSize) == HAL_OK)
-    {
-      e_ret_status = HAL_OK;
-
-    }
-    else
-    {
-      e_ret_status = HAL_ERROR;
-    }
+    memset(&pData[uSize], 0xff, (m_uFlashMinWriteSize - (uSize %  m_uFlashMinWriteSize)));
+    uSize += (m_uFlashMinWriteSize - (uSize %  m_uFlashMinWriteSize));
+  }
+  /* Write Data in Flash - size has to be 64-bit aligned */
+#if defined(MCUBOOT_PRIMARY_ONLY)
+  if (uFlashDestination < NS_IMAGE_PRIMARY_PARTITION_OFFSET)
+  {
+    ret = SECURE_Flash_ProgramData(uFlashDestination, pData, uSize);
   }
   else
+    ret = LOADER_FLASH_DEV_NAME.ProgramData(uFlashDestination, pData, uSize);
+#else
+  ret = LOADER_FLASH_DEV_NAME.ProgramData(uFlashDestination, pData, uSize);
+#endif /*defined(MCUBOOT_PRIMARY_ONLY) */
+  if (ret != ARM_DRIVER_OK)
   {
-    /*  ram buffer  */
-    memcpy((void *)uFlashDestination, pData, uSize);
-    e_ret_status = HAL_OK;
-  }
-  if (e_ret_status == HAL_ERROR)
-  {
-
     /*Reset of the ymodem variables */
     m_uFileSizeYmodem = 0U;
     m_uPacketsReceived = 0U;
     m_uNbrBlocksYmodem = 0U;
+    return HAL_ERROR;
   }
-  return e_ret_status;
+  else
+    return HAL_OK;
 }
-#endif
-
 /**
   * @}
   */
@@ -409,3 +399,4 @@ HAL_StatusTypeDef Ymodem_DataPktRxCpltCallback(uint8_t *pData, uint32_t uFlashDe
 /**
   * @}
   */
+#endif /* !defined(MCUBOOT_PRIMARY_ONLY) */

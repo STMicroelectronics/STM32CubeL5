@@ -16,11 +16,11 @@
 
 #ifndef __STM32L5XX_CFG_H__
 #define __STM32L5XX_CFG_H__
-#include "platform/ext/common/uart_stdout.h"
+#include "uart_stdout.h"
 #include "tfm_peripherals_def.h"
 
-#define TFM_DRIVER_STDIO    TFM_Driver_USART0
-#define NS_DRIVER_STDIO     TFM_Driver_USART0
+#define DRIVER_STDIO     Driver_USART0
+
 
 /*
 // <o>Floating Point Unit usage

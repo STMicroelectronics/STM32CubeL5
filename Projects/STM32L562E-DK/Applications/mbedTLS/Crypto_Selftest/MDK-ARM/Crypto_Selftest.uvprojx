@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;,USE_HAL_DRIVER,STM32L562xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Middlewares/Third_Party/mbedTLS/include/mbedtls;../../../../../../Middlewares/Third_Party/mbedTLS/include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Fonts;../../../../../../Utilities/lcd</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Middlewares/Third_Party/mbedTLS/include/mbedtls;../../../../../../Middlewares/Third_Party/mbedTLS/include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/RTOS2/Include;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Fonts;../../../../../../Utilities/lcd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -356,7 +356,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>

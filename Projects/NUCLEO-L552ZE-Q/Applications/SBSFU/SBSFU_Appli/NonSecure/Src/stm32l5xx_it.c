@@ -47,9 +47,6 @@
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
-{
-}
 
 /**
   * @brief  This function handles Hard Fault exception.

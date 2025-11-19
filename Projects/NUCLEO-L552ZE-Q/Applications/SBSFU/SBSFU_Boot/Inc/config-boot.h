@@ -23,7 +23,7 @@
 /*
  * Minimal configuration for using TLS in the bootloader
  *
- * - RSA or ECDSA signature verification
+ * - ECDSA signature verification
  */
 
 #ifndef MBEDTLS_CONFIG_BOOT_H
@@ -52,7 +52,6 @@
 #define MBEDTLS_HAVE_ASM
 #endif
 
-#define MBEDTLS_RSA_C
 #define MBEDTLS_ECP_DP_SECP256R1_ENABLED
 #define MBEDTLS_ECP_NIST_OPTIM
 #define MBEDTLS_ECP_C
@@ -76,9 +75,6 @@
 #define MBEDTLS_AES_C
 #define MBEDTLS_CIPHER_C
 /* Save RAM by adjusting to our exact needs */
-#define MBEDTLS_ECP_MAX_BITS             2048
-
-
 #define MBEDTLS_MPI_MAX_SIZE              384
 
 
@@ -87,6 +83,8 @@
 /* Save ROM and a few bytes of RAM by specifying our own ciphersuite list */
 #define MBEDTLS_SSL_CIPHERSUITES MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8
 
-#include "mbedtls/check_config.h"
+/* mbedtls >3.6 compatibility */
+#define MBEDTLS_DEPRECATED_REMOVED
+#include <mbedtls/compat-2.x.h>
 
 #endif /* MBEDTLS_CONFIG_BOOT_H */

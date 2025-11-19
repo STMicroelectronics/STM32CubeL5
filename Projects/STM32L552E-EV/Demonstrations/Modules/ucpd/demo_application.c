@@ -242,7 +242,7 @@ const uint8_t g_tab_error_strings[DEMO_ERROR_TYPE_MAXNBITEMS][DEMO_ERROR_MAX_MSG
 
 /* Counter for Sel Joystick pressed*/
 #if defined(_RTOS)
-osMessageQId  LCDMsgBox;
+osMessageQueueId_t  LCDMsgBox;
 #if (osCMSIS >= 0x20000U)
 osThreadAttr_t Demo_Thread_Atrr = {
   .name       = "LCD",
@@ -1809,7 +1809,7 @@ static void DEMO_Task(void *queue_id)
 #endif
 {
 #if defined(_RTOS)
-  osMessageQId  queue = *(osMessageQId *)queue_id;
+	osMessageQueueId_t  queue = *(osMessageQueueId_t *)queue_id;
 #endif
 
   Display_build_info();
@@ -1867,9 +1867,9 @@ static void string_completion(uint8_t *Str, uint8_t SizeMax)
 }
 
 void vApplicationStackOverflowHook( TaskHandle_t xTask,
-                                    signed char *pcTaskName );
+                                    char *pcTaskName );
 void vApplicationStackOverflowHook( TaskHandle_t xTask,
-                                    signed char *pcTaskName )
+                                    char *pcTaskName )
 {
   while(1);
 }

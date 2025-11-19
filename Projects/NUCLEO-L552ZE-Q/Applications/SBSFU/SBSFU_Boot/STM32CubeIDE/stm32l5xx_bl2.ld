@@ -38,12 +38,15 @@ GROUP(libgcc.a libc.a libm.a libnosys.a)
 ENTRY(Reset_Handler)
 
 SECTIONS
-{   
+{
 	.provision :
 	{
-		KEEP(*(.provision)) ;
+		KEEP(*(.bootutil_key_cnt))
+		KEEP(*(.bootutil_key))
+		KEEP(*(.bootutil_enc_key))
+		*keys.o(.text* .rodata*)
 	} > FLASH
-	
+
 	.BL2_NoHdp_Code :
     {
         *mpu_armv8m_drv.o (.text* .rodata*)
@@ -52,7 +55,7 @@ SECTIONS
 
 	.text (BL2_CODE_START):
     {
-        
+
         KEEP(*(.vectors))
         __Vectors_End = .;
         __Vectors_Size = __Vectors_End - __Vectors;

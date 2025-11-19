@@ -39,68 +39,56 @@ ENTRY(Reset_Handler)
 _estack = ORIGIN(RAM) + LENGTH(RAM);	/* end of "RAM" Ram type memory */
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x200;      /* required amount of heap  */
-_Min_Stack_Size = 0x400; /* required amount of stack */
+_Min_Stack_Size = 0x400;     /* required amount of stack */
 
 /* Specify the memory areas */
 MEMORY
 {
-FLASH (rx)      : ORIGIN = 0x08005D00, LENGTH = 504K
-Privileged_FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 50K
-RAM (xrw)      : ORIGIN = 0x20000800, LENGTH = 190K
-Privileged_RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 2K
+  FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 512K
+  RAM   (xrw): ORIGIN = 0x20000000, LENGTH = 256K
 }
 
 /* Variables used by FreeRTOS-MPU. */
-_Privileged_Functions_Region_Size = 7K;
-_Privileged_Data_Region_Size = 2K;
+__privileged_functions_region_size__  = 32K;
+__privileged_data_region_size__       = 32K;
 
-__FLASH_segment_start__ = ORIGIN( Privileged_FLASH );
-__FLASH_segment_end__ = __FLASH_segment_start__ + LENGTH( Privileged_FLASH ) + LENGTH( FLASH );
+__FLASH_segment_start__               = ORIGIN(FLASH);
+__FLASH_segment_end__                 = __FLASH_segment_start__ + LENGTH(FLASH) - 1;
 
-__privileged_functions_start__ = ORIGIN( Privileged_FLASH );
-__privileged_functions_end__ = __privileged_functions_start__ + _Privileged_Functions_Region_Size;
+__SRAM_segment_start__                = ORIGIN(RAM);
+__SRAM_segment_end__                  = __SRAM_segment_start__ + LENGTH(RAM) - 1;
 
-__unprivileged_flash_start__ = 0x08001F00;
-__unprivileged_flash_end__   =  0x0807FFFF;
+__privileged_functions_start__        = __FLASH_segment_start__;
+__privileged_functions_end__          = __FLASH_segment_start__ + __privileged_functions_region_size__ - 1;
 
-__SRAM_segment_start__ = ORIGIN( Privileged_RAM );
-__SRAM_segment_end__ = __SRAM_segment_start__ + LENGTH( Privileged_RAM ) + LENGTH( RAM );
+__privileged_sram_start__             = __SRAM_segment_start__;
+__privileged_sram_end__               = __SRAM_segment_start__ + __privileged_data_region_size__ - 1;
 
-__privileged_sram_start__ = ORIGIN( Privileged_RAM );
-__privileged_sram_end__ = __SRAM_segment_start__ + LENGTH( Privileged_RAM );
+__unprivileged_flash_start__          = 0x08009000;
+__unprivileged_flash_end__            = __FLASH_segment_end__;
 
-__unprivileged_sram_start__    =  0x20000800;
-__unprivileged_sram_end__      =  0x2002FFFF;
-
-__privileged_data_start__ = ORIGIN( Privileged_RAM );
-__privileged_data_end__ = __privileged_data_start__ + _Privileged_Data_Region_Size;
-
-__syscalls_flash_start__       =  0x08001D00;
-__syscalls_flash_end__         =  0x08001EFF;
-
-
-/* Define output sections */
+/* Sections */
 SECTIONS
 {
-  /* The startup code goes first into FLASH */
-  .isr_vector :
+  /* Privileged functions and vector table */
+  .privileged_functions :
   {
     . = ALIGN(4);
-    KEEP(*(.isr_vector)) /* Startup code */
-    . = ALIGN(4);
-  } >Privileged_FLASH
-  
-    .privileged_functions : 
-  {
+    KEEP(*(.isr_vector)) /* Startup code. */
     . = ALIGN(4);
     *(privileged_functions)
-    *(privileged_functions*)
     . = ALIGN(4);
-  } >Privileged_FLASH
+    FILL(0xDEAD);
+    . = __privileged_functions_region_size__;
+  } >FLASH
 
-  /* The program code and other data goes into FLASH */
+  /* The program code and other data into "FLASH" Rom type memory */
   .text :
   {
+    . = ALIGN(4);
+    __syscalls_flash_start__ = .;
+    *(freertos_system_calls)
+    __syscalls_flash_end__ = .;
     . = ALIGN(4);
     *(.text)           /* .text sections (code) */
     *(.text*)          /* .text* sections (code) */
@@ -112,10 +100,10 @@ SECTIONS
     KEEP (*(.fini))
 
     . = ALIGN(4);
-    _etext = .;        /* define a global symbols at end of code */
+    _etext = .;        /* define a global symbol at end of code */
   } >FLASH
 
-  /* Constant data goes into FLASH */
+  /* Constant data into "FLASH" Rom type memory */
   .rodata :
   {
     . = ALIGN(4);
@@ -124,91 +112,101 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  .ARM.extab (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  .ARM.extab (READONLY) :
   {
+    . = ALIGN(4);
     *(.ARM.extab* .gnu.linkonce.armextab.*)
+    . = ALIGN(4);
   } >FLASH
-  .ARM (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+
+  .ARM (READONLY) :
   {
+    . = ALIGN(4);
     __exidx_start = .;
     *(.ARM.exidx*)
     __exidx_end = .;
+    . = ALIGN(4);
   } >FLASH
 
-  .preinit_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  .preinit_array (READONLY) :
   {
+    . = ALIGN(4);
     PROVIDE_HIDDEN (__preinit_array_start = .);
     KEEP (*(.preinit_array*))
     PROVIDE_HIDDEN (__preinit_array_end = .);
+    . = ALIGN(4);
   } >FLASH
-  .init_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+
+  .init_array (READONLY) :
   {
+    . = ALIGN(4);
     PROVIDE_HIDDEN (__init_array_start = .);
     KEEP (*(SORT(.init_array.*)))
     KEEP (*(.init_array*))
     PROVIDE_HIDDEN (__init_array_end = .);
+    . = ALIGN(4);
   } >FLASH
-  .fini_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+
+  .fini_array (READONLY) :
   {
+    . = ALIGN(4);
     PROVIDE_HIDDEN (__fini_array_start = .);
     KEEP (*(SORT(.fini_array.*)))
     KEEP (*(.fini_array*))
     PROVIDE_HIDDEN (__fini_array_end = .);
+    . = ALIGN(4);
   } >FLASH
 
-.pbss : 
+  /* Used by the startup to initialize data */
+  _sipdata = LOADADDR(.privileged_data);
+
+  /* Privileged data section */
+  .privileged_data :
   {
     . = ALIGN(4);
-    _spbss = .;
+    _spdata = .;        /* VMA start of .privileged_data */
     *(privileged_data)
-    *(privileged_data*)
     . = ALIGN(4);
-    _epbss = .;
-  } >Privileged_RAM
-  
-  /* used by the startup to initialize data */
-  _sipdata = LOADADDR(.pdata);
-
-  .pdata : 
-  {
-    . = ALIGN(4);
-    _spdata = .;
-    *(privileged_initialized_data)
-    *(privileged_initialized_data*)
-    . = ALIGN(4);
-    _epdata = .;
-  } >Privileged_RAM AT> Privileged_FLASH
-
-  /* used by the startup to initialize data */
-  _sidata = LOADADDR(.data);
-
-  /* Initialized data sections goes into RAM, load LMA copy after code */
-  .data : 
-  {
-    . = ALIGN(4);
-    _sdata = .;        /* create a global symbol at data start */
-    *(.data)           /* .data sections */
-    *(.data*)          /* .data* sections */
-
-    . = ALIGN(4);
-    _edata = .;        /* define a global symbol at data end */
+    FILL(0xDEAD);
+    . = __privileged_data_region_size__;
+    _epdata = .;        /* VMA end of .privileged_data */
   } >RAM AT> FLASH
 
- 
-  /* Uninitialized data section */
-  . = ALIGN(4);
+  /* Used by the startup to initialize data */
+  _sidata = LOADADDR(.data);
+
+  /* Standard initialized data section */
+  .data :
+  {
+    . = ALIGN(4);
+    _sdata = .;         /* VMA start of .data */
+    *(.data)            /* .data sections */
+    *(.data*)           /* .data* sections */
+    . = ALIGN(4);
+    _edata = .;         /* VMA end of .data */
+  } >RAM AT> FLASH
+
+  /* Uninitialized privileged bss section */
+  .pbss :
+  {
+    . = ALIGN(4);
+    _spbss = .;         /* VMA start of .pbss */
+    *(privileged_bss)
+    *(privileged_bss*)
+    . = ALIGN(4);
+    _epbss = .;         /* VMA end of .pbss */
+  } >RAM
+
+  /* Uninitialized standard bss section */
   .bss :
   {
-    /* This is used by the startup in order to initialize the .bss section */
-    _sbss = .;         /* define a global symbol at bss start */
-    __bss_start__ = _sbss;
+    . = ALIGN(4);
+    _sbss = .;          /* VMA start of .bss */
     *(.bss)
     *(.bss*)
     *(COMMON)
-
     . = ALIGN(4);
-    _ebss = .;         /* define a global symbol at bss end */
-    __bss_end__ = _ebss;
+    _ebss = .;          /* VMA end of .bss */
   } >RAM
 
   /* User_heap_stack section, used to check that there is enough RAM left */
@@ -222,9 +220,7 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-  
-
-  /* Remove information from the standard libraries */
+  /* Remove information from the compiler libraries */
   /DISCARD/ :
   {
     libc.a ( * )

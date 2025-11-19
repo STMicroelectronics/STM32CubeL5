@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,6 +99,7 @@ void MutexLowPriorityThread(void *argument);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   
   /* USER CODE END 1 */
@@ -172,6 +173,7 @@ int main(void)
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -284,10 +286,10 @@ void MutexHighPriorityThreadr(void *argument)
   /* Infinite loop */
   for (;;)
   {
-    /* The first time through the mutex will be immediately available, on
-    subsequent times through the mutex will be held by the low priority thread
-    at this point and this Take will cause the low priority thread to inherit
-    the priority of this tadhr.  In this case the block time must be
+    /* The first time through, the mutex will be immediately available. On
+    subsequent times through, the mutex will be held by the low priority thread
+    at this point and this will cause the low priority thread to inherit
+    the priority of this thread. In this case the block time must be
     long enough to ensure the low priority thread will execute again before the
     block time expires.  If the block time does expire then the error
     flag will be set here */
@@ -468,7 +470,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM6) {
+  if (htim->Instance == TIM6)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
@@ -489,8 +492,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

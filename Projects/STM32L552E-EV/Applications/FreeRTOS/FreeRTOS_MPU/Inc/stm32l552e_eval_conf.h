@@ -53,7 +53,7 @@ extern "C" {
 #define USE_BSP_POT_FEATURE 0U
 
 /* Usage of IO expander */
-#define USE_BSP_IO_CLASS    0U
+#define USE_BSP_IO_CLASS    1U
 
 /* USBPD BSP PWR TRACE define */
 #define USE_BSP_PWR_TRACE   0U

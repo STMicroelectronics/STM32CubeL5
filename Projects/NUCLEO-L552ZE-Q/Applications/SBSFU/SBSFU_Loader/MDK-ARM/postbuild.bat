@@ -1,5 +1,6 @@
 :: arg1 is the build directory
 set "projectdir=%~dp0"
+call "%projectdir%\..\..\env.bat"
 set "operation=%~1"
 set "userAppBinary=%projectdir%\..\Binary"
 set "secure_nsc=%projectdir%\..\Secure_nsclib\secure_nsclib.o"
@@ -10,30 +11,28 @@ set "binarydir=%projectdir%\..\Binary"
 set "loader=%binarydir%\loader.bin"
 set loader_ns_size=0x5000
 set loader_s_size=0x3000
-pushd %projectdir%\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot
-set mcuboot_dir=%cd%
-popd
-::line for window executable
-echo Postbuild with windows executable
-set "imgtool=%mcuboot_dir%\scripts\dist\imgtool\imgtool.exe"
-set "python="
-if exist %imgtool% (
-goto postbuild
-)
-:py
-::line for python
-echo Postbuild with python script
-set "imgtool=%mcuboot_dir%\scripts\imgtool.py"
-set "python=python "
-:postbuild
 
+if exist "%imgtool%" (
+goto postbuild
+) else (
+  echo ""
+  echo "!!! WARNING : imgtool has not been found on your installation."
+  echo ""
+  echo "  Install CubeProgrammer on your machine in default path : C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer"
+  echo "  or "
+  echo "  Update your %projectdir%\..\..\env.bat with the proper path."
+  echo ""
+  exit 0
+)
+
+:postbuild
 IF "%operation%" == "secure" (
 goto secure_operation
 )
 
 ::Make sure we have a Binary sub-folder in UserApp folder
 if not exist "%binarydir%" (
-mkdir "%binarydir%" 
+mkdir "%binarydir%"
 )
 
 ::get size of secure_nsclib.o to determine MCUBOOT_PRIMARY_ONLY flag
@@ -41,13 +40,13 @@ FOR /F "usebackq" %%A IN ('%secure_nsc%') DO set filesize=%%~zA
 
 if %filesize% LSS %maxbytesize% (
 echo "loader without secure part (MCUBOOT_PRIMARY_ONLY not defined)" >> %projectdir%\output.txt
-set "command=%python%%imgtool% ass  -i %loader_ns_size% %loader_ns% %loader% >> %projectdir%\output.txt 2>&1"
+set "command=%imgtool% ass  -i %loader_ns_size% %loader_ns% %loader% >> %projectdir%\output.txt 2>&1"
 goto execute_command
 )
 
 :: loader with secure and non secure
 echo "loader with secure part (MCUBOOT_PRIMARY_ONLY defined)" >> %projectdir%\output.txt
-set "command=%python%%imgtool% ass -f %loader_s% -o %loader_s_size% -i %loader_ns_size% %loader_ns% %loader% >> %projectdir%\output.txt 2>&1"
+set "command=%imgtool% ass -f %loader_s% -o %loader_s_size% -i %loader_ns_size% %loader_ns% %loader% >> %projectdir%\output.txt 2>&1"
 
 :execute_command
 %command%

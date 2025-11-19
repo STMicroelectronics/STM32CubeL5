@@ -66,6 +66,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../../../Modules/main_app"/>
 									<listOptionValue builtIn="false" value="../../../../../../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../../../../../Drivers/CMSIS/RTOS2/Include"/>
 									<listOptionValue builtIn="false" value="../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure"/>
 									<listOptionValue builtIn="false" value="../../../../../../Utilities/GUI_INTERFACE"/>
 									<listOptionValue builtIn="false" value="../../../../../../Drivers/BSP/STM32L552E-EV"/>
@@ -189,6 +190,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../../../Modules/main_app"/>
 									<listOptionValue builtIn="false" value="../../../../../../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../../../../../Drivers/CMSIS/RTOS2/Include"/>
 									<listOptionValue builtIn="false" value="../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33_NTZ/non_secure"/>
 									<listOptionValue builtIn="false" value="../../../../../../Utilities/GUI_INTERFACE"/>
 									<listOptionValue builtIn="false" value="../../../../../../Drivers/BSP/STM32L552E-EV"/>

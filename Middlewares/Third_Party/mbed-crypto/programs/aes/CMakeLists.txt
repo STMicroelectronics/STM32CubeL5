@@ -1,9 +1,14 @@
-add_executable(aescrypt2 aescrypt2.c)
-target_link_libraries(aescrypt2 mbedcrypto)
+set(executables
+    crypt_and_hash
+)
+add_dependencies(${programs_target} ${executables})
 
-add_executable(crypt_and_hash crypt_and_hash.c)
-target_link_libraries(crypt_and_hash mbedcrypto)
+foreach(exe IN LISTS executables)
+    add_executable(${exe} ${exe}.c $<TARGET_OBJECTS:mbedtls_test>)
+    target_link_libraries(${exe} ${mbedcrypto_target} ${CMAKE_THREAD_LIBS_INIT})
+    target_include_directories(${exe} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../framework/tests/include)
+endforeach()
 
-install(TARGETS aescrypt2 crypt_and_hash
+install(TARGETS ${executables}
         DESTINATION "bin"
         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)

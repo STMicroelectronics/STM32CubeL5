@@ -58,17 +58,9 @@ void TimerPE1function(void *pArg);
 #endif /* USE_STM32_UTILITY_OS */
 
 /* Private typedef -----------------------------------------------------------*/
-#if (osCMSIS < 0x20000U)
-#define DPM_STACK_SIZE_ADDON_FOR_CMSIS              1
-#else
-#define DPM_STACK_SIZE_ADDON_FOR_CMSIS              4
-#endif /* osCMSIS < 0x20000U */
-
 #define OS_PE_PRIORITY                    osPriorityAboveNormal
-#define OS_PE_STACK_SIZE                  (350 * DPM_STACK_SIZE_ADDON_FOR_CMSIS)
 
 #define OS_CAD_PRIORITY                   osPriorityRealtime
-#define OS_CAD_STACK_SIZE                 (300 * DPM_STACK_SIZE_ADDON_FOR_CMSIS)
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/

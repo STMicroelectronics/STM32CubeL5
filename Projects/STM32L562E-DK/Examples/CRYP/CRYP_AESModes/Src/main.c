@@ -155,6 +155,7 @@ static void data_cmp(uint32_t *EncryptedText, uint32_t *RefText, uint8_t Size);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   COM_InitTypeDef COM_Init;
   /* USER CODE END 1 */
@@ -861,7 +862,7 @@ static void Display_DecryptedData(uint8_t mode, uint16_t keysize, uint32_t datal
 static void data_cmp(uint32_t *EncryptedText, uint32_t *RefText, uint8_t Size)
 {
   /*  Before starting a new process, you need to check the current state of the peripheral; 
-      if it’s busy you need to wait for the end of current transfer before starting a new one.
+      if it's busy you need to wait for the end of current transfer before starting a new one.
       For simplicity reasons, this example is just waiting till the end of the 
       process, but application may perform other tasks while transfer operation
       is ongoing. */ 
@@ -898,8 +899,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

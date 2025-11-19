@@ -2,9 +2,8 @@
 
 # run-test-suites.pl
 #
-# This file is part of mbed TLS (https://tls.mbed.org)
-#
-# Copyright (c) 2015-2018, ARM Limited, All Rights Reserved
+# Copyright The Mbed TLS Contributors
+# SPDX-License-Identifier: Apache-2.0
 
 =head1 SYNOPSIS
 
@@ -39,11 +38,13 @@ GetOptions(
            'verbose|v:1' => \$verbose,
           ) or die;
 
-# All test suites = executable files, excluding source files, debug
-# and profiling information, etc. We can't just grep {! /\./} because
-# some of our test cases' base names contain a dot.
-my @suites = grep { -x $_ || /\.exe$/ } glob 'test_suite_*';
-@suites = grep { !/\.c$/ && !/\.data$/ && -f } @suites;
+# All test suites = executable files with a .datax file.
+my @suites = ();
+for my $data_file (glob 'test_suite_*.datax') {
+    (my $base = $data_file) =~ s/\.datax$//;
+    push @suites, $base if -x $base;
+    push @suites, "$base.exe" if -e "$base.exe";
+}
 die "$0: no test suite found\n" unless @suites;
 
 # "foo" as a skip pattern skips "test_suite_foo" and "test_suite_foo.bar"
@@ -63,7 +64,7 @@ $ENV{'DYLD_LIBRARY_PATH'} = '../library';
 
 my $prefix = $^O eq "MSWin32" ? '' : './';
 
-my ($failed_suites, $total_tests_run, $failed, $suite_cases_passed,
+my (@failed_suites, $total_tests_run, $failed, $suite_cases_passed,
     $suite_cases_failed, $suite_cases_skipped, $total_cases_passed,
     $total_cases_failed, $total_cases_skipped );
 my $suites_skipped = 0;
@@ -93,7 +94,7 @@ for my $suite (@suites)
     $suite_cases_failed = () = $result =~ /.. FAILED/g;
     $suite_cases_skipped = () = $result =~ /.. ----/g;
 
-    if( $result =~ /PASSED/ ) {
+    if( $? == 0 ) {
         print "PASS\n";
         if( $verbose > 2 ) {
             pad_print_center( 72, '-', "Begin $suite" );
@@ -101,7 +102,7 @@ for my $suite (@suites)
             pad_print_center( 72, '-', "End $suite" );
         }
     } else {
-        $failed_suites++;
+        push @failed_suites, $suite;
         print "FAIL\n";
         if( $verbose ) {
             pad_print_center( 72, '-', "Begin $suite" );
@@ -128,11 +129,16 @@ for my $suite (@suites)
 }
 
 print "-" x 72, "\n";
-print $failed_suites ? "FAILED" : "PASSED";
+print @failed_suites ? "FAILED" : "PASSED";
 printf( " (%d suites, %d tests run%s)\n",
         scalar(@suites) - $suites_skipped,
         $total_tests_run,
         $suites_skipped ? ", $suites_skipped suites skipped" : "" );
+
+if( $verbose && @failed_suites ) {
+    # the output can be very long, so provide a summary of which suites failed
+    print "      failed suites : @failed_suites\n";
+}
 
 if( $verbose > 1 ) {
     print "  test cases passed :", $total_cases_passed, "\n";
@@ -148,5 +154,5 @@ if( $verbose > 1 ) {
     }
 }
 
-exit( $failed_suites ? 1 : 0 );
+exit( @failed_suites ? 1 : 0 );
 

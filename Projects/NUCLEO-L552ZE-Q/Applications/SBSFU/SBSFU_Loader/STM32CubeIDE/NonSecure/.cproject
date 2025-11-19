@@ -45,8 +45,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/STM32L5xx_Nucleo"/>
 									<listOptionValue builtIn="false" value="../../../NonSecure/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/trustedfirmware/test/suites/crypto"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/driver"/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/mcuboot/platform/ext/driver"/>
 									<listOptionValue builtIn="false" value="../../../../Linker"/>
 									<listOptionValue builtIn="false" value="../../../Secure_nsclib"/>
 								</option>

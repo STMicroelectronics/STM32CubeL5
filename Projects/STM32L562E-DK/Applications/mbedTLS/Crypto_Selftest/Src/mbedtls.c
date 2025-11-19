@@ -255,6 +255,7 @@ void MX_MBEDTLS_Init(void)
   mbedtls_version_get_string_full( mbedtls_string_version );
 
   sprintf(msg,"  Running with %s", mbedtls_string_version);
+  UTIL_LCD_SetFont(&Font12);
   UTIL_LCD_DisplayStringAt(0, 50, (uint8_t *)msg, LEFT_MODE);
 
   mbedtls_printf( "\nSelftest Application running with %s\n", mbedtls_string_version );

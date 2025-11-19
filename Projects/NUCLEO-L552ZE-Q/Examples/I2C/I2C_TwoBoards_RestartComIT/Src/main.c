@@ -82,6 +82,7 @@ static uint16_t Buffercmp(uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferL
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   /* STM32L5xx HAL library initialization:
        - Systick timer is configured by default as source of time base, but user
@@ -148,7 +149,7 @@ int main(void)
 
     /*##- Wait for the end of the transfer #################################*/
     /*  Before starting a new communication transfer, you need to check the current
-        state of the peripheral; if it’s busy you need to wait for the end of current
+        state of the peripheral; if it's busy you need to wait for the end of current
         transfer before starting a new one.
         For simplicity reasons, this example is just waiting till the end of the
         transfer, but application may perform other tasks while transfer operation
@@ -183,7 +184,7 @@ int main(void)
 
     /*##- Wait for the end of the transfer #################################*/
     /*  Before starting a new communication transfer, you need to check the current
-        state of the peripheral; if it’s busy you need to wait for the end of current
+        state of the peripheral; if it's busy you need to wait for the end of current
         transfer before starting a new one.
         For simplicity reasons, this example is just waiting till the end of the
         transfer, but application may perform other tasks while transfer operation
@@ -225,7 +226,7 @@ int main(void)
 
   /*##- Wait for the end of the transfer ###################################*/
   /*  Before starting a new communication transfer, you need to check the current
-      state of the peripheral; if it’s busy you need to wait for the end of current
+      state of the peripheral; if it's busy you need to wait for the end of current
       transfer before starting a new one.
       For simplicity reasons, this example is just waiting till the end of the
       transfer, but application may perform other tasks while transfer operation
@@ -255,7 +256,7 @@ int main(void)
 
   /*##- Wait for the end of the transfer ###################################*/
   /*  Before starting a new communication transfer, you need to check the current
-      state of the peripheral; if it’s busy you need to wait for the end of current
+      state of the peripheral; if it's busy you need to wait for the end of current
       transfer before starting a new one.
       For simplicity reasons, this example is just waiting till the end of the
       transfer, but application may perform other tasks while transfer operation
@@ -425,14 +426,14 @@ static void MX_ICACHE_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
@@ -569,8 +570,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

@@ -174,7 +174,7 @@ GUI_SAVE_INFO                 DPM_GUI_SaveInfo                  = NULL;
 
 /* USER CODE BEGIN Private_Variables */
 #ifdef _RTOS
-osMessageQId  DPMMsgBox;
+osMessageQueueId_t  DPMMsgBox;
 #endif /* _RTOS */
 
 #if defined(_VDM)
@@ -368,7 +368,7 @@ void USBPD_DPM_UserExecute(void *argument)
   /* User code implementation */
 #ifdef _RTOS
   uint32_t _timing = osWaitForever;
-  osMessageQId  queue = *(osMessageQId *)argument;
+  osMessageQueueId_t  queue = *(osMessageQueueId_t *)argument;
 
   do
   {

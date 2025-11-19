@@ -27,6 +27,7 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "cmsis_os.h"
 #if (osCMSIS >= 0x20000U)
+#include "FreeRTOS.h"
 #include "task.h"
 #endif /* osCMSIS >= 0x20000U */
 
@@ -59,7 +60,11 @@ extern "C" {
 /**
   * @brief macro definition the define a queue type
   */
+#if (osCMSIS < 0x20000U)
 #define OS_QUEUE_ID osMessageQId
+#else
+#define OS_QUEUE_ID osMessageQueueId_t
+#endif /* (osCMSIS < 0x20000U)*/
 
 /**
   * @brief macro definition the define a queue type
@@ -123,7 +128,11 @@ extern "C" {
 /**
   * @brief macro definition of the TASK id
   */
+#if (osCMSIS < 0x20000U)
 #define OS_TASK_ID   osThreadId
+#else
+#define OS_TASK_ID   osThreadId_t
+#endif /* osCMSIS < 0x20000U */
 
 /**
   * @brief macro definition used to create a task

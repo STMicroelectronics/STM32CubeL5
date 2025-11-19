@@ -317,6 +317,7 @@ static void HigherPriorityBlock_DMA_Processing(void);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   uint32_t process_ongoing = 1;     /* low priority block processing flag         */
   uint32_t suspension_trigger = 1;  /* low priority block suspension request flag */

@@ -360,6 +360,7 @@
           <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33/non_secure</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33/secure</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/RTOS2/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L5xx_Nucleo</state>
         </option>
         <option>
@@ -627,6 +628,7 @@
         <option>
           <name>AUserIncludes</name>
           <state>$PROJ_DIR$\..\NonSecure\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>

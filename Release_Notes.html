@@ -50,9 +50,480 @@
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section8" checked aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.5.1/ 09-February-2024</strong></label>
+<input type="checkbox" id="collapse-section9" checked aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V1.6.0/ 29-October-2025</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>General updates to fix known defects and implementation enhancements.</li>
+<li><strong>SLA0044</strong> Legal terms updated to latest revision <strong>(Rev 6 / October 2025)</strong></li>
+<li><strong>SLA0048</strong> Legal terms updated to latest revision <strong>(Rev 5 / October 2025)</strong></li>
+<li>TFM Applications are now distributed directly by the <a href="https://www.trustedfirmware.org/">TrustedFirmware.org</a> community and are no longer supported within the STM32CubeL5 package.
+<ul>
+<li>Consequently, the <strong>trustedfirmware</strong> Lib has been removed.</li>
+<li><strong>For more information on using TF-M on STM32xx please refer to following links and documentation.</strong></li>
+<li>All details and link available at <a href="https://trustedfirmware-m.readthedocs.io/en/latest/platform/stm/">tf-m-user-guide</a></li>
+</ul></li>
+<li>Upgrade <strong>mbed-crypto</strong> library to use <strong>V3.6.4 (ST modified 2025-07-01)</strong>.</li>
+<li>Upgrade <strong>USBPD Device</strong> library to use <strong>L5 V5.1.1</strong>.</li>
+<li>Upgrade <strong>FreeRTOS</strong> library to use <strong>V10.6.2 (ST modified 2024-10-11)</strong>.</li>
+<li>Upgrade <strong>mcuboot</strong> library to use <strong>v1.7.2.38</strong>.</li>
+<li>Upgrade <strong>GUI_INTERFACE</strong> library to use <strong>GUI_V2.3.0</strong>.</li>
+<li>Add <strong>GPIO_Demo</strong> example.</li>
+</ul>
+<h2 id="contents">Contents</h2>
+<h3 id="sbom"><strong>SBOM</strong></h3>
+<ul>
+<li>Deliver SBOM in <a href="sbom_cdx.json">CycloneDX v1.5 format</a></li>
+</ul>
+<h3 id="cmsis-device-updates"><strong>CMSIS Device</strong> updates</h3>
+<ul>
+<li>Fix Capture Compare register TIMx_CCR5 definition.</li>
+<li>Allow redefinition of the macro ‘VECT_TAB_OFFSET’ via IDE, makefile, or command line.</li>
+<li>Update core_cm33 header file inclusion to use double quotes instead of angle brackets.</li>
+</ul>
+<h3 id="halll-drivers-updates"><strong>HAL/LL Drivers</strong> updates</h3>
+<ul>
+<li><strong>HAL ADC</strong>
+<ul>
+<li>Correct length parameter definition in HAL_ADCEx_MultiModeStart_DMA() API.</li>
+</ul></li>
+<li><strong>HAL CRC</strong>
+<ul>
+<li>Replace successive ‘if’ statements by ‘else if’ to improve checksum calculation performance in CRC_Handle_8() static function.</li>
+</ul></li>
+<li><strong>HAL DAC</strong>
+<ul>
+<li>Update HAL_DACEx_SelfCalibrate() API to handle calibration factor equal to the range maximum value.</li>
+</ul></li>
+<li><strong>HAL CRYP</strong>
+<ul>
+<li>Remove __HAL_UNLOCK() invocation when __HAL_LOCK() is not present.</li>
+<li>Prevent reading outside the boundaries of local array for all data type.</li>
+</ul></li>
+<li><strong>HAL FDCAN</strong>
+<ul>
+<li>Fix assert issue when Standard or Extended filter numbers are zeros.</li>
+<li>Fix GetIndex computation overflow in overwrite mode in HAL_FDCAN_GetRxMessage() API.</li>
+</ul></li>
+<li><strong>HAL GPIO</strong>
+<ul>
+<li>Add Pull down capability in analog mode.</li>
+</ul></li>
+<li><strong>HAL PWR</strong>
+<ul>
+<li>Add guidance for HAL_PWR_ConfigAttributes() API description.</li>
+</ul></li>
+<li><strong>HAL RCC</strong>
+<ul>
+<li>Add guidance for HAL_RCC_ConfigAttributes() API description.</li>
+</ul></li>
+<li><strong>HAL FLASH</strong>
+<ul>
+<li>Change timeout calculation method in FLASH_WaitForLastOperation() function for improved handling.</li>
+<li>Update the description of FLASH_OB_UserConfig() function.</li>
+</ul></li>
+<li><strong>HAL HASH</strong>
+<ul>
+<li>Remove commented code section.</li>
+<li>Enhance HASH_Start_IT() function to properly handle remaining data smaller than 4 bytes during the processing phase.</li>
+</ul></li>
+<li><strong>HAL Cortex</strong>
+<ul>
+<li>Add MPU attributes description.</li>
+</ul></li>
+<li><strong>HAL I2C</strong>
+<ul>
+<li>Move variable declaration at the beginning in I2C_TransferCofig() function.</li>
+<li>Update HAL_I2C_IsDeviceReady() API to consider number of trials.</li>
+</ul></li>
+<li><strong>HAL SMBUS</strong>
+<ul>
+<li>Improve HAL_SMBUS_IsDeviceReady() API to better handle STOP flag timing issues by allowing automatic retries and improved error recovery.</li>
+</ul></li>
+<li><strong>HAL NAND</strong>
+<ul>
+<li>Correct buffer assignment to ensure proper volatile access improving data integrity and preventing compiler optimization issues.</li>
+<li>Remove unused local variables.</li>
+</ul></li>
+<li><strong>HAL OSPI</strong>
+<ul>
+<li>Add new helper HAL_OSPI_IsMemoryMapped() API to verify whether memory-mapped mode is configured or not.</li>
+<li>change ChipSelectHighTime max limits to 64 to feat with specification.</li>
+<li>Keep BSY flag high at the end of data transfer in SPI_EndRxTransaction() static API.</li>
+</ul></li>
+<li><strong>HAL RNG</strong>
+<ul>
+<li>Distinguish errors from RecoverSeedError and SeedError.</li>
+<li>Modify CR register configuration in HAL_RNG_Init() API to be compliant with NIST.</li>
+</ul></li>
+<li><strong>HAL SPI</strong>
+<ul>
+<li>Add note clarifying HAL_SPI_Receive() API behavior in master mode.</li>
+<li>Add units to physical measurements.</li>
+<li>Avoid buffer overflow in SPI_WaitFifoStateUntilTimeout() function.</li>
+<li>Check data size before changing state in reception API.</li>
+<li>Keep BSY bit high to the end of a data transfer.</li>
+</ul></li>
+<li><strong>HAL TIM</strong>
+<ul>
+<li>Fix update flag (UIF) clearing in TIM_Base_SetConfig() function.</li>
+<li>Update TIM_CCER_CCxE_MASK to support internal TIM Channel 5 and 6.</li>
+<li>Fix complementary channel being systematically disabled by TIM_OCx_SetConfig() function.</li>
+</ul></li>
+<li><strong>HAL UART</strong>
+<ul>
+<li>Report an Idle event (HAL_UART_RXEVENT_IDLE) during DMA Circular mode reception by invoking the appropriate Rx Event callback.</li>
+<li>Align prescaler value used by default in UART_GET_DIV_FACTOR macro with reference manual.</li>
+<li>Correct DMA Rx abort procedure impact on ongoing Tx transfer in polling mode in static function UART_DMAAbortOnError().</li>
+<li>Correct references to HAL_UARTEx_WakeupCallback and to HAL_UART_WAKEUP_CB_ID define, according to serie capabilities</li>
+<li>Correct wrong comment in HAL_UARTEx_DisableFifoMode() API.</li>
+<li>Ensure UART Rx buffer is not written beyond boundaries during RX FIFO reception in Interrupt mode.</li>
+<li>Improve Rx Event callback by reporting accurate position for remaining DMA transfers.</li>
+</ul></li>
+<li><strong>HAL USART</strong>
+<ul>
+<li>Align prescaler value used by default in USART_GET_DIV_FACTOR macro with reference manual.</li>
+<li>Correct wrong comment in HAL_USARTEx_DisableFifoMode() API.</li>
+</ul></li>
+<li><strong>HAL USB</strong>
+<ul>
+<li>Fix security advisory SA0035.</li>
+</ul></li>
+</ul>
+<h3 id="middlewares-updates"><strong>Middlewares</strong> updates</h3>
+<ul>
+<li>Upgrade <strong>mbed-crypto</strong> library to use <strong>V3.6.4 (ST modified 2025-07-01)</strong>.</li>
+<li>Upgrade <strong>USB Device</strong> library to use <strong>V2.11.5</strong>.</li>
+<li>Upgrade <strong>USBPD Device</strong> library to use <strong>L5 V5.1.1</strong>.</li>
+<li>Upgrade <strong>USBPD Core</strong> library to use <strong>V4.3.2</strong>.</li>
+<li>Upgrade <strong>FreeRTOS</strong> library to use <strong>V10.6.2 (ST modified 2024-10-11)</strong>.</li>
+<li>Upgrade <strong>mcuboot</strong> library to use <strong>v1.7.2.38</strong>.</li>
+<li>Remove <strong>trustedfirmware</strong> library.</li>
+</ul>
+<h3 id="bsp-drivers-updates"><strong>BSP Drivers</strong> updates</h3>
+<ul>
+<li><strong>NUCLEO-L552ZE-Q</strong>
+<ul>
+<li>Add Button state (Released/Pressed) to stm32l5xx_nucleo.h</li>
+</ul></li>
+</ul>
+<h3 id="projects-updates"><strong>Projects</strong> updates</h3>
+<ul>
+<li><strong>STM32L562E-DK</strong>
+<ul>
+<li>Remove TFM applications (keep only Readme files).</li>
+</ul></li>
+<li><strong>NUCLEO-L552ZE-Q</strong>
+<ul>
+<li>Add GPIO_Demo example.</li>
+<li>SBSFU applications:
+<ul>
+<li>Support firmware upgrade via Ymodem from the application menu STM32CubeIDE.</li>
+<li>Remove q_a.txt file.</li>
+</ul></li>
+</ul></li>
+<li><strong>STM32L552E-EV</strong>
+<ul>
+<li>ICACHE_SRAM_Memory_Remap example: Improvement for higher performance.</li>
+</ul></li>
+</ul>
+<p><br />
+</p>
+<ul>
+<li>The STM32CubeL5 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with preconfigured projects for the main supported toolchains.</li>
+<li>The exhaustive list of projects is provided in this table (<a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>).</li>
+</ul>
+<p><br />
+</p>
+<h2 id="components-vs-v1.5.1">Components vs V1.5.1</h2>
+<p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
+<p><br />
+</p>
+<h2 id="contents-1">Contents</h2>
+<p><strong>Projects</strong></p>
+<table>
+<caption>Projects</caption>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Version</th>
+<th style="text-align: left;">Release notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Projects</td>
+<td>V1.6.0 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Projects/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Drivers</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CMSIS</td>
+<td style="text-align: left;">V5.6.0</td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/docs/index.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L5xx CMSIS</td>
+<td style="text-align: left;">V1.0.7 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/cmsis-device-l5/blob/master/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L5xx HAL</td>
+<td style="text-align: left;">V1.0.7 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l5xx-hal-driver/blob/master/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L552E-EV</td>
+<td style="text-align: left;">V1.0.4</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l552e-ev-bsp/blob/main/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32L562E-DK</td>
+<td style="text-align: left;">V1.1.2</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l562e-dk-bsp/blob/main/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L5xx_Nucleo</td>
+<td style="text-align: left;">V1.0.5 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l5xx-nucleo-bsp/blob/main/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP Common</td>
+<td style="text-align: left;">V7.3.0 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP cs42l51</td>
+<td style="text-align: left;">V2.0.7 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP ft6x06</td>
+<td style="text-align: left;">V2.0.3 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP hx8347i</td>
+<td style="text-align: left;">V2.0.3 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP iss66wvh8m8</td>
+<td style="text-align: left;">V2.0.1 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP lsm6dso</td>
+<td style="text-align: left;">V1.5.4<span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP mfxstm32l152</td>
+<td style="text-align: left;">V4.0.1 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP mx25lm51245g</td>
+<td style="text-align: left;">V2.0.8 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP stmpe811</td>
+<td style="text-align: left;">V3.0.2 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP st7789h2</td>
+<td style="text-align: left;">V2.0.4 <span class="icon-st-update"></span></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-st7789h2/blob/v2.0.4/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32 USB Device Library</td>
+<td style="text-align: left;">V2.11.5 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USB_Device_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 USBPD Core Library</td>
+<td style="text-align: left;">V4.3.2 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Core/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32 USBPD Device Library</td>
+<td style="text-align: left;">L5 V5.1.1 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 TouchSensing Library</td>
+<td style="text-align: left;">V2.2.0</td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_TouchSensing_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FatFS R0.12c ST modified 20191011</td>
+<td style="text-align: left;">R0.12c</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/00history.txt">FatFS release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20191011</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FreeRTOS</td>
+<td style="text-align: left;">V10.6.2 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/readme.txt">FreeRTOS release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20241011 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mbedTLS ST modified 20231024</td>
+<td style="text-align: left;">V2.16.2</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20231024</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mbed-crypto ST modified 20250701</td>
+<td style="text-align: left;">V3.6.4 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20250701 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mcuboot</td>
+<td style="text-align: left;">V1.7.2.4.38 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mcuboot/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20250722 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mcuboot/st_readme.txt">ST release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Utilities<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">lcd</td>
+<td style="text-align: left;">V2.0.3</td>
+<td style="text-align: left;"><a href="Utilities/lcd/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fonts</td>
+<td style="text-align: left;">V2.0.4</td>
+<td style="text-align: left;"><a href="Utilities/Fonts/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUI_INTERFACE</td>
+<td style="text-align: left;">V2.3.0 <span class="icon-st-update"></span></td>
+<td style="text-align: left;"><a href="Utilities/GUI_INTERFACE/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRACER_EMB</td>
+<td style="text-align: left;">V1.7.1</td>
+<td style="text-align: left;"><a href="Utilities/TRACER_EMB/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution from Flash memory and external memories, and reach the maximum performance.</li>
+<li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
+</ul>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
+<li>Warning is logged in MDK-ARM SBSFU_Boot and TFM_SBSFU_Boot projects during the Linking stage but not preventing to run and debug.</li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.50.9 minimum + ST-Link</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.38 minimum (ARM Compiler 5 (“AC5-like Warnings” selected))
+<ul>
+<li>Note : MDK-ARM 5.38 comes by default with AC6 only. To use it with AC5, please follow the steps available in this AN:
+<ul>
+<li>https://developer.arm.com/documentation/ka005073/latest/</li>
+</ul></li>
+</ul></li>
+<li>STM32CubeIDE toolchain V1.19.0</li>
+</ul>
+<h2 id="supported-devices-and-hw-boards">Supported Devices and HW boards</h2>
+<ul>
+<li>STM32L552xx/STM32L562xx devices</li>
+<li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
+<li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
+<li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
+</ul>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<ul>
+<li>This release is compatible with the previous versions</li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li><p>STM32CubeMX V6.16.0</p></li>
+<li>STM32CubeProgrammer V2.21.0
+<ul>
+<li>This tool shall be used to enable the security on the devices (TZEN=1)</li>
+<li>For TrustZone projects, to match the CMSIS Device Template partition_stm32l552xx.h/partition_stm32l562xx.h for SAU declaration and secure project examples Flash configuration, please set the User Option bytes as follows before download and execution:
+<ul>
+<li>TZEN=1</li>
+<li>DBANK=1</li>
+<li>SECWM1_STRT=0x0 SECWM1_PEND=0x7F meaning all 128 pages of Internal Flash Bank1 set as secure</li>
+<li>SECWM2_STRT=0x1 SECWM1_PEND=0x0 meaning no page of Flash Bank2 set as secure, hence Bank2 non-secure</li>
+</ul></li>
+<li>For other projects with no TrustZone, please set the User Option Bytes as follows before download and execution:
+<ul>
+<li>TZEN=0</li>
+<li>DBANK=1</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V1.5.1/ 09-February-2024</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
 <p><strong>Maintenance release</strong></p>
 <ul>
 <li>General updates to fix known defects and implementation enhancements.</li>
@@ -60,7 +531,7 @@
 <li>Upgrade <strong>USBPD Core</strong> library to use <strong>V4.3.1</strong>.</li>
 <li>Upgrade <strong>MbedTLS</strong> library to use <strong>V2.16.2 (ST modified 2023-10-24)</strong>.</li>
 <li>Upgrade <strong>Mbed-crypto</strong> Library to use <strong>V1.1.4 (ST modified 2024-01-22)</strong>.</li>
-<li><p>Upgrade <strong>Mcuboot</strong> Library to use <strong>V1.5.0.4 (ST modified 2024-01-05)</strong>.</p></li>
+<li><p>Upgrade <strong>Mcuboot</strong> Library to use <strong>V1.0.5.4 (ST modified 2024-01-05)</strong>.</p></li>
 <li><strong>CMSIS Device</strong> updates
 <ul>
 <li>Fix the location of .size directive in STM32CubeIDE’s startup code to allow proper size information of vector table.</li>
@@ -219,7 +690,7 @@
 <li>Upgrade <strong>USB Power Delivery Core</strong> Library to use <strong>V4.3.1</strong>.</li>
 <li>Upgrade <strong>MbedTLS</strong> Library to use <strong>V2.16.2_20231024</strong>.</li>
 <li>Upgrade <strong>Mbed-crypto</strong> Library to use <strong>V1.1.4_20240122</strong>.</li>
-<li>Upgrade <strong>Mcuboot</strong> Library to use <strong>V1.5.0.4_20240105</strong>.</li>
+<li>Upgrade <strong>Mcuboot</strong> Library to use <strong>V1.0.5.4_20240105</strong>.</li>
 </ul></li>
 <li><strong>Utilities</strong> updates
 <ul>
@@ -257,7 +728,7 @@
 <p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
 <p><br />
 </p>
-<h2 id="contents">Contents</h2>
+<h2 id="contents-2">Contents</h2>
 <p><strong>Projects</strong></p>
 <table>
 <caption>Projects</caption>
@@ -319,47 +790,47 @@
 <tr class="odd">
 <td style="text-align: left;">BSP Common</td>
 <td style="text-align: left;">V7.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP cs42l51</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP ft6x06</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP hx8347i</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP iss66wvh8m8</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP lsm6dso</td>
 <td style="text-align: left;">V1.3.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP mfxstm32l152</td>
 <td style="text-align: left;">V3.0.3</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP mx25lm51245g</td>
 <td style="text-align: left;">V2.0.5</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP stmpe811</td>
 <td style="text-align: left;">V3.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP st7789h2</td>
@@ -440,7 +911,7 @@
 </tr>
 <tr class="odd">
 <td style="text-align: left;">mcuboot ST modified 20240105</td>
-<td style="text-align: left;">V1.5.0.4-cypress <span class="icon-st-update"></span></td>
+<td style="text-align: left;">V1.0.5.4-cypress <span class="icon-st-update"></span></td>
 <td style="text-align: left;"><a href="Middlewares/Third_Party/mcuboot/README.md">release notes</a></td>
 </tr>
 <tr class="even">
@@ -493,17 +964,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="notes">Notes</h2>
+<h2 id="notes-1">Notes</h2>
 <ul>
 <li>The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution from Flash memory and external memories, and reach the maximum performance.</li>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations">Known Limitations</h2>
+<h2 id="known-limitations-1">Known Limitations</h2>
 <ul>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
 <li>Warning is logged in MDK-ARM SBSFU_Boot and TFM_SBSFU_Boot projects during the Linking stage but not preventing to run and debug.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.50.9 minimum + ST-Link</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.32 minimum (ARM Compiler 5 (“AC5-like Warnings” selected))
@@ -515,18 +986,18 @@
 </ul></li>
 <li>STM32CubeIDE toolchain V1.14.0</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-1">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility">Backward Compatibility</h2>
+<h2 id="backward-compatibility-1">Backward Compatibility</h2>
 <ul>
 <li>This release is compatible with the previous versions</li>
 </ul>
-<h2 id="dependencies">Dependencies</h2>
+<h2 id="dependencies-1">Dependencies</h2>
 <ul>
 <li><p>STM32CubeMX V6.11.0</p></li>
 <li>STM32CubeProgrammer V2.15.0
@@ -551,7 +1022,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V1.5.0/ 04-November-2022</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-2">Main Changes</h2>
 <p><strong>Maintenance release</strong></p>
 <ul>
 <li>General updates to fix known defects and implementation enhancements.</li>
@@ -877,7 +1348,7 @@
 <p><small>The components flagged by “<span class="icon-st-update"></span>” have changed since the previous release. “<span class="icon-st-add"></span>” are new.</small></p>
 <p><br />
 </p>
-<h2 id="contents-1">Contents</h2>
+<h2 id="contents-3">Contents</h2>
 <p><strong>Projects</strong></p>
 <table>
 <caption>Projects</caption>
@@ -939,47 +1410,47 @@
 <tr class="odd">
 <td style="text-align: left;">BSP Common</td>
 <td style="text-align: left;">V7.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP cs42l51</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP ft6x06</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP hx8347i</td>
 <td style="text-align: left;">V2.0.2</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP iss66wvh8m8</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP lsm6dso</td>
 <td style="text-align: left;">V1.3.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP mfxstm32l152</td>
 <td style="text-align: left;">V3.0.3</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP mx25lm51245g</td>
 <td style="text-align: left;">V2.0.5</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP stmpe811</td>
 <td style="text-align: left;">V3.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP st7789h2</td>
@@ -1113,33 +1584,33 @@
 </tr>
 </tbody>
 </table>
-<h2 id="notes-1">Notes</h2>
+<h2 id="notes-2">Notes</h2>
 <ul>
 <li>The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution from Flash memory and external memories, and reach the maximum performance.</li>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-1">Known Limitations</h2>
+<h2 id="known-limitations-2">Known Limitations</h2>
 <ul>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.50.9 minimum + ST-Link</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.32 minimum (ARM Compiler 6 (“AC5-like Warnings” selected))</li>
 <li>STM32CubeIDE toolchain V1.10.0 (10.3-2021.10)</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-1">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-2">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
 <ul>
 <li>This release is compatible with the previous versions</li>
 </ul>
-<h2 id="dependencies-1">Dependencies</h2>
+<h2 id="dependencies-2">Dependencies</h2>
 <ul>
 <li><p>STM32CubeMX V6.7.0</p></li>
 <li>STM32CubeProgrammer V2.4.0
@@ -1164,7 +1635,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V1.4.0 / 10-February-2021</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-3">Main Changes</h2>
 <p><strong>Maintenance release</strong></p>
 <ul>
 <li>Corrections and enhancements of CMSIS Device, HAL and Low Layer drivers</li>
@@ -1173,7 +1644,7 @@
 <li>ICACHE peripheral enabled in projects to get a 0 wait-state execution from Flash memory and external memories, and reach the maximum performance</li>
 <li>Project examples updated to STM32CubeMX 6.2.0</li>
 </ul>
-<h2 id="contents-2">Contents</h2>
+<h2 id="contents-4">Contents</h2>
 <ul>
 <li><strong>CMSIS Device</strong> updates
 <ul>
@@ -1448,47 +1919,47 @@
 <tr class="odd">
 <td style="text-align: left;">BSP Common</td>
 <td style="text-align: left;">V7.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP cs42l51</td>
 <td style="text-align: left;">V2.0.2 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP ft6x06</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP hx8347i</td>
 <td style="text-align: left;">V2.0.2 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP iss66wvh8m8</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP lsm6dso</td>
 <td style="text-align: left;">V1.3.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP mfxstm32l152</td>
 <td style="text-align: left;">V3.0.3 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP mx25lm51245g</td>
 <td style="text-align: left;">V2.0.5 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP stmpe811</td>
 <td style="text-align: left;">V3.0.1 <span class="icon-st-update"></span></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP st7789h2</td>
@@ -1623,16 +2094,16 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-2">Notes</h2>
+<h2 id="notes-3">Notes</h2>
 <ul>
 <li>The instruction cache (ICACHE) must be enabled by software to get a 0 wait-state execution from Flash memory and external memories, and reach the maximum performance.</li>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-2">Known Limitations</h2>
+<h2 id="known-limitations-3">Known Limitations</h2>
 <ul>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 minimum + ST-Link
 <ul>
@@ -1647,18 +2118,18 @@
 <li>Projects compilation verified with STM32CubeIDE V1.6.0 (gcc 9_2020-q2_update)</li>
 </ul></li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-2">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-3">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-2">Backward Compatibility</h2>
+<h2 id="backward-compatibility-3">Backward Compatibility</h2>
 <ul>
 <li>This release is compatible with the previous versions</li>
 </ul>
-<h2 id="dependencies-2">Dependencies</h2>
+<h2 id="dependencies-3">Dependencies</h2>
 <ul>
 <li><p>STM32CubeMX V6.2.0</p></li>
 <li>STM32CubeProgrammer V2.4.0
@@ -1683,12 +2154,12 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V1.3.1 / 18-September-2020</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <p><strong>Patch release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>Middlewares updates: mcuboot is provided with exe file digitally signed by ST</li>
 </ul>
-<h2 id="contents-3">Contents</h2>
+<h2 id="contents-5">Contents</h2>
 <ul>
 <li><strong>Middlewares</strong> updates
 <ul>
@@ -1765,47 +2236,47 @@
 <tr class="odd">
 <td style="text-align: left;">BSP Common</td>
 <td style="text-align: left;">V7.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP cs42l51</td>
 <td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP ft6x06</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP hx8347i</td>
 <td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP iss66wvh8m8</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP lsm6dso</td>
 <td style="text-align: left;">V1.3.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP mfxstm32l152</td>
 <td style="text-align: left;">V3.0.2</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP mx25lm51245g</td>
 <td style="text-align: left;">V2.0.3</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP stmpe811</td>
 <td style="text-align: left;">V3.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP st7789h2</td>
@@ -1940,32 +2411,32 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-3">Notes</h2>
+<h2 id="notes-4">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-3">Known Limitations</h2>
+<h2 id="known-limitations-4">Known Limitations</h2>
 <ul>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 minimum + ST-Link</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27 minimum</li>
 <li>STM32CubeIDE V1.3.0 minimum</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-3">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-4">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-3">Backward Compatibility</h2>
+<h2 id="backward-compatibility-4">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies-3">Dependencies</h2>
+<h2 id="dependencies-4">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.4.0
 <ul>
@@ -1990,7 +2461,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4" aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V1.3.0 / 26-June-2020</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <p><strong>Fourth release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>CMSIS 5.6.0 (updated DSP libraries)</li>
@@ -2000,7 +2471,7 @@
 <li>TFM/SBSFU applications updates (crypto scheme with FW encryption, single image and external flash support)</li>
 <li>Several corrections applied to provide project examples generated from STM32CubeMX</li>
 </ul>
-<h2 id="contents-4">Contents</h2>
+<h2 id="contents-6">Contents</h2>
 <ul>
 <li><strong>CMSIS</strong> updates
 <ul>
@@ -2291,47 +2762,47 @@
 <tr class="odd">
 <td style="text-align: left;"><strong>BSP Common</strong></td>
 <td style="text-align: left;"><strong>V7.0.0</strong></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP cs42l51</td>
 <td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP ft6x06</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>BSP hx8347i</strong></td>
 <td style="text-align: left;"><strong>V2.0.1</strong></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP iss66wvh8m8</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>BSP lsm6dso</strong></td>
 <td style="text-align: left;"><strong>V1.3.0</strong></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>BSP mfxstm32l152</strong></td>
 <td style="text-align: left;"><strong>V3.0.2</strong></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>BSP mx25lm51245g</strong></td>
 <td style="text-align: left;"><strong>V2.0.3</strong></td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP stmpe811</td>
 <td style="text-align: left;">V3.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>BSP st7789h2</strong></td>
@@ -2466,32 +2937,32 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-4">Notes</h2>
+<h2 id="notes-5">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-4">Known Limitations</h2>
+<h2 id="known-limitations-5">Known Limitations</h2>
 <ul>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 and V8.50.5 but not preventing to run and debug.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 minimum + ST-Link</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27 minimum</li>
 <li>STM32CubeIDE V1.3.0 minimum</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-4">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-5">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-4">Backward Compatibility</h2>
+<h2 id="backward-compatibility-5">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies-4">Dependencies</h2>
+<h2 id="dependencies-5">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.4.0
 <ul>
@@ -2516,7 +2987,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V1.2.0 / 12-February-2020</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <p><strong>Third release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>CMSIS Device / HAL / LL Drivers updates</li>
@@ -2524,7 +2995,7 @@
 <li>SBSFU application projects added for NUCLEO-L552ZE-Q</li>
 <li>New TrustZone projects for STM32L562E-DK</li>
 </ul>
-<h2 id="contents-5">Contents</h2>
+<h2 id="contents-7">Contents</h2>
 <ul>
 <li><strong>CMSIS Device</strong> updates
 <ul>
@@ -2676,47 +3147,47 @@
 <tr class="odd">
 <td style="text-align: left;">BSP Common</td>
 <td style="text-align: left;">V6.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP cs42l51</td>
 <td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP ft6x06</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP hx8347i</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP iss66wvh8m8</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP lsm6dso</td>
 <td style="text-align: left;">V1.2.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP mfxstm32l152</td>
 <td style="text-align: left;">V3.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP mx25lm51245g</td>
 <td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP stmpe811</td>
 <td style="text-align: left;">V3.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP st7789h2</td>
@@ -2841,17 +3312,17 @@
 </table>
 <p><br />
 </p>
-<h2 id="notes-5">Notes</h2>
+<h2 id="notes-6">Notes</h2>
 <ul>
 <li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
 </ul>
-<h2 id="known-limitations-5">Known Limitations</h2>
+<h2 id="known-limitations-6">Known Limitations</h2>
 <ul>
 <li>Projects partially available for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
 <li>Warnings are logged in EWARM TrustZone projects with ‘Verify Download’ option in IAR Embedded Workbench for ARM toolchain V8.42.2 but not preventing to run and debug.</li>
 <li>STM32L562E-DK demonstration firmware not available</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link
 <ul>
@@ -2871,18 +3342,18 @@
 </ul></li>
 <li>STM32CubeIDE V1.3.0</li>
 </ul>
-<h2 id="supported-devices-and-hw-boards-5">Supported Devices and HW boards</h2>
+<h2 id="supported-devices-and-hw-boards-6">Supported Devices and HW boards</h2>
 <ul>
 <li>STM32L552xx/STM32L562xx devices</li>
 <li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
 <li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
 <li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
 </ul>
-<h2 id="backward-compatibility-5">Backward Compatibility</h2>
+<h2 id="backward-compatibility-6">Backward Compatibility</h2>
 <ul>
 <li>Not applicable</li>
 </ul>
-<h2 id="dependencies-5">Dependencies</h2>
+<h2 id="dependencies-6">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.3.0
 <ul>
@@ -2907,7 +3378,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V1.1.0 / 06-January-2020</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
+<h2 id="main-changes-7">Main Changes</h2>
 <p><strong>Second release of STM32CubeL5 Firmware Package</strong></p>
 <ul>
 <li>TFM application (STM32L562E-DK)
@@ -2917,7 +3388,7 @@
 </ul></li>
 <li>More MDK-ARM and STM32CubeIDE projects</li>
 </ul>
-<h2 id="contents-6">Contents</h2>
+<h2 id="contents-8">Contents</h2>
 <ul>
 <li>CMSIS Device STM32L5xx for STM32L552xx/STM32L562xx
 <ul>
@@ -3005,369 +3476,47 @@
 <tr class="odd">
 <td style="text-align: left;">BSP Common</td>
 <td style="text-align: left;">V6.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP cs42l51</td>
 <td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP ft6x06</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP hx8347i</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP iss66wvh8m8</td>
 <td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP lsm6dso</td>
 <td style="text-align: left;">V1.2.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP mfxstm32l152</td>
 <td style="text-align: left;">V3.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP mx25lm51245g</td>
 <td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BSP stmpe811</td>
 <td style="text-align: left;">V3.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BSP st7789h2</td>
-<td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-st7789h2/blob/v2.0.4/Release_Notes.html">release notes</a></td>
-</tr>
-</tbody>
-</table>
-<table>
-<caption><strong>Middlewares</strong></caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Version</th>
-<th style="text-align: left;">Release note</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">STM32 USB Device Library</td>
-<td style="text-align: left;">V2.5.3</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_USB_Device_Library/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">STM32 USBPD Core Library</td>
-<td style="text-align: left;">V2.9.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Core/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">STM32 USBPD Device Library</td>
-<td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">STM32 TouchSensing Library</td>
-<td style="text-align: left;">V2.2.0</td>
-<td style="text-align: left;"><a href="Middlewares/ST/STM32_TouchSensing_Library/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">FatFS R0.12c ST modified 20191011</td>
-<td style="text-align: left;">R0.12c</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/00history.txt">FatFS release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ST modified 20191011</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/st_readme.txt">ST release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">FreeRTOS</td>
-<td style="text-align: left;">V10.2.1</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/readme.txt">FreeRTOS release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ST modified 20191213</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt">ST release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">mbedTLS ST modified 20181221</td>
-<td style="text-align: left;">V2.14.1</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/README.md">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ST modified 20181221</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/st_readme.txt">ST release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">mbed-crypto ST modified 20191107</td>
-<td style="text-align: left;">V1.0.0</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/README.md">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ST modified 20191107</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/st_readme.txt">ST release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">trustedfirmware ST modified 20191202</td>
-<td style="text-align: left;">TF-Mv1.0-RC2</td>
-<td style="text-align: left;">Not available</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ST modified 20191202</td>
-<td style="text-align: left;"><a href="Middlewares/Third_Party/trustedfirmware/st_readme.txt">ST release notes</a></td>
-</tr>
-</tbody>
-</table>
-<table>
-<caption><strong>Utilities</strong></caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Version</th>
-<th style="text-align: left;">Release note</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">basic_gui</td>
-<td style="text-align: left;">V1.0.1</td>
-<td style="text-align: left;"><a href="Utilities/basic_gui/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Fonts</td>
-<td style="text-align: left;">V2.0.0</td>
-<td style="text-align: left;"><a href="Utilities/Fonts/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">GUI_INTERFACE</td>
-<td style="text-align: left;">V1.9.0</td>
-<td style="text-align: left;"><a href="Utilities/GUI_INTERFACE/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">TRACER_EMB</td>
-<td style="text-align: left;">V1.2.0</td>
-<td style="text-align: left;"><a href="Utilities/TRACER_EMB/Release_Notes.html">release notes</a></td>
-</tr>
-</tbody>
-</table>
-<p><br />
-</p>
-<h2 id="notes-6">Notes</h2>
-<ul>
-<li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
-</ul>
-<h2 id="known-limitations-6">Known Limitations</h2>
-<ul>
-<li>Projects partially available for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
-<li>STM32L562E-DK demonstration firmware not available</li>
-</ul>
-<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
-<ul>
-<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link
-<ul>
-<li>EWARM patch <strong>EWARMv8_STM32L5xx_Support_V11.2</strong> for STM32L5xx available from \Utilities\PC_Software</li>
-<li>Please note that administrator rights are required on Windows 10 at patch installation</li>
-</ul></li>
-<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27
-<ul>
-<li>Pack <strong>Keil.STM32L5xx_DFP.1.0.9.pack</strong> available from \Utilities\PC_Software
-<ul>
-<li>ST-Link usage requires
-<ul>
-<li>ST-Link Keil DLL updates (ST-LINKIII-Keil_SWO_v3_0_5_RC2.zip)</li>
-<li>Keil TOOLS.INI update as indicated in the ST-Link Keil DLL update zip package</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>STM32CubeIDE V1.2.0</li>
-</ul>
-<h2 id="supported-devices-and-hw-boards-6">Supported Devices and HW boards</h2>
-<ul>
-<li>STM32L552xx/STM32L562xx devices</li>
-<li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
-<li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
-<li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
-</ul>
-<h2 id="backward-compatibility-6">Backward Compatibility</h2>
-<ul>
-<li>Not applicable</li>
-</ul>
-<h2 id="dependencies-6">Dependencies</h2>
-<ul>
-<li>STM32CubeProgrammer V2.3.0
-<ul>
-<li>This tool shall be used to enable the security on the devices (TZEN=1)</li>
-<li>For TrustZone projects, to match the CMSIS Device Template partition_stm32l552xx.h/partition_stm32l562xx.h for SAU declaration and secure project examples Flash configuration, please set the User Option bytes as follows before download and execution:
-<ul>
-<li>TZEN=1</li>
-<li>DBANK=1</li>
-<li>SECWM1_STRT=0x0 SECWM1_PEND=0x7F meaning all 128 pages of Internal Flash Bank1 set as secure</li>
-<li>SECWM2_STRT=0x1 SECWM1_PEND=0x0 meaning no page of Flash Bank2 set as secure, hence Bank2 non-secure</li>
-</ul></li>
-<li>For other projects with no TrustZone, please set the User Option Bytes as follows before download and execution:
-<ul>
-<li>TZEN=0</li>
-<li>DBANK=1</li>
-</ul></li>
-</ul></li>
-<li>STM32CubeMX V5.5.0
-<ul>
-<li>Starter STM32CubeMX version V5.4.0 used for first project examples creation</li>
-</ul></li>
-</ul>
-</div>
-</div>
-<div class="collapse">
-<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
-<div>
-<h2 id="main-changes-7">Main Changes</h2>
-<p><strong>First release of STM32CubeL5 Firmware Package</strong></p>
-<h2 id="contents-7">Contents</h2>
-<ul>
-<li>CMSIS Device STM32L5xx for STM32L552xx/STM32L562xx
-<ul>
-<li>Note: default Security Attribute Unit (SAU) configuration in partition_stm32l552xx.h and partition_stm32l562xx.h is available from \Include\Templates
-<ul>
-<li>default SAU setup is:
-<ul>
-<li>SAU region 0: 0x0C03E000-0x0C03FFFF (Secure, Non-Secure Callable)</li>
-<li>SAU region 1: 0x08040000-0x0807FFFF (Non-Secure FLASH Bank2 (256 Kbytes))</li>
-<li>SAU region 2: 0x20018000-0x2003FFFF (Non-Secure RAM (2nd half SRAM1 + SRAM2 (160 Kbytes)))</li>
-<li>SAU region 3: 0x40000000-0x4FFFFFFF (Non-Secure Peripherals mapped memory)</li>
-<li>SAU region 4: 0x60000000-0x9FFFFFFF (Non-Secure external memories)</li>
-<li>SAU region 5: 0x0BF90000-0x0BFA8FFF (Non-Secure System memory)</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>HAL and LL drivers
-<ul>
-<li>HAL drivers
-<ul>
-<li>ADC, COMP, CORTEX, CRC, CRYP, DAC, DFSDM, DMA, EXTI, FDCAN, FLASH, GPIO, GTZC, HASH, I2C, ICACHE, IRDA, IWDG, LPTIM, MMC, NAND, NOR, OPAMP, OSPI, OTFDEC, PCD, PKA, PWR, RCC, RNG, RTC, SAI, SD, SMARTCARD, SMBUS, SPI, SRAM, TIM, TSC, UART, USART, WWDG</li>
-<li>Alternate TIM and RTC timebase templates (to be copied in user application)</li>
-</ul></li>
-<li>LL drivers
-<ul>
-<li>ADC, BUS, COMP, CORTEX, CRC, CRS, CRYP, DAC, DMA, DMAMUX, EXTI, GPIO, I2C, IWDG, LPTIM, LPUART, OPAMP, PKA, PWR, RCC, RNG, RTC, SDMMC, SPI, SYSTEM, TIM, UCPD, USART, UTILS, WWDG</li>
-</ul></li>
-</ul></li>
-<li><p>BSP board drivers for NUCLEO-L552ZE-Q (MB1361-C02), STM32L552E-EV (MB1372-C02) and STM32L562E-DK (MB1373-C01)</p></li>
-<li>Projects examples for TrustZone-disabled and TrustZone-enabled system configurations (refer to <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a> for Projects list)
-<ul>
-<li>Naming rule applied on Project Templates
-<ul>
-<li>Templates/TrustZoneDisabled when TrustZone security is disabled in the system (Flash option bit TZEN=0)</li>
-<li>Templates/TrustZoneEnabled when TrustZone security is enabled in the system (Flash option bit TZEN=1)</li>
-</ul></li>
-<li>Naming rule applied on Project Examples
-<ul>
-<li>"_TrustZone" suffix used for TrustZone-enabled projects (Flash option bit TZEN=1) except Trusted Firmware-M (TFM) applications, others are provided for default TrustZone-disabled system (Flash option bit TZEN=0) but can be easily ported to TrustZone-enabled system.</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id="components-2">Components</h2>
-<table>
-<caption><strong>Drivers</strong></caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Version</th>
-<th style="text-align: center;">Release note</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">CMSIS</td>
-<td style="text-align: left;">V5.4.0</td>
-<td style="text-align: center;"><a href="Drivers/CMSIS/README.md">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">STM32L5xx CMSIS</td>
-<td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/cmsis-device-l5/blob/master/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">STM32L5xx HAL</td>
-<td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l5xx-hal-driver/blob/master/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BSP STM32L552E_EVAL</td>
-<td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l552e-ev-bsp/blob/main/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BSP STM32L562E-Discovery</td>
-<td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l562e-dk-bsp/blob/main/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BSP STM32L5xx_Nucleo</td>
-<td style="text-align: left;">V1.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l5xx-nucleo-bsp/blob/main/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BSP Common</td>
-<td style="text-align: left;">V6.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.0.0/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BSP cs42l51</td>
-<td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.2/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BSP ft6x06</td>
-<td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.0/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BSP hx8347i</td>
-<td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.2/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BSP iss66wvh8m8</td>
-<td style="text-align: left;">V2.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.0/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BSP lsm6dso</td>
-<td style="text-align: left;">V1.2.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.3.0/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BSP mfxstm32l152</td>
-<td style="text-align: left;">V3.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v3.0.3/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BSP mx25lm51245g</td>
-<td style="text-align: left;">V2.0.1</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.6/Release_Notes.html">release notes</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BSP stmpe811</td>
-<td style="text-align: left;">V3.0.0</td>
-<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.1/Release_Notes.html">release notes</a></td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">BSP st7789h2</td>
@@ -3533,6 +3682,328 @@
 <li>Not applicable</li>
 </ul>
 <h2 id="dependencies-7">Dependencies</h2>
+<ul>
+<li>STM32CubeProgrammer V2.3.0
+<ul>
+<li>This tool shall be used to enable the security on the devices (TZEN=1)</li>
+<li>For TrustZone projects, to match the CMSIS Device Template partition_stm32l552xx.h/partition_stm32l562xx.h for SAU declaration and secure project examples Flash configuration, please set the User Option bytes as follows before download and execution:
+<ul>
+<li>TZEN=1</li>
+<li>DBANK=1</li>
+<li>SECWM1_STRT=0x0 SECWM1_PEND=0x7F meaning all 128 pages of Internal Flash Bank1 set as secure</li>
+<li>SECWM2_STRT=0x1 SECWM1_PEND=0x0 meaning no page of Flash Bank2 set as secure, hence Bank2 non-secure</li>
+</ul></li>
+<li>For other projects with no TrustZone, please set the User Option Bytes as follows before download and execution:
+<ul>
+<li>TZEN=0</li>
+<li>DBANK=1</li>
+</ul></li>
+</ul></li>
+<li>STM32CubeMX V5.5.0
+<ul>
+<li>Starter STM32CubeMX version V5.4.0 used for first project examples creation</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 13-December-2019</strong></label>
+<div>
+<h2 id="main-changes-8">Main Changes</h2>
+<p><strong>First release of STM32CubeL5 Firmware Package</strong></p>
+<h2 id="contents-9">Contents</h2>
+<ul>
+<li>CMSIS Device STM32L5xx for STM32L552xx/STM32L562xx
+<ul>
+<li>Note: default Security Attribute Unit (SAU) configuration in partition_stm32l552xx.h and partition_stm32l562xx.h is available from \Include\Templates
+<ul>
+<li>default SAU setup is:
+<ul>
+<li>SAU region 0: 0x0C03E000-0x0C03FFFF (Secure, Non-Secure Callable)</li>
+<li>SAU region 1: 0x08040000-0x0807FFFF (Non-Secure FLASH Bank2 (256 Kbytes))</li>
+<li>SAU region 2: 0x20018000-0x2003FFFF (Non-Secure RAM (2nd half SRAM1 + SRAM2 (160 Kbytes)))</li>
+<li>SAU region 3: 0x40000000-0x4FFFFFFF (Non-Secure Peripherals mapped memory)</li>
+<li>SAU region 4: 0x60000000-0x9FFFFFFF (Non-Secure external memories)</li>
+<li>SAU region 5: 0x0BF90000-0x0BFA8FFF (Non-Secure System memory)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>HAL and LL drivers
+<ul>
+<li>HAL drivers
+<ul>
+<li>ADC, COMP, CORTEX, CRC, CRYP, DAC, DFSDM, DMA, EXTI, FDCAN, FLASH, GPIO, GTZC, HASH, I2C, ICACHE, IRDA, IWDG, LPTIM, MMC, NAND, NOR, OPAMP, OSPI, OTFDEC, PCD, PKA, PWR, RCC, RNG, RTC, SAI, SD, SMARTCARD, SMBUS, SPI, SRAM, TIM, TSC, UART, USART, WWDG</li>
+<li>Alternate TIM and RTC timebase templates (to be copied in user application)</li>
+</ul></li>
+<li>LL drivers
+<ul>
+<li>ADC, BUS, COMP, CORTEX, CRC, CRS, CRYP, DAC, DMA, DMAMUX, EXTI, GPIO, I2C, IWDG, LPTIM, LPUART, OPAMP, PKA, PWR, RCC, RNG, RTC, SDMMC, SPI, SYSTEM, TIM, UCPD, USART, UTILS, WWDG</li>
+</ul></li>
+</ul></li>
+<li><p>BSP board drivers for NUCLEO-L552ZE-Q (MB1361-C02), STM32L552E-EV (MB1372-C02) and STM32L562E-DK (MB1373-C01)</p></li>
+<li>Projects examples for TrustZone-disabled and TrustZone-enabled system configurations (refer to <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a> for Projects list)
+<ul>
+<li>Naming rule applied on Project Templates
+<ul>
+<li>Templates/TrustZoneDisabled when TrustZone security is disabled in the system (Flash option bit TZEN=0)</li>
+<li>Templates/TrustZoneEnabled when TrustZone security is enabled in the system (Flash option bit TZEN=1)</li>
+</ul></li>
+<li>Naming rule applied on Project Examples
+<ul>
+<li>"_TrustZone" suffix used for TrustZone-enabled projects (Flash option bit TZEN=1) except Trusted Firmware-M (TFM) applications, others are provided for default TrustZone-disabled system (Flash option bit TZEN=0) but can be easily ported to TrustZone-enabled system.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="components-2">Components</h2>
+<table>
+<caption><strong>Drivers</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CMSIS</td>
+<td style="text-align: left;">V5.4.0</td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32L5xx CMSIS</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/cmsis-device-l5/blob/master/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32L5xx HAL</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l5xx-hal-driver/blob/master/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L552E_EVAL</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l552e-ev-bsp/blob/main/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32L562E-Discovery</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l562e-dk-bsp/blob/main/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32L5xx_Nucleo</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32l5xx-nucleo-bsp/blob/main/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP Common</td>
+<td style="text-align: left;">V6.0.1</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-bsp-common/blob/v7.3.0/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP cs42l51</td>
+<td style="text-align: left;">V2.0.1</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-cs42l51/blob/v2.0.7/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP ft6x06</td>
+<td style="text-align: left;">V2.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-ft6x06/blob/v2.0.3/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP hx8347i</td>
+<td style="text-align: left;">V2.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-hx8347i/blob/v2.0.3/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP iss66wvh8m8</td>
+<td style="text-align: left;">V2.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-iss66wvh8m8/blob/v2.0.1/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP lsm6dso</td>
+<td style="text-align: left;">V1.2.1</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-lsm6dso/blob/v1.5.4/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP mfxstm32l152</td>
+<td style="text-align: left;">V3.0.1</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mfxstm32l152/blob/v4.0.1/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP mx25lm51245g</td>
+<td style="text-align: left;">V2.0.1</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-mx25lm51245g/blob/v2.0.9/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP stmpe811</td>
+<td style="text-align: left;">V3.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-stmpe811/blob/v3.0.2/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP st7789h2</td>
+<td style="text-align: left;">V2.0.0</td>
+<td style="text-align: center;"><a href="https://htmlpreview.github.io/?https://github.com/STMicroelectronics/stm32-st7789h2/blob/v2.0.4/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><strong>Middlewares</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32 USB Device Library</td>
+<td style="text-align: left;">V2.5.3</td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USB_Device_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 USBPD Core Library</td>
+<td style="text-align: left;">V2.9.0</td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Core/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32 USBPD Device Library</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 TouchSensing Library</td>
+<td style="text-align: left;">V2.2.0</td>
+<td style="text-align: left;"><a href="Middlewares/ST/STM32_TouchSensing_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FatFS R0.12c ST modified 20191011</td>
+<td style="text-align: left;">R0.12c</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/00history.txt">FatFS release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20191011</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FatFs/src/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FreeRTOS</td>
+<td style="text-align: left;">V10.2.1</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/readme.txt">FreeRTOS release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20191213</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mbedTLS ST modified 20181221</td>
+<td style="text-align: left;">V2.14.1</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20181221</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbedtls/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mbed-crypto ST modified 20191107</td>
+<td style="text-align: left;">V1.0.0</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/README.md">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20191107</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/mbed-crypto/st_readme.txt">ST release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">trustedfirmware ST modified 20191202</td>
+<td style="text-align: left;">TF-Mv1.0-RC2</td>
+<td style="text-align: left;">Not available</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ST modified 20191202</td>
+<td style="text-align: left;"><a href="Middlewares/Third_Party/trustedfirmware/st_readme.txt">ST release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><strong>Utilities</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">basic_gui</td>
+<td style="text-align: left;">V1.0.1</td>
+<td style="text-align: left;"><a href="Utilities/basic_gui/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fonts</td>
+<td style="text-align: left;">V2.0.0</td>
+<td style="text-align: left;"><a href="Utilities/Fonts/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GUI_INTERFACE</td>
+<td style="text-align: left;">V1.9.0</td>
+<td style="text-align: left;"><a href="Utilities/GUI_INTERFACE/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRACER_EMB</td>
+<td style="text-align: left;">V1.2.0</td>
+<td style="text-align: left;"><a href="Utilities/TRACER_EMB/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="notes-8">Notes</h2>
+<ul>
+<li>Caution on User Option bytes requirements for TZEN=1 prior to execution (see TrustZone project examples readme.txt file)</li>
+</ul>
+<h2 id="known-limitations-8">Known Limitations</h2>
+<ul>
+<li>Projects partially available for RealView Microcontroller Development Kit (MDK-ARM) and STM32CubeIDE</li>
+<li>STM32L562E-DK demonstration firmware not available</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-8">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.32.3 + ST-Link
+<ul>
+<li>EWARM patch <strong>EWARMv8_STM32L5xx_Support_V11.2</strong> for STM32L5xx available from \Utilities\PC_Software</li>
+<li>Please note that administrator rights are required on Windows 10 at patch installation</li>
+</ul></li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.27
+<ul>
+<li>Pack <strong>Keil.STM32L5xx_DFP.1.0.9.pack</strong> available from \Utilities\PC_Software
+<ul>
+<li>ST-Link usage requires
+<ul>
+<li>ST-Link Keil DLL updates (ST-LINKIII-Keil_SWO_v3_0_5_RC2.zip)</li>
+<li>Keil TOOLS.INI update as indicated in the ST-Link Keil DLL update zip package</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>STM32CubeIDE V1.2.0</li>
+</ul>
+<h2 id="supported-devices-and-hw-boards-8">Supported Devices and HW boards</h2>
+<ul>
+<li>STM32L552xx/STM32L562xx devices</li>
+<li>STM32L552E-EV Evaluation board (MB1372 C-02)</li>
+<li>STM32L562E-DK Discovery kit (MB1373 C-01)</li>
+<li>NUCLEO-L552ZE-Q Nucleo kit (MB1361 C-02)</li>
+</ul>
+<h2 id="backward-compatibility-8">Backward Compatibility</h2>
+<ul>
+<li>Not applicable</li>
+</ul>
+<h2 id="dependencies-8">Dependencies</h2>
 <ul>
 <li>STM32CubeProgrammer V2.3.0
 <ul>

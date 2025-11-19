@@ -26,6 +26,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#if defined(__ICCARM__)
+#include <LowLevelIOInterface.h>
+#endif /* __ICCARM__ */
 
 /* USER CODE END Includes */
 
@@ -54,11 +57,14 @@ const LCD_UTILS_Drv_t LCD_Driver =
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-#if defined(__ARMCC_VERSION) || defined(__ICCARM__)
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#else
+#if defined(__ICCARM__) || defined ( __CC_ARM ) || defined(__ARMCC_VERSION)
+int io_putchar(int ch);
+#define PUTCHAR_PROTOTYPE int io_putchar(int ch)
+#elif defined(__GNUC__)
+int __io_putchar(int ch);
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#endif /* __ARMCC_VERSION || __ICCARM__ */
+#endif /* __ICCARM__ */
+
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -98,6 +104,49 @@ void mbedTLS_Selftest_Thread(void *argument);
 
 /* USER CODE BEGIN PFP */
 static void LCD_Init(void);
+
+/* Redirects printf to DRIVER_STDIO in case of ARMCLANG*/
+#if defined(__ARMCC_VERSION)
+FILE __stdout;
+
+/* __ARMCC_VERSION is only defined starting from Arm compiler version 6 */
+int fputc(int ch, FILE *f)
+{
+  /* Send byte to USART */
+  io_putchar(ch);
+
+  /* Return character written */
+  return ch;
+}
+#elif defined(__GNUC__)
+/* Redirects printf to DRIVER_STDIO in case of ARMCLANG*/
+int _write(int fd, char *str, int len)
+{
+  int i;
+
+  for (i = 0; i < len; i++)
+  {
+    /* Send byte to USART */
+    __io_putchar(str[i]);
+  }
+
+  /* Return the number of characters written */
+  return len;
+}
+#elif defined(__ICCARM__)
+size_t __write(int file, unsigned char const *ptr, size_t len)
+{
+  size_t idx;
+  unsigned char const *pdata = ptr;
+
+  for (idx=0; idx < len; idx++)
+  {
+    io_putchar((int)*pdata);
+    pdata++;
+  }
+  return len;
+}
+#endif /*  __GNUC__ */
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -423,8 +472,8 @@ static void MX_USART1_UART_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOG_CLK_ENABLE();
@@ -453,8 +502,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED9_GPIO_Port, &GPIO_InitStruct);
 
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
@@ -536,7 +585,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM6) {
+  if (htim->Instance == TIM6)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
@@ -560,7 +610,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

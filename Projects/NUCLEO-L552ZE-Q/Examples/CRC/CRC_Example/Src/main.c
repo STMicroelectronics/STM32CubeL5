@@ -95,6 +95,7 @@ static void MX_CRC_Init(void);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   /* STM32L5xx HAL library initialization:
        - Systick timer is configured by default as source of time base, but user

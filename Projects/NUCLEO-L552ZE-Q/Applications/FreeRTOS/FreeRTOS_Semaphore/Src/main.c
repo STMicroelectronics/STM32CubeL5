@@ -87,6 +87,7 @@ void SemaphoreThread2(void *argument);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   
   /* USER CODE END 1 */
@@ -124,7 +125,7 @@ int main(void)
 
   /* Create the semaphores(s) */
   /* creation of osSemaphore */
-  osSemaphoreHandle = osSemaphoreNew(1, 0, &osSemaphore_attributes);
+  osSemaphoreHandle = osSemaphoreNew(1, 1, &osSemaphore_attributes);
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   
@@ -157,6 +158,7 @@ int main(void)
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -358,7 +360,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM6) {
+  if (htim->Instance == TIM6)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
@@ -379,8 +382,7 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

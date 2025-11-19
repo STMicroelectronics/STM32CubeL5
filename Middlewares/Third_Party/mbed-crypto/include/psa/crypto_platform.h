@@ -1,7 +1,7 @@
 /**
  * \file psa/crypto_platform.h
  *
- * \brief PSA cryptography module: Mbed TLS platfom definitions
+ * \brief PSA cryptography module: Mbed TLS platform definitions
  *
  * \note This file may not be included directly. Applications must
  * include psa/crypto.h.
@@ -14,88 +14,89 @@
  * module implements.
  */
 /*
- *  Copyright (C) 2018, ARM Limited, All Rights Reserved
+ *  Copyright The Mbed TLS Contributors
  *  SPDX-License-Identifier: Apache-2.0
- *
- *  Licensed under the Apache License, Version 2.0 (the "License"); you may
- *  not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
- *  This file is part of mbed TLS (https://tls.mbed.org)
  */
 
 #ifndef PSA_CRYPTO_PLATFORM_H
 #define PSA_CRYPTO_PLATFORM_H
+#include "mbedtls/private_access.h"
 
-/* Include the Mbed TLS configuration file, the way Mbed TLS does it
- * in each of its header files. */
-#if !defined(MBEDTLS_CONFIG_FILE)
-#include "mbedtls/config.h"
-#else
-#include MBEDTLS_CONFIG_FILE
-#endif
+/*
+ * Include the build-time configuration information header. Here, we do not
+ * include `"mbedtls/build_info.h"` directly but `"psa/build_info.h"`, which
+ * is basically just an alias to it. This is to ease the maintenance of the
+ * TF-PSA-Crypto repository which has a different build system and
+ * configuration.
+ */
+#include "psa/build_info.h"
 
 /* PSA requires several types which C99 provides in stdint.h. */
 #include <stdint.h>
 
-/* Integral type representing a key handle. */
-typedef uint16_t psa_key_handle_t;
+#if defined(MBEDTLS_PSA_CRYPTO_KEY_ID_ENCODES_OWNER)
 
-/* This implementation distinguishes *application key identifiers*, which
- * are the key identifiers specified by the application, from
- * *key file identifiers*, which are the key identifiers that the library
- * sees internally. The two types can be different if there is a remote
- * call layer between the application and the library which supports
- * multiple client applications that do not have access to each others'
- * keys. The point of having different types is that the key file
- * identifier may encode not only the key identifier specified by the
- * application, but also the the identity of the application.
+/* Building for the PSA Crypto service on a PSA platform, a key owner is a PSA
+ * partition identifier.
  *
- * Note that this is an internal concept of the library and the remote
- * call layer. The application itself never sees anything other than
- * #psa_app_key_id_t with its standard definition.
+ * The function psa_its_identifier_of_slot() in psa_crypto_storage.c that
+ * translates a key identifier to a key storage file name assumes that
+ * mbedtls_key_owner_id_t is a 32-bit integer. This function thus needs
+ * reworking if mbedtls_key_owner_id_t is not defined as a 32-bit integer
+ * here anymore.
  */
+typedef int32_t mbedtls_key_owner_id_t;
 
-/* The application key identifier is always what the application sees as
- * #psa_key_id_t. */
-typedef uint32_t psa_app_key_id_t;
-
-#if defined(MBEDTLS_PSA_CRYPTO_KEY_FILE_ID_ENCODES_OWNER)
-
-#if defined(PSA_CRYPTO_SECURE)
-/* Building for the PSA Crypto service on a PSA platform. */
-/* A key owner is a PSA partition identifier. */
-typedef int32_t psa_key_owner_id_t;
-#endif
-
-typedef struct
+/** Compare two key owner identifiers.
+ *
+ * \param id1 First key owner identifier.
+ * \param id2 Second key owner identifier.
+ *
+ * \return Non-zero if the two key owner identifiers are equal, zero otherwise.
+ */
+static inline int mbedtls_key_owner_id_equal(mbedtls_key_owner_id_t id1,
+                                             mbedtls_key_owner_id_t id2)
 {
-    uint32_t key_id;
-    psa_key_owner_id_t owner;
-} psa_key_file_id_t;
-#define PSA_KEY_FILE_GET_KEY_ID( file_id ) ( ( file_id ).key_id )
+    return id1 == id2;
+}
 
-/* Since crypto.h is used as part of the PSA Cryptography API specification,
- * it must use standard types for things like the argument of psa_open_key().
- * If it wasn't for that constraint, psa_open_key() would take a
- * `psa_key_file_id_t` argument. As a workaround, make `psa_key_id_t` an
- * alias for `psa_key_file_id_t` when building for a multi-client service. */
-typedef psa_key_file_id_t psa_key_id_t;
+#endif /* MBEDTLS_PSA_CRYPTO_KEY_ID_ENCODES_OWNER */
 
-#else /* !MBEDTLS_PSA_CRYPTO_KEY_FILE_ID_ENCODES_OWNER */
+/*
+ * When MBEDTLS_PSA_CRYPTO_SPM is defined, the code is being built for SPM
+ * (Secure Partition Manager) integration which separates the code into two
+ * parts: NSPE (Non-Secure Processing Environment) and SPE (Secure Processing
+ * Environment). When building for the SPE, an additional header file should be
+ * included.
+ */
+#if defined(MBEDTLS_PSA_CRYPTO_SPM)
+#define PSA_CRYPTO_SECURE 1
+#include "crypto_spe.h"
+#endif // MBEDTLS_PSA_CRYPTO_SPM
 
-/* By default, a key file identifier is just the application key identifier. */
-typedef psa_app_key_id_t psa_key_file_id_t;
-#define PSA_KEY_FILE_GET_KEY_ID( id ) ( id )
+#if defined(MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG)
+/** The type of the context passed to mbedtls_psa_external_get_random().
+ *
+ * Mbed TLS initializes the context to all-bits-zero before calling
+ * mbedtls_psa_external_get_random() for the first time.
+ *
+ * The definition of this type in the Mbed TLS source code is for
+ * demonstration purposes. Implementers of mbedtls_psa_external_get_random()
+ * are expected to replace it with a custom definition.
+ */
+typedef struct {
+    uintptr_t MBEDTLS_PRIVATE(opaque)[2];
+} mbedtls_psa_external_random_context_t;
+#endif /* MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG */
 
-#endif /* !MBEDTLS_PSA_CRYPTO_KEY_FILE_ID_ENCODES_OWNER */
+#if defined(MBEDTLS_PSA_CRYPTO_CLIENT) && !defined(MBEDTLS_PSA_CRYPTO_C)
+/** The type of the client handle used in context structures
+ *
+ * When a client view of the multipart context structures is required,
+ * this handle is used to keep a mapping with the service side of the
+ * context which contains the actual data.
+ */
+typedef uint32_t mbedtls_psa_client_handle_t;
+#endif
 
 #endif /* PSA_CRYPTO_PLATFORM_H */

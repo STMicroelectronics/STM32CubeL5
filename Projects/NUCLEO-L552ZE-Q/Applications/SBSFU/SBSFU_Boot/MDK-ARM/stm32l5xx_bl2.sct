@@ -20,7 +20,12 @@
 
 LR_CODE PERSO_START {
 	ER_PROVISION PERSO_START PERSO_SIZE {
-	    *.o (.provision)
+        *(.bootutil_key_cnt, +FIRST)
+        *(.bootutil_key)
+        *(.bootutil_enc_key, +LAST)
+    }
+    ER_PROVISION_4 +0  {
+        keys.o
 	}
 
     ER_CODE (BL2_CODE_START) FIXED (BL2_CODE_SIZE) {

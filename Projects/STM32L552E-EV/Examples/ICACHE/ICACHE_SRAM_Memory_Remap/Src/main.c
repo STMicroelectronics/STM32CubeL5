@@ -133,9 +133,6 @@ int main(void)
   /* Execute function from external RAM before remap */
   IO_Toggle_extSRAM(); /* Toggle the Green led => should be ON */
 
-  /* Set remap Toggle function pointer */
-  IO_Toggle_extSRAM_Remapped = (funcptr)(IO_Toggle_extSRAM);
-
   /* Disable Instruction cache prior to enable the remapped region */
   HAL_ICACHE_Disable();
 
@@ -152,8 +149,12 @@ int main(void)
     Error_Handler();
   }
 
-  /* Enable the Instruction and Data Cache */
+  /* Set remap Toggle function pointer */
+  IO_Toggle_extSRAM_Remapped = (funcptr)(IO_Toggle_extSRAM);
+
+  /* Enable the Instruction cache and wait for cache invalidation end for deterministic cache behavior */
   HAL_ICACHE_Enable();
+  HAL_ICACHE_WaitForInvalidateComplete();
 
   /* Execute function from remapped code region */
   IO_Toggle_extSRAM_Remapped(); /* Toggle the Green led => should be OFF */
@@ -342,8 +343,12 @@ static void IO_Toggle_extSRAM(void) @ ".extsram_region"
 static void __attribute__((section(".extsram_region"), noinline)) IO_Toggle_extSRAM(void)
 #endif
 {
-  BSP_LED_Toggle(LED_GREEN);
-  HAL_Delay(500);
+  /* 5-time toggling */
+  for (uint32_t loop = 0; loop < 5; loop++)
+  {
+    BSP_LED_Toggle(LED_GREEN);
+    HAL_Delay(200);
+  }
 }
 
 /* USER CODE END 4 */

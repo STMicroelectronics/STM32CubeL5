@@ -87,6 +87,7 @@ static void NonSecureSecureTransferCompleteCallback(DMA_HandleTypeDef *hdma_memt
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* STM32L5xx **NON-SECURE** HAL library initialization:

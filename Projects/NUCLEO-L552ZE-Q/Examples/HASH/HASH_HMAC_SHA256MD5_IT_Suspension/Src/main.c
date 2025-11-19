@@ -188,6 +188,7 @@ static void HigherPriorityBlock_Processing(void);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   uint32_t process_ongoing = 1;     /* HMAC processing on-going flag                          */
   /* USER CODE END 1 */

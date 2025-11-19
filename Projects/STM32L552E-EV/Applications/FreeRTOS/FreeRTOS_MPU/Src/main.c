@@ -18,76 +18,134 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "cmsis_os.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
-
-/* Callback function prototypes */
-extern void vApplicationIdleHook (void);
-extern void vApplicationTickHook (void);
-#if configCHECK_FOR_STACK_OVERFLOW
-extern void vApplicationStackOverflowHook (TaskHandle_t xTask, signed char *pcTaskName);
-#endif
+#include "stdio.h"
 
 /* Private typedef -----------------------------------------------------------*/
+typedef struct
+{
+  uint32_t address;
+  uint32_t handle;
+  uint32_t psp;
+} FaultInfo_t;
+
 /* Private define ------------------------------------------------------------*/
-#if defined(__ICCARM__)
-extern uint32_t * __FLASH_segment_start__;
-extern uint32_t * __FLASH_segment_end__;
-extern uint32_t * __privileged_functions_start__;
-extern uint32_t * __privileged_functions_end__ ;
-extern uint32_t * __unprivileged_flash_start__;
-extern uint32_t * __unprivileged_flash_end__;
-extern uint32_t * __SRAM_segment_start__;
-extern uint32_t * __SRAM_segment_end__;
-extern uint32_t * __privileged_sram_start__;
-extern uint32_t * __privileged_sram_end__;
-extern uint32_t * __unprivileged_sram_start__;
-extern uint32_t * __unprivileged_sram_end__;
-#elif defined(__ARMCC_VERSION)
-const uint32_t * __FLASH_segment_start__ = ( uint32_t * ) 0x08000000UL;
-const uint32_t * __FLASH_segment_end__ = ( uint32_t * ) 0x0807FFFFUL;
-const uint32_t * __privileged_functions_start__ = ( uint32_t * ) 0x08000000UL;
-const uint32_t * __privileged_functions_end__ = ( uint32_t * ) 0x08001CFFUL;
-const uint32_t * __syscalls_flash_start__ = ( uint32_t * ) 0x08001D00UL;
-const uint32_t * __syscalls_flash_end__ = ( uint32_t * ) 0x0801EFFUL;
-const uint32_t * __unprivileged_flash_start__ = ( uint32_t * ) 0x08001F00UL;
-const uint32_t * __unprivileged_flash_end__ = ( uint32_t * ) 0x0807FFFFUL;
-const uint32_t * __SRAM_segment_start__ = ( uint32_t * ) 0x20000000UL;
-const uint32_t * __SRAM_segment_end__ = ( uint32_t * ) 0x2003FFFFUL;
-const uint32_t * __privileged_sram_start__ = ( uint32_t * ) 0x20000000UL;
-const uint32_t * __privileged_sram_end__ = ( uint32_t * ) 0x200007FFUL;
-const uint32_t * __unprivileged_sram_start__ = ( uint32_t * ) 0x20000800UL;
-const uint32_t * __unprivileged_sram_end__ = ( uint32_t * ) 0x2002FFFFUL;
-#else /* __GNUC__ */
-extern uint32_t __FLASH_segment_start__[];
-extern uint32_t __FLASH_segment_end__[];
-extern uint32_t __privileged_functions_start__[];
-extern uint32_t __privileged_functions_end__[];
-extern uint32_t __unprivileged_flash_start__[];
-extern uint32_t __unprivileged_flash_end__[];
-extern uint32_t __SRAM_segment_start__[];
-extern uint32_t __SRAM_segment_end__[];
-extern uint32_t __privileged_sram_start__[];
-extern uint32_t __privileged_sram_end__[];
-extern uint32_t __unprivileged_sram_start__[];
-extern uint32_t __unprivileged_sram_end__[];
+#if defined ( __CC_ARM ) || defined(__ARMCC_VERSION)
+extern uint32_t Image$$ER_IROM_FREERTOS_SYSTEM_CALLS$$Base;
+extern uint32_t Image$$ER_IROM_FREERTOS_SYSTEM_CALLS$$Limit;
+
+extern uint32_t Image$$ER_IROM_UNPRIVILEGED$$Base;
+extern uint32_t Image$$ER_IROM_UNPRIVILEGED$$Limit;
+
+/* Memory map needed for MPU setup. Must match the one defined in
+ * the scatter-loading file (Project.sct). */
+const uint32_t * __FLASH_segment_start__ = ( uint32_t * ) 0x08000000;
+const uint32_t * __FLASH_segment_end__ = ( uint32_t * ) 0x080FFFFF;
+const uint32_t * __SRAM_segment_start__ = ( uint32_t * ) 0x20000000;
+const uint32_t * __SRAM_segment_end__ = ( uint32_t * ) 0x2003FFFF;
+
+const uint32_t * __privileged_functions_start__ = ( uint32_t * ) 0x08000000;
+const uint32_t * __privileged_functions_end__ = ( uint32_t * ) 0x08007FFF;
+const uint32_t * __privileged_sram_start__ = ( uint32_t * ) 0x20000000;
+const uint32_t * __privileged_sram_end__ = ( uint32_t * ) 0x20007FFF;
+
+const uint32_t * __unprivileged_flash_start__ = ( uint32_t * ) &( Image$$ER_IROM_UNPRIVILEGED$$Base );
+const uint32_t * __unprivileged_flash_end__ = ( uint32_t * ) &( Image$$ER_IROM_UNPRIVILEGED$$Limit );
+
+const uint32_t * __syscalls_flash_start__ = ( uint32_t * ) &( Image$$ER_IROM_FREERTOS_SYSTEM_CALLS$$Base );
+const uint32_t * __syscalls_flash_end__ = ( uint32_t * ) &( Image$$ER_IROM_FREERTOS_SYSTEM_CALLS$$Limit );
 #endif
-/* Private macro -------------------------------------------------------------*/
+
+#define NUMBER_OF_TASKS (2)
+
+/* Return address offset within stack frame */
+#define RETURN_ADDRESS_OFFSET (6U)
+
+/* Mask used to identify whether instruction is 16 bits or 32 bits */
+#define INSTRUCTION_32BIT_Msk (0xE000)
+
+/* Example config */
+/* Number of faults a task can cause before it gets deleted */
+#define EXAMPLE_FAULT_COUNT_THRESHOLD (3)
+
+#define EXAMPLE_SHARED_MEMORY_SIZE (512U)
+
+/* A queue to hold fault information */
+static QueueHandle_t fault_queue;
+
+/* Define an array to track fault count */
+static uint8_t fault_count[NUMBER_OF_TASKS];
+
+/* Define stack spaces for unprivileged tasks.
+ * These must meet MPU alignment and size requirements. */
+static StackType_t Task1Stack[ 2 * configMINIMAL_STACK_SIZE ] __attribute__( ( aligned( 32 ) ) );
+static StackType_t Task2Stack[ 2 * configMINIMAL_STACK_SIZE ] __attribute__( ( aligned( 32 ) ) );
+
+/* Define shared memory */
+static uint8_t sharedMemory[ EXAMPLE_SHARED_MEMORY_SIZE ] __attribute__( ( aligned( 32 ) ) );
+static TaskHandle_t MainTaskHandle;
+static TaskHandle_t TaskHandles[NUMBER_OF_TASKS];
+
+static void Task1(void *argument);
+static void Task2(void *argument);
+
+/* Task parameters for unprivileged tasks */
+static const TaskParameters_t TaskParameters[NUMBER_OF_TASKS] =
+{
+  {
+      .pvTaskCode     = Task1,
+      .pcName         = "Task1",
+      .usStackDepth   = 2 * configMINIMAL_STACK_SIZE,
+      .pvParameters   = NULL,
+      .uxPriority     = tskIDLE_PRIORITY,
+      .puxStackBuffer = Task1Stack,
+      .xRegions       =   {
+                              { sharedMemory      , EXAMPLE_SHARED_MEMORY_SIZE,
+                              tskMPU_REGION_READ_ONLY | tskMPU_REGION_EXECUTE_NEVER },
+                              { LED4_GPIO_PORT, EXAMPLE_SHARED_MEMORY_SIZE,
+                              tskMPU_REGION_READ_WRITE | tskMPU_REGION_EXECUTE_NEVER },
+
+                              { 0 ,  0,  0 },
+                          }
+  },
+  {
+      .pvTaskCode     = Task2,
+      .pcName         = "Task2",
+      .usStackDepth   = 2 * configMINIMAL_STACK_SIZE,
+      .pvParameters   = NULL,
+      .uxPriority     = tskIDLE_PRIORITY,
+      .puxStackBuffer = Task2Stack,
+      .xRegions       =   {
+                              { sharedMemory      , EXAMPLE_SHARED_MEMORY_SIZE,
+                              tskMPU_REGION_READ_ONLY | tskMPU_REGION_EXECUTE_NEVER },
+                              { LED5_GPIO_PORT, EXAMPLE_SHARED_MEMORY_SIZE,
+                              tskMPU_REGION_READ_WRITE | tskMPU_REGION_EXECUTE_NEVER },
+                              { 0 ,  0,  0 },
+                          }
+  }
+};
+
 /* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart3;
 
 /* Private function prototypes -----------------------------------------------*/
-static void ReadTask(void *argument);
-static void WriteTask(void *argument);
-
-int8_t VAR = 0 ;
-uint8_t PB_Pressed = 0;
 static void SystemClock_Config(void);
-TaskHandle_t hReadTask, hWriteTask;
-#define CYCLE_RESET            ( 2 )
+static void MX_USART3_UART_Init(void);
+static void MX_GPIO_Init(void);
+static void MainTask(void *argument);
 
-/* Private functions ---------------------------------------------------------*/
+/* USER CODE BEGIN PFP */
+#if defined(__ARMCC_VERSION) || defined(__ICCARM__)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(__GNUC__)
+/* With GCC, small printf (option LD Linker->Libraries->Small printf
+   set to 'Yes') calls __io_putchar() */
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif
+/* USER CODE END PFP */
 
 /**
   * @brief  Main program
@@ -111,20 +169,49 @@ int main(void)
 
   /* Configure the System clock to have a frequency of 110 MHz */
   SystemClock_Config();
+ /* Initialize configured peripherals */
+  MX_GPIO_Init();
+  MX_USART3_UART_Init();
+
+  /* Initialize LEDs */
+  BSP_LED_Init(LED4);
+  BSP_LED_Init(LED5);
+  BSP_LED_Init(LED6);
 
   /* For better performances, enable the instruction cache in 1-way direct mapped mode */
   HAL_ICACHE_ConfigAssociativityMode(ICACHE_1WAY);
   HAL_ICACHE_Enable();
 
-  /* Initialize button */
-  BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
+  printf("FreeRTOS MPU Application\r\n");
 
-  /* Initialize LEDs */
-  BSP_LED_Init(LED4);
-  BSP_LED_Init(LED5);
+  /* Init scheduler */
+  osKernelInitialize();
 
-  xTaskCreate( ReadTask, "Task1", 512, NULL,( 3 | portPRIVILEGE_BIT ), &hReadTask );
-  xTaskCreate( WriteTask, "Task2", 512, NULL,( 3 | portPRIVILEGE_BIT ), &hWriteTask );
+  fault_queue = xQueueCreate(5U, sizeof(FaultInfo_t));
+
+  if(fault_queue == NULL)
+  {
+     Error_Handler();
+  }
+  /* USER CODE END RTOS_QUEUES */
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  if(xTaskCreate(MainTask, "MainTask", 4 * configMINIMAL_STACK_SIZE, NULL,
+                 (configMAX_PRIORITIES -1) |portPRIVILEGE_BIT  ,
+                 &MainTaskHandle) != pdPASS)
+  {
+     Error_Handler();
+  }
+
+  /* Create unprivileged threads */
+  if(xTaskCreateRestricted(&TaskParameters[0], &TaskHandles[0] )!= pdPASS)
+  {
+     Error_Handler();
+  }
+  if(xTaskCreateRestricted(&TaskParameters[1], &TaskHandles[1] )!= pdPASS)
+  {
+     Error_Handler();
+  }
 
   /* Start the scheduler. */
   vTaskStartScheduler();
@@ -133,151 +220,6 @@ int main(void)
   for (;;);
 
 }
-
-/**
-  * @brief  EXTI line detection callbacks
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin)
-{
-  PB_Pressed = 1;
-}
-
-/**
-  * @brief  ReadTask thread
-  * @param  thread not used
-  * @retval None
-  */
-static void ReadTask(void *argument)
-{
-  (void) argument;
-
-  for (;;)
-  {
-    if (VAR == 0)
-    {
-      BSP_LED_Off(LED4);
-    }
-    else if (VAR == 1)
-    {
-      BSP_LED_On(LED4);
-    }
-    else
-    {
-      BSP_LED_Off(LED4);
-      while(1)
-      {
-        BSP_LED_Toggle(LED5);
-        vTaskDelay(500);
-      }
-    }
-  }
-}
-
-/**
-  * @brief  WriteTask thread
-  * @param  argument not used
-  * @retval None
-  */
-static void WriteTask(void *argument)
-{
-  (void) argument;
-
-  for (;;)
-  {
-    if (PB_Pressed == 1)
-    {
-      VAR = -1;
-      portRESET_PRIVILEGE();
-      break;
-    }
-    else
-    {
-      if (VAR == 0)
-      {
-        VAR = 1;
-        vTaskDelay(500);
-      }
-      else
-      {
-        VAR = 0;
-        vTaskDelay(500);
-      }
-    }
-  }
-  while(1)
-  {
-
-  }
-}
-
-void vApplicationIdleHook( void )
-{
-  volatile const uint32_t *pul;
-  volatile uint32_t ulReadData;
-
-  /* The idle task, and therefore this function, run in Supervisor mode and
-  can therefore access all memory.  Try reading from corners of flash and
-  RAM to ensure a memory fault does not occur.
-
-  Start with the edges of the privileged data area. */
-  pul = __privileged_sram_start__;
-  ulReadData = *pul;
-  pul = __privileged_sram_end__ - 1;
-  ulReadData = *pul;
-
-  /* Next the standard SRAM area. */
-  pul = __unprivileged_sram_end__ - 1;
-  ulReadData = *pul;
-
-  /* And the standard Flash area - the start of which is marked for
-  privileged access only. */
-  pul = __privileged_functions_start__;
-  ulReadData = *pul;
-  pul = __unprivileged_flash_end__ - 1;
-  ulReadData = *pul;
-
-  /* Reading off the end of Flash or SRAM space should cause a fault.
-  Uncomment one of the following two pairs of lines to test. */
-
-  /* pul = __FLASH_segment_end__ + 4;
-  ulReadData = *pul; */
-
-  /* pul = __SRAM_segment_end__ + 1;
-  ulReadData = *pul; */
-
-  ( void ) ulReadData;
-}
-
-void vApplicationTickHook( void )
-{
-  static uint32_t ulCallCount = 0;
-  const uint32_t ulCallsBetweenSends = pdMS_TO_TICKS( 5000 );
-
-  /* If configUSE_TICK_HOOK is set to 1 then this function will get called
-  from each RTOS tick.  It is called from the tick interrupt and therefore
-  will be executing in the privileged state. */
-
-  ulCallCount++;
-
-  /* Is it time to print out the pass/fail message again? */
-  if( ulCallCount >= ulCallsBetweenSends )
-  {
-    ulCallCount = 0;
-  }
-}
-
-#if configCHECK_FOR_STACK_OVERFLOW
-void vApplicationStackOverflowHook( TaskHandle_t pxTask, signed char *pcTaskName )
-{
-  /* If configCHECK_FOR_STACK_OVERFLOW is set to either 1 or 2 then this
-  function will automatically get called if a task overflows its stack. */
-  ( void ) pxTask;
-  ( void ) pcTaskName;
-  for( ;; );
-}
-#endif
 
 /**
   * @brief  System Clock Configuration
@@ -348,6 +290,235 @@ void SystemClock_Config(void)
     /* Initialization Error */
     while(1);
   }
+}
+
+/**
+  * @brief USART3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART3_UART_Init(void)
+{
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 115200;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_ODD;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart3.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    while(1);
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart3, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    while(1);
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart3, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    while(1);
+  }
+  if (HAL_UARTEx_DisableFifoMode(&huart3) != HAL_OK)
+  {
+    while(1);
+  }
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+}
+
+/**
+  * @brief Function implementing the MainTask thread.
+  *        It is responsible for montitoring other threads.
+  * @param argument: Not used
+  * @retval None
+  */
+void MainTask(void *argument)
+{
+  UNUSED(argument);
+
+  FaultInfo_t fault;
+
+  for(;;)
+  {
+    xQueueReceive(fault_queue, &fault, portMAX_DELAY);
+
+    printf("\tTask name: %s\n", pcTaskGetName((TaskHandle_t) fault.handle));
+
+    printf("------------------------------\n");
+
+    /* Handle MPU exceptions */
+    for(int i = 0; i < NUMBER_OF_TASKS; ++i)
+    {
+        /* Delete task if it has caused too many faults*/
+        if(fault_count[i] == EXAMPLE_FAULT_COUNT_THRESHOLD)
+        {
+          vTaskDelete((TaskHandle_t)fault.handle);
+
+          printf("%s has caused %d faults. It was deleted.\n",
+                  pcTaskGetName(TaskHandles[i]),
+                  EXAMPLE_FAULT_COUNT_THRESHOLD);
+        }
+    }
+  }
+}
+
+/**
+  * @brief Function implementing the Task1 thread.
+  * @param argument: Not used
+  * @retval None
+  */
+void Task1(void *argument)
+{
+  UNUSED(argument);
+
+  uint8_t isFirstTime = 1;
+
+  for(;;)
+  {
+    HAL_GPIO_TogglePin(LED4_GPIO_PORT, LED4_PIN);
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    if(isFirstTime)
+    {
+      isFirstTime = 0;
+
+      /* Try to perform an illegal write */
+      sharedMemory[EXAMPLE_SHARED_MEMORY_SIZE - 1] = 4U;
+    }
+  }
+}
+
+/**
+  * @brief Function implementing the Task2 thread.
+  * @param argument: Not used
+  * @retval None
+  */
+void Task2(void *argument)
+{
+  UNUSED(argument);
+
+  vTaskDelay(pdMS_TO_TICKS(1000));
+  for(;;)
+  {
+    HAL_GPIO_TogglePin(LED5_GPIO_PORT, LED5_PIN);
+    vTaskDelay(pdMS_TO_TICKS(2000));
+
+    /* Try to perform an illegal write */
+    sharedMemory[EXAMPLE_SHARED_MEMORY_SIZE/2] = 4U;
+  }
+}
+
+/* We need to use the original FreeRTOS xTaskGetCurrentTaskHandle
+ * function instead of the one defined in mpu_wrapper.c */
+#undef xTaskGetCurrentTaskHandle
+TaskHandle_t xTaskGetCurrentTaskHandle( void );
+
+/**
+  * @brief MemManage fault recovery
+  * @retval None
+  */
+void MemManage_Recover(void)
+{
+  FaultInfo_t current_fault;
+
+  uint8_t nextInstructionOffset = 2U;
+  uint32_t* returnAddress;
+  uint16_t instruction;
+
+  /* Log the offending thread */
+  current_fault.address  = SCB->MMFAR;
+  current_fault.handle =  (uint32_t)xTaskGetCurrentTaskHandle();
+  current_fault.psp = (uint32_t)__get_PSP();
+
+  /*
+   * Clear DACCVIOL sticky bit in the MMFSR subregister.
+   * If not cleared, subsequent fault addresses will not be stored in
+   * the MMFAR register.*/
+  SET_BIT(SCB->CFSR,SCB_CFSR_DACCVIOL_Msk);
+
+  for(int i = 0; i < NUMBER_OF_TASKS; ++i)
+    {
+      if((TaskHandle_t)current_fault.handle == TaskHandles[i])
+      {
+        /* Increment fault count for task */
+        ++fault_count[i];
+
+        /* Display info about fault */
+        printf("MemManage fault occurred\r\n");
+        printf("\tAddress: 0x%X\n", (unsigned int) current_fault.address);
+        printf("\tCurrent Task Handle: %p\n", xTaskGetCurrentTaskHandle());
+
+        returnAddress = (uint32_t*)current_fault.psp + RETURN_ADDRESS_OFFSET;
+
+        /* Identify if the instruction which caused the issue
+         *is 16 or 32 bit wide */
+        instruction = *(uint16_t*)(*(uint32_t*)returnAddress);
+        if((instruction & INSTRUCTION_32BIT_Msk) == INSTRUCTION_32BIT_Msk)
+        {
+            nextInstructionOffset = 4U;
+        }
+        else
+        {
+            nextInstructionOffset = 2U;
+        }
+
+        /* Move to next instruction */
+        *returnAddress += nextInstructionOffset;
+
+        break;
+      }
+    }
+
+  /* Send Fault info to Main task */
+  xQueueSendToBackFromISR(fault_queue, &current_fault, NULL);
+
+  /* Current task yields. This forces a context switch and guarantees that
+   * the Main thread will be able to take action if needed before the current
+   * thread continues. */
+  portYIELD_WITHIN_API();
+}
+
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the USART3 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  printf("Critical Error occurred \r\n");
+  while (1)
+  {
+    BSP_LED_Toggle(LED6);
+    HAL_Delay(500);
+  }
+  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT

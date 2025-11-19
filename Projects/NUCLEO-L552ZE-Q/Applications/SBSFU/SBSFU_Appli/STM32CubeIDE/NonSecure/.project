@@ -47,11 +47,6 @@
 			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/NonSecure/Src/common.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/flash_if.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/NonSecure/Src/flash_if.c</locationURI>
-		</link>
-		<link>
 			<name>Application/User/fw_update_app.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/NonSecure/Src/fw_update_app.c</locationURI>
@@ -80,6 +75,16 @@
 			<name>Application/User/ymodem.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/NonSecure/Src/ymodem.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/low_level_flash.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/NonSecure/Src/low_level_flash.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/low_level_device.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/NonSecure/Src/low_level_device.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/system_stm32l5xx_ns.c</name>
@@ -137,12 +142,12 @@
 			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_gtzc.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_i2c.c</name>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_uart.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_i2c_ex.c</name>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_uart_ex.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c</locationURI>
 		</link>
@@ -167,12 +172,12 @@
 			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_rcc_ex.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_tim.c</name>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_crc.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_crc.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_tim_ex.c</name>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_crc_ex.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-7-PROJECT_LOC%7D/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_crc_ex.c</locationURI>
 		</link>

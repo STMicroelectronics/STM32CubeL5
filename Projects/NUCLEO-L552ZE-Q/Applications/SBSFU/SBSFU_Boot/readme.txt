@@ -27,8 +27,7 @@ Read the file SBSFU_Boot/q_a.txt for Application Licence Clarification.
 @par Application description
 
 This project is used to generate the SBSFU_Boot binary file.
-The core function of this application relies on the mcuboot middleware, the trusted
-firmware (TFM) middleware and the mbed-crypto middleware.
+The core function of this application relies on the mcuboot middleware,and the mbed-crypto middleware.
 
 It has to be compiled first.
 
@@ -46,34 +45,44 @@ the images preparation scripts according to the flash layout and crypto scheme.
 
 Security, SBSFU, mcuboot, mbedCrypto, AES, CRYP, FLASH, GTZC, HASH, PKA,
 ICACHE, Secure boot, Firmware update, Authentication, Integrity, Confidentiality,
-cipher, Signature, ECDSA verification, RSA, Option bytes, TrustZone
+cipher, Signature, ECDSA verification, Option bytes, TrustZone
 
 @par Directory contents
 
   - SBSFU_Boot/Inc/mcuboot_config/mcuboot_config.h Mcuboot configuration file
   - SBSFU_Boot/Inc/boot_hal_cfg.h                  Platform configuration file for SBSFU_Boot
   - SBSFU_Boot/Inc/boot_hal_imagevalid.h           Header file for image validation code in boot_hal.c
-  - SBSFU_Boot/Inc/boot_hal_otfdec.h               Header file for otfdec code in boot_hal.c
+  - SBSFU_Boot/Inc/boot_hal_flowcontrol.h          Added an empty header file to fix build issues with mcuboot v1.7.2.25.
+  - SBSFU_Boot/Inc/boot_hal_hash_ref.h             Added an empty header file to fix build issues with mcuboot v1.7.2.25.
   - SBSFU_Boot/Inc/cmsis.h                         Header file for CMSIS
   - SBSFU_Boot/Inc/config-boot.h                   Mbed-crypto configuration file
   - SBSFU_Boot/Inc/low_level_flash.h               Header file for low_level_flash.c
+  - SBSFU_Boot/Inc/low_level_rng.h                 Header file for low_level_rng.c
   - SBSFU_Boot/Inc/mpu_armv8m_drv.h                Header file for mpu_armv8m_drv.c
   - SBSFU_Boot/Inc/sha256_alt.h                    Header file for sha256_alt.c
   - SBSFU_Boot/Inc/stm32l5xx_hal_conf.h            HAL driver configuration file
   - SBSFU_Boot/Inc/target_cfg.h                    Header file for target start up
-  - SBSFU_Boot/Src/tfm_low_level_security.h        Header file for tfm_low_level_security.c
+  - SBSFU_Boot/Src/low_level_security.h            Header file for low_level_security.c
   - SBSFU_Boot/Inc/tfm_peripherals_def.h           Peripheral definitions
 
   - SBSFU_Boot/Src/bl2_nv_services.c               Non Volatile services for SBSFU_Boot
   - SBSFU_Boot/Src/boot_hal.c                      Platform initialization
+  - SBSFU_Boot/Src/keys.c                          keys provisionned in PERSO area
+  - SBSFU_Boot/Src/keys_map.c                      keys indirection to access keys in PERSO area
   - SBSFU_Boot/Src/image_macros_to_preprocess_bl2.c Images definitions to preprocess for bl2
   - SBSFU_Boot/Src/low_level_com.c                 Uart low level interface
   - SBSFU_Boot/Src/low_level_device.c              Flash Low level device configuration
   - SBSFU_Boot/Src/low_level_flash.c               Flash Low level interface
+  - SBSFU_Boot/Src/low_level_rng.c                 RNG Low level interface
   - SBSFU_Boot/Src/mpu_armv8m_drv.c                Mpu low level interface
   - SBSFU_Boot/Src/sha256_alt.c                    SHA256 HW crypto interface
   - SBSFU_Boot/Src/system_stm32l5xx.c              System Init file
-  - SBSFU_Boot/Src/tfm_low_level_security.c        Security Low level services
+  - SBSFU_Boot/Src/low_level_security.c            Security Low level services
+
+  - SBSFU_Boot/Src/enc-ec256-priv.pem              ecdsa private key for decrypting FW keys
+  - SBSFU_Boot/Src/enc-ec256-pub.pem               ecdsa public key for encrypting FW keys
+  - SBSFU_Boot/Src/root-ec-p256.pem                ecdsa private key for signing FW image
+  - SBSFU_Boot/Src/root-ec-p256_1.pem              ecdsa private key for signing FW image
 
   - Linker/flash_layout.h                         Flash mapping
   - Linker/region_defs.h                          RAM and FLASH regions definitions

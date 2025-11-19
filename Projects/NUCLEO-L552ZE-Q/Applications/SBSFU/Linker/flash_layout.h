@@ -33,19 +33,19 @@
                                                To enter it, press user button at reset.
                                       Undefined: No external local loader application. */
 
-#define MCUBOOT_IMAGE_NUMBER 1     /* 1: S and NS application binaries are assembled in one single image.
+#define MCUBOOT_APP_IMAGE_NUMBER 1     /* 1: S and NS application binaries are assembled in one single image.
                                       2: Two separated images for S and NS application binaries. */
 
 /* Flash layout configuration : end */
 
+/* Total number of images */
+#define MCUBOOT_IMAGE_NUMBER            MCUBOOT_APP_IMAGE_NUMBER
 
 /* The size of a partition. This should be large enough to contain a S or NS
  * sw binary. Each FLASH_AREA_IMAGE contains two partitions. See Flash layout
  * above.
  */
-#ifdef MCUBOOT_EXT_LOADER
-#define LOADER_FLASH_DEV_NAME             TFM_Driver_FLASH0
-#endif
+#define LOADER_FLASH_DEV_NAME             Driver_FLASH0
 
 /* Flash layout info for BL2 bootloader */
 #define FLASH_AREA_IMAGE_SECTOR_SIZE    (0x1000)     /* 4 KB */
@@ -77,26 +77,21 @@
 #endif /* MCUBOOT_PRIMARY_ONLY */
 /* area for BL2 code protected by hdp */
 #define FLASH_AREA_BL2_OFFSET           (FLASH_AREA_PERSO_OFFSET+FLASH_AREA_PERSO_SIZE)
-#if !defined(MCUBOOT_PRIMARY_ONLY)
-#define FLASH_AREA_BL2_SIZE             (0xc000)
-#else
-#define FLASH_AREA_BL2_SIZE             (0xb000)
-#endif
+#define FLASH_AREA_BL2_SIZE             (0xe000)
 /* HDP area end at this address */
 #define FLASH_BL2_HDP_END               (FLASH_AREA_BL2_OFFSET+FLASH_AREA_BL2_SIZE-1)
 /* area for BL2 code not protected by hdp */
 #define FLASH_AREA_BL2_NOHDP_OFFSET     (FLASH_AREA_BL2_OFFSET+FLASH_AREA_BL2_SIZE)
 #define FLASH_AREA_BL2_NOHDP_SIZE       (0x800)
 
-#if !defined(MCUBOOT_PRIMARY_ONLY)
 #define FLASH_S_PARTITION_SIZE          (0x04000) /* 16 KB for S partition */
+#if !defined(MCUBOOT_PRIMARY_ONLY)
 #if defined(MCUBOOT_EXT_LOADER)
 #define FLASH_NS_PARTITION_SIZE         (0x31000) /* 208 KB for NS partition */
 #else
 #define FLASH_NS_PARTITION_SIZE         (0x34000) /* 208 KB for NS partition */
 #endif /* MCUBOOT_EXT_LOADER */
 #else
-#define FLASH_S_PARTITION_SIZE          (0x08000) /* 32 KB for S partition */
 #define FLASH_NS_PARTITION_SIZE         (0x63000) /* 416 KB for NS partition */
 #endif /* MCUBOOT_PRIMARY_ONLY */
 #define FLASH_PARTITION_SIZE            (FLASH_S_PARTITION_SIZE+FLASH_NS_PARTITION_SIZE)
@@ -175,48 +170,7 @@
  * Name is defined in flash driver file: low_level_flash.c
  */
 
-#define FLASH_DEV_NAME                  TFM_Driver_FLASH0
-
-/* Secure Storage (SST) Service definitions
- * Note: Further documentation of these definitions can be found in the
- * TF-M SST Integration Guide.
- */
-#define SST_FLASH_DEV_NAME              TFM_Driver_FLASH0
-
-/* Secure Storage (SST) Service definitions */
-/* In this target the CMSIS driver requires only the offset from the base
- * address instead of the full memory address.
- */
-#define SST_FLASH_AREA_ADDR             FLASH_SST_AREA_OFFSET
-#define SST_SECTOR_SIZE                 FLASH_AREA_IMAGE_SECTOR_SIZE
-/* The sectors must be in consecutive memory location */
-#define SST_NBR_OF_SECTORS              (FLASH_SST_AREA_SIZE / SST_SECTOR_SIZE)
-/* Specifies the smallest flash programmable unit in bytes */
-#define SST_FLASH_PROGRAM_UNIT          (0x8)
-/* The maximum asset size to be stored in the SST area */
-#define SST_MAX_ASSET_SIZE              (512)
-/* The maximum number of assets to be stored in the SST area */
-#define SST_NUM_ASSETS                  (10)
-
-
-#define ITS_FLASH_DEV_NAME              TFM_Driver_FLASH0
-
-#define ITS_FLASH_AREA_ADDR             FLASH_ITS_AREA_OFFSET
-#define ITS_SECTOR_SIZE                 FLASH_AREA_IMAGE_SECTOR_SIZE
-/* The sectors must be in consecutive memory location */
-#define ITS_NBR_OF_SECTORS              (FLASH_ITS_AREA_SIZE / ITS_SECTOR_SIZE)
-/* Specifies the smallest flash programmable unit in bytes */
-#define ITS_FLASH_PROGRAM_UNIT          (0x8)
-/* The maximum asset size to be stored in the ITS area */
-#define ITS_MAX_ASSET_SIZE              (512)
-/* The maximum number of assets to be stored in the ITS area */
-#define ITS_NUM_ASSETS                  (10)
-
-/* NV Counters definitions */
-#define TFM_NV_COUNTERS_AREA_ADDR        FLASH_NV_COUNTERS_AREA_OFFSET
-#define TFM_NV_COUNTERS_AREA_SIZE        (0x18)/* 24 Bytes */
-#define TFM_NV_COUNTERS_SECTOR_ADDR      FLASH_NV_COUNTERS_AREA_OFFSET
-#define TFM_NV_COUNTERS_SECTOR_SIZE      FLASH_AREA_IMAGE_SECTOR_SIZE
+#define FLASH_DEV_NAME                  Driver_FLASH0
 
 /* BL2 NV Counters definitions  */
 #define BL2_NV_COUNTERS_AREA_ADDR        FLASH_BL2_NVCNT_AREA_OFFSET
@@ -227,6 +181,6 @@
 #define BL2_NS_RAM_ALIAS_BASE            (0x20000000)
 
 /*  This area in SRAM 2 is updated BL2 and can be lock to avoid any changes */
-#define BOOT_TFM_SHARED_DATA_SIZE        (0x0)
-#define BOOT_TFM_SHARED_DATA_BASE        (0x30040000)
+#define BOOT_SHARED_DATA_SIZE        (0x0)
+#define BOOT_SHARED_DATA_BASE        (0x30040000)
 #endif /* __FLASH_LAYOUT_H__ */

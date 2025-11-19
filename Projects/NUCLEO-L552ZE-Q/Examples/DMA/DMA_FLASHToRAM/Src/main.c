@@ -86,6 +86,7 @@ static void TransferError(DMA_HandleTypeDef *hdma_memtomem_dma1_channel1);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
     
 

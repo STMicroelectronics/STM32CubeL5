@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FreeRTOS/FreeRTOS_Thread_Creation/Inc/main.h
+  * @file    FreeRTOS/FreeRTOS_MPU/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -24,6 +24,9 @@
 #include "stm32l5xx_hal.h"
 #include "stm32l552e_eval.h"
 
+/* Exported functions prototypes ---------------------------------------------*/
+void Error_Handler(void);
+void MemManage_Recover(void);
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

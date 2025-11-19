@@ -23,14 +23,10 @@
 
 The SBSFU_Appli application consists in two distinct projects: the SBSFU_Appli
 Secure and SBSFU_Appli Non Secure projects.
-The SBSFU_Appli Secure project is used to generate the SBSFU_Appli Secure binary
-file. The core function of this application relies on the trusted firmware (TFM)
-middleware and the mbed-crypto middleware.
+The SBSFU_Appli Secure project is used to generate the SBSFU_Appli Secure binary file.
 It has to be compiled after SBSFU_Boot project.
 
-The SBSFU_Appli Non Secure project is used to generate the SBSFU_Appli Non Secure
-binary file. The core function of this application relies on the trusted
-firmware (TFM) middleware.
+The SBSFU_Appli Non Secure project is used to generate the SBSFU_Appli Non Secure binary file.
 It has to be compiled after SBSFU_Appli Secure project.
 
 In order to ease the development process, prebuild and postbuild commands are
@@ -64,8 +60,8 @@ Security, SBSFU, FLASH, TrustZone
 
   - SBSFU_Appli/NonSecure/Inc/com.h                 Header file for com.c
   - SBSFU_Appli/NonSecure/Inc/common.h              Header file for common.c
-  - SBSFU_Appli/NonSecure/Inc/flash_if.h            Header file for flash_if.c
   - SBSFU_Appli/NonSecure/Inc/fw_update_app.h       Header file for fw_update.c
+  - SBSFU_Appli/NonSecure/Inc/low_level_flash.h     Header file for low_level_flash.c
   - SBSFU_Appli/NonSecure/Inc/main.h                Header file for main.c
   - SBSFU_Appli/NonSecure/Inc/mpu_armv8m_drv.h      Header file for mpu_armv8m_drv.c
   - SBSFU_Appli/NonSecure/Inc/stm32l5xx_hal_conf.h  HAL configuration file
@@ -75,8 +71,9 @@ Security, SBSFU, FLASH, TrustZone
 
   - SBSFU_Appli/NonSecure/Src/com.c                 Uart low level interface
   - SBSFU_Appli/NonSecure/Src/common.c              Uart common functionalities
-  - SBSFU_Appli/NonSecure/Src/flash_if.c            Flash Low level interface
   - SBSFU_Appli/NonSecure/Src/fw_update_app.c       Firmware update example
+  - SBSFU_Appli/NonSecure/Src/low_level_device.c    Flash Low level device setting
+  - SBSFU_Appli/NonSecure/Src/low_level_flash.c     Flash Low level interface
   - SBSFU_Appli/NonSecure/Src/main.c                Main application file
   - SBSFU_Appli/NonSecure/Src/mpu_armv8m_drv.c      MPU low level interface
   - SBSFU_Appli/NonSecure/Src/stm32l5xx_it.c        Interrupt handlers

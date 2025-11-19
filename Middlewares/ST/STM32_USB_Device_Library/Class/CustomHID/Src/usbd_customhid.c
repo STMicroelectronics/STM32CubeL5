@@ -128,6 +128,9 @@ USBD_ClassTypeDef  USBD_CUSTOM_HID =
   USBD_CUSTOM_HID_GetOtherSpeedCfgDesc,
   USBD_CUSTOM_HID_GetDeviceQualifierDesc,
 #endif /* USE_USBD_COMPOSITE  */
+#if (USBD_SUPPORT_USER_STRING_DESC == 1U)
+  NULL,
+#endif /* USBD_SUPPORT_USER_STRING_DESC  */
 };
 
 #ifndef USE_USBD_COMPOSITE
@@ -284,6 +287,11 @@ static uint8_t USBD_CUSTOM_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 
   pdev->ep_in[CUSTOMHIDInEpAdd & 0xFU].is_used = 1U;
 
+  if (USBD_CUSTOMHID_OUTREPORT_BUF_SIZE < CUSTOM_HID_EPOUT_SIZE)
+  {
+    return (uint8_t)USBD_FAIL;
+  }
+
   /* Open EP OUT */
   (void)USBD_LL_OpenEP(pdev, CUSTOMHIDOutEpAdd, USBD_EP_TYPE_INTR,
                        CUSTOM_HID_EPOUT_SIZE);
@@ -397,9 +405,17 @@ static uint8_t USBD_CUSTOM_HID_Setup(USBD_HandleTypeDef *pdev,
           }
 #endif /* USBD_CUSTOMHID_CTRL_REQ_COMPLETE_CALLBACK_ENABLED */
 #ifndef USBD_CUSTOMHID_EP0_OUT_PREPARE_RECEIVE_DISABLED
+
+          if (req->wLength > USBD_CUSTOMHID_OUTREPORT_BUF_SIZE)
+          {
+            /* Stall EP0 */
+            USBD_CtlError(pdev, req);
+            return USBD_FAIL;
+          }
+
           hhid->IsReportAvailable = 1U;
-          (void)USBD_CtlPrepareRx(pdev, hhid->Report_buf,
-                                  MIN(req->wLength, USBD_CUSTOMHID_OUTREPORT_BUF_SIZE));
+
+          (void)USBD_CtlPrepareRx(pdev, hhid->Report_buf, req->wLength);
 #endif /* USBD_CUSTOMHID_EP0_OUT_PREPARE_RECEIVE_DISABLED */
           break;
 #ifdef USBD_CUSTOMHID_CTRL_REQ_GET_REPORT_ENABLED
@@ -479,7 +495,15 @@ static uint8_t USBD_CUSTOM_HID_Setup(USBD_HandleTypeDef *pdev,
             }
           }
 
-          (void)USBD_CtlSendData(pdev, pbuf, len);
+          if (pbuf != NULL)
+          {
+            (void)USBD_CtlSendData(pdev, pbuf, len);
+          }
+          else
+          {
+            USBD_CtlError(pdev, req);
+            ret = USBD_FAIL;
+          }
           break;
 
         case USB_REQ_GET_INTERFACE:
@@ -693,8 +717,13 @@ static uint8_t USBD_CUSTOM_HID_DataOut(USBD_HandleTypeDef *pdev, uint8_t epnum)
 
   /* USB data will be immediately processed, this allow next USB traffic being
   NAKed till the end of the application processing */
+
+#ifdef USBD_CUSTOMHID_REPORT_BUFFER_EVENT_ENABLED
+  ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData[pdev->classId])->OutEvent(hhid->Report_buf);
+#else
   ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData[pdev->classId])->OutEvent(hhid->Report_buf[0],
                                                                            hhid->Report_buf[1]);
+#endif /* USBD_CUSTOMHID_REPORT_BUFFER_EVENT_ENABLED */
 
   return (uint8_t)USBD_OK;
 }
@@ -747,8 +776,12 @@ static uint8_t USBD_CUSTOM_HID_EP0_RxReady(USBD_HandleTypeDef *pdev)
 
   if (hhid->IsReportAvailable == 1U)
   {
+#ifdef USBD_CUSTOMHID_REPORT_BUFFER_EVENT_ENABLED
+    ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData[pdev->classId])->OutEvent(hhid->Report_buf);
+#else
     ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData[pdev->classId])->OutEvent(hhid->Report_buf[0],
                                                                              hhid->Report_buf[1]);
+#endif /* USBD_CUSTOMHID_REPORT_BUFFER_EVENT_ENABLED */
     hhid->IsReportAvailable = 0U;
   }
 

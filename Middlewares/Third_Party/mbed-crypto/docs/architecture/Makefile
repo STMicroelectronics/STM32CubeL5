@@ -2,9 +2,7 @@ PANDOC = pandoc
 
 default: all
 
-all_markdown = \
-	       mbed-crypto-storage-specification.md \
-	       # This line is intentionally left blank
+all_markdown = $(wildcard *.md */*.md)
 
 html: $(all_markdown:.md=.html)
 pdf: $(all_markdown:.md=.pdf)
@@ -17,3 +15,7 @@ all: html pdf
 	$(PANDOC) -o $@ $<
 .md.pdf:
 	$(PANDOC) -o $@ $<
+
+clean:
+	rm -f *.html *.pdf
+	rm -f testing/*.html testing/*.pdf

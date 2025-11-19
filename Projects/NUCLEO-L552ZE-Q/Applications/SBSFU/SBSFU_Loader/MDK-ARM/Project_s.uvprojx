@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L552xx,USE_HAL_DRIVER,LOCAL_LOADER_CONFIG,BL2</Define>
               <Undefine></Undefine>
-              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L5xx_Nucleo;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../Secure/Inc;../Secure_nsclib;../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/driver;../../Linker</IncludePath>
+              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L5xx_Nucleo;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../Secure/Inc;../Secure_nsclib;../../../../../../Middlewares/Third_Party/mcuboot/platform/ext/driver;../../Linker</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

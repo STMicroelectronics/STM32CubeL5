@@ -43,7 +43,7 @@
 #endif /* USBPD_TCPM_MODULE_ENABLED */
 
 /* OS management */
-#include "usbpd_os_port.h"
+#include "usbpd_os_port_mx.h"
 
 #if defined(_FWUPDATE_RESPONDER)
 #include "usbpd_pdfu_responder.h"

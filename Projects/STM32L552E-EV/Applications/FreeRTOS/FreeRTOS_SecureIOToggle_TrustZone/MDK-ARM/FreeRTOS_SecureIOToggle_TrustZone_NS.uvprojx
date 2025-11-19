@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L552xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../NonSecure/Inc;../Secure_nsclib;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33/non_secure;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33/secure;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L552E-EV</IncludePath>
+              <IncludePath>../NonSecure/Inc;../Secure_nsclib;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/RTOS2/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33/non_secure;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33/secure;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/BSP/STM32L552E-EV</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

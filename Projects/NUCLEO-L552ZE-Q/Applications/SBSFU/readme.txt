@@ -38,10 +38,10 @@ on-device data:
 -	The Secure Boot (Root of Trust services) is an immutable code, always
     executed after a system reset, that checks STM32 static protections,
     activates STM32 runtime protections and then verifies the authenticity
-    (RSA or ECDSA signature) and integrity (SHA256) of the application code
+    (ECDSA signature) and integrity (SHA256) of the application code
     before execution in order to ensure that invalid or malicious
-    code cannot be run. The default asymmetric key (RSA or ECDSA) is taken from
-    Middlewares/Third_Party/trustedfirmware/bl2/ext/mcuboot/keys.c
+    code cannot be run. The default asymmetric key (ECDSA) is taken from
+    Firmware\Projects\NUCLEO-L552ZE-Q\Applications\SBSFU\SBSFU_Boot\Src\keys.c
     and is embedded in the provisionned data area in the secure boot and secure
     firmware update binary.
 
@@ -51,19 +51,19 @@ on-device data:
     installed in internal flash. In case of image installation in external
     flash, image remains AES-CTR encrypted, as it will be on-the-fly decrytped
     during its execution.
-    The AES-CTR key is encrypted (RSA-OAEP or ECIES-P256) and provided in the
-    firmware image itself. The default asymmetric key (RSA or ECDSA) used to
+    The AES-CTR key is encrypted (ECIES-P256) and provided in the
+    firmware image itself. The default asymmetric key (ECDSA) used to
     encrypt the AES-CTR key is distinct from the signature key, but also taken
-    from Middlewares/Third_Party/trustedfirmware/bl2/ext/mcuboot/keys.c.
+    from Firmware\Projects\NUCLEO-L552ZE-Q\Applications\SBSFU\SBSFU_Boot\Src\keys.c.
     The firmware update can be done either on the secure part of firmware
     image and/or on the non-secure part of the firmware image.
 
 The SBSFU secure application configures 2 secure IOs with HAL GPIO :
-- The secure IO (PC.07 which corresponds to LED1) toggles every second on Secure 
+- The secure IO (PC.07 which corresponds to LED1) toggles every second on Secure
 SysTick timer interrupt basis.
 - The secure IO (PB.07 which corresponds to LED2) toogles after a non secure call.
 
-The SBSFU Non secure application uses the secure LED toggle service provided by 
+The SBSFU Non secure application uses the secure LED toggle service provided by
 the SBSFU secure application.
 
 For more details, refer to AN5447 "Overview of Secure Boot and Secure Firmware
@@ -74,7 +74,7 @@ available from the STMicroelectronics microcontroller website www.st.com.
 
 Security, SBSFU, FLASH, mcuboot, mbedCrypto, AES, CRYP, FLASH, GTZC, HASH, PKA,
 ICACHE, Secure boot, Firmware update, Authentication, Integrity, Confidentiality,
-cipher, Signature, ECDSA verification, RSA, Option bytes, TrustZone
+cipher, Signature, ECDSA verification,Option bytes, TrustZone
 
 @par Directory contents
 
@@ -279,19 +279,14 @@ Several steps to run SBSFU application :
 
    1. Crypto-scheme
 
-      By default, the crypto scheme is RSA-2048 signature, and AES-CTR-128 image
-      encryption with key RSA-OAEP encrypted.
-      It is possible to select another crypto-scheme, thanks to CRYPTO_SCHEME define in 
+      By default, the crypto scheme is ECDSA-256 signature, and AES-CTR-128 image
+      encryption with key ECIES-P256 encrypted, thanks to CRYPTO_SCHEME define in
       SBSFU_Boot\Inc\mcuboot_config\mcuboot_config.h.
 
-      #define CRYPTO_SCHEME_RSA2048    0x0 /* RSA-2048 signature,
-                                              AES-CTR-128 encryption with key RSA-OAEP encrypted */
-      #define CRYPTO_SCHEME_RSA3072    0x1 /* RSA-3072 signature,
-                                              AES-CTR-128 encryption with key RSA-OAEP encrypted */
       #define CRYPTO_SCHEME_EC256      0x2 /* ECDSA-256 signature,
                                               AES-CTR-128 encryption with key ECIES-P256 encrypted */
 
-      #define CRYPTO_SCHEME            CRYPTO_SCHEME_RSA2048  /* Select one of available crypto schemes */
+      #define CRYPTO_SCHEME            CRYPTO_SCHEME_EC256  /* Default crypto scheme */
 
    2. Local loader
 
@@ -319,13 +314,13 @@ Several steps to run SBSFU application :
       Note: When 2 images are selected, the local loader menu proposes to download
       separately a new SBSFU Secure image or SBSFU Non Secure image or both.
       - Download Secure Image (#2): Download Secure signed image
-        (ex: TFM_Appli\Binary\tfm_s_enc_sign.bin)
+        (ex: SBSFU_Appli\Binary\sbsfu_s_enc_sign.bin)
       - Download NonSecure Image (#3): Download Non Secure signed image
-        (ex: TFM_Appli\Binary\tfm_ns_enc_sign.bin)
+        (ex: SBSFU_Appli\Binary\sbsfu_ns_enc_sign.bin)
 
    4. Primary slot only
 
-      By default, primary slot only configuration is used (for each image). 
+      By default, primary slot only configuration is used (for each image).
       In this mode, the local loader downloads encrypted image directly in
       primary slot, and the SBSFU_Boot decrypts in place the image during
       installation process.
@@ -334,7 +329,7 @@ Several steps to run SBSFU application :
       secondary slot to primary slot.
       This is configured thanks to MCUBOOT_PRIMARY_ONLY define in
       Linker\flash_layout.h.
-      
+
       #define MCUBOOT_PRIMARY_ONLY       /* Defined: No secondary (download) slot(s),
                                                      only primary slot(s) for each image.
                                             Undefined: Primary and secondary slot(s) for each image. */

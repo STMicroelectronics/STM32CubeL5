@@ -2,7 +2,7 @@
 CAD.formats=
 CAD.pinconfig=
 CAD.provider=
-FREERTOS.BinarySemaphores01=osSemaphore,Dynamic,NULL
+FREERTOS.BinarySemaphores01=osSemaphore,Dynamic,NULL,Available
 FREERTOS.FootprintOK=true
 FREERTOS.HEAP_NUMBER=4
 FREERTOS.INCLUDE_eTaskGetState=1

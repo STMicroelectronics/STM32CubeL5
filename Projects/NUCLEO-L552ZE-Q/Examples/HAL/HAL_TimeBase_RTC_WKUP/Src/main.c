@@ -64,6 +64,7 @@ static void MX_ICACHE_Init(void);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   /* STM32L5xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches

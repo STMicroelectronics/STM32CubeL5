@@ -353,8 +353,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32L5xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L5xx_Nucleo</state>
                     <state>$PROJ_DIR$\..\NonSecure\Inc</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\test\suites\crypto</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\trustedfirmware\platform\ext\driver</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\mcuboot\platform\ext\driver</state>
                     <state>$PROJ_DIR$\..\..\Linker</state>
                     <state>$PROJ_DIR$\..\Secure_nsclib</state>
                 </option>

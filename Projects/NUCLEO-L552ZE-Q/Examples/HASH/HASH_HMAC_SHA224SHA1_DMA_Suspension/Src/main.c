@@ -30,14 +30,13 @@ typedef enum
 {
   HMAC_FIRST_BUFFER        = 0,
   HMAC_INTERMEDIATE_BUFFER = 1,
-  HMAC_LAST_BUFFER         = 2,
-  HMAC_DIGEST_RETRIEVAL    = 3
+  HMAC_LAST_BUFFER         = 2
 } HMAC_MultiBuffer_StepTypeDef;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define HMAC_MULTIBUFFERS_FUNCTIONS_NUMBER    4          /* Number of APIs to carry HMAC SHA224 processing */
+#define HMAC_MULTIBUFFERS_FUNCTIONS_NUMBER    3          /* Number of APIs to carry HMAC SHA224 processing */
 #define LOW_PRIO_LARGE_INPUT_TAB_SIZE  ((uint32_t) 3567) /* The size of the input data "aInput_LowPrio_Large" */
 #define HIGH_PRIO_INPUT_TAB_SIZE   ((uint32_t) 261)      /* The size of the input data "aInput_HighPrio" */
 
@@ -701,11 +700,10 @@ static void MX_HASH_Init(void);
 static void HigherPriorityBlock_Management(void);
 static void HigherPriorityBlock_DMA_Processing(void);
 /* Array of functions used for multi-buffer HMAC SHA-224 processing */
-HAL_StatusTypeDef (*HMAC_SHA224_MultiBuffer_Functions[HMAC_MULTIBUFFERS_FUNCTIONS_NUMBER]) (HASH_HandleTypeDef *hhash, uint8_t *pBuffer, uint32_t Var) =
+HAL_StatusTypeDef (*HMAC_SHA224_MultiBuffer_Functions[HMAC_MULTIBUFFERS_FUNCTIONS_NUMBER]) (HASH_HandleTypeDef *hhash, const uint8_t *const pBuffer, uint32_t Var) =
                       {HAL_HMACEx_SHA224_Step1_2_DMA,
                        HAL_HMACEx_SHA224_Step2_DMA,
-                       HAL_HMACEx_SHA224_Step2_3_DMA,
-                       HAL_HASHEx_SHA224_Finish};
+                       HAL_HMACEx_SHA224_Step2_3_DMA};
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -719,6 +717,7 @@ HAL_StatusTypeDef (*HMAC_SHA224_MultiBuffer_Functions[HMAC_MULTIBUFFERS_FUNCTION
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   uint32_t process_ongoing = 1;     /* HMAC processing on-going flag                          */
   uint32_t suspension_trigger = 1;  /* Low block processing suspension trigger                */
@@ -842,8 +841,6 @@ int main(void)
         case HMAC_LAST_BUFFER:
           /* The last buffer has been processed. Mark the end of processing. */
           process_ongoing = 0;
-          /* Update step to carry out digest retrieval next */
-          step =  HMAC_DIGEST_RETRIEVAL;
           break;
 
         default:
@@ -874,7 +871,7 @@ int main(void)
   /*******************/
   /* Read the digest */
   /*******************/
-  if ((*HMAC_SHA224_MultiBuffer_Functions[step])(&hhash, aSHA224Digest, HASHTimeout) != HAL_OK)
+  if (HAL_HASHEx_SHA224_Finish(&hhash, aSHA224Digest, HASHTimeout) != HAL_OK)
   {
     Error_Handler();
   }

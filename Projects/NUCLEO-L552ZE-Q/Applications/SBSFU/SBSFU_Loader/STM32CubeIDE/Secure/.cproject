@@ -45,7 +45,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/STM32L5xx_Nucleo"/>
 									<listOptionValue builtIn="false" value="../../../Secure/Inc"/>
 									<listOptionValue builtIn="false" value="../../../Secure_nsclib"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/trustedfirmware/platform/ext/driver"/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/mcuboot/platform/ext/driver"/>
 									<listOptionValue builtIn="false" value="../../../../Linker"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.definedsymbols.896116106" name="Define symbols (-D)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.definedsymbols" useByScannerDiscovery="false" valueType="definedSymbols">

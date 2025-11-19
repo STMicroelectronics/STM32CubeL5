@@ -7,7 +7,7 @@ set hdp_end=24
 set wrp_bank2_start=112
 set wrp_bank2_end=127
 echo "hardening script started"
-set stm32programmercli="C:\Program Files\STMicroelectronics\STM32Cube\STM32CubeProgrammer\bin\STM32_Programmer_CLI.exe"
+call ..\..\env.bat
 set bank2_secure="-ob SECWM2_PSTRT=%sec2_start% SECWM2_PEND=%sec2_end%"
 set connect="-c port=SWD mode=UR --hardRst"
 set connect_no_reset="-c port=SWD mode=HotPlug"

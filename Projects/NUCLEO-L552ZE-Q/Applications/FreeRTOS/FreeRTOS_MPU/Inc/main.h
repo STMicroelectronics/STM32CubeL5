@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FreeRTOS/FreeRTOS_Thread_Creation/Inc/main.h
+  * @file    FreeRTOS/FreeRTOS_MPU/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -22,10 +22,18 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l5xx_hal.h"
-#include "stm32l5xx_nucleo.h"
 
+/* Exported functions prototypes ---------------------------------------------*/
+void Error_Handler(void);
+void MemManage_Recover(void);
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+#define LED1_GREEN_Pin GPIO_PIN_7
+#define LED1_GREEN_GPIO_Port GPIOC
+#define LED2_BLUE_Pin GPIO_PIN_7
+#define LED2_BLUE_GPIO_Port GPIOB
+#define LED3_RED_Pin GPIO_PIN_9
+#define LED3_RED_GPIO_Port GPIOA
 
 #endif /* __MAIN_H */

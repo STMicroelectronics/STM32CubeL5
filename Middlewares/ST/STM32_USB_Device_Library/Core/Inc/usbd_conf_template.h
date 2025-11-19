@@ -48,6 +48,7 @@ extern "C" {
 #define USBD_MAX_STR_DESC_SIZ                       0x100U
 #define USBD_SELF_POWERED                           1U
 #define USBD_DEBUG_LEVEL                            2U
+/* #define USBD_USER_REGISTER_CALLBACK                 1U */
 
 /* ECM, RNDIS, DFU Class Config */
 #define USBD_SUPPORT_USER_STRING_DESC               1U
@@ -64,6 +65,8 @@ extern "C" {
 #define USBD_CDC_INTERVAL                           2000U
 
 /* DFU Class Config */
+/* #define USBD_DFU_VENDOR_CMD_ENABLED                 1U */
+/* #define USBD_DFU_VENDOR_EXIT_ENABLED                1U */
 #define USBD_DFU_MAX_ITF_NUM                        1U
 #define USBD_DFU_XFERS_IZE                          1024U
 
@@ -76,10 +79,12 @@ extern "C" {
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE           0x02U
 #define USBD_CUSTOM_HID_REPORT_DESC_SIZE            163U
 
+/* #define USBD_CUSTOMHID_REPORT_DESC_SIZE_ENABLED */
 /* #define USBD_CUSTOMHID_CTRL_REQ_GET_REPORT_ENABLED */
 /* #define USBD_CUSTOMHID_OUT_PREPARE_RECEIVE_DISABLED */
 /* #define USBD_CUSTOMHID_EP0_OUT_PREPARE_RECEIVE_DISABLED */
 /* #define USBD_CUSTOMHID_CTRL_REQ_COMPLETE_CALLBACK_ENABLED */
+/* #define USBD_CUSTOMHID_REPORT_BUFFER_EVENT_ENABLED */
 
 /* VIDEO Class Config */
 #define UVC_1_1 /* #define UVC_1_0 */

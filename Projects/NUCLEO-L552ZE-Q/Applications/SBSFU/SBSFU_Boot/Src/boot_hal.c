@@ -21,39 +21,23 @@
 #include <string.h>
 #include "boot_hal_cfg.h"
 #include "boot_hal.h"
-#include "boot_hal_otfdec.h"
 #include "boot_hal_imagevalid.h"
 #include "mcuboot_config/mcuboot_config.h"
 #include "uart_stdout.h"
-#include "tfm_low_level_security.h"
-#include "boot_record.h"
+#include "low_level_security.h"
+#include "bootutil/boot_record.h"
 #include "target_cfg.h"
 #include "cmsis.h"
 #include "Driver_Flash.h"
 #include "region_defs.h"
+#include "low_level_rng.h"
 #ifdef MCUBOOT_EXT_LOADER
-#include "bootutil/sha256.h"
+#include "bootutil/crypto/sha256.h"
 #define BUTTON_PORT                       GPIOC
 #define BUTTON_CLK_ENABLE                 __HAL_RCC_GPIOC_CLK_ENABLE()
 #define BUTTON_PIN                        GPIO_PIN_13
 #endif /* MCUBOOT_EXT_LOADER */
 extern ARM_DRIVER_FLASH FLASH_DEV_NAME;
-
-
-/* otfdec magic is flash min write size: doubleword */
-const uint32_t otfdec_magic[] =
-{
-  0x5a8b324f,
-  0xc66da104,
-};
-
-/* otfdec key and magic flash layout */
-#define OTFDEC_KEY_SIZE     BOOT_ENC_KEY_SIZE
-#define OTFDEC_MAGIC_ARR_SZ (sizeof otfdec_magic / sizeof otfdec_magic[0])
-#define OTFDEC_MAGIC_SZ     (sizeof otfdec_magic)
-
-#define OTFDEC_KEY_ADDR     (FLASH_AREA_OTFDEC_OFFSET)
-#define OTFDEC_MAGIC_ADDR   (FLASH_AREA_OTFDEC_OFFSET + OTFDEC_KEY_SIZE)
 
 #if defined(MCUBOOT_DOUBLE_SIGN_VERIF)
 /* Global variables to memorize images validation status */
@@ -83,7 +67,7 @@ uint8_t ImageValidEnable = 0;
   * @{
   */
 #ifdef MCUBOOT_EXT_LOADER
-void execute_loader(void);
+void execute_loader(void) __NO_RETURN;
 #endif /* MCUBOOT_EXT_LOADER */
 void boot_clean_ns_ram_area(void);
 __attribute__((naked)) void boot_jump_to_ns_image(uint32_t reset_handler_addr);
@@ -119,7 +103,7 @@ void boot_platform_noimage(void)
 #if defined(MCUBOOT_PRIMARY_ONLY)
   /* loader code is set secure after control being set successfully */
   /* MPU allowing execution of this area is set after HDP activation */
-  TFM_LL_SECU_SetLoaderCodeSecure();
+  LL_SECU_SetLoaderCodeSecure();
 #endif /* MCUBOOT_PRIMARY_ONLY */
   execute_loader();
 }
@@ -138,10 +122,10 @@ __attribute__((section(".BL2_NoHdp_Code")))
 void execute_loader(void)
 {
 #if defined(MCUBOOT_PRIMARY_ONLY)
-  static struct arm_vector_table *vt = (struct arm_vector_table *)LOADER_S_CODE_START;
+  static struct boot_arm_vector_table *vt = (struct boot_arm_vector_table *)LOADER_S_CODE_START;
 
   /* Update run time protections for application execution */
-  TFM_LL_SECU_UpdateLoaderRunTimeProtections();
+  LL_SECU_UpdateLoaderRunTimeProtections();
 
   /* set the secure vector */
   SCB->VTOR = (uint32_t)LOADER_S_CODE_START;
@@ -155,16 +139,16 @@ void execute_loader(void)
   __set_MSP(vt->msp);
   __DSB();
   __ISB();
-  boot_jump_to_next_image(vt->reset);
+  boot_jump_to_next_image((uint32_t)&boot_jump_to_next_image,vt->reset);
 #else
-  static struct arm_vector_table *vt = (struct arm_vector_table *)LOADER_NS_CODE_START;
+  static struct boot_arm_vector_table *vt = (struct boot_arm_vector_table *)LOADER_NS_CODE_START;
   /* Update run time protections for application execution */
-  TFM_LL_SECU_UpdateLoaderRunTimeProtections();
+  LL_SECU_UpdateLoaderRunTimeProtections();
   SCB_NS->VTOR = LOADER_NS_CODE_START;
   /* Set non-secure main stack (MSP_NS) */
   __TZ_set_MSP_NS((*(uint32_t *)LOADER_NS_CODE_START));
   /* the function erase all internal SRAM , and unsecure all SRAM to adapt to any non secure loader mapping */
-  boot_jump_to_ns_image(vt->reset);
+  boot_jump_to_next_image((uint32_t)&boot_jump_to_ns_image,vt->reset);
 #endif /* defined(MCUBOOT_PRIMARY_ONLY) */
 
   /* Avoid compiler to pop registers after having changed MSP */
@@ -230,17 +214,56 @@ __attribute__((naked)) void boot_jump_to_ns_image(uint32_t reset_handler_addr)
 #else
 __attribute__((section(".BL2_NoHdp_Code")))
 #endif /* __ICCARM__ */
+__attribute__((naked)) void boot_jump_to_next_image(uint32_t boot_jump_addr, uint32_t reset_handler_addr)
+{
+    __ASM volatile(
+#if !defined(__ICCARM__)
+        ".syntax unified                 \n"
+#endif
+        "mov     r7, r0                  \n"
+        "mov     r8, r1                  \n"
+        "bl      boot_clear_bl2_ram_area \n" /* Clear RAM before jump */
+        "movs    r0, #0                  \n" /* Clear registers: R0-R12, */
+        "mov     r1, r0                  \n" /* except R7 */
+        "mov     r2, r0                  \n"
+        "mov     r3, r0                  \n"
+        "mov     r4, r0                  \n"
+        "mov     r5, r0                  \n"
+        "mov     r6, r0                  \n"
+        "mov     r9, r0                  \n"
+        "mov     r10, r0                 \n"
+        "mov     r11, r0                 \n"
+        "mov     r12, r0                 \n"
+        "mov     lr,  r0                 \n"
+        "mov     r0, r8                  \n"
+        "mov     r8, r1                  \n"
+        "bx      r7                      \n" /* Jump to Reset_handler */
+    );
+}
+/* Stop placing data in specified section */
+#if defined(__ICCARM__)
+#pragma default_function_attributes =
+#elif defined(__CC_ARM)
+#pragma arm section code
+#endif /* __ICCARM__ */
+/* Place code in a specific section */
+#if defined(__ICCARM__)
+#pragma default_function_attributes = @ ".BL2_NoHdp_Code"
+#else
+__attribute__((section(".BL2_NoHdp_Code")))
+#endif /* __ICCARM__ */
 /**
   * @brief This function manage the jump to secure application.
   * @note
   * @retval void
   */
-void jumper(struct arm_vector_table *vector)
+void boot_platform_quit(struct boot_arm_vector_table *vector)
 {
-  static struct arm_vector_table *vt;
+  static struct boot_arm_vector_table *vt;
 #if defined(MCUBOOT_DOUBLE_SIGN_VERIF)
   uint32_t image_index;
 
+  (void)fih_delay();
   /* Check again if images have been validated, to resist to basic hw attacks */
   for (image_index = 0; image_index < MCUBOOT_IMAGE_NUMBER; image_index++)
   {
@@ -252,7 +275,7 @@ void jumper(struct arm_vector_table *vector)
   }
 #endif /* MCUBOOT_DOUBLE_SIGN_VERIF */
 
-
+  RNG_DeInit();
   ICACHE_MONITOR_PRINT()
 
 #ifdef TFM_ICACHE_ENABLE
@@ -264,15 +287,15 @@ void jumper(struct arm_vector_table *vector)
 #endif /* ICACHE_ENABLED */
 
   /* Update run time protections for application execution */
-  TFM_LL_SECU_UpdateRunTimeProtections();
+  LL_SECU_UpdateRunTimeProtections();
 
   /* set the secure vector */
   SCB->VTOR = (uint32_t)vector;
 
-  vt = (struct arm_vector_table *)vector;
+  vt = (struct boot_arm_vector_table *)vector;
 
   /* Double the update of run time protections, to resist to basic hardware attacks */
-  TFM_LL_SECU_UpdateRunTimeProtections();
+  LL_SECU_UpdateRunTimeProtections();
 
   /*  change stack limit  */
   __set_MSPLIM(0);
@@ -283,7 +306,7 @@ void jumper(struct arm_vector_table *vector)
   __set_MSP(vt->msp);
   __DSB();
   __ISB();
-  boot_jump_to_next_image(vt->reset);
+  boot_jump_to_next_image((uint32_t)&boot_jump_to_next_image,vt->reset);
 
   /* Avoid compiler to pop registers after having changed MSP */
 #if !defined(__ICCARM__)
@@ -372,20 +395,6 @@ void  boot_clean_ns_ram_area(void)
 #if defined(__ICCARM__)
 #pragma default_function_attributes =
 #endif /* __ICCARM__ */
-
-/**
-  * @brief This function is called to recopy sw measurement
-  * @note as secure user application does not implement
-   *initial attestation , the recopy is not done.
-  * @retval boot_status_err_t
-  */
-enum boot_status_err_t boot_save_boot_status(uint8_t sw_module,
-                                             const struct image_header *hdr,
-                                             const struct flash_area *fap)
-{
-  return  BOOT_STATUS_OK;
-}
-
 
 /**
   * @brief This function configures and enables the ICache.
@@ -503,10 +512,13 @@ int32_t boot_platform_init(void)
   icache_init();
 #endif /* ICACHE_ENABLED */
 
+  /* Start HW randomization */
+  RNG_Init();
+  (void)fih_delay_init();
   /* Apply Run time Protection */
-  TFM_LL_SECU_ApplyRunTimeProtections();
+  LL_SECU_ApplyRunTimeProtections();
   /* Check static protections */
-  TFM_LL_SECU_CheckStaticProtections();
+  LL_SECU_CheckStaticProtections();
 
   /* enable SRAM2 retention low power mode */
   __HAL_RCC_PWR_CLK_ENABLE();
@@ -514,9 +526,9 @@ int32_t boot_platform_init(void)
 
   /* Double protections apply / check to resist to basic hardware attacks */
   /* Apply Run time Protection */
-  TFM_LL_SECU_ApplyRunTimeProtections();
+  LL_SECU_ApplyRunTimeProtections();
   /* Check static protections */
-  TFM_LL_SECU_CheckStaticProtections();
+  LL_SECU_CheckStaticProtections();
 
   if (FLASH_DEV_NAME.Initialize(NULL) != ARM_DRIVER_OK)
   {

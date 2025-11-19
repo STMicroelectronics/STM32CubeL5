@@ -361,6 +361,7 @@
           <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33/secure</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33/non_secure</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/RTOS2/Include</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -627,6 +628,7 @@
         <option>
           <name>AUserIncludes</name>
           <state>$PROJ_DIR$\..\\Secure\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>
@@ -1184,9 +1186,6 @@
       <name>FreeRTOS</name>
       <file>
         <name>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33/secure/secure_context.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33/secure/secure_context_port.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM33/secure/secure_context_port_asm.s</name>

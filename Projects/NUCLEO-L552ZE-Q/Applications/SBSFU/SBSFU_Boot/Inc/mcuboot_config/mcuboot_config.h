@@ -28,7 +28,7 @@ extern "C" {
  * exist, or bootutil won't build.
  */
 #ifndef __BOOTSIM__
-
+#define MCUBOOT_FIH_PROFILE_HIGH
 /*
  * In TF-M most of the configuration flags (e.g. signature type,
  * upgrade mode ...) are handled by the CMake-based buildsystem and
@@ -36,33 +36,17 @@ extern "C" {
  */
 
 /* Available crypto schemes (do not change values, as used in appli postbuild script) */
-#define CRYPTO_SCHEME_RSA2048    0x0 /* RSA-2048 signature,
-                                        AES-CTR-128 encryption with key RSA-OAEP encrypted */
-#define CRYPTO_SCHEME_RSA3072    0x1 /* RSA-3072 signature,
-                                        AES-CTR-128 encryption with key RSA-OAEP encrypted */
 #define CRYPTO_SCHEME_EC256      0x2 /* ECDSA-256 signature,
                                         AES-CTR-128 encryption with key ECIES-P256 encrypted */
 
 /* Crypto scheme selection : begin */
-#define CRYPTO_SCHEME            CRYPTO_SCHEME_RSA2048  /* Select one of available crypto schemes */
+#define CRYPTO_SCHEME            CRYPTO_SCHEME_EC256  /* Select one of available crypto schemes */
 /* Crypto scheme selection : end */
 
-
-#if (CRYPTO_SCHEME == CRYPTO_SCHEME_RSA2048) || (CRYPTO_SCHEME == CRYPTO_SCHEME_RSA3072)
-/* RSA configuration */
-#define MCUBOOT_SIGN_RSA
-#define MCUBOOT_ENCRYPT_RSA
-#if (CRYPTO_SCHEME == CRYPTO_SCHEME_RSA2048)
-#define MCUBOOT_SIGN_RSA_LEN     2048
-#else
-#define MCUBOOT_SIGN_RSA_LEN     3072
-#endif /* (CRYPTO_SCHEME == CRYPTO_SCHEME_RSA2048) */
-#else
 /* ECC config */
 #define NUM_ECC_BYTES 32
 #define MCUBOOT_SIGN_EC256
 #define MCUBOOT_ENCRYPT_EC256
-#endif /* crypto scheme selection */
 
 #define MCUBOOT_VALIDATE_PRIMARY_SLOT
 #define MCUBOOT_USE_FLASH_AREA_GET_SECTORS
@@ -74,13 +58,14 @@ extern "C" {
  * Cryptographic settings
  */
 #define MCUBOOT_USE_MBED_TLS
-
+#define MBEDTLS_ALLOW_PRIVATE_ACCESS
+#include "stm32l5xx_hal.h"
 /*
  * Logging
  */
 #ifdef TFM_DEV_MODE
 #define MCUBOOT_HAVE_LOGGING    1
-#endif 
+#endif
 
 #endif /* !__BOOTSIM__ */
 

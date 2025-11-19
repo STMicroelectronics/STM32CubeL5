@@ -48,6 +48,7 @@
 									<listOptionValue builtIn="false" value="../../../NonSecure/Inc"/>
 									<listOptionValue builtIn="false" value="../../../Secure_nsclib"/>
 									<listOptionValue builtIn="false" value="../../../../Linker"/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/mcuboot/platform/ext/driver"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1910007834" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>

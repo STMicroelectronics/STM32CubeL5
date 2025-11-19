@@ -361,6 +361,7 @@
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/Third_Party/mbedTLS/include/mbedtls</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
+          <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/RTOS2/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/BSP/Components/Common</state>
           <state>$PROJ_DIR$/../../../../../../Utilities/Fonts</state>
@@ -631,6 +632,7 @@
         <option>
           <name>AUserIncludes</name>
           <state>$PROJ_DIR$\..\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>

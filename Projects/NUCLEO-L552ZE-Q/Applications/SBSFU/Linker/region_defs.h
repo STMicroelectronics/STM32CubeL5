@@ -48,7 +48,7 @@
 /*  FIX ME : include stm32l5xx.h instead  */
 #define _SRAM2_TOP              (0x40000) /* 256Kbytes */
 #define _SRAM1_SIZE_MAX         (0x30000)  /*!< SRAM1=192k*/
-#define _SRAM2_SIZE_MAX         (0x10000 - BOOT_TFM_SHARED_DATA_SIZE)  /*!< SRAM2=64k -0x400 */
+#define _SRAM2_SIZE_MAX         (0x10000 - BOOT_SHARED_DATA_SIZE)  /*!< SRAM2=64k -0x400 */
 /* Flash and internal SRAMs base addresses - Non secure aliased */
 #define _FLASH_BASE_NS          (0x08000000) /*!< FLASH(up to 512 KB) base address */
 #define _SRAM1_BASE_NS          (0x20000000) /*!< SRAM1(up to 192 KB) base address */
@@ -181,7 +181,7 @@
 /*  regression from local tool with non secure attachment
  *  This avoid blocking board in case of hardening error */
 #define BL2_DATA_START                      (S_RAM_ALIAS(_SRAM1_SIZE_MAX))
-#define BL2_DATA_SIZE                       (BOOT_TFM_SHARED_DATA_BASE - BL2_DATA_START)
+#define BL2_DATA_SIZE                       (BOOT_SHARED_DATA_BASE - BL2_DATA_START)
 #define BL2_DATA_LIMIT                      (BL2_DATA_START + BL2_DATA_SIZE - 1)
 #endif /* BL2 */
 

@@ -95,13 +95,12 @@ void OSWrappers::taskDelay(uint16_t ms)
 extern "C"
 {
     void vApplicationStackOverflowHook(TaskHandle_t xTask,
-                                       signed portCHAR* pcTaskName)
+                                       portCHAR* pcTaskName)
     {
         while (1);
     }
 
-    void vApplicationMallocFailedHook(TaskHandle_t xTask,
-                                      signed portCHAR* pcTaskName)
+    void vApplicationMallocFailedHook(void)
     {
         while (1);
     }

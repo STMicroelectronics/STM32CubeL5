@@ -1,1 +1,0 @@
-iccarm.exe --cpu=Cortex-M33 -DBL2  -I%1\..\..\Linker  %1\stm32l562xx_flash.icf  --silent --preprocess=ns %1\flash.icf.i > %1\output.txt 2>&1

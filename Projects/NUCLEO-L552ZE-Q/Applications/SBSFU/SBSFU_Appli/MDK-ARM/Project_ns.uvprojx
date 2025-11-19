@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>STM32L552xx,USE_HAL_DRIVER,BL2</Define>
               <Undefine></Undefine>
-              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L5xx_Nucleo;../NonSecure/Inc;../Secure_nsclib;../../Linker</IncludePath>
+              <IncludePath>../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L5xx_Nucleo;../NonSecure/Inc;../Secure_nsclib;../../Linker;../../../../../../Middlewares/Third_Party/mcuboot/platform/ext/driver</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -526,11 +526,6 @@
               <FilePath>..\NonSecure\Src\common.c</FilePath>
             </File>
             <File>
-              <FileName>flash_if.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\NonSecure\Src\flash_if.c</FilePath>
-            </File>
-            <File>
               <FileName>fw_update_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\NonSecure\Src\fw_update_app.c</FilePath>
@@ -549,6 +544,16 @@
               <FileName>ymodem.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\NonSecure\Src\ymodem.c</FilePath>
+            </File>
+            <File>
+              <FileName>low_level_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NonSecure\Src\low_level_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>low_level_device.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NonSecure\Src\low_level_device.c</FilePath>
             </File>
           </Files>
         </Group>
