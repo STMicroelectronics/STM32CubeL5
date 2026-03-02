@@ -58,3 +58,39 @@
 	path = Drivers/BSP/Components/stmpe811
 	url = https://github.com/STMicroelectronics/stm32-stmpe811.git
 	branch = main
+[submodule "Middlewares/Third_Party/FatFs"]
+	path = Middlewares/Third_Party/FatFs
+	url = https://github.com/STMicroelectronics/stm32-mw-fatfs
+	branch = master
+[submodule "Middlewares/Third_Party/FreeRTOS"]
+	path = Middlewares/Third_Party/FreeRTOS
+	url = https://github.com/STMicroelectronics/stm32-mw-freertos
+	branch = master
+[submodule "Middlewares/Third_Party/mbed-crypto"]
+	path = Middlewares/Third_Party/mbed-crypto
+	url = https://github.com/STMicroelectronics/stm32-mw-mbedtls
+	branch = main
+[submodule "Middlewares/Third_Party/mcuboot"]
+	path = Middlewares/Third_Party/mcuboot
+	url = https://github.com/STMicroelectronics/stm32-mw-mcuboot
+	branch = main
+[submodule "Middlewares/Third_Party/mbedTLS"]
+	path = Middlewares/Third_Party/mbedTLS
+	url = https://github.com/STMicroelectronics/stm32-mw-mbedtls
+	branch = main
+[submodule "Middlewares/ST/STM32_TouchSensing_Library"]
+	path = Middlewares/ST/STM32_TouchSensing_Library
+	url = https://github.com/STMicroelectronics/stm32-mw-touchsensing
+	branch = main
+[submodule "Middlewares/ST/STM32_USB_Device_Library"]
+	path = Middlewares/ST/STM32_USB_Device_Library
+	url = https://github.com/STMicroelectronics/stm32-mw-usb-device
+	branch = master
+[submodule "Middlewares/ST/STM32_USBPD_Library/Core"]
+	path = Middlewares/ST/STM32_USBPD_Library/Core
+	url = https://github.com/STMicroelectronics/stm32-mw-usbpd-core
+	branch = main
+[submodule "Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX"]
+	path = Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX
+	url = https://github.com/STMicroelectronics/stm32-mw-usbpd-device-l5
+	branch = main
